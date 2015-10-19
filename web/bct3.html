@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>成为导师</title>
+    <link href="css/topic_description.css" rel="stylesheet" type="text/css"/>
+    <link href="css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="css/personal_common.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+</head>
+<body>
+    <div class="g-hd"></div>
+    <div style="width:100%;min-width:1096px;">
+    <div class="box">
+        <div class="content">
+            <h1 class="content-title">话题</h1>
+            <p class="content-text">丰富的话题说明，将有助于[一英里]通过您的申请。话题说明太过简单，通常会被拒绝。</p>
+            <p class="content-text">您通过审核后，为了给您撰写介绍文案，还是必须请您回答下列问题，所以为了节省您的时间，请尽量详细回答，谢谢。</p>
+            <div class="container" style="min-height:816px;">
+                <form>
+                    <label class="topic-title">话题标题：</label>
+                    <input type="text" id="topic-title" style="padding-left:7px"/>
+                    <label id="titleTab" class="topic-title" style="width:200px; font-size:14px; color:red;display:none">话题标题不能为空！</label><br>
+
+                    <label class="topic-title">时长：</label>  
+                    <input type="number" step="0.5" min="0.5" max="4" id="topic-time" style="padding-left:7px"/>
+                    <p class="describe" style="width:137px;">（通常为1~1.5小时）</p>
+				    <label id="timeTab" class="topic-title" style="width:200px; font-size:14px; color:red;display:none">时长不能为空！</label><br>
+                    
+                    <label class="topic-title">价格：</label>
+                    <input type="number" step="50" min="50" max="999999" id="topic-price" style="padding-left:7px"/>
+                    <p class="describe">（我们建议最初的定价在300元以下，见过两个学员，获得评价之后可以提价，这样有助于您积累好评）</p>
+                    <label id="priceTab" class="messageTab" style="width:200px; font-size:14px; color:red;display:none">价格不能为空！</label><br>
+
+                    <label class="topic-textarea">1.请输入话题主要内容（可以是话题摘要或概括的2-3个要点,1000字内）：</label>
+                    <textarea class="main" id="content" maxlength="1000" rows="12" onChange="this.value=this.value.substring(0, 1000)" onKeyDown="this.value=this.value.substring(0, 1000)" onKeyUp="this.value=this.value.substring(0, 1000)" style="width:680px;"></textarea>
+                    <label id="contentTab" class="messageTab" style="width:200px; font-size:14px; color:red;display:none">话题内容不能为空！</label>
+
+                    <label class="topic-textarea">2.您选择这一话题的原因(500字内)：</label>
+                    <textarea class="main" id="reason" maxlength="500" rows="7" onChange="this.value=this.value.substring(0, 500)" onKeyDown="this.value=this.value.substring(0, 500)" onKeyUp="this.value=this.value.substring(0, 500)" style="width:680px;"></textarea>
+                    <label id="reasonTab" class="messageTab" style="width:200px; font-size:14px; color:red;display:none">您选择的话题原因不能为空！</label>
+
+                    <label class="topic-textarea">3.您在这个话题上的优势（可以结合具体案例,1000字内）：</label>
+                    <textarea class="main" id="advantage" maxlength="1000" rows="12" onChange="this.value=this.value.substring(0, 1000)" onKeyDown="this.value=this.value.substring(0, 1000)" onKeyUp="this.value=this.value.substring(0, 1000)" style="width:680px;"></textarea>
+                    <label id="advantageTab" class="messageTab" style="width:200px; font-size:14px; color:red;display:none">您的话题优势不能为空！</label>
+
+                    <label class="topic-textarea">4.选择主题（选择您的主题）</label>
+                    <div class="content-footer">
+                        <ul class="theme-list" >
+                            <li class="theme-item">
+                                <img class="changeG" src="http://image.1yingli.cn/img/undefined_01.png" info="1"/>
+                                <p class="label-label">留学领航</p>
+                            </li>
+                            <li class="theme-item">
+                                <img class="changeG" src="http://image.1yingli.cn/img/undefined_02.png" info="2"/>
+                                <p class="label-label">求职就业</p>
+                            </li>
+                            <li class="theme-item">
+                                <img class="changeG" src="http://image.1yingli.cn/img/undefined_03.png" info="4"/>
+                                <p class="label-label">创业助力</p>
+                            </li>
+                            <li class="theme-item">
+                                <img class="changeG" src="http://image.1yingli.cn/img/undefined_04.png" info="8"/>
+                                <p class="label-label">校园生活</p>
+                            </li>
+                            <li class="theme-item">
+                                <img class="changeG" src="http://image.1yingli.cn/img/undefined_05.png" info="16"/>
+                                <p class="label-label">猎奇分享</p>
+                            </li>
+                        </ul>
+                        <a class="add-your-label" href="javascript:void(0);">
+                            <img src="http://image.1yingli.cn/img/topic_star.png" style=" width: 20px;height: 20px;margin-top: 4px;margin-right: 5px;margin-left: 25px;"style=" width: 20px;height: 20px;margin-top: 4px;margin-right: 5px;margin-left: 25px;"/>
+                            <span>给自己添加标签</span>
+                        </a>
+                        <p class="add-you-label-describe">添加和自己相符的标签，让别人更加了解你</p>
+                    </div>
+                    <div class="m-old" style="padding:0px;border:0px;margin-top:10px;">
+                        <div class="m-step">
+                            <ul>
+                                <li>
+                                    <p>你的个人资料</p>
+                                    <span class="radius">1</span>
+                                </li>
+                                <li class="">
+                                    <p>个人简历</p>
+                                    <span class="radius">2</span>
+                                </li>
+                                <li class="unactive">
+                                    <p>话题说明</p>
+                                    <span class="radius">3</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="m-btn">
+                            <a href="javascript:last();" class="u-next pre">上一步</a>
+                            <a href="javascript:submitInfo();" class="u-next">提交</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="pop">
+                <h1 class="add-label-h1">
+                    <img class="h1-img" src="http://image.1yingli.cn/img/topic_star.png" style=" width: 20px;height: 20px;margin-top: 7px;margin-right: 5px;margin-left: 25px;"/>
+                    <span class="h1-span">添加标签</span>
+                </h1>
+                <p class="add-label-p">通过单击以下标签进行选择：</p>
+                <ul class="small-label-list" id="tip-list">
+                    <!-- <li class="small-label-item">
+                        标签0
+                    </li> -->
+                </ul>
+                <p class="label-number">已添加0个标签</p>
+                <a class="cancel-add" href="javascript:void(0);">取&nbsp;消</a>
+                <a class="confirm-add" href="javascript:void(0);">确&nbsp;定</a>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="contact"></div>
+    <div class="footer"></div>
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.json-2.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/person_header.js"></script>
+    <script type="text/javascript" src="js/btc3.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script>
+    function change(btn){
+        if(btn.classList.contains("styles")){
+            btn.classList.remove("styles");
+        }else{
+            if($(".styles").length > 3) {
+                //alert("最多4个标签！");
+                return;
+            } 
+            btn.classList.add("styles") ;
+        }
+    }
+    function changeC(btn){
+        if(btn.classList.contains("changeC")){
+            btn.classList.remove("changeC");
+        }else{
+            btn.classList.add("changeC") ;
+        }
+    }
+    $(document).ready(function(){
+        var times = 0;
+        $(".changeG").click(function(){
+            var selectedNum = $(".changeC").length;
+            if((selectedNum < 6)||(this.classList.contains("changeC"))){
+                changeC(this);
+            }
+        });
+        $(".small-label-item").click(function(){
+            change(this);
+            var clickNum = $(".styles").length;
+            $(".label-number").html("已添加"+clickNum+"个标签");
+        });
+        $(".add-your-label").click(function(){
+            $(".pop").fadeIn(300);
+        });
+        $(".cancel-add").click(function(){
+            $(".pop").fadeOut(300);
+        })
+        $(".confirm-add").click(function(){
+            $(".pop").fadeOut(300);
+        })
+
+    })
+</script>
+</body>
+</html>

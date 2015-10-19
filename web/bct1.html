@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ch">
+<head>
+	<meta charset="UTF-8">
+	<title>成为导师</title>
+	<link href="css/style.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/index.css" />
+	<link rel="stylesheet" type="text/css" href="css/personal_common.css" />	
+	<link rel="stylesheet" href="css/jquery-ui.css">
+	<link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
+    <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
+</head>
+<body>
+	<div class="g-hd"></div>
+	<div style="width:100%;min-width:1096px;">
+		<div class="g-mn">
+		<div class="m-intro">
+			<h3>如果您在某个领域有多年经验和独到见解，欢迎申请成为「一英里」的导师。</h3>
+			<p>「一英里」专注于一对一咨询，致力于打造最便捷畅通的大学生线上交流平台，打破信息不对称的壁垒，轻松连接高校名企精英与万千追梦学子。</p><br>
+			<p>「一英里」鼎故革新，打破常规，实现导师与学子一对一无碍交流。从犹豫徘徊到笃定前行，从忐忑不安到锐意抉择，每一步求学之路，每一次职场险阻，「一英里」将与万千导师，伴你左右。</p><br>
+			<p>你为梦想，我们为你。</p><br>
+		</div>
+		<div class="m-inputbox f-cb">
+			<p>如果您感兴趣，请花10-15分钟填写以下表格，我们将在24小时内与您联系。</p>
+			<div class="m-inputlist f-cb">
+				<div class="m-input">
+					<label for="name">＊姓名</label>
+					<input id="name" type="text" placeholder="填写姓名" class="u-input">
+					<div id="nameTab"  class="messageTab"></div>
+				</div>
+				<div class="m-input">
+					<label for="phone">＊手机</label>
+					<input id="phone" type="text" placeholder="填写手机号码" class="u-input">
+					<div id="phoneTab"   class="messageTab"></div>
+				</div>
+				<div class="m-input">
+					<label for="address">＊常驻地址</label>
+					<input id="address" type="text" placeholder="填写地址" class="u-input">
+					<div id="addressTab"  class="messageTab"></div>
+				</div>
+				<div class="m-input">
+					<label for="mail">＊邮箱</label>
+					<input id="mail" type="email" placeholder="填写邮箱" class="u-input">
+					<div id="mailTab" class="messageTab"></div>
+				</div>
+			</div>
+			<div class="m-step">
+				<ul>
+					<li>
+						<p>你的个人资料</p>
+						<span class="radius">1</span>
+					</li>
+					<li class="unactive">
+						<p>个人简历</p>
+						<span class="radius">2</span>
+					</li>
+					<li class="unactive">
+						<p>话题说明</p>
+						<span class="radius">3</span>
+					</li>
+				</ul>
+			</div>
+			<div class="m-btn">
+				<a href="javascript:next();" class="u-next">下一步</a>
+			</div>
+		</div>
+		</div>
+	</div>
+	
+	<div class="contact"></div>
+	<div class="footer"></div>
+	<div class="mark" style="display:none; z-index:100;"></div>
+    <div id="confirm" style="width: 400px;height: 200px;margin: auto;position: absolute;top: 50%;left: 50%;margin-top:-100px;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; display:none;">
+    	<div style="width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+        <div style="position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;">您已经成为导师</div>
+        <a href="tutor.html" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">确定</a>
+    </div>
+	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery.json-2.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/util.js"></script>
+	<script type="text/javascript" src="js/person_header.js"></script>
+	<script type="text/javascript" src="js/btc1.js"></script>
+	<script src="js/jquery-ui.js"></script> 	
+</body>
+</html>

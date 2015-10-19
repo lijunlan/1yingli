@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>账号</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="css/account.css" rel="stylesheet" type="text/css"/>
+    <link href="css/personal_common.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
+    <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
+
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.json-2.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/RSA/RSA.js"></script>
+    <script type="text/javascript" src="js/RSA/BigInt.js"></script>
+    <script type="text/javascript" src="js/RSA/Barrett.js"></script>
+    <script type="text/javascript" src="js/RSA/RSAencrypt.js"></script>
+    <script type="text/javascript" src="js/person_header.js"></script>
+    <script type="text/javascript" src="js/util.js"></script>
+    <script type="text/javascript" src="js/account.js"></script>
+    <script src="js/jquery-ui.js"></script>
+</head>
+<body>
+    <div class="g-hd"></div>
+
+    <div class="top-nav"></div>
+
+    <div class="content-container">
+        <div class="content">
+        <div class="content-left">
+            <div class="content-left-01">
+               <img id="bigIcon" style="height:200px;width:200px" src="http://image.1yingli.cn/img/img.png" alt=""/>
+                <p id="bigNickName"></p>
+                <a href="general.html" id="personal-info" >编辑个人资料</a>
+                <a href="javascript:void(0);" id="personal-assess" style="color:#56bbe8">修改帐号密码</a>
+                <a href="assessSheet.html" id="personal-assess">评价</a>
+            </div>
+        </div>
+            <div class="content-right">
+                <div class="right-01">
+                    <p class="right-01-title">验证手机</p>
+                    <div id="right-01-form">
+                        <input type="tel" name="phone" id="write-phNumber" style="text-indent: 7px;"  placeHolder="请输入手机号" />
+                        <button  id="send-identify" onClick="getCheckPhoneNo()">发送手机验证码</button>
+                        <input type="text" id="write-identify" style="text-indent: 7px;" placeHolder="请输入验证码"/>
+                        <button  id="right-submit" onClick="changePhone()">提&nbsp;交</button>
+                    </div>
+                </div>
+                <div class="right-01">
+                    <p class="right-01-title">邮箱验证</p>
+                    <div id="right-01-form">
+                        <input type="tel" name="email" id="write-Email" placeHolder="请输入邮箱号" 
+                               style="text-indent: 7px;width: 266px;height: 28px;line-height: 28px; border: 1px solid rgba(0,0,0,0.15); background: rgba(0,0,0,0.05);margin-bottom: 7px;" />
+                        <button  id="send-identify1" onClick="getCheckEmailNo()" style="width: 113px;height: 24px;border: 0;background: #56bbe8;color: white;font-family: lanting;font-size: 13px;border-radius: 8px;margin-left: 5px;">发送邮箱验证码</button>
+                        <input type="text" id="write-EMidentify" placeHolder="请输入验证码"
+                               style="text-indent: 7px;width: 266px;height: 28px;line-height: 28px; border: 1px solid rgba(0,0,0,0.15); background: rgba(0,0,0,0.05);margin-bottom: 7px;" />
+                        <button  id="right-submit" onClick="changeEmail()">提&nbsp;交</button>
+                    </div>
+                </div>
+                <div class="right-02">
+                    <p class="right-01-title">修改密码</p>
+                    <div id="right-02-form" style="height: 168px;">
+                        <label style="width:300px; display:block; margin-bottom:5px; text-align:center;">不支持第三方登录密码修改。</label>
+                        <label class="right-label">当前密码</label>
+                        <input type="password" id="password" style="text-indent: 7px;" placeHolder="请输入当前密码"/>
+                        <label class="right-label">新密码</label>
+                        <input type="password" id="new-password" style="text-indent: 7px;" placeHolder="请输入新密码"/>
+                        <label class="right-label">确认密码</label>
+                        <input type="password" id="confirm-password" style="text-indent: 7px;" placeHolder="请输入新密码"/>
+                        <button id="password-submit" onClick="changePassword()">提&nbsp;交</button>
+                    </div>
+                </div>
+                <!--<div class="right-03">
+                    <p class="binding-alipay">账号绑定管理</p>
+                    <img class="binding-img" src="img/binding_alipay.png" alt=""/>
+                    <p class="a-box"><a href="" class="binding-link">立即绑定</a></p>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <div class="mark" style="display:none;"></div>
+    <div id="stel" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 30%;left: 36%;border-radius: 10px;z-index: 101;background: #fff; display:none;">
+        <div style="    width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+        <div style="position: absolute;top: 40%;left: 35%;font-size: 20px;color: #b6b6b6;">手机验证成功</div>
+        <a href="account.html" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">确定</a>
+    </div>
+    <div id="semil" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 30%;left: 36%;border-radius: 10px;z-index: 101;background: #fff; display:none;">
+        <div style="    width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+        <div style="position: absolute;top: 40%;left: 35%;font-size: 20px;color: #b6b6b6;">邮箱验证成功</div>
+        <a href="account.html" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">确定</a>
+    </div>
+    <div id="spass" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 30%;left: 36%;border-radius: 10px;z-index: 101;background: #fff; display:none;">
+        <div style="    width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+        <div style="position: absolute;top: 40%;left: 35%;font-size: 20px;color: #b6b6b6;">密码修改成功</div>
+        <a href="account.html" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">确定</a>
+    </div>
+    <div id="etel" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 30%;left: 36%;border-radius: 10px;z-index: 101;background: #fff; display:none;">
+        <div style="    width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+        <div style="position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;">手机验证失败</div>
+        <a href="account.html" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">确定</a>
+    </div>
+    <div id="eemil" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 30%;left: 36%;border-radius: 10px;z-index: 101;background: #fff; display:none;">
+        <div style="    width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+        <div style="position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;">邮箱验证失败</div>
+        <a href="account.html" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">确定</a>
+    </div>
+    <div id="epass" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 30%;left: 36%;border-radius: 10px;z-index: 101;background: #fff; display:none;">
+        <div style="    width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+        <div style="position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;">密码修改失败</div>
+        <a href="account.html" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">确定</a>
+    </div>
+    <div id="mess" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 30%;left: 36%;border-radius: 10px;z-index: 101;background: #fff; display:none;">
+        <div style="    width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+        <div style="position: absolute;top: 40%;left: 31%;font-size: 20px;color: #b6b6b6;">请将表单填写完整</div>
+        <a id="hideMiss" href="#" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">确定</a>
+    </div>
+    <div class="contact"></div>
+    <div class="footer"></div>
+    <script type="text/javascript" src="js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+<!ELEMENT service-error (error+)>
+<!ELEMENT error EMPTY>
+<!ATTLIST error name CDATA #REQUIRED>
+<!ATTLIST error value CDATA #REQUIRED>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+		scope="singleton">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml">
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>cn.yiyingli.Persistant.Task</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- !!!Transaction manager for a single Hibernate SessionFactory!!! -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!--配置service层的事务处理类的基类 -->
+
+	<bean id="baseTxService"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		abstract="true">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="remove*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="query*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- !!!!!Dao!!!!! -->
+	<bean id="timeTaskDao" class="cn.yiyingli.Dao.Impl.TimeTaskDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- !!!!!Data Transaction Service !!!! -->
+	<bean id="timeTaskService" parent="baseTxService">
+		<property name="target">
+			<ref local="timeTaskServiceImpl" />
+		</property>
+	</bean>
+
+
+	<!--!!!!Data Service Impl!!!!! -->
+	<bean id="timeTaskServiceImpl" class="cn.yiyingli.Service.Impl.TimeTaskServiceImpl">
+		<property name="timeTaskDao">
+			<ref local="timeTaskDao" />
+		</property>
+	</bean>
+</beans>
