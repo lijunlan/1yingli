@@ -313,7 +313,7 @@
             $.ajax({
                 cache : true,
                 type : "POST",
-                url : "http://service.1yingli.cn/yiyingliService/manage",
+                url : config.base_url,
                 data : "{'style':'function','method':'getCheckNo','username':'" + username+"'}",
                 async : false,
                 error : function(request) {
@@ -358,7 +358,7 @@
             $.ajax({
                 cache : true,
                 type : "POST",
-                url : "http://service.1yingli.cn/yiyingliService/manage",
+                url : config.base_url,
                 data : "{'style':'user','method':'login','username':'" + username
                        + "','password':'" + password + "'}",
                 async : false,
@@ -418,7 +418,7 @@
             $.ajax({
                 cache : true,
                 type : "POST",
-                url : "http://service.1yingli.cn/yiyingliService/manage",
+                url : config.base_url,
                 data : "{'style':'user','method':'register','username':'" + username
                        + "','password':'" + password + "','checkNo':'"+checkNo+"','nickName':'"+nickName+"'}",
                 async : false,

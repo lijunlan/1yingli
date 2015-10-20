@@ -125,7 +125,7 @@ $(document).ready(function(){
         $.ajax({
             cache : true,
             type : "POST",
-            url : "http://service.1yingli.cn/yiyingliService/manage",
+            url : config.base_url,
             data : $.toJSON(toSend),
             async : false,
             error : function(request) {
@@ -194,7 +194,7 @@ $(document).ready(function(){
         $.ajax({
             cache : true,
             type : "POST",
-            url : "http://service.1yingli.cn/yiyingliService/manage",
+            url : config.base_url,
             data : $.toJSON(toSend),
             async : false,
             error : function(request) {
@@ -242,7 +242,7 @@ $(document).ready(function(){
         $.ajax({
             cache : true,
             type : "POST",
-            url : "http://service.1yingli.cn/yiyingliService/manage",
+            url : config.base_url,
             data : $.toJSON(toSend),
             async : false,
             error : function(request) {
@@ -289,7 +289,7 @@ $(document).ready(function(){
 			$.ajax({
 				cache : true,
 				type : "POST",
-				url : "http://service.1yingli.cn/yiyingliService/manage",
+				url : config.base_url,
 				data : $.toJSON(toSend),
 				async : false,
 				error : function(request) {
@@ -312,7 +312,7 @@ $(document).ready(function(){
 			$.ajax({
 				cache : true,
 				type : "POST",
-				url : "http://service.1yingli.cn/yiyingliService/manage",
+				url : config.base_url,
 				data : $.toJSON(toSend1),
 				async : false,
 				error : function(request) {
@@ -619,7 +619,7 @@ function refreshTeacherInfo(){
     $.ajax({
             cache : true,
             type : "POST",
-            url : "http://service.1yingli.cn/yiyingliService/manage",
+            url : config.base_url,
             data : $.toJSON(toSend),
                 async : false,
                 error : function(request) {
@@ -826,7 +826,7 @@ function changePage(p){
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
         async : false,
         error : function(request) {
@@ -927,7 +927,7 @@ function changemassage(a,b,c){
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
             async : false,
             error : function(request) {
@@ -966,7 +966,7 @@ function editBackGround() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "http://service.1yingli.cn/yiyingliService/manage",
+		url : config.base_url,
 		data : $.toJSON(toSend),
 		async : false,
 		error : function(request) {
@@ -1030,7 +1030,7 @@ function editBackGround() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "http://service.1yingli.cn/yiyingliService/manage",
+		url : config.base_url,
 		data : $.toJSON(toSend),
 		async : false,
 		error : function(request) {

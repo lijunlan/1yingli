@@ -35,7 +35,7 @@
                 toSend.method = "getSearchHint";
                 toSend.word = $( "#search-input" ).val();
                 $.ajax({
-                    url: "http://service.1yingli.cn/yiyingliService/manage",
+                    url: config.base_url,
                     type : "POST",
                     dataType: 'json',
                     data: $.toJSON(toSend),

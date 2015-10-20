@@ -49,7 +49,7 @@ function getTotalPage(){
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : "{'style': 'user', 'method': 'getOrderCount', 'uid': '"+$.cookie('uid')+"'}",
         async : false,
         error : function(request) {},
@@ -73,7 +73,7 @@ function changePage(p){
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
             async : false,
             error : function(request) {
@@ -565,7 +565,7 @@ function good(order){
         $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
             async : false,
             error : function(request) {
@@ -598,7 +598,7 @@ function usend(stid,ass,order){
         $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
             async : false,
             error : function(request) {
@@ -627,7 +627,7 @@ function nopay(order){
         $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
             async : false,
             error : function(request) {
@@ -656,7 +656,7 @@ function nopayafter(order){
         $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
             async : false,
             error : function(request) {
@@ -685,7 +685,7 @@ function noserve(order){
         $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
             async : false,
             error : function(request) {
@@ -715,7 +715,7 @@ function nogood(order){
         $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
             async : false,
             error : function(request) {
@@ -745,7 +745,7 @@ function detail(oid){
         $.ajax({
             cache : true,
             type : "POST",
-            url : "http://service.1yingli.cn/yiyingliService/manage",
+            url : config.base_url,
             data : $.toJSON(toSend),
                 async : false,
                 error : function(request) {

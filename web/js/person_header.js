@@ -41,7 +41,7 @@
                 toSend.method = "getSearchHint";
                 toSend.word = $( "#search-input" ).val();
                 $.ajax({
-                    url: "http://service.1yingli.cn/yiyingliService/manage",
+                    url: config.base_url,
                     type : "POST",
                     dataType: 'json',
                     data: $.toJSON(toSend),
@@ -68,7 +68,7 @@ function logout(){
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : "{'style':'user','method':'logout','uid':'" + $.cookie('uid') + "'}",
         async : false,
         error : function(request) {
@@ -94,7 +94,7 @@ function getEmailCount() {
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : "{'style':'notification','method':'getNotiCount','uid':'" + $.cookie('uid') + "'}",
         async : false,
         error : function(request) {

@@ -12,7 +12,7 @@ var code = $_GET('code');
 $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : "{'style':'user','method':'loginByWeibo','weibo_code':'"+code+"'}",
         async : false,
         error : function(request) {
@@ -52,7 +52,7 @@ function weixin(){
     $.ajax({
             cache : true,
             type : "POST",
-            url : "http://service.1yingli.cn/yiyingliService/manage",
+            url : config.base_url,
             data : "{'style':'user','method':'loginByWeixin','weixin_code':'"+code+"'}",
             async : false,
             error : function(request) {

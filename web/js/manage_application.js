@@ -9,7 +9,7 @@ function refresh(){
 	$.ajax({
                 cache : true,
                 type : "POST",
-                url : "http://service.1yingli.cn/yiyingliService/manage",
+                url : config.base_url,
                 data : "{'style':'manager','method':'getApplicationFormList','mid':'"+$.cookie("mid")+"'}",
                 async : false,
                 error : function(request) {
@@ -104,7 +104,7 @@ function accept(afid){
 	$.ajax({
                 cache : true,
                 type : "POST",
-                url : "http://service.1yingli.cn/yiyingliService/manage",
+                url : config.base_url,
                 data : "{'style':'manager','method':'doneApplicationForm','mid':'"+$.cookie("mid")+"','afId':'"+afid+"','accept':'true','description':'"+description+"'}",
                 async : false,
                 error : function(request) {
@@ -129,7 +129,7 @@ function refuse(afid){
 	$.ajax({
                 cache : true,
                 type : "POST",
-                url : "http://service.1yingli.cn/yiyingliService/manage",
+                url : config.base_url,
                 data : "{'style':'manager','method':'doneApplicationForm','mid':'"+$.cookie("mid")+"','afId':'"+afid+"','accept':'false','description':'"+description+"'}",
                 async : false,
                 error : function(request) {
@@ -151,7 +151,7 @@ function mlogout(){
 	$.ajax({
                 cache : true,
                 type : "POST",
-                url : "http://service.1yingli.cn/yiyingliService/manage",
+                url : config.base_url,
                 data : "{'style':'manager','method':'logout','mid':'" + $.cookie('mid') + "'}",
                 async : false,
                 error : function(request) {

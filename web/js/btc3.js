@@ -66,7 +66,7 @@ $(document).ready(function(){
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : "{'style':'function','method':'getTips'}",
         async : false,
         error : function(request) {
@@ -225,7 +225,7 @@ function submitInfo(){
         cache : true,
         contentType:"application/x-www-form-urlencoded; charset=uft-8",
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data :  $.toJSON(toSend),
         async : false,
         error : function(request) {

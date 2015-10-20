@@ -289,7 +289,7 @@
                         toSend.method = "getSearchHint";
                         toSend.word = $( "#searchBox" ).val();
                         $.ajax({
-                            url: "http://service.1yingli.cn/yiyingliService/manage",
+                            url: config.base_url,
                             type : "POST",
                             
                             dataType: 'json',//如果需要为jsonp类型，则需要在下面的data属性中加上callback: ?

@@ -57,7 +57,7 @@ function changePage(p){
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
         async : false,
         error : function(request) {
@@ -177,7 +177,7 @@ function getTotalPage(){
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
         async : false,
         error : function(request) {
@@ -215,7 +215,7 @@ function deleteTeacher(tid) {
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
         async : false,
         error : function(request) {

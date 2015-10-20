@@ -12,7 +12,7 @@ function update(){
 	$.ajax({
                 cache : true,
                 type : "POST",
-                url : "http://service.1yingli.cn/yiyingliService/manage",
+                url : config.base_url,
                 data : "{'style':'manager','method':'login','username':'"+$("#username").val()+"','password':'"+password+"'}",
                 async : false,
                 error : function(request) {

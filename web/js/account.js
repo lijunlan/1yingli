@@ -26,7 +26,7 @@ function refreshPhone(){
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
         async : false,
         error : function(request) {
@@ -51,7 +51,7 @@ function refreshEmail(){
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
         async : false,
         error : function(request) {
@@ -140,7 +140,7 @@ function changePhone(){
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
         async : false,
         error : function(request) {
@@ -192,7 +192,7 @@ function getCheckPhoneNo(){
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
         async : false,
         error : function(request) {
@@ -263,7 +263,7 @@ function changeEmail(){
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
         async : false,
         error : function(request) {
@@ -321,7 +321,7 @@ function getCheckEmailNo(){
     $.ajax({
             cache : true,
             type : "POST",
-            url : "http://service.1yingli.cn/yiyingliService/manage",
+            url : config.base_url,
             data : $.toJSON(toSend),
             async : false,
             error : function(request) {
@@ -394,7 +394,7 @@ function changePassword(){
     $.ajax({
         cache : true,
         type : "POST",
-        url : "http://service.1yingli.cn/yiyingliService/manage",
+        url : config.base_url,
         data : $.toJSON(toSend),
             async : false,
             error : function(request) {
