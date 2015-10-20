@@ -3,15 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <title>导师主页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/jump.css"/>
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <link href="css/personal.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="css/jquery-ui.css"/>
     <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
     <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
+
+    <style>
+    	@media (max-width: 768px){
+            .content-box{
+            	/*display: none;*/
+            }
+            .personal-bg{
+            	min-height: 10em;
+
+            }
+            .personal-header{
+            	min-width: 20em;
+            }
+            .footer{
+            	min-width: 20em
+            }
+            #wximg{
+            	display: none;
+            }
+            #company{
+            	width: 100% !important;
+            	text-align:center !important;
+            	margin-left: 0px !important;
+            }
+            .footerc{
+            	width: 100% !important;
+            }
+            .number{
+            	width: 100% !important;
+            }
+            .content{
+            	width: 100%;
+            }
+            .content-left{
+            	width: 85%;
+            }
+            .content-left-person{
+            	display: none;
+            }
+            .content-left-topic{
+            	width: 100%;
+            }
+            .content-left-about{
+            	width: 85%;
+            }
+            .content-left-ident{
+            	width: 100%;
+            }
+            .content-left-ident ul li{
+            	width: 20%;
+            	margin-right: 0px;
+            }
+            .content-left-resume{
+            	width: 100%;
+            }
+            .content-left-assess{
+            	width: 100%;
+            }
+            .assess-content{
+            	width: 100%;
+            }
+            .content-right{
+            	width: 100%;
+            }
+            .content-box{
+            	min-width: 0px;
+            }
+            .contact-about{
+            	width: 100%;
+            	margin-left: 2rem;
+            }
+            .about-block{
+            	width: 80%;
+            	background: rgba(0,0,0,0);
+            	border: 1px solid #AFAFAF;
+            }
+            .about-person-content{
+            	float: left;
+            	width: 55%;
+            }
+            .about-where{
+            	width: 100%;
+            }
+
+        }
+    </style>
+
 </head>
 <body>
-	<div id="contolShow" style="display:none;">
+	<!-- <div id="contolShow" style="display:none;">
     <div class="personal-header" id="personal-header" style="position: relative;">
         <img src="http://image.1yingli.cn/img/person_bg.png" class="personal-bg"/>
         <div class="header" id="header">
@@ -29,7 +117,7 @@
             </div>
         </div>
         <div style="background:url(http://image.1yingli.cn/img/shadow.png);width: 100%;height: 95px; position: absolute; bottom: -3px;min-width: 1096px;"></div>
-    </div>
+    </div> -->
 
     <div class="content-box" id="content-box">
         <div class="content" id="content">
@@ -92,7 +180,7 @@
                 </div>
                 <div class="content-left-ident" id="content-left-ident">
                     <ul  style="list-style-type:disc;">
-                        <li style="list-style-type:disc;">
+                        <li>
                             <img src="http://image.1yingli.cn/img/ident_01.png" alt=""/>
                             <p id="checkID">实名认证</p>
                         </li>
@@ -190,22 +278,22 @@
         <div style="font-size:12px; color:red ; position:absolute; top:25%; left:18%; ">您预留的联系方式是导师唯一可以联系您的方式，请确认无误后再提交！</div>
         <div style="width:500px; height:30px; position:absolute; top:35%; left:10%">
             <div style="font-size:14px; font-weight:bold; position:absolute; top:3px;">真实姓名</div>
-            <input id="pname" type="text" style="width:300px; height:25px; font-size:14px; line-height: 25px; border-radius:8px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:12%; " placeholder="您的姓名">
+            <input id="pname" type="text" style="width:300px; height:25px; font-size:14px; line-height: 25px; border-radius:12px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:12%; " placeholder="您的姓名">
             <div id="warnname" style=" color:red; position:absolute; left:77.5%;display:none;">请填写真实姓名</div>
         </div>
         <div style="width:500px; height:30px; position:absolute; top:47%; left:10%">
             <div style="font-size:14px;  font-weight:bold; position:absolute; top:3px;">电话号码</div>
-            <input id="ptel" type="tel" style="width:300px; height:25px; font-size:14px; line-height: 25px; border-radius:8px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:12%;" placeholder="您的电话">
+            <input id="ptel" type="tel" style="width:300px; height:25px; font-size:14px; line-height: 25px; border-radius:12px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:12%;" placeholder="您的电话">
             <div id="warntel" style=" color:red; position:absolute; top:4px; left:77.5%; display:none;">必填</div>
         </div>
         <div style="width:500px; height:30px; position:absolute; top:59%; left:12%">
             <div style="font-size:14px;  font-weight:bold; position:absolute; top:3px;">邮箱</div>
-            <input id="pemil" type="email" style="width:300px; height:25px; font-size:14px; line-height: 25px; border-radius:8px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:9.5%;" placeholder="您的邮箱">
+            <input id="pemil" type="email" style="width:300px; height:25px; font-size:14px; line-height: 25px; border-radius:12px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:9.5%;" placeholder="您的邮箱">
             <div id="warnemil" style=" color:red; position:absolute; top:4px; left:75%; display:none;">必填</div>
         </div>
         <div style="width:500px; height:30px; position:absolute; top:71%; left:12%">
             <div style="font-size:14px; font-weight:bold; position:absolute; top:3px;">微信</div>
-            <input id="pweixin" type="text" style="width:300px; height:25px; font-size:14px; line-height: 25px; border-radius:8px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:9.5%;" placeholder="您的微信">
+            <input id="pweixin" type="text" style="width:300px; height:25px; font-size:14px; line-height: 25px; border-radius:12px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:9.5%;" placeholder="您的微信">
             <div id="warnweixin" style="font-family:lanting; color:red; position:absolute; top:4px; left:75%; display:none;">必填</div>
         </div>
         <div style="width:500px; height:30px; position:absolute; top:84%; left:50%">
@@ -266,7 +354,7 @@
         </form>
         <div style="font-size:16px; position:absolute; top:510px; left:40px;">告诉我你什么时间方便?</div>
         <form style="position:absolute; top:532px; left:40px;">
-            <textarea id="ptime" style="width:530px; height:70px; padding: 10px; font-size:16px; outline:none; border:solid 1px #b2b2b2; resize : none;" placeholder="你近期方便咨询的时间，例如：9月18号10:00、9月19号20:00（北京时间）此时间仅供参考，具体时间请与导师协商后确定" ></textarea>
+            <textarea id="ptime" style="width:530px; height:70px; padding: 10px; font-size:16px; outline:none; border:solid 1px #b2b2b2; resize : none;" placeholder="你近期方便咨询的时间，例如：9月18号10：00（请以北京时间为准,可填多个）" ></textarea>
         </form>
         <div style="font-size:16px; position:absolute; top:640px; left:40px;"><div style="background-image:url('http://image.1yingli.cn/img/discount_01.png');background-repeat:no-repeat;width: 30px;height: 25px;float: left;"></div>优惠<span style="font-size:12px;color:red;">（优惠码是系统以短信或邮箱的形式给您发出的优惠号码）</span></div>
         <form style="position:absolute; top:672px; left:40px;">
@@ -328,7 +416,7 @@
                         toSend.method = "getSearchHint";
                         toSend.word = $("#search-input").val();
                         $.ajax({
-                            url: config.base_url,
+                            url: "http://service.1yingli.cn/yiyingliService/manage",
                             type : "POST",
                             dataType: 'json',
                             data: $.toJSON(toSend),

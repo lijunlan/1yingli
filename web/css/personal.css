@@ -50,11 +50,11 @@ abbr,acronym { border:0;
 #personal-header{
     width: 100%;
     background: rgba(0,0,0,0.05);
-    min-width: 1096px;
+   /* min-width: 1096px;*/
     
 }
 .personal-bg{
-    position: relative;  width: 100%;height: 30%; min-width: 1096px; max-height: 570px;
+    position: relative;  width: 100%;height: 30%; /*min-width: 1096px;*/ max-height: 570px;
 }
 #header{
     width: 100%;  
