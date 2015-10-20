@@ -1,0 +1,200 @@
+
+
+html{color:#000;background:#FFF;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,
+fieldset,input,textarea,p,blockquote,th,td {
+    margin:0;
+    padding:0;
+}
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+fieldset,img {
+    border:0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+    font-style:normal;
+    font-weight:normal;
+}
+ol,ul {
+    list-style:none;
+}
+caption,th {
+    text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-size:100%;
+    font-weight:normal;
+}
+q:before,q:after {
+    content:'';
+}
+abbr,acronym { border:0;  }
+
+/*--------------------------------------header-----------------------------------------------------*/
+#header{
+    width: 100%;  height: 60px;  border-bottom: 2px solid #dedede;
+    -moz-border-left-colors: rgba(0,0,0,0.3) rgba(0,0,0,0.2) rgba(0,0,0,0.1) rgba(0,0,0,0.05) rgba(0,0,0,0.01);
+    -moz-border-right-colors: rgba(255,255,255,0.03) rgba(255,255,255,0.05) rgba(255,255,255,0.1) rgba(255,255,255,0.3) rgba(255,255,255,0.5) rgba(255,255,255,0.7);
+}
+#header-left{  width: 400px;  height: 60px;  line-height: 60px;  float: left;  }
+#logo{  float: left;  margin-top: 15px;  margin-left: 60px;  }
+#nav-left{  height: 60px;  line-height: 60px;  float: left;  margin-left: 5%;  }
+.nav-left{  height: 60px;  line-height: 60px;  float: left;  margin-right: 30px;  }
+.nav-left a{  text-decoration: none;  color: rgba(0,0,0,0.3);  }
+.nav-left a:hover{  color: #56bbe8;  }
+
+#header-right{  width: 400px;  height: 60px;line-height: 60px;  float: right;  }
+#nav-right{  height: 60px;  line-height: 60px;  float: left;margin-right: 20px;  }
+.nav-right{  height: 60px;  line-height: 60px;  float: left;  margin-right: 25px;  }
+
+.nav-right a{  text-decoration: none;  color: rgba(0,0,0,0.3);  }
+.nav-right:nth-last-of-type(1) a{  color: #34495e;  }
+.nav-right a:hover{  color: #56bbe8;  }
+.nav-right span{  text-decoration: none;  color: rgba(0,0,0,0.3);  }
+
+.header-bg{  width: 100%;  }
+.header-bg img{  width: 100%;  }
+
+/*--------------------------content-----------------------------------------------------------------------*/
+.content-container{  width: 100%;height: 600px;padding-top: 50px;padding-bottom: 80px;min-width: 1096px; }
+.content{  width: 1000px;height: 600px;margin: 0 auto;position: relative;  }
+.content-container-bg{  width: 1000px;height: 600px;  }
+.content-nav{  width: 420px;height: 600px;position: absolute;left: 0;top: 0;  }
+.content-nav p{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 18px;color: white;  }
+.content-nav a{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;color: #56bbe8;text-decoration: none; width:80px; display:block; float:right; line-height: 17px; height: 22px; }
+.content-nav a:hover{  color: #b9effd; }
+
+.about{  margin-right: 115px;margin-top: 68px;text-align: right;  }
+.about ul{margin-top: 10px;}
+.about ul li{height: 25px;line-height: 25px;}
+
+.join{  margin-right: 115px;margin-top: 72px;text-align: right;  }
+.join ul{margin-top: 10px;}
+.join ul li{height: 25px;line-height: 25px;}
+
+.conTact{  margin-right: 115px;margin-top: 102px;text-align: right;  }
+.conTact ul{margin-top: 10px;}
+.conTact ul li{height: 22px;line-height: 22px;}
+
+
+.content-right{  width: 580px;height: 600px;position: absolute;right: 0;top: 0;  }
+
+.whoweare{  width: 480px;height: 480px; margin: 50px 80px 60px 40px; }
+.whoweare-title{  width: 400px;height: 40px;line-height: 40px;border-bottom: 1px solid rgba(0,0,0,0.4);font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-weight: bold;font-size: 20px;color: black;  }
+.whoweare-content{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif; font-size: 18px;color: black;line-height: 1.6;margin-top: 10px;  }
+.whoweare-content h2{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;height: 30px;line-height: 30px;margin-top: 20px;color: black;  }
+
+.members{ width: 470px;height: 430px;margin: 100px 80px 60px 40px; display: none; overflow:hidden; position:relative;}
+#container {position: relative; overflow: hidden; }
+#div1 { width: 440px; position: absolute; left:0; }
+#div2 { width: 13px;height: 430px;background-color: #56bbe8;position: absolute;border-radius: 15px; right: 0; margin-top: 0px; margin-left: 30px;}
+#div3 { width: 13px;height: 100px;background-color: #34485E;position: absolute;left: 0;top: 0;cursor: pointer;border-radius: 15px;}
+.members ul{padding-top: 0px;}
+.members ul li{  width: 110px;height: 153px;float: left;text-align: center;margin: 0 15px;margin-bottom: 2px;  }
+.members ul li p:nth-of-type(1){  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;  }
+.members ul li p:nth-of-type(2){  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 12px;  }
+.members ul li img{  width: 100px;border-radius: 50px;  }
+
+.jobs{  width: 480px;height: 480px;margin: 50px 80px 60px 40px;display: none;  }
+.jobs-title{  width: 200px;height: 40px;line-height: 40px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;  }
+.jobs-title img{  float: left;margin-top: 7px; }
+.jobs-title p{  float: left;display: inline-block;width: 300px;height: 40px;line-height: 40px; font-size: 30px; }
+.job-list{width:80px; height: 95px;border-bottom: 3px solid rgba(0,0,0,0.8);margin-top: 8px; display: none;}
+.job-list ul li{  float: left;margin-top: 15px;margin-right: 80px;text-align: center;height: 80px;width: 80px;  }
+.job-list ul li a{  text-decoration: none;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 17px;color: black;  }
+.job-list ul li img{  margin-bottom: 5px;  }
+.job-list ul li p{  margin-bottom: 7px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 16px;  }
+.job-list ul li:nth-last-of-type(1){  margin-right: 5px;  }
+#job-list-01{margin-left: 0;}
+
+.ui-designer{  width: 420px;height: 300px;margin-left: 40px;display: none;  }
+.ui-discribe{  width: 420px;height: 120px;border-bottom: 1px solid rgba(0,0,0,0.8);  }
+.ui-discribe h1{  width: 420px;height: 40px;line-height: 40px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;margin-top: 10px;  }
+.ui-discribe p{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;line-height: 1.6;  }
+.ui-discription p{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;line-height: 1.6;margin-top: 10px; }
+
+.web-front{  width: 420px;height: 300px;  }
+.web-job-discribe{  width: 420px;border-bottom: 1px solid rgba(0,0,0,0.8);     padding-bottom: 10px; }
+.web-job-discribe h1{  width: 420px;height: 40px;line-height: 40px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 20px;margin-top: 10px;  }
+.web-job-discribe p{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;line-height: 30px;  }
+.web-job-discription p{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;line-height: 30px;margin-top: 10px;  }
+
+.customer-service{  width: 420px;height: 300px;margin-left: 40px;display: none;  }
+.service-discribe{  width: 420px;height: 120px;border-bottom: 1px solid rgba(0,0,0,0.8);  }
+.service-discribe h1{  width: 420px;height: 40px;line-height: 40px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;margin-top: 10px;  }
+.service-discribe p{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;line-height: 1.6;  }
+.service-discription p{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;line-height: 1.6;margin-top: 10px;  }
+
+.blueBorder{border-bottom: 4px solid #56bbe8;}
+
+.partner{height: 300px;margin-left: 40px;margin-top: 190px;display: none;}
+.partner-title{width: 450px;line-height: 40px;text-align: left;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 20px;}
+.partner-list{width: 300px;height: 220px;}
+.partner-item{width: 150px;height: 80px;line-height: 80px;float: left;text-align: center;}
+.partner-item img{margin-left: 20px;margin-top: 15px;}
+
+/*---------------------------------------------ÁªÏµÎÒÃÇ--------------------------------------------------------------------------*/
+.contact{  width: 100%;  min-width: 1000px;  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;  font-weight: bold;background: white;  }
+.contact-content{  width: 1000px;  height: 135px;  margin: 0 auto;  }
+.contact-left{  float: left; }
+.contact-left-top{  padding-top: 28px;  }
+.contact-left-top li{  height: 50px;  line-height: 50px;  display: inline-block;  margin: 10px 20px;  }
+.contact-left-top li a{  color: #273241;  opacity: 0.7;  font-size: 20px;  text-decoration: none;  }
+.contact-left-top li span{  color: #273241;  opacity: 0.7;  font-size: 22px;  }
+.contact-left-left,.contact-left-center,.contact-left-right,.contact-right{  float: left;  margin: 5px 30px;  margin-right: 90px;  }
+.contact-left-left li,.contact-left-center li,.contact-left-right li,.contact-right li{  color: #273241;  opacity: 0.7;  font-size: 15px;  text-decoration: none;  margin-top: 5px;  }
+.contact-left-left li a,.contact-left-center li a,.contact-left-right li a,.contact-right li a{  color: #273241;  opacity: 0.7;  font-size: 13px;  text-decoration: none;  }
+.contact-left-left li a:hover,
+.contact-left-center li a:hover,
+.contact-left-right li a:hover,
+.contact-right li a:hover,
+.contact-left-top li a:hover{  color: #56bbe8;  }
+.contact-right{  float: right;  position: relative;  right: 0;  top: 0;  padding-top: 50px;  }
+.contact-right-1{  text-align: right;  color: #273241;  opacity: 0.7;  font-size: 17px;  padding-bottom: 3px;  }
+.contact-right-2{  text-align: right;  color: #273241;  opacity: 0.7;  font-size: 30px;  padding-bottom: 16px;  }
+.contact-right-3{  text-align: right;  color: #273241;  opacity: 0.7;  font-size: 12px;  padding-bottom: 2px;  }
+.contact-right-4{  text-align: right;  color: #273241;  opacity: 0.7;  font-size: 12px;  }
+
+/*---------------------------------------µ×²¿---------------------------------------*/
+.footer{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;  width: 100%;  min-width: 1000px;  height: 230px;  background: url(http://image.1yingli.cn/img/footer_bg.jpg) no-repeat;  -moz-background-size: 100% 100%;  -o-background-size: 100% 100%;  -webkit-background-size: 100% 100%;  background-size: 100% 100%;  }
+.footer-share{  width: 1000px;  height: 50px;  position: relative;  top: 80px;  line-height: 50px;  margin: 100px auto;margin-top: 0;  text-align: center;  }
+.footer-share li{  display: inline-block;  height: 50px;  line-height: 50px;  float: left;  text-align: center;  }
+.footer-share li a{  height: 50px;  line-height: 50px;  }
+.footer-share li:first-child{  margin-left: 31%;  }
+.copyright{  color: white;  text-align: center;  height: 20px;  line-height: 20px;  }
+.copyright a{  text-decoration: none;  color: #428bca  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

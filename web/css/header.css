@@ -1,0 +1,105 @@
+.g-hd {
+	height: 60px;
+	background: #fff;
+}
+.m-search {
+	padding: 17px 0;
+}
+.u-logo {
+	display: block;
+	padding: 14px 29px;
+}
+#logo {
+	width: 113px;
+	height: 45px;
+	float: left;
+	margin-top: 8px;
+	margin-left: 29px;
+}
+#header {
+	background:#34495C;
+}
+#header-left {
+	width: 650px;
+	height: 70px;
+	line-height: 70px;
+	float: left;
+}
+#header {
+	height:60px;
+	min-width:1096px;
+}
+#search-input {
+	width: 317px;
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid rgba(0,0,0,0.3);
+	font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+	font-size: 15px;
+	float: left;
+	margin-top: 16px;
+}
+#search-img {
+	height: 30px;
+	float: left;
+	margin-top: 16px;
+}
+#search-box {
+	float: left;
+	width: 460px;
+	margin-left: 20px;
+	height: 70px;
+	line-height: 70px;
+}
+#nav-right-beTutor a img{
+	margin-top: 17px;
+}
+
+.nav-right a {
+	text-decoration: none;
+	color: #FFF;
+	font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+	font-size: 14px;
+}
+
+.nav-right a:hover{
+	color: #56bbe8;
+	font-size: 14px;
+}
+
+ .nav-right ul li a {
+ 	color: #34495C;
+ }
+
+#nav-right-theme ul {
+	background: #FFF;
+	z-index: 999;
+	position: absolute;
+	right: -20px;
+	top: 60px;
+	/* border: 1px solid #56bbe8; */
+	border-top: 0;
+	display: none;
+}
+
+.nav-right span {
+	text-decoration: none;
+	color: #FFF;
+	font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+	font-size: 14px;
+}
+
+#header-right {
+	width: 328px;
+	position: relative;
+}
+.nav-right {
+	margin-right: 15px;
+}
+
+.nav-right {
+	height: 60px;
+	line-height: 60px;
+	float: left;
+    position: relative;
+}

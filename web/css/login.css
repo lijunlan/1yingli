@@ -1,0 +1,211 @@
+html{color:red;background:#FFF;font-size: 12px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,
+fieldset,input,textarea,p,blockquote,th,td {
+    margin:0;
+    padding:0;
+}
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+fieldset,img {
+    border:0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+    font-style:normal;
+    font-weight:normal;
+}
+ol,ul {
+    list-style:none;
+}
+caption,th {
+    text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-size:100%;
+    font-weight:normal;
+}
+q:before,q:after {
+    content:'';
+}
+abbr,acronym { border:0;
+}
+
+@font-face{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+
+}
+
+@font-face{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+
+}
+
+@font-face{
+    font-family: lantingdahei;
+
+}
+/*-----------------------------------------------------------------------------------------------------------------------*/
+#login-form input::-moz-placeholder{
+    color: rgba(0,0,0,0.3);
+    padding-left: 13px;
+}
+#register-form input::-moz-placeholder{
+    color: rgba(0,0,0,0.3);
+}
+#login-username::-webkit-input-placeholder { font-size:14px; font-weight:normal;}
+#login-password::-webkit-input-placeholder { font-size:14px; font-weight:normal;}
+
+body{
+    width: 100%;
+    min-height: 1080px;
+    background: url(../img/login_bg.jpg);
+    background-size: cover;
+    padding-top: 100px;
+}
+.container{
+    width: 354px;
+    min-height: 400px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.9);
+    border-radius: 8px;
+    position: absolute;left: 50%;
+    margin-left: -177px;
+}
+@keyframes moveContainer {
+    0%{
+        margin-top: 0;
+        margin-left: 400px;
+    }
+    100%{
+        margin-top: 100px;
+        margin-left: 200px;
+    }
+}
+.container-top{
+    width: 352px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    padding-bottom: 15px;
+}
+#container-top-title{
+    height: 65px;
+    line-height: 65px;
+    text-align: center;
+    color: darkgray;
+    font-size: 25px;
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+}
+.container-top-weibo-login-box{
+    width: 272px;
+    height: 33px;
+    line-height: 33px;
+    margin: 0 auto;
+    margin-left: 40px;
+    /*margin-bottom: 8px;*/
+    background: #56bbe8;
+    border-radius: 8px;
+    border: 0 solid ;
+    margin-bottom: 10px;
+}
+.container-top-wechat-login-box{
+    width: 272px;
+    height: 33px;
+    line-height: 33px;
+    margin: 0 auto;
+    margin-left: 40px;
+    /*margin-bottom: 12px;*/
+    background: #56bbe8;
+    border-radius: 8px;
+    border: 0 solid ;
+}
+#container-top-weibo-login{
+
+    color: white;
+
+}
+#container-top-wechat-login{
+
+    color: white;
+
+}
+#container-top-weibo-login img,#container-top-wechat-login img{
+    float: left;
+    margin-left: 30px;
+    margin-top: 2px;
+    display: inline;
+}
+#container-top-weibo-login p,#container-top-wechat-login p{
+    float: left;
+    height: 33px;
+    line-height: 33px;
+    font-size: 20px;
+    display: inline;
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+}
+#container-bottom{
+    width: 352px;
+    margin: 0 auto;
+}
+#login-form{
+    /*margin-left: 50px;*/
+}
+#login-username{
+     width: 263px;
+     height: 31px;
+     line-height: 33px;
+     margin: 15px 40px 8px 40px;
+     background: white;
+     border-radius: 0px;
+     border: 1px solid rgba(0,0,0,0.3);
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+ }
+#login-password{
+    width: 263px;
+    height: 31px;
+    line-height: 33px;
+    margin: 0 40px 8px 40px;
+    background: white;
+    border-radius: 0px;
+    border: 1px solid rgba(0,0,0,0.3);
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+}
+#login{
+    width: 270px;
+    height: 31px;
+    line-height: 26px;
+    margin: 0 auto;
+    background: #56bbe8;
+    border-radius: 5px;
+    border: 0 solid ;
+    color: white;
+    font-size: 20px;
+    display: block;
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+}
+.container-footer{
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 12px;
+    color: darkgray;
+    margin-top: 5px;
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+}
+.container-footer-h2{
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    font-size: 16px;
+    color: darkgray;
+    margin-bottom: 20px;
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+}
+.container-footer-h2 a{
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    font-size: 16px;
+    color: #56bbe8;
+    text-decoration: none;
+}

@@ -1,0 +1,137 @@
+input{
+	outline: none;
+}
+#diandian{
+	height: 20px;
+    line-height: 20px;
+    min-width: 10px;
+    /* font-size: 12px; */
+    color: #787d82;
+    /* display: inline-block; */
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+.search-box {
+    outline:medium;
+    font-size:18px;
+    padding-left:8px;
+    color: #000000;
+    font-family:"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+    /*height:33px;*/
+    /*width: 496px;*/
+    /*border-radius: 2px;*/
+    /*border: 1px solid #ccc;*/
+    /*text-indent: 1em;*/
+    /*font-family: "微软雅黑";*/
+    /*font-size: 13px;*/
+}
+.ui-autocomplete {
+    font-family:"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+    font-size: 18px;
+    background: #fff;
+    z-index: 999;
+}
+.g-hd {
+	height: 60px;
+	background: #fff;
+	min-width: 1096px;
+}
+.m-search {
+	padding: 10px 0;
+	padding-top: 17px;
+}
+.u-logo {
+	display: block;
+	padding: 14px 29px;
+	padding-right: 20px;
+}
+#logo {
+	width: 113px;
+	height: 45px;
+	float: left;
+	margin-top: 9px;
+	margin-left: 29px;
+}
+#search-input {
+	width: 317px;
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid rgba(0,0,0,0.3);
+	font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+	font-size: 15px;
+	float: left;
+	border-radius: 8px;
+}
+.m-search a {
+	display: inline-block;
+	line-height: 29px;
+	padding-right: 0px;
+	background: url() no-repeat 100% 50%;
+	font-size: 17px;
+}
+.u-become {
+	padding: 0 25px 0 15px;
+	border-left: 1px solid #d6d6d6;
+	margin-left: 20px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 16px;
+}
+.u-become:after {
+	content: '';
+	position: absolute;
+	top: 8px;
+	right: 0;
+	border: 6px solid transparent;
+}
+.m-name {
+	margin-right: 23px;
+}
+.g-hd .right {
+	width: 348px;
+	padding: 18px 0;
+}
+.m-search a {
+	display: inline-block;
+	line-height: 29px;
+	padding-right: 30px;
+	font-size: 17px;
+}
+.g-hd .right {
+	width: 330px;
+	padding: 0px 0;
+	line-height: 29px;
+	padding-top: 20px;
+}
+.nav-center {
+	width: 650px;
+	margin: 0px auto;
+	height: 50px;
+	line-height: 50px;
+	overflow: hidden;
+}
+.top-nav {
+	height: 50px;
+	width: 100%;
+	background: #34495e;
+	overflow: hidden;
+	    min-width: 1096px;
+}
+.g-hd .left {
+	height: 60px;
+}
+.content-container {
+    width: 100%;
+    min-height: 760px;
+    overflow: hidden;
+    padding-bottom: 80px;
+    background: rgba(0,0,0,0.05);
+    min-width: 1096px;
+}
+.footer {
+	min-width: 1096px;
+}
+.content-left-01 p {
+	overflow: hidden;
+	padding: 0px 5px;
+}

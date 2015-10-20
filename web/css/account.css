@@ -1,0 +1,144 @@
+*{margin:0;padding:0}
+body{line-height:1.4;font-size:14px;color:#34495e;margin:0 auto;font-family:"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;overflow-x:hidden;background:#fff;}
+body.bg2{background:#dcdddd;}
+i{font-style: normal;}
+fieldset,img{border:0}
+a{text-decoration:none;color:#34495e;}
+a:hover{text-decoration:none;}
+ul,li {list-style:none;}
+header,footer,section {display:block;}
+.f-cb:after,.m-trip-detail li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+.f-right{float:right;}
+.f-left{float:left;}
+::-webkit-input-placeholder{color:#99a4ae;font-size:15px;line-height: 29px;font-family:Helvetica,ff-tisa-web-pro-1,ff-tisa-web-pro-2,"Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3","microsoft yahei";text-indent: 10px;}
+::-ms-input-placeholder{color:#99a4ae;font-size:15px;line-height: 29px;font-family:Helvetica,ff-tisa-web-pro-1,ff-tisa-web-pro-2,"Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3","microsoft yahei";text-indent: 10px;}
+::-moz-input-placeholder{color:#99a4ae;font-size:15px;line-height: 29px;font-family:Helvetica,ff-tisa-web-pro-1,ff-tisa-web-pro-2,"Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3","microsoft yahei";text-indent: 10px;}
+
+.g-hd{height: 70px;background:#fff;}
+.g-hd .left{height: 70px;}
+.g-hd .right{width:400px;padding:20px 0;line-height: 29px;}
+.u-logo{display: block;padding:19px 26px;}
+.u-logo img{display:block;}
+
+.m-search{padding:23px 0;}
+.u-input{height: 29px;line-height: 29px;width:282px;border:1px solid #99a4ae;margin-right:10px;font-size:15px;}
+.m-search a{display:inline-block;line-height: 29px;padding-right:30px;background:url(http://image.1yingli.cn/img/search.png) no-repeat 100% 50%;font-size:17px;}
+
+.m-thumb{display:inline-block;width:29px;height:29px;margin-right:12px;}
+.m-name{position:relative;font-size:17px;padding-right:15px;margin-right:43px;}
+.m-name ul{display: none;position: absolute;top:29px;left:0;}
+.m-name:after{content:'';position: absolute;top:11px;right: 0;border:6px solid transparent;border-top-color:#aaa;}
+.u-msg{position:relative;display: inline-block;width: 24px;height: 18px;background:url(http://image.1yingli.cn/img/msg.png) no-repeat;margin-top:5px;}
+.u-msg i{display: block;position: absolute;top:-8px;right: -8px;width: 16px;height: 16px;color: #fff;background:#56bbe8;border-radius:50%;line-height: 16px;text-align: center;font-size: 14px;}
+
+.u-become{position:relative;padding:0 25px 0 15px;border-left:1px solid #88929b;margin-left:20px;}
+.u-become:after{content:'';position: absolute;top:8px;right: 0;border:6px solid transparent;border-left-color:#aaa;}
+
+@font-face{
+    font-family:"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+    
+}
+
+@font-face{
+    font-family:"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+    
+}
+
+@font-face{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+
+}
+
+/*------------------------------------------------------nav-------------------------------------------------------*/
+.top-nav{  height: 50px;width: 100%;background: #34495e;  }
+.nav-center{  width: 800px;margin: 0 auto;height: 50px;line-height: 50px;  }
+.nav-center ul li{  float: left;height: 45px;line-height: 45px;width: 130px;text-align: center;/*margin: 0 40px;*/color: white;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 17px;  }
+.nav-center ul li a{  text-decoration: none;color: rgba(255,255,255,0.7);font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 17px;height: 50px;line-height: 50px;width: 130px;display: block;  }
+.nav-center ul li:hover{  border-bottom: 5px solid #56bbe8;  }
+.nav-center ul li:nth-of-type(4){  border-bottom: 5px solid #56bbe8;  }
+.nav-center ul li:nth-of-type(4) a{  color: #56bbe8;  }
+.nav-center ul li a:hover{  color: #56bbe8;  }
+
+/*-----------------------------------content-left----------------------------------------------------*/
+.content-container{  width: 100%;min-height: 730px; overflow: hidden;padding-bottom: 80px;background: rgba(0,0,0,0.05);  }
+.content {  width: 950px;  min-height: 600px;  margin: 25px auto 80px;  }
+
+.content-left{  width: 220px;height: 550px;float: left;  }
+.content-left-01{  width: 218px;height: 370px;border: 1px solid rgba(0,0,0,0.15);background: white;  }
+.content-left-01 img{  width: 218px !important;height: 218px !important;  }
+.content-left-01 p{  height: 50px;line-height: 50px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 30px;color: black;text-align: center;  }
+.content-left-01 a{  height: 25px;line-height: 25px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;text-align: center;display: block;text-decoration: none;  }
+
+#personal-info:hover{  color: #56bbe8;  }
+/*#personal-info:visited{  color: #56bbe8;  }*/
+#personal-assess:hover{  color: #56bbe8;  }
+/*#personal-assess:visited{  color: #56bbe8;  }*/
+
+.content-left-02{  width: 218px;min-height: 251px;overflow: hidden;border: 1px solid rgba(0,0,0,0.15);margin-top: 20px;margin-bottom: 80px;background: white;  }
+.idented-li{  width: 208px;height: 49px;line-height: 49px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 18px;color: rgba(0,0,0,0.5);border-bottom: 1px solid rgba(0,0,0,0.15);padding-left: 20px;background: rgba(0,0,0,0.05);  }
+.ident-lists{  width: 188px;min-height: 190px;overflow: hidden;padding: 20px;  }
+.ident-lists ul li{  width: 94px;height: 60px;float: left;  }
+.img-box{  width: 31px;height: 60px;float: left;  }
+.idented-text{  width: 63px;height: 60px;float: left;  }
+.idented-text p:nth-of-type(1){  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 17px;color: black;  }
+.idented-text p:nth-of-type(2){  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 17px;color: rgba(0,0,0,0.5);  }
+#add-ident{  clear: left;display: block;width: 188px;height: 30px;line-height: 30px;text-align: center;text-decoration: none;color: #56bbe8;  }
+
+/*----------------------------------------------------right--------------------------------------------------------------*/
+
+.content-right{  width: 684px; height: 202px ;float: right;  }
+
+.right-01{width: 563px;height: 212px;border: 1px solid rgba(0,0,0,0.15);}
+.right-01-title{width: 543px;height: 44px;line-height: 44px;border-bottom: 1px solid rgba(0,0,0,0.15);padding-left: 20px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;color: #34495e;}
+#right-01-form{width: 413px;height: 127px;background: white;padding: 40px 60px 0 90px;}
+#write-phNumber{width: 266px;height: 28px;line-height: 28px;border: 1px solid rgba(0,0,0,0.15);background: rgba(0,0,0,0.05);margin-bottom: 7px;}
+#write-identify{width: 266px;height: 28px;line-height: 28px;border: 1px solid rgba(0,0,0,0.15);background: rgba(0,0,0,0.05);}
+#send-identify{  width: 113px;height: 24px;border: 0;background: #56bbe8;color: white;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;border-radius: 8px;margin-left: 5px;}
+#right-submit{width: 113px;height: 24px;border: 0;background: #56bbe8;color: white;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;border-radius: 8px;margin-left: 5px;}
+
+.right-02{  width: 563px;height: 233px;border: 1px solid rgba(0,0,0,0.15);border-top: 0;position: relative}
+#right-02-form{width: 413px;height: 148px;background: white;padding: 20px 60px 0 90px;}
+#password{width: 259px;height: 28px;line-height: 28px;border: 1px solid rgba(0,0,0,0.15);background: rgba(0,0,0,0.05);margin-bottom: 7px;}
+#new-password{width: 259px;height: 28px;line-height: 28px;border: 1px solid rgba(0,0,0,0.15);background: rgba(0,0,0,0.05);margin-bottom: 7px;}
+#confirm-password{width: 259px;height: 28px;line-height: 28px;border: 1px solid rgba(0,0,0,0.15);background: rgba(0,0,0,0.05);margin-bottom: 7px;}
+.right-label{display: inline-block;width: 80px;height: 30px;line-height: 30px;text-align: center;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;color: rgba(0,0,0,0.7);}
+#password-submit{width: 54px;height: 24px;border: 0;background: #56bbe8;color: white;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;border-radius: 8px;position: absolute;right: 40px;bottom: 15px;}
+
+.right-03{width: 180px;height: 156px;}
+.binding-alipay{width: 180px;height: 40px;line-height: 40px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 21px;color: #34495e;}
+.binding-img{width: 180px;height: 90px;display: inline-block;line-height: 0;float: left}
+.a-box{width: 180px;height: 26px;line-height: 26px;display: inline-block;text-decoration: none;text-align: center;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;background: silver;float: left;margin-top: -15px;}
+.binding-link{}
+
+/*---------------------------------联系我们------------------------------------*/
+
+.contact{  width: 100%;  min-width: 1000px;  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;  font-weight: bold;  }
+.contact-content{  width: 1000px;  height: 135px;  margin: 0 auto;  }
+.contact-left{  float: left;  }
+.contact-left-top{  padding-top: 28px;  }
+.contact-left-top li{  height: 50px;  line-height: 50px;  display: inline-block;  margin: 10px 20px;  }
+.contact-left-top li a{  color: #273241;  opacity: 0.7;  font-size: 20px;  text-decoration: none;  }
+.contact-left-top li span{  color: #273241;  opacity: 0.7;  font-size: 22px;  }
+.contact-left-left,.contact-left-center,.contact-left-right,.contact-right{  float: left;  margin: 5px 30px;  margin-right: 90px;  }
+.contact-left-left li,.contact-left-center li,.contact-left-right li,.contact-right li{  color: #273241;  opacity: 0.7;  font-size: 15px;  text-decoration: none;  margin-top: 5px;  }
+.contact-left-left li a,.contact-left-center li a,.contact-left-right li a,.contact-right li a{  color: #273241;  opacity: 0.7;  font-size: 13px;  text-decoration: none;  }
+.contact-left-left li a:hover,
+.contact-left-center li a:hover,
+.contact-left-right li a:hover,
+.contact-right li a:hover,
+.contact-left-top li a:hover{  color: #56bbe8;  }
+.contact-right{  float: right;  position: relative;  right: 0;  top: 0;  padding-top: 50px;  }
+.contact-right-1{  text-align: right;  color: #273241;  opacity: 0.7;  font-size: 17px;  padding-bottom: 3px;  }
+.contact-right-2{  text-align: right;  color: #273241;  opacity: 0.7;  font-size: 30px;  padding-bottom: 16px;  }
+.contact-right-3{  text-align: right;  color: #273241;  opacity: 0.7;  font-size: 12px;  padding-bottom: 2px;  }
+.contact-right-4{  text-align: right;  color: #273241;  opacity: 0.7;  font-size: 12px;  }
+
+/*---------------------------------------底部---------------------------------------*/
+
+.footer{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;  width: 100%;  min-width: 1000px;  height: 380px;  background: url(http://image.1yingli.cn/img/footer_bg.jpg) no-repeat;  -moz-background-size: 100% 100%;  -o-background-size: 100% 100%;  -webkit-background-size: 100% 100%;  background-size: 100% 100%;  }
+.footer-share{  width: 1000px;  height: 50px;  position: relative;  top: 80px;  line-height: 50px;  margin: 100px auto;  text-align: center;  }
+.footer-share li{  display: inline-block;  height: 50px;  line-height: 50px;  float: left;  text-align: center;  }
+.footer-share li a{  height: 50px;  line-height: 50px;  }
+.footer-share li:first-child{  margin-left: 31%;  }
+.copyright{  color: white;  text-align: center;  height: 20px;  line-height: 20px;  }
+.copyright a{  text-decoration: none;  color: #428bca  }
