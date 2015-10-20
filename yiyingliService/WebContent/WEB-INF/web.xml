@@ -114,6 +114,34 @@
     <url-pattern>/Alipay</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <description>请求Paypal交易</description>
+    <display-name>PaypalCheckout</display-name>
+    <servlet-name>PaypalCheckout</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.CheckoutServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>PaypalCheckout</servlet-name>
+    <url-pattern>/Checkout</url-pattern>
+  </servlet-mapping> 
+  
+  <servlet>
+    <description>Paypal返回</description>
+    <display-name>PaypalReturn</display-name>
+    <servlet-name>PaypalReturn</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.ReturnServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>PaypalReturn</servlet-name>
+    <url-pattern>/Return</url-pattern>
+  </servlet-mapping>
+  
   <listener>
         <listener-class>
           org.apache.commons.fileupload.servlet.FileCleanerCleanup
