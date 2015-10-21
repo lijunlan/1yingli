@@ -196,8 +196,8 @@
             .contact-her{
             	width: 13rem;
             	margin: 0;
-            	padding: 0;
-            	width: 100%;
+            	padding: 0 5%;
+            	width: 90%;
             	background: inherit;
             }
             .about-label{
@@ -207,7 +207,9 @@
             	display: block;
             	width: 45%;
             	float: right;
-            	margin-top: 7px;
+            	margin-top: 9px;
+            	font-size: 12px;
+            	color: #000;
             }
             .contact-her-top ul li{
             	width: 1.5rem !important;
@@ -221,14 +223,17 @@
             .contact-her-top{
             	width: 55%;
             	float: left;
+				font-size: 12px;
             }
             .contact-her-address{
             	width: 50%;
             	float: left;
+            	font-size: 12px;
             }
             .contact-her-times{
             	width: 45%;
             	float: right;
+            	font-size: 12px;
             }
             .contact-icon{
             	/*width: 1.5rem;
@@ -289,6 +294,7 @@
             	background-repeat: no-repeat;
             	margin-top: 7px;
             	margin-left: 5px;
+            	cursor: pointer;
             }
             .right{
             	float: right;
@@ -298,6 +304,21 @@
             	background-repeat: no-repeat;
             	margin-top: 7px;
             	margin-right: 5px;
+            	cursor: pointer;
+            }
+            .center{
+            	width: 40%;
+            	height: 40px;
+            	display: inline-block;
+            }
+            .contact-her-times p{
+            	font-size: 12px;
+            }
+            .contact-her-address p{
+            	font-size: 12px;
+            }
+            .contact-her-top p{
+            	font-size: 12px;
             }
         }
     </style>
@@ -308,6 +329,10 @@
 	<nav class="mobile-header"> 
         <div class="left">
         </div>
+        <form class="center">
+        	<input type="text" placeholder="搜人名、话题" style="width:60%;height:30px;margin-top:8px;border-bottom-left-radius: 18px;border-top-left-radius: 18px;padding-left:8px;float:left;">
+        	<button style="width:35px;;height:33px;float:left;margin-top:9px;border-bottom-right-radius: 18px;border-top-right-radius: 18px;background-color: #56bbe8;border: 0;"><img src="img/03.png"></button>
+        </form>
         <div class="right">
         </div>
     </nav>
