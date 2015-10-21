@@ -84,7 +84,7 @@
     <servlet-name>DownloadImage</servlet-name>
     <url-pattern>/image</url-pattern>
   </servlet-mapping> -->
-  
+  <!-- 支付宝通知处理 -->
   <servlet>
     <description>处理支付宝通知</description>
     <display-name>TradeNotifyProcess</display-name>
@@ -99,7 +99,6 @@
     <url-pattern>/TradeNotifyProcess</url-pattern>
   </servlet-mapping>  
   
-  
   <servlet>
     <description>支付宝交易请求</description>
     <display-name>Alipay</display-name>
@@ -113,6 +112,22 @@
     <servlet-name>Alipay</servlet-name>
     <url-pattern>/Alipay</url-pattern>
   </servlet-mapping>
+  
+  <!-- Paypal通知处理 
+  <servlet>
+    <description>处理Paypal通知</description>
+    <display-name>PaypalNotifyProcess</display-name>
+    <servlet-name>PaypalNotifyProcess</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.PaypalNotifyServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>PaypalNotifyProcess</servlet-name>
+    <url-pattern>/PaypalNotify</url-pattern>
+  </servlet-mapping> 
+  -->
   
   <servlet>
     <description>请求Paypal交易</description>
@@ -140,7 +155,9 @@
    <servlet-mapping>
     <servlet-name>PaypalReturn</servlet-name>
     <url-pattern>/Return</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> 
+  
+  
   
   <listener>
         <listener-class>
