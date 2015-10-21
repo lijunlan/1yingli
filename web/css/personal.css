@@ -51,21 +51,21 @@ abbr,acronym { border:0;
     width: 100%;
     background: rgba(0,0,0,0.05);
    /* min-width: 1096px;*/
-    
+
 }
 .personal-bg{
     position: relative;  width: 100%;height: 30%; /*min-width: 1096px;*/ max-height: 570px;
 }
 #header{
-    width: 100%;  
-    height: 60px;  
+    width: 100%;
+    height: 60px;
     /*border-bottom: 2px solid #dedede;
     /* border-bottom-moz-linear-gradient(left,rgba(0,0,0,0.3),rgba(255,255,255,0.3));*/
     -moz-border-left-colors: rgba(0,0,0,0.3) rgba(0,0,0,0.2) rgba(0,0,0,0.1) rgba(0,0,0,0.05) rgba(0,0,0,0.01);
     -moz-border-right-colors: rgba(255,255,255,0.03) rgba(255,255,255,0.05) rgba(255,255,255,0.1) rgba(255,255,255,0.3) rgba(255,255,255,0.5) rgba(255,255,255,0.7);
     position: absolute;
     top:0;
-    min-width: 1096px;
+    /*min-width: 1096px;*/
     background: linear-gradient(rgba(0,0,0,.5) 0,rgba(0,0,0,0) 100%);
 }
 #header-left{
@@ -160,22 +160,22 @@ abbr,acronym { border:0;
     width: 700px;float: left;overflow: hidden; margin-left: 48px
 }
 .content-left-person{
-    width: 700px;height: 220px;border-bottom: 1px solid rgba(0,0,0,0.3);overflow: visible;
+    width: 700px;height: 180px;overflow: visible;
 }
 .face{
-    width: 200px;height: 220px;float: left;/*position: relative;*/
+    width: 200px;height: 180px;float: left;/*position: relative;*/
 }
 .face img{
-    position: absolute;
+    position: absolute;width:190px;height:190px;border-radius:50%;margin-top:-40px;border:7px solid #fff;
 }
 .face p{
     font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 30px;margin-bottom: 7px;color: rgba(0,0,0,0.8);margin-top: 178px;font-weight: bold;
 }
 .content-left-person-right{
-    width: 500px;height: 220px;float: right;position: relative;
+    width: 500px;height: 180px;float: right;position: relative;
 }
 .info{
-    width: 475px;height: 200px;margin: 15px 5px 5px 20px;
+    width: 475px;height: 160px;margin: 15px 5px 5px 20px;
 }
 .info-top{
     height: 60px;
@@ -211,8 +211,13 @@ abbr,acronym { border:0;
 .info ul li p{
     font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 16px;
 }
-.rent-p{
-    position: absolute;right: 10px;bottom: 5px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;font-weight: bold;
+
+.rent-p {
+    float: right;
+    line-height: 40px;
+    font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
 }
 .rent-p a{
     width:70px;height: 20px;line-height:20px;background: #56bbe8;border-radius: 10px;color: white;display: inline-block;text-align: center;text-decoration: none;font-size: 16px;
@@ -221,6 +226,17 @@ abbr,acronym { border:0;
 
 .content-left-topic{
     width: 700px;min-height: 225px;border-bottom: 1px solid rgba(0,0,0,0.3);overflow: hidden;position: relative;
+}
+.content-left-topic .head {
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+.content-left-topic .title {
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+    font-size: 30px;
+    margin-bottom: 7px;
+    color: rgba(0,0,0,0.8);
+    margin-top: 178px;
+    font-weight: bold;
 }
 .content-left-topic h1{
     height: 60px;line-height: 60px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;;font-size: 22px;color: rgba(0,0,0,0.8);font-weight: bold;
@@ -968,10 +984,10 @@ abbr,acronym { border:0;
     border-radius: 8px;
     cursor: pointer;
 }
-.about-block:hover { 
-  -webkit-box-shadow:0 0 5px #A1A1A1;  
-  -moz-box-shadow:0 0 5px #A1A1A1;  
-  box-shadow:0 0 5px #A1A1A1;  
+.about-block:hover {
+  -webkit-box-shadow:0 0 5px #A1A1A1;
+  -moz-box-shadow:0 0 5px #A1A1A1;
+  box-shadow:0 0 5px #A1A1A1;
 }
 .about-person-header {
     width: 60px;
@@ -990,7 +1006,7 @@ abbr,acronym { border:0;
 .about-person-content{
     width: 184px;
     padding-right: 10px;
-    height: 110px;  
+    height: 110px;
     float:right;
     text-align: justify;
 }
@@ -1006,7 +1022,7 @@ abbr,acronym { border:0;
     margin-top: 5px;
     color: #41B9EE;
     overflow:hidden;
-    
+
     text-overflow: ellipsis;
     height: 20px;
     width: 158px;
