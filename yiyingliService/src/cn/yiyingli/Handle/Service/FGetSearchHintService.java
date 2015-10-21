@@ -15,6 +15,7 @@ import com.aliyun.opensearch.object.KeyTypeEnum;
 
 import cn.yiyingli.AliyunUtil.AliyunConfiguration;
 import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Util.ConfigurationXmlUtil;
 import cn.yiyingli.Util.MsgUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -32,7 +33,7 @@ public class FGetSearchHintService extends MsgService{
             Map<String, Object> opts = new HashMap<String, Object>();
             String accessKeyId = AliyunConfiguration.ACCESS_ID;
             String accessKeySecret = AliyunConfiguration.ACCESS_KEY;
-            String host = "http://intranet.opensearch-cn-hangzhou.aliyuncs.com";
+            String host = ConfigurationXmlUtil.getInstance().getSettingData().get("searchHintUrl");
             CloudsearchClient client = new CloudsearchClient(accessKeyId, accessKeySecret, host, opts, KeyTypeEnum.ALIYUN);
             
             String indexName = "yiyinglihint";

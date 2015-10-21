@@ -1,9 +1,12 @@
 <?xml version = "1.0" encoding= "UTF-8"?>
-<!DOCTYPE service-configuration SYSTEM "/var/tomcat/tomcat-7/webapps/yiyingliService/WEB-INF/classes/config.dtd">
+<!DOCTYPE service-configuration PUBLIC "config.dtd" "http://source.1yingli.cn/config1.dtd">
 <service-configuration>
 	<cachePath value="/TEMP/" />
 	<imagePath value="http://image.1yingli.cn" />
 	<httpPath value="http://service.1yingli.cn" />
+	<searchUrl value="http://opensearch-cn-hangzhou.aliyuncs.com" />
+	<searchHintUrl value="http://opensearch-cn-hangzhou.aliyuncs.com" />
+	<rsaPath value="/RSAKey/" />
 	<style name="user">
 		<method name="getTeacherState" beanName="getTeacherStateService" />
 		<method name="getCommentCount" beanName="getCommentCountService" />

@@ -1,10 +1,16 @@
-<!ELEMENT service-configuration (cachePath,imagePath,httpPath,style+)>
+<!ELEMENT service-configuration (cachePath,imagePath,httpPath,searchUrl,searchHintUrl,rsaPath,style+)>
 <!ELEMENT cachePath EMPTY>
 <!ATTLIST cachePath value CDATA #REQUIRED>
 <!ELEMENT imagePath EMPTY>
 <!ATTLIST imagePath value CDATA #REQUIRED>
 <!ELEMENT httpPath EMPTY>
 <!ATTLIST httpPath value CDATA #REQUIRED>
+<!ELEMENT searchUrl EMPTY>
+<!ATTLIST searchUrl value CDATA #REQUIRED>
+<!ELEMENT searchHintUrl EMPTY>
+<!ATTLIST searchHintUrl value CDATA #REQUIRED>
+<!ELEMENT rsaPath EMPTY>
+<!ATTLIST rsaPath value CDATA #REQUIRED>
 <!ELEMENT style (method+)>
 <!ATTLIST style name CDATA #REQUIRED>
 <!ELEMENT method EMPTY>

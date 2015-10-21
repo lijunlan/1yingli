@@ -1,5 +1,5 @@
 <?xml version = "1.0" encoding= "UTF-8"?>
-<!DOCTYPE service-error SYSTEM "/var/tomcat/tomcat-7/webapps/yiyingliService/WEB-INF/classes/error.dtd">
+<!DOCTYPE service-error PUBLIC "error.dtd" "http://source.1yingli.cn/error.dtd">
 <service-error>
 	<error name="1" value="error1" />
 	<error name="2" value="error2" />
