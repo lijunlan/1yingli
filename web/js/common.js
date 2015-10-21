@@ -83,4 +83,8 @@ function KeyDown1()
     }
 }
 
+var config = {
+    base_url : "http://service.1yingli.cn/yiyingliService/manage"
+};
+
 
