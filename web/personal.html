@@ -104,6 +104,9 @@
             .content-left-topic h1 {
                 font-size: 18px;
                 font-weight: bold;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow:ellipsis;
             }
             .content-left-about{
             	width: 100%;
@@ -197,8 +200,9 @@
             }
             .topic-content{
             	font-size: 14px;
-            	max-height: 200px;
+            	max-height: 210px;
             	margin-bottom: 10px;
+            	width: 100%;
             }
             .contact-her{
             	width: 13rem;
@@ -346,7 +350,7 @@
             .fold1{
             	display: block;
     			position: absolute;
-   				top: 210px;
+   				top: 215px;
     			bottom: 0;
     			left: 0;
     			right: 0;
@@ -357,7 +361,7 @@
             .fold2{
             	display: block;
     			position: absolute;
-   				top: 170px;
+   				top: 175px;
     			bottom: 0;
     			left: 0;
     			right: 0;
@@ -697,6 +701,7 @@
     <script type="text/javascript" src="js/qrcode.js"></script>
     <script type="text/javascript" src="js/personal.js"></script>
     <script type="text/javascript" src="js/order.js"></script>
+    <script type="text/javascript" src="js/classie.js"></script>
 
 
 
