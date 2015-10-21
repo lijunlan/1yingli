@@ -44,19 +44,27 @@
             	width: 100%;
             }
             .content-left{
-            	width: 85%;
+            	width: 90%;
+                margin-left:5%;
             }
             .content-left-person{
-            	display: none;
+            	/*display: none;*/
             }
             .content-left-topic{
             	width: 100%;
             }
+            .content-left-topic h1 {
+                font-size: 100%;
+                font-weight: bold;
+            }
             .content-left-about{
-            	width: 85%;
+            	width: 100%;
             }
             .content-left-ident{
             	width: 100%;
+            }
+            .content-left-ident ul {
+                margin: 10px 0 0 0;
             }
             .content-left-ident ul li{
             	width: 20%;
@@ -124,15 +132,14 @@
             <div class="content-left" id="content-left">
                 <div class="content-left-person" id="content-left-person">
                     <div class="face" id="face">
-                        <img id="ticonUrl" src="http://image.1yingli.cn/img/img.png" style="width:190px;height:190px;border-radius:50%;margin-top:-40px;border:7px solid #fff;"/>
-                        <p>话题</p>
+                        <img id="ticonUrl" src="http://image.1yingli.cn/img/img.png"/>
                     </div>
                     <div class="content-left-person-right" id="content-left-person-right">
                         <div class="info" id="info">
                             <div class="info-top" id="info-top">
                                 <h1 id="tname"></h1>
                                 <p id="tposition" style="overflow:hidden;width:250px;height:20px"></p>
-                                <p class="people-want" style="100px;">
+                                <p class="people-want">
                                     <img src="http://image.1yingli.cn/img/heart.png" alt=""/>
                                     <span id="tlikeNo"></span>
                                 </p>
@@ -159,11 +166,14 @@
                                     <p>猎奇分享</p>
                                 </li>
                             </ul>
-                            <p class="rent-p" id="sprice"></p>
+
                         </div>
                     </div>
                 </div>
                 <div class="content-left-topic" id="content-left-topic">
+                    <div class="head">
+                        <span class="title">话题</span> <span class="rent-p" id="sprice"></span>
+                    </div>
                     <div class="topic-content">
                         <p class="topic-content-p" id="scontent" style="text-align: justify;">
                             　　
