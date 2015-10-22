@@ -109,6 +109,8 @@ public class CheckoutServlet extends HttpServlet {
 		price /= 6;
 		BigDecimal b = new BigDecimal(price);
 		price = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+		if(price<0.01)
+			price=(float) 0.01;
 		checkoutDetails.put("PAYMENTREQUEST_0_ITEMAMT", price+"");
 		checkoutDetails.put("PAYMENTREQUEST_0_HANDLINGAMT", "0");
 		// 包括税款，手续费（这些我们都是零）的总金额
