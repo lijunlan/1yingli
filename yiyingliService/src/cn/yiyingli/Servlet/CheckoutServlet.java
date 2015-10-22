@@ -7,6 +7,7 @@ package cn.yiyingli.Servlet;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,9 +35,9 @@ public class CheckoutServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = -2722761580200224133L;
-	
-	private String page="http://www.1yingli.cn/yourTutor.html";
-	
+
+	private String page = "http://www.1yingli.cn/yourTutor.html";
+
 	private ApplicationContext applicationContext;
 
 	public ApplicationContext getApplicationContext() {
@@ -56,14 +57,15 @@ public class CheckoutServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		PayPal paypal = new PayPal();
-		//Paypal调用的returnServlet
+		// Paypal调用的returnServlet
 		String returnURL = "http://service.1yingli.cn/yiyingliService/Return?page=return";
-		//String cancelURL = request.getScheme() + "://www.1yingli.cn/yourTutor.html";
-		//当取消交易的时候，返回地址
-		String cancelURL="http://www.1yingli.cn/yourTutor.html";
+		// String cancelURL = request.getScheme() +
+		// "://www.1yingli.cn/yourTutor.html";
+		// 当取消交易的时候，返回地址
+		String cancelURL = "http://www.1yingli.cn/yourTutor.html";
 		Map<String, String> checkoutDetails = new HashMap<String, String>();
 		checkoutDetails = setRequestParams(request);
-		//检查前台传来的数据
+		// 检查前台传来的数据
 		if (request.getParameter("oid") == null || request.getParameter("uid") == null) {
 			returnMsg(response, MsgUtil.getErrorMsg("data is incomplete"));
 			return;
@@ -96,26 +98,29 @@ public class CheckoutServlet extends HttpServlet {
 			returnMsg(response, MsgUtil.getErrorMsg("order state is not accurate"));
 			return;
 		}
-		//由后台插入相关数据
+		// 由后台插入相关数据
 		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0", order.getServiceTitle());
-			//货物id，这里填写的是导师id
+		// 货物id，这里填写的是导师id
 		checkoutDetails.put("L_PAYMENTREQUEST_0_NUMBER0", order.getTeacher().getId().toString());
-		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0", "Onemile :"+order.getServiceTitle());
+		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0", "Onemile :" + order.getServiceTitle());
 		checkoutDetails.put("L_PAYMENTREQUEST_0_QTY0", "1");
-			//商品价格
-		checkoutDetails.put("PAYMENTREQUEST_0_ITEMAMT", order.getMoney().toString());
+		// 商品价格
+		float price = order.getMoney();
+		price /= 6;
+		BigDecimal b = new BigDecimal(price);
+		price = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+		checkoutDetails.put("PAYMENTREQUEST_0_ITEMAMT", price+"");
 		checkoutDetails.put("PAYMENTREQUEST_0_HANDLINGAMT", "0");
-			//包括税款，手续费（这些我们都是零）的总金额
-		checkoutDetails.put("PAYMENTREQUEST_0_AMT", order.getMoney().toString());
-			//我们的订单号
+		// 包括税款，手续费（这些我们都是零）的总金额
+		checkoutDetails.put("PAYMENTREQUEST_0_AMT", price+"");
+		// 我们的订单号
 		checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM", request.getParameter("oid"));
 		checkoutDetails.put("REQCONFIRMSHIPPING", "0");
 		checkoutDetails.put("NOSHIPPING", "1");
 		checkoutDetails.put("L_PAYMENTREQUEST_0_ITEMCATEGORY0", "Digital");
 		checkoutDetails.put("PAYMENTREQUEST_0_CURRENCYCODE", "USD");
 		checkoutDetails.put("PAYMENTREQUEST_0_PAYMENTACTION", "Sale");
-		
-		
+
 		session.invalidate();
 		session = request.getSession();
 		Map<String, String> nvp = paypal.callShortcutExpressCheckout(checkoutDetails, returnURL, cancelURL);
@@ -136,16 +141,14 @@ public class CheckoutServlet extends HttpServlet {
 			String ErrorSeverityCode = nvp.get("L_SEVERITYCODE0").toString();
 
 			String errorString = "SetExpressCheckout API call failed. " + "Detailed Error Message: " + ErrorLongMsg
-					+ "Short Error Message: " + ErrorShortMsg + "Error Code: " + ErrorCode
-					+ "Error Severity Code: " + ErrorSeverityCode;
-			LogUtil.error("After SetExpressCheckoutDetails from Paypal and ERROR INFO:" + errorString ,
-					this.getClass());
+					+ "Short Error Message: " + ErrorShortMsg + "Error Code: " + ErrorCode + "Error Severity Code: "
+					+ ErrorSeverityCode;
+			LogUtil.error("After SetExpressCheckoutDetails from Paypal and ERROR INFO:" + errorString, this.getClass());
 			session.invalidate();
 			returnToOnemile(request, response);
 
 		}
 	}
-	
 
 	private Map<String, String> setRequestParams(HttpServletRequest request) {
 		Map<String, String> requestMap = new HashMap<String, String>();
@@ -160,22 +163,15 @@ public class CheckoutServlet extends HttpServlet {
 	private boolean isSet(Object value) {
 		return (value != null && value.toString().length() != 0);
 	}
-	
-	public void returnToOnemile(HttpServletRequest request, HttpServletResponse response){
+
+	public void returnToOnemile(HttpServletRequest request, HttpServletResponse response) {
 		/*
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-		if (dispatcher != null) {
-			try {
-				dispatcher.forward(request, response);
-			} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		*/
+		 * RequestDispatcher dispatcher = request.getRequestDispatcher(page); if
+		 * (dispatcher != null) { try { dispatcher.forward(request, response); }
+		 * catch (ServletException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated
+		 * catch block e.printStackTrace(); } }
+		 */
 		try {
 			response.sendRedirect(page);
 		} catch (IOException e) {
@@ -183,7 +179,7 @@ public class CheckoutServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * return message through httpResponse
 	 * 
