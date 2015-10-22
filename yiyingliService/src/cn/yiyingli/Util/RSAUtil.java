@@ -54,7 +54,7 @@ public class RSAUtil {
 
 	// public static final String RSAKEY_BASE_PATH =
 	// "C:/Users/Administrator/Desktop/RSAKey/";
-	public static String RSAKEY_BASE_PATH = ConfigurationXmlUtil.getInstance().getSettingData().get("/RSAKey/");
+	public static String RSAKEY_BASE_PATH = ConfigurationXmlUtil.getInstance().getSettingData().get("rsaPath");
 	private static final String RSAKeyStore = "RSAKey.txt";
 
 	public static void main(String[] args) {

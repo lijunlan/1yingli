@@ -203,10 +203,11 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Order> queryListByTeacherId(long teacherId, String[] state, final int page, final int pageSize, boolean lazy) {
+	public List<Order> queryListByTeacherId(long teacherId, String[] state, final int page, final int pageSize,
+			boolean lazy) {
 		if (state.length <= 0)
 			return new ArrayList<Order>();
-		String hql = "from Order o left join fetch o.teacher where o.teacher.id=" + teacherId + "and (o.state like '"
+		String hql = "from Order o left join fetch o.createUser where o.teacher.id=" + teacherId + "and (o.state like '"
 				+ state[0] + "%'";
 		if (state.length > 1) {
 			for (int i = 1; i < state.length; i++) {
@@ -214,7 +215,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 			}
 		}
 		final String _hql = hql + ") ORDER BY o.createTime DESC";
-		//System.out.println(_hql);
+		// System.out.println(_hql);
 		List<Order> list = new ArrayList<Order>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Order>>() {
 
@@ -269,7 +270,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 			}
 		}
 		final String _hql = hql + ") ORDER BY o.createTime DESC";
-		//System.out.println(_hql);
+		// System.out.println(_hql);
 		List<Order> list = new ArrayList<Order>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Order>>() {
 

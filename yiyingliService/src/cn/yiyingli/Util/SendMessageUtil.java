@@ -11,16 +11,20 @@ import org.apache.http.util.EntityUtils;
 public class SendMessageUtil {
 
 	public static void main(String[] args) {
-		for (int i = 1; i <= 1; i++) {
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					for (int i = 1; i <= 1; i++) {
-						sendMsg("15659831720", "CHECKNO:<a href=\"http://www.1yingli.cn\">test</a>" + CheckNoFactory.createCheckNo());
-					}
-				}
-			}).start();
-		}
+		// for (int i = 1; i <= 1; i++) {
+		// new Thread(new Runnable() {
+		// @Override
+		// public void run() {
+		// for (int i = 1; i <= 1; i++) {
+		// sendMsg("15659831720", "CHECKNO:<a
+		// href=\"http://www.1yingli.cn\">test</a>" +
+		// CheckNoFactory.createCheckNo());
+		// }
+		// }
+		// }).start();
+		// }
+		System.out.println(sendMessage("8615659831720", "马总好，我是道哥，测试一用，收到请微信，谢谢~"));
+		System.out.println(sendMessage("12176076581", "马总好，我是道哥，测试一用，收到请微信，谢谢~"));
 	}
 
 	private static final String MESSAGE_NAME = "yyl-ipxmt";
@@ -54,6 +58,12 @@ public class SendMessageUtil {
 		return false;
 	}
 
+	/**
+	 * @param phone
+	 *            e.g. 8615659831720,12176076581
+	 * @param msg
+	 * @return
+	 */
 	private static String sendMsg(String phone, String msg) {
 		String message = "";
 		try {
@@ -64,7 +74,7 @@ public class SendMessageUtil {
 		}
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpGet get = new HttpGet("http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME + "&cppwd="
-				+ MESSAGE_PASSWD + "&da=86" + phone + "&dc=15&sm=" + message);
+				+ MESSAGE_PASSWD + "&da=" + phone + "&dc=15&sm=" + message);
 		String result = null;
 		try {
 			HttpResponse response = httpClient.execute(get);
