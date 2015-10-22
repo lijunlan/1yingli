@@ -4,8 +4,10 @@
 	<cachePath value="/TEMP/" />
 	<imagePath value="http://image.1yingli.cn" />
 	<httpPath value="http://service.1yingli.cn" />
-	<searchUrl value="http://opensearch-cn-hangzhou.aliyuncs.com" />
-	<searchHintUrl value="http://opensearch-cn-hangzhou.aliyuncs.com" />
+	<searchUrl value="http://intranet.opensearch-cn-hangzhou.aliyuncs.com" />
+	<!-- <searchUrl value="http://opensearch-cn-hangzhou.aliyuncs.com" /> -->
+	<searchHintUrl value="http://intranet.opensearch-cn-hangzhou.aliyuncs.com" />
+	<!-- <searchHintUrl value="http://opensearch-cn-hangzhou.aliyuncs.com" /> -->
 	<rsaPath value="/RSAKey/" />
 	<style name="user">
 		<method name="getTeacherState" beanName="getTeacherStateService" />
