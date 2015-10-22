@@ -11,16 +11,18 @@ import org.apache.http.util.EntityUtils;
 public class SendMessageUtil {
 
 	public static void main(String[] args) {
-		for (int i = 1; i <= 1; i++) {
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					for (int i = 1; i <= 1; i++) {
-						sendMsg("15659831720", "CHECKNO:<a href=\"http://www.1yingli.cn\">test</a>" + CheckNoFactory.createCheckNo());
-					}
-				}
-			}).start();
-		}
+//		for (int i = 1; i <= 1; i++) {
+//			new Thread(new Runnable() {
+//				@Override
+//				public void run() {
+//					for (int i = 1; i <= 1; i++) {
+//						sendMsg("15659831720", "CHECKNO:<a href=\"http://www.1yingli.cn\">test</a>" + CheckNoFactory.createCheckNo());
+//					}
+//				}
+//			}).start();
+//		}
+		System.out.println(sendMessage("15659831720", "马总好，我是道哥，测试一用，收到请微信，谢谢~"));
+		System.out.println(sendMessage("12176076581", "马总好，我是道哥，测试一用，收到请微信，谢谢~"));
 	}
 
 	private static final String MESSAGE_NAME = "yyl-ipxmt";

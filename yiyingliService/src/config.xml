@@ -43,6 +43,7 @@
 		<method name="isLikeTeacher" beanName="isLikeTeacherService" />
 		<method name="getOrderCount" beanName="getOrderCountService" />
 		<method name="forgetPassword" beanName="forgetPasswordService" />
+		<method name="iosForgetPassword" beanName="iosForgetPasswordService" />
 		<!-- <method name="change_info" beanName="" /> <method name="change_password" 
 			beanName="" /> -->
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
