@@ -24,11 +24,11 @@ public class SendMsgToBaiduUtil {
 	}
 
 	public static String updataUserData(String json) {
-		return sendPost("http://ds.recsys.baidu.com/s/130426/253052?token=8d116fa25cfde0085776beee152741e2", json);
+		return sendPost("http://ds.recsys.baidu.com/s/130426/253211?token=8d116fa25cfde0085776beee152741e2", json);
 	}
 
 	public static String getRecommendListAbout(String tid) {
-		return sendGet(ConfigurationXmlUtil.getInstance().getSettingData().get("baiduAboutUrl") + "&num=5&uid=" + tid);
+		return sendGet(ConfigurationXmlUtil.getInstance().getSettingData().get("baiduAboutUrl") + "&num=5&iid=" + tid);
 	}
 
 	public static String getRecommendListIndividuation(String uid) {

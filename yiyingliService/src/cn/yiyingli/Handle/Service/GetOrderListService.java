@@ -48,9 +48,10 @@ public class GetOrderListService extends MsgService {
 			return;
 		}
 		int page = 0;
+		long count = user.getOrderNumber();
 		SuperMap toSend = MsgUtil.getSuccessMap();
+		toSend.put("count", count);
 		if (getData().get("page").equals("max")) {
-			long count = getOrderService().querySumNoByUserId(user.getId());
 			if (count % OrderService.PAGE_SIZE_INT > 0)
 				page = (int) (count / OrderService.PAGE_SIZE_INT) + 1;
 			else

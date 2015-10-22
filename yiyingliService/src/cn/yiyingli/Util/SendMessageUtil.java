@@ -21,8 +21,8 @@ public class SendMessageUtil {
 //				}
 //			}).start();
 //		}
-		System.out.println(sendMessage("15659831720", "马总好，我是道哥，测试一用，收到请微信，谢谢~"));
-		System.out.println(sendMessage("12176076581", "马总好，我是道哥，测试一用，收到请微信，谢谢~"));
+		System.out.println(sendMessage("8615659831720", "马总好，我是道哥，测试一用，收到请微信，谢谢~"));
+	    System.out.println(sendMessage("12176076581", "马总好，我是道哥，测试一用，收到请微信，谢谢~"));
 	}
 
 	private static final String MESSAGE_NAME = "yyl-ipxmt";
