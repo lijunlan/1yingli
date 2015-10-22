@@ -18,8 +18,8 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class SendMsgToBaiduUtil {
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		System.out.println(sendGet("http://api2.santo.cc/submit?command=USER_BALANCE&uid=yyl-ipxmt&pwd=IQ8R1Wpy"));
 	}
 
@@ -28,15 +28,12 @@ public class SendMsgToBaiduUtil {
 	}
 
 	public static String getRecommendListAbout(String tid) {
-		return sendGet(
-				"http://api.recsys.baidu.com/s/130426/326497/rs?token=8d116fa25cfde0085776beee152741e2&num=5&iid="
-						+ tid);
+		return sendGet(ConfigurationXmlUtil.getInstance().getSettingData().get("baiduAboutUrl") + "&num=5&uid=" + tid);
 	}
 
 	public static String getRecommendListIndividuation(String uid) {
 		return sendGet(
-				"http://api.recsys.baidu.com/s/130426/326498/rs?token=8d116fa25cfde0085776beee152741e2&num=5&uid="
-						+ uid);
+				ConfigurationXmlUtil.getInstance().getSettingData().get("baiduPersonalUrl") + "&num=5&uid=" + uid);
 	}
 
 	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
