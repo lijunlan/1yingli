@@ -124,6 +124,7 @@
 	</style>
 	<style name="order">
 		<method name="createOrder" beanName="createOrderService" />
+		<method name="createOrderWithoutLogin" beanName="createOrderWithoutLoginService" />
 		<method name="getListByTeacher" beanName="tGetOrderListService" />
 		<method name="getByTeacher" beanName="tGetOrderInfoService" />
 		<method name="getListByUser" beanName="getOrderListService" />
