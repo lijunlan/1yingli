@@ -1,0 +1,19 @@
+@media (max-width: 768px){
+	.footer{
+        min-width: 20em
+    }
+    #wximg{
+        display: none;
+    }
+    #company{
+        width: 100% !important;
+        text-align:center !important;
+        margin-left: 0px !important;
+    }
+    .footerc{
+        width: 100% !important;
+    }
+    .number{
+    	width: 100% !important;
+    }
+}
