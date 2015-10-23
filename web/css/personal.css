@@ -1037,13 +1037,782 @@ abbr,acronym { border:0;
     float: right;
     line-height: 25px;
 }
+#le{
+    display: none;
+}
+#ri{
+    display: none;
+}
+.sidenav{
+    display: none;
+}
+.sidenav1{
+    display: none;
+}
+#frame{
+    background:#FFF;
+    width:620px; 
+    min-height:300px; 
+    margin-left: -310px; 
+    margin-top:-150px; 
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    border-radius: 12px; 
+    display:none;
+}
+#pc1{
+    font-size:20px; 
+    font-weight:bold; 
+    position:absolute; 
+    top:14%; 
+    left:12%;
 
+}
+#pc2{
+    font-size:12px; 
+    color:red ; 
+    position:absolute; 
+    top:25%; 
+    left:18%; 
+}
+#ph1{
+    font-size:16px; 
+    font-weight:bold; 
+    position:absolute; 
+    top:14%; 
+    left:12%;
+    display: none;
+}
+#ph2{
+    font-size:16px; 
+    font-weight:bold; 
+    position:absolute; 
+    top:20%; 
+    left:12%; 
+    display: none;
+}
+#ph3{
+    font-size:12px; 
+    color:red ; 
+    position:absolute; 
+    top:25%; 
+    left:18%; 
+    display: none;
+}
+#name1{
+    font-size:14px; font-weight:bold; position:absolute; top:3px;
+}
+#pname{
+    width:300px; height:30px; font-size:14px; line-height: 25px; border-radius:12px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:12%; 
+}
+.name1{
+    width:500px; height:30px; position:absolute; top:30%; left:10%
+}
+#warnname{
+    color:red; position:absolute; left:77.5%;display:none;
+}
+.tel1{
+    width:500px; height:30px; position:absolute; top:40%; left:10%
+}
+#tel1{
+    font-size:14px;  font-weight:bold; position:absolute; top:3px;
+}
+#ptel{
+    width:300px; height:30px; font-size:14px; line-height: 25px; border-radius:12px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:12%;
+}
+#warntel{
+    color:red; position:absolute; top:4px; left:77.5%; display:none;
+}
+.email1{
+    width:500px; height:30px; position:absolute; top:50%; left:12%
+}
+#email1{
+    font-size:14px;  font-weight:bold; position:absolute; top:3px;
+}
+#pemail{
+    width:300px; height:30px; font-size:14px; line-height: 25px; border-radius:12px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:9.5%;
+}
+#warnemail{
+    color:red; position:absolute; top:4px; left:75%; display:none;
+}
+.weixin{
+    width:500px; height:30px; position:absolute; top:60%; left:12%
+}
+#weixin{
+    font-size:14px; font-weight:bold; position:absolute; top:3px;
+}
+#pweixin{
+    width:300px; height:30px; font-size:14px; line-height: 25px; border-radius:12px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:9.5%;
+}
+#warnweixin{
+    color:red; position:absolute; top:4px; left:75%; display:none;
+}
+.cancel{
+    width:500px; height:30px; position:absolute; top:84%; left:50%
+}
+#close{
+    width:100px; height:25px; border-radius:15px; border: 1px solid #b2b2b2; position:absolute; left:10%; cursor: pointer;
+}
+.cel{
+    font-size:16px; position:absolute; left:30% ;top:5%;
+}
+#confirm{
+    width:100px; height:25px; border-radius:15px; color:#FFF; background:rgb(86, 187, 232); position:absolute; left:35%; cursor: pointer;
+}
+.firm{
+    font-size:16px; position:absolute; left:30% ;top:5%;
+}
+#frame1{
+    background:#FFF; width:640px; min-height:780px; margin-left:-320px; position: absolute; top: 50%; left: 50%; border-radius: 8px; display:none;
+}
+#close1{
+    position: absolute; right:0;cursor: pointer;
+}
+#ticonUrl1{
+    position:absolute; top:40px; left:40px; width:125px;height:125px;border-radius:50%;
+}
+#companyName1{
+    font-size:22px; position:absolute; top:90px; left:180px;
+}
+#name{
+    font-size:20px; position:absolute; top:120px; left:180px;
+}
+.reply{
+    font-size:12px; position:absolute; top:127px; left:250px;
+}
+#sprice1{
+    position:absolute; right:40px; top:135px; font-size:20px;
+}
+.order-step{
+    position:absolute; top:185px; left:60px;
+}
+.order-step-text{
+    position:absolute; top:205px; left:60px;
+}
+.say1{
+    font-size:16px; position:absolute; top:250px; left:40px;
+}
+#length1{
+    color:red;display:none;
+}
+.form1{
+    position:absolute; top:272px; left:40px;
+}
+#pquestion{
+    width:530px; height:70px; padding: 10px; font-size:16px; outline:none; border:solid 1px #b2b2b2; resize : none;
+}
+.say2{
+    font-size:16px; position:absolute; top:380px; left:40px;
+}
+.form2{
+    position:absolute; top:402px; left:40px;
+}
+#length2{
+    color:red;display:none
+}
+#pIntroduce{
+    width:530px; height:70px; padding: 10px; font-size:16px; outline:none; border:solid 1px #b2b2b2; resize : none;
+}
+.say3{
+    font-size:16px; position:absolute; top:510px; left:40px;
+}
+.form3{
+    position:absolute; top:532px; left:40px;
+}
+#ptime{
+    width:530px; height:70px; padding: 10px; font-size:16px; outline:none; border:solid 1px #b2b2b2; resize : none;
+}
+.small{
+    font-size:16px; position:absolute; top:640px; left:40px;
+}
+.smallimg{
+    background-image:url('http://image.1yingli.cn/img/discount_01.png');background-repeat:no-repeat;width: 30px;height: 25px;float: left;
+}
+.smallnu{
+    font-size:12px;color:red;
+}
+.form4{
+    position:absolute; top:672px; left:40px;
+}
+.searchBox{
+    padding-top: 5px; padding-bottom: 5px; font-size:16px; border:solid 1px #b2b2b2; width: 348px;
+}
+#disco{
+    color:red;
+}
+#psend{
+    width:80px; height:20px; position:absolute; bottom:5%; right:12%; background:#56bbe8; border-radius: 9px; font-siza:16px; text-align:center; color:#FFF;cursor: pointer;
+}
+@media (max-width: 768px){
+    .content-box{
+        /*display: none;*/
+    }
+    .personal-bg{
+        min-height: 10em;
 
-
-
-
-
-
-
-
-
+    }
+    .personal-header{
+        min-width: 20em;
+    }
+    .footer{
+        min-width: 20em
+    }
+    #wximg{
+        display: none;
+    }
+    #company{
+        width: 100% !important;
+        text-align:center !important;
+        margin-left: 0px !important;
+    }
+    .footerc{
+        width: 100% !important;
+    }
+    .number{
+        width: 100% !important;
+    }
+    .content{
+        width: 100%;
+    }
+    .content-left{
+        width: 90%;
+        margin-left:5%;
+    }
+    .content-left-person{
+        /*display: none;*/
+    }
+    .content-left-person{
+        width: 100%;
+    }
+    .info-top h1{
+        width: 100%;
+        text-align: center;
+    }
+    #tposition{
+        width: 100% !important;
+        text-align: center;
+    }
+    .people-want{
+        display: none !important;
+    }
+    .face{
+        width: 100%;
+        height: 5rem;
+        text-align: center;
+    }
+    .info ul{
+        width: 100%;
+        margin-top: 2rem;
+    }
+    .info ul li{
+        width: 19%;
+        margin: 0;
+        text-align: center;
+    }
+    .info ul li img{
+        width: 2rem;
+    }
+    .info ul li p{
+        font-size: 12px;
+        margin-left: 8px;
+    }
+    .content-left-person-right{
+        float: left;
+        width: 100%;
+    }
+    .info{
+        width: 100%;
+        margin: 0px;
+    }
+    #ticonUrl{
+        width: 6rem;
+        height: auto;
+        margin-left: -3rem;
+    }
+    .content-left-topic{
+        width: 100%;
+    }
+    .content-left-topic h1 {
+        font-size: 18px;
+        font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow:ellipsis;
+    }
+    .content-left-about{
+        width: 100%;
+        position: relative;
+    }
+    .content-left-ident{
+        width: 100%;
+    }
+    .content-left-ident ul {
+        margin: 10px 0 0 0;
+    }
+    .content-left-ident ul li{
+        width: 20%;
+        margin-right: 0px;
+    }
+    .content-left-ident ul li img{
+        width: 2rem;
+        height: 2rem;
+    }
+    .content-left-ident ul li p{
+        font-size: 12px;
+    }
+    .content-left-resume{
+        width: 100%;
+    }
+    .content-left-assess{
+        width: 100%;
+        min-height: 100px;
+    }
+    .assess-content{
+        width: 100%;
+    }
+    .content-right{
+        width: 100%;
+    }
+    .content-box{
+        min-width: 0px;
+    }
+    .contact-about{
+        width: 100%;
+        margin-left: 0;
+    }
+    .about-block{
+        width: 80%;
+        background: rgba(0,0,0,0);
+        border: 1px solid #AFAFAF;
+        padding: 0 8%;
+        margin-left: 2%;
+    }
+    .about-person-content{
+        float: right;
+        width: 60%;
+    }
+    .about-where{
+        width: 100%;
+    }
+    .assess-face{
+        width: 2rem;
+        height: auto;
+    }
+    .assess-face img{
+        width: 2rem;
+        height: 2rem;
+    }
+    .assess-content-top h3{
+        margin-top: 5px;
+        margin-left:0;
+        font-size: 16px;
+    }
+    .assess-content-top p{
+        margin-top: 6px;
+        float: right;
+    }
+    .assess-star{
+        margin-top: 0;
+        width: 100%;
+    }
+    .assess-star li{
+        float: right;
+    }
+    .assess-content-center p:nth-of-type(1){
+        font-size: 14px;
+    }
+    .assess-content-center p:nth-of-type(2){
+        font-size: 14px;
+    }
+    .about-content-p{
+        font-size: 14px;
+        max-height: 150px;
+        margin-bottom: 10px;
+    }
+    .topic-content{
+        font-size: 14px;
+        max-height: 210px;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    .contact-her{
+        width: 13rem;
+        margin: 0;
+        padding: 0 5%;
+        width: 90%;
+        background: inherit;
+    }
+    .about-label{
+        margin-left: 1rem;
+    }
+    .contact-her-appoint{
+        display: block;
+        width: 45%;
+        float: right;
+        margin-top: 9px;
+        font-size: 12px;
+        color: #000;
+    }
+    .contact-her-top ul li{
+        width: 1.5rem !important;
+        height: 1.5rem !important;
+    }
+    .contact-her-top ul li img{
+        width: 1.5rem !important;
+        height: 1.5rem !important;
+        margin-top: 5px; 
+    }
+    .contact-her-top{
+        width: 55%;
+        float: left;
+        font-size: 12px;
+    }
+    .contact-her-address{
+        width: 50%;
+        float: left;
+        font-size: 12px;
+    }
+    .contact-her-times{
+        width: 45%;
+        float: right;
+        font-size: 12px;
+    }
+    .contact-icon{
+        /*width: 1.5rem;
+        height: 1.5rem;
+        margin-top: 5px;*/
+        display: none;
+    }
+    #taddress{
+        width:inherit !important; 
+    }
+    .ident-button{
+        float: left;
+        width: 100%;
+    }
+    .ident-button p{
+        width: 100%;
+    }
+    .add-like{
+        float: left;
+    }
+    .share-her{
+        float: left;
+    }
+    .add-like-p{
+        width: 100%;
+    }
+    .add-like{
+        width: 100%;
+    }
+    .add-like-img{
+        float: none;
+        margin-left:0;
+    }
+    .add-like-text{
+        float: none;
+    }
+    .content-right{
+        min-height: 920px;
+    }
+    .header{
+        display: none;
+    }
+    .contact-her-times p{
+        font-size: 12px;
+    }
+    .contact-her-address p{
+        font-size: 12px;
+    }
+    .contact-her-top p{
+        font-size: 12px;
+    }
+    .open{
+        width: 100%;
+        height: 30px;
+        text-align: center;
+        color: #56bbe8;
+        cursor: pointer;
+        display: block !important;
+    }
+    .close{
+        width: 100%;
+        height: 30px;
+        text-align: center;
+        color: #56bbe8;
+        /*display: none !important;*/
+        cursor: pointer;
+    }
+    .fold1{
+        display: block;
+        position: absolute;
+        top: 215px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(rgba(255,255,255,.1) 0,#F1F1F1);
+        width: 100%;
+        height: 40px;
+    }
+    .fold2{
+        display: block;
+        position: absolute;
+        top: 175px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(rgba(255,255,255,.1) 0,#F1F1F1);
+        width: 100%;
+        height: 40px;
+    }
+    .about-content{
+        margin-bottom: 0;
+    }
+    
+    #frame{
+        width: 90%;
+        height: 430px;
+        margin: 0 5%;
+        left: 0;
+        top: 50%;
+        margin-top: -200px;
+    }
+    #pc1{
+        display: none;
+    }
+    #pc1{
+        display: none;
+    }
+    #ph1{
+        width: 80%;
+        text-align: center;
+        display: block;
+        font-size: 14px;
+    }
+    #ph2{
+        width: 80%;
+        text-align: center;
+        display: block;
+        font-size: 14px;
+    }
+    #name{
+        font-size: 16px;
+        width: 70%;
+        margin-left: 29%;
+        margin-top: 20%;
+        top: 0;
+        left: 0;
+    }
+    #name1{
+        display: none;
+    }
+    #tel1{
+        display: none;
+    }
+    #email1{
+        display: none;
+    }
+    #weixin{
+        display: none;
+    }
+    #ph3{
+        top:90%;
+        left: 0;
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+    #pc2{
+        display: none;
+    }
+    #warnname{
+        left: 50%
+    }
+    .name1{
+        width:100%;
+        left: 0;
+        margin: 0 8%;
+    }
+    .tel1{
+        width:100%;
+        left: 0;
+        margin: 0 8%;
+    }
+    .email1{
+        width:100%;
+        left: 0;
+        margin: 0 8%;
+    }
+    .weixin{
+        width:100%;
+        left: 0;
+        margin: 0 8%;
+    }
+    #pname{
+        width: 80%;
+        left: 0;
+        border-radius: 5px;
+    }
+    #ptel{
+        width: 80%;
+        left: 0;
+        border-radius: 5px;
+    }
+    #pemail{
+        width: 80%;
+        left: 0;
+        border-radius: 5px;
+    }
+    #pweixin{
+        width: 80%;
+        left: 0;
+        border-radius: 5px;
+    }
+    .cancel{
+        width: 100%;
+        left: 0;
+        top:70%;
+    }
+    #confirm{
+        width: 86%;
+        left: 0;
+        margin: 0 8%;
+        border-radius: 6px;
+    }
+    #close{
+        top: 100%;
+        left: 0;
+        width: 85%;
+        margin: 0 8%;
+        border-radius: 6px;
+    }
+    .firm{
+        position: static;
+        text-align: center;
+    }
+    .cel{
+        position: static;
+        text-align: center;
+    }
+    #frame1{
+        width: 90%;
+        margin-left: 0;
+        left: 0;
+        margin: 0 5%;
+        min-height:478px;
+        position: fixed;
+        top: 50%;
+        margin-top: -239px;
+    }
+    #ticonUrl1{
+        top: 0;
+        left: 0;
+        width: 20%;
+        max-width: 100px;
+        height: auto;
+        margin-left: 8%;
+        margin-top: 10%;
+        position: static;
+    }
+    #companyName1{
+        top: 0;
+        left: 0;
+        width: 70%;
+        margin-top: 12%;
+        overflow: hidden;
+        margin-left: 29%;
+        font-size: 18px;
+    }
+    .reply{
+        top: 0;
+        left: 0;
+        width: 30%;
+        margin-left: 46%;
+        margin-top: 22%;
+    }
+    .order-step{
+        display: none;
+    }
+    .order-step-text{
+        display: none;
+    }
+    .form1{
+        width: 80%;
+        top: 142px;
+        left: 0;
+        margin: 0 8%;
+    }
+    .form2{
+        width: 80%;
+        top:222px;
+        left: 0;
+        margin: 0 8%;
+    }
+    .form3{
+        width: 80%;
+        top: 300px;
+        left: 0;
+        margin: 0 8%;
+    }
+    .form4{
+        width: 80%;
+        top: 380px;
+        left: 0;
+        margin: 0 8%;
+    }
+    #pquestion{
+        width: 100%;
+        height: 30px;
+        font-size: 14px;
+    }
+    #pIntroduce{
+        width: 100%;
+        height: 30px;
+    }
+    #ptime{
+        width: 100%;
+        height: 30px;
+    }
+    .say1{
+        top:120px;
+        left: 0;
+        margin: 0 8%;
+        width: 80%;
+        font-size: 14px;
+    }
+    .say2{
+        top:200px;
+        left: 0;
+        margin: 0 8%;
+        width: 80%;
+        font-size: 14px;
+    }
+    .say3{
+        top: 280px;
+        left: 0;
+        margin: 0 8%;
+        width: 80%;
+        font-size: 14px;
+    }
+    .small{
+        top: 360px;
+        left: 0;
+        margin: 0 8%;
+        width: 80%;
+        font-size: 14px;
+    }
+    .searchBox{
+        width: 99%;
+    }
+    .smallnu{
+        display: none;
+    }
+    .word{
+        display: none;
+    }
+    #sprice1{
+        top:95px;
+        font-size: 18px;
+    }
+}
