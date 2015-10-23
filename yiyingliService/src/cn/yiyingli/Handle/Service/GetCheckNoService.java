@@ -54,18 +54,14 @@ public class GetCheckNoService extends MsgService {
 		no.setCreateTime(String.valueOf(startTime));
 		no.setEndTime(String.valueOf(endTime));
 		getCheckNoService().save(no);
-		boolean result = false;
 		{
 			if (CheckUtil.checkMobileNumber(username))
-				result = SendMessageUtil.sendCheckNo(username, checkNo);
+				SendMessageUtil.sendCheckNo(username, checkNo);
 			else
-				result = SendMailUtil.sendMail(username, checkNo);
+				SendMailUtil.sendMail(username, checkNo);
 		}
-		if (result) {
-			setResMsg(MsgUtil.getSuccessMsg("get checkNO successfully"));
-		} else {
-			setResMsg(MsgUtil.getErrorMsg("get checkNO failed"));
-		}
+		setResMsg(MsgUtil.getSuccessMsg("get checkNO successfully"));
+
 	}
 
 }

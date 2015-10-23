@@ -1,6 +1,7 @@
 package cn.yiyingli.Util;
 
 import java.io.UnsupportedEncodingException;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -8,7 +9,53 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+import cn.yiyingli.ExchangeData.SuperMap;
+
 public class SendMessageUtil {
+
+	private static SendMessageUtil singleInstance;
+
+	public static SendMessageUtil getInstance() {
+		if (singleInstance == null) {
+			singleInstance = new SendMessageUtil();
+			singleInstance.start();
+		}
+		return singleInstance;
+	}
+
+	private LinkedBlockingQueue<SuperMap> sendQueue;
+
+	public SendMessageUtil() {
+		sendQueue = new LinkedBlockingQueue<SuperMap>();
+	}
+
+	public void addSend(String phone, String msg) {
+		SuperMap map = new SuperMap();
+		map.put("phone", phone);
+		map.put("msg", msg);
+		try {
+			sendQueue.put(map);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void start() {
+		Thread sendThread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						SuperMap map = sendQueue.take();
+						sendMsg(map.finish().get("phone"), map.finish().get("msg"));
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		sendThread.start();
+	}
 
 	public static void main(String[] args) {
 		// for (int i = 1; i <= 1; i++) {
@@ -23,8 +70,14 @@ public class SendMessageUtil {
 		// }
 		// }).start();
 		// }
-		System.out.println(sendMessage("8615659831720", "马总好，我是道哥，测试一用，收到请微信，谢谢~"));
-		System.out.println(sendMessage("12176076581", "马总好，我是道哥，测试一用，收到请微信，谢谢~"));
+		// System.out.println(sendMessage("8615659831720",
+		// "马总好，我是道哥，测试一用，收到请微信，谢谢~"));
+		// System.out.println(sendMessage("12176076581",
+		// "马总好，我是道哥，测试一用，收到请微信，谢谢~"));
+		// String regEx="[^0-9]";
+		// Pattern p = Pattern.compile(regEx);
+		// Matcher m = p.matcher("+86-15659831720");
+		// System.out.println(m.replaceAll("").trim());
 	}
 
 	private static final String MESSAGE_NAME = "yyl-ipxmt";
@@ -42,20 +95,12 @@ public class SendMessageUtil {
 		return d.toString().toLowerCase();
 	}
 
-	public static boolean sendCheckNo(String phone, String checkNo) {
-		String r = sendMsg(phone, "尊敬的用户，您的短信验证码为 " + checkNo + "(3分钟内有效)");
-		if (r.contains("ACCEPTD")) {
-			return true;
-		}
-		return false;
+	public static void sendCheckNo(String phone, String checkNo) {
+		SendMessageUtil.getInstance().addSend(phone, "尊敬的用户，您的短信验证码为 " + checkNo + "(3分钟内有效)");
 	}
 
-	public static boolean sendMessage(String phone, String msg) {
-		String r = sendMsg(phone, msg);
-		if (r.contains("ACCEPTD")) {
-			return true;
-		}
-		return false;
+	public static void sendMessage(String phone, String msg) {
+		SendMessageUtil.getInstance().addSend(phone, msg);
 	}
 
 	/**
