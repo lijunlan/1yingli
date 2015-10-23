@@ -119,7 +119,7 @@ public class SendMessageUtil {
 		}
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpGet get = new HttpGet("http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME + "&cppwd="
-				+ MESSAGE_PASSWD + "&da=" + phone + "&dc=15&sm=" + message);
+				+ MESSAGE_PASSWD + "&da=86" + phone + "&dc=15&sm=" + message);
 		String result = null;
 		try {
 			HttpResponse response = httpClient.execute(get);
