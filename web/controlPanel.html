@@ -3,14 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <title>控制面板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <link href="css/controlPanel.css" rel="stylesheet" type="text/css"/>
     <link href="css/personal_common.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/bottom.css">
     <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
     <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
+    <style>
+    @media (max-width: 768px){
+    	.g-hd{
+    		display: none;
+    	}
+    	.top-nav{
+    		display: none;
+    	}
+    	.mobile-header{
+            position: relative;
+    		display: block;
+    		height: 50px;
+    		line-height: 38px;
+    		background: #33495f;
+    		color: #fff;
+    		z-index: 999;
+    		text-align: center;
+    		display: block !important;
+        }
+        .left{
+            float: left;
+            width: 40px;
+            height: 40px;
+            background-image: url('img/01.png');
+            background-repeat: no-repeat;
+            margin-top: 7px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        .right{
+            float: right;
+            width: 40px;
+            height: 40px;
+            background-image: url('img/02.png');
+            background-repeat: no-repeat;
+            margin-top: 7px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        .center{
+            width: 40%;
+            height: 40px;
+            display: inline-block;
+            padding-left: 10%;
+        }
+        .content-left{
+        	display: none;
+        }
+        .content{
+        	width: 100%;
+        }
+        .content-container{
+        	min-width: 200px;
+        }
+        .content-right{
+        	width: 90%;
+        	padding: 0 5%;
+        }
+        .right-top{
+        	width: 99%;
+    		background-color: #fff;
+    		border-radius: 8px;
+    		border: 0;
+        }
+        .right-content{
+        	width: 100%;
+        	padding: 0;
+        	background: inherit;
+        }
+        .right-content-item{
+        	width: 99%;
+        	border: 1px solid #FFF;
+        	border-bottom: inherit !important;
+        	margin-top: 10px;
+        	background: #FFF;
+        	border-radius: 8px;
+        	min-height: 100px;
+        }
+        .right-content-item-p{
+        	width: 90%;
+        }
+        .right-top-item-link-span{
+        	color: #000;
+        }
+    }
+    </style>
 </head>
 <body>
+	<nav class="mobile-header" style="display: none;"> 
+        <div class="left">
+        </div>
+        <form class="center">
+        	<input type="text" placeholder="搜人名、话题" style="width:60%;height:30px;margin-top:8px;border-bottom-left-radius: 18px;border-top-left-radius: 18px;padding-left:8px;float:left;">
+        	<button style="width:35px;;height:33px;float:left;margin-top:9px;border-bottom-right-radius: 18px;border-top-right-radius: 18px;background-color: #56bbe8;border: 0;"><img src="img/03.png"></button>
+        </form>
+        <div class="right">
+        </div>
+    </nav>
     <div class="g-hd"></div>
 
     <div class="top-nav"></div>
@@ -29,7 +127,7 @@
                     <li class="right-top-item">
                         <a class="right-top-item-link" href="javascript:void(0);">
                             <img class="right-top-item-link-icon" src="http://image.1yingli.cn/img/controlPanel_info_icon_01.png"/>
-                            <span class="right-top-item-link-span" >(消息提醒)</span>
+                            <span class="right-top-item-link-span" >(消息中心)</span>
                         </a>
                     </li>
                     <!-- <li class="right-top-item">
@@ -42,6 +140,14 @@
                     </li> -->
                 </ul>
                 <ul class="right-content" id="noti_list">
+                <li class="right-content-item" style="display:block;min-height:90px;border-bottom: 1px solid #CCC;overflow: hidden;"><div style="margin-top:20px;margin-left: 8px; margin-bottom:10px; float:left;">2015/10/19 上午10:54:21</div><img class="show" style="cursor: pointer;width: 30px;height: 25px;float: right;margin-top: 15px;margin-right:15px;" src="http://image.1yingli.cn/img/show.png" alt=""><img class="hide" style="width: 30px;height: 25px;float: right;margin-top: 10px;margin-right:15px;cursor: pointer;display:none;" src="http://image.1yingli.cn/img/hide.png" alt=""><p class="right-content-item-p" style="margin-bottom:10px;float:left;">尊敬的学员，(订单号:2015258100000281)，导师(吴嘉辉)已经对您进行了评价(评价分数:5分。评价内容学员问的问题很好！ 聊天挺愉快的
+)</p></li>
+<li class="right-content-item" style="display:block;min-height:90px;border-bottom: 1px solid #CCC;overflow: hidden;"><div style="margin-top:20px;margin-left: 8px; margin-bottom:10px; float:left;">2015/10/19 上午10:54:21</div><img class="show" style="cursor: pointer;width: 30px;height: 25px;float: right;margin-top: 15px;margin-right:15px;" src="http://image.1yingli.cn/img/show.png" alt=""><img class="hide" style="width: 30px;height: 25px;float: right;margin-top: 10px;margin-right:15px;cursor: pointer;display:none;" src="http://image.1yingli.cn/img/hide.png" alt=""><p class="right-content-item-p" style="margin-bottom:10px;float:left;">尊敬的学员，(订单号:2015258100000281)，导师(吴嘉辉)已经对您进行了评价(评价分数:5分。评价内容学员问的问题很好！ 聊天挺愉快的
+)</p></li>
+<li class="right-content-item" style="display:block;min-height:90px;border-bottom: 1px solid #CCC;overflow: hidden;"><div style="margin-top:20px;margin-left: 8px; margin-bottom:10px; float:left;">2015/10/19 上午10:54:21</div><img class="show" style="cursor: pointer;width: 30px;height: 25px;float: right;margin-top: 15px;margin-right:15px;" src="http://image.1yingli.cn/img/show.png" alt=""><img class="hide" style="width: 30px;height: 25px;float: right;margin-top: 10px;margin-right:15px;cursor: pointer;display:none;" src="http://image.1yingli.cn/img/hide.png" alt=""><p class="right-content-item-p" style="margin-bottom:10px;float:left;">尊敬的学员，(订单号:2015258100000281)，导师(吴嘉辉)已经对您进行了评价(评价分数:5分。评价内容学员问的问题很好！ 聊天挺愉快的
+)</p></li>
+<li class="right-content-item" style="display:block;min-height:90px;border-bottom: 1px solid #CCC;overflow: hidden;"><div style="margin-top:20px;margin-left: 8px; margin-bottom:10px; float:left;">2015/10/19 上午10:54:21</div><img class="show" style="cursor: pointer;width: 30px;height: 25px;float: right;margin-top: 15px;margin-right:15px;" src="http://image.1yingli.cn/img/show.png" alt=""><img class="hide" style="width: 30px;height: 25px;float: right;margin-top: 10px;margin-right:15px;cursor: pointer;display:none;" src="http://image.1yingli.cn/img/hide.png" alt=""><p class="right-content-item-p" style="margin-bottom:10px;float:left;">尊敬的学员，(订单号:2015258100000281)，导师(吴嘉辉)已经对您进行了评价(评价分数:5分。评价内容学员问的问题很好！ 聊天挺愉快的
+)</p></li>
                     <!-- <li class="right-content-item">
                         <p class="right-content-item-p">可以要求发送一封新的确认邮件或修改您的电子邮件地址</p>
                         <a href="" class="right-content-item-a">查看详情></a>
