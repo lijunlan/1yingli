@@ -47,7 +47,7 @@ wx.ready(function () {
     onReady = function (teacher) {
         wx.onMenuShareTimeline({
             title: "【一英里导师】" + teacher.name + "(" + teacher.simpleinfo + ")", // 分享标题
-            link: "http://www.1yingli.cn/personal.html?tid=" + $_GET("tid"), // 分享链接
+            link: window.location.href, // 分享链接
             imgUrl: teacher.iconUrl, // 分享图标
             success: function () {
                 // 用户确认分享后执行的回调函数
@@ -62,7 +62,7 @@ wx.ready(function () {
         wx.onMenuShareAppMessage({
             title: "【一英里导师】" + teacher.name + "(" + teacher.simpleinfo + ")", // 分享标题
             desc: teacher.introduce.substr(0, 50), // 分享描述  //TODO
-            link: "http://www.1yingli.cn/personal.html?tid=" + $_GET("tid"), // 分享链接
+            link: window.location.href, // 分享链接
             imgUrl: teacher.iconUrl, // 分享图标
             type: 'link', // 分享类型,music、video或link，不填默认为link
             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
