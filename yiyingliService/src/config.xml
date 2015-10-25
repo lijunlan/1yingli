@@ -1,9 +1,18 @@
 <?xml version = "1.0" encoding= "UTF-8"?>
-<!DOCTYPE service-configuration SYSTEM "/var/tomcat/tomcat-7/webapps/yiyingliService/WEB-INF/classes/config.dtd">
+<!DOCTYPE service-configuration PUBLIC "config.dtd" "http://source.1yingli.cn/config.dtd">
 <service-configuration>
 	<cachePath value="/TEMP/" />
 	<imagePath value="http://image.1yingli.cn" />
 	<httpPath value="http://service.1yingli.cn" />
+	<searchUrl value="http://intranet.opensearch-cn-hangzhou.aliyuncs.com" />
+	<!-- <searchUrl value="http://opensearch-cn-hangzhou.aliyuncs.com" /> -->
+	<searchHintUrl value="http://intranet.opensearch-cn-hangzhou.aliyuncs.com" />
+	<!-- <searchHintUrl value="http://opensearch-cn-hangzhou.aliyuncs.com" /> -->
+	<rsaPath value="/RSAKey/" />
+	<baiduAboutUrl
+		value="http://api.recsys.baidu.com/s/130426/326542/rs?token=8d116fa25cfde0085776beee152741e2" />
+	<baiduPersonalUrl
+		value="http://api.recsys.baidu.com/s/130426/326544/rs?token=8d116fa25cfde0085776beee152741e2" />
 	<style name="user">
 		<method name="getTeacherState" beanName="getTeacherStateService" />
 		<method name="getCommentCount" beanName="getCommentCountService" />
@@ -38,6 +47,7 @@
 		<method name="isLikeTeacher" beanName="isLikeTeacherService" />
 		<method name="getOrderCount" beanName="getOrderCountService" />
 		<method name="forgetPassword" beanName="forgetPasswordService" />
+		<method name="iosForgetPassword" beanName="iosForgetPasswordService" />
 		<!-- <method name="change_info" beanName="" /> <method name="change_password" 
 			beanName="" /> -->
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
@@ -121,6 +131,7 @@
 	</style>
 	<style name="order">
 		<method name="createOrder" beanName="createOrderService" />
+		<method name="createOrderWithoutLogin" beanName="createOrderWithoutLoginService" />
 		<method name="getListByTeacher" beanName="tGetOrderListService" />
 		<method name="getByTeacher" beanName="tGetOrderInfoService" />
 		<method name="getListByUser" beanName="getOrderListService" />
