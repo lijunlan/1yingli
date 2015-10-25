@@ -78,8 +78,6 @@
     #le:checked ~ .sidenav b {
         opacity: 1;
         transform: translateX(0);
-
-
     }
     #le:checked ~ .sidenav {
         box-shadow: -8px 0 8px #ccc inset;

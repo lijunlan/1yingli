@@ -44,8 +44,8 @@ header,footer,section {display:block;}
 
 /*-----------------------------------content-left----------------------------------------------------*/
 
-.content-container{  width: 100%;min-height: 730px; overflow: hidden;padding-bottom: 80px;background: rgba(0,0,0,0.05); min-width: 1096px; }
-.content {  width: 950px;  min-height: 600px;  margin: 25px auto 80px;  }
+.content-container{  width: 100%;min-height: 400px; overflow: hidden;/*padding-bottom: 80px;*/background: rgba(0,0,0,0.05); min-width: 1096px; }
+.content {  width: 950px;  min-height: 400px;  margin: 25px auto 10px;  }
 
 .content-left{  width: 220px;height: 550px;float: left;  }
 
@@ -161,7 +161,7 @@ header,footer,section {display:block;}
     	width: 100%;
     }
     .content-container{
-    	min-width: 200px;
+    	min-width: 400px;
     }
     .content-right{
     	width: 90%;

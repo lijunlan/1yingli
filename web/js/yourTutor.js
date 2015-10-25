@@ -1,6 +1,6 @@
 var list,i,con,orderId,cval,ppay,ptime,star,ass;
 //var uid = $.cookie('uid');
-var uid= "b6cb1675-bf58-409d-9536-385199caf835";
+var uid= "37382507-40d3-44bc-b5a1-54755ccfcd88";
 $(document).ready(function(){    
     /*var u = $.cookie('uid');
     var n = $.cookie('nickName');
@@ -75,7 +75,7 @@ function getTotalPage(){
             }
         }
     });
-    return total;
+    return 6;
 }
 
 //导师主页
@@ -261,7 +261,7 @@ function openshow(tid,i,orderId){
             $("#fpay").click(function(){
                 var tuid = $.cookie('uid');
                 $(".no1").fadeOut();
-                $("#pay").fadeIn().html("<img class='Tutor_icon1' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/><div style='width: 400px;height: 40px;font-size: 20px;text-align: center;margin-top: 40px;'>您确认要付款么</div><input size='30' name='oid' value="+orderId+" style='display:none' /><input size='30' name='uid' value="+tuid+" style='display:none' /><button type='submit' style='width:80px;height:20px;font-size:16px;color:#FFF;background:#56bbe8;border-radius:8px;text-align:center;float:right;margin-right: 160px;border:0px;margin-top: 30px;cursor: pointer;' id='fukuan'>确认支付")
+                $("#pay").fadeIn().html("<img class='Tutor_icon1' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/><div style='width: 100%;height: 40px;font-size: 20px;text-align: center;margin-top: 40px;'>您确认要付款么</div><input size='30' name='oid' value="+orderId+" style='display:none' /><input size='30' name='uid' value="+tuid+" style='display:none' /><button type='submit' style='width:80px;height:20px;font-size:16px;color:#FFF;background:#56bbe8;border-radius:8px;text-align:center;float:right;margin-right: 10%;border:0px;margin-top: 30px;cursor: pointer;' id='fukuan'>确认支付")
                 $(".Tutor_icon1").click(function(){
                     $(".no1").fadeOut();
                     $(".mark").hide();
