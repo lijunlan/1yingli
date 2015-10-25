@@ -8,6 +8,7 @@ package cn.yiyingli.Servlet;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +38,8 @@ public class CheckoutServlet extends HttpServlet {
 	private static final long serialVersionUID = -2722761580200224133L;
 
 	private String page = "http://www.1yingli.cn/yourTutor.html";
+	
+	private String testPage = "http://testweb.1yingli.cn/yourTutor.html";
 
 	private ApplicationContext applicationContext;
 
@@ -58,11 +61,12 @@ public class CheckoutServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		PayPal paypal = new PayPal();
 		// Paypal调用的returnServlet
-		String returnURL = "http://service.1yingli.cn/yiyingliService/Return?page=return";
+		//String returnURL = "http://service.1yingli.cn/yiyingliService/Return?page=return";
+		String returnURL = "http://test.1yingli.cn/yiyingliService/Return?page=return";
 		// String cancelURL = request.getScheme() +
 		// "://www.1yingli.cn/yourTutor.html";
 		// 当取消交易的时候，返回地址
-		String cancelURL = "http://www.1yingli.cn/yourTutor.html";
+		String cancelURL = testPage;
 		Map<String, String> checkoutDetails = new HashMap<String, String>();
 		checkoutDetails = setRequestParams(request);
 		// 检查前台传来的数据
@@ -99,10 +103,10 @@ public class CheckoutServlet extends HttpServlet {
 			return;
 		}
 		// 由后台插入相关数据
-		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0", order.getServiceTitle());
+		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0",  URLEncoder.encode(order.getServiceTitle(), "UTF-8"));
 		// 货物id，这里填写的是导师id
 		checkoutDetails.put("L_PAYMENTREQUEST_0_NUMBER0", order.getTeacher().getId().toString());
-		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0", "Onemile :" + order.getServiceTitle());
+		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0", "Onemile:" + URLEncoder.encode(order.getServiceTitle(), "UTF-8"));
 		checkoutDetails.put("L_PAYMENTREQUEST_0_QTY0", "1");
 		// 商品价格
 		float price = order.getMoney();
@@ -111,6 +115,8 @@ public class CheckoutServlet extends HttpServlet {
 		price = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
 		if(price<0.01)
 			price=(float) 0.01;
+		checkoutDetails.remove("oid");
+		checkoutDetails.remove("uid");
 		checkoutDetails.put("PAYMENTREQUEST_0_ITEMAMT", price+"");
 		checkoutDetails.put("PAYMENTREQUEST_0_HANDLINGAMT", "0");
 		// 包括税款，手续费（这些我们都是零）的总金额
@@ -119,7 +125,7 @@ public class CheckoutServlet extends HttpServlet {
 		checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM", request.getParameter("oid"));
 		checkoutDetails.put("REQCONFIRMSHIPPING", "0");
 		checkoutDetails.put("NOSHIPPING", "1");
-		checkoutDetails.put("L_PAYMENTREQUEST_0_ITEMCATEGORY0", "Digital");
+		
 		checkoutDetails.put("PAYMENTREQUEST_0_CURRENCYCODE", "USD");
 		checkoutDetails.put("PAYMENTREQUEST_0_PAYMENTACTION", "Sale");
 
@@ -175,7 +181,7 @@ public class CheckoutServlet extends HttpServlet {
 		 * catch block e.printStackTrace(); } }
 		 */
 		try {
-			response.sendRedirect(page);
+			response.sendRedirect(testPage);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,6 +1,6 @@
 var list,i,con,orderId,cval,ppay,ptime,star,ass;
 //var uid = $.cookie('uid');
-var uid= "3be8f212-8e97-4691-8bbb-d088f505ca11";
+var uid= "37382507-40d3-44bc-b5a1-54755ccfcd88";
 $(document).ready(function(){    
     /*var u = $.cookie('uid');
     var n = $.cookie('nickName');
@@ -75,7 +75,7 @@ function getTotalPage(){
             }
         }
     });
-    return total;
+    return 6;
 }
 
 //导师主页
@@ -261,7 +261,7 @@ function openshow(tid,i,orderId){
             $("#fpay").click(function(){
                 var tuid = $.cookie('uid');
                 $(".no1").fadeOut();
-                $("#pay").fadeIn().html("<img class='Tutor_icon1' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/><div style='width: 400px;height: 40px;font-size: 20px;text-align: center;margin-top: 40px;'>您确认要付款么</div><input size='30' name='oid' value="+orderId+" style='display:none' /><input size='30' name='uid' value="+tuid+" style='display:none' /><button type='submit' style='width:80px;height:20px;font-size:16px;color:#FFF;background:#56bbe8;border-radius:8px;text-align:center;float:right;margin-right: 160px;border:0px;margin-top: 30px;cursor: pointer;' id='fukuan'>确认支付")
+                $("#pay").fadeIn().html("<img class='Tutor_icon1' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/><div style='width: 100%;height: 40px;font-size: 20px;text-align: center;margin-top: 40px;'>您确认要付款么</div><input size='30' name='oid' value="+orderId+" style='display:none' /><input size='30' name='uid' value="+tuid+" style='display:none' /><button type='submit' style='width:80px;height:20px;font-size:16px;color:#FFF;background:#56bbe8;border-radius:8px;text-align:center;float:right;margin-right: 10%;border:0px;margin-top: 30px;cursor: pointer;' id='fukuan'>确认支付")
                 $(".Tutor_icon1").click(function(){
                     $(".no1").fadeOut();
                     $(".mark").hide();
@@ -758,7 +758,7 @@ function detail(oid){
                 },
         success : function(data, textStatu) {
             var json = eval("(" + data + ")"); 
-            $(".details").fadeIn().html("<img class='Tutor_icon' src='http://image.1yingli.cn/img/order_close_icon.png' alt=''/><div class='details_top'><div class='details_top_content'>"+json.title+"</div> </div><div class='details_content'><div class='details_person_img'><img src=\""+(json.teacherUrl==""?"http://image.1yingli.cn/img/img.png":json.teacherUrl)+"\" style='width:173px; height:173px;' alt=''/></div><div class='details_person_name'>"+json.teacherName+"</div><div class='details_person_price'>"+json.price+"元/1小时</div><div class='details_person_topic'> 话题 ："+json.title+"</div></div><div class='details_person_problem'><p style='font-size:16px;font-weight: bolder;'>学员提的问题:</p><p style='width:520px;height:97px;border:1px solid #eeeeee;margin: 0;overflow-y: auto;overflow-x: hidden;word-break: break-word;'>"+json.question+"</p></div><div class='details_person_status'><p style='font-size:16px;font-weight: bolder;'>学员目前状况:</p><p style='width:520px;height:97px;border:1px solid #eeeeee;margin: 0;overflow-y: auto;overflow-x: hidden;word-break: break-word;'>"+json.userIntroduce+"</p></div><div class='details_person_time'><p style='font-size:16px;font-weight: bolder;'>预约时间:</p><p style='width:520px;height:35px;border:1px solid #eeeeee;margin: 0;overflow-y: auto;overflow-x: hidden;word-break: break-word;'>"+json.selectTimes+"</p></div><div class='details_person_contract'><p style='font-size:16px;font-weight: bolder;'>联系方式:</p><p style='width:150px;height:15px;font-size:13px;margin:5px 20px 0 0; float:left;'>手机号码："+json.phone+"</p><p style='width:150px;height:15px;font-size:13px;margin:5px 20px 0 0; float:left;'>微信："+json.contact+"</p><p style='width:180px;height:15px;font-size:13px;margin:5px 0 0 0; float:left;'>邮箱："+json.email+"</p></div><div class='details_bottom'><div style='height:20px;font-size: 14px; color: #000; padding-top: 8px;'>订单号："+json.orderId+"</div> </div>");
+            $(".details").fadeIn().html("<img class='Tutor_icon' src='http://image.1yingli.cn/img/order_close_icon.png' alt=''/><div class='details_top'><div class='details_top_content'>"+json.title+"</div> </div><div class='details_content'><div class='details_person_img'><img src=\""+(json.teacherUrl==""?"http://image.1yingli.cn/img/img.png":json.teacherUrl)+"\" style='width:173px; height:173px;' alt=''/></div><div class='details_person_name'>"+json.teacherName+"</div><div class='details_person_price'>"+json.price+"元/1小时</div><div class='details_person_topic'> 话题 ："+json.title+"</div></div><div class='details_person_problem'><p class='quest1'>学员提的问题:</p><p class='text1'>"+json.question+"</p></div><div class='details_person_status'><p class='quest2'>学员目前状况:</p><p class='text2'>"+json.userIntroduce+"</p></div><div class='details_person_time'><p class='quest3'>预约时间:</p><p class='text3'>"+json.selectTimes+"</p></div><div class='details_person_contract'><p style='font-size:16px;font-weight: bolder;'>联系方式:</p><p style='width:150px;height:15px;font-size:13px;margin:5px 20px 0 0; float:left;'>手机号码："+json.phone+"</p><p style='width:150px;height:15px;font-size:13px;margin:5px 20px 0 0; float:left;'>微信："+json.contact+"</p><p style='width:180px;height:15px;font-size:13px;margin:5px 0 0 0; float:left;'>邮箱："+json.email+"</p></div><div class='details_bottom'><div style='height:20px;font-size: 14px; color: #000; padding-top: 8px;'>订单号："+json.orderId+"</div> </div>");
             $(".Tutor_icon").click(function(){
                     $(".mark").hide();
                     $(".details").fadeOut();

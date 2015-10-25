@@ -1,3 +1,18 @@
+.sidenav{
+    display: none;
+}
+.sidenav1{
+    display: none;
+}
+#le{
+    display: none;
+}
+#ri{
+    display: none;
+}
+
+
+
 @media (max-width: 768px){
 	.footer{
         min-width: 20em
@@ -69,6 +84,7 @@
     #le:checked ~ .sidenav {
         box-shadow: -8px 0 8px #ccc inset;
         display: block;
+        background-color: #FFF;
     }
     
     #ri {
@@ -119,6 +135,7 @@
     #ri:checked ~ .sidenav1 {
         box-shadow: 8px 0 8px #ccc inset;
         display: block;
+        background-color: #FFF;
     }
     .mobile-header{
         position: relative;
@@ -163,4 +180,5 @@
         margin-bottom: 20px;
     }
 
+>>>>>>> d05b6e54bad23352eef5648a0fca1bfb109d17cc
 }

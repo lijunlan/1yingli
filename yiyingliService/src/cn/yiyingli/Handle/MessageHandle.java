@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.ApplicationContext;
 
-
 import cn.yiyingli.Util.ConfigurationXmlUtil;
 import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.LogUtil;
@@ -51,7 +50,7 @@ public class MessageHandle {
 	private static String getJson(HttpServletRequest rq) {
 		String receive = "";
 		try {
-			 receive = org.apache.commons.io.IOUtils.toString(rq.getInputStream());
+			receive = org.apache.commons.io.IOUtils.toString(rq.getInputStream());
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -110,6 +109,7 @@ public class MessageHandle {
 	private void returnMsg(String msg) {
 		resp.setCharacterEncoding("UTF-8");
 		resp.setHeader("Content-type", "text/html;charset=UTF-8");
+		resp.setHeader("Access-Control-Allow-Methods", "GET, POST");
 		resp.setHeader("Access-Control-Allow-Origin", "*");
 		try {
 			OutputStream stream = resp.getOutputStream();

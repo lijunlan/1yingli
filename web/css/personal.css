@@ -353,7 +353,7 @@ abbr,acronym { border:0;
     width: 300px;min-height: 1096px;/*background: #5bc0de;*/float: left;
 }
 .contact-her{
-    width: 220px;height: 250px;margin-left: 20px;background: white;padding: 30px 30px 25px 30px;border-radius: 2px;
+    width: 220px;height: 270px;margin-left: 20px;background: white;padding: 30px 30px 25px 30px;border-radius: 2px;
 }
 .contact-her-top{
     width: 240px;height: 35px;line-height: 35px;
@@ -1383,7 +1383,6 @@ abbr,acronym { border:0;
     }
     .about-block{
         width: 80%;
-        background: rgba(0,0,0,0);
         border: 1px solid #AFAFAF;
         padding: 0 8%;
         margin-left: 2%;
@@ -1447,7 +1446,7 @@ abbr,acronym { border:0;
         margin-left: 1rem;
     }
     .contact-her-appoint{
-        display: block;
+        display: block !important;
         width: 45%;
         float: right;
         margin-top: 9px;
@@ -1515,6 +1514,7 @@ abbr,acronym { border:0;
     }
     .content-right{
         min-height: 920px;
+        margin-bottom: 20px;
     }
     .header{
         display: none;
@@ -1529,6 +1529,7 @@ abbr,acronym { border:0;
         font-size: 12px;
     }
     .open{
+        min-height: 30px;
         width: 100%;
         height: 30px;
         text-align: center;
@@ -1536,9 +1537,20 @@ abbr,acronym { border:0;
         cursor: pointer;
         display: block !important;
     }
-    .close{
+
+    #open1,#open2{
         width: 100%;
         height: 30px;
+        font-size: 16px;
+        text-align: center;
+        color: #56bbe8;
+        cursor: pointer;
+        display: block !important;
+    }
+    #close1,#close2{
+        width: 100%;
+        height: 30px;
+        font-size: 16px;
         text-align: center;
         color: #56bbe8;
         /*display: none !important;*/
@@ -1629,6 +1641,15 @@ abbr,acronym { border:0;
     #warnname{
         left: 50%
     }
+    #warnemail{
+        left: 60%;
+    }
+    #warntel{
+        left: 60%;
+    }
+    #warnweixin{
+        left: 60%;
+    }
     .name1{
         width:100%;
         left: 0;
@@ -1705,6 +1726,9 @@ abbr,acronym { border:0;
         top: 50%;
         margin-top: -239px;
     }
+    #close_frame1{
+        float: right;
+    }
     #ticonUrl1{
         top: 0;
         left: 0;
@@ -1718,6 +1742,7 @@ abbr,acronym { border:0;
     #companyName1{
         top: 0;
         left: 0;
+        height: 20px;
         width: 70%;
         margin-top: 12%;
         overflow: hidden;

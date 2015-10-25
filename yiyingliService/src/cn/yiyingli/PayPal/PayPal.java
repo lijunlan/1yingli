@@ -380,7 +380,7 @@ public Map<String, String> getShippingDetails(String token)
 	* Inputs:   FinalPaymentAmount:	The total transaction amount.
 	* Returns: 	The NVP Collection object of the DoExpressCheckoutPayment Call Response.
 *********************************************************************************/
-public HashMap confirmPayment(Map<String,String>checkoutDetails, String serverName)
+public HashMap<?, ?> confirmPayment(Map<String,String>checkoutDetails, String serverName)
 {
 
 	/* Gather the information to make the final call to finalize the PayPal payment.  The variable nvpstr
@@ -449,10 +449,11 @@ public HashMap<String, String> httpcall( String methodName, String nvpStr)
 	//test
 	System.out.println(methodName);
 	//test
-    String version = "2.3";
+    @SuppressWarnings("unused")
+	String version = "2.3";
     String agent = "Mozilla/4.0";
     StringBuilder respText = new StringBuilder("");
-    HashMap nvp = null; 
+    HashMap<String, String> nvp = null; 
 
     //deformatNVP( nvpStr );
     StringBuilder encodedData = new StringBuilder("METHOD=").append(methodName).append("&VERSION=").append(gvVersion).append("&PWD=").append(gvAPIPassword).append("&USER=").append(gvAPIUserName).append("&SIGNATURE=").append(gvAPISignature).append(nvpStr).append("&BUTTONSOURCE=").append(gvBNCode);
@@ -509,9 +510,9 @@ public HashMap<String, String> httpcall( String methodName, String nvpStr)
   * 	pPayLoad is the NVP string.
   * returns a HashMap object containing all the name value pairs of the string.
 *********************************************************************************/
-public HashMap deformatNVP( String pPayload )
+public HashMap<String, String> deformatNVP( String pPayload )
 {
-    HashMap nvp = new HashMap();
+    HashMap<String, String> nvp = new HashMap<String, String>();
     StringTokenizer stTok = new StringTokenizer( pPayload, "&");
     while (stTok.hasMoreTokens())
     {

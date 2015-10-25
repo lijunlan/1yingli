@@ -50,7 +50,7 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 	public Voucher query(long id, boolean lazy) {
 		String hql = "from Voucher v where v.id=?";
 		if (lazy) {
-			hql = "from Voucher v left join useOrder left join ownUser where v.id=?";
+			hql = "from Voucher v left join fetch v.useOrder left join fetch v.ownUser where v.id=?";
 		}
 		@SuppressWarnings("unchecked")
 		List<Voucher> list = getHibernateTemplate().find(hql, id);
@@ -64,7 +64,7 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 	public Voucher query(String vno, boolean lazy) {
 		String hql = "from Voucher v where v.number=?";
 		if (lazy) {
-			hql = "from Voucher v left join useOrder left join ownUser where v.number=?";
+			hql = "from Voucher v left join fetch v.useOrder left join fetch v.ownUser where v.number=?";
 		}
 		@SuppressWarnings("unchecked")
 		List<Voucher> list = getHibernateTemplate().find(hql, vno);
@@ -84,7 +84,7 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 			public List<Voucher> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from Voucher v";
 				if (lazy) {
-					hql = "from Voucher v left join useOrder left join ownUser";
+					hql = "from Voucher v left join fetch v.useOrder left join fetch v.ownUser ORDER BY v.createTime DESC";
 				}
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
@@ -106,7 +106,7 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 			public List<Voucher> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from Voucher v where v.ownUser.id=" + userId + " ORDER BY v.createTime DESC";
 				if (lazy) {
-					hql = "from Voucher v left join useOrder left join ownUser where v.ownUser.id=" + userId
+					hql = "from Voucher v left join fetch v.useOrder left join fetch v.ownUser where v.ownUser.id=" + userId
 							+ " ORDER BY v.createTime DESC";
 				}
 				Query query = session.createQuery(hql);

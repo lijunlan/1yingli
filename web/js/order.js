@@ -6,10 +6,39 @@
         $("#frame").fadeOut();
     });
 
+    $("#open1").click(function(){
+        $(".topic-content").css('max-height','none');
+        $("#scontent").css('overflow','visible');
+        $(".fold1").hide();
+        $("#open1").removeAttr("id");
+        $("#close1").show();
+    })
+    $("#close1").click(function(){
+        $(".topic-content").css('max-height','210px');
+        $("#scontent").css('overflow','hidden');
+        $(".fold1").show();
+        $("#close1").hide();
+        $(".open1").attr('id','open1');
+    })
+    $("#open2").click(function(){
+        $("#tintroduce").css('max-height','none');
+        $("#tintroduce").css('overflow','visible');
+        $(".fold2").hide();
+        $("#open2").removeAttr("id");
+        $("#close2").show();
+    })
+    $("#close2").click(function(){
+        $("#tintroduce").css('max-height','150px');
+        $("#tintroduce").css('overflow','hidden');
+        $(".fold2").show();
+        $("#close2").hide();
+        $(".open2").attr('id','open2');
+    })
+    
     $("#confirm").click(function(){
         var pname = $("#pname").val();
         var ptel = $("#ptel").val();
-        var pemil = $("#pemil").val();
+        var pemail = $("#pemail").val();
         var pweixin = $("#pweixin").val();
 
         var isSubmit = true;
@@ -21,8 +50,8 @@
             $("#warntel").show();
             isSubmit = false;
         }
-         if(pemil == "" ){
-            $("#warnemil").show();
+         if(pemail == "" ){
+            $("#warnemail").show();
             isSubmit = false;
         }
          if(pweixin == "" ){
@@ -39,7 +68,7 @@
         
     });
 
-    $("#close1").click(function(){
+    $("#close_frame1").click(function(){
         $(".mark").fadeOut();
         $("#frame1").fadeOut();
     });

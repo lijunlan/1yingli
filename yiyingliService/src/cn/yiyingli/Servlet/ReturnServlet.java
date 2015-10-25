@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +26,8 @@ public class ReturnServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private String page = "http://www.1yingli.cn/yourTutor.html";
+	
+	private String testPage = "http://testweb.1yingli.cn/yourTutor.html";
 
 	private ApplicationContext applicationContext;
 
@@ -131,6 +132,7 @@ public class ReturnServlet extends HttpServlet {
 			if (isSet(request.getParameter("page")) && request.getParameter("page").equals("return")) {
 				// FIXME - The method 'request.getServerName()' must be
 				// sanitized before being used.
+				@SuppressWarnings("rawtypes")
 				HashMap results = pp.confirmPayment(checkoutDetails, request.getServerName());
 				request.setAttribute("payment_method", "");
 				String strAck = results.get("ACK").toString().toUpperCase();
@@ -269,7 +271,7 @@ public class ReturnServlet extends HttpServlet {
 		}
 		*/
 		try {
-			response.sendRedirect(page);
+			response.sendRedirect(testPage);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
