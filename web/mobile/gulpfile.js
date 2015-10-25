@@ -7,9 +7,9 @@ var paths = {
     scripts: [
         "bower_components/jquery/dist/jquery.js",
         "bower_components/jquery-json/dist/jquery.json.min.js",
+        "bower_components/fastclick/lib/fastclick.js",
         "bower_components/angular/angular.js",
         "bower_components/angular-route/angular-route.js",
-        "bower_components/fastclick/lib/fastclick.js",
         "bower_components/angular-touch/angular-touch.js",
         "js/common.js",
         "pages/**/*.js",

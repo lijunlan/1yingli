@@ -30,7 +30,7 @@ app.config(['$httpProvider', function ($httpProvider) {
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when("/main/:tid", {
-            templateUrl: "/pages/main/main.html",
+            templateUrl: "pages/main/main.html",
             controller: "MainController"
         })
 }]);

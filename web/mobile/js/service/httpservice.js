@@ -5,7 +5,7 @@ app.service('HttpService', ['$http', '$rootScope', function ($http,$rootScope) {
         $.ajax({
             cache: true,
             type: "POST",
-            url: "http://service.1yingli.cn/yiyingliService/manage",
+            url: "http://test.1yingli.cn/yiyingliService/manage",
             data: $.toJSON(param),
             error: function (request) {
                 // alert("Connection error");

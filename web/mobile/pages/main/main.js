@@ -1,6 +1,10 @@
-app.controller('MainController', ['$scope', 'HttpService', '$routeParams',
+app.controller('MainController', ['$scope', 'HttpService', '$routeParams', '$location',
+    function ($scope, HttpService, $routeParams, $location) {
 
-    function ($scope, HttpService, $routeParams) {
+        //载入页面后保证滚动到头部
+        $('body,html').scrollTop(0);
+
+
         //获取导师信息，并处理用于显示
         HttpService.post('user', 'getTeacherInfo', {"teacherId": $routeParams.tid}, function (data) {
             $scope.teacher = data;
@@ -75,7 +79,7 @@ app.controller('MainController', ['$scope', 'HttpService', '$routeParams',
             onReady($scope.teacher);
         });
 
-        //评论相关
+        //评论
         {
             HttpService.post('teacher', 'getCommentCount', {teacherId: $routeParams.tid}, function (data) {
                 $scope.commentInfo = data;
@@ -102,15 +106,21 @@ app.controller('MainController', ['$scope', 'HttpService', '$routeParams',
                     changePage(($scope.page + 1) + "");
                 }
             };
+
+            //跳转
+            $scope.changeTeache = function (teacherId) {
+                $location.path('/main/' + teacherId);
+            };
         }
 
-
+        //相关话题
         {
             HttpService.post('function', 'getRecommendTeacherList', {teacherId: $routeParams.tid}, function (data) {
                 $scope.recommend = $_ToJson(data.data);
             });
         }
 
+        //显示更多
         {
             $scope.loadMore = function (domst, foldst, morest, heightst) {
                 var dom = $(domst);
@@ -129,17 +139,103 @@ app.controller('MainController', ['$scope', 'HttpService', '$routeParams',
                 }
             };
         }
+        
+        $scope.params = {
+            question: "",
+            userIntroduce: "",
+            checkNO: "",
+            teacherId: "",
+            selectTime: "",
+            name: "",
+            phone: "",
+            email: "",
+            contact: ""
+        };
 
-        //$scope.date = function () {
-        //    document.getElementById('iframe').addEventListener('touchmove', remove, false);
-        //    $('#iframe').css('display', 'block');
-        //};
-        //
-        //
-        //$scope.closeFrame = function () {
-        //    document.getElementById('iframe').removeEventListener('touchmove', remove, false);
-        //    $('#iframe').css('display', 'none');
-        //};
+
+        //预约流程控制
+        {
+            $scope.date = function () {
+                document.getElementById('iframe').addEventListener('touchmove', remove, false);
+                $('#iframe').css('display', 'block');
+                $('#iframe .box').css('display', 'none');
+                $('#step1').css('display', 'block');
+            };
+
+
+            $scope.closeFrame = function () {
+                document.getElementById('iframe').removeEventListener('touchmove', remove, false);
+                $('#iframe').css('display', 'none');
+            };
+
+            $scope.nextStep = function () {
+                if ($scope.params.name == "") {
+                    alert("请输入姓名");
+                    return;
+                }
+                if ($scope.params.email == "") {
+                    alert("请输入邮箱");
+                    return;
+                }
+                if ($scope.params.contact == "") {
+                    alert("请输入微信号");
+                    return;
+                }
+                if ($scope.params.checkNO == "") {
+                    alert("请输入验证码");
+                    return;
+                }
+                $('#step1').css('display', 'none');
+                $('#step2').css('display', 'block');
+            };
+
+            $scope.confirmOrder = function () {
+                if ($scope.params.question == "") {
+                    alert("请输入方便的时间");
+                    return;
+                }
+                if ($scope.params.userIntroduce == "") {
+                    alert("请输入自我介绍");
+                    return;
+                }
+                if ($scope.params.selectTime == "") {
+                    alert("请输入方便的时间");
+                    return;
+                }
+            }
+        }
+
+        //获取验证码
+        {
+            function getCheckNOFun() {
+                if ($scope.params.email == "") {
+                    alert("请输入邮箱");
+                    return;
+                }
+                HttpService.post('function', 'getCheckNo', {'username': $scope.params.email}, function (data) {
+                    console.log(data);
+                });
+
+                $scope.getCheckNO = null;
+                $scope.countdown = 60;
+                $('#getCheckNO').addClass('disable');
+                var myTime = setInterval(function () {
+                    $scope.countdown--;
+                    $scope.$digest();
+                }, 1000);
+
+                setTimeout(function () {
+                    clearInterval(myTime);
+                    $scope.countdown = "获取验证码";
+                    $scope.$digest();
+                    $scope.getCheckNO = getCheckNOFun;
+                    $('#getCheckNO').removeClass('disable');
+                }, 61000);
+            }
+
+            $scope.countdown = "获取验证码";
+            $scope.getCheckNO = getCheckNOFun;
+        }
 
 
         //为了产生星星
