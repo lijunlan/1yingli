@@ -8,6 +8,7 @@ package cn.yiyingli.Servlet;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -99,10 +100,10 @@ public class CheckoutServlet extends HttpServlet {
 			return;
 		}
 		// 由后台插入相关数据
-		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0", order.getServiceTitle());
+		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0",  URLEncoder.encode(order.getServiceTitle(), "UTF-8"));
 		// 货物id，这里填写的是导师id
 		checkoutDetails.put("L_PAYMENTREQUEST_0_NUMBER0", order.getTeacher().getId().toString());
-		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0", "Onemile :" + order.getServiceTitle());
+		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0", "Onemile:" + URLEncoder.encode(order.getServiceTitle(), "UTF-8"));
 		checkoutDetails.put("L_PAYMENTREQUEST_0_QTY0", "1");
 		// 商品价格
 		float price = order.getMoney();
