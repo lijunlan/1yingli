@@ -5,109 +5,42 @@
     <title>控制面板</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="css/controlPanel.css" rel="stylesheet" type="text/css"/>
     <link href="css/personal_common.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="css/jquery-ui.css">
+    <link href="css/controlPanel.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="css/bottom.css">
     <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
     <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
-    <style>
-    @media (max-width: 768px){
-    	.g-hd{
-    		display: none;
-    	}
-    	.top-nav{
-    		display: none;
-    	}
-    	.mobile-header{
-            position: relative;
-    		display: block;
-    		height: 50px;
-    		line-height: 38px;
-    		background: #33495f;
-    		color: #fff;
-    		z-index: 999;
-    		text-align: center;
-    		display: block !important;
-        }
-        .left{
-            float: left;
-            width: 40px;
-            height: 40px;
-            background-image: url('img/01.png');
-            background-repeat: no-repeat;
-            margin-top: 7px;
-            margin-left: 5px;
-            cursor: pointer;
-        }
-        .right{
-            float: right;
-            width: 40px;
-            height: 40px;
-            background-image: url('img/02.png');
-            background-repeat: no-repeat;
-            margin-top: 7px;
-            margin-right: 5px;
-            cursor: pointer;
-        }
-        .center{
-            width: 40%;
-            height: 40px;
-            display: inline-block;
-            padding-left: 10%;
-        }
-        .content-left{
-        	display: none;
-        }
-        .content{
-        	width: 100%;
-        }
-        .content-container{
-        	min-width: 200px;
-        }
-        .content-right{
-        	width: 90%;
-        	padding: 0 5%;
-        }
-        .right-top{
-        	width: 99%;
-    		background-color: #fff;
-    		border-radius: 8px;
-    		border: 0;
-        }
-        .right-content{
-        	width: 100%;
-        	padding: 0;
-        	background: inherit;
-        }
-        .right-content-item{
-        	width: 99%;
-        	border: 1px solid #FFF;
-        	border-bottom: inherit !important;
-        	margin-top: 10px;
-        	background: #FFF;
-        	border-radius: 8px;
-        	min-height: 100px;
-        }
-        .right-content-item-p{
-        	width: 90%;
-        }
-        .right-top-item-link-span{
-        	color: #000;
-        }
-    }
-    </style>
 </head>
 <body>
+        <input type="checkbox" id="le"/>
+        <ul class="sidenav">
+            <div class="home"><a href="home.html"><b>首页</b></a></div>
+            <li><a href="theme.html">留学领航</a></li>
+            <li><a href="theme_01.html">求职就业</a></li>
+            <li><a href="theme_03.html">创业助力</a></li>
+            <li><a href="theme_04.html">校园生活</a></li>
+            <li><a href="theme_05.html">猎奇分享</a></li>
+            <!-- <li><a href="#"><b>Logout</b></a></li> -->
+        </ul>
+        <input type="checkbox" id="ri"/>
+        <ul class="sidenav1">
+            <li><a href="#"><b>首页</b></a></li>
+            <li><a href="#"><b>留学领航</b></a></li>
+            <li><a href="#"><b>求职就业</b></a></li>
+            <li><a href="#"><b>创业助力</b></a></li>
+            <li><a href="#"><b>校园生活</b></a></li>
+            <li><a href="#"><b>猎奇分享</b></a></li>
+            <!-- <li><a href="#"><b>Logout</b></a></li> -->
+        </ul>
+<section>
 	<nav class="mobile-header" style="display: none;"> 
-        <div class="left">
-        </div>
+        <label for="le" class="left"><img src="img/01.png" style="width:20px;height:20px;"></label>
         <form class="center">
-        	<input type="text" placeholder="搜人名、话题" style="width:60%;height:30px;margin-top:8px;border-bottom-left-radius: 18px;border-top-left-radius: 18px;padding-left:8px;float:left;">
-        	<button style="width:35px;;height:33px;float:left;margin-top:9px;border-bottom-right-radius: 18px;border-top-right-radius: 18px;background-color: #56bbe8;border: 0;"><img src="img/03.png"></button>
+            <input type="text" placeholder="搜人名、话题" style="width:60%;height:20px;margin-top:8px;border-bottom-left-radius: 18px;border-top-left-radius: 18px;padding-left:8px;float:left;">
+            <button style="width:35px;;height:23px;float:left;margin-top:9px;border-bottom-right-radius: 18px;border-top-right-radius: 18px;background-color: #56bbe8;border: 0;"><img src="img/03.png"></button>
         </form>
-        <div class="right">
-        </div>
+        <label for="ri" class="right"><img src="img/02.png" style="width:20px;height:20px;"></label>
     </nav>
     <div class="g-hd"></div>
 
@@ -161,6 +94,7 @@
     </div>
     <div class="contact"></div>
     <div class="footer"></div>
+</section>
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script type="text/javascript" src="js/jquery.json-2.4.min.js"></script>
