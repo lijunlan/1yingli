@@ -104,7 +104,7 @@ link(rel="styleSheet" href="pages/main/main.css")
             .field#confirm
                 h3 验证码
                     span *
-                input(ng-model="params.checkNO")
+                input(ng-model="params.checkNo")
                 .button#getCheckNO(ng-click="getCheckNO()") {{countdown}}
             .field
                 h3 微信号
@@ -134,5 +134,31 @@ link(rel="styleSheet" href="pages/main/main.css")
                 textarea.small(placeholder='你近期方便咨询的时间，此时间仅供参考，具体时间请与导师协商后确定' ng-model="params.selectTime")
             .field
                 h3 优惠码
-                textarea.line(placeholder='10位优惠序号')
-        .button 确认预约
+                textarea.line(placeholder='10位优惠序号' ng-model="voucher")
+        .button(ng-click="confirmOrder()") 确认预约
+    .box#step3
+        .content
+            h1 订单已成功，等待付款
+            p 详情可登陆 www.1yingli.cn查询
+        .button(ng-click="toPay()") 去付款
+    .box#step4
+        .header
+            img.close(src='http://image.1yingli.cn/img/register_close.png' ng-click="closeFrame()")
+        .content
+            h1 确认付款，请选择您的支付方式
+            .select
+                input(type="radio" ng-model="payType" value=1)
+                img(src="http://image.1yingli.cn/img/pay_01.png")
+            .select
+                input(type="radio" ng-model="payType" value=2)
+                img(src="http://image.1yingli.cn/img/pay_02.png")
+        .button(ng-click="pay()") 确认付款
+        .button#canclePay(ng-click="closeFrame()") 放弃支付
+    .box#step5
+         .content
+             h1 您确认要付款吗
+          form(action="http://service.1yingli.cn/yiyingliService/Alipay" target="_blank" method="post")
+              input(type="hidden" ng-model="orderId" name="oid")
+              input(type="hidden" ng-model="uid" name="uid")
+              button.button(type="submit") 确认支付
+

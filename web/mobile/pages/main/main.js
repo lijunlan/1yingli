@@ -139,18 +139,18 @@ app.controller('MainController', ['$scope', 'HttpService', '$routeParams', '$loc
                 }
             };
         }
-        
+
         $scope.params = {
             question: "",
             userIntroduce: "",
-            checkNO: "",
-            teacherId: "",
+            checkNo: "",
+            teacherId: $routeParams.tid,
             selectTime: "",
             name: "",
-            phone: "",
             email: "",
             contact: ""
         };
+        $scope.voucher = "";
 
 
         //预约流程控制
@@ -202,7 +202,34 @@ app.controller('MainController', ['$scope', 'HttpService', '$routeParams', '$loc
                     alert("请输入方便的时间");
                     return;
                 }
+                if ($scope.voucher != "") {
+                    $scope.params.voucher = $scope.voucher
+                }
+                HttpService.post("order", "createOrderWithoutLogin", $scope.params, function (data) {
+                    $scope.uid = data.uid;
+                    $scope.orderId = data.orderId;
+                });
+                $('#step2').css('display','none');
+                $('#step3').css('display','block');
+            };
+
+            $scope.toPay = function() {
+                $('#step3').css('display','none');
+                $('#step4').css('display','block');
+            };
+
+            $scope.payType = 0;
+            $scope.pay = function() {
+                if($scope.payType == 0) {
+                    alert("请选择支付方式");
+                    return
+                }
+                if($scope.payType == 1) {
+                    $('#step4').css('display','none');
+                    $('#step5').css('display','block');
+                }
             }
+
         }
 
         //获取验证码

@@ -353,7 +353,7 @@
     right: 0;
     padding: 5% 10%;
     box-sizing: border-box;
-    display: none;
+    /*display: none;*/
 }
 
 .iframe .box {
@@ -405,6 +405,10 @@
     position: relative;
     top: 2px;
     left: 2px;
+}
+
+#step1 {
+    display: none;
 }
 
 #step1 .content h1 {
@@ -504,4 +508,67 @@
     border-radius: 5px;
     background: #56bbe8;
     color: white;
+}
+
+#step3 .content h1 {
+    text-align: center;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 26px;
+}
+
+#step3 .content p {
+    text-align: center;
+    line-height: 26px;
+    color: #999999;
+}
+
+#step4 {
+    display: none;
+}
+
+#step4 .header {
+    height: 10px;
+}
+
+#step4 .content h1 {
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 26px;
+}
+
+#step4 .select {
+    text-align: center;
+    position: relative;
+}
+
+#step4 .select img {
+    padding-left: 20px;
+    width: 50%;
+    height: 50%;
+}
+
+#step4 .select input {
+    position: absolute;
+    top: 50%;
+    margin-top: -6px;
+}
+
+#step4 #canclePay {
+    background: #aaaaaa;
+}
+
+#step5 {
+    display: none;
+}
+
+#step5 .content h1 {
+    text-align: center;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+#step5 button{
+    border: hidden;
 }
