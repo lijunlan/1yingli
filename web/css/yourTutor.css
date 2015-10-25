@@ -282,6 +282,7 @@
         height: 45px;
         line-height: 45px;
         margin: 0 auto;
+        display: block !important;
     }
     .right-top-item{
         width: 150px;
@@ -333,6 +334,21 @@
     }
     .mark{
         z-index: 999 !important;
+    }
+    #fpay{
+        float: right !important;
+        margin: 30px 10px 0 0 !important;
+        left: 0;
+        position: static;
+    }
+    #fnopay{
+        float: right !important;
+        margin: 30px 10px 0 0 !important;
+        left: 0;
+        position: static;
+    }
+    #pay{
+        z-index: 9999 !important;
     }
 }
 
@@ -886,7 +902,9 @@ width:520px;height:35px;border:1px solid #eeeeee;margin: 0;overflow-y: auto;over
 .quest3{
     font-size:16px;font-weight: bolder;
 }
-
+.right-top{
+    display: none;
+}
 
 
 
