@@ -50,7 +50,7 @@ public class IOSRegisterService extends MsgService {
 			setResMsg(MsgUtil.getErrorMsg("username or password is wrong"));
 			return;
 		}
-		
+
 		// TODO check No
 		CheckNo no = getCheckNoService().query(username);
 		long time = Calendar.getInstance().getTimeInMillis();
@@ -72,17 +72,18 @@ public class IOSRegisterService extends MsgService {
 			setResMsg(MsgUtil.getErrorMsg("error"));
 			return;
 		}
-		if(!CheckUtil.checkPassword(password)){
+		if (!CheckUtil.checkPassword(password)) {
 			setResMsg(MsgUtil.getErrorMsg("BAD PASSWROD!"));
 			return;
 		}
 		password = MD5Util.MD5(password);
 		User user = new User();
-		user.setLikeTeacherNumber((long) 0);
+		user.setLikeTeacherNumber(0L);
+		user.setOrderNumber(0L);
 		user.setUsername(username);
 		user.setNickName(nickName);
-		user.setReceiveCommentNumber((long) 0);
-		user.setSendCommentNumber((long) 0);
+		user.setReceiveCommentNumber(0L);
+		user.setSendCommentNumber(0L);
 		if (CheckUtil.checkMobileNumber(username)) {
 			user.setPhone(username);
 		} else {

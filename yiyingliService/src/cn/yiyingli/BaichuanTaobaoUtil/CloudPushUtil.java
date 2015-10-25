@@ -18,7 +18,7 @@ public class CloudPushUtil {
 	private static final String appkey = "23226220";
 	private static final String secret = "32462bfecf3b9a01d3b89441f5a9eefd";
 	private static final String url = "http://gw.api.taobao.com/router/rest";
-
+ 
 	private static String array2str(String[] array) {
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < array.length; i++) {

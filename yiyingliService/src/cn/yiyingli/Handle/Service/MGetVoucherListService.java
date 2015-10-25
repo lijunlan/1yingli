@@ -69,7 +69,10 @@ public class MGetVoucherListService extends MsgService {
 			map.put("used", v.getUsed());
 			map.put("id", v.getId());
 			map.put("money", v.getMoney());
-			map.put("userId", v.getUseOrder().getOrderNo());
+			if(v.getUseOrder()==null){
+				map.put("userId","");
+			}else{
+			map.put("userId", v.getUseOrder().getOrderNo());}
 			toSend.add(map.finishByJson());
 		}
 		setResMsg(MsgUtil.getSuccessMap().put("data",Json.getJson(toSend)).finishByJson());

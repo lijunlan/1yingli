@@ -48,10 +48,11 @@ public class GetNotificationService extends MsgService {
 			return;
 		}
 		if (getData().get("page") != null) {
+			long count = getNotificationService().querySumNo(user.getId());
 			int page = 0;
 			SuperMap toSend = MsgUtil.getSuccessMap();
+			toSend.put("count", count);
 			if (getData().get("page").equals("max")) {
-				long count = getNotificationService().querySumNo(user.getId());
 				if (count % NotificationService.PAGE_SIZE_INT > 0)
 					page = (int) (count / NotificationService.PAGE_SIZE_INT) + 1;
 				else
@@ -92,7 +93,7 @@ public class GetNotificationService extends MsgService {
 				return;
 			}
 			Notification notification = getNotificationService().query(nid, false);
-			if(notification==null){
+			if (notification == null) {
 				setResMsg(MsgUtil.getErrorMsg("notification is not existed"));
 				return;
 			}
