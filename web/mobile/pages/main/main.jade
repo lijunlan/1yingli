@@ -1,0 +1,164 @@
+link(rel="styleSheet" href="pages/main/main.css")
+.header
+    .bg
+        img.headBg(src='http://image.1yingli.cn/img/person_bg.png')
+        .bgFold
+    .want
+        img(src="http://image.1yingli.cn/img/heart.png")
+        | {{teacher.likeNo}}人想见
+    .photo
+        span
+            img(ng-src="{{teacher.iconUrl}}")
+    .info
+        | {{teacher.name}}
+        p {{teacher.simpleinfo}}
+        .category
+            .img(ng-repeat="num in tips")
+                img(ng-src='{{tip_img_url}}{{$index + 1}}.png' ng-class="{'on': num.val == 1}" )
+                p {{num.text}}
+.content
+    .topic
+        span 话题
+        span.right {{teacher.price | currency:'￥'}}元/ {{teacher.serviceTime}}小时
+
+    div#service
+    .fold#fold1
+    .more(ng-click="loadMore('#service','#fold1', '#more1','160')")
+        span#more1 显示更多
+    .about
+        h1 关于 Ta
+        | {{teacher.introduce}}
+    .fold#fold2
+    .more(ng-click="loadMore('.about','#fold2', '#more2','170')")
+        span#more2 显示更多
+    .check
+        .icon(ng-repeat="item in check")
+            img(ng-src="{{item.img}}")
+            p {{item.text}}
+    .exprence
+        h1 个人履历
+        .item(ng-repeat="item in studyExprence")
+            p.school {{item.schoolName}} {{item.major}} {{item.degree}}
+            p.time {{item.startTime}}-{{item.endTime}}
+        .item(ng-repeat="item in workExprence")
+            p.school {{item.companyName}} {{item.position}}
+            p.time {{item.startTime}}-{{item.endTime}}
+
+.comment
+    h1 {{commentInfo.count}}条评价
+    .item(ng-repeat="item in comment")
+        img(ng-src="{{item.iconUrl}}" ng-if="item.iconUrl")
+        img(src="http://image.1yingli.cn/img/img.png" ng-if="!item.iconUrl")
+        span.name {{item.nickName}}
+        span.time {{item.createTime | shortTime}}
+        span.score
+            img(ng-repeat="star in getNumber(item.score) track by $index" src="http://image.1yingli.cn/img/light_star_for_tutor_assess.png")
+        p {{item.content}}
+        p.topic 参与话题：{{item.serviceTitle}}
+    .pager(ng-if="commentInfo.count > 0")
+        img(src="http://image.1yingli.cn/img/lastPage.png" ng-click="lastPage()")
+        | {{page}}
+        img(src="http://image.1yingli.cn/img/nextPage.png" ng-click="nextPage()")
+
+
+.date
+    .left 可约时间：
+        span 双方协商
+    .right 常住区域：
+        span {{teacher.address}}
+    .left 咨询方式：
+        img(ng-src="{{talkWayUrl[item]}}" ng-repeat="item in talkWay")
+    .right 本周可预约次数：
+        span {{teacher.timeperweek}}次
+
+    .button(ng-click='date()') 预约Ｔa
+
+.relate
+    h1 相关话题
+    .item(ng-repeat="item in recommend" ng-click="changeTeache(item.teacherId)")
+        .left
+            img(ng-src="{{item.url}}")
+            span {{item.name}}
+        .middle
+            p.topic 话题：{{item.topic}}
+            span.bottom  {{item.simpleInfo}}
+        .want
+            img(src="http://image.1yingli.cn/img/heart.png")
+            | {{item.likenumber}}人想见
+
+.iframe#iframe
+    .box#step1
+        .header
+            img.close(src='http://image.1yingli.cn/img/register_close.png' ng-click="closeFrame()")
+        .content
+            h1 预约导师需要预留以下信息
+            h2 请保证您的信息准确，以方便导师联系
+            .field
+                h3 姓名
+                    span *
+                input(ng-model="params.name")
+            .field
+                h3 邮箱
+                    span *
+                input(ng-model="params.email")
+            .field#confirm
+                h3 验证码
+                    span *
+                input(ng-model="params.checkNo")
+                .button#getCheckNO(ng-click="getCheckNO()") {{countdown}}
+            .field
+                h3 微信号
+                    span *
+                input(ng-model="params.contact")
+        .button(ng-click="nextStep()") 下一步
+
+    .box#step2
+        .header
+            img.icon(ng-src="{{teacher.iconUrl}}")
+            img.close(src='http://image.1yingli.cn/img/register_close.png' ng-click="closeFrame()")
+            .title
+                h2 {{teacher.name}} {{teacher.simpleinfo}}
+                p {{teacher.price | currency:'￥'}}元 / {{teacher.serviceTime}}小时
+        .content
+            .field
+                h3 请教的问题（30到300字）
+                    span *
+                textarea(placeholder='例如：关于留学申请、关于求职、关于创业...' ng-model="params.question")
+            .field
+                h3 介绍自己的当前情况（30到300字）
+                    span *
+                textarea(placeholder='简单介绍一下自己的情况，例如：所在院校，专业...' ng-model="params.userIntroduce")
+            .field
+                h3 方便的时间
+                    span *
+                textarea.small(placeholder='你近期方便咨询的时间，此时间仅供参考，具体时间请与导师协商后确定' ng-model="params.selectTime")
+            .field
+                h3 优惠码
+                textarea.line(placeholder='10位优惠序号' ng-model="voucher")
+        .button(ng-click="confirmOrder()") 确认预约
+    .box#step3
+        .content
+            h1 订单已成功，等待付款
+            p 详情可登陆 www.1yingli.cn查询
+        .button(ng-click="toPay()") 去付款
+    .box#step4
+        .header
+            img.close(src='http://image.1yingli.cn/img/register_close.png' ng-click="closeFrame()")
+        .content
+            h1 确认付款，请选择您的支付方式
+            .select
+                input(type="radio" ng-model="payType" value=1)
+                img(src="http://image.1yingli.cn/img/pay_01.png")
+            .select
+                input(type="radio" ng-model="payType" value=2)
+                img(src="http://image.1yingli.cn/img/pay_02.png")
+        .button(ng-click="pay()") 确认付款
+        .button#canclePay(ng-click="closeFrame()") 放弃支付
+    .box#step5
+         .content
+             h1 您确认要付款吗
+          form(action="http://service.1yingli.cn/yiyingliService/Alipay" target="_blank" method="post")
+              input(type="hidden" ng-model="orderId" name="oid")
+              input(type="hidden" ng-model="uid" name="uid")
+              button.button(type="submit") 确认支付
+

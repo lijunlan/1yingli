@@ -1,0 +1,39 @@
+html, body, form, ol, ul, li, div, p, dl, dt, dd, h1, h2, h3, h4, h5, h6, table, th, td, a, span, header {
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+    -webkit-text-size-adjust: none;
+    color: #333333;
+}
+
+button, input, select, textarea {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+a, a:hover {
+    text-decoration: none;
+
+}
+
+html {
+    font-size: 10px;
+    min-height: 100%;
+    font-family: "Microsoft YaHei";
+    background: #FFF;
+    color: #333333;
+}
+
+body {
+    font-size: 1.2rem;
+}
+
+h1 {
+    font-size: 18px;
+    color: #333333;
+    line-height: 50px;
+}
+
+
+
+
