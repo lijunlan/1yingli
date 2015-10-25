@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -131,6 +130,7 @@ public class ReturnServlet extends HttpServlet {
 			if (isSet(request.getParameter("page")) && request.getParameter("page").equals("return")) {
 				// FIXME - The method 'request.getServerName()' must be
 				// sanitized before being used.
+				@SuppressWarnings("rawtypes")
 				HashMap results = pp.confirmPayment(checkoutDetails, request.getServerName());
 				request.setAttribute("payment_method", "");
 				String strAck = results.get("ACK").toString().toUpperCase();
