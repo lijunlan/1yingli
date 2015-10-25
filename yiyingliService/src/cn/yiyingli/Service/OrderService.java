@@ -107,7 +107,7 @@ public interface OrderService {
 
 	public static final int PAGE_SIZE_INT = 12;
 
-	void save(Order order);
+	String save(Order order);
 
 	Long saveAndReturnId(Order order);
 
