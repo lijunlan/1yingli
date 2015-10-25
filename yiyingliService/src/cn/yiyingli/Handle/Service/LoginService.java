@@ -61,22 +61,26 @@ public class LoginService extends MsgService {
 			return;
 		}
 		if (password.equals(user.getPassword())) {
-			String _UUID = UUID.randomUUID().toString();
-			getUserMarkService().save(String.valueOf(user.getId()), _UUID);
-			user.setLastLoginTime("" + Calendar.getInstance().getTimeInMillis());
-			getUserService().update(user);
-			if (user.getTeacherState() == UserService.TEACHER_STATE_ON_SHORT) {
-				setResMsg("{\"uid\":\"" + _UUID + "\",\"nickName\":\"" + user.getNickName() + "\",\"iconUrl\":\""
-						+ (user.getIconUrl() != null ? user.getIconUrl() : "") + "\",\"state\":\"success\",\"teacherId\":\""
-						+ user.getTeacher().getId() + "\"}");
-			} else {
-				setResMsg("{\"uid\":\"" + _UUID + "\",\"nickName\":\"" + user.getNickName() + "\",\"iconUrl\":\""
-						+ (user.getIconUrl() != null ? user.getIconUrl() : "") + "\",\"state\":\"success\"}");
-			}
-			TimeTaskUtil.sendTimeTask("remove", "userMark",
-					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 12) + "", _UUID);
+			returnUser(user);
 		} else {
 			setResMsg(MsgUtil.getErrorMsg("password is not accurate"));
 		}
+	}
+
+	private void returnUser(User user) {
+		String _UUID = UUID.randomUUID().toString();
+		getUserMarkService().save(String.valueOf(user.getId()), _UUID);
+		user.setLastLoginTime("" + Calendar.getInstance().getTimeInMillis());
+		getUserService().update(user);
+		if (user.getTeacherState() == UserService.TEACHER_STATE_ON_SHORT) {
+			setResMsg("{\"uid\":\"" + _UUID + "\",\"nickName\":\"" + user.getNickName() + "\",\"iconUrl\":\""
+					+ (user.getIconUrl() != null ? user.getIconUrl() : "") + "\",\"state\":\"success\",\"teacherId\":\""
+					+ user.getTeacher().getId() + "\"}");
+		} else {
+			setResMsg("{\"uid\":\"" + _UUID + "\",\"nickName\":\"" + user.getNickName() + "\",\"iconUrl\":\""
+					+ (user.getIconUrl() != null ? user.getIconUrl() : "") + "\",\"state\":\"success\"}");
+		}
+		TimeTaskUtil.sendTimeTask("remove", "userMark",
+				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 12) + "", _UUID);
 	}
 }

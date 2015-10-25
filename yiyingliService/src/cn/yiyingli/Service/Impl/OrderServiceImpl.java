@@ -46,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void save(Order order) {
+	public String save(Order order) {
 		long id = getOrderDao().saveWithUserNumber(order, order.getCreateUser());
 		order.setOrderNo("" + Calendar.getInstance().get(Calendar.YEAR) + new Random().nextInt(10)
 				+ new Random().nextInt(10) + new Random().nextInt(10) + (100000000L + id));
@@ -54,6 +54,7 @@ public class OrderServiceImpl implements OrderService {
 		TimeTaskUtil.sendTimeTask("change", "order",
 				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
 				new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+		return  order.getOrderNo();
 	}
 
 	@Override
