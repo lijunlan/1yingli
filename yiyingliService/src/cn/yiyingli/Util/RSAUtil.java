@@ -25,7 +25,7 @@ import java.security.spec.RSAPublicKeySpec;
 
 import javax.crypto.Cipher;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.util.io.pem.PemObject;
 import org.bouncycastle.util.io.pem.PemWriter;
 
@@ -52,8 +52,9 @@ public class RSAUtil {
 		}
 	}
 
-	//public static final String RSAKEY_BASE_PATH = "C:/Users/Administrator/Desktop/RSAKey/";
-	public static String RSAKEY_BASE_PATH = "/RSAKey/";
+	// public static final String RSAKEY_BASE_PATH =
+	// "C:/Users/Administrator/Desktop/RSAKey/";
+	public static String RSAKEY_BASE_PATH = ConfigurationXmlUtil.getInstance().getSettingData().get("rsaPath");
 	private static final String RSAKeyStore = "RSAKey.txt";
 
 	public static void main(String[] args) {
@@ -81,11 +82,11 @@ public class RSAUtil {
 			// byte[] encode = encrypt(keyPair.getPublic(),
 			// "1234567890".getBytes());
 			// System.out.println(encode[encode.length-1]);
-			//String decode = decryptStrIOS(
-			//		"0ba24587b2ab0bb613ff3ec2fd6b8ec4e3b8890cd010086778aec9cdfed8278f9556d4a65fee79b27e4529985c598826574172069f05532ed4b34ccdeccdb262eb2f0e2d1c30f575365f5efc26aeb380845b958b4c541b6ef6961846d4cfcb912ca90eed4741f25b4c134301cbc9672d7c130e037b7fddff6eba4fd108bbac21",
-			//		RSAKEY_BASE_PATH);
-			//System.out.println(decode.length());
-			//System.out.println(decode);
+			// String decode = decryptStrIOS(
+			// "0ba24587b2ab0bb613ff3ec2fd6b8ec4e3b8890cd010086778aec9cdfed8278f9556d4a65fee79b27e4529985c598826574172069f05532ed4b34ccdeccdb262eb2f0e2d1c30f575365f5efc26aeb380845b958b4c541b6ef6961846d4cfcb912ca90eed4741f25b4c134301cbc9672d7c130e037b7fddff6eba4fd108bbac21",
+			// RSAKEY_BASE_PATH);
+			// System.out.println(decode.length());
+			// System.out.println(decode);
 			// byte[] bb = {00,(byte) 0xff};
 			// System.out.println(DES3Util.byte2hexClean(bb));
 			// System.out.println(((RSAPublicKey)keyPair.getPublic()).getModulus());
@@ -296,10 +297,10 @@ public class RSAUtil {
 			keySingleInstance = getKeyPair(basePath);
 		}
 		byte[] de_result = decrypt(keySingleInstance.getPrivate(), en_result);
-		
+
 		StringBuffer sb = new StringBuffer();
 		sb.append(new String(de_result));
-		String[] t = sb.reverse().toString().split(new String(new byte[] {0x00}));
+		String[] t = sb.reverse().toString().split(new String(new byte[] { 0x00 }));
 		// 返回解密的字符串
 		return t[0];
 	}

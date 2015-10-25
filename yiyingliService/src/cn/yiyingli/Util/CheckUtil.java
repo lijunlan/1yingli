@@ -6,7 +6,8 @@ import java.util.regex.Pattern;
 public class CheckUtil {
 
 	public static void main(String[] args) {
-		System.out.println(checkPassword("3456931"));
+		// System.out.println(checkPassword("3456931"));
+		System.out.println(checkGlobalPhoneNumber(""));
 	}
 
 	/**
@@ -21,6 +22,19 @@ public class CheckUtil {
 			String check = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
 			Pattern regex = Pattern.compile(check);
 			Matcher matcher = regex.matcher(email);
+			flag = matcher.matches();
+		} catch (Exception e) {
+			flag = false;
+		}
+		return flag;
+	}
+
+	public static boolean checkGlobalPhoneNumber(String number) {
+		boolean flag = false;
+		try {
+			Pattern regex = Pattern.compile(
+					"^\\s*\\+?\\s*(\\(\\s*\\d+\\s*\\)|\\d+)(\\s*-?\\s*(\\(\\s*\\d+\\s*\\)|\\s*\\d+\\s*))*\\s*$");
+			Matcher matcher = regex.matcher(number);
 			flag = matcher.matches();
 		} catch (Exception e) {
 			flag = false;

@@ -23,7 +23,11 @@ import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.WarnUtil;
-
+/**
+ * 支付宝交易通知
+ * @author lp
+ *
+ */
 @SuppressWarnings("serial")
 public class TradeNotifyProcessServlet extends HttpServlet {
 

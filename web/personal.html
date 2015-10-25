@@ -8,124 +8,62 @@
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <link href="css/personal.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="css/jquery-ui.css"/>
+    <link rel="stylesheet" href="css/bottom.css"/>
     <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
     <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
 
-    <style>
-    	@media (max-width: 768px){
-            .content-box{
-            	/*display: none;*/
-            }
-            .personal-bg{
-            	min-height: 10em;
-
-            }
-            .personal-header{
-            	min-width: 20em;
-            }
-            .footer{
-            	min-width: 20em
-            }
-            #wximg{
-            	display: none;
-            }
-            #company{
-            	width: 100% !important;
-            	text-align:center !important;
-            	margin-left: 0px !important;
-            }
-            .footerc{
-            	width: 100% !important;
-            }
-            .number{
-            	width: 100% !important;
-            }
-            .content{
-            	width: 100%;
-            }
-            .content-left{
-            	width: 90%;
-                margin-left:5%;
-            }
-            .content-left-person{
-            	/*display: none;*/
-            }
-            .content-left-topic{
-            	width: 100%;
-            }
-            .content-left-topic h1 {
-                font-size: 100%;
-                font-weight: bold;
-            }
-            .content-left-about{
-            	width: 100%;
-            }
-            .content-left-ident{
-            	width: 100%;
-            }
-            .content-left-ident ul {
-                margin: 10px 0 0 0;
-            }
-            .content-left-ident ul li{
-            	width: 20%;
-            	margin-right: 0px;
-            }
-            .content-left-resume{
-            	width: 100%;
-            }
-            .content-left-assess{
-            	width: 100%;
-            }
-            .assess-content{
-            	width: 100%;
-            }
-            .content-right{
-            	width: 100%;
-            }
-            .content-box{
-            	min-width: 0px;
-            }
-            .contact-about{
-            	width: 100%;
-            	margin-left: 2rem;
-            }
-            .about-block{
-            	width: 80%;
-            	background: rgba(0,0,0,0);
-            	border: 1px solid #AFAFAF;
-            }
-            .about-person-content{
-            	float: left;
-            	width: 55%;
-            }
-            .about-where{
-            	width: 100%;
-            }
-
-        }
-    </style>
-
 </head>
 <body>
-	<!-- <div id="contolShow" style="display:none;">
-    <div class="personal-header" id="personal-header" style="position: relative;">
-        <img src="http://image.1yingli.cn/img/person_bg.png" class="personal-bg"/>
-        <div class="header" id="header">
-            <div class="header-left" id="header-left">
-                <a href="home.html">
-                    <img src="http://image.1yingli.cn/img/logo1.png" class="logo" id="logo" alt=""/>
-                </a>
-                <form action="" id="search-box" method="get">
-                    <input type="text" id="search-input" placeholder="搜索：学校 / 导师 / 创业" style="padding-left: 7px; border-radius:8px;" onKeyDown="KeyDown()"/>
-                    <img src="http://image.1yingli.cn/img/search_icon.png" alt="" id="search-img" onClick="searchByInput();" style="margin-left:10px;cursor:pointer;"/>
-                </form>
-            </div>
-            <div class="header-left" id="header-right">
-                 <ul class="nav-left-ul" id="nav-right"></ul>
-            </div>
-        </div>
-        <div style="background:url(http://image.1yingli.cn/img/shadow.png);width: 100%;height: 95px; position: absolute; bottom: -3px;min-width: 1096px;"></div>
-    </div> -->
+    <input type="checkbox" id="le"/>
+        <ul class="sidenav">
+            <div class="home"><a href="home.html"><b>首页</b></a></div>
+            <li><a href="theme.html">留学领航</a></li>
+            <li><a href="theme_01.html">求职就业</a></li>
+            <li><a href="theme_03.html">创业助力</a></li>
+            <li><a href="theme_04.html">校园生活</a></li>
+            <li><a href="theme_05.html">猎奇分享</a></li>
+            <!-- <li><a href="#"><b>Logout</b></a></li> -->
+        </ul>
+        <input type="checkbox" id="ri"/>
+        <ul class="sidenav1">
+            <li><a href="#"><b>首页</b></a></li>
+            <li><a href="#"><b>留学领航</b></a></li>
+            <li><a href="#"><b>求职就业</b></a></li>
+            <li><a href="#"><b>创业助力</b></a></li>
+            <li><a href="#"><b>校园生活</b></a></li>
+            <li><a href="#"><b>猎奇分享</b></a></li>
+            <!-- <li><a href="#"><b>Logout</b></a></li> -->
+        </ul>
+        
+<section>
+	<!-- <div id="contolShow" style="display:none;"> -->
+	<nav class="mobile-header" style="display: none;"> 
+    <label for="le" class="left"><img src="img/01.png" style="width:20px;height:20px;"></label>
+    <form class="center">
+        <input type="text" placeholder="搜人名、话题" style="width:60%;height:20px;margin-top:8px;border-bottom-left-radius: 18px;border-top-left-radius: 18px;padding-left:8px;float:left;">
+        <button style="width:35px;;height:23px;float:left;margin-top:9px;border-bottom-right-radius: 18px;border-top-right-radius: 18px;background-color: #56bbe8;border: 0;"><img src="img/03.png"></button>
+    </form>
+    <label for="ri" class="right"><img src="img/02.png" style="width:20px;height:20px;"></label>
+    </nav>
+    	<div class="personal-header" id="personal-header" style="position: relative;">
+        	<img src="http://image.1yingli.cn/img/person_bg.png" class="personal-bg"/>
+        	<div class="header" id="header">
+            	<div class="header-left" id="header-left">
+                	<a href="home.html">
+                    	<img src="http://image.1yingli.cn/img/logo1.png" class="logo" id="logo" alt=""/>
+                	</a>
+                	<form action="" id="search-box" method="get">
+                    	<input type="text" id="search-input" placeholder="搜索：学校 / 导师 / 创业" style="padding-left: 7px; border-radius:8px;" onKeyDown="KeyDown()"/>
+                    	<img src="http://image.1yingli.cn/img/search_icon.png" alt="" id="search-img" onClick="searchByInput();" style="margin-left:10px;cursor:pointer;"/>
+                	</form>
+            	</div>
+            	<div class="header-left" id="header-right">
+                	<ul class="nav-left-ul" id="nav-right"></ul>
+            	</div>
+        	</div>
+        	
+        	<div style="background:url(http://image.1yingli.cn/img/shadow.png);width: 100%;height: 95px; position: absolute; bottom: -3px;"></div>
+    	</div>
 
     <div class="content-box" id="content-box">
         <div class="content" id="content">
@@ -179,6 +117,9 @@
                             　　
                         </p>
                     </div>
+                    <div class="fold1" style="display: block;"></div>
+                    <div class="open" id="open1" style="display:none">点击展开</div>
+                    <div class="close" id="close1" style="display:none">关闭</div>
                 </div>
                 <div class="content-left-about" id="content-left-about">
                     <h1>关于TA</h1>
@@ -187,6 +128,9 @@
                         <p class="about-content-p" id="tintroduce" style="text-align: justify;">
                         </p>
                     </div>
+                    <div class="fold2" style="display: block;"></div>
+                    <div class="open" id="open2" style="display:none">点击展开</div>
+                    <div class="close" id="close2" style="display:none">关闭</div>
                 </div>
                 <div class="content-left-ident" id="content-left-ident">
                     <ul  style="list-style-type:none;">
@@ -247,6 +191,9 @@
                             <li id='li33' style='float:left; width:39px; height:35px; margin-left:5px;'></li>
                         </ul>
                     </div>
+                    <div class="contact-her-appoint" style="dispaly:none">
+                    	预约方式：双方协商
+                    </div>
                     <div class="contact-her-address">
                         <img class="contact-icon" src="http://image.1yingli.cn/img/address_icon.png" alt=""/>
                         <p>常驻地区：</p>
@@ -281,52 +228,55 @@
 	</div>
     
 	<div id="shelter"></div>
-
+</section>
     <!-- 弹出层 -->
-    <div id="frame" style="background:#FFF; width:620px; min-height:300px; margin-left: -310px; margin-top:-150px; position: fixed; top: 50%; left: 50%; border-radius: 12px; display:none">
-        <div style="font-size:20px; font-weight:bold; position:absolute; top:14%; left:12%; ">预约前，请填写自己的个人信息，以确保导师联系您</div>
-        <div style="font-size:12px; color:red ; position:absolute; top:25%; left:18%; ">您预留的联系方式是导师唯一可以联系您的方式，请确认无误后再提交！</div>
-        <div style="width:500px; height:30px; position:absolute; top:35%; left:10%">
-            <div style="font-size:14px; font-weight:bold; position:absolute; top:3px;">真实姓名</div>
-            <input id="pname" type="text" style="width:300px; height:25px; font-size:14px; line-height: 25px; border-radius:12px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:12%; " placeholder="您的姓名">
-            <div id="warnname" style=" color:red; position:absolute; left:77.5%;display:none;">请填写真实姓名</div>
+    <div id="frame">
+        <div id="pc1">预约前，请填写自己的个人信息，以确保导师联系您</div>
+        <div id="ph1">预约前，请填写自己的个人信息</div>
+        <div id="ph2">确保导师联系您</div>
+        <div id="ph3">请确认预留信息正确，否则导师将联系不到您</div>
+        <div id="pc2">您预留的联系方式是导师唯一可以联系您的方式，请确认无误后再提交！</div>
+        <div class="name1">
+            <div id="name1">真实姓名</div>
+            <input id="pname" type="text" placeholder="您的姓名">
+            <div id="warnname">请填写真实姓名</div>
         </div>
-        <div style="width:500px; height:30px; position:absolute; top:47%; left:10%">
-            <div style="font-size:14px;  font-weight:bold; position:absolute; top:3px;">电话号码</div>
-            <input id="ptel" type="tel" style="width:300px; height:25px; font-size:14px; line-height: 25px; border-radius:12px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:12%;" placeholder="您的电话">
-            <div id="warntel" style=" color:red; position:absolute; top:4px; left:77.5%; display:none;">必填</div>
+        <div class="tel1">
+            <div id="tel1">电话号码</div>
+            <input id="ptel" type="tel" placeholder="您的电话">
+            <div id="warntel">必填</div>
         </div>
-        <div style="width:500px; height:30px; position:absolute; top:59%; left:12%">
-            <div style="font-size:14px;  font-weight:bold; position:absolute; top:3px;">邮箱</div>
-            <input id="pemil" type="email" style="width:300px; height:25px; font-size:14px; line-height: 25px; border-radius:12px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:9.5%;" placeholder="您的邮箱">
-            <div id="warnemil" style=" color:red; position:absolute; top:4px; left:75%; display:none;">必填</div>
+        <div class="email1">
+            <div id="email1">邮箱</div>
+            <input id="pemail" type="email" placeholder="您的邮箱">
+            <div id="warnemail">必填</div>
         </div>
-        <div style="width:500px; height:30px; position:absolute; top:71%; left:12%">
-            <div style="font-size:14px; font-weight:bold; position:absolute; top:3px;">微信</div>
-            <input id="pweixin" type="text" style="width:300px; height:25px; font-size:14px; line-height: 25px; border-radius:12px; border: 1px solid #b2b2b2; padding:0px 10px; position:absolute; left:9.5%;" placeholder="您的微信">
-            <div id="warnweixin" style="font-family:lanting; color:red; position:absolute; top:4px; left:75%; display:none;">必填</div>
+        <div class="weixin">
+            <div id="weixin">微信</div>
+            <input id="pweixin" type="text" placeholder="您的微信">
+            <div id="warnweixin">必填</div>
         </div>
-        <div style="width:500px; height:30px; position:absolute; top:84%; left:50%">
-            <div id="close" style="width:100px; height:25px; border-radius:15px; border: 1px solid #b2b2b2; position:absolute; left:10%; cursor: pointer;">
-                <div style="font-size:16px; position:absolute; left:30% ;top:5%;">取 消</div>
+        <div class="cancel">
+            <div id="close">
+                <div class="cel">取 消</div>
             </div>
-            <div id="confirm" style="width:100px; height:25px; border-radius:15px; color:#FFF; background:rgb(86, 187, 232); position:absolute; left:35%; cursor: pointer;">
-                <div style="font-size:16px; position:absolute; left:30% ;top:5%;">确 定</div>
+            <div id="confirm">
+                <div class="firm">确 定</div>
             </div>
         </div>
     </div>
 
-    <div id="frame1" style="background:#FFF; width:640px; min-height:780px; margin-left:-320px; position: absolute; top: 50%; left: 50%; border-radius: 8px; display:none">
-        <img id="close1" src="http://image.1yingli.cn/img/register_close.png" style="position: absolute; right:0;cursor: pointer;">
-        <img id="ticonUrl1" src="http://image.1yingli.cn/img/img.png" style="position:absolute; top:40px; left:40px; width:125px;height:125px;border-radius:50%"/>
-        <div id="companyName1" style="font-size:22px; position:absolute; top:90px; left:180px;"></div>
-        <div id="name" style="font-size:20px;font-family:lanting; position:absolute; top:120px; left:180px;"></div>
-        <div style="font-size:12px; position:absolute; top:127px; left:250px;">24小时内回复</div>
-        <p id="sprice1" style="position:absolute; right:40px; top:135px; font-size:20px;">
+    <div id="frame1">
+        <img id="close1" src="http://image.1yingli.cn/img/register_close.png">
+        <img id="ticonUrl1" src="http://image.1yingli.cn/img/img.png"/>
+        <div id="companyName1"></div>
+        <div id="name"></div>
+        <div class="reply">24小时内回复</div>
+        <p id="sprice1">
             价格：0元/1小时
             <a href="" id="rent">预约</a>
         </p>
-        <div class="order-step" style="position:absolute; top:185px; left:60px;">
+        <div class="order-step">
             <div class="yuan yuan-01">
                 <span>1</span>
             </div>
@@ -347,31 +297,31 @@
                 <span>5</span>
             </div>
         </div>
-        <ul class="order-step-text" style="position:absolute; top:205px; left:60px;">
+        <ul class="order-step-text">
             <li>学员申请</li>
             <li>导师确认</li>
             <li>协商时间</li>
             <li>服务进行</li>
             <li>双方评价</li>
         </ul>
-        <div style="font-size:16px; position:absolute; top:250px; left:40px;">告诉我你要请教的问题?（30到500字之间）<span id="length1" style="color:red;display:none;">字数超过限制</span></div>
-        <form style="position:absolute; top:272px; left:40px;">
-            <textarea id="pquestion" style="width:530px; height:70px; padding: 10px; font-size:16px; outline:none; border:solid 1px #b2b2b2; resize : none;" placeholder="例如：关于留学申请、关于求职、关于创业..." maxlength="500"></textarea>
+        <div class="say1">告诉我你要请教的问题?<span class="word">（500以内）</span><span id="length1">字数超过限制</span></div>
+        <form class="form1">
+            <textarea id="pquestion" placeholder="例如：关于留学申请、关于求职、关于创业..." maxlength="500"></textarea>
         </form>
-        <div style="font-size:16px; position:absolute; top:380px; left:40px;">介绍自己当前情况?（30到500字之间）<span id="length2" style="color:red;display:none">字数超过限制</span></div>
-        <form style="position:absolute; top:402px; left:40px;">
-            <textarea id="pIntroduce" style="width:530px; height:70px; padding: 10px; font-size:16px; outline:none; border:solid 1px #b2b2b2; resize : none;" placeholder="简单介绍一下自己的情况，例如：所在院校，专业..." maxlength="500" ></textarea>
+        <div class="say2">介绍自己当前情况?<span class="word">（500以内）</span><span id="length2">字数超过限制</span></div>
+        <form class="form2">
+            <textarea id="pIntroduce" placeholder="简单介绍一下自己的情况，例如：所在院校，专业..." maxlength="500" ></textarea>
         </form>
-        <div style="font-size:16px; position:absolute; top:510px; left:40px;">告诉我你什么时间方便?</div>
-        <form style="position:absolute; top:532px; left:40px;">
-            <textarea id="ptime" style="width:530px; height:70px; padding: 10px; font-size:16px; outline:none; border:solid 1px #b2b2b2; resize : none;" placeholder="你近期方便咨询的时间，例如：9月18号10：00（请以北京时间为准,可填多个）" ></textarea>
+        <div class="say3">告诉我你什么时间方便?</div>
+        <form class="form3">
+            <textarea id="ptime" placeholder="你近期方便咨询的时间，例如：9月18号10：00（请以北京时间为准,可填多个）" ></textarea>
         </form>
-        <div style="font-size:16px; position:absolute; top:640px; left:40px;"><div style="background-image:url('http://image.1yingli.cn/img/discount_01.png');background-repeat:no-repeat;width: 30px;height: 25px;float: left;"></div>优惠<span style="font-size:12px;color:red;">（优惠码是系统以短信或邮箱的形式给您发出的优惠号码）</span></div>
-        <form style="position:absolute; top:672px; left:40px;">
-            <input id="discount" class="searchBox" style="padding-top: 5px; padding-bottom: 5px; font-size:16px; border:solid 1px #b2b2b2; width: 348px; " placeholder="10位优惠序号" maxlength="10"></input><span id="disco" style="color:red;"></span>
+        <div class="small"><div class="smallimg"></div>优惠<span class="smallnu">（优惠码是系统以短信或邮箱的形式给您发出的优惠号码）</span></div>
+        <form class="form4">
+            <input id="discount" class="searchBox" placeholder="10位优惠序号" maxlength="10"></input><span id="disco"></span>
         </form>
 
-        <div id="psend" style="width:80px; height:20px; position:absolute; bottom:5%; right:12%; background:#56bbe8; border-radius: 9px; font-siza:16px; text-align:center; color:#FFF;cursor: pointer;">确认预约</div>
+        <div id="psend">确认预约</div>
                     
     </div>
 
