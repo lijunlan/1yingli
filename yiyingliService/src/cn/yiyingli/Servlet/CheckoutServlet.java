@@ -119,7 +119,7 @@ public class CheckoutServlet extends HttpServlet {
 		checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM", request.getParameter("oid"));
 		checkoutDetails.put("REQCONFIRMSHIPPING", "0");
 		checkoutDetails.put("NOSHIPPING", "1");
-		checkoutDetails.put("L_PAYMENTREQUEST_0_ITEMCATEGORY0", "Digital");
+		
 		checkoutDetails.put("PAYMENTREQUEST_0_CURRENCYCODE", "USD");
 		checkoutDetails.put("PAYMENTREQUEST_0_PAYMENTACTION", "Sale");
 
