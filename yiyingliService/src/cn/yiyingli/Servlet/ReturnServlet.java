@@ -271,7 +271,7 @@ public class ReturnServlet extends HttpServlet {
 		}
 		*/
 		try {
-			response.sendRedirect(testPage);
+			response.sendRedirect(page);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

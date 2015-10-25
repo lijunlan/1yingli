@@ -66,7 +66,7 @@ public class CheckoutServlet extends HttpServlet {
 		// String cancelURL = request.getScheme() +
 		// "://www.1yingli.cn/yourTutor.html";
 		// 当取消交易的时候，返回地址
-		String cancelURL = testPage;
+		String cancelURL = page;
 		Map<String, String> checkoutDetails = new HashMap<String, String>();
 		checkoutDetails = setRequestParams(request);
 		// 检查前台传来的数据
@@ -133,6 +133,7 @@ public class CheckoutServlet extends HttpServlet {
 		session = request.getSession();
 		Map<String, String> nvp = paypal.callShortcutExpressCheckout(checkoutDetails, returnURL, cancelURL);
 		session.setAttribute("checkoutDetails", checkoutDetails);
+		System.out.println(nvp);
 		String strAck = nvp.get("ACK").toString().toUpperCase();
 		if (strAck != null && (strAck.equals("SUCCESS") || strAck.equals("SUCCESSWITHWARNING"))) {
 			session.setAttribute("TOKEN", nvp.get("TOKEN").toString());
@@ -181,7 +182,7 @@ public class CheckoutServlet extends HttpServlet {
 		 * catch block e.printStackTrace(); } }
 		 */
 		try {
-			response.sendRedirect(testPage);
+			response.sendRedirect(page);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
