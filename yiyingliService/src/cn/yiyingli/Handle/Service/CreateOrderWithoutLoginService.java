@@ -43,7 +43,7 @@ public class CreateOrderWithoutLoginService extends MsgService {
 	private NotificationService notificationService;
 
 	private VoucherService voucherService;
-	
+
 	private CheckNoService checkNoService;
 
 	public UserMarkService getUserMarkService() {
@@ -108,7 +108,7 @@ public class CreateOrderWithoutLoginService extends MsgService {
 		return getData().containsKey("question") && getData().containsKey("userIntroduce")
 				&& getData().containsKey("checkNo") && getData().containsKey("teacherId")
 				&& getData().containsKey("selectTime") && getData().containsKey("name")
-				&& getData().containsKey("phone") && getData().containsKey("email") && getData().containsKey("contact")
+				&& getData().containsKey("email") && getData().containsKey("contact")
 				|| getData().containsKey("voucher");
 	}
 
@@ -118,11 +118,10 @@ public class CreateOrderWithoutLoginService extends MsgService {
 
 		extensionInformation = "";
 		String email = (String) getData().get("email");
-		String phone = (String) getData().get("phone");
 		String contact = (String) getData().get("contact");
 		String name = (String) getData().get("name");
 		String checkNo = (String) getData().get("checkNo");
-		
+
 		Teacher teacher = getTeacherService().query(Long.valueOf((String) getData().get("teacherId")), false);
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsg("teacher is not existed"));
@@ -157,22 +156,12 @@ public class CreateOrderWithoutLoginService extends MsgService {
 		User user = getUserService().query(email, false);
 		if (user != null) {
 			// 邮箱有注册
-			createOrder(email, name, phone, contact, user, teacher);
+			createOrder(email, name, "", contact, user, teacher);
 		} else {
-			if (!(CheckUtil.checkMobileNumber(phone))) {
-				setResMsg(MsgUtil.getErrorMsg("BAD PHONE NUMBER"));
-				return;
-			}
-			user = getUserService().query(phone, false);
-			if (user != null) {
-				// 手机有注册
-				createOrder(email, name, phone, contact, user, teacher);
-			} else {
-				// 从来没注册过
-				user = createUser(email, phone);
-				LogUtil.info("create a user and username is " + email, this.getClass());
-				createOrder(email, name, phone, contact, user, teacher);
-			}
+			// 从来没注册过
+			user = createUser(email, "");
+			LogUtil.info("create a user and username is " + email, this.getClass());
+			createOrder(email, name, "", contact, user, teacher);
 		}
 	}
 
