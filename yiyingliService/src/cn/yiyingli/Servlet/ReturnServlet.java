@@ -26,6 +26,8 @@ public class ReturnServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private String page = "http://www.1yingli.cn/yourTutor.html";
+	
+	private String testPage = "http://testweb.1yingli.cn/yourTutor.html";
 
 	private ApplicationContext applicationContext;
 
@@ -269,7 +271,7 @@ public class ReturnServlet extends HttpServlet {
 		}
 		*/
 		try {
-			response.sendRedirect(page);
+			response.sendRedirect(testPage);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

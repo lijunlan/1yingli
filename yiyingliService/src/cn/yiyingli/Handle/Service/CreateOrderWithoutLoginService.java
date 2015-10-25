@@ -1,8 +1,10 @@
 package cn.yiyingli.Handle.Service;
 
 import java.util.Calendar;
+import java.util.Map;
 import java.util.Random;
 
+import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.CheckNo;
 import cn.yiyingli.Persistant.Order;
@@ -224,7 +226,7 @@ public class CreateOrderWithoutLoginService extends MsgService {
 
 		SendMailUtil.sendMessage(email,
 				"尊敬的学员，您的导师预约订单已经创建。订单号" + order.getOrderNo() + "，请在24小时内完成支付，超时系统会自动取消订单。" + extensionInformation);
-
+		
 		setResMsg(MsgUtil.getSuccessMsg("create order successfully"));
 	}
 

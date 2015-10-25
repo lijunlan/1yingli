@@ -38,6 +38,8 @@ public class CheckoutServlet extends HttpServlet {
 	private static final long serialVersionUID = -2722761580200224133L;
 
 	private String page = "http://www.1yingli.cn/yourTutor.html";
+	
+	private String testPage = "http://testweb.1yingli.cn/yourTutor.html";
 
 	private ApplicationContext applicationContext;
 
@@ -59,11 +61,12 @@ public class CheckoutServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		PayPal paypal = new PayPal();
 		// Paypal调用的returnServlet
-		String returnURL = "http://service.1yingli.cn/yiyingliService/Return?page=return";
+		//String returnURL = "http://service.1yingli.cn/yiyingliService/Return?page=return";
+		String returnURL = "http://test.1yingli.cn/yiyingliService/Return?page=return";
 		// String cancelURL = request.getScheme() +
 		// "://www.1yingli.cn/yourTutor.html";
 		// 当取消交易的时候，返回地址
-		String cancelURL = "http://www.1yingli.cn/yourTutor.html";
+		String cancelURL = testPage;
 		Map<String, String> checkoutDetails = new HashMap<String, String>();
 		checkoutDetails = setRequestParams(request);
 		// 检查前台传来的数据
@@ -176,7 +179,7 @@ public class CheckoutServlet extends HttpServlet {
 		 * catch block e.printStackTrace(); } }
 		 */
 		try {
-			response.sendRedirect(page);
+			response.sendRedirect(testPage);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
