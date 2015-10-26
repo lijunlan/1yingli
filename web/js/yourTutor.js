@@ -1,20 +1,17 @@
 var list,i,con,orderId,cval,ppay,ptime,star,ass;
-//var uid = $.cookie('uid');
-var uid= "37382507-40d3-44bc-b5a1-54755ccfcd88";
+var uid = $.cookie('uid');
+var nickName = $.cookie('nickName');
+var iconUrl = $.cookie('iconUrl');
+
 $(document).ready(function(){    
-    /*var u = $.cookie('uid');
-    var n = $.cookie('nickName');
-    var i = $.cookie('iconUrl');
-    if(u==null||n==null||i==null){
-        self.location='login.html';
-        return;
+    if(!uid||!nickName){ self.location='login.html'; return; }
+    $("#nickName").html(nickName);
+    $("#bigNickName").html(iconUrl);
+    if(iconUrl!=""){
+        $("#iconUrl").attr("src",iconUrl);
+        $("#bigIcon").attr("src",iconUrl);
     }
-    $("#nickName").html(n);
-    $("#bigNickName").html(n);
-    if(i!=""){
-        $("#iconUrl").attr("src",i);
-        $("#bigIcon").attr("src",i);
-    }*/
+
     changePage(page);
 
     $(".yourTutor-lists").on( "click", "a.see", function(){
@@ -22,39 +19,35 @@ $(document).ready(function(){
         var oid = $(this).parent().parent().parent().find("#111").text();
         detail(oid);
     });
+
+    //支付方式单选按钮选择
+    $(".choose_pay_Alipay img").click(function(){
+        $("#alipay").click();
+    });
+    $(".choose_pay_paypal img").click(function(){
+        $("#paypal").click();
+    });
 });
 
 var totalPage = 1;
 var page = 1;
 function firstPage() {
-    if(page == 1) {
-        return;
-    } else {
-        changePage(1);
-    }
+    if(page != 1) { changePage(1) }
 }
 function nextPage(){
-    if(page >= totalPage) {
-        return;
-    } else {
-        page = page + 1;
+    if(page < totalPage) {
+        page ++;
         changePage(page);
     }
 }
 function lastPage(){
-    if(page <= 1) {
-        return;
-    } else {
-        page = page - 1;
+    if(page > 1) {
+        page -- ;
         changePage(page);
     }
 }
 function finalPage() {
-    if(page == totalPage) {
-        return;
-    } else {
-        changePage(totalPage);
-    }
+    if(page != totalPage) { changePage(totalPage); }
 }
 
 //获取总页数
@@ -75,7 +68,7 @@ function getTotalPage(){
             }
         }
     });
-    return 6;
+    return total;
 }
 
 //导师主页
@@ -246,8 +239,21 @@ function Situation(tid,i,orderId){
 function openshow(tid,i,orderId){
     switch (i){
         case 64:
+            //背景
             $(".mark").show();
-            $(".no1").slideDown().html("<p>订单已生成，请确认付款</p><p>请耐心等待，付款后导师会在24小时内确认</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian'></div><div class='yuan'><span>2</span></div><div class='xian'></div><div class='yuan'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='fpay' style='float:left; margin:30px 0 0 210px'>确认付款</button><button id='fnopay' style='float:left; margin:30px 0 0 50px;'>放弃支付</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
+            //订单查看
+            $(".no1").slideDown().html("<p>订单已生成，请确认付款</p><p>请耐心等待，付款后导师会在24小时内确认</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian'></div><div class='yuan'><span>2</span></div><div class='xian'></div><div class='yuan'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='choose_method' style='float:left; margin:30px 0 0 210px'>确认付款</button><button id='fnopay' style='float:left; margin:30px 0 0 50px;'>放弃支付</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
+            //取消
+            $(".Tutor_icon1").click(function(){
+                $(".no1").fadeOut();
+                $(".mark").hide();
+                $("#pay").fadeOut(); 
+            });
+            $("#fukuan").click(function(){
+                $(".no1").hide();
+                $(".mark").hide();
+                $("#pay").hide();
+            });
             $(".Tutor_icon").click(function(){
                 $(".no1").slideUp();
                 $(".mark").hide();
@@ -258,28 +264,29 @@ function openshow(tid,i,orderId){
                 $(".mark").hide();
                 $("#pay").slideUp();
             });
-            $("#fpay").click(function(){
-                var tuid = $.cookie('uid');
+            //选择支付方式页面
+            $("#choose_method").click(function(){
                 $(".no1").fadeOut();
-                $("#pay").fadeIn().html("<img class='Tutor_icon1' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/><div style='width: 100%;height: 40px;font-size: 20px;text-align: center;margin-top: 40px;'>您确认要付款么</div><input size='30' name='oid' value="+orderId+" style='display:none' /><input size='30' name='uid' value="+tuid+" style='display:none' /><button type='submit' style='width:80px;height:20px;font-size:16px;color:#FFF;background:#56bbe8;border-radius:8px;text-align:center;float:right;margin-right: 10%;border:0px;margin-top: 30px;cursor: pointer;' id='fukuan'>确认支付")
-                $(".Tutor_icon1").click(function(){
-                    $(".no1").fadeOut();
-                    $(".mark").hide();
-                    $("#pay").fadeOut(); 
-                });
-                $("#fukuan").click(function(){
-                    $(".no1").hide();
-                    $(".mark").hide();
-                    $("#pay").hide();
-                });
-            }) ;
+                $("#choose_pay_method").css("display", "block");
+            });
+            //付款方式选择事件
+            $("#fpay").click(function(){
+                $("#choose_pay_method").hide();
+                $("#pay").fadeIn();
+                $("input[name='oid']").val(orderId);
+                $("input[name='uid']").val(uid);
+                if($("input[name='paymethod']:checked").val() == 1){
+                    $("#pay").attr("action", "http://service.1yingli.cn/yiyingliService/Alipay");
+                } else {
+                    $("#pay").attr("action", "http://test.1yingli.cn/yiyingliService/Checkout");
+                }
+            });
             $("#fnopay").click(function(){
                 var order = orderId.toString(10);
                 $(".no1").hide();
                 $("#pay").hide();
                 nopay(order);
             });
-            
             break;
         case 128:
             $(".mark").show();
