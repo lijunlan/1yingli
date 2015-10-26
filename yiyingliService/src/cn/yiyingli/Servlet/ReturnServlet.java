@@ -202,7 +202,7 @@ public class ReturnServlet extends HttpServlet {
 						NotifyUtil.notifyTeacher(order.getTeacher().getPhone(),
 								order.getTeacher().getEmail(), "尊敬的导师，订单号为" + order.getOrderNo() + "的订单，用户("
 										+ order.getCustomerName() + ")已经付款，等待您的接受。",
-								order.getTeacher(), notificationService);
+								order.getTeacher(),notificationService);
 					} else {
 						// TODO:other case
 						LogUtil.error(

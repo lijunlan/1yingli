@@ -84,6 +84,7 @@ public class CreateApplicationFormService extends MsgService {
 		user.setEmail(mail);
 		user.setName(name);
 		teacher.setOnService(false);
+		teacher.setUsername(user.getUsername());
 		teacher.setAddress(address);
 		teacher.setName(name);
 		teacher.setEmail(mail);
