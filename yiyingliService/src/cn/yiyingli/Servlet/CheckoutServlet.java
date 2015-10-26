@@ -37,9 +37,10 @@ public class CheckoutServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -2722761580200224133L;
 
-	private String page = "http://www.1yingli.cn/yourTutor.html";
+	@SuppressWarnings("unused")
+	private static final String page = "http://www.1yingli.cn/yourTutor.html";
 	
-	private String testPage = "http://testweb.1yingli.cn/yourTutor.html";
+	private static final String testPage = "http://testweb.1yingli.cn/yourTutor.html";
 
 	private ApplicationContext applicationContext;
 
