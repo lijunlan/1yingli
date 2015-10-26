@@ -26,7 +26,7 @@ link(rel="styleSheet" href="pages/main/main.css")
     .more(ng-click="loadMore('#service','#fold1', '#more1','160')")
         span#more1 显示更多
     .about
-        h1 关于 Ta
+        h1 关于 TA
         | {{teacher.introduce}}
     .fold#fold2
     .more(ng-click="loadMore('.about','#fold2', '#more2','170')")
@@ -71,7 +71,7 @@ link(rel="styleSheet" href="pages/main/main.css")
     .right 本周可预约次数：
         span {{teacher.timeperweek}}次
 
-    .button(ng-click='date()') 预约Ｔa
+    .button(ng-click='date()') 预约TA
 
 .relate
     h1 相关话题
@@ -85,11 +85,12 @@ link(rel="styleSheet" href="pages/main/main.css")
         .want
             img(src="http://image.1yingli.cn/img/heart.png")
             | {{item.likenumber}}人想见
-
 .iframe#iframe
     .box#step1
         .header
             img.close(src='http://image.1yingli.cn/img/register_close.png' ng-click="closeFrame()")
+            .pic
+                img(src="http://image.1yingli.cn/img/share-edit.png")
         .content
             h1 预约导师需要预留以下信息
             h2 请保证您的信息准确，以方便导师联系
@@ -137,28 +138,43 @@ link(rel="styleSheet" href="pages/main/main.css")
                 textarea.line(placeholder='10位优惠序号' ng-model="voucher")
         .button(ng-click="confirmOrder()") 确认预约
     .box#step3
-        .content
-            h1 订单已成功，等待付款
-            p 详情可登陆 www.1yingli.cn查询
-        .button(ng-click="toPay()") 去付款
-    .box#step4
         .header
             img.close(src='http://image.1yingli.cn/img/register_close.png' ng-click="closeFrame()")
         .content
             h1 确认付款，请选择您的支付方式
-            .select
-                input(type="radio" ng-model="payType" value=1)
+            .select(ng-click="payType = 0")
+                input(type="radio" ng-model="payType" value=0)
                 img(src="http://image.1yingli.cn/img/pay_01.png")
-            .select
-                input(type="radio" ng-model="payType" value=2)
-                img(src="http://image.1yingli.cn/img/pay_02.png")
+            .select(ng-click="payType = 1")
+                input(type="radio" ng-model="payType" value=1)
+                img.paypal(src="http://image.1yingli.cn/img/pay_02.png")
         .button(ng-click="pay()") 确认付款
-        .button#canclePay(ng-click="closeFrame()") 放弃支付
-    .box#step5
-         .content
-             h1 您确认要付款吗
-          form(action="http://service.1yingli.cn/yiyingliService/Alipay" target="_blank" method="post")
-              input(type="hidden" ng-model="orderId" name="oid")
-              input(type="hidden" ng-model="uid" name="uid")
-              button.button(type="submit") 确认支付
+        .button#canclePay(ng-click="refusePay()") 放弃支付
+    .box#step4
+        .content
+            h1 您确认要付款吗
+        form(action="" method="post")
+            input(type="hidden" value='{{orderId}}' name="oid")
+            input(type="hidden" value='{{uid}}' name="uid")
+            input(type="hidden" value='{{callback}}' name="callback")
+            button.button(type="submit") 确认支付
+    .box#step5-1
+        .content
+            .pic
+                img(src="http://image.1yingli.cn/img/share-pay-success.png")
+            h1 预约成功
+            p 详情可登陆 www.1yingli.cn查询
+        .button(ng-click="closeFrame()") 确定
+    .box#step5-2
+        .header
+            img.close(src='http://image.1yingli.cn/img/register_close.png' ng-click="closeFrame()")
+        .content
+            .pic
+                img(src="http://image.1yingli.cn/img/share-order-success.png")
+            h1 订单已成功，等待付款
+            p 详情可登陆 www.1yingli.cn查询
+        .button(ng-click="toPay()") 去付款
+.blackBg
+
+
 
