@@ -12,78 +12,87 @@
     <link href="css/bottom.css" rel="stylesheet"/>
     <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
     <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
+
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery.json-2.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/person_header.js"></script>
+	<script type="text/javascript" src="js/yourTutor.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
 </head>
 
 <body>
-
-        <input type="checkbox" id="le"/>
-        <ul class="sidenav">
-            <div class="home"><a href="home.html"><b>首页</b></a></div>
-            <li><a href="theme.html">留学领航</a></li>
-            <li><a href="theme_01.html">求职就业</a></li>
-            <li><a href="theme_03.html">创业助力</a></li>
-            <li><a href="theme_04.html">校园生活</a></li>
-            <li><a href="theme_05.html">猎奇分享</a></li>
-            <!-- <li><a href="#"><b>Logout</b></a></li> -->
-        </ul>
-        <input type="checkbox" id="ri"/>
-        <ul class="sidenav1">
-            <li><a href="controlPanel.html"><b>消息中心</b></a></li>
-            <li><a href="yourTutor.html"><b>我的导师</b></a></li>
-            <!-- <li><a href="#"><b>求职就业</b></a></li>
-            <li><a href="#"><b>创业助力</b></a></li>
-            <li><a href="#"><b>校园生活</b></a></li>
-            <li><a href="#"><b>猎奇分享</b></a></li> -->
-            <!-- <li><a href="#"><b>Logout</b></a></li> -->
-        </ul>
+<input type="checkbox" id="le"/>
+<ul class="sidenav">
+    <div class="home"><a href="home.html"><b>首页</b></a></div>
+    <li><a href="theme.html">留学领航</a></li>
+    <li><a href="theme_01.html">求职就业</a></li>
+    <li><a href="theme_03.html">创业助力</a></li>
+    <li><a href="theme_04.html">校园生活</a></li>
+    <li><a href="theme_05.html">猎奇分享</a></li>
+</ul>
+<input type="checkbox" id="ri"/>
+<ul class="sidenav1">
+    <li><a href="controlPanel.html"><b>消息中心</b></a></li>
+    <li><a href="yourTutor.html"><b>我的导师</b></a></li>
+</ul>
 <section>
-<div class="g-hd"></div>
-<div class="top-nav"></div>
-<nav class="mobile-header" style="display: none;"> 
-    <label for="le" class="left"><img src="img/01.png" style="width:20px;height:20px;"></label>
-    <form class="center">
-        <input type="text" placeholder="搜人名、话题" style="width:60%;height:20px;margin-top:8px;border-bottom-left-radius: 18px;border-top-left-radius: 18px;padding-left:8px;float:left;">
-        <button style="width:35px;;height:23px;float:left;margin-top:9px;border-bottom-right-radius: 18px;border-top-right-radius: 18px;background-color: #56bbe8;border: 0;"><img src="img/03.png"></button>
-    </form>
-    <label for="ri" class="right"><img src="img/02.png" style="width:20px;height:20px;"></label>
-</nav>
-<div class="content-container">
-    <div class="content">
-        <div class="content-left">
-            <div class="content-left-01">
-                <img id="bigIcon" src="http://image.1yingli.cn/img/img.png" alt=""/>
-                <p id="bigNickName"></p>
-            </div>
-        </div>
+	<div class="g-hd"></div>
+	<div class="top-nav"></div>
+	<nav class="mobile-header" style="display: none;"> 
+	    <label for="le" class="left"><img src="img/01.png" style="width:20px;height:20px;"></label>
+	    <form class="center">
+	        <input type="text" placeholder="搜人名、话题" style="width:60%;height:20px;margin-top:8px;border-bottom-left-radius: 18px;border-top-left-radius: 18px;padding-left:8px;float:left;">
+	        <button style="width:35px;;height:23px;float:left;margin-top:9px;border-bottom-right-radius: 18px;border-top-right-radius: 18px;background-color: #56bbe8;border: 0;"><img src="img/03.png"></button>
+	    </form>
+	    <label for="ri" class="right"><img src="img/02.png" style="width:20px;height:20px;"></label>
+	</nav>
+	<div class="content-container">
+	    <div class="content">
+	        <div class="content-left">
+	            <div class="content-left-01">
+	                <img id="bigIcon" src="http://image.1yingli.cn/img/img.png" alt=""/>
+	                <p id="bigNickName"></p>
+	            </div>
+	        </div>
 
-        <div class="yourTutor">
-            <ul class="right-top">
-                <li class="right-top-item">
-                    <a class="right-top-item-link" href="javascript:void(0);">
-                        <img class="right-top-item-link-icon" src="img/04.png"/>
-                        <span class="right-top-item-link-span" >(我的导师)</span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="yourTutor-lists"></ul>
-            <div class="page">
-                <a id="btnStart" href="javascript:firstPage()"><img src="http://image.1yingli.cn/img/firstPage.png"></a>
-                <a id="btnLast" href="javascript:lastPage()" style="padding: 0px;"><img src="http://image.1yingli.cn/img/lastPage.png"></a>
-                <a id="btnNext" href="javascript:nextPage();" style="padding: 0px;"><img src="http://image.1yingli.cn/img/nextPage.png"></a>
-                <a id="btnEnd" href="javascript:finalPage();"><img src="http://image.1yingli.cn/img/finalPage.png"></a>
-            </div>
-        </div>
-    </div>
-</div>
+	        <div class="yourTutor">
+	            <ul class="right-top">
+	                <li class="right-top-item">
+	                    <a class="right-top-item-link" href="javascript:void(0);">
+	                        <img class="right-top-item-link-icon" src="img/04.png"/>
+	                        <span class="right-top-item-link-span" >(我的导师)</span>
+	                    </a>
+	                </li>
+	            </ul>
+	            <ul class="yourTutor-lists"></ul>
+	            <div class="page">
+	                <a id="btnStart" href="javascript:firstPage()"><img src="http://image.1yingli.cn/img/firstPage.png"></a>
+	                <a id="btnLast" href="javascript:lastPage()" style="padding: 0px;"><img src="http://image.1yingli.cn/img/lastPage.png"></a>
+	                <a id="btnNext" href="javascript:nextPage();" style="padding: 0px;"><img src="http://image.1yingli.cn/img/nextPage.png"></a>
+	                <a id="btnEnd" href="javascript:finalPage();"><img src="http://image.1yingli.cn/img/finalPage.png"></a>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 
-<div class="no1"></div>
-<!-- 个人详细订单信息 -->
-<div class="details"></div>
-<!-- 页面的尾部 -->
-<div class="footer"></div>
+	<div class="no1"></div>
+	<!-- 个人详细订单信息 -->
+	<div class="details"></div>
+	<!-- 页面的尾部 -->
+	<div class="footer"></div>
 </section>
+
 <div id="refuse" style="display:none;"></div>
-<form id="pay" name=alipayment action="http://service.1yingli.cn/yiyingliService/Alipay" method=post target="_blank" oid style="width: 400px;height: 150px;padding: 20px 10px;border-radius: 8px;position: fixed;left: 50%;top: 50%;margin-top:-120px;margin-left: -200px;z-index: 150;background: white;display:none;">
+
+<!-- 支付界面 -->
+<form id="pay" name=alipayment action="" method=post target="_blank" oid style="">
+    <img class='Tutor_icon1' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/>
+    <div>您确认要付款么</div>
+    <input size='30' name='oid' type="hidden" />
+    <input size='30' name='uid' value="uid" type="hidden" />
+    <button type='submit' id='fukuan'>确认支付</button>
 </form>
 
 <div id="assess" style="width: 627px;height: 200px;padding: 30px 30px 20px 30px;border-radius: 10px;background: white;position: fixed;left: 50%;top: 50%;margin-top: -100px;margin-left:-313.5px;z-index: 100;display:none;">
@@ -116,33 +125,24 @@
     <div style="position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;">提交的信息有误</div>
     <a href="yourTutor.html" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">返回</a>
 </div>
-<div style="width: 442px;height: 414px;padding: 30px;border-radius: 10px;background: white;position: fixed;left: 50%;top: 50%;margin-top: -160px;margin-left: -313.5px;display: none;z-index: 100;display: none;">
-	<p style="font-size:18px;width:450px;text-align:center;margin:0px;">确认付款，请选择您支付的方式</p>
-	<div style="float:left;padding-top:20px;margin-top:40px;">
-		<input name="1" type="radio" value="" style="width:31px;height:31px;float:left;margin-left:120px;" />
-	</div>
-	<div style="float:left;margin-top:40px;">
-		<img src="http://image.1yingli.cn/img/pay_01.png">
-	</div>
-	<div style="float:left;padding-top:40px;margin-top:33px;">
-		<input name="1" type="radio" value="" style="width:31px;height:31px;float:left;margin-left:120px;"/>
-	</div>
-	<div style="float:left;margin-top:33px;">
-		<img src="http://image.1yingli.cn/img/pay_02.png">
-	</div>
-	<button style="float:left; margin:30px 0 0 120px;color: #000;width: 74px;height: 27px;line-height: 27px;text-align: center;font-size: 13px;border: 0;border-radius: 14px;cursor: pointer;">取消</button>
-	<button style="float:left; margin:30px 0 0 50px;width: 74px;height: 27px;line-height: 27px;text-align: center;background: #56bbe8;color: white;font-size: 13px;border: 0;border-radius: 14px;cursor: pointer;">确定</button>
-	<img class="Tutor_icon" src="http://image.1yingli.cn/img/schedule_close.png" alt="">
+
+<!-- 用户选择支付方式-->
+<div id="choose_pay_method">
+    <p>确认付款，请选择您支付的方式</p>
+    <div  class="choose_pay_Alipay">
+        <input name="paymethod" type="radio" id="alipay" value="1" checked="checked" />
+        <img src="http://image.1yingli.cn/img/pay_01.png">
+    </div>
+    <div class="choose_pay_paypal" >
+        <input name="paymethod" type="radio" id="paypal" value="2" />
+        <img src="http://image.1yingli.cn/img/pay_02.png">
+    </div>
+    <div class="choose_pay_button">
+        <button class="button1" onclick="closeChoose_pay_method();">取消</button>
+        <button class="button2" id="fpay">确定</button>
+    </div>
+    <img class="Tutor_icon" onclick="closeChoose_pay_method();" src="http://image.1yingli.cn/img/schedule_close.png"/>
 </div>
-
-<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="js/jquery.json-2.4.min.js"></script>
-<script type="text/javascript" src="js/jquery.cookie.js"></script>
-<script type="text/javascript" src="js/jquery-ui.js"></script>
-
-<script type="text/javascript" src="js/person_header.js"></script>
-<script type="text/javascript" src="js/yourTutor.js"></script>
-<script type="text/javascript" src="js/common.js"></script>
 
 </body>
 </html>

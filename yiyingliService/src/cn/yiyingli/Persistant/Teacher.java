@@ -34,6 +34,9 @@ public class Teacher {
 	@JoinColumn(name = "USER_ID", insertable = true, unique = true, updatable = true)
 	private User user;
 
+	@Column(name = "USERNAME", nullable = false, unique = true)
+	private String username;
+
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
@@ -519,6 +522,14 @@ public class Teacher {
 
 	public void setShowWeight16(Integer showWeight16) {
 		this.showWeight16 = showWeight16;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }
