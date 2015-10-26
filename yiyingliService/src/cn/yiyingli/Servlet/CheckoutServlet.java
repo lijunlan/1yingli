@@ -41,6 +41,8 @@ public class CheckoutServlet extends HttpServlet {
 	private static final String page = "http://www.1yingli.cn/yourTutor.html";
 	
 	private static final String testPage = "http://testweb.1yingli.cn/yourTutor.html";
+	
+	private static final String resultParameter = "?paymentResult=";
 
 	private ApplicationContext applicationContext;
 
@@ -157,7 +159,7 @@ public class CheckoutServlet extends HttpServlet {
 					+ ErrorSeverityCode;
 			LogUtil.error("After SetExpressCheckoutDetails from Paypal and ERROR INFO:" + errorString, this.getClass());
 			session.invalidate();
-			returnToOnemile(request, response);
+			returnToOnemile(resultParameter+"fail", response);
 
 		}
 	}
@@ -176,16 +178,9 @@ public class CheckoutServlet extends HttpServlet {
 		return (value != null && value.toString().length() != 0);
 	}
 
-	public void returnToOnemile(HttpServletRequest request, HttpServletResponse response) {
-		/*
-		 * RequestDispatcher dispatcher = request.getRequestDispatcher(page); if
-		 * (dispatcher != null) { try { dispatcher.forward(request, response); }
-		 * catch (ServletException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated
-		 * catch block e.printStackTrace(); } }
-		 */
+	public void returnToOnemile(String para, HttpServletResponse response) {
 		try {
-			response.sendRedirect(testPage);
+			response.sendRedirect(testPage+para);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

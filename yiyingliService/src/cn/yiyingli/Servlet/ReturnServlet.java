@@ -29,6 +29,8 @@ public class ReturnServlet extends HttpServlet {
 	private static final String page = "http://www.1yingli.cn/yourTutor.html";
 	
 	private static final String testPage = "http://testweb.1yingli.cn/yourTutor.html";
+	
+	private static final String resultParameter = "?paymentResult=";
 
 	private ApplicationContext applicationContext;
 
@@ -116,7 +118,7 @@ public class ReturnServlet extends HttpServlet {
 				LogUtil.error("After GetExpressCheckoutDetails from Paypal and ERROR INFO:" + errorString ,
 						this.getClass());
 				session.invalidate();
-				returnToOnemile(request, response);
+				returnToOnemile(resultParameter+"fail", response);
 				return;
 			}
 		}
@@ -154,7 +156,7 @@ public class ReturnServlet extends HttpServlet {
 							LogUtil.error("Return from Paypal and order is not exist. order id:" + oid,
 									this.getClass());
 							session.invalidate();
-							returnToOnemile(request, response);
+							returnToOnemile(resultParameter+"fail", response);
 							return;
 						}
 						// 检查订单款项是否正确
@@ -169,7 +171,7 @@ public class ReturnServlet extends HttpServlet {
 									+ Float.parseFloat(result.get("PAYMENTREQUEST_0_AMT")));
 							orderService.update(order);
 							session.invalidate();
-							returnToOnemile(request, response);
+							returnToOnemile(resultParameter+"fail", response);
 							return;
 						}
 						// 检查订单状态是否正确
@@ -181,7 +183,7 @@ public class ReturnServlet extends HttpServlet {
 											+ ", order has paid and maybe this is duplicate notify from Paypal",
 									this.getClass());
 							session.invalidate();
-							returnToOnemile(request, response);
+							returnToOnemile(resultParameter+"fail", response);
 							return;
 						}
 						if (!state.equals(cn.yiyingli.Service.OrderService.ORDER_STATE_NOT_PAID)) {
@@ -189,7 +191,7 @@ public class ReturnServlet extends HttpServlet {
 									this.getClass());
 							WarnUtil.sendWarnToCTO("Return from Paypal and order id:" + oid + ", state is wrong");
 							session.invalidate();
-							returnToOnemile(request, response);
+							returnToOnemile(resultParameter+"fail", response);
 							return;
 						}
 						// 订单貌似没有异常，因此根据Paypal信息处理订单
@@ -224,16 +226,16 @@ public class ReturnServlet extends HttpServlet {
 					LogUtil.error("After GetExpressCheckoutDetails from Paypal and ERROR INFO:" + errorString ,
 							this.getClass());
 					session.invalidate();
-					returnToOnemile(request, response);
+					returnToOnemile(resultParameter+"fail", response);
 					return;
 				}
 			}
 			request.setAttribute("result", result);
-			returnToOnemile(request, response);
+			returnToOnemile(resultParameter+"success", response);
 		} catch (Exception e) {
 			String errorString = e.getCause().getMessage();
 			request.setAttribute("error", errorString);
-			returnToOnemile(request, response);
+			returnToOnemile(resultParameter+"fail", response);
 		}
 	}
 
@@ -256,9 +258,9 @@ public class ReturnServlet extends HttpServlet {
 		return (value != null && value.toString().length() != 0);
 	}
 	
-	public void returnToOnemile(HttpServletRequest request, HttpServletResponse response){
+	public void returnToOnemile(String para, HttpServletResponse response){
 		try {
-			response.sendRedirect(testPage);
+			response.sendRedirect(testPage+para);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
