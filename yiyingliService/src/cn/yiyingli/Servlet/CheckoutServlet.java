@@ -37,10 +37,10 @@ public class CheckoutServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -2722761580200224133L;
 
-	@SuppressWarnings("unused")
-	private static final String page = "http://www.1yingli.cn/yourTutor.html";
+	//@SuppressWarnings("unused")
+	//private static final String page = "http://www.1yingli.cn/yourTutor.html";
 	
-	private static final String testPage = "http://testweb.1yingli.cn/yourTutor.html";
+	private static final String testPage = "http://www.1yingli.cn/yourTutor.html";
 	
 	private static final String resultParameter = "?paymentResult=";
 
@@ -65,7 +65,7 @@ public class CheckoutServlet extends HttpServlet {
 		PayPal paypal = new PayPal();
 		// Paypal调用的returnServlet
 		//String returnURL = "http://service.1yingli.cn/yiyingliService/Return?page=return";
-		String returnURL = "http://test.1yingli.cn/yiyingliService/Return?page=return";
+		String returnURL = "http://service.1yingli.cn/yiyingliService/Return?page=return";
 		// 当取消交易的时候，返回地址
 		String cancelURL = testPage;
 		Map<String, String> checkoutDetails = new HashMap<String, String>();

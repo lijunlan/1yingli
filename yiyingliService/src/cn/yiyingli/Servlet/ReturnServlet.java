@@ -25,10 +25,10 @@ import cn.yiyingli.Util.WarnUtil;
 public class ReturnServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	@SuppressWarnings("unused")
-	private static final String page = "http://www.1yingli.cn/yourTutor.html";
+	//@SuppressWarnings("unused")
+	//private static final String page = "http://www.1yingli.cn/yourTutor.html";
 	
-	private static final String testPage = "http://testweb.1yingli.cn/yourTutor.html";
+	private static final String testPage = "http://www.1yingli.cn/yourTutor.html";
 	
 	private static final String resultParameter = "?paymentResult=";
 
