@@ -84,7 +84,7 @@ function KeyDown1()
 }
 
 var config = {
-    base_url : "http://service.1yingli.cn/yiyingliService/manage"
+    base_url : "http://test.1yingli.cn/yiyingliService/manage"
 };
 
 
