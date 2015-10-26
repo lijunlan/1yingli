@@ -3,6 +3,7 @@ package cn.yiyingli.Util;
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 
+import cn.yiyingli.BaichuanTaobaoUtil.CloudPushUtil;
 import cn.yiyingli.Dao.NotificationDao;
 import cn.yiyingli.Persistant.Notification;
 import cn.yiyingli.Persistant.Teacher;
@@ -26,7 +27,12 @@ public class NotifyUtil {
 		if (CheckUtil.checkEmail(email)) {
 			SendMailUtil.sendMessage(email, message);
 		}
+		// web
 		sendNotification(user, notificationService, message);
+		// mobile
+		String[] usernames = { user.getUsername() };
+		CloudPushUtil.IOSpushMessageToAccount(usernames, message);
+		CloudPushUtil.IOSpushNoticeToAccount(usernames, message);
 		return true;
 	}
 
@@ -45,7 +51,12 @@ public class NotifyUtil {
 		if (CheckUtil.checkEmail(email)) {
 			SendMailUtil.sendMessage(email, m1);
 		}
+		// web
 		sendNotification(teacher, notificationService, m1);
+		// mobile
+		String[] usernames = { teacher.getUsername() };
+		CloudPushUtil.IOSpushMessageToAccount(usernames, message);
+		CloudPushUtil.IOSpushNoticeToAccount(usernames, message);
 		return true;
 	}
 
