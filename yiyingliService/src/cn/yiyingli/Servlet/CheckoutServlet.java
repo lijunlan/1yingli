@@ -132,6 +132,10 @@ public class CheckoutServlet extends HttpServlet {
 		session.invalidate();
 		session = request.getSession();
 		Map<String, String> nvp = paypal.callShortcutExpressCheckout(checkoutDetails, returnURL, cancelURL);
+		if(nvp==null){
+			returnMsg(response, MsgUtil.getErrorMsg("fail to go to PayPal, try again later"));
+			return;
+		}
 		session.setAttribute("checkoutDetails", checkoutDetails);
 		System.out.println(nvp);
 		String strAck = nvp.get("ACK").toString().toUpperCase();
