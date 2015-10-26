@@ -63,10 +63,8 @@ public class CheckoutServlet extends HttpServlet {
 		// Paypal调用的returnServlet
 		//String returnURL = "http://service.1yingli.cn/yiyingliService/Return?page=return";
 		String returnURL = "http://test.1yingli.cn/yiyingliService/Return?page=return";
-		// String cancelURL = request.getScheme() +
-		// "://www.1yingli.cn/yourTutor.html";
 		// 当取消交易的时候，返回地址
-		String cancelURL = page;
+		String cancelURL = testPage;
 		Map<String, String> checkoutDetails = new HashMap<String, String>();
 		checkoutDetails = setRequestParams(request);
 		// 检查前台传来的数据
@@ -133,7 +131,7 @@ public class CheckoutServlet extends HttpServlet {
 		session = request.getSession();
 		Map<String, String> nvp = paypal.callShortcutExpressCheckout(checkoutDetails, returnURL, cancelURL);
 		if(nvp==null){
-			returnMsg(response, MsgUtil.getErrorMsg("fail to go to PayPal, try again later"));
+			returnMsg(response, MsgUtil.getErrorMsg("fail to connect to PayPal, try again later"));
 			return;
 		}
 		session.setAttribute("checkoutDetails", checkoutDetails);
@@ -186,7 +184,7 @@ public class CheckoutServlet extends HttpServlet {
 		 * catch block e.printStackTrace(); } }
 		 */
 		try {
-			response.sendRedirect(page);
+			response.sendRedirect(testPage);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

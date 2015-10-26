@@ -112,7 +112,12 @@ public class AlipayServlet extends HttpServlet {
 		parms.put("_input_charset", AlipayConfig.input_charset);
 		parms.put("payment_type", AlipayConfig.payment_type);
 		parms.put("notify_url", AlipayConfig.notify_url);
-		parms.put("return_url", AlipayConfig.return_url);
+		// 判断是否使用默认的return_url
+		if (req.getParameter("callback") == null) {
+			parms.put("return_url", AlipayConfig.return_url);
+		} else {
+			parms.put("return_url", req.getParameter("callback"));
+		}
 		parms.put("out_trade_no", oid);
 		parms.put("subject", "【一英里】" + subject);
 		parms.put("total_fee", total_fee);
@@ -120,7 +125,7 @@ public class AlipayServlet extends HttpServlet {
 		parms.put("show_url", show_url);
 		parms.put("anti_phishing_key", anti_phishing_key);
 		parms.put("exter_invoke_ip", exter_invoke_ip);
-		// 过期时间 2h
+		// 过期时间 24h
 		parms.put("it_b_pay", "24h");
 
 		// PrintWriter out = resp.getWriter();

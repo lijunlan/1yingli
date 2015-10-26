@@ -256,22 +256,8 @@ public class ReturnServlet extends HttpServlet {
 	}
 	
 	public void returnToOnemile(HttpServletRequest request, HttpServletResponse response){
-		/*
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-		if (dispatcher != null) {
-			try {
-				dispatcher.forward(request, response);
-			} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		*/
 		try {
-			response.sendRedirect(page);
+			response.sendRedirect(testPage);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
