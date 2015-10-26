@@ -117,28 +117,28 @@ function ordern(){
     toSend.selectTime = $("#ptime").val();
     toSend.name = $("#pname").val();
     toSend.phone = $("#ptel").val();
-    toSend.email = $("#pemil").val();
+    toSend.email = $("#pemail").val();
     toSend.contact = $("#pweixin").val();
     $.ajax({
         cache : true,
         type : "POST",
         url : config.base_url,
         data : $.toJSON(toSend),
-            async : false,
-            error : function(request) {
-                    $(".mark").show();
-                    $("#box").show();
-                    },
-            success : function(data, textStatu) {
-                var json = eval("(" + data + ")");
-                if (json.state == "success") {
-                    $(".mark").show();
-                    $("#succ").show();
-                } else {
-                    $(".mark").show();
-                    $("#erro").show();
-                }
+        async : false,
+        error : function(request) {
+                $(".mark").show();
+                $("#box").show();
+                },
+        success : function(data, textStatu) {
+            var json = eval("(" + data + ")");
+            if (json.state == "success") {
+                $(".mark").show();
+                $("#succ").show();
+            } else {
+                $(".mark").show();
+                $("#erro").show();
             }
+        }
     });
 }
 
@@ -155,7 +155,7 @@ function ordery(){
     toSend.selectTime = $("#ptime").val();
     toSend.name = $("#pname").val();
     toSend.phone = $("#ptel").val();
-    toSend.email = $("#pemil").val();
+    toSend.email = $("#pemail").val();
     toSend.contact = $("#pweixin").val();
     toSend.voucher = $("#discount").val();
     $.ajax({

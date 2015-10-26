@@ -73,7 +73,6 @@ function getTotalPage(){
 
 //导师主页
 function changePage(p){
-    if(!uid){ return; }
     var toSend = new Object();
     toSend.style = "order";
     toSend.method = "getListByUser";
@@ -571,150 +570,150 @@ function openshow(tid,i,orderId){
 }
 
 function good(order){
-        var toSend = new Object();
-        toSend.style= "order";
-        toSend.method = "satisfyOrder";
-        toSend.uid = $.cookie('uid');
-        toSend.orderId = order;
-        $.ajax({
-        cache : true,
-        type : "POST",
-        url : config.base_url,
-        data : $.toJSON(toSend),
-            async : false,
-            error : function(request) {
-                        $(".mark").show();
-                        $("#box").show();
-                    },
-            success : function(data, textStatu) {
-                var json = eval("(" + data + ")");
-                if (json.state == "success") {
+    var toSend = new Object();
+    toSend.style= "order";
+    toSend.method = "satisfyOrder";
+    toSend.uid = uid;
+    toSend.orderId = order;
+    $.ajax({
+    cache : true,
+    type : "POST",
+    url : config.base_url,
+    data : $.toJSON(toSend),
+        async : false,
+        error : function(request) {
                     $(".mark").show();
-                    $("#succ").show();
-                } else {
-                    $(".mark").show();
-                    $("#erro").show();
-                }
+                    $("#box").show();
+                },
+        success : function(data, textStatu) {
+            var json = eval("(" + data + ")");
+            if (json.state == "success") {
+                $(".mark").show();
+                $("#succ").show();
+            } else {
+                $(".mark").show();
+                $("#erro").show();
             }
+        }
     });
 }
 
 function usend(stid,ass,order){
-        var toSend = new Object();
-        toSend.style= "user";
-        toSend.method = "commentTeacher";
-        toSend.orderId = order;
-        toSend.teacherId = stid;
-        toSend.score = star;
-        toSend.content = ass;
-        toSend.uid = $.cookie('uid');
-        $.ajax({
-        cache : true,
-        type : "POST",
-        url : config.base_url,
-        data : $.toJSON(toSend),
-            async : false,
-            error : function(request) {
-                        $(".mark").show();
-                        $("#box").show();
-                    },
-            success : function(data, textStatu) {
-                var json = eval("(" + data + ")");
-                if (json.state == "success") {
+    var toSend = new Object();
+    toSend.style= "user";
+    toSend.method = "commentTeacher";
+    toSend.orderId = order;
+    toSend.teacherId = stid;
+    toSend.score = star;
+    toSend.content = ass;
+    toSend.uid = uid;
+    $.ajax({
+    cache : true,
+    type : "POST",
+    url : config.base_url,
+    data : $.toJSON(toSend),
+        async : false,
+        error : function(request) {
                     $(".mark").show();
-                    $("#succ").show();
-                } else {
-                    $(".mark").show();
-                    $("#erro").show();
-                }
+                    $("#box").show();
+                },
+        success : function(data, textStatu) {
+            var json = eval("(" + data + ")");
+            if (json.state == "success") {
+                $(".mark").show();
+                $("#succ").show();
+            } else {
+                $(".mark").show();
+                $("#erro").show();
             }
+        }
     });
 }
 
 function nopay(order){
-        var toSend = new Object();
-        toSend.style= "order";
-        toSend.method = "cancelOrder";
-        toSend.uid = $.cookie('uid');        
-        toSend.orderId = order;
-        $.ajax({
-        cache : true,
-        type : "POST",
-        url : config.base_url,
-        data : $.toJSON(toSend),
-            async : false,
-            error : function(request) {
-                        $(".mark").show();
-                        $("#box").show();
-                    },
-            success : function(data, textStatu) {
-                var json = eval("(" + data + ")");
-                if (json.state == "success") {
+    var toSend = new Object();
+    toSend.style= "order";
+    toSend.method = "cancelOrder";
+    toSend.uid = uid;        
+    toSend.orderId = order;
+    $.ajax({
+    cache : true,
+    type : "POST",
+    url : config.base_url,
+    data : $.toJSON(toSend),
+        async : false,
+        error : function(request) {
                     $(".mark").show();
-                    $("#succ").show();
-                } else {
-                    $(".mark").show();
-                    $("#erro").show();
-                }
+                    $("#box").show();
+                },
+        success : function(data, textStatu) {
+            var json = eval("(" + data + ")");
+            if (json.state == "success") {
+                $(".mark").show();
+                $("#succ").show();
+            } else {
+                $(".mark").show();
+                $("#erro").show();
             }
+        }
     });
 }
 
 function nopayafter(order){
-        var toSend = new Object();
-        toSend.style= "order";
-        toSend.method = "cancelOrderAfterPay";
-        toSend.uid = $.cookie('uid');        
-        toSend.orderId = order;
-        $.ajax({
-        cache : true,
-        type : "POST",
-        url : config.base_url,
-        data : $.toJSON(toSend),
-            async : false,
-            error : function(request) {
-                        $(".mark").show();
-                        $("#box").show();
-                    },
-            success : function(data, textStatu) {
-                var json = eval("(" + data + ")");
-                if (json.state == "success") {
+    var toSend = new Object();
+    toSend.style= "order";
+    toSend.method = "cancelOrderAfterPay";
+    toSend.uid = uid;        
+    toSend.orderId = order;
+    $.ajax({
+    cache : true,
+    type : "POST",
+    url : config.base_url,
+    data : $.toJSON(toSend),
+        async : false,
+        error : function(request) {
                     $(".mark").show();
-                    $("#succ").show();
-                } else {
-                    $(".mark").show();
-                    $("#erro").show();
-                }
+                    $("#box").show();
+                },
+        success : function(data, textStatu) {
+            var json = eval("(" + data + ")");
+            if (json.state == "success") {
+                $(".mark").show();
+                $("#succ").show();
+            } else {
+                $(".mark").show();
+                $("#erro").show();
             }
+        }
     });
 }
 
 function noserve(order){
-        var toSend = new Object();
-        toSend.style= "order";
-        toSend.method = "cancelOrderAfterAccept";
-        toSend.uid = $.cookie('uid');        
-        toSend.orderId = order;
-        $.ajax({
-        cache : true,
-        type : "POST",
-        url : config.base_url,
-        data : $.toJSON(toSend),
-            async : false,
-            error : function(request) {
-                        $(".mark").show();
-                        $("#box").show();
-                    },
-            success : function(data, textStatu) {
-                var json = eval("(" + data + ")");
-                if (json.state == "success") {
+    var toSend = new Object();
+    toSend.style= "order";
+    toSend.method = "cancelOrderAfterAccept";
+    toSend.uid = uid;        
+    toSend.orderId = order;
+    $.ajax({
+    cache : true,
+    type : "POST",
+    url : config.base_url,
+    data : $.toJSON(toSend),
+        async : false,
+        error : function(request) {
                     $(".mark").show();
-                    $("#succ").show();
-                } else {
-                    $(".mark").show();
-                    $("#erro").show();
-                }
+                    $("#box").show();
+                },
+        success : function(data, textStatu) {
+            var json = eval("(" + data + ")");
+            if (json.state == "success") {
+                $(".mark").show();
+                $("#succ").show();
+            } else {
+                $(".mark").show();
+                $("#erro").show();
             }
+        }
     });
 }
 
@@ -722,13 +721,13 @@ function nogood(order){
         var toSend = new Object();
         toSend.style= "order";
         toSend.method = "dissatisfyOrder";
-        toSend.uid = $.cookie('uid');        
+        toSend.uid = uid;        
         toSend.orderId = order;
         $.ajax({
-        cache : true,
-        type : "POST",
-        url : config.base_url,
-        data : $.toJSON(toSend),
+            cache : true,
+            type : "POST",
+            url : config.base_url,
+            data : $.toJSON(toSend),
             async : false,
             error : function(request) {
                         $(".mark").show();
