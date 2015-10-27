@@ -78,8 +78,6 @@
     #le:checked ~ .sidenav b {
         opacity: 1;
         transform: translateX(0);
-
-
     }
     #le:checked ~ .sidenav {
         box-shadow: -8px 0 8px #ccc inset;
@@ -187,7 +185,8 @@
         height: 45px;
         line-height: 45px;
         margin: 0 auto;
-        display: block;
+        display: block !important;
+        margin-bottom: 10px;
     }
     .right-top-item{
         width: 150px;
@@ -220,7 +219,7 @@
     .right-top-item-link-span{
         color: #000;
         display: inline-block;
-        width: 100px;
+        width: 120px;
         height: 45px;
         line-height: 45px;
         margin-left: 46px;
@@ -229,5 +228,10 @@
     }
     .footer{
         min-width: 0 !important;
+    }
+    .XY{
+            height:100% !important;
+            overflow:hidden !important;
+        }
     }
 }
