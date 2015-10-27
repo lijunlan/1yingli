@@ -171,6 +171,7 @@ public class CheckoutServlet extends HttpServlet {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private Map<String, String> setRequestParams(HttpServletRequest request) {
 		Map<String, String> requestMap = new HashMap<String, String>();
 		for (String key : request.getParameterMap().keySet()) {
