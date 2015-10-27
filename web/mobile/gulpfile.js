@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var gzip = require('gulp-gzip');
 
 var wwwroot = './';
 var paths = {
@@ -23,6 +24,7 @@ gulp.task("scripts", function () {
     gulp.src(paths.scripts)
         .pipe(concat('app.js'))
         .pipe(uglify())
+        //.pipe(gzip())
         .pipe(gulp.dest(wwwroot))
 });
 

@@ -37,9 +37,12 @@ public class CheckoutServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -2722761580200224133L;
 
-	private String page = "http://www.1yingli.cn/yourTutor.html";
-	
-	private String testPage = "http://testweb.1yingli.cn/yourTutor.html";
+	private static final String page = "http://www.1yingli.cn/yourTutor.html";
+
+	// private static final String testPage =
+	// "http://testweb.1yingli.cn/yourTutor.html";
+
+	private static final String resultParameter = "?paymentResult=";
 
 	private ApplicationContext applicationContext;
 
@@ -61,14 +64,10 @@ public class CheckoutServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		PayPal paypal = new PayPal();
 		// Paypal调用的returnServlet
-		//String returnURL = "http://service.1yingli.cn/yiyingliService/Return?page=return";
-		String returnURL = "http://test.1yingli.cn/yiyingliService/Return?page=return";
-		// String cancelURL = request.getScheme() +
-		// "://www.1yingli.cn/yourTutor.html";
+		String returnURL = "http://service.1yingli.cn/yiyingliService/Return?page=return";
 		// 当取消交易的时候，返回地址
 		String cancelURL = page;
 		Map<String, String> checkoutDetails = new HashMap<String, String>();
-		checkoutDetails = setRequestParams(request);
 		// 检查前台传来的数据
 		if (request.getParameter("oid") == null || request.getParameter("uid") == null) {
 			returnMsg(response, MsgUtil.getErrorMsg("data is incomplete"));
@@ -103,37 +102,41 @@ public class CheckoutServlet extends HttpServlet {
 			return;
 		}
 		// 由后台插入相关数据
-		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0",  URLEncoder.encode(order.getServiceTitle(), "UTF-8"));
+		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0", URLEncoder.encode(order.getServiceTitle(), "UTF-8"));
 		// 货物id，这里填写的是导师id
 		checkoutDetails.put("L_PAYMENTREQUEST_0_NUMBER0", order.getTeacher().getId().toString());
-		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0", "Onemile:" + URLEncoder.encode(order.getServiceTitle(), "UTF-8"));
+		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0", URLEncoder.encode("【一英里】"+order.getServiceTitle(), "UTF-8"));
 		checkoutDetails.put("L_PAYMENTREQUEST_0_QTY0", "1");
 		// 商品价格
 		float price = order.getMoney();
 		price /= 6;
 		BigDecimal b = new BigDecimal(price);
 		price = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
-		if(price<0.01)
-			price=(float) 0.01;
-		checkoutDetails.remove("oid");
-		checkoutDetails.remove("uid");
-		checkoutDetails.put("PAYMENTREQUEST_0_ITEMAMT", price+"");
+		if (price < 0.01)
+			price = (float) 0.01;
+		
+		checkoutDetails.put("PAYMENTREQUEST_0_ITEMAMT", price + "");
 		checkoutDetails.put("PAYMENTREQUEST_0_HANDLINGAMT", "0");
 		// 包括税款，手续费（这些我们都是零）的总金额
-		checkoutDetails.put("PAYMENTREQUEST_0_AMT", price+"");
-		// 我们的订单号
-		checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM", request.getParameter("oid"));
+		checkoutDetails.put("PAYMENTREQUEST_0_AMT", price + "");
+		// 我们的订单号,以及微信端回调页面（可选）
+		if (request.getParameter("callback") == null) {
+			checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM", request.getParameter("oid"));
+		} else {
+			checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM",
+					request.getParameter("oid") + "|" + request.getParameter("callback"));
+		}
 		checkoutDetails.put("REQCONFIRMSHIPPING", "0");
 		checkoutDetails.put("NOSHIPPING", "1");
-		
+
 		checkoutDetails.put("PAYMENTREQUEST_0_CURRENCYCODE", "USD");
 		checkoutDetails.put("PAYMENTREQUEST_0_PAYMENTACTION", "Sale");
 
 		session.invalidate();
 		session = request.getSession();
 		Map<String, String> nvp = paypal.callShortcutExpressCheckout(checkoutDetails, returnURL, cancelURL);
-		if(nvp==null){
-			returnMsg(response, MsgUtil.getErrorMsg("fail to go to PayPal, try again later"));
+		if (nvp == null) {
+			returnMsg(response, MsgUtil.getErrorMsg("fail to connect to PayPal, try again later"));
 			return;
 		}
 		session.setAttribute("checkoutDetails", checkoutDetails);
@@ -158,7 +161,7 @@ public class CheckoutServlet extends HttpServlet {
 					+ ErrorSeverityCode;
 			LogUtil.error("After SetExpressCheckoutDetails from Paypal and ERROR INFO:" + errorString, this.getClass());
 			session.invalidate();
-			returnToOnemile(request, response);
+			returnToOnemile(resultParameter + "fail", response);
 
 		}
 	}
@@ -177,16 +180,9 @@ public class CheckoutServlet extends HttpServlet {
 		return (value != null && value.toString().length() != 0);
 	}
 
-	public void returnToOnemile(HttpServletRequest request, HttpServletResponse response) {
-		/*
-		 * RequestDispatcher dispatcher = request.getRequestDispatcher(page); if
-		 * (dispatcher != null) { try { dispatcher.forward(request, response); }
-		 * catch (ServletException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated
-		 * catch block e.printStackTrace(); } }
-		 */
+	public void returnToOnemile(String para, HttpServletResponse response) {
 		try {
-			response.sendRedirect(page);
+			response.sendRedirect(page + para);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

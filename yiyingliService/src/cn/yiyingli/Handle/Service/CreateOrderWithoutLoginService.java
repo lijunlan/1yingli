@@ -19,6 +19,7 @@ import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Service.VoucherService;
 import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.LogUtil;
+import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.SendMailUtil;
 import cn.yiyingli.Util.SendMsgToBaiduUtil;
@@ -248,7 +249,7 @@ public class CreateOrderWithoutLoginService extends MsgService {
 		user.setSendCommentNumber(0L);
 		user.setPhone(phone);
 		user.setEmail(email);
-		user.setPassword(pw);
+		user.setPassword(MD5Util.MD5(pw));
 		user.setCreateTime(String.valueOf(Calendar.getInstance().getTimeInMillis()));
 		user.setTeacherState(UserService.TEACHER_STATE_OFF_SHORT);
 		user.setForbid(false);

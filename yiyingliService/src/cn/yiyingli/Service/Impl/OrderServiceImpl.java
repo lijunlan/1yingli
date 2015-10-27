@@ -81,6 +81,8 @@ public class OrderServiceImpl implements OrderService {
 			NotifyUtil.notifyManager(new SuperMap().put("type", "managerIn").finishByJson());
 		} else if (order.getSalaryState().shortValue() == OrderService.ORDER_SALARY_STATE_NEED) {
 			NotifyUtil.notifyManager(new SuperMap().put("type", "salary").finishByJson());
+		} else if(order.getState().startsWith(ORDER_STATE_FINISH_PAID)){
+			NotifyUtil.notifyManager(new SuperMap().put("type", "waitConfirm").finishByJson());
 		}
 	}
 
