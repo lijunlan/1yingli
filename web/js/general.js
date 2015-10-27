@@ -1,17 +1,17 @@
 ﻿    
 $(document).ready(function(){
-    var u = $.cookie('uid');
-    var n = $.cookie('nickName');
-    var i = $.cookie('iconUrl');
-    if(u==null||n==null||i==null){self.location='login.html';return;}
-    $("#nickName").html(n);
-    $("#bigNickName").html(n);
-    if(i!=""){
-        $("#iconUrl").attr("src",i);
-        $("#bigIcon").attr("src",i);
-        $("#iconView").attr("src",i);
-        $("#picture-src").val(i);
-    }
+    // var u = $.cookie('uid');
+    // var n = $.cookie('nickName');
+    // var i = $.cookie('iconUrl');
+    // if(u==null||n==null||i==null){self.location='login.html';return;}
+    // $("#nickName").html(n);
+    // $("#bigNickName").html(n);
+    // if(i!=""){
+    //     $("#iconUrl").attr("src",i);
+    //     $("#bigIcon").attr("src",i);
+    //     $("#iconView").attr("src",i);
+    //     $("#picture-src").val(i);
+    // }
 
     refreshUserInfo();
 
@@ -145,16 +145,16 @@ function refreshUserInfo(){
                     $.cookie("nickName",$("#nickname").val(),{path:'/',domain:".1yingli.cn",secure:false,raw:false});
                     $("#nickName").html($("#nickname").val());
                 } else {
-                    $(".mark").show();
-                    $("#box").show();
-                    $("#bomb").html("帐号信息已失效，请重新登录");
-                    $("#connect").attr('href','login.html');
-                    $("#connect").css('left','15%');
-                    $("#cancel").show();
-                    $.cookie("uid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                    $.cookie("nickName",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                    $.cookie("iconUrl",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                    $.cookie("tid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                    // $(".mark").show();
+                    // $("#box").show();
+                    // $("#bomb").html("帐号信息已失效，请重新登录");
+                    // $("#connect").attr('href','login.html');
+                    // $("#connect").css('left','15%');
+                    // $("#cancel").show();
+                    // $.cookie("uid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                    // $.cookie("nickName",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                    // $.cookie("iconUrl",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                    // $.cookie("tid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
                 }
             }
     });

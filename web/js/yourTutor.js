@@ -1,6 +1,6 @@
 var list,i,con,orderId,cval,ppay,ptime,star,ass;
 //var uid = $.cookie('uid');
-var uid= "37382507-40d3-44bc-b5a1-54755ccfcd88";
+var uid= "7345357d-69a5-41f2-8b53-1c52128acba3";
 $(document).ready(function(){    
     /*var u = $.cookie('uid');
     var n = $.cookie('nickName');

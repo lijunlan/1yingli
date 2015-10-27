@@ -1,15 +1,15 @@
 $(document).ready(function(){
 
-    var u = $.cookie('uid');
-    var n = $.cookie('nickName');
-    var i = $.cookie('iconUrl');
-    if(u==null||n==null||i==null){self.location='login.html';return;}
-    $("#nickName").html(n);
-    $("#bigNickName").html(n);
-    if(i!=""){
-        $("#iconUrl").attr("src",i);
-        $("#bigIcon").attr("src",i);
-    }
+    // var u = $.cookie('uid');
+    // var n = $.cookie('nickName');
+    // var i = $.cookie('iconUrl');
+    // if(u==null||n==null||i==null){self.location='login.html';return;}
+    // $("#nickName").html(n);
+    // $("#bigNickName").html(n);
+    // if(i!=""){
+    //     $("#iconUrl").attr("src",i);
+    //     $("#bigIcon").attr("src",i);
+    // }
 
     changePage(page);
 });
@@ -101,16 +101,16 @@ function changePage(p){
                     $("#likeList").html(html);
                 }
             } else {
-                $(".mark").show();
-                $("#box").show();
-                $("#bomb").html("帐号信息已失效，请重新登录");
-                $("#connect").attr('href','login.html');
-                $("#connect").css('left','15%');
-                $("#cancel").show();
-                $.cookie("uid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                $.cookie("nickName",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                $.cookie("iconUrl",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                $.cookie("tid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                // $(".mark").show();
+                // $("#box").show();
+                // $("#bomb").html("帐号信息已失效，请重新登录");
+                // $("#connect").attr('href','login.html');
+                // $("#connect").css('left','15%');
+                // $("#cancel").show();
+                // $.cookie("uid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                // $.cookie("nickName",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                // $.cookie("iconUrl",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                // $.cookie("tid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
             }
         }
     });
@@ -189,17 +189,17 @@ function getTotalPage(){
             if (json.state == "success") {
                 totalPage = json.page;
             } else {
-                $(".mark").show();
-                $("#box").show();
-                $("#bomb").html("帐号信息已失效，请重新登录");
-                $("#connect").attr('href','login.html');
-                $("#connect").css('left','15%');
-                $("#cancel").show();
-                $.cookie("uid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                $.cookie("nickName",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                $.cookie("iconUrl",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                $.cookie("tid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-            }
+            //     $(".mark").show();
+            //     $("#box").show();
+            //     $("#bomb").html("帐号信息已失效，请重新登录");
+            //     $("#connect").attr('href','login.html');
+            //     $("#connect").css('left','15%');
+            //     $("#cancel").show();
+            //     $.cookie("uid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+            //     $.cookie("nickName",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+            //     $.cookie("iconUrl",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+            //     $.cookie("tid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+            // }
         }
     });
     return totalPage;
@@ -227,16 +227,16 @@ function deleteTeacher(tid) {
             if (json.state == "success") {
                 changePage(page);
             } else {
-                $(".mark").show();
-                $("#box").show();
-                $("#bomb").html("帐号信息已失效，请重新登录");
-                $("#connect").attr('href','login.html');
-                $("#connect").css('left','15%');
-                $("#cancel").show();
-                $.cookie("uid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                $.cookie("nickName",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                $.cookie("iconUrl",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                $.cookie("tid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                // $(".mark").show();
+                // $("#box").show();
+                // $("#bomb").html("帐号信息已失效，请重新登录");
+                // $("#connect").attr('href','login.html');
+                // $("#connect").css('left','15%');
+                // $("#cancel").show();
+                // $.cookie("uid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                // $.cookie("nickName",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                // $.cookie("iconUrl",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                // $.cookie("tid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
             }
         }
     });

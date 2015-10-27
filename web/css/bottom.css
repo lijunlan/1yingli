@@ -179,6 +179,55 @@
         padding-bottom: 20px;
         margin-bottom: 20px;
     }
-
->>>>>>> d05b6e54bad23352eef5648a0fca1bfb109d17cc
+    .right-top{
+        width: 99%;
+        background-color: #fff;
+        border-radius: 8px;
+        border: 0;
+        height: 45px;
+        line-height: 45px;
+        margin: 0 auto;
+        display: block;
+    }
+    .right-top-item{
+        width: 150px;
+        height: 45px;
+        line-height: 45px;
+        margin: 0 10px;
+        float: left;
+    }
+    .right-top-item-link{
+        display: inline-block;
+        width: 150px;
+        height: 45px;
+        line-height: 45px;
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+    }
+    .right-top-item-link-icon{
+        width: 25px;
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        float: left;
+    }
+    .right-top-item-link-icon1{
+        width: 46px;
+        position: absolute;
+        float: left;
+    }
+    .right-top-item-link-span{
+        color: #000;
+        display: inline-block;
+        width: 100px;
+        height: 45px;
+        line-height: 45px;
+        margin-left: 46px;
+        font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+        font-size: 15px;
+    }
+    .footer{
+        min-width: 0 !important;
+    }
 }
