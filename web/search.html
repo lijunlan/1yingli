@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,minimum-scale=1">
     <title>搜索</title>
+    <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
+    <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
+
     <link rel="stylesheet" type="text/css" href="css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <link rel="stylesheet" type="text/css" href="css/search.css"/>
@@ -11,7 +14,7 @@
     <link rel="stylesheet" href="css/bottom.css"/>
     <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
     <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
-
+    <link rel="stylesheet" href="css/jquery-ui.css">
 
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -95,6 +98,7 @@
                         <a href="javascript:void(0);">
                             <select class="selectType" id="select_Country"
                                     onChange="findByTips($(this).val(),'','','','');">
+                                <option value="">请选择</option>
                                 <option value="加拿大">加拿大</option>
                                 <option value="新加坡">新加坡</option>
                                 <option value="美国">美国</option>
@@ -107,6 +111,7 @@
                         <a href="javascript:void(0);">
                             <select class="selectType" id="select_Position"
                                     onChange="findByTips('',$(this).val(),'','','');">
+                                <option value="">请选择</option>
                                 <option value="研究生">研究生</option>
                                 <option value="博士">博士</option>
                                 <option value="本科">本科</option>
@@ -117,6 +122,7 @@
                         <a href="javascript:void(0);">
                             <select class="selectType" id="select_major"
                                     onChange="findByTips('','',$(this).val(),'','');">
+                                <option value="">请选择</option>
                                 <option value="土木工程">土木工程</option>
                                 <option value="电子工程">电子工程</option>
                                 <option value="金融工程">金融工程</option>
@@ -133,6 +139,7 @@
                         <a href="javascript:void(0);">
                             <select class="selectType" id="select_like"
                                     onChange="findByTips('','','',$(this).val(),'');">
+                                <option value="">请选择</option>
                                 <option value="骑马">骑马</option>
                                 <option value="赛车">赛车</option>
                                 <option value="旅游">旅游</option>
@@ -270,35 +277,30 @@
         }).bind("input.autocomplete", function () {
             $("#search-input1").autocomplete("search", $("#search-input1").val());
         }).focus();
+        $("#ui-id-1").click(function () {
+            searchByInput1();
+        });
     }, 0);
 
     //默认国家选择
     var tips1 = decodeURIComponent($_GET('tip1'));
     if (tips1 && tips1 != "null") {
         $("#select_Country").val(tips1);
-    } else {
-        $("#select_Country").val("加拿大");
     }
     //默认学历选择
     var tips2 = decodeURIComponent($_GET('tip2'));
     if (tips2 && tips2 != "null") {
         $("#select_Position").val(tips2);
-    } else {
-        $("#select_Position").val("研究生");
     }
     //默认学历选择
     var tips3 = decodeURIComponent($_GET('tip3'));
     if (tips3 && tips3 != "null") {
         $("#select_major").val(tips3);
-    } else {
-        $("#select_major").val("土木工程");
     }
     //默认兴趣选择
     var tips4 = decodeURIComponent($_GET('tip4'));
     if (tips4 && tips4 != "null") {
         $("#select_like").val(tips4);
-    } else {
-        $("#select_like").val("骑马");
     }
 </script>
 </body>

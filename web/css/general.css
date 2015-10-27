@@ -108,10 +108,10 @@ header,footer,section {display:block;}
 .face-face{  width: 90px;height: 90px;border-radius: 45px;  }
 .personal-info-pic{  float: left;width: 353px;margin-left: 15px;  }
 .personal-info-pic p{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 12px;margin-top: 30px;width: 353px;  }
-#select-picture{  width: 387px;height: 25px; border: 1px solid rgba(0,0,0,0.15);  }
+#select-picture{  width: 438px;height: 30px; border: 1px solid rgba(0,0,0,0.15);  }
 #picture-src{
     width: 337px;
-    height: 25px;
+    height: 30px;
     border: 0;
     border-right: 1px solid rgba(0, 0, 0, 0.2);
     float: left;
@@ -119,23 +119,21 @@ header,footer,section {display:block;}
     text-indent: 5px;
 }
 .file-box{
-    border: 0px !important;
-    border-radius: 0px !important; 
-    -webkit-border-radius: 0px !important; 
-    width: 49px !important;
-    height: 25px !important;
-    line-height: 25px !important;
-    text-decoration: none !important;
-    text-shadow: 0px 0px !important;
-    text-align: center !important;
-    font : normal 14px/25px lantingxihei !important;
-    font-family: lantingxihei !important;
-    color: #56bbe8 !important;
-    background: rgba(0,0,0,0.05) !important;
-    display: inline-block !important;
-    float: left !important;
-    position:relative !important; 
-    overflow:hidden !important;
+    border: 0px;
+    border-radius: 0px; 
+    -webkit-border-radius: 0px; 
+    width: 49px;
+    height: 25px;
+    line-height: 25px;
+    text-decoration: none;
+    text-shadow: 0px 0px;
+    text-align: center;
+    color: #fff;
+    background: rgba(0,0,0,0.05);
+    display: inline-block;
+    float: left;
+    position:relative; 
+    overflow:hidden;
 }
 #uploadifive-select-picture-src input{
     cursor: pointer !important;
@@ -151,7 +149,7 @@ header,footer,section {display:block;}
 }
 
 #rewrite-info{
-    height: 340px;padding: 10px 40px 40px 100px;/*text-align: right;*/background: white;position: relative;
+    height: 390px;padding: 10px 40px 40px 100px;/*text-align: right;*/background: white;position: relative;
 }
 #rewrite-info label:nth-of-type(1),
 #rewrite-info label:nth-of-type(2),
@@ -395,6 +393,129 @@ header,footer,section {display:block;}
     color: #56bbe8;
 }
 
+@media (max-width: 768px){
+    .g-hd{
+        display: none;
+    }
+    .top-nav{
+        display: none;
+    }
+    .content-left{
+        display: none;
+    }
+    .personal-info-title{
+        display: none;
+    }
+    .content-container{
+        min-width: 0 !important;
+        min-height: 400px;
+    }
+    .content{
+        width: 100%;
+        min-height: 400px;
+    }
+    .content-right{
+        width: 90%;
+        margin: 0 5%;
+        float: left;
+        border:0;
+    }
+    .personal-info-face-box{
+        height: 200px;
+    }
+    .personal-info-face{
+        width: 100%;
+        margin-left: 0;
+    }
+    .personal-info-pic{
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+    }
+    #select-picture{
+        width: 80%;
+        height: 25px;
+        border: 1px solid rgba(0,0,0,0.15);
+        margin: 0 9%;
+    }
+    #picture-src{
+        width: 80%;
+        height: 25px;
+        border: 0;
+        border-right: 1px solid rgba(0, 0, 0, 0.2);
+        float: left;
+        background: rgba(0,0,0,0.05);
+        text-indent: 5px;
+    }
+    .personal-info-pic p{
+        width: 100%;
+    }
+    .file-box{
+        width: 19.5% !important;
+        height: 26px !important;
+    }
+    #rewrite-info{
+        padding: 10px 40px 40px 0px;
+    }
+    input#nickname{
+        width: 60%;
+    }
+    #name{
+        width: 60%;
+    }
+    #phone{
+        width: 60%;
+    }
+    #email{
+        width: 60%;
+    }
+    #address{
+        width: 60%;
+        margin-right:0;
+    }
+    #username-label{
+        margin-left: 20px !important;
+    }
+    #name-label{
+        margin-left: 20px !important;
+    }
+    #phone-label{
+        margin-left: 20px !important;
+    }
+    #email-label{
+        margin-left: 20px !important;
+    }
+    #address-label{
+        margin-left: 5px !important;
+    }
+    #intro-label{
+        line-height: 20px !important;
+        width: 40px;
+        margin-left: 19px !important;
+        margin-right: 0px !important;
+    }
+    #intro{
+        width: 60%;
+    }
+    #nickname_span{
+        display: none;
+    }
+    #name_span{
+        display: none;
+    }
+    #name_span{
+        display: none;
+    }
+    #intro_span{
+        display: none;
+    }
+    #info-submit{
+        bottom: 20px;
+    }
+    .prompt{
+        display: none;
+    }
+}
 
 
 

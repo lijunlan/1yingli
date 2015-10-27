@@ -267,7 +267,7 @@ function refresh(){
 				$.each(result,function(index,content){
 					html = html + "<div class='one_person' ><a href='personal.html?tid="+content.id+"' target='_blank'><img src='"+content.iconurl+"' ><div class='import_info'><p class='person_topic'>"+ content.servicetitle +"</p><p class='person_info'>"+content.name+"<span>&nbsp;&nbsp;"+ content.simpleinfo +"</span> </p><p class='person_likes'>"+content.servicecontent+"</p></div><div class='price'> <p class='money'>"+ parseInt(content.serviceprice) + "元/" + parseInt(content.servicetime) +"时</p><p class='like'><img style='margin-left:0px;' src='http://image.1yingli.cn/img/heart.png' >"+content.likeno+" 人想见</p><p class='times'>本周可咨询"+content.timeperweek+"次</p></div></a></div>";
 				});
-				if(html ==""){
+				if(html == ""){
 					html = "<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;没有找到相关导师</h1>"
 				}
 				$("#sercher_result").html(html);

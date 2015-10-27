@@ -1,4 +1,8 @@
 var list,i,con,orderId,cval,ppay,ptime,star,ass;
+
+//var uid = $.cookie('uid');
+var uid= "7345357d-69a5-41f2-8b53-1c52128acba3";
+
 var uid = $.cookie('uid');
 var nickName = $.cookie('nickName');
 var iconUrl = $.cookie('iconUrl');

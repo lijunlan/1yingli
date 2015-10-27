@@ -54,7 +54,7 @@ abbr,acronym { border:0;
 
 }
 .personal-bg{
-    position: relative;  width: 100%;height: 30%; /*min-width: 1096px;*/ max-height: 570px;
+    position: relative;  width: 100%; /*min-width: 1096px;*/ max-height: 570px;
 }
 #header{
     width: 100%;
@@ -1686,22 +1686,22 @@ abbr,acronym { border:0;
         margin: 0 8%;
     }
     #pname{
-        width: 80%;
+        width: 85%;
         left: 0;
         border-radius: 5px;
     }
     #ptel{
-        width: 80%;
+        width: 85%;
         left: 0;
         border-radius: 5px;
     }
     #pemail{
-        width: 80%;
+        width: 85%;
         left: 0;
         border-radius: 5px;
     }
     #pweixin{
-        width: 80%;
+        width: 85%;
         left: 0;
         border-radius: 5px;
     }
@@ -1711,7 +1711,8 @@ abbr,acronym { border:0;
         top:70%;
     }
     #confirm{
-        width: 86%;
+        width: 85%;
+        height: 26px;
         left: 0;
         margin: 0 8%;
         border-radius: 6px;
@@ -1719,7 +1720,7 @@ abbr,acronym { border:0;
     #close{
         top: 100%;
         left: 0;
-        width: 85%;
+        width: 84.5%;
         margin: 0 8%;
         border-radius: 6px;
     }
@@ -1803,12 +1804,12 @@ abbr,acronym { border:0;
     }
     #pquestion{
         width: 100%;
-        height: 30px;
+        height: 55px;
         font-size: 14px;
     }
     #pIntroduce{
         width: 100%;
-        height: 30px;
+        height: 55px;
     }
     #ptime{
         width: 100%;

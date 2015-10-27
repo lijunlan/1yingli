@@ -22,6 +22,9 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ORDER_ID")
 	private Long id;
+	
+	@Column(name = "ORIGINMONEY", nullable = false)
+	private Float originMoney;
 
 	@Column(name = "MONEY", nullable = false)
 	private Float money;
@@ -306,6 +309,14 @@ public class Order {
 
 	public void setSalaryState(Short salaryState) {
 		this.salaryState = salaryState;
+	}
+
+	public Float getOriginMoney() {
+		return originMoney;
+	}
+
+	public void setOriginMoney(Float originMoney) {
+		this.originMoney = originMoney;
 	}
 
 }

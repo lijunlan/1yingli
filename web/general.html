@@ -2,20 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人主页</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css"/>
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <link href="css/general.css" rel="stylesheet" type="text/css"/>
     <link href="css/personal_common.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/bottom.css">
     <link rel="stylesheet" type="text/css" href="uploadify/uploadifive.css" />
     <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
     <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
 </head>
 <body>
+
+        <input type="checkbox" id="le"/>
+        <ul class="sidenav">
+            <div class="home"><a href="home.html"><b>首页</b></a></div>
+            <li><a href="theme.html">留学领航</a></li>
+            <li><a href="theme_01.html">求职就业</a></li>
+            <li><a href="theme_03.html">创业助力</a></li>
+            <li><a href="theme_04.html">校园生活</a></li>
+            <li><a href="theme_05.html">猎奇分享</a></li>
+            <!-- <li><a href="#"><b>Logout</b></a></li> -->
+        </ul>
+        <input type="checkbox" id="ri"/>
+        <ul class="sidenav1">
+            <li><a href="controlPanel.html"><b>消息中心</b></a></li>
+            <li><a href="yourTutor.html"><b>我的导师</b></a></li>
+            <li><a href="likeList.html"><b>心愿名单</b></a></li>
+            <li><a href="general.html"><b>个人资料修改</b></a></li>
+            <li><a href="account.html"><b>密码修改</b></a></li>
+            <!-- <li><a href="#"><b>猎奇分享</b></a></li> -->
+            <!-- <li><a href="#"><b>Logout</b></a></li> -->
+        </ul>
+
+<section>
 <div class="g-hd"></div>
 <div class="top-nav"></div>
-
+<nav class="mobile-header" style="display: none;"> 
+    <label for="le" class="left"><img src="img/01.png" style="width:20px;height:20px;"></label>
+    <form class="center">
+        <input type="text" placeholder="搜人名、话题" style="width:60%;height:20px;margin-top:8px;border-bottom-left-radius: 18px;border-top-left-radius: 18px;padding-left:8px;float:left;">
+        <button style="width:35px;;height:23px;float:left;margin-top:9px;border-bottom-right-radius: 18px;border-top-right-radius: 18px;background-color: #56bbe8;border: 0;"><img src="img/03.png"></button>
+    </form>
+    <label for="ri" class="right"><img src="img/02.png" style="width:20px;height:20px;"></label>
+</nav>
 <div class="content-container">
     <div class="content">
         <div class="content-left">
@@ -28,6 +60,14 @@
             </div>
         </div>
         <div class="content-right">
+            <ul class="right-top" style="display:none;">
+                    <li class="right-top-item">
+                        <a class="right-top-item-link" href="javascript:void(0);">
+                            <img class="right-top-item-link-icon" src="img/04.png">
+                            <span class="right-top-item-link-span">(修改个人资料)</span>
+                        </a>
+                    </li>
+                </ul>
             <p class="personal-info-title">个人资料</p>
             <div class="personal-info-face-box">
                 <div class="personal-info-face">
@@ -53,10 +93,10 @@
                 <input id="name" name="name" type="text" style="padding-left: 7px;margin-right: 10px;background:#F3F3F3;"/><span id="name_span">用户姓名不能为空</span>
                 </br>
                 <label id="phone-label">手机</label>
-                <input id="phone" name="name" type="text" style="padding-left: 7px;margin-right: 10px;background:#F3F3F3;" disabled="disabled" />不可修改，需要验证。
+                <input id="phone" name="name" type="text" style="padding-left: 7px;margin-right: 10px;background:#F3F3F3;" disabled="disabled" /><span class="prompt">不可修改，需要验证。</span>
                 </br>
                 <label id="email-label">邮箱</label>
-                <input id="email" name="name" type="text" style="padding-left: 7px;margin-right: 10px;background:#F3F3F3;" disabled="disabled" />不可修改，需要验证。
+                <input id="email" name="name" type="text" style="padding-left: 7px;margin-right: 10px;background:#F3F3F3;" disabled="disabled" /><span class="prompt">不可修改，需要验证。</span>
                 </br>
                 <label id="address-label">长居地</label>
                 <input id="address" name="name" type="text" style="padding-left: 7px;background:#F3F3F3;"/>
@@ -71,6 +111,7 @@
 
 <div class="contact"></div>
 <div class="footer"></div>
+</section>
 
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="uploadify/jquery.uploadifive.min.js"></script>

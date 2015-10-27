@@ -23,12 +23,10 @@ import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.WarnUtil;
 
 public class ReturnServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	private static String page = "http://www.1yingli.cn/yourTutor.html";
-
-	// private static final String testPage =
-	// "http://testweb.1yingli.cn/yourTutor.html";
 
 	private static final String resultParameter = "?paymentResult=";
 
@@ -80,7 +78,7 @@ public class ReturnServlet extends HttpServlet {
 			// 根据之前传的callback参数修改callback
 			String tmp = results.get("CUSTOM");
 			String callback[] = tmp.split("\\|");
-			if (callback[1] != null) {
+			if (callback.length != 1) {
 				page = callback[1];
 			} else {
 				page = "http://www.1yingli.cn/yourTutor.html";
