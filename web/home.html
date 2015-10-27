@@ -7,24 +7,25 @@
     <meta name="description" content="「一英里」专注于一对一咨询，致力于打造最便捷畅通的大学生线上交流平台，打破信息不对称的壁垒，轻松连接高校名企精英与万千追梦学子。"/>
     <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
     <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
+
     <link rel="stylesheet" href="css/reset.css" />
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/common.css" type="text/css">
     <link rel="stylesheet" href="layerslider/css/layerslider.css" type="text/css">
     <link rel="stylesheet" href="css/jquery-ui.css">
 	<style>
-	.search-box {
-			outline:medium;
-			font-size:18px;
-			padding-left:8px;
-			color: #000000;
-	}
-	.ui-autocomplete {
-			font-size: 18px;
-			background: #fff;
-			z-index: 999;
-	}
+    	.search-box {
+    			outline:medium;
+    			font-size:18px;
+    			padding-left:8px;
+    			color: #000000;
+    	}
+    	.ui-autocomplete {
+    			font-size: 18px;
+    			background: #fff;
+    			z-index: 999;
+    	}
 	</style>
     
 </head>
@@ -272,14 +273,13 @@
     <script type="text/javascript" src="js/common.js"></script> 
     <script src="js/jquery-ui.js"></script>
     <script>
+        function key(){
+           if (event.keyCode==13){
+                search();
+           }
+        }
         $(function() {
-            var hit = 10; // 显示的下拉提示列表的长度，可修改
-            $("#searchBox").bind('keypress',function(event){
-                if(event.keyCode == "13")    
-                {
-                    search();
-                }
-            });
+            var hit = 10;
             setTimeout(function() {
                 $("#searchBox" ).autocomplete({
                     delay: 0,
@@ -312,6 +312,9 @@
                     // 修复在Firefox中不支持中文的BUG
                     $( "#searchBox" ).autocomplete("search", $( "#searchBox" ).val());
                 }).focus();
+                $("#ui-id-1").click(function(){
+                    search();
+                });
             }, 0);
         });
     </script>
