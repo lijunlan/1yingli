@@ -37,7 +37,7 @@ public class CheckoutServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -2722761580200224133L;
 
-	private static final String page = "http://www.1yingli.cn/yourTutor.html";
+	private static String page = "http://www.1yingli.cn/yourTutor.html";
 
 	// private static final String testPage =
 	// "http://testweb.1yingli.cn/yourTutor.html";
@@ -125,9 +125,11 @@ public class CheckoutServlet extends HttpServlet {
 		// 我们的订单号,以及微信端回调页面（可选）
 		if (request.getParameter("callback") == null) {
 			checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM", request.getParameter("oid"));
+			page = "http://www.1yingli.cn/yourTutor.html";
 		} else {
 			checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM",
 					request.getParameter("oid") + "|" + request.getParameter("callback"));
+			page=request.getParameter("callback");
 		}
 		checkoutDetails.put("REQCONFIRMSHIPPING", "0");
 		checkoutDetails.put("NOSHIPPING", "1");
