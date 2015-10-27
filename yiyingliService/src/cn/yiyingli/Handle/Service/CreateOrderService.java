@@ -138,6 +138,7 @@ public class CreateOrderService extends MsgService {
 		getUserService().update(user);
 
 		float money = teacher.gettService().getPriceTotal();
+		float originMoney = teacher.gettService().getPriceTotal();
 		long ntime = Calendar.getInstance().getTimeInMillis();
 		Voucher voucher = null;
 		if (getData().containsKey("voucher")) {
@@ -163,6 +164,7 @@ public class CreateOrderService extends MsgService {
 		if (money < 0.01)
 			money = 0.01F;
 		order.setMoney(money);
+		order.setOriginMoney(originMoney);
 		getOrderService().save(order);
 		if (voucher != null) {
 			getVoucherService().update(voucher);

@@ -62,6 +62,7 @@ public class MGetOrderByOIdService extends MsgService {
 		map.put("createTime", o.getCreateTime());
 		map.put("title", o.getServiceTitle());
 		map.put("price", o.getMoney().toString());
+		map.put("originPrice", o.getOriginMoney());
 		map.put("time", o.getTime().toString());
 		map.put("teacherName", o.getTeacher().getName());
 		map.put("teacherUrl", o.getTeacher().getIconUrl());

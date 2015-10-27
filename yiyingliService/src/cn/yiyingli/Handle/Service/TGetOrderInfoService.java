@@ -80,6 +80,7 @@ public class TGetOrderInfoService extends MsgService {
 		map.put("createTime", o.getCreateTime());
 		map.put("title", o.getServiceTitle());
 		map.put("price", o.getMoney());
+		map.put("originPrice",o.getOriginMoney());
 		map.put("time", o.getTime());
 		map.put("iconUrl", o.getCreateUser().getIconUrl());
 		map.put("name", o.getCustomerName());
