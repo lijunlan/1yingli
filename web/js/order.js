@@ -6,21 +6,6 @@
         $("#frame").fadeOut();
     });
 
-    $(".left").click(function(){
-        if($("html,body").hasClass("XY")){
-            $("html,body").removeClass("XY");
-        }else{
-            $("html,body").addClass("XY");
-        }
-    })
-    $(".right").click(function(){
-        if($("html,body").hasClass("XY")){
-            $("html,body").removeClass("XY");
-        }else{
-            $("html,body").addClass("XY");
-        }
-    })
-
     $("#open1").click(function(){
         $(".topic-content").css('max-height','none');
         $("#scontent").css('overflow','visible');

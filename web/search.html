@@ -29,11 +29,11 @@
 <input type="checkbox" id="le"/>
 <ul class="sidenav">
     <div class="home"><a href="home.html"><b>首页</b></a></div>
-    <li><a href="theme.html">留学领航</a></li>
-    <li><a href="theme_01.html">求职就业</a></li>
-    <li><a href="theme_03.html">创业助力</a></li>
-    <li><a href="theme_04.html">校园生活</a></li>
-    <li><a href="theme_05.html">猎奇分享</a></li>
+    <li onClick="findByTheme($(this).find('a').text());"><a href="">留学领航</a></li>
+    <li onClick="findByTheme($(this).find('a').text());"><a href="">求职就业</a></li>
+    <li onClick="findByTheme($(this).find('a').text());"><a href="">创业助力</a></li>
+    <li onClick="findByTheme($(this).find('a').text());"><a href="">校园生活</a></li>
+    <li onClick="findByTheme($(this).find('a').text());"><a href="">猎奇分享</a></li>
     <!-- <li><a href="#"><b>Logout</b></a></li> -->
 </ul>
 <input type="checkbox" id="ri"/>
@@ -51,12 +51,7 @@
     <nav class="mobile-header" style="display: none;">
         <label for="le" class="left"><img src="img/01.png" style="width:20px;height:20px;"></label>
 
-        <form class="center">
-            <input type="text" placeholder="搜人名、话题"
-                   style="width:60%;height:20px;margin-top:8px;border-bottom-left-radius: 18px;border-top-left-radius: 18px;padding-left:8px;float:left;border: 2px inset;">
-            <button style="width:35px;;height:23px;float:left;margin-top:9px;border-bottom-right-radius: 18px;border-top-right-radius: 18px;background-color: #56bbe8;border: 0;">
-                <img src="img/03.png"></button>
-        </form>
+        <span>一英里</span>
         <label for="ri" class="right"><img src="img/02.png" style="width:20px;height:20px;"></label>
     </nav>
     <div class="header" id="header"></div>
@@ -68,23 +63,23 @@
                     <li class="hot-theme-list" id="hot-theme-list-01" onClick="findByTheme('', $(this).attr('id'));"><a
                             id="hot-theme-list-a-01" href="javascript:void(0);"><p>全部</p></a></li>
                     <li class="hot-theme-list" id="hot-theme-list-02"
-                        onClick="findByTheme($(this).find('a').text(), $(this).attr('id'));"><a id="hot-theme-list-a-02"
+                        onClick="findByTheme($(this).find('a').find('p').text(), $(this).attr('id'));"><a id="hot-theme-list-a-02"
                                                                                                 href="javascript:void(0);">
                         <p>留学领航</p></a></li>
                     <li class="hot-theme-list" id="hot-theme-list-03"
-                        onClick="findByTheme($(this).find('a').text(), $(this).attr('id'));"><a id="hot-theme-list-a-03"
+                        onClick="findByTheme($(this).find('a').find('p').text(), $(this).attr('id'));"><a id="hot-theme-list-a-03"
                                                                                                 href="javascript:void(0);">
                         <p>求职就业</p></a></li>
                     <li class="hot-theme-list" id="hot-theme-list-04"
-                        onClick="findByTheme($(this).find('a').text(), $(this).attr('id'));"><a id="hot-theme-list-a-04"
+                        onClick="findByTheme($(this).find('a').find('p').text(), $(this).attr('id'));"><a id="hot-theme-list-a-04"
                                                                                                 href="javascript:void(0);">
                         <p>创业助力</p></a></li>
                     <li class="hot-theme-list" id="hot-theme-list-05"
-                        onClick="findByTheme($(this).find('a').text(), $(this).attr('id'));"><a id="hot-theme-list-a-05"
+                        onClick="findByTheme($(this).find('a').find('p').text(), $(this).attr('id'));"><a id="hot-theme-list-a-05"
                                                                                                 href="javascript:void(0);">
                         <p>校园生活</p></a></li>
                     <li class="hot-theme-list" id="hot-theme-list-06"
-                        onClick="findByTheme($(this).find('a').text(), $(this).attr('id'));"><a id="hot-theme-list-a-06"
+                        onClick="findByTheme($(this).find('a').find('p').text(), $(this).attr('id'));"><a id="hot-theme-list-a-06"
                                                                                                 href="javascript:void(0);">
                         <p>猎奇分享</p></a></li>
                 </ul>
