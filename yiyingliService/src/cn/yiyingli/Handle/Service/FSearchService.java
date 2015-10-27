@@ -51,13 +51,13 @@ public class FSearchService extends MsgService {
 				for (int i = 0; i < qss.length; i++) {
 					String qs = qss[i];
 					if (i == 0) {
-						query = query + "(default:'" + qs + "'^99 OR simpleinfo:'" + qs + "'^99 OR name:'" + qs
-								+ "'^99 OR companyname:'" + qs + "'^99 OR schoolname:'" + qs + "'^99 OR servicetitle:'"
-								+ qs + "'^99 OR servicecontent:'" + qs + "'^60 OR introduce:'" + qs + "'^60)";
+						query = query + "(default:'" + qs + "'^99 OR si:'" + qs + "'^99 OR n:'" + qs + "'^99 OR cn:'"
+								+ qs + "'^99 OR sn:'" + qs + "'^99 OR st:'" + qs + "'^99 OR sc:'" + qs + "'^60 OR i:'"
+								+ qs + "'^60)";
 					} else {
-						query = query + "AND (default:'" + qs + "'^99 OR simpleinfo:'" + qs + "'^99 OR name:'" + qs
-								+ "'^99 OR companyname:'" + qs + "'^99 OR schoolname:'" + qs + "'^99 OR servicetitle:'"
-								+ qs + "'^99 OR servicecontent:'" + qs + "'^60 OR introduce:'" + qs + "'^60)";
+						query = query + "AND (default:'" + qs + "'^99 OR si:'" + qs + "'^99 OR n:'" + qs
+								+ "'^99 OR cn:'" + qs + "'^99 OR sn:'" + qs + "'^99 OR st:'" + qs + "'^99 OR sc:'" + qs
+								+ "'^60 OR i:'" + qs + "'^60)";
 					}
 				}
 				// System.out.println(query);
@@ -66,9 +66,9 @@ public class FSearchService extends MsgService {
 				String tips = (String) getData().get("tips");
 				tips = URLDecoder.decode(tips, "utf-8");
 				String[] ts = tips.split(",");
-				StringBuffer sb = new StringBuffer("default:'' OR tipcontent:'" + ts[0] + "'");
+				StringBuffer sb = new StringBuffer("default:'' OR tc:'" + ts[0] + "'");
 				for (int i = 1; i < ts.length; i++) {
-					sb.append(" OR tipcontent:'" + ts[i] + "'");
+					sb.append(" OR tc:'" + ts[i] + "'");
 				}
 				// System.out.println(sb.toString());
 				search.setQueryString(sb.toString());
