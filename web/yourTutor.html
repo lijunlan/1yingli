@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>你的导师</title>
+    <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
+    <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <link href="css/reset.css" rel="stylesheet"/>
     <link href="css/yourTutor.css" rel="stylesheet" type="text/css"/>
     <link href="css/personal_common.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link href="css/bottom.css" rel="stylesheet"/>
-    <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
-    <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
 
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="js/jquery.json-2.4.min.js"></script>
@@ -20,6 +20,7 @@
 	<script type="text/javascript" src="js/person_header.js"></script>
 	<script type="text/javascript" src="js/yourTutor.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/get.js"></script>
 </head>
 
 <body>
@@ -68,7 +69,7 @@
 	                <li class="right-top-item">
 	                    <a class="right-top-item-link" href="javascript:void(0);">
 	                        <img class="right-top-item-link-icon" src="img/04.png"/>
-	                        <span class="right-top-item-link-span" >(我的导师)</span>
+	                        <span class="right-top-item-link-span">(我的导师)</span>
 	                    </a>
 	                </li>
 	            </ul>
@@ -150,5 +151,21 @@
     <img class="Tutor_icon" onclick="closeChoose_pay_method();" src="http://image.1yingli.cn/img/schedule_close.png"/>
 </div>
 
+<!-- 支付结果提示 -->
+<div class="prompt">支付成功</div>
+<script>
+    if (document.referrer && document.referrer.indexOf("1yingli") == -1) {
+        if($_GET("paymentResult") == "success"){
+            $(".prompt").fadeIn();
+            $(".prompt").html("支付成功");
+        } else if($_GET("paymentResult") == "fail") {
+            $(".prompt").fadeIn();
+            $(".prompt").html("支付失败");
+        }
+    };
+    setTimeout(function(){
+        $(".prompt").fadeOut();
+    }, 1500)
+</script>
 </body>
 </html>

@@ -55,6 +55,12 @@
         }).bind("input.autocomplete", function () {
             $( "#search-input" ).autocomplete("search", $( "#search-input" ).val());
         }).focus();
+            $("#ui-id-2").click(function(){
+                searchByInput();
+            });
+            $("#ui-id-1").click(function(){
+                searchByInput();
+            });
     }, 0);
 });
 

@@ -32,7 +32,7 @@
 }
 @media (max-width: 768px) and (min-width: 391px){
     .details_person_price {
-        margin:25px 0 0 0 !important;
+        margin:10px 0 0 0 !important;
         font-size: 20px !important;
         width: 141px !important;
         text-align: left !important;
@@ -1030,11 +1030,23 @@ width:520px;height:35px;border:1px solid #eeeeee;margin: 0;overflow-y: auto;over
     cursor: pointer;
 }
 
-
-
-
-
-
+/*提示支付成功界面*/
+.prompt {
+    width: 240px;
+    height: 100px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -120px;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 100px;
+    background: #57BBE8;
+    font-size: 16px;
+    color: #FFF;
+    display: none;
+}
 
 
 
