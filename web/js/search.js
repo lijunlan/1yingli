@@ -265,7 +265,7 @@ function refresh(){
 				var result = $.parseJSON(json.result);
 				html  = "";
 				$.each(result,function(index,content){
-					html = html + "<div class='one_person' ><a href='personal.html?tid="+content.id+"' target='_blank'><img src='"+content.iconurl+"' ><div class='import_info'><p class='person_topic'>"+ content.servicetitle +"</p><p class='person_info'>"+content.name+"<span>&nbsp;&nbsp;"+ content.simpleinfo +"</span> </p><p class='person_likes'>"+content.servicecontent+"</p></div><div class='price'> <p class='money'>"+ parseInt(content.serviceprice) + "元/" + parseInt(content.servicetime) +"时</p><p class='like'><img style='margin-left:0px;' src='http://image.1yingli.cn/img/heart.png' >"+content.likeno+" 人想见</p><p>本周可咨询"+content.timeperweek+"次</p></div></a></div>";					
+					html = html + "<div class='one_person' ><a href='personal.html?tid="+content.id+"' target='_blank'><img src='"+content.iconurl+"' ><div class='import_info'><p class='person_topic'>"+ content.servicetitle +"</p><p class='person_info'>"+content.name+"<span>&nbsp;&nbsp;"+ content.simpleinfo +"</span> </p><p class='person_likes'>"+content.servicecontent+"</p></div><div class='price'> <p class='money'>"+ parseInt(content.serviceprice) + "元/" + parseInt(content.servicetime) +"时</p><p class='like'><img style='margin-left:0px;' src='http://image.1yingli.cn/img/heart.png' >"+content.likeno+" 人想见</p><p class='times'>本周可咨询"+content.timeperweek+"次</p></div></a></div>";
 				});
 				if(html ==""){
 					html = "<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;没有找到相关导师</h1>"
@@ -290,36 +290,36 @@ function refresh(){
     for (var i = totalPage; i >=1; i--) {$("#btn" + i ).remove(); };
 	if(totalPage <= basePage) {
 		for (var i = 1; i <=totalPage; i++) {
-			$("#btnNext").before("<a id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");	
+			$("#btnNext").before("<a class ='pager' id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
     	};
 	} else {
 		for (var i = 1; i <=totalPage; i++) {
 			if(page == 1) {
-				$("#btnNext").before("<a id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
+				$("#btnNext").before("<a class ='pager' id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
 				if(i == 5) {
-					$("#btnNext").before("<span id='diandian'>...</span>");
-					$("#btnNext").before("<a id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
+					$("#btnNext").before("<span class ='pager' id='diandian'>...</span>");
+					$("#btnNext").before("<a class ='pager' id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
 					break;
 				}
 			} else if(page <=mostPage) {
-				$("#btnNext").before("<a id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
+				$("#btnNext").before("<a class ='pager' id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
 				if(i == afterShowPage) {
-					 $("#btnNext").before("<span id='diandian'>...</span>");
-					 $("#btnNext").before("<a id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
+					 $("#btnNext").before("<span class ='pager' id='diandian'>...</span>");
+					 $("#btnNext").before("<a class ='pager' id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
 					 break;
 				}
 			} else {
 				if(i<=leastPage) {
-					$("#btnNext").before("<a id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
-					if(i == leastPage) { $("#btnNext").before("<span id='diandian'>...</span>");}
+					$("#btnNext").before("<a class ='pager' id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
+					if(i == leastPage) { $("#btnNext").before("<span class ='pager' id='diandian'>...</span>");}
 				}
 				if(beforeShowPage <= i && i <= afterShowPage){
-					$("#btnNext").before("<a id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
+					$("#btnNext").before("<a class ='pager' id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
 				}
 				if(i == afterShowPage) {
 					if(afterShowPage !=totalPage ) {
-						$("#btnNext").before("<span id='diandian'>...</span>"); 
-						$("#btnNext").before("<a id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
+						$("#btnNext").before("<span class ='pager' id='diandian'>...</span>");
+						$("#btnNext").before("<a class ='pager' id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
 						break;
 					}
 				}

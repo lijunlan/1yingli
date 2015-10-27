@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,minimum-scale=1">
     <title>搜索</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <link rel="stylesheet" type="text/css" href="css/search.css"/>
-	<link rel="stylesheet" type="text/css" href="css/header.css"/>
-    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css"/>
+    <link rel="stylesheet" href="css/bottom.css"/>
     <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
     <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
+
 
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -21,206 +23,283 @@
     <script type="text/javascript" src="js/search.js"></script>
 </head>
 <body>
-<div class="header" id="header"></div>
+<input type="checkbox" id="le"/>
+<ul class="sidenav">
+    <div class="home"><a href="home.html"><b>首页</b></a></div>
+    <li><a href="theme.html">留学领航</a></li>
+    <li><a href="theme_01.html">求职就业</a></li>
+    <li><a href="theme_03.html">创业助力</a></li>
+    <li><a href="theme_04.html">校园生活</a></li>
+    <li><a href="theme_05.html">猎奇分享</a></li>
+    <!-- <li><a href="#"><b>Logout</b></a></li> -->
+</ul>
+<input type="checkbox" id="ri"/>
+<ul class="sidenav1">
+    <li><a href="#"><b>首页</b></a></li>
+    <li><a href="#"><b>留学领航</b></a></li>
+    <li><a href="#"><b>求职就业</b></a></li>
+    <li><a href="#"><b>创业助力</b></a></li>
+    <li><a href="#"><b>校园生活</b></a></li>
+    <li><a href="#"><b>猎奇分享</b></a></li>
+    <!-- <li><a href="#"><b>Logout</b></a></li> -->
+</ul>
 
-<div class="condition" id="condition">
-    <div class="condition-box" id="condition-box">
-        <div class="hot-theme" id="hot-theme">
-            <ul class="hot-theme-lists" id="hot-theme-lists">
-                <li class="hot-theme-list" id="hot-theme-list-01" onClick="findByTheme('', $(this).attr('id'));"><a id="hot-theme-list-a-01" href="javascript:void(0);"><p>全部</p></a></li>
-				<li class="hot-theme-list" id="hot-theme-list-02" onClick="findByTheme($(this).find('a').text(), $(this).attr('id'));"><a id="hot-theme-list-a-02" href="javascript:void(0);"><p>留学领航</p></a></li>
-                <li class="hot-theme-list" id="hot-theme-list-03" onClick="findByTheme($(this).find('a').text(), $(this).attr('id'));"><a id="hot-theme-list-a-03" href="javascript:void(0);"><p>求职就业</p></a></li>
-                <li class="hot-theme-list" id="hot-theme-list-04" onClick="findByTheme($(this).find('a').text(), $(this).attr('id'));"><a id="hot-theme-list-a-04" href="javascript:void(0);"><p>创业助力</p></a></li>
-                <li class="hot-theme-list" id="hot-theme-list-05" onClick="findByTheme($(this).find('a').text(), $(this).attr('id'));"><a id="hot-theme-list-a-05" href="javascript:void(0);"><p>校园生活</p></a></li>
-                <li class="hot-theme-list" id="hot-theme-list-06" onClick="findByTheme($(this).find('a').text(), $(this).attr('id'));"><a id="hot-theme-list-a-06" href="javascript:void(0);"><p>猎奇分享</p></a></li>
-            </ul>
-        </div>
-      <div class="feature" id="feature">
-            <img src="http://image.1yingli.cn/img/good.png" style="margin-left: 10px" />
-            <p class="feature-title" id="feature-title">特色标签</p>
-            <ul class="feature-lists" id="feature-lists">
-                <li class="feature-list" id="feature-list-01">
-					<a href="javascript:void(0);" > 
-						<select class="selectType" id="select_Country" onChange="findByTips($(this).val(),'','','','');">
-							<option value="加拿大">加拿大</option>
-							<option value="新加坡">新加坡</option>
-							<option value="美国">美国</option>
-							<option value="英国">英国</option>
-							<option value="法国">法国</option>
-						</select>
-					</a>
-				</li>
-                <li class="feature-list" id="feature-list-02">
-					<a href="javascript:void(0);">
-						<select class="selectType" id="select_Position" onChange="findByTips('',$(this).val(),'','','');">
-							<option value="研究生">研究生</option>
-							<option value="博士">博士</option>
-							<option value="本科">本科</option>
-						</select>
-					</a>
-					</li>
-                <li class="feature-list" id="feature-list-03">
-					<a href="javascript:void(0);" >
-						<select class="selectType" id="select_major" onChange="findByTips('','',$(this).val(),'','');">
-							<option value="土木工程">土木工程</option>
-							<option value="电子工程">电子工程</option>
-							<option value="金融工程">金融工程</option>
-							<option value="材料工程">材料工程</option>
-							<option value="计算机">计算机</option>
-							<option value="物理">物理</option>
-							<option value="金融">金融</option>							
-							<option value="心理">心理</option>
-							<option value="生物">生物</option>
-						</select>
-					</a>
-				</li>
-                <li class="feature-list" id="feature-list-04">
-					<a href="javascript:void(0);" >
-						<select class="selectType" id="select_like" onChange="findByTips('','','',$(this).val(),'');">
-							<option value="骑马">骑马</option>
-							<option value="赛车">赛车</option>
-							<option value="旅游">旅游</option>
-							<option value="摄影">摄影</option>
-							<option value="健身">健身</option>
-						</select>
-					</a>
-				</li>
-                <!--<li class="feature-list" id="feature-list-05"><a href="javascript:void(0);" onClick="findByTips('','','','',$(this).text());">金融</a></li>-->
-            </ul>
-        </div>
-        <div class="selected" id="selected">
-			<img src="http://image.1yingli.cn/img/choose.png" style="float:left;margin-top: 13px; margin-right: 10px; margin-left: 10px"/>
-            <p class="selected-title" id="selected-title">已选标签</p>
-            <ul class="selected-lists" id="selected-lists">
-                <li class="selected-list" id="selected-list-01">
-                    <div class="selected-condition">
-                        <p></p>
-                        <a href="javascript:void(0);"><img src="http://image.1yingli.cn/img/selected_condition_close.png" alt="" class="selected-condition-close" id="selected-condition-close-01"/></a>
-                    </div>
-                </li>
-                <li class="selected-list" id="selected-list-02">
-                    <div class="selected-condition">
-                        <p></p>
-                        <a href="javascript:void(0);"><img src="http://image.1yingli.cn/img/selected_condition_close.png" alt="" class="selected-condition-close" id="selected-condition-close-02"/></a>
-                    </div>
-                </li>
-                <li class="selected-list" id="selected-list-03">
-                    <div class="selected-condition">
-                        <p></p>
-                        <a href="javascript:void(0);"><img src="http://image.1yingli.cn/img/selected_condition_close.png" alt="" class="selected-condition-close" id="selected-condition-close-03"/></a>
-                    </div>
-                </li>
-                <li class="selected-list" id="selected-list-04">
-                    <div class="selected-condition">
-                        <p></p>
-                        <a href="javascript:void(0);"><img src="http://image.1yingli.cn/img/selected_condition_close.png" alt="" class="selected-condition-close" id="selected-condition-close-04"/></a>
-                    </div>
-                </li>
-                <li class="selected-list" id="selected-list-05">
-                    <div class="selected-condition">
-                        <p></p>
-                        <a href="javascript:void(0);"><img src="http://image.1yingli.cn/img/selected_condition_close.png" alt="" class="selected-condition-close" id="selected-condition-close-05"/></a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>	
-    <div class="result-content-header" id="result-content-header">
-        <div style="width:950px; margin:0 auto; padding-left: 20px;position: relative;">
-            <a href="javascript:void(0);" class="result-content-header-list" id="result-content-header-list-01" >综合<span style="display:none;">1</span></a>
-            <a href="javascript:void(0);" class="result-content-header-list" id="result-content-header-list-02" >喜爱<i class="arrow2"><img id="triangle-up02" style="margin-left:5px;"/></i><span style="display:none;">2</span></a>
-            <a href="javascript:void(0);" class="result-content-header-list" id="result-content-header-list-03" >价格<i class="arrow2"><img id="triangle-up03" style="margin-left:5px;"/></i><span style="display:none;">1</span></a>
-			<span style="border: 1px #56bbe8 solid;height: 24px;width: 295px;border-radius: 18px; background-color: #FFF;position: absolute; top: 14px;margin: 0px; padding: 0px;">
-				<input id="search-input1"  placeholder="例如：导师 / 学校 / 专业"  onkeydown="KeyDown1();" style="border: #FFFFFF;position: absolute;top: 2px;font-size: 12px;left: 10px;hieght: 20px;width: 260px;height: 20px; line-height: 20px;"/>
-				<img src="http://image.1yingli.cn/img/search_icon.png" width="24" style="position: absolute;left: 265px;cursor:pointer" onClick="searchByInput1();"/></span>
-        </div>
-    </div>
-    <div class="sercher_result" id="sercher_result">
-        <div class="one_person" >
-            <img src="http://image.1yingli.cn/img/logo.png" >
-            <div class="import_info">
-                <p class="person_topic"></p>
-                <p class="person_info"><span></span> </p>
-                <p class="person_likes"></p> 
-            </div>
-            <div class="price">
-                <p class="money"></p>
-                <p class="like"><img src=""></p>
-            </div>
-        </div>
-    </div>
-    <div class="page">
-        <a id="btnStart" href="javascript:firstPage()"><img src="http://image.1yingli.cn/img/firstPage.png"></a>
-        <a id="btnLast" href="javascript:lastPage()" style="padding: 0px;"><img src="http://image.1yingli.cn/img/lastPage.png"></a>
-        <a id="btnNext" href="javascript:nextPage();" style="padding: 0px;"><img src="http://image.1yingli.cn/img/nextPage.png"></a>
-        <a id="btnEnd" href="javascript:finalPage();"><img src="http://image.1yingli.cn/img/finalPage.png"></a>
-    </div>
-</div>
+<section class="subject">
+    <nav class="mobile-header" style="display: none;">
+        <label for="le" class="left"><img src="img/01.png" style="width:20px;height:20px;"></label>
 
-<div class="contact"></div>
-<div class="footer"></div>
+        <form class="center">
+            <input type="text" placeholder="搜人名、话题"
+                   style="width:60%;height:20px;margin-top:8px;border-bottom-left-radius: 18px;border-top-left-radius: 18px;padding-left:8px;float:left;border: 2px inset;">
+            <button style="width:35px;;height:23px;float:left;margin-top:9px;border-bottom-right-radius: 18px;border-top-right-radius: 18px;background-color: #56bbe8;border: 0;">
+                <img src="img/03.png"></button>
+        </form>
+        <label for="ri" class="right"><img src="img/02.png" style="width:20px;height:20px;"></label>
+    </nav>
+    <div class="header" id="header"></div>
+
+    <div class="condition" id="condition">
+        <div class="condition-box" id="condition-box">
+            <div class="hot-theme" id="hot-theme">
+                <ul class="hot-theme-lists" id="hot-theme-lists">
+                    <li class="hot-theme-list" id="hot-theme-list-01" onClick="findByTheme('', $(this).attr('id'));"><a
+                            id="hot-theme-list-a-01" href="javascript:void(0);"><p>全部</p></a></li>
+                    <li class="hot-theme-list" id="hot-theme-list-02"
+                        onClick="findByTheme($(this).find('a').text(), $(this).attr('id'));"><a id="hot-theme-list-a-02"
+                                                                                                href="javascript:void(0);">
+                        <p>留学领航</p></a></li>
+                    <li class="hot-theme-list" id="hot-theme-list-03"
+                        onClick="findByTheme($(this).find('a').text(), $(this).attr('id'));"><a id="hot-theme-list-a-03"
+                                                                                                href="javascript:void(0);">
+                        <p>求职就业</p></a></li>
+                    <li class="hot-theme-list" id="hot-theme-list-04"
+                        onClick="findByTheme($(this).find('a').text(), $(this).attr('id'));"><a id="hot-theme-list-a-04"
+                                                                                                href="javascript:void(0);">
+                        <p>创业助力</p></a></li>
+                    <li class="hot-theme-list" id="hot-theme-list-05"
+                        onClick="findByTheme($(this).find('a').text(), $(this).attr('id'));"><a id="hot-theme-list-a-05"
+                                                                                                href="javascript:void(0);">
+                        <p>校园生活</p></a></li>
+                    <li class="hot-theme-list" id="hot-theme-list-06"
+                        onClick="findByTheme($(this).find('a').text(), $(this).attr('id'));"><a id="hot-theme-list-a-06"
+                                                                                                href="javascript:void(0);">
+                        <p>猎奇分享</p></a></li>
+                </ul>
+            </div>
+            <div class="feature" id="feature">
+                <img src="http://image.1yingli.cn/img/good.png" style=""/>
+
+                <p class="feature-title" id="feature-title">特色标签</p>
+                <ul class="feature-lists" id="feature-lists">
+                    <li class="feature-list" id="feature-list-01">
+                        <a href="javascript:void(0);">
+                            <select class="selectType" id="select_Country"
+                                    onChange="findByTips($(this).val(),'','','','');">
+                                <option value="加拿大">加拿大</option>
+                                <option value="新加坡">新加坡</option>
+                                <option value="美国">美国</option>
+                                <option value="英国">英国</option>
+                                <option value="法国">法国</option>
+                            </select>
+                        </a>
+                    </li>
+                    <li class="feature-list" id="feature-list-02">
+                        <a href="javascript:void(0);">
+                            <select class="selectType" id="select_Position"
+                                    onChange="findByTips('',$(this).val(),'','','');">
+                                <option value="研究生">研究生</option>
+                                <option value="博士">博士</option>
+                                <option value="本科">本科</option>
+                            </select>
+                        </a>
+                    </li>
+                    <li class="feature-list" id="feature-list-03">
+                        <a href="javascript:void(0);">
+                            <select class="selectType" id="select_major"
+                                    onChange="findByTips('','',$(this).val(),'','');">
+                                <option value="土木工程">土木工程</option>
+                                <option value="电子工程">电子工程</option>
+                                <option value="金融工程">金融工程</option>
+                                <option value="材料工程">材料工程</option>
+                                <option value="计算机">计算机</option>
+                                <option value="物理">物理</option>
+                                <option value="金融">金融</option>
+                                <option value="心理">心理</option>
+                                <option value="生物">生物</option>
+                            </select>
+                        </a>
+                    </li>
+                    <li class="feature-list" id="feature-list-04">
+                        <a href="javascript:void(0);">
+                            <select class="selectType" id="select_like"
+                                    onChange="findByTips('','','',$(this).val(),'');">
+                                <option value="骑马">骑马</option>
+                                <option value="赛车">赛车</option>
+                                <option value="旅游">旅游</option>
+                                <option value="摄影">摄影</option>
+                                <option value="健身">健身</option>
+                            </select>
+                        </a>
+                    </li>
+                    <!--<li class="feature-list" id="feature-list-05"><a href="javascript:void(0);" onClick="findByTips('','','','',$(this).text());">金融</a></li>-->
+                </ul>
+            </div>
+            <div class="selected" id="selected">
+                <img src="http://image.1yingli.cn/img/choose.png"/>
+
+                <p class="selected-title" id="selected-title">已选标签</p>
+                <ul class="selected-lists" id="selected-lists">
+                    <li class="selected-list" id="selected-list-01">
+                        <div class="selected-condition">
+                            <p></p>
+                            <a href="javascript:void(0);"><img
+                                    src="http://image.1yingli.cn/img/selected_condition_close.png" alt=""
+                                    class="selected-condition-close" id="selected-condition-close-01"/></a>
+                        </div>
+                    </li>
+                    <li class="selected-list" id="selected-list-02">
+                        <div class="selected-condition">
+                            <p></p>
+                            <a href="javascript:void(0);"><img
+                                    src="http://image.1yingli.cn/img/selected_condition_close.png" alt=""
+                                    class="selected-condition-close" id="selected-condition-close-02"/></a>
+                        </div>
+                    </li>
+                    <li class="selected-list" id="selected-list-03">
+                        <div class="selected-condition">
+                            <p></p>
+                            <a href="javascript:void(0);"><img
+                                    src="http://image.1yingli.cn/img/selected_condition_close.png" alt=""
+                                    class="selected-condition-close" id="selected-condition-close-03"/></a>
+                        </div>
+                    </li>
+                    <li class="selected-list" id="selected-list-04">
+                        <div class="selected-condition">
+                            <p></p>
+                            <a href="javascript:void(0);"><img
+                                    src="http://image.1yingli.cn/img/selected_condition_close.png" alt=""
+                                    class="selected-condition-close" id="selected-condition-close-04"/></a>
+                        </div>
+                    </li>
+                    <li class="selected-list" id="selected-list-05">
+                        <div class="selected-condition">
+                            <p></p>
+                            <a href="javascript:void(0);"><img
+                                    src="http://image.1yingli.cn/img/selected_condition_close.png" alt=""
+                                    class="selected-condition-close" id="selected-condition-close-05"/></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="result-content-header" id="result-content-header">
+            <div>
+                <a href="javascript:void(0);" class="result-content-header-list"
+                   id="result-content-header-list-01">综合<span style="display:none;">1</span></a>
+                <a href="javascript:void(0);" class="result-content-header-list" id="result-content-header-list-02">喜爱<i
+                        class="arrow2"><img id="triangle-up02" style="margin-left:5px;"/></i><span
+                        style="display:none;">2</span></a>
+                <a href="javascript:void(0);" class="result-content-header-list" id="result-content-header-list-03">价格<i
+                        class="arrow2"><img id="triangle-up03" style="margin-left:5px;"/></i><span
+                        style="display:none;">1</span></a>
+			<span id="search-input1-span">
+				<input id="search-input1" placeholder="例如：导师 / 学校 / 专业" onkeydown="KeyDown1();"/>
+				<img src="http://image.1yingli.cn/img/search_icon.png" width="24" onClick="searchByInput1();"/></span>
+            </div>
+        </div>
+        <div class="sercher_result" id="sercher_result">
+            <div class="one_person">
+                <img src="http://image.1yingli.cn/img/logo.png">
+
+                <div class="import_info">
+                    <p class="person_topic"></p>
+
+                    <p class="person_info"><span></span></p>
+
+                    <p class="person_likes"></p>
+                </div>
+                <div class="price">
+                    <p class="money"></p>
+
+                    <p class="like"><img src=""></p>
+                </div>
+            </div>
+        </div>
+        <div class="page">
+            <a id="btnStart" href="javascript:firstPage()"><img src="http://image.1yingli.cn/img/firstPage.png"></a>
+            <a id="btnLast" href="javascript:lastPage()" style="padding: 0px;"><img
+                    src="http://image.1yingli.cn/img/lastPage.png"></a>
+            <a id="btnNext" href="javascript:nextPage();" style="padding: 0px;"><img
+                    src="http://image.1yingli.cn/img/nextPage.png"></a>
+            <a id="btnEnd" href="javascript:finalPage();"><img src="http://image.1yingli.cn/img/finalPage.png"></a>
+        </div>
+    </div>
+
+    <div class="contact"></div>
+    <div class="footer"></div>
+</section>
 <script type="text/javascript">
     //下拉菜单
     var hit = 10; // 显示的下拉提示列表的长度
-    setTimeout(function() {
+    setTimeout(function () {
         $("#search-input1").autocomplete({
             delay: 0,
-            source: function(request, response) {
+            source: function (request, response) {
                 var toSend = new Object();
                 toSend.style = "function";
                 toSend.method = "getSearchHint";
-                toSend.word = $( "#search-input1" ).val();
+                toSend.word = $("#search-input1").val();
                 $.ajax({
                     url: config.base_url,
-                    type : "POST",
+                    type: "POST",
                     dataType: 'json',
                     data: $.toJSON(toSend),
-                    success: function(data) {
-                        if(data.status === 'OK' && data.result) {
-                            if(data.result.length >= hit) {
+                    success: function (data) {
+                        if (data.status === 'OK' && data.result) {
+                            if (data.result.length >= hit) {
                                 response(data.result.slice(0, hit));
                             } else {
                                 response(data.result);
                             }
-                        } else if( data.status === 'FAIL' && data.errors ){
+                        } else if (data.status === 'FAIL' && data.errors) {
                             //alert(data.errors[0].message);
                         }
                     }
                 });
             }
         }).bind("input.autocomplete", function () {
-            $( "#search-input1" ).autocomplete("search", $( "#search-input1" ).val());
+            $("#search-input1").autocomplete("search", $("#search-input1").val());
         }).focus();
     }, 0);
-	
-	//默认国家选择
-	var tips1 = decodeURIComponent($_GET('tip1'));
-	if(tips1 && tips1!="null"){
-		$("#select_Country").val(tips1);
-	} else {
-		$("#select_Country").val("加拿大");
-	}
-	//默认学历选择
-	var tips2 = decodeURIComponent($_GET('tip2'));
-	if(tips2 && tips2!="null"){
-		$("#select_Position").val(tips2);
-	} else {
-		$("#select_Position").val("研究生");
-	}
-	//默认学历选择
-	var tips3 = decodeURIComponent($_GET('tip3'));
-	if(tips3 && tips3!="null"){
-		$("#select_major").val(tips3);
-	} else {
-		$("#select_major").val("土木工程");
-	}
-	//默认兴趣选择
-	var tips4 = decodeURIComponent($_GET('tip4'));
-	if(tips4 && tips4!="null"){
-		$("#select_like").val(tips4);
-	} else {
-		$("#select_like").val("骑马");
-	}
+
+    //默认国家选择
+    var tips1 = decodeURIComponent($_GET('tip1'));
+    if (tips1 && tips1 != "null") {
+        $("#select_Country").val(tips1);
+    } else {
+        $("#select_Country").val("加拿大");
+    }
+    //默认学历选择
+    var tips2 = decodeURIComponent($_GET('tip2'));
+    if (tips2 && tips2 != "null") {
+        $("#select_Position").val(tips2);
+    } else {
+        $("#select_Position").val("研究生");
+    }
+    //默认学历选择
+    var tips3 = decodeURIComponent($_GET('tip3'));
+    if (tips3 && tips3 != "null") {
+        $("#select_major").val(tips3);
+    } else {
+        $("#select_major").val("土木工程");
+    }
+    //默认兴趣选择
+    var tips4 = decodeURIComponent($_GET('tip4'));
+    if (tips4 && tips4 != "null") {
+        $("#select_like").val(tips4);
+    } else {
+        $("#select_like").val("骑马");
+    }
 </script>
 </body>
 </html>
