@@ -9,42 +9,39 @@ function _getRandomString(len) {
     return pwd;
 }
 
-//微信菜单
-$.ajax({
-    cache: true,
-    type: "GET",
-    url: "http://service.1yingli.cn/GetACCESSTOKEN/getAT",
-    data: "",
-    async: false,
-    error: function (request) {
-        //alert("Connection error");
-    },
-    success: function (data, textStatu) {
-        var json = eval("(" + data + ")");
-        // var json = $.parseJSON(data);
-        var ticket1 = json.ticket;
-        var timestamp1 = parseInt((new Date()).valueOf() / 1000);
-        var noncestr1 = _getRandomString(16);
+var onReady = function (teacher) {
+    //微信菜单
+    $.ajax({
+        cache: true,
+        type: "GET",
+        url: "http://service.1yingli.cn/GetACCESSTOKEN/getAT",
+        data: "",
+        async: false,
+        error: function (request) {
+            //alert("Connection error");
+        },
+        success: function (data, textStatu) {
+            var json = eval("(" + data + ")");
+            // var json = $.parseJSON(data);
+            var ticket1 = json.ticket;
+            var timestamp1 = parseInt((new Date()).valueOf() / 1000);
+            var noncestr1 = _getRandomString(16);
 
-        var str = "jsapi_ticket=" + ticket1 + "&noncestr=" + noncestr1 + "&timestamp=" + timestamp1 + "&url=" + location.href.split('#')[0];
-        var signature1 = $.sha1(str);
-        wx.config({
-            debug: true,
-            appId: 'wxd042cdef58e2e669',
-            timestamp: timestamp1,
-            nonceStr: noncestr1,
-            signature: signature1,
-            jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage']
-        });
-    }
-});
+            var str = "jsapi_ticket=" + ticket1 + "&noncestr=" + noncestr1 + "&timestamp=" + timestamp1 + "&url=" + location.href.split('#')[0];
+            var signature1 = $.sha1(str);
+            wx.config({
+                debug: false,
+                appId: 'wxd042cdef58e2e669',
+                timestamp: timestamp1,
+                nonceStr: noncestr1,
+                signature: signature1,
+                jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage']
+            });
+        }
+    });
 
-
-var onReady;
-wx.ready(function () {
-    //微信分享设置
-
-    onReady = function (teacher) {
+    wx.ready(function () {
+        //微信分享设置
         wx.onMenuShareTimeline({
             title: "【一英里导师】" + teacher.name + "(" + teacher.simpleinfo + ")", // 分享标题
             link: window.location.href, // 分享链接
@@ -75,5 +72,5 @@ wx.ready(function () {
                 //alert("cancel2");
             }
         });
-    }
-});
+    });
+};

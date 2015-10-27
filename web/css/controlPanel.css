@@ -74,7 +74,7 @@ header,footer,section {display:block;}
 .right-top{width: 682px;height: 45px;line-height: 45px;border: 1px solid rgba(0,0,0,0.15);}
 .right-top-item{width: 150px;height: 45px;line-height: 45px;margin: 0 10px;float: left;}
 .right-top-item-link{display: inline-block;width: 150px;height: 45px;line-height: 45px;position: relative;overflow: hidden;text-decoration: none}
-.right-top-item-link-icon{  width: 46px;position: absolute;left: 0;top: -34px;float: left;  }
+.right-top-item-link-icon1{  width: 46px;position: absolute;left: 0;top: -34px;float: left;  }
 .right-top-item-link-span{display: inline-block;width: 100px;height: 45px;line-height: 45px;margin-left: 46px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;color: rgba(0,0,0,0.3);}
 .right-top-item-link-span-p{  display: inline-block;width: 60px;height: 45px;line-height: 45px;  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;color: rgba(0,0,0,0.3);}
 
@@ -160,9 +160,6 @@ header,footer,section {display:block;}
     .content{
     	width: 100%;
     }
-    .content-container{
-    	min-width: 400px;
-    }
     .content-right{
     	width: 90%;
     	padding: 0 5%;
@@ -194,6 +191,6 @@ header,footer,section {display:block;}
     	color: #000;
     }
     .content-container{
-    	min-width: 200px;
+    	min-width: 200px !important
     }
 }

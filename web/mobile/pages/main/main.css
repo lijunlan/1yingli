@@ -342,19 +342,31 @@
 }
 
 .iframe {
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 100;
+    z-index: 1000;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    padding: 5% 10%;
+    padding: 10%;
     box-sizing: border-box;
-    /*display: none;*/
+    display: none;
 }
+
+.blackBg {
+    position: fixed;
+    width: 100%;
+    height: 200%;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
 
 .iframe .box {
     background: white;
@@ -370,6 +382,15 @@
     top: -18px;
     height: 30px;
     width: 30px;
+}
+
+.iframe .box .header .pic {
+    text-align: center;
+}
+
+.iframe .box .header .pic img {
+    width: 20px;
+    height: 20px;
 }
 
 .iframe .box .header {
@@ -409,6 +430,10 @@
 
 #step1 {
     display: none;
+}
+
+#step1 .header {
+    height: 20px;
 }
 
 #step1 .content h1 {
@@ -510,65 +535,78 @@
     color: white;
 }
 
+#step3 {
+    display: none;
+}
+
+#step3 .header {
+    height: 10px;
+}
+
 #step3 .content h1 {
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: normal;
     line-height: 26px;
 }
 
-#step3 .content p {
+#step3 .select {
     text-align: center;
-    line-height: 26px;
-    color: #999999;
+    position: relative;
+}
+
+#step3 .select img {
+    padding-left: 20px;
+    width: 50%;
+}
+
+#step3 .select input {
+    position: absolute;
+    top: 50%;
+    margin-top: -6px;
+    border: solid 10px rgba(0,0,0,0);
+}
+
+#step3 #canclePay {
+    background: #aaaaaa;
 }
 
 #step4 {
     display: none;
 }
 
-#step4 .header {
-    height: 10px;
-}
-
 #step4 .content h1 {
     text-align: center;
+    font-weight: normal;
     font-size: 14px;
+}
+
+#step4 button {
+    border: hidden;
+}
+
+#step5-1, #step5-2 {
+    display: none;
+}
+
+#step5-1 .content .pic, #step5-2 .content .pic {
+    text-align: center;
+}
+
+#step5-1 .content .pic img, #step5-2 .content .pic img {
+    height: 45px;
+    width: 45px;
+}
+
+#step5-2 .content h1, #step5-1 .content h1 {
+    text-align: center;
+    font-size: 16px;
     font-weight: normal;
     line-height: 26px;
 }
 
-#step4 .select {
+#step5-2 .content p, #step5-1 .content p {
     text-align: center;
-    position: relative;
-}
-
-#step4 .select img {
-    padding-left: 20px;
-    width: 50%;
-    height: 50%;
-}
-
-#step4 .select input {
-    position: absolute;
-    top: 50%;
-    margin-top: -6px;
-}
-
-#step4 #canclePay {
-    background: #aaaaaa;
-}
-
-#step5 {
-    display: none;
-}
-
-#step5 .content h1 {
-    text-align: center;
-    font-weight: normal;
-    font-size: 14px;
-}
-
-#step5 button{
-    border: hidden;
+    line-height: 26px;
+    color: #999999;
 }
