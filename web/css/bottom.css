@@ -71,20 +71,20 @@
 
     }
 
-    #le:checked ~ section {
-        transform: translateX(260px);
+    #le:checked ~ .subject {
+        -webkit-transform: translate3d(260px,0,0);
+        transform: translate3d(260px,0,0);
     }
 
     #le:checked ~ .sidenav b {
         opacity: 1;
         transform: translateX(0);
-
-
     }
     #le:checked ~ .sidenav {
         box-shadow: -8px 0 8px #ccc inset;
         display: block;
         background-color: #FFF;
+        z-index: 100;
     }
     
     #ri {
@@ -124,7 +124,8 @@
         line-height: 48px;
     }
     #ri:checked ~ section {
-        transform: translateX(-260px);
+        -webkit-transform: translate3d(-260px,0,0);
+        transform: translate3d(-260px,0,0);
 
     }
 

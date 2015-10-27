@@ -1299,7 +1299,7 @@ abbr,acronym { border:0;
     .face{
         width: 100%;
         height: 5rem;
-        text-align: center;
+        /*text-align: center;*/
     }
     .info ul{
         width: 100%;
@@ -1325,10 +1325,25 @@ abbr,acronym { border:0;
         width: 100%;
         margin: 0px;
     }
-    #ticonUrl{
-        width: 6rem;
-        height: auto;
+
+    .face span {
+        position: absolute;
+        left: 50%;
         margin-left: -3rem;
+        width: 6rem;
+        height: 6rem;
+        margin-top: -40px;
+        padding: 7px;
+        background: white;
+        border-radius: 50%;
+    }
+
+    #ticonUrl{
+        width: 100%;
+        height: auto;
+        border: none;
+        margin: 0;
+        position: relative;
     }
     .content-left-topic{
         width: 100%;
