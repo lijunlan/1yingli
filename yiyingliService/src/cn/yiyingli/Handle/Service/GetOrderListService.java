@@ -86,6 +86,7 @@ public class GetOrderListService extends MsgService {
 			map.put("createTime", o.getCreateTime());
 			map.put("title", o.getServiceTitle());
 			map.put("price", o.getMoney());
+			map.put("originPrice", o.getOriginMoney());
 			map.put("time", o.getTime());
 			map.put("teacherId", o.getTeacher().getId());
 			map.put("teacherName", o.getTeacher().getName());
