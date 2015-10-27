@@ -11,6 +11,10 @@ app.service('HttpService', ['$http', '$rootScope', function ($http,$rootScope) {
                 // alert("Connection error");
             },
             success: function (data, textStatu) {
+                if($_ToJson(data).state == "error") {
+                    alert($_ToJson(data).msg);
+                    return;
+                }
                 callback($_ToJson(data));
                 $rootScope.$digest();
             }

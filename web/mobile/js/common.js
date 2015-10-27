@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     FastClick.attach(document.body);
 });
 
@@ -10,7 +10,7 @@ function remove() {
     event.preventDefault();
 }
 
-var app = angular.module('app', ['ngRoute','ngTouch']);
+var app = angular.module('app', ['ngRoute', 'ngTouch']);
 
 app.filter('shortTime', function () {
     return function (inputString) {
@@ -29,7 +29,11 @@ app.config(['$httpProvider', function ($httpProvider) {
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-        .when("/main/:tid", {
+        .when("/main/:tid/", {
+            templateUrl: "pages/main/main.html",
+            controller: "MainController"
+        })
+        .when("/main/:tid/:callback", {
             templateUrl: "pages/main/main.html",
             controller: "MainController"
         })
