@@ -78,7 +78,7 @@ public class ReturnServlet extends HttpServlet {
 			// 根据之前传的callback参数修改callback
 			String tmp = results.get("CUSTOM");
 			String callback[] = tmp.split("\\|");
-			if (callback[1] != null) {
+			if (callback.length != 1) {
 				page = callback[1];
 			} else {
 				page = "http://www.1yingli.cn/yourTutor.html";

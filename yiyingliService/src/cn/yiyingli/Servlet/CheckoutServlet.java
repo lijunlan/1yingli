@@ -37,12 +37,15 @@ public class CheckoutServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -2722761580200224133L;
 
-	private static final String page = "http://www.1yingli.cn/yourTutor.html";
+	private static String page = "http://www.1yingli.cn/yourTutor.html";
 
 	// private static final String testPage =
 	// "http://testweb.1yingli.cn/yourTutor.html";
 
 	private static final String resultParameter = "?paymentResult=";
+
+	// 当payapl链接失败返回的网页
+	private static final String connectError = "<!DOCTYPE html><html lang=\"en\"><head>    <meta charset=\"UTF-8\">    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">    <title>你的导师</title>    <link rel=\"Shortcut Icon\" href=\"http://image.1yingli.cn/img/logo0.png\">    <link rel=\"Bookmark\" href=\"http://image.1yingli.cn/img/logo0.png\">    <style type=\"text/css\">    	#succ{    		width: 400px;height: 200px;margin: auto;position: fixed;top: 50%;left: 50%;margin-top:-150px;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; border:1px solid #D2D2D2    	}    	.succ_title{    	  width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;    	}    	.succ_title div{    	  font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;    	}    	.succ_content{    		position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;    	}    	#succ a{    		text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;    	}    </style></head><body>	<div id=\"succ\">    	<div class=\"succ_title\"><div>来自一英里的信息</div></div>    	<div class=\"succ_content\">支付连接超时，请重新支付。</div>    	<a href=\"http://www.1yingli.cn/yourTutor.html\">确定</a>		</div></body>";
 
 	private ApplicationContext applicationContext;
 
@@ -105,7 +108,7 @@ public class CheckoutServlet extends HttpServlet {
 		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0", URLEncoder.encode(order.getServiceTitle(), "UTF-8"));
 		// 货物id，这里填写的是导师id
 		checkoutDetails.put("L_PAYMENTREQUEST_0_NUMBER0", order.getTeacher().getId().toString());
-		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0", URLEncoder.encode("【一英里】"+order.getServiceTitle(), "UTF-8"));
+		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0", URLEncoder.encode("【一英里】" + order.getServiceTitle(), "UTF-8"));
 		checkoutDetails.put("L_PAYMENTREQUEST_0_QTY0", "1");
 		// 商品价格
 		float price = order.getMoney();
@@ -114,7 +117,7 @@ public class CheckoutServlet extends HttpServlet {
 		price = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
 		if (price < 0.01)
 			price = (float) 0.01;
-		
+
 		checkoutDetails.put("PAYMENTREQUEST_0_ITEMAMT", price + "");
 		checkoutDetails.put("PAYMENTREQUEST_0_HANDLINGAMT", "0");
 		// 包括税款，手续费（这些我们都是零）的总金额
@@ -122,9 +125,11 @@ public class CheckoutServlet extends HttpServlet {
 		// 我们的订单号,以及微信端回调页面（可选）
 		if (request.getParameter("callback") == null) {
 			checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM", request.getParameter("oid"));
+			page = "http://www.1yingli.cn/yourTutor.html";
 		} else {
 			checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM",
 					request.getParameter("oid") + "|" + request.getParameter("callback"));
+			page=request.getParameter("callback");
 		}
 		checkoutDetails.put("REQCONFIRMSHIPPING", "0");
 		checkoutDetails.put("NOSHIPPING", "1");
@@ -136,7 +141,7 @@ public class CheckoutServlet extends HttpServlet {
 		session = request.getSession();
 		Map<String, String> nvp = paypal.callShortcutExpressCheckout(checkoutDetails, returnURL, cancelURL);
 		if (nvp == null) {
-			returnMsg(response, MsgUtil.getErrorMsg("fail to connect to PayPal, try again later"));
+			returnMsg(response, connectError);
 			return;
 		}
 		session.setAttribute("checkoutDetails", checkoutDetails);
@@ -166,6 +171,7 @@ public class CheckoutServlet extends HttpServlet {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private Map<String, String> setRequestParams(HttpServletRequest request) {
 		Map<String, String> requestMap = new HashMap<String, String>();
 		for (String key : request.getParameterMap().keySet()) {
