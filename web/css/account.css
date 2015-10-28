@@ -157,7 +157,7 @@ header,footer,section {display:block;}
 		display: none;
 	}
 	.content-container{
-		min-height: 300px !important;
+		min-height: 500px !important;
 		min-width: 200px !important;
 	}
 	.content{

@@ -1,6 +1,3 @@
-@media (min-width: 768px){
-    
-}
 @media (max-width: 380px){
     .name {
         width: 130px !important;
@@ -51,7 +48,7 @@
         width: 20% !important;
     }
     .Tutor-05 {
-        width: 29.5% !important;
+        width: 29.3% !important;
     }
 }
 @media (max-width: 768px){
@@ -116,10 +113,83 @@
         border: 1px solid #CCC !important;
         border-radius: 3px !important;
         width: 99.3% !important;
-        margin-left: 0px;
+        margin-left: 0px !important;
     }
     .page {
         text-align: center !important;
+    }
+
+    .details {
+        width: 90% !important;
+        border-radius: 10px;
+        left: 0px !important;
+        top: 0px !important;
+        margin-left: 5% !important;
+        margin-top: 80px !important;
+        min-width: 290px !important;
+        position: absolute !important;
+    }
+
+    .details div:nth-of-type(1) div:nth-of-type(1) {
+        width: 100% !important;
+    }
+
+    .details div:nth-of-type(2) {
+        width: 263px !important;
+        height: 160px !important;
+        margin: 5% 0 0 10px !important;
+        float: none !important;
+        margin: 0 auto !important;
+    }
+
+    .details div:nth-of-type(2) div:nth-of-type(2) {
+        width: 110px !important;
+        height: 30px !important;
+        line-height: 30px !important;
+        margin: 65px 0 0 0 !important;
+        float:  left !important;
+        font-size: 20px !important;
+        text-align: left !important;
+    }
+
+    .details div:nth-of-type(2) div:nth-of-type(3) {
+        width: 110px !important;
+        height: 30px !important;
+        margin: 10px 0 0 0 !important;
+        line-height: 30px;
+        font-size: 20px !important;
+        text-align: left !important;
+    }
+    .details div:nth-of-type(3) {
+        width: 90% !important;
+        margin: 10px 0 0 5% !important;
+    }
+    .details div:nth-of-type(3) p:nth-of-type(2) {
+        width: 100% !important;
+    }
+    .details div:nth-of-type(4) {
+        width: 90% !important;
+        margin: 10px 0 0 5% !important;
+    }
+    .details div:nth-of-type(4) p:nth-of-type(2) {
+        width: 100% !important;
+    }
+    .details div:nth-of-type(5) {
+        width: 90% !important;
+        margin: 10px 0 0 5% !important;
+    }
+    .details div:nth-of-type(5) p:nth-of-type(2) {
+        width: 100% !important;
+    }
+    .details div:nth-of-type(6) {
+        width: 90% !important;
+        margin: 20px 0 20px 5% !important;
+    }
+    .details div:nth-of-type(7) {
+        width: 100% !important;
+    }
+    .details div:nth-of-type(7) div:nth-of-type(1) {
+        width: 100% !important;
     }
 }
 
@@ -463,7 +533,6 @@ header,footer,section {display:block;}
 
 .details{      
 	width: 822px;
-    height: 557px;
     background: #FFf;
     border-radius: 10px;
     position: fixed;
@@ -474,6 +543,99 @@ header,footer,section {display:block;}
     margin-top: -278.5px;
     display: none; 
 }
+.details div:nth-of-type(1) div:nth-of-type(1){    
+    width:822px; height:34px;border-top-left-radius:10px;border-top-right-radius:10px;background-color:#eeeeee;text-align: -webkit-center;
+}
+
+.details div div:nth-of-type(1){    
+    width:240px;height:20px;font-size: 16px; color: #000;font-weight: bolder;padding-top: 10px;overflow:hidden; white-space: nowrap; text-overflow:ellipsis;
+}
+
+.details div:nth-of-type(2){  
+    width:173px; height:440px;margin:49px 0 0 60px;float:left;
+}
+
+.details div:nth-of-type(2) div:nth-of-type(1) {  
+   width:153px; height:153px; border-radius:10px;float:left;
+}
+
+.details div:nth-of-type(2) div:nth-of-type(1) img{  
+   width:133px; height:133px; border-radius: 8px;
+}
+
+.details div:nth-of-type(2) div:nth-of-type(2) {  
+   width:173px; height:30px; font-size:16px; text-align:center; border-radius:10px;float:left;margin:10px 0 0 0;
+}
+
+.details div:nth-of-type(2) div:nth-of-type(3) {  
+   width:173px; height:30px; font-size:42px; text-align:center; border-radius:10px;float:left;margin:30px 0 0 0;
+}
+
+.details div:nth-of-type(3){  
+    width:533px; height:120px; background-color:#FFF;float:left;margin:49px 0 0 37px;
+}
+
+.details div:nth-of-type(3) p:nth-of-type(1){  
+    font-size:16px;font-weight: bolder;
+}
+
+.details div:nth-of-type(3) p:nth-of-type(2){  
+    width:520px;height:97px;border:1px solid #eeeeee;margin: 0;overflow-y: auto;overflow-x: hidden;word-break: break-word;
+}
+
+.details div:nth-of-type(4){  
+    width:533px; height:120px; background-color:#FFF;float:left;margin:20px 0 0 37px;
+}
+
+.details div:nth-of-type(4) p:nth-of-type(1){  
+    font-size:16px;font-weight: bolder;
+}
+
+.details div:nth-of-type(4) p:nth-of-type(2){  
+    width:520px;height:97px;border:1px solid #eeeeee;margin: 0;overflow-y: auto;overflow-x: hidden;word-break: break-word;
+}
+
+.details div:nth-of-type(5){  
+    width:533px; height:50px; background-color:#FFF;float:left;margin:20px 0 0 37px;
+}
+
+.details div:nth-of-type(5) p:nth-of-type(1){  
+    font-size:16px;font-weight: bolder;
+}
+
+.details div:nth-of-type(5) p:nth-of-type(2){  
+    width:520px;height:35px;border:1px solid #eeeeee;margin: 0;overflow-y: auto;overflow-x: hidden;word-break: break-word;
+}
+
+
+.details div:nth-of-type(6){  
+    width:533px; background-color:#FFF;float:left;margin:20px 0 20px 37px;
+}
+
+.details div:nth-of-type(6) p:nth-of-type(1){  
+    font-size:16px;font-weight: bolder;
+}
+
+.details div:nth-of-type(6) p:nth-of-type(2){
+    width:150px;height:15px;font-size:13px;margin:5px 20px 0 0; float:left;
+}
+
+.details div:nth-of-type(6) p:nth-of-type(3){  
+    width:150px;height:15px;font-size:13px;margin:5px 20px 0 0; float:left;
+}
+
+.details div:nth-of-type(6) p:nth-of-type(4){  
+    width:180px;height:15px;font-size:13px;margin:5px 0 0 0; float:left;
+}
+
+.details div:nth-of-type(7){  
+    width:822px; height:34px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;background-color:#eeeeee;text-align: -webkit-center;float:left;
+}
+
+.details div:nth-of-type(7) div:nth-of-type(1){  
+    width:400px;height:20px;font-size: 14px; color: #000; padding-top: 8px;
+}
+
 .details1{  width: 684px;height: 496px;background: #56bbe8;border-radius: 10px;position: absolute;left: 30%;top: 510px;z-index: 100;display: none;  }
 
 .detail-title{  width: 684px;height: 80px;line-height: 80px;  }

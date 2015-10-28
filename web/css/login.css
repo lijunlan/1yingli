@@ -64,13 +64,13 @@ body{
     padding-top: 100px;
 }
 .container{
-    width: 354px;
+    width: 304px;
     min-height: 400px;
     margin: 0 auto;
     background: rgba(255,255,255,0.9);
     border-radius: 8px;
     position: absolute;left: 50%;
-    margin-left: -177px;
+    margin-left: -152px;
 }
 @keyframes moveContainer {
     0%{
@@ -83,7 +83,7 @@ body{
     }
 }
 .container-top{
-    width: 352px;
+    width: 302px;
     margin: 0 auto;
     border-bottom: 1px solid rgba(0,0,0,0.2);
     padding-bottom: 15px;
@@ -101,7 +101,7 @@ body{
     height: 33px;
     line-height: 33px;
     margin: 0 auto;
-    margin-left: 40px;
+    margin-left: 18px;
     /*margin-bottom: 8px;*/
     background: #56bbe8;
     border-radius: 8px;
@@ -113,7 +113,7 @@ body{
     height: 33px;
     line-height: 33px;
     margin: 0 auto;
-    margin-left: 40px;
+    margin-left: 18px;
     /*margin-bottom: 12px;*/
     background: #56bbe8;
     border-radius: 8px;
@@ -144,7 +144,7 @@ body{
     font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
 }
 #container-bottom{
-    width: 352px;
+    width: 302px;
     margin: 0 auto;
 }
 #login-form{
@@ -154,7 +154,7 @@ body{
      width: 263px;
      height: 31px;
      line-height: 33px;
-     margin: 15px 40px 8px 40px;
+     margin: 15px 18px 8px 18px;
      background: white;
      border-radius: 0px;
      border: 1px solid rgba(0,0,0,0.3);
@@ -164,7 +164,7 @@ body{
     width: 263px;
     height: 31px;
     line-height: 33px;
-    margin: 0 40px 8px 40px;
+    margin: 0 18px 8px 18px;
     background: white;
     border-radius: 0px;
     border: 1px solid rgba(0,0,0,0.3);
