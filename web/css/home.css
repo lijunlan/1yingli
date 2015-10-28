@@ -1,0 +1,93 @@
+
+#mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    html {
+        background: #f0f0f0 !important;
+    }
+
+    #mobile {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    #pc {
+        display: none;
+    }
+
+    body {
+        background: url('http://image.1yingli.cn/img/mobile-home-new.png') no-repeat 100% 100%;
+        background-size: 100%;
+    }
+
+    #mobile header img {
+        width: 80px;
+        padding: 10px;
+    }
+
+    .home-text {
+        width: 100%;
+        position: absolute;
+        top: 100px;
+    }
+
+    #mobile header span {
+        float: right;
+        padding: 10px;
+        color: #41B9EE;
+    }
+
+    #mobile .mobile-bottom {
+        position: absolute;
+        text-align: center;
+        bottom: -100px;
+        width: 100%;
+        color: #cccccc;
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    #mobile .mobile-bottom h1 {
+        font-size: 20px;
+        /*padding: 10px;*/
+    }
+
+    #mobile .mobile-bottom h3 {
+        font-size: 14px;
+        padding: 5px;
+    }
+
+    #mobile .mobile-bottom h4, #mobile .mobile-bottom h2 {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+
+    .mobile-search {
+        position: absolute;
+        top: 170px;
+        left: 50%;
+        width: 180px;
+        height: 20px;
+        margin-left: -90px;
+    }
+    .mobile-search input {
+        width: 180px;
+        height: 20px;
+        border-radius: 10px;
+        padding: 5px 10px;
+        border: 1px inset;
+        font-size: 12px;
+    }
+
+    .mobile-search img {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 20px;
+    }
+
+
+
+}
