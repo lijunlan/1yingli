@@ -359,3 +359,8 @@ function firstPage(){
    		refreshPage(1);
     }
 }
+
+function mobile_search() {
+    var findName1 = encodeURIComponent(encodeURIComponent($("#mobile_search").val()));
+    self.location = 'search.html?findName1=' + findName1;
+}

@@ -950,6 +950,7 @@ em {
 .person_info {
     font-size: 16px;
     line-height: 30px;
+    padding-top: 2px;
 }
 
 .person_likes {
@@ -960,6 +961,7 @@ em {
 .person_info span {
     color: #AFAFAF;
     height: 25px;
+    font-size: 12px;
 }
 
 .like {
@@ -1055,12 +1057,13 @@ em {
         top: 3px;
         line-height: 30px;
         height: 30px;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: normal;
     }
 
     #feature > img, #selected > img {
-        margin: 6px 0 0 0;
+        margin: 8px 0 0 0;
+        width: 20px;
     }
 
     .feature-list {
@@ -1085,10 +1088,10 @@ em {
     #selected-title {
         float: none;
         position: relative;
-        left: 3px;
+        left: 5px;
         line-height: 30px;
         height: 30px;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: normal;
     }
 
@@ -1129,7 +1132,8 @@ em {
 
     #result-content-header {
         position: relative;
-        height: 50px;
+        height: 40px;
+        line-height: 40px;
     }
 
     #result-content-header > div {
@@ -1143,10 +1147,10 @@ em {
         margin: 0;
         width: 32%;
         box-sizing: border-box;
-        height: 40px;
+        height: 30px;
         border: 0;
         background: #f8f8f8;
-        line-height: 40px;
+        line-height: 30px;
         border-radius: 0;
     }
 
@@ -1217,8 +1221,8 @@ em {
     }
 
     .one_person .price .money {
-        top: 45px;
-        font-size: 14px;
+        top: 50px;
+        font-size: 12px;
         left: 68px;
         margin-top: 0;
     }
@@ -1242,6 +1246,7 @@ em {
     .one_person .price .times {
         left: 68px;
         bottom: 3px;
+        font-size: 12px;
     }
 
     .page .pager {
