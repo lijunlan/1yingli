@@ -192,6 +192,8 @@ public class ReturnServlet extends HttpServlet {
 						price /= 6;
 						BigDecimal b = new BigDecimal(price);
 						price = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+						if(price<0.01)
+							price = 0.01F;
 						if (!(Float.parseFloat(result.get("PAYMENTREQUEST_0_AMT")) == price)) {
 							LogUtil.error("Return from Paypal and order id:" + oid + ", price is wrong, it should be "
 									+ order.getMoney() + ", but it is "
