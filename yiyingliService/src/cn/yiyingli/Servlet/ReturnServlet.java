@@ -77,7 +77,7 @@ public class ReturnServlet extends HttpServlet {
 			 */
 			Map<String, String> results = pp.getShippingDetails(token);
 			// 根据之前传的callback参数修改callback
-			String tmp = results.get("CUSTOM");
+			String tmp = results.get("PAYMENTREQUEST_0_CUSTOM");
 			String callback[] = tmp.split("\\|");
 			if (callback.length != 1) {
 				page = callback[1];
