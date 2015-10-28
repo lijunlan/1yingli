@@ -1,6 +1,7 @@
 package cn.yiyingli.Servlet;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -168,7 +169,11 @@ public class ReturnServlet extends HttpServlet {
 							return;
 						}
 						// 检查订单款项是否正确
-						if (!(Float.parseFloat(result.get("PAYMENTREQUEST_0_AMT")) == order.getMoney())) {
+						float price = order.getMoney();
+						price /= 6;
+						BigDecimal b = new BigDecimal(price);
+						price = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+						if (!(Float.parseFloat(result.get("PAYMENTREQUEST_0_AMT")) == price)) {
 							LogUtil.error("Return from Paypal and order id:" + oid + ", price is wrong, it should be "
 									+ order.getMoney() + ", but it is "
 									+ Float.parseFloat(result.get("PAYMENTREQUEST_0_AMT")), this.getClass());
