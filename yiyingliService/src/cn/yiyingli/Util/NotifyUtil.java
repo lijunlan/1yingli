@@ -25,7 +25,7 @@ public class NotifyUtil {
 			SendMessageUtil.sendMessage(phone, message);
 		}
 		if (CheckUtil.checkEmail(email)) {
-			SendMailUtil.sendMessage(email, message);
+			SendMailUtil.sendMessage(email, "订单状态改变通知", message);
 		}
 		// web
 		sendNotification(user, notificationService, message);
@@ -37,7 +37,7 @@ public class NotifyUtil {
 	}
 
 	public static boolean notifyBD(String msg) {
-		SendMailUtil.sendMessage("boom@1yingli.cn", msg);
+		SendMailUtil.sendMessage("boom@1yingli.cn", "订单状态通知", msg);
 		return true;
 	}
 
@@ -49,7 +49,7 @@ public class NotifyUtil {
 			SendMessageUtil.sendMessage(phone, m2);
 		}
 		if (CheckUtil.checkEmail(email)) {
-			SendMailUtil.sendMessage(email, m1);
+			SendMailUtil.sendMessage(email, "订单状态改变通知", m1);
 		}
 		// web
 		sendNotification(teacher, notificationService, m1);

@@ -245,7 +245,7 @@ public class ReturnServlet extends HttpServlet {
 			request.setAttribute("result", result);
 			returnToOnemile(resultParameter + "success", response);
 		} catch (Exception e) {
-			String errorString = e.getCause().getMessage();
+			String errorString = e.getMessage();
 			request.setAttribute("error", errorString);
 			returnToOnemile(resultParameter + "fail", response);
 		}
