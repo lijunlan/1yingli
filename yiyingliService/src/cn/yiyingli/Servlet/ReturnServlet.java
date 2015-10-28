@@ -91,6 +91,9 @@ public class ReturnServlet extends HttpServlet {
 				tmp = results.get("PAYMENTREQUEST_0_CUSTOM");
 			} else if (results.get("CUSTOM") != null) {
 				tmp = results.get("CUSTOM");
+			} else{
+				returnMsg(response, connectError);
+				return;
 			}
 			String callback[] = tmp.split("\\|");
 			if (callback.length != 1) {
@@ -177,7 +180,7 @@ public class ReturnServlet extends HttpServlet {
 					NotificationService notificationService = (NotificationService) getApplicationContext()
 							.getBean("notificationService");
 					if (result.get("PAYMENTINFO_0_PAYMENTSTATUS").equals("Completed")) {
-						String oid = result.get("PAYMENTREQUEST_0_CUSTOM");
+						String oid = result.get("PAYMENTREQUEST_0_CUSTOM").split("\\|")[0];
 						Order order = orderService.queryByShowId(oid, false);
 						// 检查订单是否存在
 						if (order == null) {
@@ -266,8 +269,7 @@ public class ReturnServlet extends HttpServlet {
 			request.setAttribute("result", result);
 			returnToOnemile(resultParameter + "success", response);
 		} catch (Exception e) {
-			String errorString = e.getMessage();
-			request.setAttribute("error", errorString);
+			e.printStackTrace();
 			returnToOnemile(resultParameter + "fail", response);
 		}
 	}

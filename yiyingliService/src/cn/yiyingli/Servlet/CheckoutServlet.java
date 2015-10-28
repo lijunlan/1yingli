@@ -49,7 +49,7 @@ public class CheckoutServlet extends HttpServlet {
 
 	private ApplicationContext applicationContext;
 
-	public ApplicationContext getApplicationContext() {
+	public ApplicationContext getApplicationContext() { 
 		return applicationContext;
 	}
 
