@@ -1299,7 +1299,7 @@ abbr,acronym { border:0;
     .face{
         width: 100%;
         height: 5rem;
-        /*text-align: center;*/
+        text-align: center;
     }
     .info ul{
         width: 100%;
@@ -1325,25 +1325,12 @@ abbr,acronym { border:0;
         width: 100%;
         margin: 0px;
     }
-
-    .face span {
-        position: absolute;
-        left: 50%;
-        margin-left: -3rem;
-        width: 6rem;
-        height: 6rem;
-        margin-top: -40px;
-        padding: 7px;
-        background: white;
-        border-radius: 50%;
-    }
-
     #ticonUrl{
-        width: 100%;
+        width: 6rem;
         height: auto;
-        border: none;
-        margin: 0;
-        position: relative;
+        margin-left: -3rem;
+        left: 50%;
+        border: 7px solid #fff;
     }
     .content-left-topic{
         width: 100%;
@@ -1510,14 +1497,12 @@ abbr,acronym { border:0;
     }
     .add-like{
         float: left;
+        width: 99%;
     }
     .share-her{
         float: left;
     }
     .add-like-p{
-        width: 100%;
-    }
-    .add-like{
         width: 100%;
     }
     .add-like-img{
@@ -1855,5 +1840,13 @@ abbr,acronym { border:0;
     #sprice1{
         top:95px;
         font-size: 18px;
+    }
+    #worktime{
+        float: left !important;
+        font-size: 12px;
+    }
+    #schooltime{
+        float: left !important;
+        font-size: 12px;
     }
 }
