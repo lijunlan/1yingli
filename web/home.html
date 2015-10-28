@@ -2,62 +2,74 @@
 <html lang="ch">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,minimum-scale=1">
     <title>一英里</title>
     <meta name="keywords" content="留学,咨询,经验,解决问题,世界名校,一对一,面对面"/>
     <meta name="description" content="「一英里」专注于一对一咨询，致力于打造最便捷畅通的大学生线上交流平台，打破信息不对称的壁垒，轻松连接高校名企精英与万千追梦学子。"/>
     <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
     <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
 
-    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/reset.css"/>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/common.css" type="text/css">
     <link rel="stylesheet" href="layerslider/css/layerslider.css" type="text/css">
     <link rel="stylesheet" href="css/jquery-ui.css">
-	<style>
-    	.search-box {
-    			outline:medium;
-    			font-size:18px;
-    			padding-left:8px;
-    			color: #000000;
-    	}
-    	.ui-autocomplete {
-    			font-size: 18px;
-    			background: #fff;
-    			z-index: 999;
-    	}
-	</style>
-    
+    <style>
+        .search-box {
+            outline: medium;
+            font-size: 18px;
+            padding-left: 8px;
+            color: #000000;
+        }
+
+        .ui-autocomplete {
+            font-size: 18px;
+            background: #fff;
+            z-index: 999;
+        }
+    </style>
+
 </head>
 <body>
+<div id="pc">
+    <div id="player"
+         style="min-width:1096px; background:#000; width:100%; height:100%; top: 0px; left: 0px; padding: 0; position: fixed; filter: alpha(Opacity=60); display:none;z-index:100000"
+         texy-align="center">
+        <div id="playerShow"
+             style="width:960px;height:500px;position: fixed;top: 50%;left: 50%;margin-top: -250px;margin-left: -480px;"></div>
+        <div><img onClick="stopPlayer();" src="http://image.1yingli.cn/img/close_play.png"
+                  style=" cursor: pointer;width: 50px;height: 50px;position: fixed;top: 50%;left: 50%;margin-top: -250px;margin-left: 420px;">
+        </div>
+    </div>
 
-	<div id="player" style="min-width:1096px; background:#000; width:100%; height:100%; top: 0px; left: 0px; padding: 0; position: fixed; filter: alpha(Opacity=60); display:none;z-index:100000" texy-align="center">
-		<div id="playerShow" style="width:960px;height:500px;position: fixed;top: 50%;left: 50%;margin-top: -250px;margin-left: -480px;"></div>
-		<div><img  onClick="stopPlayer();" src="http://image.1yingli.cn/img/close_play.png" style=" cursor: pointer;width: 50px;height: 50px;position: fixed;top: 50%;left: 50%;margin-top: -250px;margin-left: 420px;"></div>
-	</div>
-	
     <!----------------------------------头部-------------------------------->
     <div class="header" id="header">
-		<!-- 头部背景滚动-->
-		<div class="ls-wp-fullwidth-container">
-			<div class="ls-wp-fullwidth-helper">
-				<div id="layerslider"  class="ls-wp-container"  style="width: 100%; min-width:1096px; height: 563px;">
-					<div class="ls-layer">
-						<img class="ls-bg" src="http://image.1yingli.cn/img/bg1.jpg" alt="layer1-background" style="width:100%;">
-						<img class="ls-s-1" src="http://image.1yingli.cn/img/z1.png" alt="layer1-sublayer1"  style="position: absolute; top: 45%; left: 50%; durationin : 0;  ">	
-					</div>
-				</div>
-			</div>
-	    </div>
-	
-		<div class="header-top">
-			<div class="header-top-img">
-				<a href="home.html"><img src="http://image.1yingli.cn/img/logo_white.png" style="width:113px; height:45px"/></a>
-			</div>
+        <!-- 头部背景滚动-->
+        <div class="ls-wp-fullwidth-container">
+            <div class="ls-wp-fullwidth-helper">
+                <div id="layerslider" class="ls-wp-container" style="width: 100%; min-width:1096px; height: 563px;">
+                    <div class="ls-layer">
+                        <img class="ls-bg" src="http://image.1yingli.cn/img/bg1.jpg" alt="layer1-background"
+                             style="width:100%;">
+                        <img class="ls-s-1" src="http://image.1yingli.cn/img/z1.png" alt="layer1-sublayer1"
+                             style="position: absolute; top: 45%; left: 50%; durationin : 0;  ">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-top">
+            <div class="header-top-img">
+                <a href="home.html"><img src="http://image.1yingli.cn/img/logo_white.png"
+                                         style="width:113px; height:45px"/></a>
+            </div>
             <div class="header-left" style="float:right; width:348px;">
                 <ul>
                     <li id="nav-right-theme">
                         <a href="">主题分类</a>
+
                         <div class="triangle-uup"></div>
                         <ul class="triangle-uup-ul">
                             <li><a class="nav-right-theme-list" href="theme.html" target="_self">留学领航</a></li>
@@ -68,6 +80,7 @@
                         </ul>
                     </li>
                     <span>|</span>
+
                     <div id="userconsole">
                         <li><a href="login.html">登录</a></li>
                         <span>|</span>
@@ -77,25 +90,29 @@
                     <li><a href="bct1.html">成为导师</a></li>
                 </ul>
             </div>
-		</div>
-		<div class="header-foot">
-			<div class="header-footer-content">
-				<input id="searchBox" class="search-box" type="text" placeholder="搜索：学校 / 公司 / 留学 / 求职就业">
-				<button onClick="search()" id="" >搜索</button> 
-			</div>
-		</div>
-	</div>
-	
+        </div>
+        <div class="header-foot">
+            <div class="header-footer-content">
+                <input id="searchBox" class="search-box" type="text" placeholder="搜索：学校 / 公司 / 留学 / 求职就业">
+                <button onClick="search()" id="">搜索</button>
+            </div>
+        </div>
+    </div>
+
     <div class="content">
         <div class="content-img">
             <a id="content-img1" class="content-img1" href="theme.html">
                 <!--<img  src="img/content_img_1.jpg" />-->
                 <span class="content-span1">留学领航</span>
+
                 <div class="img-shade" id="img-shade01">
                     <h1>留学领航</h1>
+
                     <div class="content-p">
                         <p>留学申请事半功倍，名校录取不再是梦</p>
+
                         <p>留学难题快速解答，轻松获得专业指导</p>
+
                         <p>留学生活提前感知，更快适应海外生活</p>
                     </div>
                 </div>
@@ -103,11 +120,15 @@
             <a id="content-img2" class="content-img2" href="theme_01.html">
                 <!--<img  src="img/content_img_2.jpg"/>-->
                 <span class="content-span2">求职就业</span>
+
                 <div class="img-shade" id="img-shade02">
                     <h1>求职就业</h1>
+
                     <div class="content-p">
                         <p>帮你完善个人简历</p>
+
                         <p>帮你掌握面试技能</p>
+
                         <p>帮你提升职场竞力</p>
                     </div>
                 </div>
@@ -115,11 +136,15 @@
             <a id="content-img3" class="content-img3" href="theme_03.html">
                 <!--<img  src="img/content_img_3.jpg"/>-->
                 <span class="content-span3">创业助力</span>
+
                 <div class="img-shade" id="img-shade03">
                     <h1>创业助力</h1>
+
                     <div class="content-p">
                         <p>助你寻得天使投资</p>
+
                         <p>助你挑选合作伙伴</p>
+
                         <p>助你实现创业梦想</p>
                     </div>
                 </div>
@@ -127,11 +152,15 @@
             <a id="content-img4" class="content-img4" href="theme_04.html">
                 <!--<img  src="img/content_img_4.jpg"/>-->
                 <span class="content-span4">校园生活</span>
+
                 <div class="img-shade" id="img-shade04">
                     <h1>校园生活</h1>
+
                     <div class="content-p">
                         <p>教你规划校园生活</p>
+
                         <p>教你处理师生关系</p>
+
                         <p>教你兼得学习玩乐</p>
                     </div>
                 </div>
@@ -139,23 +168,28 @@
             <a id="content-img5" class="content-img5" href="theme_05.html">
                 <!--<img  src="img/content_img_5.jpg"/>-->
                 <span class="content-span5">猎奇分享</span>
+
                 <div class="img-shade" id="img-shade05">
                     <h1>猎奇分享</h1>
+
                     <div class="content-p">
                         <p>带你环游世界精彩</p>
+
                         <p>带你融入异国文化</p>
+
                         <p>带你得到最酷体验</p>
                     </div>
                 </div>
             </a>
         </div>
     </div>
-	
-    <div class="green" >
-		<img src="http://image.1yingli.cn/img/green.png"/>
-		<img class="green-little-title" src="http://image.1yingli.cn/img/play_stop.png" style="width:138px;cursor:pointer" onclick="showPaly();"/>
+
+    <div class="green">
+        <img src="http://image.1yingli.cn/img/green.png"/>
+        <img class="green-little-title" src="http://image.1yingli.cn/img/play_stop.png"
+             style="width:138px;cursor:pointer" onclick="showPaly();"/>
     </div>
-	
+
     <div class="why">
         <div class="why_content">
             <ul class="why-content-center">
@@ -163,160 +197,234 @@
                     <a id="why-img-01">
                         <img id="why_self_01" src="http://image.1yingli.cn/img/why_img_01.png"/>
                     </a>
-					<p>世界名校精英</p>
+
+                    <p>世界名校精英</p>
                 </li>
                 <li>
                     <a id="why-img-02">
                         <img id="why_self_02" src="http://image.1yingli.cn/img/why_img_02.png"/>
                     </a>
-					<p>一对一交流</p>
+
+                    <p>一对一交流</p>
                 </li>
                 <li>
-                    <a id="why-img-03" >
+                    <a id="why-img-03">
                         <img id="why_self_03" src="http://image.1yingli.cn/img/why_img_03.png"/>
                     </a>
-					<p>在线预约时间</p>
+
+                    <p>在线预约时间</p>
                 </li>
                 <li>
-                    <a id="why-img-04" >
+                    <a id="why-img-04">
                         <img id="why_self_04" src="http://image.1yingli.cn/img/why_img_04.png"/>
                     </a>
-					<p>超高性价比</p>
+
+                    <p>超高性价比</p>
                 </li>
             </ul>
         </div>
     </div>
-	
+
     <div class="contact"></div>
     <div class="footer">
-		<div style='width:100%;height:270px;float:left'>
-			<div style='width:1024px;margin:0 auto; height:100%'>
-				<div style='width:200px;float:left;margin-top:50px;margin-left:100px'>
-					<img src='http://image.1yingli.cn/img/WeChat_1440487276.jpeg' width=150px; height=150px style='border-radius: 8px;'></img>
-					<p style='width:150px;color:#fff;font-size:16px; text-align:center;line-height:50px;'>微信公众账号</p>
-				</div>
-				<div style='width:350px;;float:left;margin-top:40px;margin-left:300px;font-size:18px;color:#fff;align:right;text-align: right;line-height: 40px;'> 
-					<p><a href='joinus.html?id=1' style='color:#fff;text-decoration:none;'>关于我们</a> / <a href='joinus.html?id=1' style='color:#fff;text-decoration:none;'>加入我们</a> / <a href='joinus.html?id=1' style='color:#fff;text-decoration:none;'>联系我们</a></p><p style='font-size:25px;line-height:70px'>0571-86415101</p><p>工作日：9:00-17:00</p><p>客服邮箱：contact@1yingli.cn</p>		                </div>
-			</div>
-		</div>
-		<div style='width:100%;height:3px;float:left;opacity: 0.3;border-top: 1px solid #ccc;'></div>
-		<div style='width:100%;height:60px;float:left'>
-			<div style='width:1024px;margin:0 auto;'>
-				<p style='height:60px;line-height:60px;color:white;text-align: center;' >Copyright&copy2014-2015 杭州千询科技有限公司 版权所有<a style='color:#FFF;' href='http://www.miitbeian.gov.cn/'  target='_Blank'>浙ICP备15023254号</a></p>
-			</div>
-		</div>
-	</div>
-    <!-- jQuery with jQuery Easing, and jQuery Transit JS -->
-    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="js/jquery.json-2.4.min.js"></script>
-    <script src="layerslider/jQuery/jquery-easing-1.3.js" type="text/javascript"></script>
-    <script src="layerslider/jQuery/jquerytransit.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/home.js"></script>
-     
-    <!-- LayerSlider from Kreatura Media with Transitions -->
-    <script src="layerslider/js/layerslider.transitions.js" type="text/javascript"></script>
-    <script src="layerslider/js/layerslider.kreaturamedia.jquery.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/jquery.cookie.js" ></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/clappr.min.js"></script>
-    <script type="text/javascript">
-        var lsjQuery = jQuery;
-        lsjQuery(document).ready(function() {
-            if (typeof lsjQuery.fn.layerSlider == "undefined") {
-                lsShowNotice('layerslider', 'jquery');
-            } else if (typeof lsjQuery.transit == "undefined" || typeof lsjQuery.transit.modifiedForLayerSlider == "undefined") {
-                lsShowNotice('layerslider', 'transit');
-            } else {
-                lsjQuery("#layerslider").layerSlider({
-                    width: '100%',
-                    // height: '500px',
-                    // responsive: false,
-                    // responsiveUnder: 9ft60,
-                    // sublayerContainer: 960,
-                    responsive : true,
-                    autoStart: true,
-                    pauseOnHover: false,
-                    firstLayer: 1,
-                    animateFirstLayer: true,
-                    randomSlideshow: false,
-                    twoWaySlideshow: true,
-                    loops: 0,
-                    autoPlayVideos: false,
-                    autoPauseSlideshow: 'auto',
-                    keybNav: true,
-                    touchNav: true,
-                    skin: 'fullwidthdark',
-                    skinsPath: 'layerslider/skins/',
-                    globalBGColor: '#000000',
-                    navPrevNext: true,
-                    navStartStop: false,
-                    navButtons: false,
-                    hoverPrevNext: true,
-                    hoverBottomNav: false,
-                    showBarTimer: false,
-                    showCircleTimer: false,
-                    thumbnailNavigation: 'disable',
-                    imgPreload: true,
-                    yourLogo: false,
-                    cbInit: function(element) {},
-                    cbStart: function(data) {},
-                    cbStop: function(data) {},
-                    cbPause: function(data) {},
-                    cbAnimStart: function(data) {},
-                    cbAnimStop: function(data) {},
-                    cbPrev: function(data) {},
-                    cbNext: function(data) {}
-                });
-            }
-        });
-    </script>
-    <script type="text/javascript" src="js/common.js"></script> 
-    <script src="js/jquery-ui.js"></script>
-    <script>
-        function key(){
-           if (event.keyCode==13){
-                search();
-           }
+        <div style='width:100%;height:270px;float:left'>
+            <div style='width:1024px;margin:0 auto; height:100%'>
+                <div style='width:200px;float:left;margin-top:50px;margin-left:100px'>
+                    <img src='http://image.1yingli.cn/img/WeChat_1440487276.jpeg' width=150px; height=150px
+                         style='border-radius: 8px;'></img>
+
+                    <p style='width:150px;color:#fff;font-size:16px; text-align:center;line-height:50px;'>微信公众账号</p>
+                </div>
+                <div style='width:350px;;float:left;margin-top:40px;margin-left:300px;font-size:18px;color:#fff;align:right;text-align: right;line-height: 40px;'>
+                    <p><a href='joinus.html?id=1' style='color:#fff;text-decoration:none;'>关于我们</a> / <a
+                            href='joinus.html?id=1' style='color:#fff;text-decoration:none;'>加入我们</a> / <a
+                            href='joinus.html?id=1' style='color:#fff;text-decoration:none;'>联系我们</a></p>
+
+                    <p style='font-size:25px;line-height:70px'>0571-86415101</p>
+
+                    <p>工作日：9:00-17:00</p>
+
+                    <p>客服邮箱：contact@1yingli.cn</p></div>
+            </div>
+        </div>
+        <div style='width:100%;height:3px;float:left;opacity: 0.3;border-top: 1px solid #ccc;'></div>
+        <div style='width:100%;height:60px;float:left'>
+            <div style='width:1024px;margin:0 auto;'>
+                <p style='height:60px;line-height:60px;color:white;text-align: center;'>Copyright&copy2014-2015
+                    杭州千询科技有限公司 版权所有<a style='color:#FFF;' href='http://www.miitbeian.gov.cn/' target='_Blank'>浙ICP备15023254号</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="mobile">
+    <header>
+        <img src="http://image.1yingli.cn/img/logo1.png">
+        <span>登陆 | 注册</span>
+    </header>
+    <img class="home-text" src="http://image.1yingli.cn/img/home-text-black.png">
+
+    <div class="mobile-search">
+        <input id="mobile_search" type="text" placeholder="搜索：导师 / 学校 / 专业">
+        <img id="mobile_search_button" src="http://image.1yingli.cn/img/mobile-search-blue.png">
+    </div>
+
+    <div class="mobile-bottom">
+        <h1>0571-86415101</h1>
+
+        <h2>工作日：9:00 - 17:00</h2>
+
+        <h3>客服邮箱：service@1ying.cn</h3>
+        <h4>Copyright©2014-2015 杭州千询<br/>浙ICP备15023254号</h4>
+    </div>
+</div>
+
+<!-- jQuery with jQuery Easing, and jQuery Transit JS -->
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/jquery.json-2.4.min.js"></script>
+<script src="layerslider/jQuery/jquery-easing-1.3.js" type="text/javascript"></script>
+<script src="layerslider/jQuery/jquerytransit.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/home.js"></script>
+
+<!-- LayerSlider from Kreatura Media with Transitions -->
+<script src="layerslider/js/layerslider.transitions.js" type="text/javascript"></script>
+<script src="layerslider/js/layerslider.kreaturamedia.jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/clappr.min.js"></script>
+<script type="text/javascript">
+    var lsjQuery = jQuery;
+    lsjQuery(document).ready(function () {
+        if (typeof lsjQuery.fn.layerSlider == "undefined") {
+            lsShowNotice('layerslider', 'jquery');
+        } else if (typeof lsjQuery.transit == "undefined" || typeof lsjQuery.transit.modifiedForLayerSlider == "undefined") {
+            lsShowNotice('layerslider', 'transit');
+        } else {
+            lsjQuery("#layerslider").layerSlider({
+                width: '100%',
+                // height: '500px',
+                // responsive: false,
+                // responsiveUnder: 9ft60,
+                // sublayerContainer: 960,
+                responsive: true,
+                autoStart: true,
+                pauseOnHover: false,
+                firstLayer: 1,
+                animateFirstLayer: true,
+                randomSlideshow: false,
+                twoWaySlideshow: true,
+                loops: 0,
+                autoPlayVideos: false,
+                autoPauseSlideshow: 'auto',
+                keybNav: true,
+                touchNav: true,
+                skin: 'fullwidthdark',
+                skinsPath: 'layerslider/skins/',
+                globalBGColor: '#000000',
+                navPrevNext: true,
+                navStartStop: false,
+                navButtons: false,
+                hoverPrevNext: true,
+                hoverBottomNav: false,
+                showBarTimer: false,
+                showCircleTimer: false,
+                thumbnailNavigation: 'disable',
+                imgPreload: true,
+                yourLogo: false,
+                cbInit: function (element) {
+                },
+                cbStart: function (data) {
+                },
+                cbStop: function (data) {
+                },
+                cbPause: function (data) {
+                },
+                cbAnimStart: function (data) {
+                },
+                cbAnimStop: function (data) {
+                },
+                cbPrev: function (data) {
+                },
+                cbNext: function (data) {
+                }
+            });
         }
-        $(function() {
-            var hit = 10;
-            setTimeout(function() {
-                $("#searchBox" ).autocomplete({
-                    delay: 0,
-                    source: function(request, response) {
-                        var toSend = new Object();
-                        toSend.style = "function";
-                        toSend.method = "getSearchHint";
-                        toSend.word = $( "#searchBox" ).val();
-                        $.ajax({
-                            url: config.base_url,
-                            type : "POST",
-                            
-                            dataType: 'json',//如果需要为jsonp类型，则需要在下面的data属性中加上callback: ?
-                            data: $.toJSON(toSend),
-                            success: function(data) {
-                                if(data.status === 'OK' && data.result) {
-                                    if(data.result.length >= hit) {
-                                        response(data.result.slice(0, hit));
-                                    } else {
-                                        response(data.result);
-                                    }
-                                } else if( data.status === 'FAIL' && data.errors ){
-                                    //alert(data.errors[0].message);
+    });
+</script>
+<script type="text/javascript" src="js/common.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script>
+    function key() {
+        if (event.keyCode == 13) {
+            if ($(window).width() < 768) {
+                mobile_search();
+            } else {
+                search();
+            }
+        }
+    }
+    $(function () {
+        if ($(window).width() < 768) {
+            return;
+        }
+        var hit = 10;
+        setTimeout(function () {
+            $("#searchBox").autocomplete({
+                delay: 0,
+                source: function (request, response) {
+                    var toSend = new Object();
+                    toSend.style = "function";
+                    toSend.method = "getSearchHint";
+                    toSend.word = $("#searchBox").val();
+                    $.ajax({
+                        url: config.base_url,
+                        type: "POST",
+
+                        dataType: 'json',//如果需要为jsonp类型，则需要在下面的data属性中加上callback: ?
+                        data: $.toJSON(toSend),
+                        success: function (data) {
+                            if (data.status === 'OK' && data.result) {
+                                if (data.result.length >= hit) {
+                                    response(data.result.slice(0, hit));
+                                } else {
+                                    response(data.result);
                                 }
+                            } else if (data.status === 'FAIL' && data.errors) {
+                                //alert(data.errors[0].message);
                             }
-        
-                        });
-                    }
-                }).bind("input.autocomplete", function () {
-                    // 修复在Firefox中不支持中文的BUG
-                    $( "#searchBox" ).autocomplete("search", $( "#searchBox" ).val());
-                }).focus();
-                $("#ui-id-1").click(function(){
-                    search();
-                });
-            }, 0);
-        });
-    </script>
+                        }
+
+                    });
+                }
+            }).bind("input.autocomplete", function () {
+                // 修复在Firefox中不支持中文的BUG
+                $("#searchBox").autocomplete("search", $("#searchBox").val());
+            }).focus();
+            $("#ui-id-1").click(function () {
+                search();
+            });
+        }, 0);
+    });
+</script>
+
+<script>
+    (function () {
+        var window = $(window);
+        if (window.width() > 768) {
+            return;
+        }
+        var body = $('body');
+        body.css('height', document.documentElement.clientHeight + 100);
+        body.css('width', window.width());
+        $('#mobile_search_button').click(function () {
+            mobile_search();
+        })
+    })();
+    function mobile_search() {
+        var findName = encodeURIComponent(encodeURIComponent($("#mobile_search").val()));
+        self.location = 'search.html?findName=' + findName;
+    }
+</script>
+
 </body>
 </html>
