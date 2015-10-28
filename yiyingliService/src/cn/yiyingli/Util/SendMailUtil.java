@@ -19,29 +19,29 @@ public class SendMailUtil {
 
 	public static void main(String[] args) {
 		for (int i = 1; i <= 10; i++) {
-			System.out.println(sendMessage("lijunlan@1yingli.cn","fwefwe", "呵呵呵呵呵呵呵" + i));
+			System.out.println(sendMessage("lijunlan@1yingli.cn", "fwefwe", "呵呵呵呵呵呵呵" + i));
 		}
 	}
 
-	public static boolean sendMessage(String toEmail, String title,String message) {
+	public static boolean sendMessage(String toEmail, String title, String message) {
 		MailSenderInfo mailInfo = new MailSenderInfo();
-		//mailInfo.setMailServerHost("email-smtp.us-west-2.amazonaws.com");
+		// mailInfo.setMailServerHost("email-smtp.us-west-2.amazonaws.com");
 		mailInfo.setMailServerHost("smtp.1yingli.cn");
 		mailInfo.setMailServerPort("25");
 		mailInfo.setValidate(true);
 
 		// 邮箱用户名
-		//mailInfo.setUserName("AKIAJMTNHGS3FEHBYZ6Q");
+		// mailInfo.setUserName("AKIAJMTNHGS3FEHBYZ6Q");
 		mailInfo.setUserName("notify@1yingli.cn");
 		// 邮箱密码
-		//mailInfo.setPassword("AvMBHttyRlsICNXNFIzyisUnsHNj+NKWjmAgdubYha4l");
+		// mailInfo.setPassword("AvMBHttyRlsICNXNFIzyisUnsHNj+NKWjmAgdubYha4l");
 		mailInfo.setPassword("Onemile123!@#");
 		// 发件人邮箱
 		mailInfo.setFromAddress("notify@1yingli.cn");
 		// 收件人邮箱
 		mailInfo.setToAddress(toEmail);
 		// 邮件标题
-		mailInfo.setSubject("【一英里】");
+		mailInfo.setSubject("【一英里】" + title);
 		// 邮件内容
 		StringBuffer buffer = new StringBuffer();
 		buffer.append(HTML);
@@ -61,16 +61,16 @@ public class SendMailUtil {
 
 	private static boolean sendCheckNo(String title, String checkNo, String toEmail) {
 		MailSenderInfo mailInfo = new MailSenderInfo();
-		//mailInfo.setMailServerHost("email-smtp.us-west-2.amazonaws.com");
+		// mailInfo.setMailServerHost("email-smtp.us-west-2.amazonaws.com");
 		mailInfo.setMailServerHost("smtp.1yingli.cn");
 		mailInfo.setMailServerPort("25");
 		mailInfo.setValidate(true);
 
 		// 邮箱用户名
-		//mailInfo.setUserName("AKIAJMTNHGS3FEHBYZ6Q");
+		// mailInfo.setUserName("AKIAJMTNHGS3FEHBYZ6Q");
 		mailInfo.setUserName("notify@1yingli.cn");
 		// 邮箱密码
-		//mailInfo.setPassword("AvMBHttyRlsICNXNFIzyisUnsHNj+NKWjmAgdubYha4l");
+		// mailInfo.setPassword("AvMBHttyRlsICNXNFIzyisUnsHNj+NKWjmAgdubYha4l");
 		mailInfo.setPassword("Onemile123!@#");
 		// 发件人邮箱
 		mailInfo.setFromAddress("notify@1yingli.cn");

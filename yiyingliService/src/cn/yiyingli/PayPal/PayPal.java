@@ -500,6 +500,7 @@ public HashMap<String, String> httpcall( String methodName, String nvpStr)
     }
     catch( IOException e )
     {
+    	e.printStackTrace();
         // handle the error here
         return null;
     }
