@@ -141,7 +141,7 @@ public class MCreateTeacherService extends MsgService {
 		user.setPhone(phone);
 		user.setEmail(mail);
 		user.setIconUrl(iconUrl);
-		user.setResume(introduce);
+		//user.setResume(introduce);
 		user.setTeacher(teacher);
 		teacher.setUser(user);
 

@@ -1,3 +1,112 @@
+@media (min-width: 768px){
+    
+}
+@media (max-width: 380px){
+    .name {
+        width: 130px !important;
+        float: none !important;
+        margin-top: 0px !important;
+    }
+}
+@media (max-width: 494px){
+    .Tutor-id p:nth-of-type(3) {
+        width: 88px !important;
+        text-overflow: initial !important;
+        white-space: initial !important;
+        height: 20px;
+        float: right;
+    }
+    .Tutor-id p:nth-of-type(3) span{
+        display: none;
+    }
+    .Tutor-01 {
+        width: 39% !important;
+        text-align: center !important;
+    }
+    .Tutor-03 {
+        display: none;
+    }
+    .Tutor-04 {
+        width: 30% !important;
+    }
+    .Tutor-05 {
+        width: 30% !important;
+    }
+}
+@media (min-width: 493px) and (max-width: 768px){
+    .Tutor-id p:nth-of-type(3) {
+        width: 230px !important;
+        float: right;
+    }
+    .Tutor-01 {
+        width: 30% !important;
+        text-align: center !important;
+    }
+    .Tutor-03 {
+        width: 20% !important;
+    }
+    .Tutor-04 {
+        width: 20% !important;
+    }
+    .Tutor-05 {
+        width: 29.3% !important;
+    }
+}
+@media (max-width: 768px){
+    .g-hd {
+        display: none;
+    }
+    .top-nav {
+        display: none;
+    }
+    .content-left {
+        display: none;
+    }
+
+    .content-container {
+        min-height: 100px !important;
+        min-width: 320px !important;
+        padding-bottom: 20px !important;
+    }
+    .content {
+        width: 95% !important;
+        min-height: 100px !important;
+        margin: 25px auto 0px !important;
+        overflow:  hidden;
+    }
+    .Tutor { 
+        width: 100% !important;
+    }
+    .Tutor-lists {
+        width: 100% !important;
+    }
+    .Tutor-list {
+        width: 95% !important;
+    }
+    .Tutor-id {
+        width: 100% !important;
+    }
+    .Tutor-id p:nth-of-type(2) {
+        width: 160px !important;
+    }
+    .Tutor-01 img {
+        width: 70px !important;
+        height: 70px !important;
+        border-radius: 40px;
+        margin-left: 5% !important;
+        float: none !important;
+        text-align: center;
+    }
+    .name {
+        width: 100% !important;
+        margin-top: 0px !important;
+        margin-left: 0px !important;
+        text-indent: 5px;
+        height: 20px !important;
+        text-align: center; 
+    }
+}
+
 html{color:#000;background:#FFF;}
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,
 fieldset,input,textarea,p,blockquote,th,td {

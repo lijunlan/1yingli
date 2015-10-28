@@ -10,7 +10,7 @@ var iconUrl = $.cookie('iconUrl');
 $(document).ready(function(){    
     if(!uid||!nickName){ self.location='login.html'; return; }
     $("#nickName").html(nickName);
-    $("#bigNickName").html(iconUrl);
+    $("#bigNickName").html(nickName);
     if(iconUrl!=""){
         $("#iconUrl").attr("src",iconUrl);
         $("#bigIcon").attr("src",iconUrl);

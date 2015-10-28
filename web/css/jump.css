@@ -7,7 +7,7 @@ fieldset,img{border:0}
 a{text-decoration:none;color:#34495e;}
 a:hover{text-decoration:none;}
 ul,li {list-style:none;}
-header,footer,section {display:block;}
+header,footer,section {display:block;position: relative}
 .f-cb:after,.m-trip-detail li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
 .f-right{float:right;}
 .f-left{float:left;}
