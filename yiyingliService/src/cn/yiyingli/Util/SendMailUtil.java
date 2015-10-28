@@ -14,16 +14,16 @@ public class SendMailUtil {
 			+ "		</div>			</div>	</div>" + "</div></body></html>";
 
 	public static boolean sendMail(String toEmail, String checkNo) {
-		return sendCheckNo("验证码【一英里】", checkNo, toEmail);
+		return sendCheckNo("【一英里】验证码", checkNo, toEmail);
 	}
 
 	public static void main(String[] args) {
 		for (int i = 1; i <= 10; i++) {
-			System.out.println(sendMessage("lijunlan@1yingli.cn", "呵呵呵呵呵呵呵" + i));
+			System.out.println(sendMessage("lijunlan@1yingli.cn","fwefwe", "呵呵呵呵呵呵呵" + i));
 		}
 	}
 
-	public static boolean sendMessage(String toEmail, String message) {
+	public static boolean sendMessage(String toEmail, String title,String message) {
 		MailSenderInfo mailInfo = new MailSenderInfo();
 		//mailInfo.setMailServerHost("email-smtp.us-west-2.amazonaws.com");
 		mailInfo.setMailServerHost("smtp.1yingli.cn");
