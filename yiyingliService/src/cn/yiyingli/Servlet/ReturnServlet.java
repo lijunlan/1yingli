@@ -1,6 +1,8 @@
 package cn.yiyingli.Servlet;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,12 +25,15 @@ import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.WarnUtil;
 
 public class ReturnServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private static String page = "http://www.1yingli.cn/yourTutor.html";
 
 	private static final String resultParameter = "?paymentResult=";
+
+	// 当payapl链接失败返回的网页
+	private static final String connectError = "<!DOCTYPE html><html lang=\"en\"><head>    <meta charset=\"UTF-8\">    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">    <title>你的导师</title>    <link rel=\"Shortcut Icon\" href=\"http://image.1yingli.cn/img/logo0.png\">    <link rel=\"Bookmark\" href=\"http://image.1yingli.cn/img/logo0.png\">    <style type=\"text/css\">    	#succ{    		width: 400px;height: 200px;margin: auto;position: fixed;top: 50%;left: 50%;margin-top:-150px;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; border:1px solid #D2D2D2    	}    	.succ_title{    	  width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;    	}    	.succ_title div{    	  font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;    	}    	.succ_content{    		position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;    	}    	#succ a{    		text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;    	}    </style></head><body>	<div id=\"succ\">    	<div class=\"succ_title\"><div>来自一英里的信息</div></div>    	<div class=\"succ_content\">支付连接超时，请重新支付。</div>    	<a href=\"http://www.1yingli.cn/yourTutor.html\">确定</a>		</div></body>";
 
 	private ApplicationContext applicationContext;
 
@@ -75,8 +80,21 @@ public class ReturnServlet extends HttpServlet {
 			 * Calls the GetExpressCheckoutDetails API call
 			 */
 			Map<String, String> results = pp.getShippingDetails(token);
+			//检测paypal是否链接中断，没有返回内容
+			if (results == null) {
+				returnMsg(response, connectError);
+				return;
+			}
 			// 根据之前传的callback参数修改callback
-			String tmp = results.get("CUSTOM");
+			String tmp = "";
+			if (results.get("PAYMENTREQUEST_0_CUSTOM") != null) {
+				tmp = results.get("PAYMENTREQUEST_0_CUSTOM");
+			} else if (results.get("CUSTOM") != null) {
+				tmp = results.get("CUSTOM");
+			} else{
+				returnMsg(response, connectError);
+				return;
+			}
 			String callback[] = tmp.split("\\|");
 			if (callback.length != 1) {
 				page = callback[1];
@@ -145,6 +163,11 @@ public class ReturnServlet extends HttpServlet {
 				// sanitized before being used.
 				@SuppressWarnings("rawtypes")
 				HashMap results = pp.confirmPayment(checkoutDetails, request.getServerName());
+				//检测paypal是否链接中断，没有返回内容
+				if (results == null) {
+					returnMsg(response, connectError);
+					return;
+				}
 				request.setAttribute("payment_method", "");
 				String strAck = results.get("ACK").toString().toUpperCase();
 				if (strAck != null
@@ -157,7 +180,7 @@ public class ReturnServlet extends HttpServlet {
 					NotificationService notificationService = (NotificationService) getApplicationContext()
 							.getBean("notificationService");
 					if (result.get("PAYMENTINFO_0_PAYMENTSTATUS").equals("Completed")) {
-						String oid = result.get("PAYMENTREQUEST_0_CUSTOM");
+						String oid = result.get("PAYMENTREQUEST_0_CUSTOM").split("\\|")[0];
 						Order order = orderService.queryByShowId(oid, false);
 						// 检查订单是否存在
 						if (order == null) {
@@ -168,7 +191,13 @@ public class ReturnServlet extends HttpServlet {
 							return;
 						}
 						// 检查订单款项是否正确
-						if (!(Float.parseFloat(result.get("PAYMENTREQUEST_0_AMT")) == order.getMoney())) {
+						float price = order.getMoney();
+						price /= 6;
+						BigDecimal b = new BigDecimal(price);
+						price = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+						if(price<0.01)
+							price = 0.01F;
+						if (!(Float.parseFloat(result.get("PAYMENTREQUEST_0_AMT")) == price)) {
 							LogUtil.error("Return from Paypal and order id:" + oid + ", price is wrong, it should be "
 									+ order.getMoney() + ", but it is "
 									+ Float.parseFloat(result.get("PAYMENTREQUEST_0_AMT")), this.getClass());
@@ -240,8 +269,7 @@ public class ReturnServlet extends HttpServlet {
 			request.setAttribute("result", result);
 			returnToOnemile(resultParameter + "success", response);
 		} catch (Exception e) {
-			String errorString = e.getCause().getMessage();
-			request.setAttribute("error", errorString);
+			e.printStackTrace();
 			returnToOnemile(resultParameter + "fail", response);
 		}
 	}
@@ -270,6 +298,24 @@ public class ReturnServlet extends HttpServlet {
 			response.sendRedirect(page + para);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * return message through httpResponse
+	 * 
+	 * @param msg
+	 */
+	private void returnMsg(HttpServletResponse resp, String msg) {
+		resp.setCharacterEncoding("UTF-8");
+		resp.setHeader("Content-type", "text/html;charset=UTF-8");
+		resp.setHeader("Access-Control-Allow-Origin", "*");
+		try {
+			OutputStream stream = resp.getOutputStream();
+			LogUtil.info("send>>>>>" + msg, this.getClass());
+			stream.write(msg.getBytes("UTF-8"));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

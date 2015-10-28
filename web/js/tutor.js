@@ -125,7 +125,7 @@ function changePage(p){
                     i = content.state.split(",")[0];
                     con = content;
                     orderId = content.orderId
-                    html = html + "<li class='Tutor-list'><div class='Tutor-id'><p>编号:<p id='111' style='float:left;'>"+content.orderId+"</p><p style='font-size: initial;padding-top: 12px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>发起时间："+d.toLocaleString()+"</p></div><div class='Tutor-01'><img src=\""+(content.iconUrl==""?"http://image.1yingli.cn/img/img.png":content.iconUrl)+"\" alt=''/><div class='name'>"+content.name+"</div></div></div><div class='Tutor-03'><p>"+content.price+"元</p><p>/"+content.time+"分钟</p></div><div class='Tutor-04'><div class='order-details' style='color:#56bbe8; cursor: pointer;'><a class='see'><p>查看详情</p></a></div></div><div class='Tutor-05'>"+Situation(i,orderId)+"</div></li>";
+                    html = html + "<li class='Tutor-list'><div class='Tutor-id'><p>编号:<p id='111' style='float:left;'>"+content.orderId+"</p><p style='font-size: initial;padding-top: 12px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'><span>时间：</span>"+d.toLocaleString()+"</p></div><div class='Tutor-01'><img src=\""+(content.iconUrl==""?"http://image.1yingli.cn/img/img.png":content.iconUrl)+"\" alt=''/><div class='name'>"+content.name+"</div></div></div><div class='Tutor-03'><p>"+content.price+"元</p><p>/"+content.time+"分钟</p></div><div class='Tutor-04'><div class='order-details' style='color:#56bbe8; cursor: pointer;'><a class='see'><p>查看详情</p></a></div></div><div class='Tutor-05'>"+Situation(i,orderId)+"</div></li>";
                 });
             $(".Tutor-lists").html(html);
             } else {
