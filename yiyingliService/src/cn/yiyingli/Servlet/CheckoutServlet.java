@@ -76,7 +76,7 @@ public class CheckoutServlet extends HttpServlet {
 		}
 		UserMarkService userMarkService = (UserMarkService) getApplicationContext().getBean("userMarkService");
 		OrderService orderService = (OrderService) getApplicationContext().getBean("orderService");
-		LogUtil.info("receive>>>>orderId:" + request.getParameter("oid") + "\t uid:" + request.getParameter("uid"),
+		LogUtil.info("receive>>>>PAYPAL orderId:" + request.getParameter("oid") + "\t uid:" + request.getParameter("uid"),
 				this.getClass());
 		// 商户网站订单系统中唯一订单号，必填
 		Order order = orderService.queryByShowId(request.getParameter("oid"), false);
@@ -92,7 +92,7 @@ public class CheckoutServlet extends HttpServlet {
 			return;
 		}
 		if (order.getCreateUser().getId().longValue() != user.getId().longValue()) {
-			LogUtil.info("receive>>>>createOrderId:" + order.getCreateUser().getId() + ",userId:" + user.getId() + ","
+			LogUtil.info("receive>>>>ORDER IS NOT BELONG TO YOU createOrderId:" + order.getCreateUser().getId() + ",userId:" + user.getId() + ","
 					+ (order.getCreateUser().getId() == user.getId()), this.getClass());
 			returnMsg(response, MsgUtil.getErrorMsg("this order is not belong to you"));
 			return;

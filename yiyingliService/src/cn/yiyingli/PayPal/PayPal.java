@@ -121,106 +121,8 @@ public class PayPal {
 		}
 		if (isSet(checkoutDetails.get("PAYMENTREQUEST_0_ITEMAMT")))
 			nvpstr.append("&L_PAYMENTREQUEST_0_AMT0=").append(checkoutDetails.get("PAYMENTREQUEST_0_ITEMAMT"));
-		// test
 
-		// nvpstr.append(
-		// "&PAYMENTREQUEST_0_SELLERPAYPALACCOUNTID=").append(this.getSellerEmail();
-
-		// Optional parameters for SetExpressCheckout API call
-		/*
-		 * 
-		 * if(isSet(checkoutDetails.get("PAYMENTREQUEST_0_AMT") )){
-		 * nvpstr.append( "&PAYMENTREQUEST_0_AMT=").append(checkoutDetails.get(
-		 * "PAYMENTREQUEST_0_AMT")); }
-		 * 
-		 * if(isSet(checkoutDetails.get("PAYMENTREQUEST_0_CURRENCYCODE") )){
-		 * nvpstr.append(
-		 * "&PAYMENTREQUEST_0_CURRENCYCODE=").append(checkoutDetails.get(
-		 * "PAYMENTREQUEST_0_CURRENCYCODE")); }
-		 * 
-		 * if(isSet(checkoutDetails.get("PAYMENTREQUEST_0_ITEMAMT") )){
-		 * nvpstr.append(
-		 * "&PAYMENTREQUEST_0_ITEMAMT=").append(checkoutDetails.get(
-		 * "PAYMENTREQUEST_0_ITEMAMT")); }
-		 * 
-		 * if(isSet(checkoutDetails.get("PAYMENTREQUEST_0_TAXAMT") )){
-		 * nvpstr.append(
-		 * "&PAYMENTREQUEST_0_TAXAMT=").append(checkoutDetails.get(
-		 * "PAYMENTREQUEST_0_TAXAMT")); }
-		 * 
-		 * if(isSet(checkoutDetails.get("PAYMENTREQUEST_0_SHIPPINGAMT") )){
-		 * nvpstr.append(
-		 * "&PAYMENTREQUEST_0_SHIPPINGAMT=").append(checkoutDetails.get(
-		 * "PAYMENTREQUEST_0_SHIPPINGAMT")); }
-		 * 
-		 * if(isSet(checkoutDetails.get("PAYMENTREQUEST_0_HANDLINGAMT") )){
-		 * nvpstr.append(
-		 * "&PAYMENTREQUEST_0_HANDLINGAMT=").append(checkoutDetails.get(
-		 * "PAYMENTREQUEST_0_HANDLINGAMT")); }
-		 * 
-		 * if(isSet(checkoutDetails.get("PAYMENTREQUEST_0_SHIPDISCAMT") )){
-		 * nvpstr.append(
-		 * "&PAYMENTREQUEST_0_SHIPDISCAMT=").append(checkoutDetails.get(
-		 * "PAYMENTREQUEST_0_SHIPDISCAMT")); }
-		 * 
-		 * if(isSet(checkoutDetails.get("PAYMENTREQUEST_0_INSURANCEAMT") )){
-		 * nvpstr.append(
-		 * "&PAYMENTREQUEST_0_INSURANCEAMT=").append(checkoutDetails.get(
-		 * "PAYMENTREQUEST_0_INSURANCEAMT")); }
-		 * 
-		 * if(isSet(checkoutDetails.get("L_PAYMENTREQUEST_0_NAME0")))
-		 * nvpstr.append(
-		 * "&L_PAYMENTREQUEST_0_NAME0=").append(checkoutDetails.get(
-		 * "L_PAYMENTREQUEST_0_NAME0"));
-		 * 
-		 * if(isSet(checkoutDetails.get("L_PAYMENTREQUEST_0_NUMBER0")))
-		 * nvpstr.append(
-		 * "&L_PAYMENTREQUEST_0_NUMBER0=").append(checkoutDetails.get(
-		 * "L_PAYMENTREQUEST_0_NUMBER0"));
-		 * 
-		 * if(isSet(checkoutDetails.get("L_PAYMENTREQUEST_0_DESC0")))
-		 * nvpstr.append(
-		 * "&L_PAYMENTREQUEST_0_DESC0=").append(checkoutDetails.get(
-		 * "L_PAYMENTREQUEST_0_DESC0"));
-		 * 
-		 * if(isSet(checkoutDetails.get("PAYMENTREQUEST_0_ITEMAMT")))
-		 * nvpstr.append(
-		 * "&L_PAYMENTREQUEST_0_AMT0=").append(checkoutDetails.get(
-		 * "PAYMENTREQUEST_0_ITEMAMT"));
-		 * 
-		 * if(isSet(checkoutDetails.get("L_PAYMENTREQUEST_0_QTY0")))
-		 * nvpstr.append(
-		 * "&L_PAYMENTREQUEST_0_QTY0=").append(checkoutDetails.get(
-		 * "L_PAYMENTREQUEST_0_QTY0"));
-		 * 
-		 * if(isSet(checkoutDetails.get("LOGOIMG"))) nvpstr.append( "&LOGOIMG="+
-		 * checkoutDetails.get("LOGOIMG"));
-		 * 
-		 * //add by LP if(isSet(checkoutDetails.get("REQCONFIRMSHIPPING")))
-		 * nvpstr.append( "&REQCONFIRMSHIPPING="+
-		 * checkoutDetails.get("REQCONFIRMSHIPPING"));
-		 * 
-		 * if(isSet(checkoutDetails.get("NOSHIPPING"))) nvpstr.append(
-		 * "&NOSHIPPING="+ checkoutDetails.get("NOSHIPPING"));
-		 * 
-		 * if(isSet(checkoutDetails.get("PAYMENTREQUEST_0_INVNUM")))
-		 * nvpstr.append( "&PAYMENTREQUEST_0_INVNUM="+
-		 * checkoutDetails.get("PAYMENTREQUEST_0_INVNUM"));
-		 * 
-		 * if(isSet(checkoutDetails.get("L_PAYMENTREQUEST_0_ITEMCATEGORY0")))
-		 * nvpstr.append( "&L_PAYMENTREQUEST_0_ITEMCATEGORY0="+
-		 * checkoutDetails.get("L_PAYMENTREQUEST_0_ITEMCATEGORY0"));
-		 * 
-		 * if(isSet(checkoutDetails.get("PAYMENTREQUEST_0_PAYMENTACTION")))
-		 * nvpstr.append( "&PAYMENTREQUEST_0_PAYMENTACTION="+
-		 * checkoutDetails.get("PAYMENTREQUEST_0_PAYMENTACTION"));
-		 * 
-		 * 
-		 * /* Make the call to PayPal to get the Express Checkout token If the
-		 * API call succeeded, then redirect the buyer to PayPal to begin to
-		 * authorize payment. If an error occurred, show the resulting errors
-		 */
-		System.out.println(nvpstr);
+		LogUtil.info(nvpstr.toString(), getClass());
 
 		return httpcall("SetExpressCheckout", nvpstr.toString());
 
@@ -379,6 +281,7 @@ public class PayPal {
 
 		String nvpstr = "&TOKEN=" + token;
 
+		LogUtil.info(nvpstr.toString(), getClass());
 		/*
 		 * Make the API call and store the results in an array. If the call was
 		 * a success, show the authorization details, and provide an action to
@@ -451,7 +354,7 @@ public class PayPal {
 
 		// nvpstr.append(
 		// "&PAYMENTREQUEST_n_NOTIFYURL=").append("http://www.sdll18.com/checkout-mini-browser-test/Notify");
-
+		LogUtil.info(nvpstr.toString(), getClass());
 		/*
 		 * Make the call to PayPal to finalize payment If an error occurred,
 		 * show the resulting errors

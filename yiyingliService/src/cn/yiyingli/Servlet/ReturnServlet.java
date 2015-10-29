@@ -139,7 +139,7 @@ public class ReturnServlet extends HttpServlet {
 					returnMsg(response, connectError);
 					return;
 				}
-				request.setAttribute("payment_method", "");
+				//request.setAttribute("payment_method", "");
 				String strAck2 = results2.get("ACK").toString().toUpperCase();
 				if (("Success".equalsIgnoreCase(strAck2) || "SuccessWithWarning".equalsIgnoreCase(strAck))) {
 					// 检查数据库，并修改，最终完成订单
@@ -162,7 +162,8 @@ public class ReturnServlet extends HttpServlet {
 						price = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
 						if (price < 0.01)
 							price = 0.01F;
-						if (!(Float.parseFloat(results2.get("PAYMENTREQUEST_0_AMT")) == price)) {
+						if (!(Float.parseFloat(results2.get("PAYMENTINFO_0_AMT")) == price
+								&& (results2.get("PAYMENTINFO_0_CURRENCYCODE").equals("USD")))) {
 							LogUtil.error("Return from Paypal and order id:" + oid + ", price is wrong, it should be "
 									+ order.getMoney() + ", but it is "
 									+ Float.parseFloat(results2.get("PAYMENTREQUEST_0_AMT")), this.getClass());
@@ -205,17 +206,16 @@ public class ReturnServlet extends HttpServlet {
 										+ order.getCustomerName() + ")已经付款，等待您的接受。",
 								order.getTeacher(), notificationService);
 					} else {
-						LogUtil.error(
-								"Return from Paypal and payment status is:" + results2.get("PAYMENTINFO_0_PAYMENTSTATUS"),
-								this.getClass());
+						LogUtil.error("Return from Paypal and payment status is:"
+								+ results2.get("PAYMENTINFO_0_PAYMENTSTATUS"), this.getClass());
 					}
 					request.setAttribute("ack", strAck);
 				} else {
 					// log error information returned by PayPal
-					String errorCode = results2.get("L_ERRORCODE0").toString();
-					String errorShortMsg = results2.get("L_SHORTMESSAGE0").toString();
-					String errorLongMsg = results2.get("L_LONGMESSAGE0").toString();
-					String errorSeverityCode = results2.get("L_SEVERITYCODE0").toString();
+					String errorCode = results2.get("PAYMENTINFO_0_ERRORCODE").toString();
+					String errorShortMsg = results2.get("PAYMENTINFO_0_SHORTMESSAGE").toString();
+					String errorLongMsg = results2.get("PAYMENTINFO_0_LONGMESSAGE").toString();
+					String errorSeverityCode = results2.get("PAYMENTINFO_0_SEVERITYCODE").toString();
 					String errorString = "SetExpressCheckout API call failed. " + "Detailed Error Message: "
 							+ errorLongMsg + "Short Error Message: " + errorShortMsg + "Error Code: " + errorCode
 							+ "Error Severity Code: " + errorSeverityCode;
