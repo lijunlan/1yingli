@@ -74,18 +74,18 @@
     }
     .mobile-search input {
         width: 180px;
-        height: 20px;
-        border-radius: 10px;
+        height: 30px;
+        border-radius: 15px;
         padding: 5px 10px;
-        border: 1px inset;
+        border: 1px solid #dcdcdc;
         font-size: 12px;
     }
 
     .mobile-search img {
         position: absolute;
-        right: 0;
-        top: 0;
-        width: 20px;
+        right: 0px;
+        top: 1px;
+        width: 28px;
     }
 
 
