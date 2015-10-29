@@ -50,6 +50,9 @@ public class User {
 
 	@Column(name = "PHONE", nullable = true)
 	private String phone;
+	
+	@Column(name = "CONTACT", nullable = true)
+	private String contact;
 
 	@Column(name = "LASTLOGINTIME", nullable = true)
 	private String lastLoginTime;
@@ -360,6 +363,14 @@ public class User {
 
 	public void setOrderNumber(Long orderNumber) {
 		this.orderNumber = orderNumber;
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
 
 }

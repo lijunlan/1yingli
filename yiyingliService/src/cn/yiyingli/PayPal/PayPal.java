@@ -18,6 +18,8 @@ import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletResponse;
 
+import cn.yiyingli.Util.LogUtil;
+
 public class PayPal {
 
 	private String gvAPIUserName;
@@ -39,7 +41,7 @@ public class PayPal {
 
 			input = this.getClass().getClassLoader().getResourceAsStream(filename);
 			if (input == null) {
-				System.out.println("Sorry, unable to find " + filename);
+				LogUtil.error("Sorry, unable to find " + filename, getClass());
 				return;
 			}
 
@@ -392,7 +394,7 @@ public class PayPal {
 	 * Call. Inputs: FinalPaymentAmount: The total transaction amount. Returns:
 	 * The NVP Collection object of the DoExpressCheckoutPayment Call Response.
 	 *********************************************************************************/
-	public HashMap<?, ?> confirmPayment(Map<String, String> checkoutDetails, String serverName) {
+	public HashMap<String, String> confirmPayment(Map<String, String> checkoutDetails, String serverName) {
 
 		/*
 		 * Gather the information to make the final call to finalize the PayPal
@@ -464,16 +466,13 @@ public class PayPal {
 	 * returns a NVP string containing the response from the server.
 	 *********************************************************************************/
 	public HashMap<String, String> httpcall(String methodName, String nvpStr) {
-		// test
-		System.out.println(methodName);
-		// test
+
 		@SuppressWarnings("unused")
 		String version = "2.3";
 		String agent = "Mozilla/4.0";
 		StringBuilder respText = new StringBuilder("");
 		HashMap<String, String> nvp = null;
 
-		// deformatNVP( nvpStr );
 		StringBuilder encodedData = new StringBuilder("METHOD=").append(methodName).append("&VERSION=")
 				.append(gvVersion).append("&PWD=").append(gvAPIPassword).append("&USER=").append(gvAPIUserName)
 				.append("&SIGNATURE=").append(gvAPISignature).append(nvpStr).append("&BUTTONSOURCE=").append(gvBNCode);
