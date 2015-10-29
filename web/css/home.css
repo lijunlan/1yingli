@@ -4,7 +4,7 @@
 }
 
 @media (max-width: 768px) {
-    html {
+    body {
         background: #f0f0f0 !important;
     }
 
@@ -18,7 +18,7 @@
         display: none;
     }
 
-    body {
+    .subject {
         background: url('http://image.1yingli.cn/img/mobile-home-new.png') no-repeat 100% 100%;
         background-size: 100%;
     }
@@ -68,6 +68,7 @@
     }
 
     #mobile .mobile-bottom {
+        display: none;
         position: absolute;
         text-align: center;
         height: 100px;
