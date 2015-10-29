@@ -318,7 +318,7 @@ function refresh(){
 				}
 				if(i == afterShowPage) {
 					if(afterShowPage !=totalPage ) {
-						$("#btnNext").before("<span class='pager' id='diandian'>...</span>"); 
+						$("#btnNext").before("<span class='pager' id='diandian'>...</span>");
 						$("#btnNext").before("<a class='pager' id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
 						break;
 					}

@@ -1067,6 +1067,7 @@ em {
     }
 
     .feature-list {
+        -webkit-appearance:none;
         margin: 0;
         line-height: 30px;
         height: 30px;
@@ -1116,7 +1117,7 @@ em {
     }
 
     .selected-condition img {
-        margin-top: 1px;
+        margin-top: 0;
     }
 
     .selected-list {
@@ -1151,7 +1152,7 @@ em {
         border: 0;
         background: #f8f8f8;
         line-height: 30px;
-        border-radius: 0;
+        border-radius: 5px;
     }
 
     #search-input1-span {
@@ -1192,7 +1193,7 @@ em {
 
     .person_topic, .person_info {
         margin: 0;
-        font-size: 16px;
+        font-size: 14px;
         line-height: 20px;
         padding-top: 5px;
         overflow: hidden;
@@ -1221,7 +1222,7 @@ em {
     }
 
     .one_person .price .money {
-        top: 50px;
+        top: 47px;
         font-size: 12px;
         left: 68px;
         margin-top: 0;
@@ -1239,7 +1240,7 @@ em {
         height: 16px;
         margin-top: 0;
         left: -23px;
-        bottom: 2px;
+        bottom: 1px;
         position: absolute;
     }
 
