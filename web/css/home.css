@@ -79,17 +79,20 @@
 
     #mobile .mobile-bottom h1 {
         font-size: 20px;
-        /*padding: 10px;*/
-    }
-
-    #mobile .mobile-bottom h3 {
-        font-size: 14px;
         padding: 5px;
     }
 
-    #mobile .mobile-bottom h4, #mobile .mobile-bottom h2 {
+    #mobile .mobile-bottom h3 {
         font-size: 12px;
-        margin-bottom: 5px;
+        padding: 5px;
+    }
+
+    #mobile .mobile-bottom h4 {
+        font-size: 12px;
+    }
+    #mobile .mobile-bottom h2 {
+        font-size: 12px;
+        margin-bottom: 15px;
     }
 
     .mobile-search {
