@@ -15,11 +15,21 @@ $(document).ready(function(){
         }
     })
     $(".right").click(function(){
+      var u = $.cookie('uid');
+      var n = $.cookie('nickName');
+      var i = $.cookie('iconUrl');
+      if(u==null||n==null||i==null){
+        $(".sidenav1").addClass("loginBox");
+        $(".subject").addClass("loginY");
+        self.location='login.html';
+        return;
+      } else{
         if($("html,body").hasClass("XY")){
             $("html,body").removeClass("XY");
         }else{
             $("html,body").addClass("XY");
         }
+      }  
     })
     //$(".header").css("margin","10px");
 	//1...10分别代表不同的id请求参数。
