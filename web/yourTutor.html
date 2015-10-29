@@ -36,7 +36,6 @@
         }, 1500)
     </script>
 </head>
-
 <body>
 <input type="checkbox" id="le"/>
 <ul class="sidenav">
@@ -95,14 +94,15 @@
 	        </div>
 	    </div>
 	</div>
-
-	<div class="no1"></div>
-	<!-- 个人详细订单信息 -->
-	<div class="details"></div>
-	<!-- 页面的尾部 -->
 	<div class="footer"></div>
 </section>
 
+<div class="no1"></div>
+
+<!-- 个人详细订单信息 -->
+<div class="details"></div>
+
+<!-- 老师拒绝理由 -->
 <div id="refuse" style="display:none;"></div>
 
 <!-- 支付界面 -->
@@ -114,38 +114,23 @@
     <button type='submit' id='fukuan'>确认支付</button>
 </form>
 
-<div id="assess" style="width: 627px;height: 200px;padding: 30px 30px 20px 30px;border-radius: 10px;background: white;position: fixed;left: 50%;top: 50%;margin-top: -100px;margin-left:-313.5px;z-index: 100;display:none;">
-    <div style="width: 627px; height: 217px; font-size:18px; text-align: center;line-height: 0px;">评价导师</div>
-    <form style="position:absolute; top:55px; left:60px;">
-        <textarea id="uassess" style="width:550px; height:70px; padding: 10px; font-size:16px; outline:none; border:solid 1px #b2b2b2; resize : none;" placeholder="" ></textarea>
-    </form>
-    <div id="stars" style="width: 627px;height: 40px;position: absolute;left: 10%;top: 160px;">
-        <img class="star" id="1" style="width:25px;height:25px;float:left;" src="http://image.1yingli.cn/img/topic_star.png" alt="">
-        <img class="star" id="2" style="width:25px;height:25px;float:left;" src="http://image.1yingli.cn/img/topic_star.png" alt="">
-        <img class="star" id="3" style="width:25px;height:25px;float:left;" src="http://image.1yingli.cn/img/topic_star.png" alt="">
-        <img class="star" id="4" style="width:25px;height:25px;float:left;" src="http://image.1yingli.cn/img/topic_star.png" alt="">
-        <img class="star" id="5" style="width:25px;height:25px;float:left;" src="http://image.1yingli.cn/img/topic_star.png" alt="">
-        <span id="miss1" style="color:red;display:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请填写评价</span>
+<!-- 评价表单 -->
+<div id="assess">
+    <img class='Tutor_icon_assess' src='http://image.1yingli.cn/img/schedule_close.png'  onclick="closeAssess();" />
+    <div>评价导师</div>
+    <form> <textarea id="uassess" placeholder="" ></textarea> </form>
+    <div id="stars">
+        <img class="star" id="1" src="http://image.1yingli.cn/img/topic_star.png" alt="">
+        <img class="star" id="2" src="http://image.1yingli.cn/img/topic_star.png" alt="">
+        <img class="star" id="3" src="http://image.1yingli.cn/img/topic_star.png" alt="">
+        <img class="star" id="4" src="http://image.1yingli.cn/img/topic_star.png" alt="">
+        <img class="star" id="5" src="http://image.1yingli.cn/img/topic_star.png" alt="">
+        <span id="miss2">请勾选星级!</span><span id="miss1">请填写评价!</span>
     </div>
-    <div style="position: absolute;top: 190px;left: 100px;color: red;display: none;" id="miss2">请勾选星级</div>
-    <div id="usend" style="width: 80px; height: 21px; background:#56bbe8; font-size:18px; color:#FFF; font-family:lantingxihei; position: absolute;left: 75%;top: 200px;border-radius: 8px;padding-left:7px; cursor: pointer;">提交评价</div>
+    <div id="usend">提交评价</div>
 </div>
 
-<!-- 提交信息成功 -->
-<div id="succ" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 50%;left: 50%;margin-top:-150px;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; display:none;">
-    <div style="width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
-    <div style="position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;">提交的请求成功</div>
-    <a href="yourTutor.html" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">确定</a>
-</div>
-
-<!-- 提交信息有误 -->
-<div id="erro" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 50%;left: 50%;margin-top:-150px;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; display:none;">
-    <div style="    width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
-    <div style="position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;">提交的信息有误</div>
-    <a href="yourTutor.html" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">返回</a>
-</div>
-
-<!-- 用户选择支付方式-->
+<!-- 用户选择支付方式 -->
 <div id="choose_pay_method">
     <p>确认付款，请选择您支付的方式</p>
     <div  class="choose_pay_Alipay">
@@ -165,5 +150,19 @@
 
 <!-- 支付结果提示 -->
 <div class="prompt">支付成功</div>
+
+<!-- 提交信息成功 -->
+<div id="succ" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 50%;left: 50%;margin-top:-150px;margin-left:-200px;border-radius: 10px;z-index: 1000;background: #fff; display:none;">
+    <div style="width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+    <div style="position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;">提交的请求成功</div>
+    <a href="yourTutor.html" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">确定</a>
+</div>
+
+<!-- 提交信息有误 -->
+<div id="erro" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 50%;left: 50%;margin-top:-150px;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; display:none;">
+    <div style="    width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+    <div style="position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;">提交的信息有误</div>
+    <a href="yourTutor.html" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">返回</a>
+</div>
 </body>
 </html>
