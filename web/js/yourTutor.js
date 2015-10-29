@@ -32,6 +32,16 @@ $(document).ready(function(){
     });
 });
 
+//取消事件
+function closeChoose_pay_method(){
+    $("#choose_pay_method").hide(); 
+    $(".mark").hide();
+}
+function closeAssess(){
+    $(".mark").hide();
+    $("#assess").hide();
+}
+
 var totalPage = 1;
 var page = 1;
 function firstPage() {
@@ -138,7 +148,6 @@ function changePage(p){
     var afterShowPage = parseInt(page) + showPage;
     var beforeShowPage = parseInt(page) - showPage;
     $(".page").html("");
-    var html1="";
     html1 = "<a id='btnStart' href='javascript:firstPage()'><img src='http://image.1yingli.cn/img/firstPage.png'></a><a id='btnLast' href='javascript:lastPage();' style='padding: 0px;'><img src='http://image.1yingli.cn/img/lastPage.png'></a><a id='btnNext' href='javascript:nextPage();' style='padding: 0px;'><img src='http://image.1yingli.cn/img/nextPage.png'></a><a id='btnEnd' href='javascript:finalPage();'><img src='http://image.1yingli.cn/img/finalPage.png'></a>";
     $(".page").html(html1);
     if(totalPage <= basePage) {
@@ -257,14 +266,14 @@ function openshow(tid,i,orderId){
                 $("#pay").hide();
             });
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
-                $("#pay").slideUp(); 
+                $("#pay").hide(); 
             });
             $(".mark").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
-                $("#pay").slideUp();
+                $("#pay").hide();
             });
             //选择支付方式页面
             $("#choose_method").click(function(){
@@ -294,15 +303,15 @@ function openshow(tid,i,orderId){
             $(".mark").show();
             $(".no1").slideDown().html("<p>取消订单成功</p><p></p><div class='order-step'><div class='yuan'><span>1</span></div><div class='xian'></div><div class='yuan'><span>2</span></div><div class='xian'></div><div class='yuan'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='back128'>确定</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             $(".mark").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             $("#back128").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             break;
@@ -310,15 +319,15 @@ function openshow(tid,i,orderId){
             $(".mark").show();
             $(".no1").slideDown().html("<p>导师已收到提醒，等待导师确认</p><p>请耐心等待，导师会在24小时内确认</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian'></div><div class='yuan'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='spay' style='float:left; margin:30px 0 0 210px'>确认</button><button id='nopayafter' style='float:left; margin:30px 0 0 50px;'>申请退款</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             $(".mark").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             $("#spay").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             $("#nopayafter").click(function(){
@@ -331,11 +340,11 @@ function openshow(tid,i,orderId){
             $(".mark").show();
             $(".no1").slideDown().html("<p>导师已收到提醒，等待导师与您协商时间</p><p>请耐心等待，导师会在24小时内确认</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='noserve'>取消咨询</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             $(".mark").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             $("#noserve").click(function(){
@@ -349,11 +358,11 @@ function openshow(tid,i,orderId){
             $(".mark").show();
             $(".no1").slideDown().html("<p>导师已确认时间，等待导师服务</p><p></p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>3</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='tgd' style='margin:20px 70px 0px 200px;'>服务满意</button><button id='nogd' style='margin:0;'>服务不满意</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             $(".mark").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             $("#tgd").click(function(){
@@ -371,11 +380,11 @@ function openshow(tid,i,orderId){
             $(".mark").show();
             $(".no1").slideDown().html("<p>反馈信息已经收到</p><p>请耐心等待</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>3</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='back400'>确定</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             $("#back400").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             break;
@@ -383,15 +392,15 @@ function openshow(tid,i,orderId){
             $(".mark").show();
             $(".no1").slideDown().html("<p>订单已取消</p><p></p><div class='order-step'><div class='yuan'><span>1</span></div><div class='xian'></div><div class='yuan'><span>2</span></div><div class='xian'></div><div class='yuan'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='back448'>确定</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             $("#back448").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             $(".mark").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             break;
@@ -399,15 +408,15 @@ function openshow(tid,i,orderId){
             $(".mark").show();
             $(".no1").slideDown().html("<p>订单已经取消</p><p>请耐心等待退款到账</p><div class='order-step'><div class='yuan'><span>1</span></div><div class='xian'></div><div class='yuan'><span>2</span></div><div class='xian'></div><div class='yuan'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='back800'>确定</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             $(".mark").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             $("#back800").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             break;
@@ -415,16 +424,16 @@ function openshow(tid,i,orderId){
             $(".mark").show();
             $(".no1").slideDown().html("<p>服务已经完成</p><p>请等待导师确认信息</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>3</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>4</span></div><div class='xian xian-01'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='uass'>确认</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
-                $("#assess").slideUp(); 
+                $("#assess").hide(); 
             });
             $(".mark").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             $("#uass").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             break;
@@ -432,17 +441,18 @@ function openshow(tid,i,orderId){
             $(".mark").show();
             $(".no1").slideDown().html("<p>导师已确认收款</p><p>请评价导师</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>3</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>4</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='uass'>立即评价</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
                 $("#assess").hide(); 
             });
             $(".mark").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
                 $("#assess").hide();
             });
             $("#uass").click(function(){
                 $("#assess").fadeIn();
+                $(".no1").hide();
                 $(".star").click(function(){
                     star = $(this).attr("id");
                     for(var i = 1;i<=5;i++){
@@ -477,15 +487,15 @@ function openshow(tid,i,orderId){
             $(".mark").show();
             $(".no1").slideDown().html("<p>导师已收到提醒，等待导师评价</p><p>请耐心等待，导师会在24小时内评价</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>3</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>4</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='back1010'>确认</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             $(".mark").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             $("#back1010").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             break;
@@ -493,15 +503,15 @@ function openshow(tid,i,orderId){
             $(".mark").show();
             $(".no1").slideDown().html("<p>订单成功完成</p><p>感谢您的支持</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>3</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>4</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='back'>返回</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             $(".mark").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             $("#back").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             })
             break;
@@ -509,15 +519,15 @@ function openshow(tid,i,orderId){
             $(".mark").show();
             $(".no1").slideDown().html("<p>服务已经取消</p><p>感谢您的支持</p><div class='order-step'><div class='yuan'><span>1</span></div><div class='xian'></div><div class='yuan'><span>2</span></div><div class='xian'></div><div class='yuan'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='back1200'>返回</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             $(".mark").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             $("#back1200").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             break;
@@ -525,15 +535,15 @@ function openshow(tid,i,orderId){
             $(".mark").show();
             $(".no1").slideDown().html("<p>客服介入中</p><p>请耐心等待，客服会尽快处理</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>3</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='back1300'>确认</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             $(".mark").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             $("#back1300").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             }) ;
             break;
@@ -541,15 +551,15 @@ function openshow(tid,i,orderId){
             $(".mark").show();
             $(".no1").slideDown().html("<p>订单出现异常</p><p>请耐心等待，客服会在24小时内修正</p><div class='order-step'><div class='yuan'><span>1</span></div><div class='xian'></div><div class='yuan'><span>2</span></div><div class='xian'></div><div class='yuan'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='back1400'>确定</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             $(".mark").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             $("#back1400").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             break;
@@ -557,15 +567,15 @@ function openshow(tid,i,orderId){
             $(".mark").show();
             $(".no1").slideDown().html("<p>退款请求已经提交</p><p>请耐心等待，退款会在24小时内达到</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='back1500'>确认</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             $(".mark").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide();
             });
             $("#back1500").click(function(){
-                $(".no1").slideUp();
+                $(".no1").hide();
                 $(".mark").hide(); 
             });
             break;
