@@ -1,0 +1,120 @@
+
+#mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    body {
+        background: #f0f0f0 !important;
+    }
+
+    #mobile {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    #pc {
+        display: none;
+    }
+
+    .subject {
+        background: url('http://image.1yingli.cn/img/mobile-home-new.png') no-repeat 100% 100%;
+        background-size: 100%;
+    }
+
+    #mobile header .left {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        height: 16px;
+        margin: 0;
+        width: auto;
+    }
+
+    #mobile header .left img , #mobile header .right img {
+        height: 100%;
+        width: auto;
+    }
+
+
+    #mobile header .logo {
+        position: absolute;
+        top: 13px;
+        left: 50%;
+        margin-left: -30px;
+        width: 60px;
+    }
+
+    #mobile header .right {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        height: 20px;
+        margin: 0;
+        width: auto;
+    }
+
+    .home-text {
+        width: 100%;
+        position: absolute;
+        top: 100px;
+    }
+
+    #mobile header span {
+        float: right;
+        padding: 10px;
+        color: #41B9EE;
+    }
+
+    #mobile .mobile-bottom {
+        display: none;
+        position: absolute;
+        text-align: center;
+        height: 100px;
+        width: 100%;
+        color: #cccccc;
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    #mobile .mobile-bottom h1 {
+        font-size: 20px;
+        /*padding: 10px;*/
+    }
+
+    #mobile .mobile-bottom h3 {
+        font-size: 14px;
+        padding: 5px;
+    }
+
+    #mobile .mobile-bottom h4, #mobile .mobile-bottom h2 {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+
+    .mobile-search {
+        position: absolute;
+        top: 170px;
+        left: 50%;
+        width: 180px;
+        height: 20px;
+        margin-left: -90px;
+    }
+
+    .mobile-search input {
+        width: 180px;
+        height: 30px;
+        border-radius: 15px;
+        padding: 5px 10px;
+        border: 1px solid #dcdcdc;
+        font-size: 12px;
+    }
+
+    .mobile-search img {
+        position: absolute;
+        right: 0px;
+        top: 1px;
+        width: 28px;
+    }
+
+}

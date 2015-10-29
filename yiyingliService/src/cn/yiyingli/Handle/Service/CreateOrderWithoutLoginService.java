@@ -19,8 +19,9 @@ import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Service.VoucherService;
 import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.LogUtil;
+import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
-import cn.yiyingli.Util.SendMailUtil;
+import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.SendMsgToBaiduUtil;
 import cn.yiyingli.Util.TimeTaskUtil;
 
@@ -191,6 +192,7 @@ public class CreateOrderWithoutLoginService extends MsgService {
 		getUserService().update(user);
 
 		float money = teacher.gettService().getPriceTotal();
+		float originMoney = teacher.gettService().getPriceTotal();
 		long ntime = Calendar.getInstance().getTimeInMillis();
 		Voucher voucher = null;
 		if (getData().containsKey("voucher")) {
@@ -216,6 +218,7 @@ public class CreateOrderWithoutLoginService extends MsgService {
 		if (money < 0.01)
 			money = 0.01F;
 		order.setMoney(money);
+		order.setOriginMoney(originMoney);
 		String orderNo = getOrderService().save(order);
 		if (voucher != null) {
 			getVoucherService().update(voucher);
@@ -224,8 +227,9 @@ public class CreateOrderWithoutLoginService extends MsgService {
 		SendMsgToBaiduUtil.updateUserTrainDataOrder(user.getId() + "", teacher.getId() + "",
 				Calendar.getInstance().getTimeInMillis() + "");
 
-		SendMailUtil.sendMessage(email,
-				"尊敬的学员，您的导师预约订单已经创建。订单号" + order.getOrderNo() + "，请在24小时内完成支付，超时系统会自动取消订单。" + extensionInformation);
+		NotifyUtil.notifyUser("", email,
+				"尊敬的学员，您的导师预约订单已经创建。订单号" + order.getOrderNo() + "，请在24小时内完成支付，超时系统会自动取消订单。" + extensionInformation,
+				user, notificationService);
 
 		String _UUID = UUID.randomUUID().toString();
 		getUserMarkService().save(String.valueOf(user.getId()), _UUID);
@@ -248,7 +252,7 @@ public class CreateOrderWithoutLoginService extends MsgService {
 		user.setSendCommentNumber(0L);
 		user.setPhone(phone);
 		user.setEmail(email);
-		user.setPassword(pw);
+		user.setPassword(MD5Util.MD5(pw));
 		user.setCreateTime(String.valueOf(Calendar.getInstance().getTimeInMillis()));
 		user.setTeacherState(UserService.TEACHER_STATE_OFF_SHORT);
 		user.setForbid(false);

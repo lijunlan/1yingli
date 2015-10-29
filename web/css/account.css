@@ -142,3 +142,69 @@ header,footer,section {display:block;}
 .footer-share li:first-child{  margin-left: 31%;  }
 .copyright{  color: white;  text-align: center;  height: 20px;  line-height: 20px;  }
 .copyright a{  text-decoration: none;  color: #428bca  }
+
+@media (max-width: 768px){
+	.g-hd{
+		display: none;
+	}
+	.top-nav{
+		display: none;
+	}
+	.content-left{
+		display: none;
+	}
+	.right-01{
+		display: none;
+	}
+	.content-container{
+		min-height: 500px !important;
+		min-width: 200px !important;
+	}
+	.content{
+		width: 100%;
+		min-height: 200px; 
+	}
+	.content-right{
+		width: 100%;
+		float: left;
+	}
+	.right-02{
+		width: 100%;
+		border: 0 ;
+	}
+	#password-submit{
+		top: 140px;
+    	right: 10%;
+	}
+	#right-02-form{
+		width: 90%;
+		padding: 0;
+		margin: 0 5%;
+	}
+	.right-01-title{
+		display: none;
+	}
+	.right-label{
+		float: left;
+		width: 20%;
+		margin-right: 5px;
+	}
+	#password{
+		float: left;
+		width: 65%;
+	}
+	#new-password{
+		float: left;
+		width: 65%;
+	}
+	.flRi{
+		float: right;
+	}
+	#confirm-password{
+		float: left;
+		width: 65%;
+	}
+	.right-top{
+		width: 90% !important;
+	}
+}

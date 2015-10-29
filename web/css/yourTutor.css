@@ -32,7 +32,7 @@
 }
 @media (max-width: 768px) and (min-width: 391px){
     .details_person_price {
-        margin:25px 0 0 0 !important;
+        margin:10px 0 0 0 !important;
         font-size: 20px !important;
         width: 141px !important;
         text-align: left !important;
@@ -104,6 +104,8 @@
         float: right !important;
         margin-right: 5px;
         width: 90px;
+        white-space: normal !important;
+        height: 20px;
         text-overflow: initial !important;
     }
     .yourTutor-01 {
@@ -345,7 +347,7 @@
     }
     #fnopay{
         float: right !important;
-        margin: 30px 10px 0 0 !important;
+        margin: 0px 10px 0 0 !important;
         left: 0;
         position: static;
     }
@@ -356,6 +358,12 @@
         margin-top: -85px !important;
         margin-left: 5% !important;
     }
+    #choose_method {
+        margin: 0px 20px 0 10px !important;
+        position: initial !important;
+        float: right !important;
+    }
+    
 }
 
 html{color:#000;background:#FFF;}
@@ -913,11 +921,140 @@ width:520px;height:35px;border:1px solid #eeeeee;margin: 0;overflow-y: auto;over
 }
 
 
+/*用户支付方式界面*/
+#choose_pay_method {
+    width: 542px;
+    padding: 30px;
+    border-radius: 10px;
+    background: white;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-top: -207px;
+    margin-left: -271px;
+    z-index: 100;
+    border: 1px solid #ccc;
+    display:none;
+}
 
+#choose_pay_method p {
+    font-size:18px;
+    width:100%;
+    text-align:center;
+    margin:0px;
+}
 
+.choose_pay_Alipay, .choose_pay_paypal {
+    margin-top:10px;
+    text-align: center;
+    width: 100%;
+    position:relative;
+}
 
+.choose_pay_Alipay img,.choose_pay_paypal img{
+    width: 158px;
+    margin-left: 30px;
+    cursor: pointer;
+}
 
+.choose_pay_Alipay input,.choose_pay_paypal input{
+    height: 20px;
+    position:absolute;
+    top: 35%;
+    width: 20px;
+    cursor: pointer;
+}
 
+.choose_pay_button {
+    width: 200px;
+    text-align: center;
+    margin:0 auto;
+    overflow: hidden;
+}
+
+.button1 {
+    float:left; 
+    margin:20px 0 0 0px;
+    color: #000;
+    width: 74px;
+    height: 27px;
+    line-height: 27px;
+    text-align: center;
+    font-size: 13px;
+    border: 0;
+    border-radius: 14px;
+    cursor: pointer;
+}
+.button2 {
+    float:left; 
+    margin:20px 0 0 50px;
+    width: 74px;
+    height: 27px;
+    line-height: 27px;
+    text-align: center;
+    background: #56bbe8;
+    color: white;
+    font-size: 13px;
+    border: 0;
+    border-radius: 14px;
+    cursor: pointer;
+}
+
+#pay{
+    width: 400px;
+    height: 150px;
+    padding: 20px 10px;
+    border-radius: 8px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-top:-120px;
+    margin-left: -200px;
+    z-index: 150;
+    background: white;
+    display:none;    
+}
+
+#pay div{
+    width: 400px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+#pay button{
+    width:80px;
+    height:20px;
+    font-size:16px;
+    color:#FFF;
+    background:#56bbe8;
+    border-radius:8px;
+    text-align:center;
+    float:right;
+    margin-right: 160px;
+    border:0px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+/*提示支付成功界面*/
+.prompt {
+    width: 240px;
+    height: 100px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -120px;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 100px;
+    background: #57BBE8;
+    font-size: 16px;
+    color: #FFF;
+    display: none;
+}
 
 
 

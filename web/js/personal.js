@@ -490,7 +490,7 @@ function refreshTeacherInfo(){
                             showTime = st[0]+"年"+st[1]+"月-"+et[0]+"年"+et[1]+"月";
                         }
 
-                        html = html + "<p><span style='width:500px;height:30px;overflow:hidden;display:block;float:left;'>"+content.schoolName +" "+content.major+" "+content.degree + "</span><lable style='float:right;'>"+showTime+"</lable></p>";
+                        html = html + "<p><span style='width:500px;height:30px;overflow:hidden;display:block;float:left;'>"+content.schoolName +" "+content.major+" "+content.degree + "</span><lable id='schooltime' style='float:right;'>"+showTime+"</lable></p>";
                     });
 
                     $.each(workExp,function(index,content){
@@ -502,7 +502,7 @@ function refreshTeacherInfo(){
                         }else {
                             showTime = st[0]+"年"+st[1]+"月-"+et[0]+"年"+et[1]+"月";
                         }
-                        html = html + "<p><span style='width:500px;height:30px;overflow:hidden;display:block;float:left;'>"+content.companyName+" "+content.position+" " + "</span><lable style='float:right;'>"+showTime+"</lable></p>";
+                        html = html + "<p><span style='width:500px;height:30px;overflow:hidden;display:block;float:left;'>"+content.companyName+" "+content.position+" " + "</span><lable id='worktime' style='float:right;'>"+showTime+"</lable></p>";
                     });
                     
                     $("#explist").html(html);

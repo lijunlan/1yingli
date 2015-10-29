@@ -1,4 +1,4 @@
-app.controller('MainController', ['$scope', 'HttpService', '$routeParams', '$location',
+app.controller('MainController', ['$scope', 'HttpService', '$routeParams', '$location', '$rootScope',
     function ($scope, HttpService, $routeParams, $location) {
 
         //载入页面后保证滚动到头部
@@ -77,6 +77,11 @@ app.controller('MainController', ['$scope', 'HttpService', '$routeParams', '$loc
                 }
             }
             onReady($scope.teacher);
+            if ($routeParams.callback == 1) {
+                $scope.date();
+                $('#step1').css('display', 'none');
+                $('#step5-1').css('display', 'block');
+            }
         });
 
         //评论
@@ -156,16 +161,23 @@ app.controller('MainController', ['$scope', 'HttpService', '$routeParams', '$loc
         //预约流程控制
         {
             $scope.date = function () {
-                document.getElementById('iframe').addEventListener('touchmove', remove, false);
+                //document.getElementById('iframe').addEventListener('touchmove', remove, false);
                 $('#iframe').css('display', 'block');
+                $('.blackBg').css('display', 'block');
+                $('body,html').scrollTop(0);
+                if ($scope.orderId != undefined) {
+                    $scope.toPay();
+                    return;
+                }
                 $('#iframe .box').css('display', 'none');
                 $('#step1').css('display', 'block');
             };
 
 
             $scope.closeFrame = function () {
-                document.getElementById('iframe').removeEventListener('touchmove', remove, false);
+                //document.getElementById('iframe').removeEventListener('touchmove', remove, false);
                 $('#iframe').css('display', 'none');
+                $('.blackBg').css('display', 'none');
             };
 
             $scope.nextStep = function () {
@@ -208,26 +220,29 @@ app.controller('MainController', ['$scope', 'HttpService', '$routeParams', '$loc
                 HttpService.post("order", "createOrderWithoutLogin", $scope.params, function (data) {
                     $scope.uid = data.uid;
                     $scope.orderId = data.orderId;
+                    $scope.callback = 'http://' + window.location.host + window.location.pathname
+                        + "#/main/" + $routeParams.tid + "/1";
+                    $('#step2').css('display', 'none');
+                    $('#step3').css('display', 'block');
                 });
-                $('#step2').css('display','none');
-                $('#step3').css('display','block');
-            };
-
-            $scope.toPay = function() {
-                $('#step3').css('display','none');
-                $('#step4').css('display','block');
             };
 
             $scope.payType = 0;
-            $scope.pay = function() {
-                if($scope.payType == 0) {
-                    alert("请选择支付方式");
-                    return
-                }
-                if($scope.payType == 1) {
-                    $('#step4').css('display','none');
-                    $('#step5').css('display','block');
-                }
+            $scope.pay = function () {
+                var payUrls = ["http://test.1yingli.cn/yiyingliService/Alipay", "http://test.1yingli.cn/yiyingliService/Checkout"];
+                $('#step4 form').attr('action', payUrls[$scope.payType]);
+                $('#step3').css('display', 'none');
+                $('#step4').css('display', 'block');
+            };
+
+            $scope.toPay = function () {
+                $('#iframe .box').css('display', 'none');
+                $('#step3').css('display', 'block');
+            };
+
+            $scope.refusePay = function () {
+                $('#step3').css('display', 'none');
+                $('#step5-2').css('display', 'block');
             }
 
         }

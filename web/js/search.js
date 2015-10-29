@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	refresh(page);
-	
+
 	<!--人物模块动态效果-->
 	$(".one_person").hover(function(){
         $(this).css("-moz-box-shadow","0px 0px 10px #D9D9D9");
@@ -15,7 +15,7 @@ $(document).ready(function(){
     $("#result-content-header-list-01").click(function(){
 			findBySort("");
     });
-    $("#result-content-header-list-02").click(function(){            
+    $("#result-content-header-list-02").click(function(){
 		if($(this).find('span').text() == 1) {
 			findBySort("likeno+");
 		} else {
@@ -29,7 +29,7 @@ $(document).ready(function(){
 			findBySort("price-");
 		}
     });
-	
+
 	<!--闭当前标签-->
 	$("#selected-condition-close-01").click(function(){
 		var tips1 = encodeURIComponent($_GET('tip1'));
@@ -200,31 +200,31 @@ function refresh(){
 
 	//搜索页面调整
 	if(sort=='likeno+') {
-		$("#result-content-header-list-02").css({"background":"#56bbe8","color":"white"});
+		$("#result-content-header-list-02").css({"background":"#56bbe8","color":"#f8f8f8"});
 		$("#triangle-up02").attr("src","http://image.1yingli.cn/img/triangle_white_down.png");
 		$("#result-content-header-list-02").find('span').text('2');
 	}
 	if(sort=='likeno-') {
-		$("#result-content-header-list-02").css({"background":"#56bbe8","color":"white"});
+		$("#result-content-header-list-02").css({"background":"#56bbe8","color":"#f8f8f8"});
 		$("#triangle-up02").attr("src","http://image.1yingli.cn/img/triangle_white_up.png");
 		$("#result-content-header-list-02").find('span').text('1');
 	}
 	if(sort=='price+') {
-		$("#result-content-header-list-03").css({"background":"#56bbe8","color":"white"});
+		$("#result-content-header-list-03").css({"background":"#56bbe8","color":"#f8f8f8"});
 		$("#triangle-up03").attr("src","http://image.1yingli.cn/img/triangle_white_down.png");
 		$("#result-content-header-list-03").find('span').text('2');
 	}
 	if(sort=='price-') {
-		$("#result-content-header-list-03").css({"background":"#56bbe8","color":"white"});
+		$("#result-content-header-list-03").css({"background":"#56bbe8","color":"#f8f8f8"});
 		$("#triangle-up03").attr("src","http://image.1yingli.cn/img/triangle_white_up.png");
 		$("#result-content-header-list-03").find('span').text('1');
 	}
 	if(!sort){
-       	$("#result-content-header-list-01").css({"background":"#56bbe8","color":"white"});
-		$("#result-content-header-list-02").css({"background":"white","color":"#56bbe8"});
-       	$("#result-content-header-list-03").css({"background":"white","color":"#56bbe8"});
+       	$("#result-content-header-list-01").css({"background":"#56bbe8","color":"#f8f8f8"});
+		$("#result-content-header-list-02").css({"background":"#f8f8f8","color":"#56bbe8"});
+       	$("#result-content-header-list-03").css({"background":"#f8f8f8","color":"#56bbe8"});
 	}
-	
+
 	//获取数据
 	var toSend = new Object();
 	toSend.style = "function";
@@ -248,7 +248,7 @@ function refresh(){
 	} else {
     	toSend.tips = word;
     }
-    
+
     $.ajax({
 		cache : true,
 		type : "POST",
@@ -265,9 +265,9 @@ function refresh(){
 				var result = $.parseJSON(json.result);
 				html  = "";
 				$.each(result,function(index,content){
-					html = html + "<div class='one_person' ><a href='personal.html?tid="+content.id+"' target='_blank'><img src='"+content.iconurl+"' ><div class='import_info'><p class='person_topic'>"+ content.servicetitle +"</p><p class='person_info'>"+content.name+"<span>&nbsp;&nbsp;"+ content.simpleinfo +"</span> </p><p class='person_likes'>"+content.servicecontent+"</p></div><div class='price'> <p class='money'>"+ parseInt(content.serviceprice) + "元/" + parseInt(content.servicetime) +"时</p><p class='like'><img style='margin-left:0px;' src='http://image.1yingli.cn/img/heart.png' >"+content.likeno+" 人想见</p><p>本周可咨询"+content.timeperweek+"次</p></div></a></div>";					
+					html = html + "<div class='one_person' ><a href='personal.html?tid="+content.id+"' target='_blank'><img src='"+content.iconurl+"' ><div class='import_info'><p class='person_topic'>"+ content.servicetitle +"</p><p class='person_info'>"+content.name+"<span>&nbsp;&nbsp;"+ content.simpleinfo +"</span> </p><p class='person_likes'>"+content.servicecontent+"</p></div><div class='price'> <p class='money'>"+ parseInt(content.serviceprice) + "元/" + parseInt(content.servicetime) +"时</p><p class='like'><img style='margin-left:0px;' src='http://image.1yingli.cn/img/heart.png' >"+content.likeno+" 人想见</p><p class='times'>本周可咨询"+content.timeperweek+"次</p></div></a></div>";
 				});
-				if(html ==""){
+				if(html == ""){
 					html = "<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;没有找到相关导师</h1>"
 				}
 				$("#sercher_result").html(html);
@@ -290,36 +290,36 @@ function refresh(){
     for (var i = totalPage; i >=1; i--) {$("#btn" + i ).remove(); };
 	if(totalPage <= basePage) {
 		for (var i = 1; i <=totalPage; i++) {
-			$("#btnNext").before("<a id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");	
+			$("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
     	};
 	} else {
 		for (var i = 1; i <=totalPage; i++) {
 			if(page == 1) {
-				$("#btnNext").before("<a id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
+				$("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
 				if(i == 5) {
-					$("#btnNext").before("<span id='diandian'>...</span>");
-					$("#btnNext").before("<a id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
+					$("#btnNext").before("<span class='pager' id='diandian'>...</span>");
+					$("#btnNext").before("<a class='pager' id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
 					break;
 				}
 			} else if(page <=mostPage) {
-				$("#btnNext").before("<a id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
+				$("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
 				if(i == afterShowPage) {
-					 $("#btnNext").before("<span id='diandian'>...</span>");
-					 $("#btnNext").before("<a id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
+					 $("#btnNext").before("<span class='pager' id='diandian'>...</span>");
+					 $("#btnNext").before("<a class='pager' id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
 					 break;
 				}
 			} else {
 				if(i<=leastPage) {
-					$("#btnNext").before("<a id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
-					if(i == leastPage) { $("#btnNext").before("<span id='diandian'>...</span>");}
+					$("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
+					if(i == leastPage) { $("#btnNext").before("<span class='pager' id='diandian'>...</span>");}
 				}
 				if(beforeShowPage <= i && i <= afterShowPage){
-					$("#btnNext").before("<a id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
+					$("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
 				}
 				if(i == afterShowPage) {
 					if(afterShowPage !=totalPage ) {
-						$("#btnNext").before("<span id='diandian'>...</span>"); 
-						$("#btnNext").before("<a id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
+						$("#btnNext").before("<span class='pager' id='diandian'>...</span>");
+						$("#btnNext").before("<a class='pager' id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
 						break;
 					}
 				}
@@ -358,4 +358,9 @@ function firstPage(){
     if(page != 1) {
    		refreshPage(1);
     }
+}
+
+function mobile_search() {
+    var findName1 = encodeURIComponent(encodeURIComponent($("#mobile_search").val()));
+    self.location = 'search.html?findName1=' + findName1;
 }

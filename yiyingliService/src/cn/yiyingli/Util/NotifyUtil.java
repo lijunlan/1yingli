@@ -3,6 +3,7 @@ package cn.yiyingli.Util;
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 
+import cn.yiyingli.BaichuanTaobaoUtil.CloudPushUtil;
 import cn.yiyingli.Dao.NotificationDao;
 import cn.yiyingli.Persistant.Notification;
 import cn.yiyingli.Persistant.Teacher;
@@ -24,14 +25,19 @@ public class NotifyUtil {
 			SendMessageUtil.sendMessage(phone, message);
 		}
 		if (CheckUtil.checkEmail(email)) {
-			SendMailUtil.sendMessage(email, message);
+			SendMailUtil.sendMessage(email, "订单状态改变通知", message);
 		}
+		// web
 		sendNotification(user, notificationService, message);
+		// mobile
+		String[] usernames = { user.getUsername() };
+		CloudPushUtil.IOSpushMessageToAccount(usernames, message);
+		CloudPushUtil.IOSpushNoticeToAccount(usernames, message);
 		return true;
 	}
 
 	public static boolean notifyBD(String msg) {
-		SendMailUtil.sendMessage("boom@1yingli.cn", msg);
+		SendMailUtil.sendMessage("boom@1yingli.cn", "订单状态通知", msg);
 		return true;
 	}
 
@@ -43,9 +49,14 @@ public class NotifyUtil {
 			SendMessageUtil.sendMessage(phone, m2);
 		}
 		if (CheckUtil.checkEmail(email)) {
-			SendMailUtil.sendMessage(email, m1);
+			SendMailUtil.sendMessage(email, "订单状态改变通知", m1);
 		}
+		// web
 		sendNotification(teacher, notificationService, m1);
+		// mobile
+		String[] usernames = { teacher.getUsername() };
+		CloudPushUtil.IOSpushMessageToAccount(usernames, message);
+		CloudPushUtil.IOSpushNoticeToAccount(usernames, message);
 		return true;
 	}
 

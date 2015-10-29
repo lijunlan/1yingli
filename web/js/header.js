@@ -55,6 +55,43 @@
         }).bind("input.autocomplete", function () {
             $( "#search-input" ).autocomplete("search", $( "#search-input" ).val());
         }).focus();
+            $("#ui-id-1").click(function(){
+                searchByInput();
+            });
+    }, 0);
+
+    setTimeout(function() {
+        $("#search-input1").autocomplete({
+            delay: 0,
+            source: function(request, response) {
+                var toSend = new Object();
+                toSend.style = "function";
+                toSend.method = "getSearchHint";
+                toSend.word = $( "#search-input1" ).val();
+                $.ajax({
+                    url: config.base_url,
+                    type : "POST",
+                    dataType: 'json',
+                    data: $.toJSON(toSend),
+                    success: function(data) {
+                        if(data.status === 'OK' && data.result) {
+                            if(data.result.length >= hit) {
+                                response(data.result.slice(0, hit));
+                            } else {
+                                response(data.result);
+                            }
+                        } else if( data.status === 'FAIL' && data.errors ){
+                            //alert(data.errors[0].message);
+                        }
+                    }
+                });
+            }
+        }).bind("input.autocomplete", function () {
+            $( "#search-input1" ).autocomplete("search", $( "#search-input1" ).val());
+        }).focus();
+            $("#ui-id-2").click(function(){
+                searchByInput1();
+            });
     }, 0);
 });
 

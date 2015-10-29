@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <title>登录</title>
     <link href="css/login.css" rel="stylesheet" type="text/css"/>
     <link href="css/register.css" rel="stylesheet" type="text/css"/>
@@ -20,11 +21,12 @@
     <script type="text/javascript" src="js/RSA/Barrett.js"></script>
     <script type="text/javascript" src="js/RSA/RSAencrypt.js"></script>
     <script src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
 </head>
 <body>
     <div class="container" id="container">
         <div class="container-top" id="container-top">
-            <a id="close" href="javascript:void(0);"><img src="http://image.1yingli.cn/img/register_close.png" style="position: absolute;left: 319px;"></a>
+            <a id="close" href="javascript:void(0);"><img src="http://image.1yingli.cn/img/register_close.png" style="position: absolute;left: 269px;"></a>
             <h1 class="container-top-title" id="container-top-title">欢迎登录一英里</h1>
             <a href="https://api.weibo.com/oauth2/authorize?client_id=3399536820&redirect_uri=http://www.1yingli.cn/weiboredirect.html&response_type=code" class="container-top-weibo-login" id="container-top-weibo-login">
                 <div class="container-top-weibo-login-box" id="container-top-weibo-login-box">
@@ -136,7 +138,7 @@
             }
 
             $("#close").click(function(){
-                history.go(-1);
+                self.location=document.referrer;
             })
 
             var kind = $_GET("kind");
@@ -280,7 +282,7 @@
         });
 
         function refreshValidate(){
-                $("#validateImage").attr("src","http://service.1yingli.cn/yiyingliService/"+parseInt(Math.random()*1000000)+".images");
+                $("#validateImage").attr("src","http://test.1yingli.cn/yiyingliService/"+parseInt(Math.random()*1000000)+".images");
                 //alert($.cookie('validate'));
                 //$.cookie('test',"hehehe");
                 //$("#vn").val($.cookie('validate'));
@@ -338,8 +340,8 @@
         var publickey = "8959d2ced61bee338accd16794538ec0a49da0655ddca8fa2461d4cf419dafaf4d7c47813f6ac8c6e5646a2beb08cccf4184a831e683a631e3c528b908deecc57235d03935d0650fbe53d44f717da7f5d1622e7405a3b4f06377eb506880dae21e5065c878c03d85113e068ac82af6b29037d57163d9a311807bee654927d349";
 
         function mlogin(){
-            var username = $("#login-username").val();
-            var password = $("#login-password").val();
+            var username = $("#login-username").val().replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+            var password = $("#login-password").val().replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 
             var isPass = true;
             if(!username) {
@@ -386,9 +388,10 @@
                             callback = decodeURIComponent(callback);
                             self.location = callback;
                         }else{
-                            history.go(-1);
+                            self.location=document.referrer;
                         }
                     } else {
+                        $("#login-password").val("");
                         $(".mark").show();
                         $("#erro").show();
                         $("#newLog").click(function(){
@@ -450,162 +453,6 @@
                 }
             });
         }
-
     </script>
-
-
-
 </body>
 </html>
-<!-- 
-            <p>
-                <p>
-                    <label class="register-label" id="register-form-ident"><img src="img/register_ident.png" alt=""/><span>验证码*</span>
-                        <br/>
-                        <input class="user" id="ident" name="ident" type="text" placeholder="6位验证码" style="padding-left: 7px"/>
-                        <button id="sent-ident">发送验证码</button>
-                    </label>
-                </p>
-            </p>
-            <br/>
-
-            <p>
-                <label class="register-label"><img src="img/register_password.png" alt=""/>创建密码*</label>
-                <br/>
-                <input class="user" id="password" name="password" type="password" placeholder="密码为6-20个字符" style="padding-left: 7px"/>
-            </p>
-
-            <p>
-                <label class="register-label"><img src="img/register_password.png" alt=""/>确认密码*</label>
-                <br/>
-                <input class="user" id="confirm-password" name="confirm-password" type="password" placeholder="密码为6-20个字符" style="padding-left: 7px"/>
-            </p>
-
-            <p class="container-footer">注册即表示我同意服务条款，隐私政策</p>
-            <button class="login" id="register">注册</button>
-            <h2 class="container-footer-h2">已有账号？去<a href="javascript:void(0);" class="container-footer-a" id="register-container-footer-a">登录</a></h2>
-        </form>
-    </div>
-
-    <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/jquery.foggy.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $("#login-form").validate({
-                rules: {
-                    phoneNumber: {
-                        required: true,
-                        minlength: 11,
-                        maxlength: 11
-                    },
-                    password: {
-                        required: true,
-                        minlength: 6,
-                        maxlength: 20
-                    }
-                },
-                messages: {
-                    phoneNumber: {
-                        required: "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;手机号码",
-                        minlength: "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入11位电话号码",
-                        maxlength: "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入11位电话号码"
-                    },
-                    password: {
-                        required: "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入密码",
-                        minlength: "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码错误",
-                        maxlength: "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码错误"
-                    }
-                }
-            });
-            /*if(! $("#login-form").valid())
-            {
-                /!*$("#否正确");*!/
-                return false;
-            }*/
-            $("#register-form").validate({
-                rules: {
-                    username: {
-                        required: true,
-                        minlength: 6,
-                        maxlength: 12
-                    },
-                    "phone-number": {
-                        required: true,
-                        minlength: 11,
-                        maxlength: 11
-                    },
-                    ident: {
-                        required: true,
-                        minlength: 6,
-                        maxlength: 6
-                    },
-                    password: {
-                        required: true,
-                        minlength: 6,
-                        maxlength: 20
-                    },
-                    "confirm-password": {
-                        required: true,
-                        equalTo: "#password"
-                    }
-                },
-                messages: {
-                    username: {
-                        required: "用户名错误",
-                        minlength: "用户名错误",
-                        maxlength: "用户名错误"
-                    },
-                    "phone-number": {
-                        required: "用户名错误",
-                        minlength: "用户名错误",
-                        maxlength: "用户名错误"
-                    },
-                    ident: {
-                        required: "用户名错误",
-                        minlength: "用户名错误",
-                        maxlength: "用户名错误"
-                    },
-                    password: {
-                        required: "用户名错误",
-                        minlength: "用户名错误",
-                        maxlength: "用户名错误"
-                    },
-                    "confirm-password": {
-                        required: "用户名错误",
-                        equalTo: "用户名错误"
-                    }
-                }
-            });
-            $("#container-footer-a").click(function () {
-                $("#container").fadeOut(1200);/*stop().animate({left: "-=300px",top: "50px"},1200);*/
-                /*$("#container").foggy({
-                    blurRadius: 2,          // In pixels.
-                    opacity: 0.8,           // Falls back to a filter for IE.
-                    cssFilterSupport: true  // Use "-webkit-filter" where available.
-                });*/
-                $("#register-container").fadeIn(1200);
-            });
-            $("#register-close").click(function() {
-                $("#register-container").fadeOut(1200);
-                $("#container").fadeIn(1200);
-            });
-                /*$("#container").stop().animate({left: "0px",top: "0px"},1200);
-                $("#container").foggy({
-                    blurRadius: 0,          // In pixels.
-                    opacity: 1,           // Falls back to a filter for IE.
-                    cssFilterSupport: true  // Use "-webkit-filter" where available.
-                });*/
-            $("#register-container-footer-a").click(function(){
-                $("#register-container").fadeOut(1200);
-                $("#container").fadeIn(1200);
-            });
-        })
-
-
-    </script>
-
-
-
-</body>
-</html> -->
