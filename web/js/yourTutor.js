@@ -1,8 +1,7 @@
 var list,i,con,orderId,cval,ppay,ptime,star,ass;
-//var uid = $.cookie('uid');
-var uid= "7345357d-69a5-41f2-8b53-1c52128acba3";
+var uid = $.cookie('uid');
 $(document).ready(function(){    
-    /*var u = $.cookie('uid');
+    var u = $.cookie('uid');
     var n = $.cookie('nickName');
     var i = $.cookie('iconUrl');
     if(u==null||n==null||i==null){
@@ -14,7 +13,7 @@ $(document).ready(function(){
     if(i!=""){
         $("#iconUrl").attr("src",i);
         $("#bigIcon").attr("src",i);
-    }*/
+    }
     changePage(page);
 
     $(".yourTutor-lists").on( "click", "a.see", function(){
