@@ -341,7 +341,7 @@
     }
     #fpay{
         float: right !important;
-        margin: 30px 10px 0 0 !important;
+        margin: 20px 10px 0 0 !important;
         left: 0;
         position: static;
     }
@@ -357,13 +357,83 @@
         left: 0 !important;
         margin-top: -85px !important;
         margin-left: 5% !important;
+        text-align: center;
+    }
+    #pay button {
+        float: none !important;
+        margin-right: 0px !important;
     }
     #choose_method {
         margin: 0px 20px 0 10px !important;
         position: initial !important;
         float: right !important;
     }
-    
+    #assess {
+        min-width: 290px;
+        width: 90% !important;
+        height: 215px !important;
+        padding: 0px 0px 0px 0px !important;
+        left: 0px !important;
+        top: 40% !important;
+        margin-top: -50px !important;
+        margin-left: 5% !important;
+    }
+    #assess div:nth-of-type(1) {
+        width: 100% !important;
+        height: 30px !important;
+        line-height: 30px !important;
+        margin-top: 20px;
+    }
+    #assess form {
+        width: 100%;
+        top: 58px !important;
+        left: 0% !important;
+        text-align: center;
+    }
+    #assess form textarea {
+        width: 90% !important;
+        padding: 0px !important;
+        text-indent: 5px;
+    }
+    #stars {
+        width: 90% !important;
+        left: 5% !important;
+        top: 140px !important;
+    }
+    #usend {
+        right: 6% !important;
+        top: 175px !important;
+        left: initial !important;
+
+    }
+    #stars span {
+        margin-right: 5px !important;
+    }
+
+    #choose_pay_method {
+        width: 90% !important;
+        padding: 3% !important;
+        border-radius: 10px;
+        background: white;
+        position: fixed;
+        left: 2% !important;
+        top: 40%;
+        margin-top: -150px !important;
+        margin-left:0px !important;
+        z-index: 100000;
+        border: 1px solid #ccc;
+        display: none;
+    }
+    #choose_pay_method p {
+        font-size: 18px;
+        width: 100%;
+        text-align: center;
+        margin: 0px !important;
+        margin-top: 20px !important;
+    }
+    #pay div {
+        width: 100% !important;
+    }
 }
 
 html{color:#000;background:#FFF;}
@@ -687,7 +757,7 @@ header,footer,section {display:block;}
     width: 822px;
     background: #FFf;
     border-radius: 10px;
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     z-index: 100;
@@ -745,7 +815,7 @@ header,footer,section {display:block;}
 }
 .Tutor_icon {
     position: absolute;
-    right: 10px;
+    right: 0px;
     top: 2px;
     cursor: pointer;
     border-radius: 8px;
@@ -932,7 +1002,7 @@ width:520px;height:35px;border:1px solid #eeeeee;margin: 0;overflow-y: auto;over
     top: 50%;
     margin-top: -207px;
     margin-left: -271px;
-    z-index: 100;
+    z-index: 100000;
     border: 1px solid #ccc;
     display:none;
 }
@@ -941,7 +1011,7 @@ width:520px;height:35px;border:1px solid #eeeeee;margin: 0;overflow-y: auto;over
     font-size:18px;
     width:100%;
     text-align:center;
-    margin:0px;
+    margin:10px;
 }
 
 .choose_pay_Alipay, .choose_pay_paypal {
@@ -1057,11 +1127,47 @@ width:520px;height:35px;border:1px solid #eeeeee;margin: 0;overflow-y: auto;over
 }
 
 
+/*评价界面*/
+#assess {
+    width: 627px;height: 180px;padding: 30px 30px 10px 30px;border-radius: 10px;background: white;position: fixed;left: 50%;top: 50%;margin-top: -100px;margin-left:-313.5px;z-index: 9999999;display:none;
+}
 
+#assess div:nth-of-type(1){
+    width: 627px; height: 20px; font-size:18px; text-align: center;line-height: 20px;
+}
 
+#assess form{
+    position:absolute; top:60px; left:33px;
+}
 
+#assess form textarea{
+    width:600px; height:70px; padding: 10px; font-size:16px; outline:none; border:solid 1px #b2b2b2; resize : none;
+}
 
+#stars {
+    width: 620px;height: 40px;position: absolute;left: 5%;top: 165px;
+}
 
+#stars img{
+    width:25px;height:25px;float:left;
+}
 
+#stars span{
+    color:red;display:none; margin-right: 10px; line-height:  25px; margin-left: 10px;
+}
 
+#miss2{
+    color: red;display: none; margin-right: 10px; line-height: 25px; margin-left: 10px;
+}
+
+#usend {
+    width: 80px; height: 21px; background:#56bbe8; font-size:18px; color:#FFF; font-family:lantingxihei; position: absolute;left: 82%;top: 170px;border-radius: 8px;padding-left:7px; cursor: pointer;
+}
+.Tutor_icon_assess {
+    position: absolute;
+    right: 10px;
+    top: 2px;
+    cursor: pointer;
+    border-radius: 8px;
+}
 
