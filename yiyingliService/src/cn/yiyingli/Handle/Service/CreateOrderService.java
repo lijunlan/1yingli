@@ -135,6 +135,11 @@ public class CreateOrderService extends MsgService {
 		order.setSalaryState(OrderService.ORDER_SALARY_STATE_OFF);
 
 		user.setResume((String) getData().get("userIntroduce"));
+		//user.setEmail(email);
+		//user.setPhone(phone);
+		user.setName(name);
+		user.setContact(contact);
+		
 		getUserService().update(user);
 
 		float money = teacher.gettService().getPriceTotal();

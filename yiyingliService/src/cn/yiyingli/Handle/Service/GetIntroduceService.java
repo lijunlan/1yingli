@@ -31,7 +31,9 @@ public class GetIntroduceService extends MsgService {
 			return;
 		}
 		String introduce = user.getResume();
-		setResMsg(MsgUtil.getSuccessMap().put("introduce", introduce).finishByJson());
+		setResMsg(MsgUtil.getSuccessMap().put("introduce", introduce).put("name", user.getName())
+				.put("phone", user.getPhone()).put("email", user.getEmail()).put("contact", user.getContact())
+				.finishByJson());
 	}
 
 }
