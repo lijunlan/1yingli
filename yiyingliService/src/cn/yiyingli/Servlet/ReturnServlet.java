@@ -81,6 +81,7 @@ public class ReturnServlet extends HttpServlet {
 			returnMsg(response, connectError);
 			return;
 		}
+		String oid = tmp.split("\\|")[0];
 		String callback[] = tmp.split("\\|");
 		if (callback.length != 1) {
 			page = callback[1];
@@ -146,7 +147,6 @@ public class ReturnServlet extends HttpServlet {
 					NotificationService notificationService = (NotificationService) getApplicationContext()
 							.getBean("notificationService");
 					if (results2.get("PAYMENTINFO_0_PAYMENTSTATUS").equals("Completed")) {
-						String oid = results2.get("PAYMENTREQUEST_0_CUSTOM").split("\\|")[0];
 						Order order = orderService.queryByShowId(oid, false);
 						// 检查订单是否存在
 						if (order == null) {
