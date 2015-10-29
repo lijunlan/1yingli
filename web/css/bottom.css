@@ -272,4 +272,10 @@
     #companynu2{
         display: none;
     }
+    .loginY{
+        transform: translate3d(0,0,0) !important;
+    }
+    .loginBox{
+        box-shadow: none !important;
+    }
 }

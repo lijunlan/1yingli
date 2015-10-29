@@ -138,7 +138,7 @@
             }
 
             $("#close").click(function(){
-                history.go(-1);
+                self.location=document.referrer;
             })
 
             var kind = $_GET("kind");
@@ -388,7 +388,7 @@
                             callback = decodeURIComponent(callback);
                             self.location = callback;
                         }else{
-                            history.go(-1);
+                            self.location=document.referrer;
                         }
                     } else {
                         $("#login-password").val("");
