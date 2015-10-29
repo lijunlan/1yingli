@@ -1144,8 +1144,8 @@ em {
     }
 
     #result-content-header a {
-        margin: 0;
-        width: 32%;
+        margin: 0 6%;
+        width: 20%;
         box-sizing: border-box;
         height: 30px;
         border: 0;
