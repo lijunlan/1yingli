@@ -7,7 +7,8 @@ public class CheckUtil {
 
 	public static void main(String[] args) {
 		// System.out.println(checkPassword("3456931"));
-		System.out.println(checkGlobalPhoneNumber(""));
+		// System.out.println(checkGlobalPhoneNumber(""));
+		System.out.println(checkMobileNumber("8615659831720"));
 	}
 
 	/**
@@ -29,17 +30,24 @@ public class CheckUtil {
 		return flag;
 	}
 
-	public static boolean checkGlobalPhoneNumber(String number) {
+	public static boolean checkGlobleMobileNumber(String number) {
 		boolean flag = false;
 		try {
-			Pattern regex = Pattern.compile(
-					"^\\s*\\+?\\s*(\\(\\s*\\d+\\s*\\)|\\d+)(\\s*-?\\s*(\\(\\s*\\d+\\s*\\)|\\s*\\d+\\s*))*\\s*$");
+			Pattern regex = Pattern.compile("[1-9][0-9]{5,14}");
 			Matcher matcher = regex.matcher(number);
 			flag = matcher.matches();
 		} catch (Exception e) {
 			flag = false;
 		}
 		return flag;
+	}
+
+	public static String getCorrectPhone(String phone) {
+		String t = phone;
+		while (t.startsWith("0")) {
+			t = t.substring(1);
+		}
+		return t;
 	}
 
 	/**

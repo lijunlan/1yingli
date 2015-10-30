@@ -47,7 +47,13 @@ public class SendMessageUtil {
 				while (true) {
 					try {
 						SuperMap map = sendQueue.take();
-						sendMsg(map.finish().get("phone"), map.finish().get("msg"));
+						String phone = map.finish().get("phone");
+						String msg = map.finish().get("msg");
+						if (CheckUtil.checkMobileNumber(phone)) {
+							sendChinaMsg(phone, msg);
+						} else {
+							sendGlobleMsg(phone, msg);
+						}
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -109,7 +115,36 @@ public class SendMessageUtil {
 	 * @param msg
 	 * @return
 	 */
-	private static String sendMsg(String phone, String msg) {
+	private static String sendGlobleMsg(String phone, String msg) {
+		String message = "";
+		try {
+			message = hexString(msg.getBytes("GBK"));
+
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+		HttpClient httpClient = HttpClients.createDefault();
+		HttpGet get = new HttpGet("http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME + "&cppwd="
+				+ MESSAGE_PASSWD + "&da=" + phone + "&dc=15&sm=" + message);
+		String result = null;
+		try {
+			HttpResponse response = httpClient.execute(get);
+			if (response.getStatusLine().getStatusCode() == 200) {
+				result = EntityUtils.toString(response.getEntity(), "utf-8");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	/**
+	 * @param phone
+	 *            e.g. 15659831720
+	 * @param msg
+	 * @return
+	 */
+	private static String sendChinaMsg(String phone, String msg) {
 		String message = "";
 		try {
 			message = hexString(msg.getBytes("GBK"));

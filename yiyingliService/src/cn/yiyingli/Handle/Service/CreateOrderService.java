@@ -113,9 +113,10 @@ public class CreateOrderService extends MsgService {
 		String question = (String) getData().get("question");
 		String time = (String) getData().get("selectTime");
 		String resume = (String) getData().get("userIntroduce");
-		if (!(CheckUtil.checkEmail(email))) {
-			// CheckUtil.checkMobileNumber(phone) &&PHONE NUMBER OR BAD
-			setResMsg(MsgUtil.getErrorMsg("BAD  EMAIL"));
+
+		phone = CheckUtil.getCorrectPhone(phone);
+		if (!(CheckUtil.checkEmail(email) && CheckUtil.checkGlobleMobileNumber(phone))) {
+			setResMsg(MsgUtil.getErrorMsg("BAD PHONE NUMBER OR BAD EMAIL"));
 			return;
 		}
 		Order order = new Order();
