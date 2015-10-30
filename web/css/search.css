@@ -998,7 +998,7 @@ em {
         display: none;
     }
 
-    .mobile-search {
+    .mobile-header .mobile-search {
         position: absolute;
         top: 10px;
         left: 50%;
@@ -1007,7 +1007,7 @@ em {
         height: 20px;
     }
 
-    .mobile-search input {
+    .mobile-search #mobile_search{
         width: 160px;
         height: 20px;
         border-radius: 20px;
@@ -1024,7 +1024,7 @@ em {
         border: 1px inset;
     }
 
-    .mobile-search img {
+    .mobile-search #mobile_search_button{
         position: absolute;
         width: 20px;
         right: 0;
