@@ -422,6 +422,7 @@ public class PayPal {
 				while (((line = is.readLine()) != null)) {
 					respText.append(line);
 				}
+				LogUtil.info("PAYPAL RECEIVE:" + respText.toString(), getClass());
 				nvp = deformatNVP(respText.toString());
 			}
 			return nvp;
