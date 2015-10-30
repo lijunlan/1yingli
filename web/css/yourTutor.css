@@ -323,6 +323,7 @@
     }
     .no1 p:nth-of-type(2), .no2 p:nth-of-type(2), .no3 p:nth-of-type(2), .no4 p:nth-of-type(2), .no5 p:nth-of-type(2), .no6 p:nth-of-type(2), .no7 p:nth-of-type(2){
         width: 100% !important;
+        font-size: 14px !important;
     }
     .Tutor_icon{
         top:5px !important;
