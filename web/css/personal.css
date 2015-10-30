@@ -2569,10 +2569,10 @@ abbr, acronym {
     }
 
     .about-block {
-        width: 80%;
-        border: 1px solid #AFAFAF;
-        padding: 0 8%;
-        margin-left: 2%;
+        width: 75%;
+    	border: 1px solid #AFAFAF;
+    	padding: 0 5%;
+    	margin-left: 8%;
     }
 
     .about-person-content {
@@ -2721,6 +2721,7 @@ abbr, acronym {
     .add-like-img {
         float: none;
         margin-left: 0;
+        width: 16px;
     }
 
     .add-like-text {
@@ -2915,25 +2916,25 @@ abbr, acronym {
     }
 
     #pname {
-        width: 85%;
+        width: 80%;
         left: 0;
         border-radius: 5px;
     }
 
     #ptel {
-        width: 85%;
+        width: 80%;
         left: 0;
         border-radius: 5px;
     }
 
     #pemail {
-        width: 85%;
+        width: 80%;
         left: 0;
         border-radius: 5px;
     }
 
     #pweixin {
-        width: 85%;
+        width: 80%;
         left: 0;
         border-radius: 5px;
     }

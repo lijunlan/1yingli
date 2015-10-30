@@ -25,6 +25,9 @@
 .right-top{
     display: none;
 }
+.phonenum{
+    font-size:25px;line-height:70px;
+}
 
 
 @media (max-width: 768px){
@@ -276,5 +279,13 @@
     }
     .loginBox{
         box-shadow: none !important;
+    }
+    .phonenum{
+        font-size: 25px;
+        line-height: 30px;
+        margin-top: 20px;
+    }
+    .emailbt{
+        margin-top: 20px;
     }
 }
