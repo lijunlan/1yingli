@@ -33,6 +33,7 @@ $(document).ready(function () {
         if (u == null || n == null || i == null) {
             $(".sidenav1").addClass("loginBox");
             $(".subject").addClass("loginY");
+            $('#ri').click();
             self.location = 'login.html';
             return;
         } else {
@@ -181,4 +182,29 @@ $('.subject').append(
     '<div id="bg" class="bg"/>'
 );
 
+function logout(){
+    $.ajax({
+        cache : true,
+        type : "POST",
+        url : config.base_url,
+        data : "{'style':'user','method':'logout','uid':'" + $.cookie('uid') + "'}",
+        async : false,
+        error : function(request) {
+            alert("Connection error");
+        },
+        success : function(data, textStatu) {
+            var json = eval("(" + data + ")");
+            if (json.state == "success") {
+                $.cookie("uid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                $.cookie("nickName",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                $.cookie("iconUrl",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                $.cookie("tid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                self.location='home.html';
+                return;
+            } else {
+                alert(json.msg);
+            }
+        }
+    });
+}
 

@@ -28,7 +28,7 @@ function refreshPhone(){
         type : "POST",
         url : config.base_url,
         data : $.toJSON(toSend),
-        async : false,
+        async : true,
         error : function(request) {
                     $(".mark").show();
                     $("#box").show();
@@ -53,7 +53,7 @@ function refreshEmail(){
         type : "POST",
         url : config.base_url,
         data : $.toJSON(toSend),
-        async : false,
+        async : true,
         error : function(request) {
                     $(".mark").show();
                     $("#box").show();

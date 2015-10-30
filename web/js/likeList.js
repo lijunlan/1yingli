@@ -59,7 +59,7 @@ function changePage(p){
         type : "POST",
         url : config.base_url,
         data : $.toJSON(toSend),
-        async : false,
+        async : true,
         error : function(request) {
                     $(".mark").show();
                     $("#box").show();
@@ -179,7 +179,7 @@ function getTotalPage(){
         type : "POST",
         url : config.base_url,
         data : $.toJSON(toSend),
-        async : false,
+        async : true,
         error : function(request) {
                     $(".mark").show();
                     $("#box").show();

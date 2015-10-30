@@ -60,7 +60,7 @@ function changePage(p){
         type : "POST",
         url : config.base_url,
         data : "{'style':'notification','method':'getNoti','uid':'" + $.cookie('uid') + "','page':'"+p+"'}",
-        async : false,
+        async : true,
         error : function(request) {
                     $(".mark").show();
                     $("#box").show();
@@ -80,15 +80,18 @@ function changePage(p){
                     html="<li style='display:block;height:30px;line-height:30px;'>暂无通知。</li>";
                 }
                 $("#noti_list").html(html);
-                $(".show").click(function(){
-                    $(this).parent().find(".right-content-item-p").css('white-space','normal');
-                    $(this).parent().find(".show").hide();
-                    $(this).parent().find(".hide").show();
-                })
-                $(".hide").click(function(){
-                    $(this).parent().find(".right-content-item-p").css('white-space','nowrap');
-                    $(this).parent().find(".show").show();
-                    $(this).parent().find(".hide").hide();
+                $(".right-content-item").click(function() {
+                    if($(this).attr('show') == 1) {
+                        $(this).find(".right-content-item-p").css('white-space','nowrap');
+                        $(this).find(".show").show();
+                        $(this).find(".hide").hide();
+                        $(this).attr('show', 0);
+                    } else {
+                        $(this).find(".right-content-item-p").css('white-space','normal');
+                        $(this).find(".show").hide();
+                        $(this).find(".hide").show();
+                        $(this).attr('show', 1);
+                    }
                 })
             } else {
                 $(".mark").show();
@@ -170,7 +173,7 @@ function getTotalPage(){
         type : "POST",
         url : config.base_url,
         data : $.toJSON(toSend),
-        async : false,
+        async : true,
         error : function(request) {
                     $(".mark").show();
                     $("#box").show();

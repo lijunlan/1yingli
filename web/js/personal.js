@@ -114,7 +114,7 @@ function setUpWeixinShare(){
         type : "GET",
         url : "http://service.1yingli.cn/GetACCESSTOKEN/getAT",
         data : "",
-        async : false,
+        async : true,
         error : function(request) {
                 //alert("Connection error");
         },
@@ -251,7 +251,7 @@ function islikeTeacher(){
         type : "POST",
         url : config.base_url,
         data : $.toJSON(toSend),
-        async : false,
+        async : true,
         error : function(request) {
                     $(".mark").show();
                     $("#box").show();
@@ -281,17 +281,18 @@ function getAboutTeachers() {
     var toSend = new Object();
     toSend.style = "function";
     toSend.method = "getRecommendTeacherList";
-    if(uid && uid!="null"){
-         toSend.uid = uid;
-    } else {
-         toSend.teacherId = tid;        
-    }
+    //if(uid && uid!="null"){
+    //     toSend.uid = uid;
+    //} else {
+    //     toSend.teacherId = tid;
+    //}
+    toSend.teacherId = tid;
     $.ajax({
         cache : true,
         type : "POST",
         url : config.base_url,
         data : $.toJSON(toSend),
-        async : false,
+        async : true,
         error : function(request) {
            // alert("Connection error");
         },
@@ -349,7 +350,7 @@ function refreshTeacherInfo(){
         type : "POST",
         url : config.base_url,
         data : $.toJSON(toSend),
-        async : false,
+        async : true,
         error : function(request) {
            // alert("Connection error");
         },
@@ -588,7 +589,7 @@ function changePage(p){
         type : "POST",
         url : config.base_url,
         data : $.toJSON(toSend),
-        async : false,
+        async : true,
         error : function(request) {
                     //alert("Connection error");
                 },
