@@ -193,6 +193,11 @@ abbr, acronym {
     color: rgba(255, 255, 255, 0.8);
     font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, Helvetica, sans-serif;
     font-size: 14px;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
 }
 
 .nav-right a:hover {
@@ -2569,15 +2574,23 @@ abbr, acronym {
     }
 
     .about-block {
-        width: 75%;
+        width: 85%;
     	border: 1px solid #AFAFAF;
-    	padding: 0 5%;
+    	padding: 0;
     	margin-left: 8%;
+        position: relative;
+    }
+
+    .about-person-header {
+        position: absolute;
+        left: 0;
+        top: 0;
     }
 
     .about-person-content {
-        float: right;
-        width: 60%;
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 80px;
     }
 
     .about-where {

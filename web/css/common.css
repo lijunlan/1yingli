@@ -90,6 +90,10 @@ textarea::-webkit-input-placeholder {
 }
 .header-top ul li:nth-last-of-type(1) a{
     color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
 }
 .header-top ul li a:hover{
     color: #56bbe8;
