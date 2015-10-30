@@ -33,7 +33,7 @@ public class User {
 	@Column(name = "OEMAIL", nullable = true)
 	private String oemail;
 	
-	@Column(name = "OQUESTION", nullable = true)
+	@Column(name = "OQUESTION", nullable = true, length = 500)
 	private String oquestion;
 	
 	@Column(name = "OTIME", nullable = true)
