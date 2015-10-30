@@ -125,9 +125,9 @@
         width: 90% !important;
         border-radius: 10px;
         left: 0px !important;
-        top: 0px !important;
+        top: 25% !important;
         margin-left: 5% !important;
-        margin-top: 80px !important;
+        margin-top: -0px !important;
         min-width: 290px !important;
         position: absolute !important;
     }
@@ -195,14 +195,13 @@
     }
     .no1, .no2, .no3, .no4, .no5, .no6, .no7 {
         width: 90% !important;
-        height: 97px !important;
         padding: 53px 0px 30px 0px !important;
         border-radius: 10px;
         background: white;
-        position: fixed;
+        position: absolute;
         left: 0% !important;
-        top: 0% !important;
-        margin-top: 100px !important;
+        top: 30% !important;
+        margin-top: -0px !important;
         margin-left: 5% !important;
         min-width: 290px !important;
     }
@@ -219,13 +218,20 @@
         display: none;
     }
     .no1 button, .no2 button, .no3 button, .no4 button, .no5 button, .no6 button, .no7 button {
-        float: right;
-        margin-right: 20px !important;
+        float: none;
+        margin-right: 0px !important;
         margin-top: 0px !important;
+        margin-left: 0px !important;
     }
     #tsev {
         float: right !important;
         margin: 0px 20px 0px 0px !important;
+    }
+    #ttime {
+        margin-right: 10px !important;
+    }
+    #ct{
+        margin-left: 5px !important;
     }
 }
 
@@ -480,7 +486,7 @@ header,footer,section {display:block;}
 .no4,
 .no5,
 .no6,
-.no7{  width: 627px;height: 217px;padding: 73px 30px 20px 30px;border-radius: 10px;background: white;position: fixed;left: 50%;top: 50%;margin-top:-160px;margin-left: -313.5px;display: none;z-index: 100;  }
+.no7{ text-align: center; width: 627px;padding: 53px 30px 20px 30px;border-radius: 10px;background: white;position: fixed;left: 50%;top: 50%;margin-top:-160px;margin-left: -313.5px;display: none;z-index: 100;  }
 .no8{   width: 627px;height: 217px;padding: 73px 30px 20px 30px;border-radius: 10px;background: white;position: absolute;left: 30%;top: 200px;display: none;z-index: 100;  }
 
 .no1 p:nth-of-type(1),
@@ -505,7 +511,7 @@ header,footer,section {display:block;}
 .no4 button,
 .no5 button,
 .no6 button,
-.no7 button{  width: 74px;height: 27px;line-height: 27px;text-align: center;background: #56bbe8;color: white;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;border: 0;border-radius: 14px;margin-left: 277px;margin-top: 30px;cursor: pointer;   }
+.no7 button{  width: 74px;height: 27px;line-height: 27px;text-align: center;background: #56bbe8;color: white;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;border: 0;border-radius: 14px;margin-left: 57px;margin-top: 30px;cursor: pointer;   }
 
 .no4 button,
 .no5 button{  width: 120px;margin-left: 253px;  }
@@ -555,7 +561,7 @@ header,footer,section {display:block;}
 }
 .no8 p{  width: 140px;height: 140px;line-height: 140px;text-align: center;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 18px;position: absolute;left: 273px;top: 70px;  }
 #detail8{  margin-top: 60px;  }
-.order-step{  width: 400px;height: 18px;margin-left: 113px;  }
+.order-step{  margin-top: 15px; width: 400px;height: 18px;margin-left: 113px;  }
 .yuan{  width: 19px;height: 19px;border-radius: 9px;background: rgba(0,0,0,0.3);color: white;float: left;text-align: center;  }
 .xian{  width: 76px;height: 8px;border-bottom: 2px solid rgba(0,0,0,0.3);float: left;  }
 .yuan-01{  background: #56bbe8;  }

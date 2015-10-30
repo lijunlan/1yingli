@@ -179,7 +179,7 @@
         margin-left: 5% !important;
         left: 0% !important;
         top: 50% !important;
-        position: fixed !important;
+        position: absolute !important;
         z-index: 9999 !important;
     }
     .details_top {
@@ -246,8 +246,8 @@
         background: white;
         position: fixed;
         left: 0% !important;
-        top: 50% !important;
-        margin-top: -50px !important;
+        top: 30% !important;
+        margin-top: -0px !important;
         margin-left: 2% !important;
         display: none;
         z-index: 9999 !important;
@@ -347,7 +347,6 @@
         position: static;
     }
     #fnopay{
-        float: right !important;
         margin: 0px 10px 0 0 !important;
         left: 0;
         position: static;
@@ -367,7 +366,6 @@
     #choose_method {
         margin: 0px 20px 0 10px !important;
         position: initial !important;
-        float: right !important;
     }
     #assess {
         min-width: 290px;
@@ -691,7 +689,7 @@ header,footer,section {display:block;}
 .no4 p:nth-of-type(2),
 .no5 p:nth-of-type(2),
 .no6 p:nth-of-type(2),
-.no7 p:nth-of-type(2){  width: 627px;height: 30px;line-height: 30px;text-align: center;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 17px;margin-bottom: 20px;  }
+.no7 p:nth-of-type(2){  width: 627px;height: 30px;text-align: center;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 17px;margin-bottom: 20px;  }
 
 .no1 button,
 .no2 button,
@@ -1162,7 +1160,7 @@ width:520px;height:35px;border:1px solid #eeeeee;margin: 0;overflow-y: auto;over
 }
 
 #usend {
-    width: 80px; height: 21px; background:#56bbe8; font-size:18px; color:#FFF; font-family:lantingxihei; position: absolute;left: 82%;top: 170px;border-radius: 8px;padding-left:7px; cursor: pointer;
+    width: 80px; height: 23px; background:#56bbe8; font-size:16px; color:#FFF; font-family:lantingxihei; position: absolute;left: 82%;top: 170px;border-radius: 8px; cursor: pointer;text-align:  center;
 }
 .Tutor_icon_assess {
     position: absolute;

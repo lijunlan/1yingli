@@ -253,7 +253,7 @@ function openshow(tid,i,orderId){
             //背景
             $(".mark").show();
             //订单查看
-            $(".no1").slideDown().html("<p>订单已生成，请确认付款</p><p>请耐心等待，付款后导师会在24小时内确认</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian'></div><div class='yuan'><span>2</span></div><div class='xian'></div><div class='yuan'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='choose_method' style='float:left; margin:30px 0 0 210px'>确认付款</button><button id='fnopay' style='float:left; margin:30px 0 0 50px;'>放弃支付</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
+            $(".no1").slideDown().html("<p>订单已生成，请确认付款</p><p>请耐心等待，付款后导师会在24小时内确认</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian'></div><div class='yuan'><span>2</span></div><div class='xian'></div><div class='yuan'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><div style='width:100%; text-align:center;'><button id='choose_method' style='margin:0 20px;'>确认付款</button><button id='fnopay' style='margin:0px;'>放弃支付</button></div><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             //取消
             $(".Tutor_icon1").click(function(){
                 $(".no1").fadeOut();
@@ -287,7 +287,7 @@ function openshow(tid,i,orderId){
                 $("input[name='oid']").val(orderId);
                 $("input[name='uid']").val(uid);
                 if($("input[name='paymethod']:checked").val() == 1){
-                    $("#pay").attr("action", "http://service.1yingli.cn/yiyingliService/Alipay");
+                    $("#pay").attr("action", "http://test.1yingli.cn/yiyingliService/Alipay");
                 } else {
                     $("#pay").attr("action", "http://test.1yingli.cn/yiyingliService/Checkout");
                 }
