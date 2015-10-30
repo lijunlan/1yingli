@@ -2569,10 +2569,10 @@ abbr, acronym {
     }
 
     .about-block {
-        width: 80%;
-        border: 1px solid #AFAFAF;
-        padding: 0 5%;
-        margin-left: 5%;
+        width: 75%;
+    	border: 1px solid #AFAFAF;
+    	padding: 0 5%;
+    	margin-left: 8%;
     }
 
     .about-person-content {
