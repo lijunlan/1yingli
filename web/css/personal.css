@@ -2721,6 +2721,7 @@ abbr, acronym {
     .add-like-img {
         float: none;
         margin-left: 0;
+        width: 16px;
     }
 
     .add-like-text {
