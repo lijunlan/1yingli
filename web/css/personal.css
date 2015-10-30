@@ -2571,8 +2571,8 @@ abbr, acronym {
     .about-block {
         width: 80%;
         border: 1px solid #AFAFAF;
-        padding: 0 8%;
-        margin-left: 2%;
+        padding: 0 5%;
+        margin-left: 5%;
     }
 
     .about-person-content {
