@@ -73,11 +73,6 @@ $(document).ready(function(){
     });
 });
 
-//主题搜索
-function findByTheme(themeName, id){
-	var w = encodeURIComponent(encodeURIComponent(themeName));
-	self.location = 'search.html?word='+w+'&id='+id;
-}
 
 //通过标签搜索
 function findByTips(tip01, tip02, tip03, tip04, tip05){

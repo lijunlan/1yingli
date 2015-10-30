@@ -8,12 +8,13 @@ var _hmt = _hmt || [];
 })();
 $(document).ready(function(){
   $(".left").click(function(){
+        console.log("left");
         if($("html,body").hasClass("XY")){
             $("html,body").removeClass("XY");
         }else{
             $("html,body").addClass("XY");
         }
-    })
+    });
     $(".right").click(function(){
       var u = $.cookie('uid');
       var n = $.cookie('nickName');
@@ -30,7 +31,7 @@ $(document).ready(function(){
             $("html,body").addClass("XY");
         }
       }  
-    })
+    });
     //$(".header").css("margin","10px");
 	//1...10分别代表不同的id请求参数。
     //$(".contact").html("<div class='contact-content'><div class='contact-left'> <ul class='contact-left-top'><li><a href='joinus.html?id=1'>关于我们</a></li><li><span>/</span></li> <li><a href='joinus.html?id=1'>加入我们</a></li><li><span>/</span></li><li><a href='joinus.html?id=1'>联系我们</a></li></ul><ul class='contact-left-left'><li><a href='joinus.html?id=4'>团队故事</a></li><li><a href='joinus.html?id=5'>团队成员</a></li><li><a href='joinus.html?id=1'>媒体报道</a></li></ul><ul class='contact-left-center'><li><a href='joinus.html?id=1'>招聘岗位</a></li><li><a href='joinus.html?id=1'>公司福利</a></li></ul><ul class='contact-left-right'><li><a href='joinus.html?id=1'>网站反馈</a></li><li><a href='joinus.html?id=1'>商务合作</a></li></ul></div><div class='contact-right'><p class='contact-right-1'>客服电话：</p><p class='contact-right-2'>0571-86415101</p><p class='contact-right-3'>工作日：9:00-17:00</p><p class='contact-right-4'>客服邮箱：contact@1yingli.cn</p></div></div>");
@@ -105,6 +106,12 @@ function KeyDown1()
         event.cancel = true;
         searchByInput1();
     }
+}
+
+//主题搜索
+function findByTheme(themeName, id){
+    var w = encodeURIComponent(encodeURIComponent(themeName));
+    self.location = 'search.html?word='+w+'&id='+id;
 }
 
 var config = {
