@@ -288,4 +288,33 @@
     .emailbt{
         margin-top: 20px;
     }
+    .mobile-search{
+        position: absolute;
+        left: 50%;
+        width: 160px;
+        height: 20px;
+        margin-left: -90px;
+    }
+    .mobile_search{
+        width: 160px;
+        height: 15px;
+        border-radius: 15px;
+        padding: 5px 10px;
+        border: 1px solid #dcdcdc;
+        font-size: 12px;
+    }
+    #mobile_search_button{
+        position: absolute;
+        right: -22px;
+        top: 6px;
+        width: 28px;
+    }
+    #mobile_search{
+        width: 160px;
+        height: 15px;
+        border-radius: 15px;
+        padding: 5px 10px;
+        border: 1px solid #dcdcdc;
+        font-size: 12px;
+    }
 }
