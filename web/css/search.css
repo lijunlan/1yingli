@@ -904,6 +904,11 @@ em {
     min-height: 300px;
 }
 
+.sercher_result > h1{
+    position: relative;
+    left: 37px;
+}
+
 .one_person {
     width: 930px;
     height: 139px;
@@ -998,38 +1003,38 @@ em {
         display: none;
     }
 
-    .mobile-header .mobile-search {
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        width: 160px;
-        margin-left: -80px;
-        height: 20px;
-    }
+    /*.mobile-header .mobile-search {*/
+        /*position: absolute;*/
+        /*top: 10px;*/
+        /*left: 50%;*/
+        /*width: 160px;*/
+        /*margin-left: -80px;*/
+        /*height: 20px;*/
+    /*}*/
 
-    .mobile-search #mobile_search{
-        width: 160px;
-        height: 20px;
-        border-radius: 20px;
-        position: absolute;
-        padding: 2px 5px;
-        font-size: 12px;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        border: 1px inset;
-    }
+    /*.mobile-search #mobile_search{*/
+        /*width: 160px;*/
+        /*height: 20px;*/
+        /*border-radius: 20px;*/
+        /*position: absolute;*/
+        /*padding: 2px 5px;*/
+        /*font-size: 12px;*/
+        /*top: 0;*/
+        /*left: 0;*/
+        /*right: 0;*/
+        /*bottom: 0;*/
+        /*-webkit-box-sizing: border-box;*/
+        /*-moz-box-sizing: border-box;*/
+        /*box-sizing: border-box;*/
+        /*border: 1px inset;*/
+    /*}*/
 
-    .mobile-search #mobile_search_button{
-        position: absolute;
-        width: 20px;
-        right: 0;
-        top: 0;
-    }
+    /*.mobile-search #mobile_search_button{*/
+        /*position: absolute;*/
+        /*width: 20px;*/
+        /*right: 0;*/
+        /*top: 0;*/
+    /*}*/
 
     #hot-theme {
         display: none;
@@ -1162,6 +1167,10 @@ em {
     div#sercher_result {
         width: 100%;
         padding: 0;
+    }
+
+    #sercher_result > h1 {
+        left: 0;
     }
 
     .one_person {

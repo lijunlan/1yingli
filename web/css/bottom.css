@@ -28,7 +28,20 @@
 .phonenum{
     font-size:25px;line-height:70px;
 }
+.bg {
+    display: none;
+}
 
+.bg-show {
+    z-index: 100;
+    display: block;
+    background: rgba(0,0,0,0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
 
 @media (max-width: 768px){
     #wximg{
@@ -291,8 +304,9 @@
     .mobile-search{
         position: absolute;
         left: 50%;
-        width: 160px;
+        width: 180px;
         height: 20px;
+        top: 10px;
         margin-left: -90px;
     }
     .mobile_search{
@@ -305,15 +319,19 @@
     }
     #mobile_search_button{
         position: absolute;
-        right: -22px;
-        top: 6px;
-        width: 28px;
+        right: 0;
+        top: 1px;
+        width: 18px;
         padding: 0;
         margin: 0;
     }
     #mobile_search{
-        width: 160px;
-        height: 15px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 180px;
+        box-sizing: border-box;
+        height: 20px;
         border-radius: 15px;
         padding: 5px 10px;
         border: 1px solid #dcdcdc;

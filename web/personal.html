@@ -37,7 +37,7 @@
             <!-- <li><a href="#"><b>Logout</b></a></li> -->
         </ul>
 
-<section class="subject">
+<section id='section' class="subject">
 	<!-- <div id="contolShow" style="display:none;"> -->
 	<nav class="mobile-header" style="display: none;">
     <label for="le" class="left"><img src="img/01.png" style="width:20px;height:20px;"></label>
@@ -404,6 +404,8 @@
                     }
                 }).bind("input.autocomplete", function () {
                     $("#search-input").autocomplete("search", $("#search-input").val());
+                }).bind('autocompleteselect', function(e,ui) {
+                    self.location = 'search.html?findName=' + encodeURIComponent(encodeURIComponent(ui.item.value));
                 }).focus();
             }, 0);
         });

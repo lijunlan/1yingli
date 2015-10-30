@@ -281,8 +281,9 @@
     <li><a href="likeList.html"><b>心愿名单</b></a></li>
     <li><a href="general.html"><b>个人资料修改</b></a></li>
     <li><a href="account.html"><b>密码修改</b></a></li>
+    <li><a href="javascript:logout()"><b>退出</b></a></li>
 </ul>
-<section class="subject">
+<section id='section' class="subject">
     <div id="mobile">
         <header>
             <label for="le" class="left">
@@ -435,12 +436,10 @@
             }).bind("input.autocomplete", function () {
                 // 修复在Firefox中不支持中文的BUG
                 $("#searchBox").autocomplete("search", $("#searchBox").val());
+            }).bind('autocompleteselect', function(e,ui) {
+                self.location = 'search.html?findName=' + encodeURIComponent(encodeURIComponent(ui.item.value));
             }).focus();
 
-
-            $("#ui-id-1").click(function () {
-                search();
-            });
         }, 0);
     });
 </script>
@@ -488,7 +487,9 @@
                 }
             }).bind("input.autocomplete", function () {
                 $("#mobile_search").autocomplete("search", $("#mobile_search").val());
-            });
+            }).bind('autocompleteselect', function(e,ui) {
+                self.location = 'search.html?findName=' + encodeURIComponent(encodeURIComponent(ui.item.value));
+            })
         }, 0);
     })();
 </script>

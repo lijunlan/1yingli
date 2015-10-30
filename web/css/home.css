@@ -3,9 +3,17 @@
     display: none;
 }
 
+section {
+    display: none;
+}
+
 @media (max-width: 768px) {
     body {
         background: #f0f0f0 !important;
+    }
+
+    section {
+        display: block;
     }
 
     #mobile {
@@ -32,11 +40,10 @@
         width: auto;
     }
 
-    #mobile header .left img , #mobile header .right img {
+    #mobile header .left img, #mobile header .right img {
         height: 100%;
         width: auto;
     }
-
 
     #mobile header .logo {
         position: absolute;
@@ -94,6 +101,7 @@
 
         color: #dddddd;
     }
+
     #mobile .mobile-bottom h2 {
         font-size: 12px;
         margin-bottom: 15px;

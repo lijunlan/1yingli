@@ -122,6 +122,10 @@ header,footer,section {display:block;}
     text-align: right;
 }
 @media (max-width: 768px){
+
+    .page {
+        text-align: center;
+    }
 	.g-hd{
 		display: none;
 	}

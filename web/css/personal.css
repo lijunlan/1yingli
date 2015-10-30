@@ -2654,6 +2654,7 @@ abbr, acronym {
         padding: 0 5%;
         width: 90%;
         background: inherit;
+        height: 150px;
     }
 
     .about-label {
@@ -3147,5 +3148,8 @@ abbr, acronym {
     .page a.active {
         position: relative;
         top: -6px;
+    }
+    .share-her {
+        display: none;
     }
 }

@@ -60,6 +60,8 @@
             }
         }).bind("input.autocomplete", function () {
             $( "#search-input" ).autocomplete("search", $( "#search-input" ).val());
+        }).bind('autocompleteselect', function(e,ui) {
+            self.location = 'search.html?findName=' + encodeURIComponent(encodeURIComponent(ui.item.value));
         }).focus();
     }, 0);
 });

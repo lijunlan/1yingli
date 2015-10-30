@@ -43,7 +43,7 @@ input,textarea{outline:none;}
 }
 
 .headerLink:hover {
-	
+
 }
 
 .headerLink>a {
@@ -51,7 +51,7 @@ input,textarea{outline:none;}
 }
 
 .headerLink>a:hover {
-	
+
 }
 
 #header>ul {
@@ -106,7 +106,7 @@ input,textarea{outline:none;}
 	color: white;
 	font-size: 16px;
 	float: left;
-}/* 
+}/*
 
 .dropDown {
 	position: absolute;
@@ -140,7 +140,7 @@ input,textarea{outline:none;}
 }
 
 .show-images {
-	
+
 }
 
 .show-images img {
@@ -191,7 +191,7 @@ input,textarea{outline:none;}
     left: 0px;
     padding:0;
     position: fixed;
-    color:#F00; 
+    color:#F00;
     filter:alpha(Opacity=60);
     -moz-opacity:0.6;
     opacity: 0.6;
@@ -199,7 +199,7 @@ input,textarea{outline:none;}
 
 
 .page {
-    padding: 20px 0px; 
+    padding: 20px 0px;
     overflow: hidden;
     clear: both;
     text-align: center;
@@ -238,6 +238,31 @@ input,textarea{outline:none;}
     color: #ffffff;
     border-color: transparent;
 }
+
+@media (max-width: 768px) {
+    .page a.active {
+        position: relative;
+        top: -6px;
+    }
+
+    .ui-autocomplete .ui-menu-item {
+        font-size: 12px;
+    }
+}
+.bg {
+    display: none;
+}
+.bg-show {
+    z-index: 100;
+    display: block;
+    background: rgba(0,0,0,0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 .page span,
 .page-disabled {
     display: inline-block;
