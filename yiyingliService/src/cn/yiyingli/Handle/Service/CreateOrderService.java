@@ -110,6 +110,9 @@ public class CreateOrderService extends MsgService {
 		String email = (String) getData().get("email");
 		String contact = (String) getData().get("contact");
 		String name = (String) getData().get("name");
+		String question = (String) getData().get("question");
+		String time = (String) getData().get("selectTime");
+		String resume = (String) getData().get("userIntroduce");
 		if (!(CheckUtil.checkEmail(email))) {
 			// CheckUtil.checkMobileNumber(phone) &&PHONE NUMBER OR BAD
 			setResMsg(MsgUtil.getErrorMsg("BAD  EMAIL"));
@@ -122,8 +125,8 @@ public class CreateOrderService extends MsgService {
 		order.setCustomerContact(contact);
 		order.setCreateUser(user);
 
-		order.setQuestion((String) getData().get("question"));
-		order.setSelectTime((String) getData().get("selectTime"));
+		order.setQuestion(question);
+		order.setSelectTime(time);
 		order.setServiceTitle(teacher.gettService().getTitle());
 		order.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		order.setState(OrderService.ORDER_STATE_NOT_PAID);
@@ -131,15 +134,17 @@ public class CreateOrderService extends MsgService {
 		order.setAlipayNo(teacher.getAlipay());
 		order.setTime(teacher.gettService().getTime());
 		order.settService(teacher.gettService());
-		order.setUserIntroduce((String) getData().get("userIntroduce"));
+		order.setUserIntroduce(resume);
 		order.setSalaryState(OrderService.ORDER_SALARY_STATE_OFF);
 
-		user.setResume((String) getData().get("userIntroduce"));
-		//user.setEmail(email);
-		//user.setPhone(phone);
-		user.setName(name);
+		user.setResume(resume);
+		user.setOname(name);
+		user.setOphone(phone);
+		user.setOemail(email);
+		user.setOquestion(question);
+		user.setOtime(time);
 		user.setContact(contact);
-		
+
 		getUserService().update(user);
 
 		float money = teacher.gettService().getPriceTotal();

@@ -23,6 +23,21 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "USER_ID")
 	private Long id;
+	
+	@Column(name = "ONAME", nullable = true)
+	private String oname;
+	
+	@Column(name = "OPHONE", nullable = true)
+	private String ophone;
+	
+	@Column(name = "OEMAIL", nullable = true)
+	private String oemail;
+	
+	@Column(name = "OQUESTION", nullable = true)
+	private String oquestion;
+	
+	@Column(name = "OTIME", nullable = true)
+	private String otime;
 
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
@@ -371,6 +386,46 @@ public class User {
 
 	public void setContact(String contact) {
 		this.contact = contact;
+	}
+
+	public String getOname() {
+		return oname;
+	}
+
+	public void setOname(String oname) {
+		this.oname = oname;
+	}
+
+	public String getOphone() {
+		return ophone;
+	}
+
+	public void setOphone(String ophone) {
+		this.ophone = ophone;
+	}
+
+	public String getOemail() {
+		return oemail;
+	}
+
+	public void setOemail(String oemail) {
+		this.oemail = oemail;
+	}
+
+	public String getOquestion() {
+		return oquestion;
+	}
+
+	public void setOquestion(String oquestion) {
+		this.oquestion = oquestion;
+	}
+
+	public String getOtime() {
+		return otime;
+	}
+
+	public void setOtime(String otime) {
+		this.otime = otime;
 	}
 
 }
