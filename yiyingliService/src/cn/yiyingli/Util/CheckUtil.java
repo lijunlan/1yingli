@@ -44,6 +44,10 @@ public class CheckUtil {
 
 	public static String getCorrectPhone(String phone) {
 		String t = phone;
+		t = t.replaceAll("-", "");
+		if (t.startsWith("+")) {
+			t = t.substring(1);
+		}
 		while (t.startsWith("0")) {
 			t = t.substring(1);
 		}
