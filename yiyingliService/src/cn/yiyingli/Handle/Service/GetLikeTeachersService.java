@@ -3,7 +3,7 @@ package cn.yiyingli.Handle.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.yiyingli.ExchangeData.SimpleShowUtil;
+import cn.yiyingli.ExchangeData.ExTeacherSimpleShowUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Teacher;
@@ -82,7 +82,7 @@ public class GetLikeTeachersService extends MsgService {
 			map.put("time", t.gettService().getTime());
 			map.put("title", t.gettService().getTitle());
 			map.put("timeperweek", t.gettService().getTimesPerWeek());
-			SimpleShowUtil.getSimpleShowByTip(t, map);
+			ExTeacherSimpleShowUtil.getSimpleShowByTip(t, map);
 			sends.add(map.finishByJson());
 		}
 		setResMsg(toSend.put("data", Json.getJson(sends)).finishByJson());
