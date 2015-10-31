@@ -9,7 +9,9 @@ var _hmt = _hmt || [];
 var left = 0;
 var right = 0;
 $(document).ready(function () {
-
+    if($.cookie('tid') == null) {
+        $('.i-am-a-teacher').css('display','none');
+    }
     $("label.left").click(function () {
         if (left == 1) {
             console.log('have');
