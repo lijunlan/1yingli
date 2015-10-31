@@ -389,7 +389,14 @@
                             callback = decodeURIComponent(callback);
                             self.location = callback;
                         }else{
-                            self.location=document.referrer;
+                        	if(document.referrer){
+                                if(document.referrer.indexOf("1yingli.cn/login")>0){
+                                    self.location = "http://www.1yingli.cn";
+                                }
+                                self.location = document.referrer;
+                            } else {
+                                self.location = "http://www.1yingli.cn/controlPanel.html";
+                            }
                         }
                     } else {
                         $("#login-password").val("");
