@@ -1,6 +1,7 @@
 package cn.yiyingli.Handle.Service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import cn.yiyingli.Handle.MsgService;
@@ -141,7 +142,7 @@ public class MCreateTeacherService extends MsgService {
 		user.setPhone(phone);
 		user.setEmail(mail);
 		user.setIconUrl(iconUrl);
-		//user.setResume(introduce);
+		// user.setResume(introduce);
 		user.setTeacher(teacher);
 		teacher.setUser(user);
 
@@ -153,6 +154,7 @@ public class MCreateTeacherService extends MsgService {
 		teacher.setIconUrl(iconUrl);
 		teacher.setIntroduce(introduce);
 		teacher.setSimpleInfo(simpleinfo);
+		teacher.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		teacher.setShowWeight1(Integer.valueOf(showWeight1.equals("") ? "" : showWeight1));
 		teacher.setShowWeight2(Integer.valueOf(showWeight2.equals("") ? "" : showWeight2));
 		teacher.setShowWeight4(Integer.valueOf(showWeight4.equals("") ? "" : showWeight4));
