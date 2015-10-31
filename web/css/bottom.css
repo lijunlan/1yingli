@@ -337,4 +337,13 @@
         border: 1px solid #dcdcdc;
         font-size: 12px;
     }
+
+    .page .pager {
+        display: none;
+    }
+
+    .page a.active {
+        position: relative;
+        top: -6px;
+    }
 }

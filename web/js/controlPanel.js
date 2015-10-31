@@ -55,12 +55,15 @@ function firstPage(){
     }
 }
 function changePage(p){
+    if(p == undefined) {
+        p=1;
+    }
     $.ajax({
         cache : true,
         type : "POST",
         url : config.base_url,
         data : "{'style':'notification','method':'getNoti','uid':'" + $.cookie('uid') + "','page':'"+p+"'}",
-        async : true,
+        async : false,
         error : function(request) {
                     $(".mark").show();
                     $("#box").show();
@@ -122,36 +125,36 @@ function changePage(p){
     $(".page").html(html1);
     if(totalPage <= basePage) {
         for (var i = 1; i <=totalPage; i++) {
-            $("#btnNext").before("<a id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");   
+            $("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
         };
     } else {
         for (var i = 1; i <=totalPage; i++) {
             if(page == 1) {
-                $("#btnNext").before("<a id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
+                $("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
                 if(i == 5) {
                     $("#btnNext").before("<span id='diandian'>...</span>");
-                    $("#btnNext").before("<a id='btn" + totalPage + "' href='javascript:changePage(" + totalPage + ")' >" + totalPage + "</a>");
+                    $("#btnNext").before("<a class='pager' id='btn" + totalPage + "' href='javascript:changePage(" + totalPage + ")' >" + totalPage + "</a>");
                     break;
                 }
             } else if(page <=mostPage) {
-                $("#btnNext").before("<a id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
+                $("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
                 if(i == afterShowPage) {
                      $("#btnNext").before("<span id='diandian'>...</span>");
-                     $("#btnNext").before("<a id='btn" + totalPage + "' href='javascript:changePage(" + totalPage + ")' >" + totalPage + "</a>");
+                     $("#btnNext").before("<a class='pager' id='btn" + totalPage + "' href='javascript:changePage(" + totalPage + ")' >" + totalPage + "</a>");
                      break;
                 }
             } else {
                 if(i<=leastPage) {
-                    $("#btnNext").before("<a id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
+                    $("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
                     if(i == leastPage) { $("#btnNext").before("<span id='diandian'>...</span>");}
                 }
                 if(beforeShowPage <= i && i <= afterShowPage){
-                    $("#btnNext").before("<a id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
+                    $("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
                 }
                 if(i == afterShowPage) {
                     if(afterShowPage !=totalPage ) {
-                        $("#btnNext").before("<span id='diandian'>...</span>"); 
-                        $("#btnNext").before("<a id='btn" + totalPage + "' href='javascript:changePage(" + totalPage + ")' >" + totalPage + "</a>");
+                        $("#btnNext").before("<span id='diandian'>...</span>");
+                        $("#btnNext").before("<a class='pager' id='btn" + totalPage + "' href='javascript:changePage(" + totalPage + ")' >" + totalPage + "</a>");
                         break;
                     }
                 }
@@ -173,7 +176,7 @@ function getTotalPage(){
         type : "POST",
         url : config.base_url,
         data : $.toJSON(toSend),
-        async : true,
+        async : false,
         error : function(request) {
                     $(".mark").show();
                     $("#box").show();

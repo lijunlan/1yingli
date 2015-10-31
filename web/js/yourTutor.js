@@ -72,7 +72,7 @@ function getTotalPage(){
         type : "POST",
         url : config.base_url,
         data : "{'style': 'user', 'method': 'getOrderCount', 'uid': '" + uid + "'}",
-        async : true,
+        async : false,
         error : function(request) {},
         success : function(data, textStatu) {
             var json = eval("(" + data + ")"); 
@@ -90,13 +90,16 @@ function changePage(p){
     toSend.style = "order";
     toSend.method = "getListByUser";
     toSend.uid = uid;
+    if(p == undefined) {
+        p=1;
+    }
     toSend.page = "" + p;
     $.ajax({
         cache : true,
         type : "POST",
         url : config.base_url,
         data : $.toJSON(toSend),
-        async : true,
+        async : false,
         error : function(request) {
                     $(".mark").show();
                     $("#box").show();
@@ -152,36 +155,36 @@ function changePage(p){
     $(".page").html(html1);
     if(totalPage <= basePage) {
         for (var i = 1; i <=totalPage; i++) {
-            $("#btnNext").before("<a id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");   
+            $("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
         };
     } else {
         for (var i = 1; i <=totalPage; i++) {
             if(page == 1) {
-                $("#btnNext").before("<a id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
+                $("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
                 if(i == 5) {
                     $("#btnNext").before("...");
-                    $("#btnNext").before("<a id='btn" + totalPage + "' href='javascript:changePage(" + totalPage + ")' >" + totalPage + "</a>");
+                    $("#btnNext").before("<a class='pager' id='btn" + totalPage + "' href='javascript:changePage(" + totalPage + ")' >" + totalPage + "</a>");
                     break;
                 }
             } else if(page <=mostPage) {
-                $("#btnNext").before("<a id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
+                $("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
                 if(i == afterShowPage) {
                      $("#btnNext").before("...");
-                     $("#btnNext").before("<a id='btn" + totalPage + "' href='javascript:changePage(" + totalPage + ")' >" + totalPage + "</a>");
+                     $("#btnNext").before("<a class='pager' id='btn" + totalPage + "' href='javascript:changePage(" + totalPage + ")' >" + totalPage + "</a>");
                      break;
                 }
             } else {
                 if(i<=leastPage) {
-                    $("#btnNext").before("<a id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
+                    $("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
                     if(i == leastPage) { $("#btnNext").before("...");}
                 }
                 if(beforeShowPage <= i && i <= afterShowPage){
-                    $("#btnNext").before("<a id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
+                    $("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
                 }
                 if(i == afterShowPage) {
                     if(afterShowPage !=totalPage ) {
-                        $("#btnNext").before("..."); 
-                        $("#btnNext").before("<a id='btn" + totalPage + "' href='javascript:changePage(" + totalPage + ")' >" + totalPage + "</a>");
+                        $("#btnNext").before("...");
+                        $("#btnNext").before("<a class='pager' id='btn" + totalPage + "' href='javascript:changePage(" + totalPage + ")' >" + totalPage + "</a>");
                         break;
                     }
                 }

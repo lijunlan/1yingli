@@ -707,9 +707,9 @@ abbr, acronym {
 }
 
 .add-like-img {
-    margin-top: 4px;
     float: left;
     margin-left: 50px;
+    height: 22px;
 }
 
 .add-like-p {
@@ -2738,9 +2738,12 @@ abbr, acronym {
     }
 
     .add-like-img {
+        margin-top: -4px;
         float: none;
         margin-left: 0;
         width: 16px;
+        position: relative;
+        top: 4px;
     }
 
     .add-like-text {

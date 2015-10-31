@@ -618,8 +618,6 @@ header,footer,section {display:block;}
 .assess-text{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;line-height: 1.7;color: rgba(0,0,0,0.7);  }
 .date-text{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;line-height: 1.7;color: rgba(0,0,0,0.9);margin-top: 15px;  }
 
-.page {text-align: right;  }
-
 /*---------------------------------ÁªÏµÎÒÃÇ------------------------------------*/
 .contact{  width: 100%;  min-width: 1000px;  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;  font-weight: bold;background: white;   }
 .contact-content{  width: 1000px;  height: 135px;  margin: 0 auto;  }

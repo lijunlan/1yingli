@@ -119,7 +119,7 @@ header,footer,section {display:block;}
 
 
 
-.page {text-align: right;  }
+/*.page {text-align: right;  }*/
 
 
 /*---------------------------------------------联系我们--------------------------------------------------------------------------*/
@@ -200,9 +200,8 @@ header,footer,section {display:block;}
         margin: 25px auto;
     }
     .right-list-list li{
-        width: 80%;
-        margin-left: 4%;
-        padding: 10px 20px 3px 20px;
+        margin: 10px;
+        padding: 10px 10px 3px 10px;
     }
     .like-list-left{
         width: 20%;
@@ -219,7 +218,7 @@ header,footer,section {display:block;}
         width: 50%;
         height: 20px;
         float: left;
-        margin-left: 20px;
+        margin-left: 10px;
     }
     .like-list-left-02 p{
         height: 20px;
@@ -245,6 +244,7 @@ header,footer,section {display:block;}
     .like-list-left-03 p:nth-of-type(1){
         margin-top: 0px;
         font-size: 12px;
+        margin-left: 10px;
     }
     .like-list-left-03 p:nth-of-type(2){
         font-size: 12px;

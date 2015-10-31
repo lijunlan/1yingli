@@ -268,13 +268,16 @@ function refresh(){
 				}
 				$("#sercher_result").html(html);
 				totalPage = Math.ceil(json.viewtotal / 9);
+				makePager();
 				//totalPage = 30;
 			} else {
 				//alert(json.msg);
 			}
 		}
 	}), 100);
+}
 
+function makePager() {
 	//先删除后添加页数
 	//页码设置
 	var basePage = 10;
@@ -283,46 +286,50 @@ function refresh(){
 	var mostPage = parseInt(leastPage) + parseInt(showPage);
 	var afterShowPage = parseInt(page) + showPage;
 	var beforeShowPage = parseInt(page) - showPage;
-    for (var i = totalPage; i >=1; i--) {$("#btn" + i ).remove(); };
-	if(totalPage <= basePage) {
-		for (var i = 1; i <=totalPage; i++) {
+	for (var i = totalPage; i >= 1; i--) {
+		$("#btn" + i).remove();
+	}
+	if (totalPage <= basePage) {
+		for (var i = 1; i <= totalPage; i++) {
 			$("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
-    	};
+		}
 	} else {
-		for (var i = 1; i <=totalPage; i++) {
-			if(page == 1) {
+		for (var i = 1; i <= totalPage; i++) {
+			if (page == 1) {
 				$("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
-				if(i == 5) {
+				if (i == 5) {
 					$("#btnNext").before("<span class='pager' id='diandian'>...</span>");
 					$("#btnNext").before("<a class='pager' id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
 					break;
 				}
-			} else if(page <=mostPage) {
+			} else if (page <= mostPage) {
 				$("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
-				if(i == afterShowPage) {
-					 $("#btnNext").before("<span class='pager' id='diandian'>...</span>");
-					 $("#btnNext").before("<a class='pager' id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
-					 break;
+				if (i == afterShowPage) {
+					$("#btnNext").before("<span class='pager' id='diandian'>...</span>");
+					$("#btnNext").before("<a class='pager' id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
+					break;
 				}
 			} else {
-				if(i<=leastPage) {
+				if (i <= leastPage) {
 					$("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
-					if(i == leastPage) { $("#btnNext").before("<span class='pager' id='diandian'>...</span>");}
+					if (i == leastPage) {
+						$("#btnNext").before("<span class='pager' id='diandian'>...</span>");
+					}
 				}
-				if(beforeShowPage <= i && i <= afterShowPage){
+				if (beforeShowPage <= i && i <= afterShowPage) {
 					$("#btnNext").before("<a class='pager' id='btn" + i + "' href='javascript:refreshPage(" + i + ")' >" + i + "</a>");
 				}
-				if(i == afterShowPage) {
-					if(afterShowPage !=totalPage ) {
+				if (i == afterShowPage) {
+					if (afterShowPage != totalPage) {
 						$("#btnNext").before("<span class='pager' id='diandian'>...</span>");
 						$("#btnNext").before("<a class='pager' id='btn" + totalPage + "' href='javascript:refreshPage(" + totalPage + ")' >" + totalPage + "</a>");
 						break;
 					}
 				}
 			}
-    	};
+		}
 	}
-    $("#btn" + page).attr("class", "active");
+	$("#btn" + page).attr("class", "active");
 }
 
 //分页排序
