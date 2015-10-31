@@ -77,7 +77,7 @@ public class FGetRecommendTeacherListService extends MsgService {
 		if (ids.size() > 0) {
 			teachers = getTeacherService().queryByIds(ids);
 		} else {
-			teachers = getTeacherService().queryList(0, 5, false);
+			teachers = getTeacherService().queryListOnservice(0, 5, false);
 		}
 		SuperMap map = MsgUtil.getSuccessMap();
 		JSONArray jsonTeachers = new JSONArray();

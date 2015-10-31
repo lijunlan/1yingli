@@ -186,6 +186,11 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
+	public List<Teacher> queryListOnservice(int page, int pageSize, boolean lazy) {
+		return getTeacherDao().queryListOnservice(page, pageSize, lazy);
+	}
+
+	@Override
 	public List<Teacher> queryList(int page, boolean lazy) {
 		return queryList(page, PAGE_SIZE_INT, lazy);
 	}

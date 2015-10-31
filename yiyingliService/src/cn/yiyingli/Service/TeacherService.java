@@ -56,6 +56,8 @@ public interface TeacherService {
 	Teacher queryByUserIdWithTService(long userid, boolean lazy);
 
 	List<Teacher> queryByIds(List<Long> ids);
+	
+	List<Teacher> queryListOnservice(int page,int pageSize,boolean lazy);
 
 	List<Teacher> queryList(int page, int pageSize, boolean lazy);
 
