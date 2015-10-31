@@ -277,6 +277,11 @@
         </div>
     </div>
 
+
+    <div class="order-flex">
+        预约
+    </div>
+
     <div id="frame1">
         <img id="close_frame1" src="http://image.1yingli.cn/img/register_close.png">
         <img id="ticonUrl1" src="http://image.1yingli.cn/img/img.png"/>
@@ -411,6 +416,11 @@
                     self.location = 'search.html?findName=' + encodeURIComponent(encodeURIComponent(ui.item.value));
                 }).focus();
             }, 0);
+        });
+
+
+        $('.order-flex').click(function() {
+            $('#order-him').click();
         });
     </script>
 </body>

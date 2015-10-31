@@ -12,10 +12,16 @@
     $("#cancell").click(function(){
         $("#login").hide();
         $(".mark").hide();
+        if($(window).width() < 768) {
+            $('.order-flex').css('display','block');
+        }
     });
     $("#cancele").click(function(){
         $("#euid").hide();
         $(".mark").hide();
+        if($(window).width() < 768) {
+            $('.order-flex').css('display','block');
+        }
     });
 
 
@@ -40,6 +46,10 @@
         if($(".add-like-text").html()=="加入心愿单"){
             if(uid==null)  {
                 $(".mark").show();
+
+                if($(window).width() < 768) {
+                    $('.order-flex').css('display','none');
+                }
                 $("#login").show();
                 return;
             }
@@ -196,6 +206,9 @@ function likeTeacher(){
         async : false,
         error : function(request) {
                     $(".mark").show();
+                    if($(window).width() < 768) {
+                        $('.order-flex').css('display','none');
+                    }
                     $("#box").show();
                 },
         success : function(data, textStatu) {
@@ -204,6 +217,9 @@ function likeTeacher(){
             } else {
                 $("#euid").show();
                 $(".mark").show();
+                if($(window).width() < 768) {
+                    $('.order-flex').css('display','none');
+                }
             }
         }
     });
@@ -225,6 +241,9 @@ function dislikeTeacher(){
         async : false,
         error : function(request) {
                     $(".mark").show();
+                    if($(window).width() < 768) {
+                        $('.order-flex').css('display','none');
+                    }
                     $("#box").show();
                 },
         success : function(data, textStatu) {
@@ -233,6 +252,9 @@ function dislikeTeacher(){
             } else {
                 $("#euid").show();
                 $(".mark").show();
+                if($(window).width() < 768) {
+                    $('.order-flex').css('display','none');
+                }
             }
         }
     });
@@ -254,6 +276,9 @@ function islikeTeacher(){
         async : true,
         error : function(request) {
                     $(".mark").show();
+                    if($(window).width() < 768) {
+                        $('.order-flex').css('display','none');
+                    }
                     $("#box").show();
                 },
         success : function(data, textStatu) {
@@ -428,10 +453,17 @@ function refreshTeacherInfo(){
                             var uid = $.cookie('uid');
                             if(uid == null){
                                 $(".mark").show();
+                                if($(window).width() < 768) {
+                                    $('.order-flex').css('display','none');
+                                }
                                 $("#login").show();
                             } else {
                                 $(".mark").fadeIn();
                                 $("#frame").fadeIn();
+                                if($(window).width() < 768) {
+                                    $('body').scrollTop(0);
+                                    $('.order-flex').css('display','none');
+                                }
                             }
                         });
                     }

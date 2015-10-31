@@ -4,6 +4,9 @@
     $("#close").click(function () {
         $(".mark").fadeOut();
         $("#frame").fadeOut();
+        if($(window).width() < 768) {
+            $('.order-flex').css('display','block');
+        }
     });
 
     $("#open1").click(function () {
@@ -69,6 +72,9 @@
         }
 
         $(".mark").fadeIn();
+        if($(window).width() < 768) {
+            $('.order-flex').css('display','none');
+        }
         $("#frame").fadeOut();
         $("#frame1").fadeIn();
 
@@ -76,6 +82,9 @@
 
     $("#close_frame1").click(function () {
         $(".mark").fadeOut();
+        if($(window).width() < 768) {
+            $('.order-flex').css('display','block');
+        }
         $("#frame1").fadeOut();
     });
 
@@ -132,15 +141,24 @@ function ordern() {
         async: false,
         error: function (request) {
             $(".mark").show();
+            if($(window).width() < 768) {
+                $('.order-flex').css('display','none');
+            }
             $("#box").show();
         },
         success: function (data, textStatu) {
             var json = eval("(" + data + ")");
             if (json.state == "success") {
                 $(".mark").show();
+                if($(window).width() < 768) {
+                    $('.order-flex').css('display','none');
+                }
                 $("#succ").show();
             } else {
                 $(".mark").show();
+                if($(window).width() < 768) {
+                    $('.order-flex').css('display','none');
+                }
                 $("#erro").show();
             }
         }
@@ -171,12 +189,18 @@ function ordery() {
         async: false,
         error: function (request) {
             $(".mark").show();
+            if($(window).width() < 768) {
+                $('.order-flex').css('display','none');
+            }
             $("#box").show();
         },
         success: function (data, textStatu) {
             var json = eval("(" + data + ")");
             if (json.state == "success") {
                 $(".mark").show();
+                if($(window).width() < 768) {
+                    $('.order-flex').css('display','none');
+                }
                 $("#succ").show();
             } else {
                 if (json.msg == "voucher is not existed") {
@@ -190,6 +214,10 @@ function ordery() {
                     $("#frame1").show();
                 } else if (json.msg == "BAD PHONE NUMBER OR BAD EMAIL") {
                     $(".mark").show();
+
+                    if($(window).width() < 768) {
+                        $('.order-flex').css('display','none');
+                    }
                     $("#box").show();
                     $("#bomb").html("输入的邮箱或电话号码有误，请重新修改");
                     $("#connect").attr('href', 'javascript:void(0);');
@@ -199,6 +227,10 @@ function ordery() {
                     });
                 } else {
                     $(".mark").show();
+
+                    if($(window).width() < 768) {
+                        $('.order-flex').css('display','none');
+                    }
                     $("#erro").show();
                 }
             }
@@ -221,6 +253,10 @@ function info() {
         async: true,
         error: function (request) {
             $(".mark").show();
+
+            if($(window).width() < 768) {
+                $('.order-flex').css('display','none');
+            }
             $("#box").show();
         },
         success: function (data, textStatu) {
@@ -235,6 +271,10 @@ function info() {
                 $("#ptime").val(json.selectTime);
             } else {
                 $(".mark").show();
+
+                if($(window).width() < 768) {
+                    $('.order-flex').css('display','none');
+                }
                 $("#box").show();
                 $("#bomb").html("帐号已经失效，请重新登录");
                 $("#connect").attr('href', 'login.html');
