@@ -153,7 +153,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 						order.getTeacher(), notificationService);
 				returnSuccess(resp);
 			}
-			// 因为交易超时或者我们主动关闭而导致交易失败
+			// 因为交易超时或者我们主动关闭而导致交易失败,退款
 			else if (is_trade_success.equals("TRADE_CLOSED")) {
 				// TODO：
 
@@ -191,10 +191,9 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 							"尊敬的学员，订单号为" + order.getOrderNo() + "的订单，已经成功退款，请注意查收.如有疑问请咨询lijunlan@1yingli.cn.",
 							order.getCreateUser(), notificationService);
 				} else {
+					order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_ABNORMAL + "," + order.getState());
 					LogUtil.error("order id:" + oid + ", state is wrong", this.getClass());
 					WarnUtil.sendWarnToCTO("TRADE_CLOSED order id:" + oid + ", state is wrong");
-					// order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_ABNORMAL
-					// + "," + order.getState());
 				}
 				returnSuccess(resp);
 			}

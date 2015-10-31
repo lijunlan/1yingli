@@ -43,6 +43,8 @@ public interface TeacherDao {
 	List<Teacher> queryLikeListByUserId(long userid, int page, int pageSize, boolean lazy);
 
 	List<Teacher> queryList(int page, int pageSize, boolean lazy);
+	
+	List<Teacher> queryListOnservice(int page,int pageSize,boolean lazy);
 
 	List<Teacher> queryByTipOrderByShow(int size, long tipMark, boolean lazy);
 
