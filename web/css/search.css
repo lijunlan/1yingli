@@ -1067,7 +1067,7 @@ em {
     }
 
     #feature > img, #selected > img {
-        margin: 8px 0 0 0;
+        margin: 8px 5px 0 5px;
         width: 20px;
     }
 
