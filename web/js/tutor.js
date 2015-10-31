@@ -761,7 +761,7 @@ function detail(oid){
                         },
                 success : function(data, textStatu) {
                     var json = eval("(" + data + ")"); 
-                    $(".details").fadeIn().html("<img class='Tutor_icon' src='http://image.1yingli.cn/img/order_close_icon.png' alt=''/><div><div>"+json.title+"</div> </div><div><div><img src=\""+(json.iconUrl==""?"http://image.1yingli.cn/img/img.png":json.iconUrl)+"\"/></div><div>"+json.name+"</div><div>"+json.price+"元</div></div><div><p>学员提的问题:</p><p>"+json.question+"</p></div><div><p>学员目前状况:</p><p>"+json.userIntroduce+"</p></div><div><p>预约时间:</p><p>"+json.selectTimes+"</p></div><div><p>联系方式:</p><p>手机号码："+json.phone+"</p><p>微信："+json.contact+"</p><p>邮箱："+json.email+"</p></div><div><div>订单号："+json.orderId+"</div> </div>");
+                    $(".details").fadeIn().html("<img class='Tutor_icon' src='http://image.1yingli.cn/img/order_close_icon.png' alt=''/><div><div><span class='order_title'>"+json.title+"</span></div> </div><div><div><img src=\""+(json.iconUrl==""?"http://image.1yingli.cn/img/img.png":json.iconUrl)+"\"/></div><div>"+json.name+"</div><div>"+json.price+"元</div></div><div><p>学员提的问题:</p><p>"+json.question+"</p></div><div><p>学员目前状况:</p><p>"+json.userIntroduce+"</p></div><div><p>预约时间:</p><p>"+json.selectTimes+"</p></div><div><p>联系方式:</p><p>手机号码："+json.phone+"</p><p>微信："+json.contact+"</p><p>邮箱："+json.email+"</p></div><div><div>订单号："+json.orderId+"</div> </div>");
                     $(".Tutor_icon").click(function(){
                             $(".mark").hide();
                             $(".details").fadeOut();
