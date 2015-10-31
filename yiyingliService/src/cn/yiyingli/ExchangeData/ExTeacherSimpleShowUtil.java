@@ -4,7 +4,7 @@ import cn.yiyingli.Persistant.StudyExperience;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.WorkExperience;
 
-public class SimpleShowUtil {
+public class ExTeacherSimpleShowUtil {
 
 	public static void getSimpleShowByTip(Teacher teacher, SuperMap map, long tid) {
 		map.put("simpleinfo", teacher.getSimpleInfo());

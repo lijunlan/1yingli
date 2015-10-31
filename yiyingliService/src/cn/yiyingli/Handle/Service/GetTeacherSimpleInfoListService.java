@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.LikeNoShowUtil;
-import cn.yiyingli.ExchangeData.SimpleShowUtil;
+import cn.yiyingli.ExchangeData.ExTeacherSimpleShowUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Record;
@@ -67,7 +67,7 @@ public class GetTeacherSimpleInfoListService extends MsgService {
 				SuperMap map = new SuperMap();
 				map.put("name", teacher.getName());
 				map.put("iconUrl", teacher.getIconUrl());
-				SimpleShowUtil.getSimpleShowByTip(teacher, map, Long.valueOf(tipId));
+				ExTeacherSimpleShowUtil.getSimpleShowByTip(teacher, map, Long.valueOf(tipId));
 				map.put("level", teacher.getLevel());
 				LikeNoShowUtil.setLikeNo(teacher, map);
 				map.put("teacherId", teacher.getId());

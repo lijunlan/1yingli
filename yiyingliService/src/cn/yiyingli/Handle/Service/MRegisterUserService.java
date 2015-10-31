@@ -1,7 +1,5 @@
 package cn.yiyingli.Handle.Service;
 
-import java.util.Calendar;
-
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Manager;
 import cn.yiyingli.Persistant.User;
@@ -11,6 +9,7 @@ import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.RSAUtil;
+import cn.yiyingli.toPersistan.PUserUtil;
 
 public class MRegisterUserService extends MsgService {
 
@@ -68,22 +67,12 @@ public class MRegisterUserService extends MsgService {
 			return;
 		}
 		password = MD5Util.MD5(password);
-		User user = new User();
-		user.setLikeTeacherNumber(0L);
-		user.setUsername(username);
-		user.setNickName(nickName);
-		user.setReceiveCommentNumber(0L);
-		user.setSendCommentNumber(0L);
-		user.setOrderNumber(0L);
+		User user = PUserUtil.assembleUser(username, password, nickName, null, null);
 		if (CheckUtil.checkMobileNumber(username)) {
 			user.setPhone(username);
 		} else {
 			user.setEmail(username);
 		}
-		user.setPassword(password);
-		user.setCreateTime(String.valueOf(Calendar.getInstance().getTimeInMillis()));
-		user.setTeacherState(UserService.TEACHER_STATE_OFF_SHORT);
-		user.setForbid(false);
 		try {
 			getUserService().save(user);
 		} catch (Exception e) {
