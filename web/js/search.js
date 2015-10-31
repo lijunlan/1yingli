@@ -195,29 +195,29 @@ function refresh(){
 
 	//搜索页面调整
 	if(sort=='likeno+') {
-		$("#result-content-header-list-02").css({"background":"#56bbe8","color":"#ffffff"});
+		$("#result-content-header-list-02").css({"background":"#56bbe8","color":"#f8f8f8"});
 		$("#triangle-up02").attr("src","http://image.1yingli.cn/img/triangle_white_down.png");
 		$("#result-content-header-list-02").find('span').text('2');
 	}
 	if(sort=='likeno-') {
-		$("#result-content-header-list-02").css({"background":"#56bbe8","color":"#ffffff"});
+		$("#result-content-header-list-02").css({"background":"#56bbe8","color":"#f8f8f8"});
 		$("#triangle-up02").attr("src","http://image.1yingli.cn/img/triangle_white_up.png");
 		$("#result-content-header-list-02").find('span').text('1');
 	}
 	if(sort=='price+') {
-		$("#result-content-header-list-03").css({"background":"#56bbe8","color":"#ffffff"});
+		$("#result-content-header-list-03").css({"background":"#56bbe8","color":"#f8f8f8"});
 		$("#triangle-up03").attr("src","http://image.1yingli.cn/img/triangle_white_down.png");
 		$("#result-content-header-list-03").find('span').text('2');
 	}
 	if(sort=='price-') {
-		$("#result-content-header-list-03").css({"background":"#56bbe8","color":"#ffffff"});
+		$("#result-content-header-list-03").css({"background":"#56bbe8","color":"#f8f8f8"});
 		$("#triangle-up03").attr("src","http://image.1yingli.cn/img/triangle_white_up.png");
 		$("#result-content-header-list-03").find('span').text('1');
 	}
 	if(!sort){
-       	$("#result-content-header-list-01").css({"background":"#56bbe8","color":"#ffffff"});
-		$("#result-content-header-list-02").css({"background":"#ffffff","color":"#56bbe8"});
-       	$("#result-content-header-list-03").css({"background":"#ffffff","color":"#56bbe8"});
+       	$("#result-content-header-list-01").css({"background":"#56bbe8","color":"#f8f8f8"});
+		$("#result-content-header-list-02").css({"background":"#f8f8f8","color":"#56bbe8"});
+       	$("#result-content-header-list-03").css({"background":"#f8f8f8","color":"#56bbe8"});
 	}
 
 	//获取数据

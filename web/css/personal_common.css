@@ -61,6 +61,7 @@ input{
 	font-size: 15px;
 	float: left;
 	border-radius: 8px;
+	margin-right: 10px;
 }
 .m-search a {
 	display: inline-block;
