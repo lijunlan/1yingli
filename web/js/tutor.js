@@ -57,6 +57,12 @@ function judge(){
     });
 }
 
+//关闭评价
+function closeAssess(){
+    $(".mark").hide();
+    $("#assess").hide();
+}
+
 //导师主页
 var totalPage = 2;
 var page = 1;
@@ -263,7 +269,7 @@ function openshow(i,orderId) {
             break;
         case 192:
             $(".mark").show();
-            $(".no1").slideDown().html("<p>学员已支付，等待导师确认</p><p>请您在24小时内确认</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian'></div><div class='yuan'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='tsev' style='margin: 30px 100px 30px 200px;'>确认服务</button><button id='back192' style='margin:0;'>拒绝服务</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
+            $(".no1").slideDown().html("<p>学员已支付，等待导师确认</p><p>请您在24小时内确认</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian'></div><div class='yuan'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><div style='width:100%;text-align:center;'><button id='tsev' style='margin: 30px 20px 30px 10px;'>确认服务</button><button id='back192' style='margin:0;'>拒绝服务</button></div><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){  
                 $(".no1").slideUp();
                 $(".mark").hide(); 
@@ -280,7 +286,7 @@ function openshow(i,orderId) {
                 agree(order);
             });
             $("#back192").click(function(){
-                $("#refuse").slideDown().html("<div><img src='http://image.1yingli.cn/images/edge.png' style='width:20px; height:20px; position:absolute; top:440px; left:55%;z-index:300;'><div style='width:150px; height:160px; background:#56bbe8; position:absolute; top:420px; left:56%; border-top-left-radius:8px;border-top-right-radius:8px;z-index:300;'><div style='font-size:16px; font-family:lantingxihei; color:#FFF; margin:10px 16px'>请选择拒绝理由</div><ul class='##'><li><div class='##' style='margin:10px'><input name='choice' type='radio'  style='width:15px; height:15px;' value='学员信息不完整'><div style='font-size:14px; color:#FFF; position:absolute; top:40px;left:20%;'>学员信息不完整</div></div></li><li><div class='##' style='margin:10px'> <input name='choice' type='radio' placeholder='' style='width:15px; height:15px;' value='临时有事'><div style='font-size:14px; color:#FFF; position:absolute; top:70px;left:20%;'>临时有事</div></div></li><li><div class='##' style='margin:10px'><input name='choice' type='radio' placeholder='' style='width:15px; height:15px;' value='其他原因'><div style='font-size:14px; color:#FFF; position:absolute; top:100px;left:20%;'>其他原因</div></div></li></ul></div><div style='width:150px; height:40px; background:#FFF; position:absolute; top:580px; left:56%;border-bottom-right-radius:8px;border-bottom-left-radius:8px; z-index:300;'><div id='Tclose' style='width:40px; height:20px; font-size:14px; color:#FFF; background:#d3d3d3; position:absolute; top:5px; left:10%; padding:2px 8px; border-radius:8px; cursor: pointer;'>取 消</div><div id='tconfirm' style='width:40px; height:20px; font-size:14px; color:#FFF; background:#56bbe8; position:absolute; top:5px; left:50%; padding:2px 8px; border-radius:8px; cursor: pointer;'>确 认</div></div></div>")
+                $("#refuse").slideDown();
                 $("#Tclose").click(function(){
                     $("#refuse").slideUp();
                 });
@@ -437,6 +443,7 @@ function openshow(i,orderId) {
                 $("#assess").hide(); 
             });
             $("#uass").click(function(){
+                $(".no1").slideUp();
                 $("#assess").fadeIn();
                 $(".star").click(function(){
                     star = $(this).attr("id");
@@ -754,7 +761,7 @@ function detail(oid){
                         },
                 success : function(data, textStatu) {
                     var json = eval("(" + data + ")"); 
-                    $(".details").fadeIn().html("<img class='Tutor_icon' src='http://image.1yingli.cn/img/order_close_icon.png' alt=''/><div><div>"+json.title+"</div> </div><div><div><img src=\""+(json.iconUrl==""?"http://image.1yingli.cn/img/img.png":json.iconUrl)+"\"/></div><div>"+json.name+"</div><div>"+json.price+"元</div></div><div><p>学员提的问题:</p><p>"+json.question+"</p></div><div><p>学员目前状况:</p><p>"+json.userIntroduce+"</p></div><div><p>预约时间:</p><p>"+json.selectTimes+"</p></div><div><p>联系方式:</p><p>手机号码："+json.phone+"</p><p>微信："+json.contact+"</p><p>邮箱："+json.email+"</p></div><div><div>订单号："+json.orderId+"</div> </div>");
+                    $(".details").fadeIn().html("<img class='Tutor_icon' src='http://image.1yingli.cn/img/order_close_icon.png' alt=''/><div><div><span class='order_title'>"+json.title+"</span></div> </div><div><div><img src=\""+(json.iconUrl==""?"http://image.1yingli.cn/img/img.png":json.iconUrl)+"\"/></div><div>"+json.name+"</div><div>"+json.price+"元</div></div><div><p>学员提的问题:</p><p>"+json.question+"</p></div><div><p>学员目前状况:</p><p>"+json.userIntroduce+"</p></div><div><p>预约时间:</p><p>"+json.selectTimes+"</p></div><div><p>联系方式:</p><p>手机号码："+json.phone+"</p><p>微信："+json.contact+"</p><p>邮箱："+json.email+"</p></div><div><div>订单号："+json.orderId+"</div> </div>");
                     $(".Tutor_icon").click(function(){
                             $(".mark").hide();
                             $(".details").fadeOut();

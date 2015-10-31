@@ -3,6 +3,7 @@ package cn.yiyingli.Handle.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.yiyingli.ExchangeData.ExOrderUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Order;
@@ -104,22 +105,7 @@ public class TGetOrderListService extends MsgService {
 		List<String> sends = new ArrayList<String>();
 		for (Order o : orders) {
 			SuperMap map = new SuperMap();
-			map.put("orderId", o.getOrderNo());
-			map.put("createTime", o.getCreateTime());
-			map.put("title", o.getServiceTitle());
-			map.put("price", o.getMoney());
-			map.put("originPrice", o.getOriginMoney());
-			map.put("time", o.getTime());
-			map.put("iconUrl", o.getCreateUser().getIconUrl());
-			map.put("name", o.getCustomerName());
-			map.put("state", o.getState());
-			map.put("question", o.getQuestion());
-			map.put("phone", o.getCustomerPhone());
-			map.put("email", o.getCustomerEmail());
-			map.put("userIntroduce", o.getUserIntroduce());
-			map.put("selectTimes", o.getSelectTime());
-			map.put("okTime", o.getOkTime());
-			map.put("contact", o.getCustomerContact());
+			ExOrderUtil.assembleOrderToTeacher(map, o);
 			sends.add(map.finishByJson());
 		}
 		setResMsg(toSend.put("data", Json.getJson(sends)).finishByJson());

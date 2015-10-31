@@ -73,7 +73,12 @@ public class FGetRecommendTeacherListService extends MsgService {
 			String tid = jobj.getString("ItemId");
 			ids.add(Long.valueOf(tid));
 		}
-		List<Teacher> teachers = getTeacherService().queryByIds(ids);
+		List<Teacher> teachers = null;
+		if (ids.size() > 0) {
+			teachers = getTeacherService().queryByIds(ids);
+		} else {
+			teachers = getTeacherService().queryListOnservice(0, 5, false);
+		}
 		SuperMap map = MsgUtil.getSuccessMap();
 		JSONArray jsonTeachers = new JSONArray();
 		for (Teacher teacher : teachers) {

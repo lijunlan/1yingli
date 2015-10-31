@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import cn.yiyingli.ExchangeData.LikeNoShowUtil;
-import cn.yiyingli.ExchangeData.SimpleShowUtil;
+import cn.yiyingli.ExchangeData.ExTeacherSimpleShowUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.StudyExperience;
@@ -45,7 +45,7 @@ public class TGetAllInfoService extends MsgService {
 		map.put("name", teacher.getName());
 		map.put("iconUrl", teacher.getIconUrl());
 		map.put("bgUrl", teacher.getBgUrl());
-		SimpleShowUtil.getSimpleShowByTip(teacher, map);
+		ExTeacherSimpleShowUtil.getSimpleShowByTip(teacher, map);
 		map.put("phone", teacher.getPhone());
 		map.put("email", teacher.getEmail());
 		map.put("introduce", teacher.getIntroduce());

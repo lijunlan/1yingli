@@ -1,7 +1,7 @@
 package cn.yiyingli.Handle.Service;
 
 import cn.yiyingli.ExchangeData.LikeNoShowUtil;
-import cn.yiyingli.ExchangeData.SimpleShowUtil;
+import cn.yiyingli.ExchangeData.ExTeacherSimpleShowUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Teacher;
@@ -37,7 +37,7 @@ public class TGetTeacherSimpleInfoService extends MsgService {
 		map.put("iconUrl", teacher.getIconUrl());
 		map.put("name", teacher.getName());
 		LikeNoShowUtil.setLikeNo(teacher, map);
-		SimpleShowUtil.getSimpleShowByTip(teacher, map);
+		ExTeacherSimpleShowUtil.getSimpleShowByTip(teacher, map);
 		setResMsg(map.finishByJson());
 	}
 

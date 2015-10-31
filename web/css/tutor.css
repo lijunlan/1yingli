@@ -30,7 +30,7 @@
         width: 30% !important;
     }
     .Tutor-05 {
-        width: 30% !important;
+        width: 30.3% !important;
     }
 }
 @media (min-width: 493px) and (max-width: 768px){
@@ -125,30 +125,47 @@
         width: 90% !important;
         border-radius: 10px;
         left: 0px !important;
-        top: 25% !important;
+        top: 50% !important;
         margin-left: 5% !important;
-        margin-top: -0px !important;
+        margin-top: -240px !important;
         min-width: 290px !important;
-        position: absolute !important;
+        position: fixed !important;
     }
-
+    .details .order_title{
+    	display: none;
+    }
     .details div:nth-of-type(1) div:nth-of-type(1) {
         width: 100% !important;
+        padding-top: 5px !important;
+    	height: 26px !important;
     }
 
+    .Tutor_icon {
+    	right: 5px !important;
+    	top: 3px !important;
+    	width: 23px;
+	}
     .details div:nth-of-type(2) {
-        width: 263px !important;
-        height: 160px !important;
+        width: 233px !important;
+        height: 80px !important;
         margin: 5% 0 0 10px !important;
         float: none !important;
         margin: 0 auto !important;
+        margin-left: 5% !important;
     }
-
+    .details div:nth-of-type(2) div:nth-of-type(1) img {
+    	width: 80px !important;
+    	height: 80px !important;
+	}
+	.details div:nth-of-type(2) div:nth-of-type(1) {
+	    width: 80px !important;
+	    height: 80px !important;
+	}
     .details div:nth-of-type(2) div:nth-of-type(2) {
         width: 110px !important;
         height: 30px !important;
         line-height: 30px !important;
-        margin: 65px 0 0 0 !important;
+        margin: 15px 0 0 20px !important;
         float:  left !important;
         font-size: 20px !important;
         text-align: left !important;
@@ -157,7 +174,7 @@
     .details div:nth-of-type(2) div:nth-of-type(3) {
         width: 110px !important;
         height: 30px !important;
-        margin: 10px 0 0 0 !important;
+        margin: 10px 0 0 20px !important;
         line-height: 30px;
         font-size: 20px !important;
         text-align: left !important;
@@ -165,27 +182,33 @@
     .details div:nth-of-type(3) {
         width: 90% !important;
         margin: 10px 0 0 5% !important;
+        height: 80px !important;
     }
     .details div:nth-of-type(3) p:nth-of-type(2) {
         width: 100% !important;
+        height: 60px !important;
     }
     .details div:nth-of-type(4) {
         width: 90% !important;
         margin: 10px 0 0 5% !important;
+        height: 65px !important;
     }
     .details div:nth-of-type(4) p:nth-of-type(2) {
         width: 100% !important;
+        height: 50px !important;
     }
     .details div:nth-of-type(5) {
         width: 90% !important;
         margin: 10px 0 0 5% !important;
+        height: 35px !important;
     }
     .details div:nth-of-type(5) p:nth-of-type(2) {
         width: 100% !important;
+    	height: 25px !important;
     }
     .details div:nth-of-type(6) {
         width: 90% !important;
-        margin: 20px 0 20px 5% !important;
+        margin: 20px 0 6px 5% !important;
     }
     .details div:nth-of-type(7) {
         width: 100% !important;
@@ -224,7 +247,6 @@
         margin-left: 0px !important;
     }
     #tsev {
-        float: right !important;
         margin: 0px 20px 0px 0px !important;
     }
     #ttime {
@@ -233,6 +255,50 @@
     #ct{
         margin-left: 5px !important;
     }
+    #assess {
+        text-align: center;
+        width: 90% !important;
+        padding: 20px 0px 20px 0px !important;
+        border-radius: 10px;
+        background: white;
+        position: fixed;
+        left: 0% !important;
+        top: 30% !important;
+        margin-top: -0px !important;
+        margin-left: 5% !important;
+        z-index: 100;
+        display: none;
+        min-width: 290px;
+    }
+    #refuse {
+        top: 33% !important;
+        left: 45% !important;
+        z-index: 999 !important;
+    }
+
+    #succ {
+    	width: 290px !important;
+    	left: 50% !important;
+    	margin-left: -145px !important;
+    }
+    #succ div:nth-of-type(1) {
+	    width: 290px !important;
+	}
+	#erro {
+    	width: 290px !important;
+    	left: 50% !important;
+    	margin-left: -145px !important;
+    }
+    #erro div:nth-of-type(1) {
+	    width: 290px !important;
+	}
+	#erro a{
+		left: 30% !important;
+	}
+	#succ a{
+		left: 30% !important;
+	}
+
 }
 
 html{color:#000;background:#FFF;}
@@ -412,7 +478,7 @@ header,footer,section {display:block;}
 
 .
 
-/*---------------------------------��ϵ����------------------------------------*/
+/*---------------------------------ÁªÏµÎÒÃÇ------------------------------------*/
 .contact{  width: 100%;  min-width: 1000px;  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;  font-weight: bold;background: white;  }
 .contact-content{  width: 1000px;  height: 135px;  margin: 0 auto;  }
 .contact-left{  float: left; }
@@ -434,7 +500,7 @@ header,footer,section {display:block;}
 .contact-right-3{  text-align: right;  color: #273241;  opacity: 0.7;  font-size: 12px;  padding-bottom: 2px;  }
 .contact-right-4{  text-align: right;  color: #273241;  opacity: 0.7;  font-size: 12px;  }
 
-/*---------------------------------------�ײ�---------------------------------------*/
+/*---------------------------------------µ×²¿---------------------------------------*/
 .footer{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;  width: 100%;  min-width: 1000px;  height: 380px;  background: url(http://image.1yingli.cn/img/footer_bg.jpg) no-repeat;  -moz-background-size: 100% 100%;  -o-background-size: 100% 100%;  -webkit-background-size: 100% 100%;  background-size: 100% 100%;  }
 .footer-share{  width: 1000px;  height: 50px;  position: relative;  top: 80px;  line-height: 50px;  margin: 100px auto;margin-top: 0;  text-align: center;  }
 .footer-share li{  display: inline-block;  height: 50px;  line-height: 50px;  float: left;  text-align: center;  }
@@ -511,7 +577,7 @@ header,footer,section {display:block;}
 .no4 button,
 .no5 button,
 .no6 button,
-.no7 button{  width: 74px;height: 27px;line-height: 27px;text-align: center;background: #56bbe8;color: white;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;border: 0;border-radius: 14px;margin-left: 57px;margin-top: 30px;cursor: pointer;   }
+.no7 button{  width: 74px;height: 27px;line-height: 27px;text-align: center;background: #56bbe8;color: white;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;border: 0;border-radius: 14px;margin:20px 13px 0px; cursor: pointer;   }
 
 .no4 button,
 .no5 button{  width: 120px;margin-left: 253px;  }
@@ -736,13 +802,126 @@ header,footer,section {display:block;}
 }
 #personal-assess{  color: #56bbe8;  }
 
+#assess {
+    text-align: center; width: 627px; padding: 30px 30px 20px 30px;border-radius: 10px;background: white;position: fixed;left: 50%;top: 50%;margin-top:-120px;margin-left:-313.5px; z-index: 100;display:none;
+}
+
+#assess div:nth-of-type(1){
+    width: 100%; font-size:18px; font-family:lantingxihei; text-align: center; margin-bottom: 10px;
+}
+#uassess {
+    width: 90%; height:70px;text-indent: 5px; font-size:16px; outline:none; border:solid 1px #b2b2b2; resize : none;
+}
+#stars{
+    width: 90%; height: 28px; margin: 10px auto 0px;
+}
+.star{
+    width:25px;height:25px;float:left;
+}
+#miss1 {
+    color:red;display:none; text-align: left;width: 90%;margin:0 auto;
+}
+#miss2{
+    width: 90%; text-align: left; color: red;display: none; margin: 0 auto;
+}
+#usend {
+    width: 80px; height: 23px; background:#56bbe8; font-size:16px; color:#FFF; border-radius: 8px; cursor: pointer; margin: 3px auto;padding: 0px 10px; float: right;  
+}
+.Tutor_icon_assess {
+    position: absolute;
+    right: 10px;
+    top: 2px;
+    cursor: pointer;
+    border-radius: 8px; 
+   
+}
+
+#refuse{
+    display:none;
+    width: 150px;
+    height: 200px;
+    position: fixed;
+    top: 50%;
+    left: 63%;
+    z-index: 999;
+}
+#refuse img{
+    width:20px; 
+    height:20px; 
+    position:absolute; 
+    top:440px; 
+    left:55%;
+    z-index:300;
+    display:none;
+}
+.refuse_why{
+    width:150px; height:160px; background:#56bbe8; position:absolute; top:0px; border-top-left-radius:8px;border-top-right-radius:8px;z-index:300;
+}
+.refuse_why_topic {
+    font-size:16px; font-family:lantingxihei; color:#FFF; margin:10px 16px;    
+}
+.why_content1{
+    font-size:14px; color:#FFF; position:absolute; top:40px;left:20%;
+}
+.why_content2{
+    font-size:14px; color:#FFF; position:absolute; top:70px;left:20%;
+}
+.why_content3{
+    font-size:14px; color:#FFF; position:absolute; top:100px;left:20%;
+}
+.refuse_why_topic input{
+    width:15px; height:15px;
+}
+.refuse_submit{
+    width:150px; height:40px; background:#FFF; position:absolute; top:160px; border-bottom-right-radius:8px;border-bottom-left-radius:8px; z-index:300;
+}
+#Tclose {
+    width:40px; height:20px; font-size:14px; color:#FFF; background:#d3d3d3; position:absolute; top:5px; left:10%; padding:2px 8px; border-radius:8px; cursor: pointer;
+}
+#tconfirm {
+    width:40px; height:20px; font-size:14px; color:#FFF; background:#56bbe8; position:absolute; top:5px; left:50%; padding:2px 8px; border-radius:8px; cursor: pointer;
+}
 
 
+/*成功错误弹出框*/
+	#succ {
+    	width: 400px;height: 200px;margin: auto;position: fixed;top: 30%;left: 42%;border-radius: 10px;z-index: 101;background: #fff; display:none;	border: 1px solid #ccc;
+    }
 
+    #succ div:nth-of-type(1) {
+    	width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;
+	}
 
+	#succ div:nth-of-type(1) span{
+		font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;line-height: 35px;
+	}
 
+	#succ div:nth-of-type(2) {
+		position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;
+	}
 
+	#succ a{
+		text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;
+	}	
+	
+	#erro {
+		width: 400px;height: 200px;margin: auto;position: absolute;top: 30%;left: 42%;border-radius: 10px;z-index: 101;background: #fff; display:none;border: 1px solid #ccc;
+	}
 
+	#erro div:nth-of-type(1){
+		width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;
+	}
+	
+	#erro div:nth-of-type(1) span{
+		font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;line-height: 35px;
+	}
+	#erro div:nth-of-type(2){
+		position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;
+	}
+	
+	#erro a{
+		text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;
+	}
 
 
 

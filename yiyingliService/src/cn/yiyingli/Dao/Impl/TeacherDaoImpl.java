@@ -233,15 +233,37 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public List<Teacher> queryListOnservice(final int page, final int pageSize, final boolean lazy) {
+		List<Teacher> list = new ArrayList<Teacher>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
+
+			@Override
+			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from Teacher t left join fetch t.tService where t.onService=true ORDER BY t.id DESC";
+				if (lazy) {
+					hql = "from Teacher t left join fetch t.tService where t.onService=true ORDER BY t.id DESC";
+				}
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<Teacher> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<Teacher> queryList(final int page, final int pageSize, final boolean lazy) {
 		List<Teacher> list = new ArrayList<Teacher>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
 
 			@Override
 			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.tService  ORDER BY t.createTime DESC";
+				String hql = "from Teacher t left join fetch t.tService ORDER BY t.createTime DESC";
 				if (lazy) {
-					hql = "from Teacher t left join fetch t.tService  ORDER BY t.createTime DESC";
+					hql = "from Teacher t left join fetch t.tService ORDER BY t.createTime DESC";
 				}
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
