@@ -83,28 +83,59 @@
 	        </div>
 	    </div>
 	</div>
-
 	<div class="footer"></div>
 </section>
 
 <div class="no1"></div>
 <div class="details" ></div>
-<div id="refuse" style="display:none;"></div>
-<div id="assess" style="width: 627px;height: 200px;padding: 30px 30px 20px 30px;border-radius: 10px;background: white;position: fixed;left: 50%;top: 50%;margin-top:-120px;margin-left:-313.5px; z-index: 100;display:none;">
-    <div style="width: 627px; height: 217px; font-size:18px; font-family:lantingxihei; text-align: center;">评价学员</div>
-    <form style="position:absolute; top:55px; left:60px;">
-        <textarea id="uassess" style="width:550px; height:70px; padding: 10px; font-size:16px; outline:none; border:solid 1px #b2b2b2; resize : none;" placeholder="" ></textarea>
-    </form>
-    <div id="stars" style="width: 627px;height: 40px;position: absolute;left: 10%;top: 160px;">
-        <img class="star" id="1" style="width:25px;height:25px;float:left;" src="http://image.1yingli.cn/img/topic_star.png" alt="">
-        <img class="star" id="2" style="width:25px;height:25px;float:left;" src="http://image.1yingli.cn/img/topic_star.png" alt="">
-        <img class="star" id="3" style="width:25px;height:25px;float:left;" src="http://image.1yingli.cn/img/topic_star.png" alt="">
-        <img class="star" id="4" style="width:25px;height:25px;float:left;" src="http://image.1yingli.cn/img/topic_star.png" alt="">
-        <img class="star" id="5" style="width:25px;height:25px;float:left;" src="http://image.1yingli.cn/img/topic_star.png" alt="">
-        <span id="miss1" style="color:red;display:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请填写评价</span>
+
+<!-- 服务拒绝理由 -->
+<div id="refuse">
+    <img src='http://image.1yingli.cn/images/edge.png'>
+    <div class="refuse_why">
+        <div class='refuse_why_topic'>请选择拒绝理由</div>
+        <ul class='##'>
+            <li>
+                <div class='##' style='margin:10px'>
+                    <input name='choice' type='radio' value='学员信息不完整'>
+                    <div class="why_content1">学员信息不完整</div>
+                </div>
+            </li>
+            <li>
+                <div class='##' style='margin:10px'> 
+                    <input name='choice' type='radio' value='临时有事'>
+                    <div class="why_content2">临时有事</div>
+                </div>
+            </li>
+            <li>
+                <div class='##' style='margin:10px'>
+                    <input name='choice' type='radio' value='其他原因'>
+                    <div class="why_content3">其他原因</div>
+                </div>
+            </li>
+        </ul>
     </div>
-    <div style="position: absolute;top: 190px;left: 100px;color: red;display: none;" id="miss2">请勾选星级</div>
-    <div id="usend" style="width: 80px; height: 21px; background:#56bbe8; font-size:18px; color:#FFF; font-family:lantingxihei; position: absolute;left: 75%;top: 200px;border-radius: 8px;padding-left:7px; cursor: pointer;">提交评价</div>
+    <div class="refuse_submit" >
+        <div id='Tclose'>取 消</div>
+        <div id='tconfirm'>确 认</div>
+    </div>
+</div>
+
+<!-- 导师评价 -->
+<div id="assess">
+    <img class='Tutor_icon_assess' src='http://image.1yingli.cn/img/schedule_close.png'  onclick="closeAssess();" />
+    <div>评价学员</div>
+    <textarea id="uassess" placeholder="" ></textarea>
+    <div id="miss1">请填写评价</div>
+    <div id="stars">
+        <img class="star" id="1" src="http://image.1yingli.cn/img/topic_star.png" alt="">
+        <img class="star" id="2" src="http://image.1yingli.cn/img/topic_star.png" alt="">
+        <img class="star" id="3" src="http://image.1yingli.cn/img/topic_star.png" alt="">
+        <img class="star" id="4" src="http://image.1yingli.cn/img/topic_star.png" alt="">
+        <img class="star" id="5" src="http://image.1yingli.cn/img/topic_star.png" alt="">
+        <label id="usend">提交评价</label>
+    </div>
+    <div id="miss2">请勾选星级</div>
 </div>
 
 <!-- 提交信息成功 -->
