@@ -54,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
 		TimeTaskUtil.sendTimeTask("change", "order",
 				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
 				new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
-		return  order.getOrderNo();
+		return order.getOrderNo();
 	}
 
 	@Override
@@ -81,8 +81,6 @@ public class OrderServiceImpl implements OrderService {
 			NotifyUtil.notifyManager(new SuperMap().put("type", "managerIn").finishByJson());
 		} else if (order.getSalaryState().shortValue() == OrderService.ORDER_SALARY_STATE_NEED) {
 			NotifyUtil.notifyManager(new SuperMap().put("type", "salary").finishByJson());
-		} else if(order.getState().startsWith(ORDER_STATE_FINISH_PAID)){
-			NotifyUtil.notifyManager(new SuperMap().put("type", "waitConfirm").finishByJson());
 		}
 	}
 
@@ -111,6 +109,9 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void updateAndPlusNumber(Order order) {
 		getOrderDao().updateWithTeacherNumber(order, order.getTeacher());
+		if (order.getState().startsWith(ORDER_STATE_FINISH_PAID)) {
+			NotifyUtil.notifyManager(new SuperMap().put("type", "waitConfirm").finishByJson());
+		}
 		TimeTaskUtil.sendTimeTask("change", "order",
 				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
 				new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
