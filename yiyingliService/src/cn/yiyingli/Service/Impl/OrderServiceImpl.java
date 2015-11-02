@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
 				+ new Random().nextInt(10) + new Random().nextInt(10) + (100000000L + id));
 		getOrderDao().update(order);
 		TimeTaskUtil.sendTimeTask("change", "order",
-				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
+				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
 				new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
 		return order.getOrderNo();
 	}

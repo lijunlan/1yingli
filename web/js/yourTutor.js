@@ -290,9 +290,9 @@ function openshow(tid,i,orderId){
                 $("input[name='oid']").val(orderId);
                 $("input[name='uid']").val(uid);
                 if($("input[name='paymethod']:checked").val() == 1){
-                    $("#pay").attr("action", "http://test.1yingli.cn/yiyingliService/Alipay");
+                    $("#pay").attr("action", "http://service.1yingli.cn/yiyingliService/Alipay");
                 } else {
-                    $("#pay").attr("action", "http://test.1yingli.cn/yiyingliService/Checkout");
+                    $("#pay").attr("action", "http://service.1yingli.cn/yiyingliService/Checkout");
                 }
             });
             $("#fnopay").click(function(){
