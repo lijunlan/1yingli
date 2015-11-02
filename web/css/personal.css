@@ -2384,6 +2384,9 @@ abbr, acronym {
     color: #FFF;
     cursor: pointer;
 }
+#wbshare1{
+        display: none;
+    }
 
 @media (max-width: 768px) {
     .content-box {
@@ -3157,7 +3160,18 @@ abbr, acronym {
         position: relative;
         top: -6px;
     }
-    .share-her {
-        display: none;
+    #wxshare{
+        display: none !important;
+    }
+    #wbshare{
+        display: none !important;
+    }
+    #wbshare1{
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    .share-her{
+        width: 100%;
     }
 }
