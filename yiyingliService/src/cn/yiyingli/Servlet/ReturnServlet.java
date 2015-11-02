@@ -104,7 +104,7 @@ public class ReturnServlet extends HttpServlet {
 		}
 
 		try {
-			// TODO 组装checkoutDetails
+			// 组装checkoutDetails
 			Map<String, String> checkoutDetails = new HashMap<String, String>();
 
 			checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0", results.get("L_PAYMENTREQUEST_0_NAME0"));
@@ -131,15 +131,13 @@ public class ReturnServlet extends HttpServlet {
 			 */
 
 			if ("return".equals(request.getParameter("page"))) {
-				// FIXME - The method 'request.getServerName()' must be
-				// sanitized before being used.
 				HashMap<String, String> results2 = pp.confirmPayment(checkoutDetails, request.getServerName());
 				// 检测paypal是否链接中断，没有返回内容
 				if (results2 == null) {
 					returnMsg(response, connectError);
 					return;
 				}
-				//request.setAttribute("payment_method", "");
+				// request.setAttribute("payment_method", "");
 				String strAck2 = results2.get("ACK").toString().toUpperCase();
 				if (("Success".equalsIgnoreCase(strAck2) || "SuccessWithWarning".equalsIgnoreCase(strAck))) {
 					// 检查数据库，并修改，最终完成订单
@@ -212,10 +210,10 @@ public class ReturnServlet extends HttpServlet {
 					request.setAttribute("ack", strAck);
 				} else {
 					// log error information returned by PayPal
-					String errorCode = results2.get("PAYMENTINFO_0_ERRORCODE").toString();
-					String errorShortMsg = results2.get("PAYMENTINFO_0_SHORTMESSAGE").toString();
-					String errorLongMsg = results2.get("PAYMENTINFO_0_LONGMESSAGE").toString();
-					String errorSeverityCode = results2.get("PAYMENTINFO_0_SEVERITYCODE").toString();
+					String errorCode = results2.get("L_ERRORCODE0").toString();
+					String errorShortMsg = results2.get("L_SHORTMESSAGE0").toString();
+					String errorLongMsg = results2.get("L_LONGMESSAGE0").toString();
+					String errorSeverityCode = results2.get("L_SEVERITYCODE0").toString();
 					String errorString = "SetExpressCheckout API call failed. " + "Detailed Error Message: "
 							+ errorLongMsg + "Short Error Message: " + errorShortMsg + "Error Code: " + errorCode
 							+ "Error Severity Code: " + errorSeverityCode;
