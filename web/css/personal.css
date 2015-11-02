@@ -2019,7 +2019,7 @@ abbr, acronym {
     line-height: 25px;
     border-radius: 12px;
     border: 1px solid #b2b2b2;
-    padding: 0px 10px;
+    text-indent: 5px;
     position: absolute;
     left: 12%;
 }
@@ -2061,7 +2061,7 @@ abbr, acronym {
     line-height: 25px;
     border-radius: 12px;
     border: 1px solid #b2b2b2;
-    padding: 0px 10px;
+    text-indent: 5px;
     position: absolute;
     left: 12%;
 }
@@ -2096,7 +2096,7 @@ abbr, acronym {
     line-height: 25px;
     border-radius: 12px;
     border: 1px solid #b2b2b2;
-    padding: 0px 10px;
+    text-indent: 5px;
     position: absolute;
     left: 9.5%;
 }
@@ -2131,7 +2131,7 @@ abbr, acronym {
     line-height: 25px;
     border-radius: 12px;
     border: 1px solid #b2b2b2;
-    padding: 0px 10px;
+    text-indent: 5px;
     position: absolute;
     left: 9.5%;
 }
@@ -2913,63 +2913,63 @@ abbr, acronym {
     }
 
     #warnname, #warnemail, #warntel,#warnweixin{
-        left: 70%;
+        left: 85%;
         line-height: 30px;
         top: 0;
     }
 
     #warnname {
-        left: 50%;
+        left: 60%;
     }
 
     .name1 {
-        width: 100%;
+        width: 90%;
         left: 0;
-        margin: 0 8%;
+        margin: 0 5%;
         top: 20%;
     }
 
     .tel1 {
-        width: 100%;
+        width: 90%;
         left: 0;
-        margin: 0 8%;
+        margin: 0 5%;
         top: 32%;
     }
 
     .email1 {
-        width: 100%;
+        width: 90%;
         left: 0;
-        margin: 0 8%;
+        margin: 0 5%;
         top: 44%;
     }
 
     .weixin {
-        width: 100%;
+        width: 90%;
         left: 0;
-        margin: 0 8%;
+        margin: 0 5%;
         top: 56%;
     }
 
     #pname {
-        width: 79%;
+        width: 100%;
         left: 0;
         border-radius: 5px;
     }
 
     #ptel {
-        width: 79%;
+        width: 100%;
         left: 0;
         border-radius: 5px;
     }
 
     #pemail {
-        width: 79%;
+        width: 100%;
         left: 0;
         border-radius: 5px;
     }
 
     #pweixin {
-        width: 79%;
+        width: 100%;
         left: 0;
         border-radius: 5px;
     }
@@ -2981,18 +2981,18 @@ abbr, acronym {
     }
 
     #confirm {
-        width: 85%;
+        width: 90%;
         height: 26px;
         left: 0;
-        margin: 0 8%;
+        margin: 0 5%;
         border-radius: 6px;
     }
 
     #close {
         top: 100%;
         left: 0;
-        width: 84.5%;
-        margin: 0 8%;
+        width: 90%;
+        margin: 0 5%;
         border-radius: 6px;
     }
 
