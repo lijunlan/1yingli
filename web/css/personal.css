@@ -2019,7 +2019,7 @@ abbr, acronym {
     line-height: 25px;
     border-radius: 12px;
     border: 1px solid #b2b2b2;
-    padding: 0px 10px;
+    text-indent: 5px;
     position: absolute;
     left: 12%;
 }
@@ -2061,7 +2061,7 @@ abbr, acronym {
     line-height: 25px;
     border-radius: 12px;
     border: 1px solid #b2b2b2;
-    padding: 0px 10px;
+    text-indent: 5px;
     position: absolute;
     left: 12%;
 }
@@ -2096,7 +2096,7 @@ abbr, acronym {
     line-height: 25px;
     border-radius: 12px;
     border: 1px solid #b2b2b2;
-    padding: 0px 10px;
+    text-indent: 5px;
     position: absolute;
     left: 9.5%;
 }
@@ -2131,7 +2131,7 @@ abbr, acronym {
     line-height: 25px;
     border-radius: 12px;
     border: 1px solid #b2b2b2;
-    padding: 0px 10px;
+    text-indent: 5px;
     position: absolute;
     left: 9.5%;
 }
@@ -2275,7 +2275,7 @@ abbr, acronym {
 #pquestion {
     width: 530px;
     height: 70px;
-    padding: 10px;
+    text-indent: 5px;
     font-size: 16px;
     outline: none;
     border: solid 1px #b2b2b2;
@@ -2303,7 +2303,7 @@ abbr, acronym {
 #pIntroduce {
     width: 530px;
     height: 70px;
-    padding: 10px;
+    text-indent: 5px;
     font-size: 16px;
     outline: none;
     border: solid 1px #b2b2b2;
@@ -2326,7 +2326,7 @@ abbr, acronym {
 #ptime {
     width: 530px;
     height: 70px;
-    padding: 10px;
+    text-indent: 5px;
     font-size: 16px;
     outline: none;
     border: solid 1px #b2b2b2;
@@ -2913,63 +2913,63 @@ abbr, acronym {
     }
 
     #warnname, #warnemail, #warntel,#warnweixin{
-        left: 70%;
+        left: 75%;
         line-height: 30px;
         top: 0;
     }
 
     #warnname {
-        left: 50%;
+        left: 60%;
     }
 
     .name1 {
-        width: 100%;
+        width: 90%;
         left: 0;
-        margin: 0 8%;
+        margin: 0 5%;
         top: 20%;
     }
 
     .tel1 {
-        width: 100%;
+        width: 90%;
         left: 0;
-        margin: 0 8%;
+        margin: 0 5%;
         top: 32%;
     }
 
     .email1 {
-        width: 100%;
+        width: 90%;
         left: 0;
-        margin: 0 8%;
+        margin: 0 5%;
         top: 44%;
     }
 
     .weixin {
-        width: 100%;
+        width: 90%;
         left: 0;
-        margin: 0 8%;
+        margin: 0 5%;
         top: 56%;
     }
 
     #pname {
-        width: 79%;
+        width: 100%;
         left: 0;
         border-radius: 5px;
     }
 
     #ptel {
-        width: 79%;
+        width: 100%;
         left: 0;
         border-radius: 5px;
     }
 
     #pemail {
-        width: 79%;
+        width: 100%;
         left: 0;
         border-radius: 5px;
     }
 
     #pweixin {
-        width: 79%;
+        width: 100%;
         left: 0;
         border-radius: 5px;
     }
@@ -2981,18 +2981,19 @@ abbr, acronym {
     }
 
     #confirm {
-        width: 85%;
+        width: 90%;
         height: 26px;
         left: 0;
-        margin: 0 8%;
+        margin: 0 5%;
         border-radius: 6px;
+        border: 1px solid rgb(86, 187, 232);
     }
 
     #close {
         top: 100%;
         left: 0;
-        width: 84.5%;
-        margin: 0 8%;
+        width: 90%;
+        margin: 0 5%;
         border-radius: 6px;
     }
 
@@ -3011,10 +3012,10 @@ abbr, acronym {
         margin-left: 0;
         left: 0;
         margin: 0 5%;
-        min-height: 478px;
+        min-height: 418px;
         position: fixed;
         top: 50%;
-        margin-top: -239px;
+        margin-top: -209px;
     }
 
     #close_frame1 {
@@ -3060,51 +3061,51 @@ abbr, acronym {
     }
 
     .form1 {
-        width: 80%;
-        top: 142px;
+        width: 90%;
+        top: 132px;
         left: 0;
-        margin: 0 8%;
+        margin: 0 5%;
     }
 
     .form2 {
-        width: 80%;
-        top: 222px;
+        width: 90%;
+        top: 202px;
         left: 0;
-        margin: 0 8%;
+        margin: 0 5%;
     }
 
     .form3 {
-        width: 80%;
-        top: 300px;
+        width: 90%;
+        top: 270px;
         left: 0;
-        margin: 0 8%;
+        margin: 0 5%;
     }
 
     .form4 {
-        width: 80%;
-        top: 380px;
+        width: 90%;
+        top: 330px;
         left: 0;
-        margin: 0 8%;
+        margin: 0 5%;
     }
 
     #pquestion {
         width: 100%;
-        height: 35px;
+        height: 45px;
         font-size: 14px;
     }
 
     #pIntroduce {
         width: 100%;
-        height: 35px;
+        height: 45px;
     }
 
     #ptime {
         width: 100%;
-        height: 30px;
+        height: 35px;
     }
 
     .say1 {
-        top: 120px;
+        top: 110px;
         left: 0;
         margin: 0 8%;
         width: 80%;
@@ -3112,7 +3113,7 @@ abbr, acronym {
     }
 
     .say2 {
-        top: 200px;
+        top: 180px;
         left: 0;
         margin: 0 8%;
         width: 80%;
@@ -3120,7 +3121,7 @@ abbr, acronym {
     }
 
     .say3 {
-        top: 280px;
+        top: 250px;
         left: 0;
         margin: 0 8%;
         width: 80%;
@@ -3128,7 +3129,7 @@ abbr, acronym {
     }
 
     .small {
-        top: 360px;
+        top: 310px;
         left: 0;
         margin: 0 8%;
         width: 80%;
@@ -3136,7 +3137,7 @@ abbr, acronym {
     }
 
     .searchBox {
-        width: 99%;
+        width: 100%;
     }
 
     .smallnu {
@@ -3148,8 +3149,9 @@ abbr, acronym {
     }
 
     #sprice1 {
-        top: 95px;
+        top: 85px;
         font-size: 18px;
+        right: 5%;
     }
 
     #worktime {
@@ -3199,4 +3201,8 @@ abbr, acronym {
         line-height: 30px;
         text-align: center;
     }
+    #psend{
+        bottom: 7%;
+    }
+
 }

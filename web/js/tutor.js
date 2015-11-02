@@ -16,26 +16,29 @@ $(document).ready(function(){
     }
 
     //判断是不是导师:0导师,1不是,2已经成为
-    judge();
-    if(teacherState == "0"){
-    }else  if(teacherState == "2"){ 
-        self.location='bct5.html';return;
-    }else{
-        self.location='bct0.html';return;
-    }
+    judge(function() {
+        if(teacherState == "0"){
+        }else  if(teacherState == "2"){
+            self.location='bct5.html';return;
+        }else{
+            self.location='bct0.html';return;
+        }
 
-    //导师主页
-    changePage(page);
+        //导师主页
+        changePage(page);
 
-    $(".Tutor-lists").on( "click", "a.see", function(){
-        $(".mark").show();
-        var oid = $(this).parent().parent().parent().find("#111").text();
-        detail(oid);
-    })
+        $(".Tutor-lists").on( "click", "a.see", function(){
+            $(".mark").show();
+            var oid = $(this).parent().parent().parent().find("#111").text();
+            detail(oid);
+        })
+    });
+
+
 });
 
 //判断是不是导师
-function judge(){
+function judge(callabck){
     var toSend = new Object();
     toSend.style = "user";
     toSend.method = "getTeacherState";
@@ -45,14 +48,30 @@ function judge(){
         type : "POST",
         url : config.base_url,
         data : $.toJSON(toSend),
-        async : false,
+        async : true,
         error : function(request) {
                     $(".mark").show();
                     $("#box").show();
                 },
         success : function(data, textStatu) {
             var json = eval("(" + data + ")");
-            teacherState = json.teacherState;
+            if(json.state == 'success') {
+                teacherState = json.teacherState;
+                callabck();
+            } else {
+                if (json.msg == "uid is not existed") {
+                    $(".mark").show();
+                    $("#box").show();
+                    $("#bomb").html("帐号信息已失效，请重新登录");
+                    $("#connect").attr('href','login.html');
+                    $("#connect").css('left','15%');
+                    $("#cancel").show();
+                    $.cookie("uid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                    $.cookie("nickName",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                    $.cookie("iconUrl",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                    $.cookie("tid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                }
+            }
         }
     });
 }
@@ -138,6 +157,7 @@ function changePage(p){
                 });
             $(".Tutor-lists").html(html);
             } else {
+                if (json.msg == "uid is not existed") {
                     $(".mark").show();
                     $("#box").show();
                     $("#bomb").html("帐号信息已失效，请重新登录");
@@ -149,6 +169,7 @@ function changePage(p){
                     $.cookie("iconUrl",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
                     $.cookie("tid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
                 }
+            }
         }
     });
 

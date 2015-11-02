@@ -127,17 +127,19 @@ function changePage(p){
                     }
                     $(".yourTutor-lists").html(html);
                 } else {
-                    $(".mark").show();
-                    $("#box").show();
-                    $("#bomb").html("帐号信息已失效，请重新登录");
-                    $("#connect").attr('href','login.html');
-                    $("#connect").css('left','15%');
-                    $("#cancel").show();
-                    $.cookie("uid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                    $.cookie("nickName",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                    $.cookie("iconUrl",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                    $.cookie("tid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                }
+                    if (json.msg == "uid is not existed") {
+                        $(".mark").show();
+                        $("#box").show();
+                        $("#bomb").html("帐号信息已失效，请重新登录");
+                        $("#connect").attr('href','login.html');
+                        $("#connect").css('left','15%');
+                        $("#cancel").show();
+                        $.cookie("uid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                        $.cookie("nickName",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                        $.cookie("iconUrl",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                        $.cookie("tid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                    }
+                  }
             }
     });
 
@@ -290,9 +292,9 @@ function openshow(tid,i,orderId){
                 $("input[name='oid']").val(orderId);
                 $("input[name='uid']").val(uid);
                 if($("input[name='paymethod']:checked").val() == 1){
-                    $("#pay").attr("action", "http://test.1yingli.cn/yiyingliService/Alipay");
+                    $("#pay").attr("action", "http://service.1yingli.cn/yiyingliService/Alipay");
                 } else {
-                    $("#pay").attr("action", "http://test.1yingli.cn/yiyingliService/Checkout");
+                    $("#pay").attr("action", "http://service.1yingli.cn/yiyingliService/Checkout");
                 }
             });
             $("#fnopay").click(function(){
