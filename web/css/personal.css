@@ -3012,10 +3012,10 @@ abbr, acronym {
         margin-left: 0;
         left: 0;
         margin: 0 5%;
-        min-height: 478px;
+        min-height: 418px;
         position: fixed;
         top: 50%;
-        margin-top: -239px;
+        margin-top: -209px;
     }
 
     #close_frame1 {
@@ -3062,50 +3062,50 @@ abbr, acronym {
 
     .form1 {
         width: 90%;
-        top: 142px;
+        top: 132px;
         left: 0;
         margin: 0 5%;
     }
 
     .form2 {
         width: 90%;
-        top: 222px;
+        top: 202px;
         left: 0;
         margin: 0 5%;
     }
 
     .form3 {
         width: 90%;
-        top: 300px;
+        top: 270px;
         left: 0;
         margin: 0 5%;
     }
 
     .form4 {
         width: 90%;
-        top: 380px;
+        top: 330px;
         left: 0;
         margin: 0 5%;
     }
 
     #pquestion {
         width: 100%;
-        height: 55px;
+        height: 45px;
         font-size: 14px;
     }
 
     #pIntroduce {
         width: 100%;
-        height: 55px;
+        height: 45px;
     }
 
     #ptime {
         width: 100%;
-        height: 50px;
+        height: 35px;
     }
 
     .say1 {
-        top: 120px;
+        top: 110px;
         left: 0;
         margin: 0 8%;
         width: 80%;
@@ -3113,7 +3113,7 @@ abbr, acronym {
     }
 
     .say2 {
-        top: 200px;
+        top: 180px;
         left: 0;
         margin: 0 8%;
         width: 80%;
@@ -3121,7 +3121,7 @@ abbr, acronym {
     }
 
     .say3 {
-        top: 280px;
+        top: 250px;
         left: 0;
         margin: 0 8%;
         width: 80%;
@@ -3129,7 +3129,7 @@ abbr, acronym {
     }
 
     .small {
-        top: 360px;
+        top: 310px;
         left: 0;
         margin: 0 8%;
         width: 80%;
@@ -3149,7 +3149,7 @@ abbr, acronym {
     }
 
     #sprice1 {
-        top: 95px;
+        top: 85px;
         font-size: 18px;
         right: 5%;
     }
