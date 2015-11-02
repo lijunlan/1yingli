@@ -303,5 +303,5 @@ textarea{
 	background-image:url('http://image.1yingli.cn/img/discount_02.png');
 	background-position-y:3px;
 	background-repeat:no-repeat;
-	padding-left:25px;
+	text-indent: 25px;
 }
