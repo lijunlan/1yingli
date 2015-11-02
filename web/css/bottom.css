@@ -42,6 +42,14 @@
     right: 0;
     bottom: 0;
 }
+.left_img{
+    height: 16px;
+    position: relative;
+    top: -4px;
+}
+.right_img{
+    height: 20px;
+}
 
 @media (max-width: 768px){
     #wximg{
