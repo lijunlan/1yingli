@@ -324,7 +324,7 @@ function openshow(i,orderId) {
             break;
         case 256:
             $(".mark").show();
-            $(".no1").slideDown().html("<p>请先和学员协商后尽快确认时间</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><div style='width:100%;margin-top:10px;font-size:17px;'>协商时间：<input id='cd' type='date' style='margin-right: 10px;border: 1px solid rgba(0,0,0,0.3);border-radius: 5px;'/><input id='ct' type='time' style='border: 1px solid rgba(0,0,0,0.3);border-radius: 5px;'/></div><div style='width:100%;height:30px;margin-top:15px;'><button id='ttime' style='margin:0px 20px 0 0;'>确认时间</button><button id='back256' style='margin:0;'>返回</button></div><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/><div id='alt' style='color:red; display:none;'>日期与时间必填！</div></div>");
+            $(".no1").slideDown().html("<p>请先和学员协商后尽快确认时间</p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>3</span></div><div class='xian'></div><div class='yuan'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><div style='width:100%;margin-top:10px;font-size:17px;'>协商时间：<input id='cd' type='text' style='margin-right: 10px;border: 1px solid rgba(0,0,0,0.3);border-radius: 3px;text-indent: 5px;width: 158px;'/></div><div style='width:100%;height:30px;margin-top:15px;'><button id='ttime' style='margin:0px 20px 0 0;'>确认时间</button><button id='back256' style='margin:0;'>返回</button></div><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/><div id='alt' style='color:red; display:none;'>日期与时间必填！</div></div>");
             $(".Tutor_icon").click(function(){
                 $(".no1").slideUp();
                 $(".mark").hide(); 
@@ -333,14 +333,17 @@ function openshow(i,orderId) {
                 $(".no1").slideUp();
                 $(".mark").hide(); 
             });
+            var myDate = new Date();
+            //var nowDate = myDate.getFullYear() + '/'+ (myDate.getMonth() + 1) + '/' + myDate.getDate() +' '+ myDate.getTime()+' : '+myDate.getHours();
+            $('#cd').datetimepicker({value: myDate.toLocaleString(),step:10,lang:"ch", format:"Y-m-d h:i"});
             $("#ttime").click(function(){
                 var data = $("#cd").val();
-                var time = $("#ct").val();
-                if(!data == "" && !time == ""){
-                    datatime = data +"-"+ time ;
+                if(!data == ""){
+                    datatime = data;
                     var order = orderId.toString(10);
                     $(".no1").hide();
                     dtime(datatime,order);
+                    return;
                 } else {
                     $("#alt").show();
                 }
