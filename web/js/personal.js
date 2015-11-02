@@ -306,12 +306,11 @@ function getAboutTeachers() {
     var toSend = new Object();
     toSend.style = "function";
     toSend.method = "getRecommendTeacherList";
-    //if(uid && uid!="null"){
-    //     toSend.uid = uid;
-    //} else {
-    //     toSend.teacherId = tid;
-    //}
-    toSend.teacherId = tid;
+    if(uid && uid!="null"){
+         toSend.uid = uid;
+    } else {
+         toSend.teacherId = tid;
+    }
     $.ajax({
         cache : true,
         type : "POST",
