@@ -264,7 +264,7 @@ function info() {
             if (json.state == "success") {
                 $("#pIntroduce").val(json.introduce);
                 $("#pname").val(json.name);
-                $("#pemil").val(json.email);
+                $("#pemail").val(json.email);
                 $("#ptel").val(json.phone);
                 $("#pweixin").val(json.contact);
                 $("#pquestion").val(json.question);
