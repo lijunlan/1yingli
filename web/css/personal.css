@@ -1965,7 +1965,7 @@ abbr, acronym {
     font-size: 20px;
     font-weight: bold;
     position: absolute;
-    top: 14%;
+    top: 10%;
     left: 12%;
 
 }
@@ -1974,7 +1974,7 @@ abbr, acronym {
     font-size: 12px;
     color: red;
     position: absolute;
-    top: 25%;
+    top: 19%;
     left: 18%;
 }
 
@@ -2028,7 +2028,7 @@ abbr, acronym {
     width: 500px;
     height: 30px;
     position: absolute;
-    top: 30%;
+    top: 25%;
     left: 10%
 }
 
@@ -2078,7 +2078,7 @@ abbr, acronym {
     width: 500px;
     height: 30px;
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 12%
 }
 
@@ -2113,7 +2113,7 @@ abbr, acronym {
     width: 500px;
     height: 30px;
     position: absolute;
-    top: 60%;
+    top: 70%;
     left: 12%
 }
 
@@ -2148,7 +2148,7 @@ abbr, acronym {
     width: 500px;
     height: 30px;
     position: absolute;
-    top: 84%;
+    top: 85%;
     left: 50%
 }
 
@@ -2387,6 +2387,11 @@ abbr, acronym {
 #wbshare1{
         display: none;
     }
+
+
+.order-flex {
+    display: none;
+}
 
 @media (max-width: 768px) {
     .content-box {
@@ -2838,6 +2843,7 @@ abbr, acronym {
         margin: 0 5%;
         left: 0;
         top: 50%;
+        position: absolute;
         margin-top: -200px;
     }
 
@@ -2854,6 +2860,7 @@ abbr, acronym {
         text-align: center;
         display: block;
         font-size: 14px;
+        top: 10%;
     }
 
     #ph2 {
@@ -2861,6 +2868,7 @@ abbr, acronym {
         text-align: center;
         display: block;
         font-size: 14px;
+        top: 15%;
     }
 
     #name {
@@ -2900,44 +2908,42 @@ abbr, acronym {
         display: none;
     }
 
+    #warnname, #warnemail, #warntel,#warnweixin{
+        left: 70%;
+        line-height: 30px;
+        top: 0;
+    }
+
     #warnname {
-        left: 50%
-    }
-
-    #warnemail {
-        left: 60%;
-    }
-
-    #warntel {
-        left: 60%;
-    }
-
-    #warnweixin {
-        left: 60%;
+        left: 50%;
     }
 
     .name1 {
         width: 100%;
         left: 0;
         margin: 0 8%;
+        top: 20%;
     }
 
     .tel1 {
         width: 100%;
         left: 0;
         margin: 0 8%;
+        top: 32%;
     }
 
     .email1 {
         width: 100%;
         left: 0;
         margin: 0 8%;
+        top: 44%;
     }
 
     .weixin {
         width: 100%;
         left: 0;
         margin: 0 8%;
+        top: 56%;
     }
 
     #pname {
@@ -2967,7 +2973,7 @@ abbr, acronym {
     .cancel {
         width: 100%;
         left: 0;
-        top: 70%;
+        top: 68%;
     }
 
     #confirm {
@@ -3173,5 +3179,20 @@ abbr, acronym {
     }
     .share-her{
         width: 100%;
+    }
+
+    .order-flex {
+        position: fixed;
+        width: 60px;
+        height: 30px;
+        right: 10px;
+        bottom: 10px;
+        z-index: 100;
+        display: block;
+        border-radius: 25px;
+        background: #41B9EE;
+        color: white;
+        line-height: 30px;
+        text-align: center;
     }
 }

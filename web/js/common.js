@@ -18,6 +18,9 @@ $(document).ready(function () {
             $("html,body").removeClass("XY");
             $('.bg').removeClass('bg-show').off('click');
             left = 0;
+            if($(window).width() < 768) {
+                $('.order-flex ').fadeIn();
+            }
         } else {
             console.log('else');
             $("html,body").addClass("XY");
@@ -25,6 +28,7 @@ $(document).ready(function () {
                 $(".left").click();
             });
             left = 1;
+            $('.order-flex ').fadeOut();
         }
     });
     $("label.right").click(function () {
@@ -42,11 +46,15 @@ $(document).ready(function () {
             if ($("html,body").hasClass("XY")) {
                 $("html,body").removeClass("XY");
                 $('.bg').removeClass('bg-show').off('click');
+                if($(window).width() < 768) {
+                    $('.order-flex ').fadeIn();
+                }
             } else {
                 $("html,body").addClass("XY");
                 $('.bg').addClass('bg-show').click(function () {
                     $(".right").click();
                 })
+                $('.order-flex ').fadeOut();
             }
         }
     });
