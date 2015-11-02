@@ -175,7 +175,7 @@
     .details {
         width: 90% !important;
         min-width: 288px;
-        margin-top: -234px !important;
+        margin-top: -214px !important;
         margin-left: 5% !important;
         left: 0% !important;
         top: 50% !important;
@@ -184,6 +184,7 @@
     }
     .details_top {
         width: 100% !important;
+        height: 30px !important;
     }
     .details_top_content{
         display: none;
@@ -191,6 +192,13 @@
     .details_bottom {
         width: 100% !important;  
         margin-top: 8px; 
+        height: 30px !important;
+    }
+    .details_bottom div{
+        padding-top: 5px !important;
+    }
+    .details_person_contract p:nth-of-type(1) {
+        font-size: 14px !important;
     }
     .details_person_img {
         width: 80px !important;
@@ -212,11 +220,11 @@
     .details_person_problem {
         width: 92% !important;
         margin: 0px 4% 0 4% !important;
-        height: 80px !important;
+        height: 65px !important;
     }
     .details_person_problem :nth-child(2) {
         width: 100% !important;
-        height: 60px !important;
+        height: 50px !important;
     }
     .details_person_status {
         width: 92% !important;
@@ -326,7 +334,7 @@
         font-size: 14px !important;
     }
     .Tutor_icon{
-        top:5px !important;
+        top:0px !important;
     }
     .quest1{
         font-size: 14px !important;
@@ -1073,6 +1081,7 @@ width:520px;height:35px;border:1px solid #eeeeee;margin: 0;overflow-y: auto;over
     border: 0;
     border-radius: 14px;
     cursor: pointer;
+    background-color: #CCC;
 }
 .button2 {
     float:left; 
