@@ -2905,20 +2905,14 @@ abbr, acronym {
         display: none;
     }
 
+    #warnname, #warnemail, #warntel,#warnweixin{
+        left: 70%;
+        line-height: 30px;
+        top: 0;
+    }
+
     #warnname {
-        left: 50%
-    }
-
-    #warnemail {
-        left: 60%;
-    }
-
-    #warntel {
-        left: 60%;
-    }
-
-    #warnweixin {
-        left: 60%;
+        left: 50%;
     }
 
     .name1 {
