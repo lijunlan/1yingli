@@ -2384,6 +2384,9 @@ abbr, acronym {
     color: #FFF;
     cursor: pointer;
 }
+#wbshare1{
+        display: none;
+    }
 
 
 .order-flex {
@@ -3163,8 +3166,19 @@ abbr, acronym {
         position: relative;
         top: -6px;
     }
-    .share-her {
-        display: none;
+    #wxshare{
+        display: none !important;
+    }
+    #wbshare{
+        display: none !important;
+    }
+    #wbshare1{
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    .share-her{
+        width: 100%;
     }
 
     .order-flex {

@@ -399,8 +399,10 @@ function refreshTeacherInfo(){
                     $("#companyName1").html(json.simpleinfo);
                     //微博分享按钮初始化
                     $("#wbshare").attr("default_text","【一英里导师】"+name+"("+$("#tposition").html()+")");
+                    $("#wbshare1").attr("default_text","【一英里导师】"+name+"("+$("#tposition").html()+")");
                     var link = iconUrl.split("\@")[0];
                     $("#wbshare").attr("pic",encodeURIComponent(iconUrl==""?"http://image.1yingli.cn/img/img.png":link));
+                    $("#wbshare1").attr("pic",encodeURIComponent(iconUrl==""?"http://image.1yingli.cn/img/img.png":link));
                     var weibojs = "<script src=\"http://tjs.sjs.sinajs.cn/open/api/js/wb.js\" type=\"text/javascript\" charset=\"utf-8\"></script>";
 
                     $("head").append(weibojs);
