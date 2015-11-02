@@ -1660,7 +1660,7 @@
 			<ref local="checkNoService" />
 		</property>
 	</bean>
-	
+
 	<bean id="iosForgetPasswordService" class="cn.yiyingli.Handle.Service.IOSForgetPasswordService"
 		scope="prototype">
 		<property name="userService">
@@ -1769,8 +1769,9 @@
 			<ref local="teacherService" />
 		</property>
 	</bean>
-	
-	<bean id="createOrderWithoutLoginService" class="cn.yiyingli.Handle.Service.CreateOrderWithoutLoginService"
+
+	<bean id="createOrderWithoutLoginService"
+		class="cn.yiyingli.Handle.Service.CreateOrderWithoutLoginService"
 		scope="prototype">
 		<property name="userMarkService">
 			<ref local="userMarkService" />
@@ -1792,6 +1793,19 @@
 		</property>
 		<property name="checkNoService">
 			<ref local="checkNoService" />
+		</property>
+	</bean>
+
+	<bean id="mRestartOrderService" class="cn.yiyingli.Handle.Service.MRestartOrderService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+		<property name="notificationService">
+			<ref local="notificationService" />
 		</property>
 	</bean>
 
