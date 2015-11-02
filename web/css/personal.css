@@ -2177,6 +2177,7 @@ abbr, acronym {
     background: rgb(86, 187, 232);
     position: absolute;
     left: 35%;
+    border: 1px solid rgb(86, 187, 232);
     cursor: pointer;
 }
 
@@ -3150,6 +3151,7 @@ abbr, acronym {
     #sprice1 {
         top: 95px;
         font-size: 18px;
+        right: 5%;
     }
 
     #worktime {
