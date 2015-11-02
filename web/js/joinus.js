@@ -56,7 +56,7 @@ switch(parseInt(GetQueryString("id"))) {
 		break;
 }
 
-//Ìí¼ÓÊÂ¼ş
+//æ·»åŠ äº‹ä»¶
 $("#tab-01").click(function(){
     ResetCSS();
     $(".whoweare").css("display","block");
@@ -95,7 +95,7 @@ $("#tab-06").click(function(){
 });
 
 
-//¹¤×÷Ö°Î»×ª»»
+//å·¥ä½œèŒä½è½¬æ¢
 $("#job-tab-01").click(function(){
     $(".ui-designer").css("display","none");
     $(".customer-service").css("display","none");
@@ -122,7 +122,7 @@ $("#job-tab-03").click(function(){
 });
 
 
-/////////Êó±ê¹ö¶¯ÌõÉèÖÃ--------start
+/////////é¼ æ ‡æ»šåŠ¨æ¡è®¾ç½®--------start
 var oContainer = document.getElementById("container"), oDiv1 = document.getElementById("div1"), oDiv2 = document.getElementById("div2"), oDiv3 = document.getElementById("div3");
 oDiv3.onmousedown = function(e) {
 	e = e || event;
@@ -196,11 +196,11 @@ function mousewheel(e) {
 		setTop(oDiv3.offsetTop-10);
 	}
 
-	//FF,°ó¶¨ÊÂ¼ş£¬×èÖ¹Ä¬ÈÏÊÂ¼ş
+	//FF,ç»‘å®šäº‹ä»¶ï¼Œé˜»æ­¢é»˜è®¤äº‹ä»¶
 	if (e.preventDefault) {
 		e.preventDefault();
 	}
 
 	return false;
 }
-/////////Êó±ê¹ö¶¯ÌõÉèÖÃ--------end
+/////////é¼ æ ‡æ»šåŠ¨æ¡è®¾ç½®--------end
