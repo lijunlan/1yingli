@@ -3042,6 +3042,8 @@ abbr, acronym {
         overflow: hidden;
         margin-left: 102px;
         font-size: 18px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     .reply {
