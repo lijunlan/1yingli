@@ -86,6 +86,7 @@
 		<method name="getAlipayNo" beanName="tGetAlipayNoService" />
 	</style>
 	<style name="manager">
+		<method name="restartOrder" beanName="mRestartOrderService"></method>
 		<method name="login" beanName="mLoginService"></method>
 		<method name="logout" beanName="mLogoutService"></method>
 		<method name="getUserList" beanName="mGetUserListService"></method>
