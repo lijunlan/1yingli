@@ -82,13 +82,13 @@ public class CancelOrderService extends MsgService {
 			if (AlipayCancelUtil.cancelOrder("", oid)) {
 				order.setState(OrderService.ORDER_STATE_END_FAILED + "," + order.getState());
 				getOrderService().update(order);
-				NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+				NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 						"尊敬的学员，您的订单已经取消。订单号" + order.getOrderNo(), user, getNotificationService());
 				setResMsg(MsgUtil.getSuccessMsg("cancel order successfully"));
 				return;
 			} else {
 				getOrderService().update(order);
-				NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+				NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 						"尊敬的学员，您的订单已经取消。订单号" + order.getOrderNo(), user, getNotificationService());
 				setResMsg(MsgUtil.getSuccessMsg("cancel order successfully"));
 				return;

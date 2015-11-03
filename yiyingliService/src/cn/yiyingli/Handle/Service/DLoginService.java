@@ -1,12 +1,15 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Handle.ULoginMsgService;
-import cn.yiyingli.Persistant.User;
+import java.util.Calendar;
+import java.util.UUID;
+
+import cn.yiyingli.Handle.DMsgService;
+import cn.yiyingli.Persistant.Distributor;
 import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.RSAUtil;
 
-public class LoginService extends ULoginMsgService {
+public class DLoginService extends DMsgService {
 
 	@Override
 	protected boolean checkData() {
@@ -29,16 +32,19 @@ public class LoginService extends ULoginMsgService {
 			setResMsg(MsgUtil.getErrorMsg("error"));
 			return;
 		}
-		User user = getUserService().queryWithTeacher(username, false);
-		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("username is not existed"));
+		Distributor distributor = getDistributorService().queryByUsername(username);
+		if (distributor == null) {
+			setResMsg(MsgUtil.getErrorMsg("distributor is not existed"));
 			return;
 		}
-		if (password.equals(user.getPassword())) {
-			returnUser(user);
+		if (password.equals(distributor.getPassword())) {
+			String _UUID = UUID.randomUUID().toString();
+			getDistributorMarkService().save(String.valueOf(distributor.getId()), _UUID);
+			distributor.setLastLoginTime(Calendar.getInstance().getTimeInMillis() + "");
+			getDistributorService().update(distributor);
+			setResMsg("{\"did\":\"" + _UUID + "\",\"state\":\"success\",\"dname\":\"" + distributor.getName() + "\"}");
 		} else {
 			setResMsg(MsgUtil.getErrorMsg("password is not accurate"));
 		}
 	}
-
 }

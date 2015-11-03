@@ -85,7 +85,13 @@
 		<method name="editAlipayNo" beanName="tEditAlipayNoService" />
 		<method name="getAlipayNo" beanName="tGetAlipayNoService" />
 	</style>
+	<style name="distributor">
+		<method name="getInfo" beanName="dGetInfoService" />
+		<method name="login" beanName="dLoginService" />
+	</style>
 	<style name="manager">
+		<method name="createDistributor" beanName="mCreateDistributorService"></method>
+		<method name="getDistributorList" beanName="mGetDistributorListService"></method>
 		<method name="restartOrder" beanName="mRestartOrderService"></method>
 		<method name="login" beanName="mLoginService"></method>
 		<method name="logout" beanName="mLogoutService"></method>

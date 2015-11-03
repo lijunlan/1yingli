@@ -312,13 +312,13 @@ public class PayPal {
 		if (isSet(checkoutDetails.get("payer_id")))
 			nvpstr.append("&PAYERID=").append(encode(checkoutDetails.get("payer_id")));
 
-		nvpstr.append("&PAYMENTREQUEST_0_SELLERPAYPALACCOUNTID=").append(this.getSellerEmail());
+		nvpstr.append("&PAYMENTREQUEST_0_SELLERPAYPALACCOUNTID=").append(getSellerEmail());
 
 		if (isSet(checkoutDetails.get("paymentType")))
 			nvpstr.append("&PAYMENTREQUEST_0_PAYMENTACTION=").append(encode(checkoutDetails.get("paymentType")));
 
-		if (isSet(serverName))
-			nvpstr.append("&IPADDRESS=").append(encode(serverName));
+		// if (isSet(serverName))
+		// nvpstr.append("&IPADDRESS=").append(encode(serverName));
 
 		nvpstr.append("&PAYMENTREQUEST_0_AMT=").append(finalPaymentAmount);
 

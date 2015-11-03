@@ -2,6 +2,7 @@ package cn.yiyingli.Dao;
 
 import java.util.List;
 
+import cn.yiyingli.Persistant.Distributor;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
@@ -24,6 +25,10 @@ public interface OrderDao {
 
 	void updateWithTeacherNumber(Order order, Teacher teacher);
 
+	void updateDistriOrderNumber(Order order, Distributor distributor);
+
+	void updateDistriDealNumberWhenFinished(Order order);
+
 	Order query(long id, boolean lazy);
 
 	Order queryByOrderNo(String orderNo);
@@ -45,7 +50,7 @@ public interface OrderDao {
 	List<Order> queryListByTeacherId(long teacherId, int page, int pageSize, boolean lazy);
 
 	List<Order> queryListByTeacherId(long teacherId, String state, int page, int pageSize, boolean lazy);
-	
+
 	List<Order> queryListByTeacherId(long teacherId, String[] state, int page, int pageSize, boolean lazy);
 
 	List<Order> queryListByUserId(long userId, int page, int pageSize, boolean lazy);
@@ -59,4 +64,8 @@ public interface OrderDao {
 	List<Order> queryListByName(String name, final int page, final int pageSize);
 
 	List<Order> queryListBySalaryState(final int page, final int pageSize, short salaryState);
+
+	List<Order> queryListBySalaryState(short salaryState, int page, int pageSize, String rank);
+
+	List<Order> queryListByState(String state, int page, int pageSize, boolean lazy, String rank);
 }

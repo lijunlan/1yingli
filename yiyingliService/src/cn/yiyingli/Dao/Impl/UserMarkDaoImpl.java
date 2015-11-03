@@ -58,7 +58,7 @@ public class UserMarkDaoImpl extends HibernateDaoSupport implements UserMarkDao 
 
 	@Override
 	public User queryUser(String UUID) {
-		String hql = "from UserMark um left join fetch um.user where um.uuid=?";
+		String hql = "from UserMark um left join fetch um.user left join fetch um.user.distributor where um.uuid=?";
 		@SuppressWarnings("unchecked")
 		List<UserMark> list = getHibernateTemplate().find(hql, UUID);
 		if (list.isEmpty())

@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
 		long id = getOrderDao().saveWithUserNumber(order, order.getCreateUser());
 		order.setOrderNo("" + Calendar.getInstance().get(Calendar.YEAR) + new Random().nextInt(10)
 				+ new Random().nextInt(10) + new Random().nextInt(10) + (100000000L + id));
-		getOrderDao().update(order);
+		getOrderDao().updateDistriOrderNumber(order, order.getDistributor());
 		TimeTaskUtil.sendTimeTask("change", "order",
 				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
 				new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
@@ -74,7 +74,13 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public void update(Order order) {
-		getOrderDao().update(order);
+		// 如果订单完成，给分销人更新数据
+		if (order.getState().startsWith(ORDER_STATE_WAIT_COMMENT)) {
+			getOrderDao().updateDistriDealNumberWhenFinished(order);
+		} else {
+			getOrderDao().update(order);
+		}
+		// 通知管理员
 		if (order.getState().startsWith(ORDER_STATE_WAIT_RETURN)) {
 			NotifyUtil.notifyManager(new SuperMap().put("type", "withdraw").finishByJson());
 		} else if (order.getState().startsWith(ORDER_STATE_MANAGER_IN)) {
@@ -103,7 +109,7 @@ public class OrderServiceImpl implements OrderService {
 			TimeTaskUtil.sendTimeTask("change", "order",
 					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 5) + "",
 					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
-		}else if(order.getState().startsWith(ORDER_STATE_FINISH_PAID)){
+		} else if (order.getState().startsWith(ORDER_STATE_FINISH_PAID)) {
 			TimeTaskUtil.sendTimeTask("change", "order",
 					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
 					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
@@ -243,14 +249,38 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public long querySumNoBySalaryState(short salaryState) {
-		// TODO Auto-generated method stub
 		return getOrderDao().querySumNoBySalaryState(salaryState);
 	}
 
 	@Override
 	public List<Order> queryListBySalaryState(short salaryState, int page) {
-		// TODO Auto-generated method stub
 		return getOrderDao().queryListBySalaryState(page, PAGE_SIZE_INT, salaryState);
+	}
+
+	@Override
+	public List<Order> queryListBySalaryState(short salaryState, int page, String rank) {
+		if (rank == null)
+			return getOrderDao().queryListBySalaryState(page, PAGE_SIZE_INT, salaryState);
+		else if ("D".equals(rank)) {
+			return getOrderDao().queryListBySalaryState(salaryState, page, PAGE_SIZE_INT, "DESC");
+		} else if ("A".equals(rank)) {
+			return getOrderDao().queryListBySalaryState(salaryState, page, PAGE_SIZE_INT, "ASC");
+		} else {
+			return getOrderDao().queryListBySalaryState(page, PAGE_SIZE_INT, salaryState);
+		}
+	}
+
+	@Override
+	public List<Order> queryListByState(String state, int page, boolean lazy, String rank) {
+		if (rank == null)
+			return getOrderDao().queryListByState(state, page, PAGE_SIZE_INT, false);
+		else if ("D".equals(rank)) {
+			return getOrderDao().queryListByState(state, page, PAGE_SIZE_INT, false, "DESC");
+		} else if ("A".equals(rank)) {
+			return getOrderDao().queryListByState(state, page, PAGE_SIZE_INT, false, "ASC");
+		} else {
+			return getOrderDao().queryListByState(state, page, PAGE_SIZE_INT, false);
+		}
 	}
 
 }

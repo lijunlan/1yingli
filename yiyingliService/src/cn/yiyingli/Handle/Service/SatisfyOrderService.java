@@ -77,7 +77,7 @@ public class SatisfyOrderService extends MsgService {
 		order.setEndTime(Calendar.getInstance().getTimeInMillis() + "");
 		getOrderService().update(order);
 
-		NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 				"尊敬的学员，您已经确认咨询。订单号" + order.getOrderNo() + "，记得在一英里平台对本次咨询进行评价哦。", user, getNotificationService());
 		NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
 				"尊敬的导师，(订单号：" + order.getOrderNo() + ")，学员对本次咨询很满意，您的酬劳会在24小时内到账。", order.getTeacher(),

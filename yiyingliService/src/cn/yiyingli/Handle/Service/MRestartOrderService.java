@@ -71,7 +71,7 @@ public class MRestartOrderService extends MsgService {
 		}
 		order.setState(ss[1] + "," + order.getState());
 		getOrderService().updateAndSendTimeTask(order);
-		NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 				"尊敬的学员，订单号为" + order.getOrderNo() + "的订单，订单状态已经被管理员恢复，您可以继续流程.", order.getCreateUser(),
 				getNotificationService());
 		NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),

@@ -72,7 +72,7 @@ public class DissatisfyOrderService extends MsgService {
 		order.setState(OrderService.ORDER_STATE_USER_DISLIKE + "," + order.getState());
 		getOrderService().updateAndSendTimeTask(order);
 
-		NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 				"尊敬的学员，您对这次咨询不满意，申请退款。订单号" + order.getOrderNo() + "，请等待导师确认", user, getNotificationService());
 		NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
 				"尊敬的导师，订单号为" + order.getOrderNo() + "的订单，学员(" + order.getCustomerName()

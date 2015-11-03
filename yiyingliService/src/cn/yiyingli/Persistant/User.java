@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -23,19 +24,19 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "USER_ID")
 	private Long id;
-	
+
 	@Column(name = "ONAME", nullable = true)
 	private String oname;
-	
+
 	@Column(name = "OPHONE", nullable = true)
 	private String ophone;
-	
+
 	@Column(name = "OEMAIL", nullable = true)
 	private String oemail;
-	
+
 	@Column(name = "OQUESTION", nullable = true, length = 500)
 	private String oquestion;
-	
+
 	@Column(name = "OTIME", nullable = true)
 	private String otime;
 
@@ -65,7 +66,7 @@ public class User {
 
 	@Column(name = "PHONE", nullable = true)
 	private String phone;
-	
+
 	@Column(name = "CONTACT", nullable = true)
 	private String contact;
 
@@ -139,6 +140,10 @@ public class User {
 	@OneToMany(targetEntity = Order.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private Set<Order> orders = new HashSet<Order>();
+
+	@ManyToOne(targetEntity = Distributor.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "DISTRIBUTOR_ID", updatable = false)
+	private Distributor distributor;
 
 	public Long getId() {
 		return id;
@@ -426,6 +431,14 @@ public class User {
 
 	public void setOtime(String otime) {
 		this.otime = otime;
+	}
+
+	public Distributor getDistributor() {
+		return distributor;
+	}
+
+	public void setDistributor(Distributor distributor) {
+		this.distributor = distributor;
 	}
 
 }

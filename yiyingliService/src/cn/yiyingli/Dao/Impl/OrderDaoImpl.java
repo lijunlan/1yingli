@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import cn.yiyingli.Dao.OrderDao;
+import cn.yiyingli.Persistant.Distributor;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
@@ -73,6 +74,30 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 						+ teacher.getId()
 						+ "' and orders.STATE not like '0100%' and orders.STATE not like '%0200,0100%') where teacher.TEACHER_ID="
 						+ teacher.getId());
+		query.executeUpdate();
+	}
+
+	@Override
+	public void updateDistriOrderNumber(Order order, Distributor distributor) {
+		getHibernateTemplate().update(order);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session.createSQLQuery(
+				"update distributor set distributor.ORDERNUMBER=(select count(*) from orders where orders.DISTRIBUTOR_ID='"
+						+ distributor.getId() + "') where distributor.DISTRIBUTOR_ID=" + distributor.getId());
+		query.executeUpdate();
+	}
+
+	@Override
+	public void updateDistriDealNumberWhenFinished(Order order) {
+		getHibernateTemplate().update(order);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session.createSQLQuery(
+				"update distributor set distributor.DEALNUMBER=(select count(*) from orders where orders.DISTRIBUTOR_ID=(select orders.DISTRIBUTOR_ID from orders where orders.ORDER_ID='"
+						+ order.getId()
+						+ "') and orders.STATE like '%1000%') where distributor.DISTRIBUTOR_ID=(select orders.DISTRIBUTOR_ID from orders where orders.ORDER_ID='"
+						+ order.getId() + "')");
 		query.executeUpdate();
 	}
 
@@ -411,13 +436,56 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Order> queryListBySalaryState(final int page, final int pageSize, short salaryState) {
-		// TODO Auto-generated method stub
 		final String hql = "from Order o left join fetch o.createUser u left join fetch o.teacher t where o.salaryState="
 				+ salaryState + " ORDER BY o.createTime DESC";
 		List<Order> list = new ArrayList<Order>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Order>>() {
 			@Override
 			public List<Order> doInHibernate(Session session) throws HibernateException, SQLException {
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<Order> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Order> queryListBySalaryState(short salaryState, final int page, final int pageSize, String rank) {
+		final String hql = "from Order o left join fetch o.createUser u left join fetch o.teacher t left join fetch o.distributor od where o.salaryState="
+				+ salaryState + " ORDER BY od.name " + ("DESC".equals(rank) ? "DESC" : "ASC");
+		List<Order> list = new ArrayList<Order>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Order>>() {
+			@Override
+			public List<Order> doInHibernate(Session session) throws HibernateException, SQLException {
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<Order> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Order> queryListByState(final String state, final int page, final int pageSize, final boolean lazy,
+			final String rank) {
+		List<Order> list = new ArrayList<Order>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Order>>() {
+			@Override
+			public List<Order> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from Order o left join fetch o.createUser left join fetch o.teacher left join fetch o.distributor od where o.state like '"
+						+ state + "%' ORDER BY od.name " + ("DESC".equals(rank) ? "DESC" : "ASC");
+				if (lazy) {
+					hql = "from Order o left join fetch o.useVouchers left join fetch o.createUser "
+							+ "left join fetch o.tService where o.state like '" + state
+							+ "%' ORDER BY o.createTime DESC" + ("DESC".equals(rank) ? "DESC" : "ASC");
+				}
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);

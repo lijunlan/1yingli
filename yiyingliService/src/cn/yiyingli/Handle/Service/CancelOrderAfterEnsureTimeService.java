@@ -73,7 +73,7 @@ public class CancelOrderAfterEnsureTimeService extends MsgService {
 		getOrderService().updateAndSendTimeTask(order);
 
 		NotifyUtil
-				.notifyUser(
+				.notifyUserOrder(
 						order.getCustomerPhone(), order.getCustomerEmail(), "尊敬的学员，您与导师(" + order.getTeacher().getName()
 								+ ")约定好咨询时间的订单已经申请取消。订单号" + order.getOrderNo() + "，请等待导师同意",
 						user, getNotificationService());

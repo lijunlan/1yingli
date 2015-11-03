@@ -3,14 +3,13 @@ package cn.yiyingli.ExchangeData;
 import cn.yiyingli.Persistant.Order;
 
 public class ExOrderUtil {
-	
 
-	public static void assembleOrderToTeacher(SuperMap map,Order o) {
+	public static void assembleOrderToTeacher(SuperMap map, Order o) {
 		map.put("orderId", o.getOrderNo());
 		map.put("createTime", o.getCreateTime());
 		map.put("title", o.getServiceTitle());
 		map.put("price", o.getMoney());
-		map.put("originPrice",o.getOriginMoney());
+		map.put("originPrice", o.getOriginMoney());
 		map.put("time", o.getTime());
 		map.put("iconUrl", o.getCreateUser().getIconUrl());
 		map.put("name", o.getCustomerName());
@@ -24,7 +23,7 @@ public class ExOrderUtil {
 		map.put("contact", o.getCustomerContact());
 	}
 
-	public static void assembleOrderToUser(SuperMap map,Order o) {
+	public static void assembleOrderToUser(SuperMap map, Order o) {
 		map.put("orderId", o.getOrderNo());
 		map.put("createTime", o.getCreateTime());
 		map.put("title", o.getServiceTitle());
@@ -44,13 +43,14 @@ public class ExOrderUtil {
 		map.put("name", o.getCustomerName());
 		map.put("contact", o.getCustomerContact());
 	}
-	
-	public static void assembleOrderToManager(SuperMap map,Order o) {
+
+	public static void assembleOrderToManager(SuperMap map, Order o) {
 		map.put("orderId", o.getOrderNo());
 		map.put("createTime", o.getCreateTime());
 		map.put("title", o.getServiceTitle());
 		map.put("price", o.getMoney().toString());
 		map.put("originPrice", o.getOriginMoney());
+		map.put("distriName", o.getDistributor() != null ? o.getDistributor().getName() : "");
 		map.put("time", o.getTime().toString());
 		map.put("teacherName", o.getTeacher().getName());
 		map.put("teacherUrl", o.getTeacher().getIconUrl());

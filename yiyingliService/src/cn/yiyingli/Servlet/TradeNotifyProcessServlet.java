@@ -109,7 +109,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 				order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
 				orderService.updateAndPlusNumber(order);
 
-				NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+				NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 						"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经付款完成，请等待导师接受订单", order.getCreateUser(),
 						notificationService);
 				NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
@@ -145,7 +145,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 				order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
 				orderService.updateAndPlusNumber(order);
 
-				NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+				NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 						"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经付款完成，请等待导师接受订单", order.getCreateUser(),
 						notificationService);
 				NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
@@ -170,7 +170,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 					LogUtil.info("order id: " + oid + ", get notify from Alipay, time up and trade is closed",
 							this.getClass());
 					orderService.update(order);
-					NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+					NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 							"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经取消", order.getCreateUser(), notificationService);
 				} else if (state.equals(cn.yiyingli.Service.OrderService.ORDER_STATE_END_FAILED)
 						|| state.equals(cn.yiyingli.Service.OrderService.ORDER_STATE_CANCEL_PAID)) {
@@ -187,7 +187,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 							"order id: " + oid
 									+ ", get notify from Alipay, return money successfully and trade is closed",
 							this.getClass());
-					NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+					NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 							"尊敬的学员，订单号为" + order.getOrderNo() + "的订单，已经成功退款，请注意查收.如有疑问请咨询lijunlan@1yingli.cn.",
 							order.getCreateUser(), notificationService);
 				} else {

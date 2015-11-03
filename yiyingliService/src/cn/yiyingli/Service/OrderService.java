@@ -139,6 +139,8 @@ public interface OrderService {
 
 	List<Order> queryListByState(String state, int page, boolean lazy);
 
+	List<Order> queryListByState(String state, int page, boolean lazy, String rank);
+
 	List<Order> queryListByState(String state, int page, int pageSize, boolean lazy);
 
 	List<Order> queryListByTeacherId(long teacherId, int page, boolean lazy);
@@ -148,10 +150,10 @@ public interface OrderService {
 	List<Order> queryListByTeacherId(long teacherId, String state, int page, int pageSize, boolean lazy);
 
 	List<Order> queryListByTeacherId(long teacherId, String state, int page, boolean lazy);
-	
+
 	List<Order> queryListByTeacherId(long teacherId, String[] state, int page, int pageSize, boolean lazy);
-	
-	List<Order> queryListByTeacherId(long teacherId, String[] state, int page,boolean lazy);
+
+	List<Order> queryListByTeacherId(long teacherId, String[] state, int page, boolean lazy);
 
 	List<Order> queryListByUserId(long userId, int page, boolean lazy);
 
@@ -172,4 +174,6 @@ public interface OrderService {
 	List<Order> queryListByName(String name, final int page);
 
 	List<Order> queryListBySalaryState(short salaryState, final int page);
+
+	List<Order> queryListBySalaryState(short salaryState, final int page, String rank);
 }

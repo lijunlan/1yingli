@@ -31,6 +31,8 @@
 				<value>cn.yiyingli.Persistant.Record</value>
 				<value>cn.yiyingli.Persistant.Suggestion</value>
 				<value>cn.yiyingli.Persistant.UserLikeTeacher</value>
+				<value>cn.yiyingli.Persistant.Distributor</value>
+				<value>cn.yiyingli.Persistant.DistributorMark</value>
 			</list>
 		</property>
 	</bean>
@@ -61,6 +63,18 @@
 
 
 	<!-- !!!!!Dao!!!!! -->
+	<bean id="distributorMarkDao" class="cn.yiyingli.Dao.Impl.DistributorMarkDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="distributorDao" class="cn.yiyingli.Dao.Impl.DistributorDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
 	<bean id="suggestionDao" class="cn.yiyingli.Dao.Impl.SuggestionDaoImpl">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
@@ -188,9 +202,21 @@
 	</bean>
 
 	<!-- !!!!!Data Transaction Service !!!! -->
+	<bean id="distributorMarkService" parent="baseTxService">
+		<property name="target">
+			<ref local="distributorMarkServiceImpl" />
+		</property>
+	</bean>
+
 	<bean id="commentService" parent="baseTxService">
 		<property name="target">
 			<ref local="commentServiceImpl" />
+		</property>
+	</bean>
+
+	<bean id="distributorService" parent="baseTxService">
+		<property name="target">
+			<ref local="distributorServiceImpl" />
 		</property>
 	</bean>
 
@@ -315,6 +341,21 @@
 	</bean>
 
 	<!--!!!!Data Service Impl!!!!! -->
+	<bean id="distributorServiceImpl" class="cn.yiyingli.Service.Impl.DistributorServiceImpl">
+		<property name="distributorDao">
+			<ref local="distributorDao" />
+		</property>
+	</bean>
+
+	<bean id="distributorMarkServiceImpl" class="cn.yiyingli.Service.Impl.DistributorMarkServiceImpl">
+		<property name="distributorMarkDao">
+			<ref local="distributorMarkDao" />
+		</property>
+		<property name="distributorDao">
+			<ref local="distributorDao" />
+		</property>
+	</bean>
+
 	<bean id="applicationFormServiceImpl" class="cn.yiyingli.Service.Impl.ApplicationFormServiceImpl">
 		<property name="applicationFormDao">
 			<ref local="applicationFormDao" />
@@ -477,6 +518,9 @@
 		</property>
 		<property name="teacherDao">
 			<ref local="teacherDao" />
+		</property>
+		<property name="voucherDao">
+			<ref local="voucherDao" />
 		</property>
 	</bean>
 
@@ -1808,5 +1852,47 @@
 			<ref local="notificationService" />
 		</property>
 	</bean>
+
+	<bean id="mGetDistributorListService" class="cn.yiyingli.Handle.Service.MGetDistributorListService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="distributorService">
+			<ref local="distributorService" />
+		</property>
+	</bean>
+
+	<bean id="mCreateDistributorService" class="cn.yiyingli.Handle.Service.MCreateDistributorService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="distributorService">
+			<ref local="distributorService" />
+		</property>
+	</bean>
+
+	<bean id="dLoginService" class="cn.yiyingli.Handle.Service.DLoginService"
+		scope="prototype">
+		<property name="distributorService">
+			<ref local="distributorService" />
+		</property>
+		<property name="distributorMarkService">
+			<ref local="distributorMarkService" />
+		</property>
+	</bean>
+	
+	<bean id="dGetInfoService" class="cn.yiyingli.Handle.Service.DGetInfoService"
+		scope="prototype">
+		<property name="distributorService">
+			<ref local="distributorService" />
+		</property>
+		<property name="distributorMarkService">
+			<ref local="distributorMarkService" />
+		</property>
+	</bean>
+
+
 
 </beans>

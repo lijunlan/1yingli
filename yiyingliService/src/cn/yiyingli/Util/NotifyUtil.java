@@ -19,13 +19,28 @@ public class NotifyUtil {
 	 * @param uid
 	 *            用户标识 UUID
 	 */
-	public static boolean notifyUser(String phone, String email, String message, User user,
+	public static boolean notifyUserOrder(String phone, String email, String message, User user,
+			NotificationService notificationService) {
+		return notifyUserNormal(phone, email, "订单状态改变通知", message, user, notificationService);
+	}
+
+	public static boolean notifyUserNormal(String phone, String email, String title, String message, User user) {
+		if (CheckUtil.checkMobileNumber(phone)) {
+			SendMessageUtil.sendMessage(phone, message);
+		}
+		if (CheckUtil.checkEmail(email)) {
+			SendMailUtil.sendMessage(email, title, message);
+		}
+		return true;
+	}
+
+	public static boolean notifyUserNormal(String phone, String email, String title, String message, User user,
 			NotificationService notificationService) {
 		if (CheckUtil.checkMobileNumber(phone)) {
 			SendMessageUtil.sendMessage(phone, message);
 		}
 		if (CheckUtil.checkEmail(email)) {
-			SendMailUtil.sendMessage(email, "订单状态改变通知", message);
+			SendMailUtil.sendMessage(email, title, message);
 		}
 		// web
 		sendNotification(user, notificationService, message);

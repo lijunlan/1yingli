@@ -9,7 +9,7 @@ import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.RSAUtil;
-import cn.yiyingli.toPersistan.PUserUtil;
+import cn.yiyingli.toPersistant.PUserUtil;
 
 public class MRegisterUserService extends MsgService {
 
@@ -59,7 +59,7 @@ public class MRegisterUserService extends MsgService {
 			password = RSAUtil.decryptStr(password, RSAUtil.RSAKEY_BASE_PATH);
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("error"));
+			setResMsg(MsgUtil.getErrorMsg("server error"));
 			return;
 		}
 		if (!CheckUtil.checkPassword(password)) {
@@ -67,7 +67,7 @@ public class MRegisterUserService extends MsgService {
 			return;
 		}
 		password = MD5Util.MD5(password);
-		User user = PUserUtil.assembleUser(username, password, nickName, null, null);
+		User user = PUserUtil.assembleUser(username, password, nickName, null, null, null);
 		if (CheckUtil.checkMobileNumber(username)) {
 			user.setPhone(username);
 		} else {

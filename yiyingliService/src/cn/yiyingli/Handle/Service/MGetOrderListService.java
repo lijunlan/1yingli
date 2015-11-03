@@ -38,7 +38,8 @@ public class MGetOrderListService extends MsgService {
 	@Override
 	protected boolean checkData() {
 		return getData().containsKey("mid") && getData().containsKey("page")
-				&& (getData().containsKey("state") || getData().containsKey("salaryState"));
+				&& (getData().containsKey("state") || getData().containsKey("salaryState"))
+				|| getData().containsKey("rank");
 	}
 
 	@Override
@@ -54,53 +55,33 @@ public class MGetOrderListService extends MsgService {
 		if (getData().containsKey("salaryState")) {
 			short salaryState = Short.parseShort((String) getData().get("salaryState"));
 			int page = 0;
-			if (getData().get("page").equals("max")) {
-				long count = getOrderService().querySumNoBySalaryState(salaryState);
-				if (count % 9 > 0)
-					page = (int) (count / 9) + 1;
-				else
-					page = (int) (count / 9);
-				if (page == 0)
-					page = 1;
-				toSend.put("page", page);
-			} else {
-				try {
-					page = Integer.parseInt((String) getData().get("page"));
-				} catch (Exception e) {
-					setResMsg(MsgUtil.getErrorMsg("page is wrong"));
-					return;
-				}
-				if (page <= 0) {
-					setResMsg(MsgUtil.getErrorMsg("page is wrong"));
-					return;
-				}
+			try {
+				page = Integer.parseInt((String) getData().get("page"));
+			} catch (Exception e) {
+				setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+				return;
 			}
-			orders = getOrderService().queryListBySalaryState(salaryState, page);
+			if (page <= 0) {
+				setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+				return;
+			}
+			orders = getOrderService().queryListBySalaryState(salaryState, page,
+					getData().get("rank") == null ? null : (String) getData().get("rank"));
 		} else {
 			String state = (String) getData().get("state");
 			int page = 0;
-			if (getData().get("page").equals("max")) {
-				long count = getOrderService().querySumNoByState(state);
-				if (count % 9 > 0)
-					page = (int) (count / 9) + 1;
-				else
-					page = (int) (count / 9);
-				if (page == 0)
-					page = 1;
-				toSend.put("page", page);
-			} else {
-				try {
-					page = Integer.parseInt((String) getData().get("page"));
-				} catch (Exception e) {
-					setResMsg(MsgUtil.getErrorMsg("page is wrong"));
-					return;
-				}
-				if (page <= 0) {
-					setResMsg(MsgUtil.getErrorMsg("page is wrong"));
-					return;
-				}
+			try {
+				page = Integer.parseInt((String) getData().get("page"));
+			} catch (Exception e) {
+				setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+				return;
 			}
-			orders = getOrderService().queryListByState(state, page, false);
+			if (page <= 0) {
+				setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+				return;
+			}
+			orders = getOrderService().queryListByState(state, page, false,
+					getData().get("rank") == null ? null : (String) getData().get("rank"));
 		}
 		List<String> sends = new ArrayList<String>();
 		for (Order o : orders) {

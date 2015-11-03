@@ -137,6 +137,7 @@ public class CreateOrderService extends MsgService {
 		order.settService(teacher.gettService());
 		order.setUserIntroduce(resume);
 		order.setSalaryState(OrderService.ORDER_SALARY_STATE_OFF);
+		order.setDistributor(user.getDistributor());
 
 		user.setResume(resume);
 		user.setOname(name);
@@ -184,7 +185,7 @@ public class CreateOrderService extends MsgService {
 		SendMsgToBaiduUtil.updateUserTrainDataOrder(user.getId() + "", teacher.getId() + "",
 				Calendar.getInstance().getTimeInMillis() + "");
 
-		NotifyUtil.notifyUser(phone, email, "尊敬的学员，您的导师预约订单已经创建。订单号" + order.getOrderNo() + "，请在48小时内完成支付，超时系统会自动取消订单。",
+		NotifyUtil.notifyUserOrder(phone, email, "尊敬的学员，您的导师预约订单已经创建。订单号" + order.getOrderNo() + "，请在48小时内完成支付，超时系统会自动取消订单。",
 				user, getNotificationService());
 
 		setResMsg(MsgUtil.getSuccessMsg("create order successfully"));

@@ -56,8 +56,9 @@ public class MCreateVoucherService extends MsgService {
 			voucher.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 			voucher.setEndTime(endTime);
 			voucher.setMoney(money);
-			voucher.setNumber(CouponNumberUtil.getNewNumber());
+			voucher.setNumber(CouponNumberUtil.getNewNumber(10));
 			voucher.setStartTime(startTime);
+			voucher.setOrigin("Manager:" + manager.getId() + "," + manager.getName());
 			voucher.setUsed(false);
 			try {
 				getVoucherService().save(voucher);
