@@ -328,10 +328,10 @@ abbr,acronym { border:0;
 }
 .home-company label{
     float: left;
-	height: 14px;
-	line-height: 14px;
+	height: 30px;
+	line-height: 23px;
 	font-size:14px;
-	margin-top:6px;
+	margin-top:0px;
 	color: #b6b6b6;
     max-width: 245px;
 }
