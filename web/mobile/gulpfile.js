@@ -14,7 +14,7 @@ var paths = {
         "bower_components/angular-touch/angular-touch.js",
         "js/common.js",
         "pages/**/*.js",
-        "js/service/*.js",
+        "service/*.js",
         "js/sha1.js",
         "js/wx.js"
     ]
