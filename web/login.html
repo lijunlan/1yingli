@@ -426,12 +426,23 @@
             password = encryptedStr(password,publickey);
             var checkNo = $("#ident").val();
             var nickName = $("#nickName").val();
+
+            var toSend = new Object();
+            toSend.style = "user";
+            toSend.method = "register";
+            toSend.username = username;
+            toSend.password = password;
+            toSend.checkNo = checkNo;
+            toSend.nickName = nickName;
+            var distributorNO = $_GET('distributorNO'); 
+            if(distributorNO) {
+                toSend.distributorNO = distributorNO;
+            }
             $.ajax({
                 cache : true,
                 type : "POST",
                 url : config.base_url,
-                data : "{'style':'user','method':'register','username':'" + username
-                       + "','password':'" + password + "','checkNo':'"+checkNo+"','nickName':'"+nickName+"'}",
+                data : JSON.stringify(toSend),
                 async : false,
                 error : function(request) {
                             alert("Connection error");

@@ -118,7 +118,7 @@
 
 });
 
-
+//不使用优惠码
 function ordern() {
     if ($.cookie('uid') == null || $.cookie('uid') == "")return;
     var toSend = new Object();
@@ -165,7 +165,7 @@ function ordern() {
     });
 }
 
-
+//使用优惠码
 function ordery() {
     if ($.cookie('uid') == null || $.cookie('uid') == "")return;
     var toSend = new Object();
