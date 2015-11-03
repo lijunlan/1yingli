@@ -72,7 +72,7 @@ public class CancelOrderAfterAcceptService extends MsgService {
 		order.setState(OrderService.ORDER_STATE_USER_REGRET + "," + order.getState());
 		getOrderService().updateAndSendTimeTask(order);
 
-		NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 				"尊敬的学员，被导师(" + order.getTeacher().getName() + ")接受的订单已经申请取消。订单号" + order.getOrderNo() + "，请等待导师同意",
 				user, getNotificationService());
 		NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),

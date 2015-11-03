@@ -1,18 +1,27 @@
 package cn.yiyingli.Service.Impl;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import cn.yiyingli.Dao.TeacherDao;
 import cn.yiyingli.Dao.UserDao;
+import cn.yiyingli.Dao.VoucherDao;
+import cn.yiyingli.Persistant.Distributor;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
+import cn.yiyingli.Persistant.Voucher;
 import cn.yiyingli.Service.UserService;
+import cn.yiyingli.Util.CouponNumberUtil;
+import cn.yiyingli.Util.NotifyUtil;
 
 public class UserServiceImpl implements UserService {
 
 	private UserDao userDao;
 
 	private TeacherDao teacherDao;
+
+	private VoucherDao voucherDao;
 
 	public UserDao getUserDao() {
 		return userDao;
@@ -30,11 +39,47 @@ public class UserServiceImpl implements UserService {
 		this.teacherDao = teacherDao;
 	}
 
+	public VoucherDao getVoucherDao() {
+		return voucherDao;
+	}
+
+	public void setVoucherDao(VoucherDao voucherDao) {
+		this.voucherDao = voucherDao;
+	}
+
 	@Override
 	public void save(User user) throws Exception {
 		User u = getUserDao().query(user.getUsername(), false);
 		if (u == null) {
 			getUserDao().save(user);
+			if (user.getDistributor() != null) {
+				Distributor distributor = user.getDistributor();
+				float money = distributor.getVoucherMoney();
+				int count = distributor.getVoucherCount();
+				List<String> vouchers = new ArrayList<String>();
+				for (int i = 1; i <= count; i++) {
+					String number = CouponNumberUtil.getNewNumber(16);
+					Voucher voucher = new Voucher();
+					long time = Calendar.getInstance().getTimeInMillis();
+					long endTime = time + 1000 * 60 * 60 * 24 * 30;
+					voucher.setCreateTime(time + "");
+					voucher.setOrigin("System,Distributor:" + distributor.getId() + "," + distributor.getName());
+					voucher.setStartTime(time + "");
+					voucher.setEndTime(endTime + "");
+					voucher.setMoney(money);
+					voucher.setNumber(number);
+					voucher.setUsed(false);
+					getVoucherDao().save(voucher);
+					vouchers.add(number);
+				}
+				StringBuffer sb = new StringBuffer();
+				sb.append("感谢您在一英里平台注册，以下是送您的优惠码(" + count + "个):");
+				for (String v : vouchers) {
+					sb.append(v + ",");
+				}
+				sb.append("，优惠码即时生效，每次消费可以使用一个，每个可抵扣人民币" + money + "元，有效期为30天。");
+				NotifyUtil.notifyUserNormal(user.getPhone(), user.getEmail(), "优惠码", sb.toString(), user);
+			}
 		} else {
 			throw new Exception("phone or email has been registered");
 		}

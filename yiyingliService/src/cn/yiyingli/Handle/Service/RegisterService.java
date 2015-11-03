@@ -4,20 +4,24 @@ import java.util.Calendar;
 
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.CheckNo;
+import cn.yiyingli.Persistant.Distributor;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.CheckNoService;
+import cn.yiyingli.Service.DistributorService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.RSAUtil;
-import cn.yiyingli.toPersistan.PUserUtil;
+import cn.yiyingli.toPersistant.PUserUtil;
 
 public class RegisterService extends MsgService {
 
 	private UserService userService;
 
 	private CheckNoService checkNoService;
+
+	private DistributorService distributorService;
 
 	public UserService getUserService() {
 		return userService;
@@ -35,10 +39,19 @@ public class RegisterService extends MsgService {
 		this.checkNoService = checkNoService;
 	}
 
+	public DistributorService getDistributorService() {
+		return distributorService;
+	}
+
+	public void setDistributorService(DistributorService distributorService) {
+		this.distributorService = distributorService;
+	}
+
 	@Override
 	protected boolean checkData() {
 		return getData().containsKey("username") && getData().containsKey("password")
-				&& getData().containsKey("checkNo") && getData().containsKey("nickName");
+				&& getData().containsKey("checkNo") && getData().containsKey("nickName")
+				|| getData().containsKey("distributorNO");
 	}
 
 	@Override
@@ -47,6 +60,7 @@ public class RegisterService extends MsgService {
 		String password = (String) getData().get("password");
 		String checkNo = (String) getData().get("checkNo");
 		String nickName = (String) getData().get("nickName");
+		Distributor distributor = null;
 		if (nickName.length() > 7) {
 			nickName = nickName.substring(0, 7);
 		}
@@ -82,8 +96,16 @@ public class RegisterService extends MsgService {
 			setResMsg(MsgUtil.getErrorMsg("BAD PASSWROD!"));
 			return;
 		}
+		if (getData().containsKey("distributorNO")) {
+			String dno = (String) getData().get("distributorNO");
+			distributor = getDistributorService().queryByNo(dno);
+			if (distributor == null) {
+				setResMsg(MsgUtil.getErrorMsg("distributorNO is not existed"));
+				return;
+			}
+		}
 		password = MD5Util.MD5(password);
-		User user = PUserUtil.assembleUser(username, password, nickName, null, null);
+		User user = PUserUtil.assembleUser(username, password, nickName, null, null, distributor);
 		if (CheckUtil.checkMobileNumber(username)) {
 			user.setPhone(username);
 		} else {

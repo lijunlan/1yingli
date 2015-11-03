@@ -1,14 +1,14 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Handle.LoginMsgService;
+import cn.yiyingli.Handle.ULoginMsgService;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Weixin.Util.GetSingleUserWeixinInfoUtil;
-import cn.yiyingli.toPersistan.PUserUtil;
+import cn.yiyingli.toPersistant.PUserUtil;
 import net.sf.json.JSONObject;
 
-public class LoginByWeixinService extends LoginMsgService {
+public class LoginByWeixinService extends ULoginMsgService {
 
 	@Override
 	protected boolean checkData() {
@@ -57,7 +57,7 @@ public class LoginByWeixinService extends LoginMsgService {
 		User u = getUserService().queryWithWeixin(weixinNo, false);
 		if (u == null) {
 			password = MD5Util.MD5(password);
-			User user = PUserUtil.assembleUser(weixinNo, password, nickName, icon, address);
+			User user = PUserUtil.assembleUser(weixinNo, password, nickName, icon, address, null);
 			try {
 				getUserService().save(user);
 			} catch (Exception e) {

@@ -35,8 +35,8 @@ public class UserMarkServiceImpl implements UserMarkService {
 
 	@Override
 	public void save(String userId, String UUID) {
-		User user = getUserDao().query(Integer.valueOf(userId), false);
-		UserMark um = getUserMarkDao().queryUUID(Integer.valueOf(userId));
+		User user = getUserDao().query(Long.valueOf(userId), false);
+		UserMark um = getUserMarkDao().queryUUID(Long.valueOf(userId));
 		if (um == null) {
 			UserMark userMark = new UserMark();
 			userMark.setUser(user);

@@ -74,7 +74,7 @@ public class MDealOrderService extends MsgService {
 				order.setState(OrderService.ORDER_STATE_WAIT_COMMENT + "," + order.getState());
 				order.setSalaryState(OrderService.ORDER_SALARY_STATE_NEED);
 				getOrderService().update(order);
-				NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+				NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 						"尊敬的学员，订单号为" + order.getOrderNo() + "的订单，导师(" + order.getTeacher().getName()
 								+ ")，客服已经协调结束，协调结果：拒绝此次退款。请到一英里平台对本次咨询进行评价",
 						order.getCreateUser(), getNotificationService());
@@ -88,7 +88,7 @@ public class MDealOrderService extends MsgService {
 				order.setState(OrderService.ORDER_STATE_END_FAILED + "," + order.getState());
 				order.setSalaryState(OrderService.ORDER_SALARY_STATE_NEED);
 				getOrderService().update(order);
-				NotifyUtil.notifyUser(order.getCustomerPhone(),
+				NotifyUtil.notifyUserOrder(order.getCustomerPhone(),
 						order.getCustomerEmail(), "尊敬的学员，订单号为" + order.getOrderNo() + "的订单，导师("
 								+ order.getTeacher().getName() + ")，客服已经协调结束，协调结果：拒绝此次退款。",
 						order.getCreateUser(), getNotificationService());
@@ -107,7 +107,7 @@ public class MDealOrderService extends MsgService {
 			order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
 			getOrderService().update(order);
 			// 退钱,等待将钱退回学员支付宝
-			NotifyUtil.notifyUser(order.getCustomerPhone(),
+			NotifyUtil.notifyUserOrder(order.getCustomerPhone(),
 					order.getCustomerEmail(), "尊敬的学员，订单号为" + order.getOrderNo() + "的订单，导师("
 							+ order.getTeacher().getName() + ")，客服已经协调结束，协调结果：同意此次退款。我们将在24小时内给您退款.",
 					order.getCreateUser(), getNotificationService());

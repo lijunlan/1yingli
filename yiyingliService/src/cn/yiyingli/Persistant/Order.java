@@ -22,7 +22,7 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ORDER_ID")
 	private Long id;
-	
+
 	@Column(name = "ORIGINMONEY", nullable = false)
 	private Float originMoney;
 
@@ -110,6 +110,10 @@ public class Order {
 	@ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private User createUser;
+
+	@ManyToOne(targetEntity = Distributor.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "DISTRIBUTOR_ID", updatable = false)
+	private Distributor distributor;
 
 	public Long getId() {
 		return id;
@@ -317,6 +321,14 @@ public class Order {
 
 	public void setOriginMoney(Float originMoney) {
 		this.originMoney = originMoney;
+	}
+
+	public Distributor getDistributor() {
+		return distributor;
+	}
+
+	public void setDistributor(Distributor distributor) {
+		this.distributor = distributor;
 	}
 
 }

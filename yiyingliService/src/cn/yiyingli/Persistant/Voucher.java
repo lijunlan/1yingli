@@ -30,6 +30,9 @@ public class Voucher {
 	@Column(name = "STARTTIME", nullable = false)
 	private String startTime;
 
+	@Column(name = "ORIGIN", nullable = false)
+	private String origin;
+
 	@Column(name = "USED", nullable = false)
 	private Boolean used;
 
@@ -114,6 +117,14 @@ public class Voucher {
 
 	public void setNumber(String number) {
 		this.number = number;
+	}
+
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
 	}
 
 }

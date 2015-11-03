@@ -97,7 +97,7 @@ public class TEnsureTimeService extends MsgService {
 		order.setState(OrderService.ORDER_STATE_WAIT_SERVICE + "," + order.getState());
 		getOrderService().updateAndSendTimeTask(order);
 
-		NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 				"尊敬的用户，订单号" + order.getOrderNo() + "，已经约定好咨询时间(" + okTime + ")，请等待咨询，并在一周内确认咨询或申请退款，系统会在2周后自动确认咨询成功",
 				order.getCreateUser(), getNotificationService());
 		NotifyUtil.notifyTeacher(teacher.getPhone(), teacher.getEmail(),

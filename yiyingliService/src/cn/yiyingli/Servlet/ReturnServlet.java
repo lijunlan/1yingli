@@ -122,7 +122,8 @@ public class ReturnServlet extends HttpServlet {
 			checkoutDetails.put("PAYMENTREQUEST_0_CURRENCYCODE", results.get("PAYMENTREQUEST_0_CURRENCYCODE"));
 			checkoutDetails.put("PAYMENTREQUEST_0_PAYMENTACTION", results.get("PAYMENTREQUEST_0_PAYMENTACTION"));
 
-			checkoutDetails.putAll(setRequestParams(request));
+			checkoutDetails.put("paymentType","Sale");
+			checkoutDetails.put("currencyCodeType", "USD");
 			checkoutDetails.put("TOKEN", token);
 			checkoutDetails.put("payer_id", payerID);
 
@@ -196,7 +197,7 @@ public class ReturnServlet extends HttpServlet {
 						order.setState(
 								cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
 						orderService.updateAndPlusNumber(order);
-						NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+						NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 								"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经付款完成，请等待导师接受订单", order.getCreateUser(),
 								notificationService);
 						NotifyUtil.notifyTeacher(order.getTeacher().getPhone(),
@@ -235,17 +236,6 @@ public class ReturnServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-	}
-
-	private Map<String, String> setRequestParams(HttpServletRequest request) {
-		Map<String, String> requestMap = new HashMap<String, String>();
-		for (String key : request.getParameterMap().keySet()) {
-
-			requestMap.put(key, request.getParameterMap().get(key)[0]);
-		}
-
-		return requestMap;
-
 	}
 
 	public void returnToOnemile(String para, HttpServletResponse response) {

@@ -1,14 +1,14 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Handle.LoginMsgService;
+import cn.yiyingli.Handle.ULoginMsgService;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.WeiboUtil.GetSingleUserWeiboInfoUtil;
-import cn.yiyingli.toPersistan.PUserUtil;
+import cn.yiyingli.toPersistant.PUserUtil;
 import weibo4j.http.AccessToken;
 
-public class LoginByWeiboService extends LoginMsgService {
+public class LoginByWeiboService extends ULoginMsgService {
 
 	@Override
 	protected boolean checkData() {

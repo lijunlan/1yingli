@@ -119,7 +119,7 @@ public class TCommentUserService extends MsgService {
 			comment.setUser(order.getCreateUser());
 			getCommentService().saveWithOrder(comment, order);
 
-			NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+			NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 					"尊敬的学员，(订单号:" + order.getOrderNo() + ")，导师(" + order.getCustomerName() + ")已经对您进行了评价(评价分数:"
 							+ comment.getScore() + "分。评价内容" + comment.getContent() + ")",
 					order.getCreateUser(), getNotificationService());

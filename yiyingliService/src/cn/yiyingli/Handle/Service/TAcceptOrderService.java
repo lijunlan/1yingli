@@ -100,7 +100,7 @@ public class TAcceptOrderService extends MsgService {
 		order.setState(OrderService.ORDER_STATE_TEACHER_ACCEPT + "," + order.getState());
 		getOrderService().updateAndSendTimeTask(order);
 
-		NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 				"尊敬的学员，订单号为" + order.getOrderNo() + "的订单已经被导师(" + teacher.getName() + ")接受，请及时跟导师确认咨询时间。",
 				order.getCreateUser(), getNotificationService());
 		NotifyUtil.notifyTeacher(teacher.getPhone(), teacher.getEmail(),

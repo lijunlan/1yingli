@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class CouponNumberUtil {
 
-	public static String getNewNumber() {
+	public static String getNewNumber(int index) {
 		StringBuffer sb = new StringBuffer();
-		for (int i = 1; i <= 10; i++) {
+		for (int i = 1; i <= index; i++) {
 			sb.append(getSingle());
 		}
 		return sb.toString();
@@ -24,7 +24,7 @@ public class CouponNumberUtil {
 
 	public static void main(String[] args) {
 		for (int i = 1; i <= 100; i++) {
-			System.out.println(getNewNumber());
+			System.out.println(getNewNumber(10));
 		}
 	}
 

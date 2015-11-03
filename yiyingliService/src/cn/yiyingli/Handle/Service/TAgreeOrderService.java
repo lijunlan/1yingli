@@ -97,7 +97,7 @@ public class TAgreeOrderService extends MsgService {
 		order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
 		getOrderService().update(order);
 
-		NotifyUtil.notifyUser(order.getCustomerPhone(), order.getCustomerEmail(),
+		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 				"尊敬的学员，订单号为" + order.getOrderNo() + "的订单，申请退款已经被导师(" + teacher.getName() + ")接受，我们会在24小时内为您退款。",
 				order.getCreateUser(), getNotificationService());
 		NotifyUtil.notifyTeacher(teacher.getPhone(), teacher.getEmail(),
