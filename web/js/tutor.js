@@ -335,7 +335,7 @@ function openshow(i,orderId) {
             });
             var myDate = new Date();
             //var nowDate = myDate.getFullYear() + '/'+ (myDate.getMonth() + 1) + '/' + myDate.getDate() +' '+ myDate.getTime()+' : '+myDate.getHours();
-            $('#cd').datetimepicker({value: myDate.toLocaleString(),step:10,lang:"ch", format:"Y-m-d h:i"});
+            $('#cd').datetimepicker({step:10,lang:"ch", format:"Y-m-d H:i"});
             $("#ttime").click(function(){
                 var data = $("#cd").val();
                 if(!data == ""){
