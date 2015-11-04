@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
 				NotifyUtil.notifyUserNormal(user.getPhone(), user.getEmail(), "优惠码", sb.toString(), user);
 			}
 		} else {
-			throw new Exception("phone or email has been registered");
+			throw new Exception("phone,email or weixin,weibo has been registered");
 		}
 	}
 
