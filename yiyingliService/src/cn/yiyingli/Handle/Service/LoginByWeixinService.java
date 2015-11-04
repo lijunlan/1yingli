@@ -57,7 +57,7 @@ public class LoginByWeixinService extends ULoginMsgService {
 		User u = getUserService().queryWithWeixin(weixinNo, false);
 		if (u == null) {
 			password = MD5Util.MD5(password);
-			User user = PUserUtil.assembleUser(weixinNo, password, nickName, icon, address, null);
+			User user = PUserUtil.assembleUserFromWX(weixinNo, password, nickName, icon, address);
 			try {
 				getUserService().save(user);
 			} catch (Exception e) {
