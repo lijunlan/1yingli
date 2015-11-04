@@ -11,6 +11,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import cn.yiyingli.Dao.UserDao;
+import cn.yiyingli.Persistant.Distributor;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.UserLikeTeacher;
 
@@ -19,6 +20,17 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	@Override
 	public void save(User user) {
 		getHibernateTemplate().save(user);
+	}
+
+	@Override
+	public void saveAndCount(User user, Distributor distributor) {
+		getHibernateTemplate().save(user);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session
+				.createSQLQuery("update distributor set distributor.REGISTERNUMBER=(select count(*) from user where user.DISTRIBUTOR_ID='"
+						+ distributor.getId() + "') where distributor.DISTRIBUTOR_ID=" + distributor.getId());
+		query.executeUpdate();
 	}
 
 	@Override

@@ -424,7 +424,6 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 
 	@Override
 	public long querySumNoBySalaryState(short salaryState) {
-		// TODO Auto-generated method stub
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Transaction ts = session.beginTransaction();
 		long sum = (long) session.createQuery("select count(*) from Order o where o.salaryState = " + salaryState)
