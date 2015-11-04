@@ -52,7 +52,8 @@ public class UserServiceImpl implements UserService {
 		User u = getUserDao().query(user.getUsername(), false);
 		if (u == null) {
 			getUserDao().save(user);
-			if (user.getDistributor() != null && user.getDistributor().getVoucherCount() > 0) {
+			if (user.getDistributor() != null && user.getDistributor().getSendVoucher()
+					&& user.getDistributor().getVoucherCount() > 0) {
 				Distributor distributor = user.getDistributor();
 				float money = distributor.getVoucherMoney();
 				int count = distributor.getVoucherCount();
