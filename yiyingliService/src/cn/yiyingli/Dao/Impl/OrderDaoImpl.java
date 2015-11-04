@@ -29,12 +29,15 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 	@Override
 	public Long saveWithUserNumber(Order order, User user) {
 		getHibernateTemplate().save(order);
-		Session session = getSessionFactory().getCurrentSession();
+		Session session = getSessionFactory().openSession();
 		session.flush();
+		Transaction ts = session.beginTransaction();
 		Query query = session
 				.createSQLQuery("update user set user.ORDERNUMBER=(select count(*) from orders where orders.USER_ID='"
 						+ user.getId() + "') where user.USER_ID=" + user.getId());
 		query.executeUpdate();
+		ts.commit();
+		session.close();
 		return order.getId();
 	}
 
@@ -67,38 +70,47 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 	@Override
 	public void updateWithTeacherNumber(Order order, Teacher teacher) {
 		getHibernateTemplate().update(order);
-		Session session = getSessionFactory().getCurrentSession();
+		Session session = getSessionFactory().openSession();
 		session.flush();
+		Transaction ts = session.getTransaction();
 		Query query = session.createSQLQuery(
 				"update teacher set teacher.ORDERNUMBER=(select count(*) from orders where orders.TEACHER_ID='"
 						+ teacher.getId()
 						+ "' and orders.STATE not like '0100%' and orders.STATE not like '%0200,0100%') where teacher.TEACHER_ID="
 						+ teacher.getId());
 		query.executeUpdate();
+		ts.commit();
+		session.close();
 	}
 
 	@Override
 	public void updateDistriOrderNumber(Order order, Distributor distributor) {
 		getHibernateTemplate().update(order);
-		Session session = getSessionFactory().getCurrentSession();
+		Session session = getSessionFactory().openSession();
 		session.flush();
+		Transaction ts = session.getTransaction();
 		Query query = session.createSQLQuery(
 				"update distributor set distributor.ORDERNUMBER=(select count(*) from orders where orders.DISTRIBUTOR_ID='"
 						+ distributor.getId() + "') where distributor.DISTRIBUTOR_ID=" + distributor.getId());
 		query.executeUpdate();
+		ts.commit();
+		session.close();
 	}
 
 	@Override
 	public void updateDistriDealNumberWhenFinished(Order order) {
 		getHibernateTemplate().update(order);
-		Session session = getSessionFactory().getCurrentSession();
+		Session session = getSessionFactory().openSession();
 		session.flush();
+		Transaction ts = session.getTransaction();
 		Query query = session.createSQLQuery(
 				"update distributor set distributor.DEALNUMBER=(select count(*) from orders where orders.DISTRIBUTOR_ID=(select orders.DISTRIBUTOR_ID from orders where orders.ORDER_ID='"
 						+ order.getId()
 						+ "') and orders.STATE like '%1000%') where distributor.DISTRIBUTOR_ID=(select orders.DISTRIBUTOR_ID from orders where orders.ORDER_ID='"
 						+ order.getId() + "')");
 		query.executeUpdate();
+		ts.commit();
+		session.close();
 	}
 
 	@Override
@@ -365,40 +377,44 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 
 	@Override
 	public long querySumNo() {
-		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Transaction ts = session.beginTransaction();
 		long sum = (long) session.createQuery("select count(*) from Order o").uniqueResult();
 		ts.commit();
+		session.close();
 		return sum;
 	}
 
 	@Override
 	public long querySumNoByUserId(long userId) {
-		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Transaction ts = session.beginTransaction();
 		long sum = (long) session.createQuery("select count(*) from Order o where o.createUser.id=" + userId)
 				.uniqueResult();
 		ts.commit();
+		session.close();
 		return sum;
 	}
 
 	@Override
 	public long querySumNoByTeacherId(long teacherId) {
-		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Transaction ts = session.beginTransaction();
 		long sum = (long) session.createQuery("select count(*) from Order o where o.teacher.id=" + teacherId)
 				.uniqueResult();
 		ts.commit();
+		session.close();
 		return sum;
 	}
 
 	@Override
 	public long querySumNoByState(String state) {
-		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Transaction ts = session.beginTransaction();
 		long sum = (long) session.createQuery("select count(*) from Order o where o.state like '" + state + "%'")
 				.uniqueResult();
 		ts.commit();
+		session.close();
 		return sum;
 	}
 

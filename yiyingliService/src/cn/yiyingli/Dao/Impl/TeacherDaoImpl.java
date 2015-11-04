@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -38,14 +39,18 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 
 	@Override
 	public void removeAllTip(long teacherId) {
-		Session session = getSession();
+		Session session =getHibernateTemplate().getSessionFactory().openSession();
+		Transaction ts = session.beginTransaction();
 		Query query = session.createSQLQuery("delete from teacher_tip where TEACHER_ID='" + teacherId + "'");
 		query.executeUpdate();
+		ts.commit();
+		session.close();
 	}
 
 	@Override
 	public void removeUserLike(long teacherId, long userId) {
-		Session session = getSessionFactory().getCurrentSession();
+		Session session =getHibernateTemplate().getSessionFactory().openSession();
+		Transaction ts = session.beginTransaction();
 		Query query = session.createSQLQuery("delete from userliketeacher where userliketeacher.TEACHER_ID='"
 				+ teacherId + "' and userliketeacher.USER_ID='" + userId + "'");
 		query.executeUpdate();
@@ -58,6 +63,8 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 				"update user set user.LIKETEACHERNUMBER=(select count(*) from userliketeacher where userliketeacher.USER_ID='"
 						+ userId + "') where user.USER_ID=" + userId);
 		query.executeUpdate();
+		ts.commit();
+		session.close();
 	}
 
 	@Override
