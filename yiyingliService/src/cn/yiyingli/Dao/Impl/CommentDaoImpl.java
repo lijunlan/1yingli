@@ -33,9 +33,8 @@ public class CommentDaoImpl extends HibernateDaoSupport implements CommentDao {
 	@Override
 	public void saveWithTeacherAndUser(Comment comment, Teacher teacher, User user, short kind) {
 		getHibernateTemplate().save(comment);
-		Session session = getSessionFactory().openSession();
+		Session session = getSessionFactory().getCurrentSession();
 		session.flush();
-		Transaction ts = session.beginTransaction();
 		Query query = session.createSQLQuery(
 				"update teacher set teacher.COMMENTNUMBER=(select count(*) from comment where comment.TEACHER_ID='"
 						+ teacher.getId() + "' and kind=" + kind + ") where teacher.TEACHER_ID=" + teacher.getId());
@@ -44,22 +43,17 @@ public class CommentDaoImpl extends HibernateDaoSupport implements CommentDao {
 				"update user set user.SENDCOMMENTNUMBER=(select count(*) from comment where comment.USER_ID='"
 						+ user.getId() + "' and kind=" + kind + ") where user.USER_ID=" + user.getId());
 		query.executeUpdate();
-		ts.commit();
-		session.close();
 	}
 
 	@Override
 	public void saveWithUser(Comment comment, User user, short kind) {
 		getHibernateTemplate().save(comment);
-		Session session = getSessionFactory().openSession();
+		Session session = getSessionFactory().getCurrentSession();
 		session.flush();
-		Transaction ts = session.beginTransaction();
 		Query query = session.createSQLQuery(
 				"update user set user.RECEIVECOMMENTNUMBER=(select count(*) from comment where comment.USER_ID='"
 						+ user.getId() + "' and kind=" + kind + ") where user.USER_ID=" + user.getId());
 		query.executeUpdate();
-		ts.commit();
-		session.close();
 	}
 
 	@Override
@@ -208,23 +202,21 @@ public class CommentDaoImpl extends HibernateDaoSupport implements CommentDao {
 
 	@Override
 	public long querySumNoByUserId(long userId) {
-		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Transaction ts = session.beginTransaction();
 		long sum = (long) session.createQuery("select count(*) from Comment c where c.user.id=" + userId)
 				.uniqueResult();
 		ts.commit();
-		session.close();
 		return sum;
 	}
 
 	@Override
 	public long querySumNoByTeacherId(long teacherId) {
-		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Transaction ts = session.beginTransaction();
 		long sum = (long) session.createQuery("select count(*) from Comment c where c.teacher.id=" + teacherId)
 				.uniqueResult();
 		ts.commit();
-		session.close();
 		return sum;
 	}
 
