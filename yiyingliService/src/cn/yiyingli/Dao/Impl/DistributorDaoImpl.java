@@ -71,10 +71,11 @@ public class DistributorDaoImpl extends HibernateDaoSupport implements Distribut
 
 	@Override
 	public long queryCount() {
-		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Transaction ts = session.beginTransaction();
 		long sum = (long) session.createQuery("select count(*) from Distributor d").uniqueResult();
 		ts.commit();
+		session.close();
 		return sum;
 	}
 

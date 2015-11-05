@@ -50,7 +50,11 @@ public class OrderServiceImpl implements OrderService {
 		long id = getOrderDao().saveWithUserNumber(order, order.getCreateUser());
 		order.setOrderNo("" + Calendar.getInstance().get(Calendar.YEAR) + new Random().nextInt(10)
 				+ new Random().nextInt(10) + new Random().nextInt(10) + (100000000L + id));
-		getOrderDao().updateDistriOrderNumber(order, order.getDistributor());
+		if (order.getDistributor() != null) {
+			getOrderDao().updateDistriOrderNumber(order, order.getDistributor());
+		} else {
+			getOrderDao().update(order);
+		}
 		TimeTaskUtil.sendTimeTask("change", "order",
 				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
 				new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());

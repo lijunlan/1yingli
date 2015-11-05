@@ -2,12 +2,15 @@ package cn.yiyingli.Dao;
 
 import java.util.List;
 
+import cn.yiyingli.Persistant.Distributor;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.UserLikeTeacher;
 
 public interface UserDao {
 
 	void save(User user);
+
+	void saveAndCount(User user, Distributor distributor);
 
 	Long saveAndReturnId(User user);
 
@@ -18,7 +21,7 @@ public interface UserDao {
 	void merge(User user);
 
 	void update(User user);
-	
+
 	void updateLikeTeacher(UserLikeTeacher userLikeTeacher);
 
 	void updateFromSql(String sql);
@@ -28,7 +31,7 @@ public interface UserDao {
 	User query(long id, boolean lazy);
 
 	User queryWithTeacher(long id, boolean lazy);
-	
+
 	User queryByTeacherId(long teacherId);
 
 	User query(String username, boolean lazy);

@@ -45,6 +45,7 @@ public class MGetDistributorListService extends MsgService {
 		Manager manager = getManagerMarkService().queryManager(mid);
 		if (manager == null) {
 			setResMsg(MsgUtil.getErrorMsg("manager is not existed"));
+			return;
 		}
 		int page = Integer.valueOf((String) getData().get("page"));
 		long count = getDistributorService().queryCount();

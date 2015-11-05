@@ -681,6 +681,9 @@
 		<property name="userService">
 			<ref local="userService" />
 		</property>
+		<property name="distributorService">
+			<ref local="distributorService" />
+		</property>
 	</bean>
 
 	<bean id="iosRegisterService" class="cn.yiyingli.Handle.Service.IOSRegisterService"
@@ -1882,7 +1885,7 @@
 			<ref local="distributorMarkService" />
 		</property>
 	</bean>
-	
+
 	<bean id="dGetInfoService" class="cn.yiyingli.Handle.Service.DGetInfoService"
 		scope="prototype">
 		<property name="distributorService">

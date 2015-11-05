@@ -32,7 +32,6 @@ public class CommentDaoImpl extends HibernateDaoSupport implements CommentDao {
 
 	@Override
 	public void saveWithTeacherAndUser(Comment comment, Teacher teacher, User user, short kind) {
-		// TODO Auto-generated method stub
 		getHibernateTemplate().save(comment);
 		Session session = getSessionFactory().getCurrentSession();
 		session.flush();
