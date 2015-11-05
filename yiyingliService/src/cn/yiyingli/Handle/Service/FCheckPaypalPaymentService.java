@@ -47,6 +47,8 @@ public class FCheckPaypalPaymentService extends MsgService {
 				order.setState(OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
 				getOrderService().update(order);
 				setResMsg(MsgUtil.getSuccessMsg("check payment successfully"));
+			}else{ 
+				setResMsg(MsgUtil.getErrorMsg("order do not match the payment"));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
