@@ -9,17 +9,13 @@ public class DGetInfoService extends DMsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("did");
+		return super.checkData();
 	}
 
 	@Override
 	public void doit() {
-		String did = (String) getData().get("did");
-		Distributor distributor = getDistributorMarkService().queryDistributor(did);
-		if (distributor == null) {
-			setResMsg(MsgUtil.getErrorMsg("distributor is not existed"));
-			return;
-		}
+		super.doit();
+		Distributor distributor = getDistributor();
 		SuperMap map = MsgUtil.getSuccessMap();
 		map.put("registerNumber", distributor.getRegisterNumber());
 		map.put("dealNumber", distributor.getDealNumber());

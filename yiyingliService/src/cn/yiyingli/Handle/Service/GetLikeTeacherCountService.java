@@ -1,37 +1,17 @@
 package cn.yiyingli.Handle.Service;
 
 import cn.yiyingli.ExchangeData.SuperMap;
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.TeacherService;
-import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.MsgUtil;
 
-public class GetLikeTeacherCountService extends MsgService {
-
-	private UserMarkService userMarkService;
-
-	public UserMarkService getUserMarkService() {
-		return userMarkService;
-	}
-
-	public void setUserMarkService(UserMarkService userMarkService) {
-		this.userMarkService = userMarkService;
-	}
-
-	@Override
-	protected boolean checkData() {
-		return getData().containsKey("uid");
-	}
+public class GetLikeTeacherCountService extends UMsgService {
 
 	@Override
 	public void doit() {
-		String uid = (String) getData().get("uid");
-		User user = getUserMarkService().queryUser(uid);
-		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("uid is not existed"));
-			return;
-		}
+		super.doit();
+		User user = getUser();
 		int page = 0;
 		SuperMap toSend = MsgUtil.getSuccessMap();
 		long count = user.getLikeTeacherNumber();

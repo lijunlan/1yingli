@@ -1,6 +1,94 @@
 <?xml version = "1.0" encoding= "UTF-8"?>
 <!DOCTYPE service-error PUBLIC "error.dtd" "http://source.1yingli.cn/error.dtd">
+<!-- error code e.g. 1000 -->
 <service-error>
-	<error name="1" value="error1" />
-	<error name="2" value="error2" />
+	<!-- user start with 1 -->
+	<!-- teacher start with 2 -->
+	<!-- manager start with 3 -->
+	<!-- order start with 4 -->
+	<!-- function start with 5 -->
+	<!-- distributor start with 6 -->
+	
+	<!-- system error the second number is 0 -->
+	<!-- data frame error the second number is 1 -->
+	<!-- input data error the second number is 2 -->
+	<!-- third party error the second number is 3 -->
+	<!-- authority error the second number is 4 -->
+	<!-- logic error the second number is 5 -->
+	
+	
+	<!-- user 1-->
+	<error name="10001" value="decrypt failed" />
+	<error name="12001" value="checkNo is wrong" /> setResMsg(MsgUtil.getErrorMsgByCode("12001"));
+	<error name="12002" value="checkNo is overdue" /> setResMsg(MsgUtil.getErrorMsgByCode("12002"));
+	<error name="12003" value="email is not accurate" />
+	<error name="12004" value="oldpassword or newpassword can not be null" />
+	<error name="12005" value="BAD PASSWROD" />
+	<error name="12006" value="old password is wrong" />
+	<error name="12007" value="phone number is not accurate" />
+	<error name="12008" value="BAD PHONE NUMBER OR BAD EMAIL" />
+	<error name="12009" value="kind is not accurate" />
+	<error name="12010" value="page is wrong" />
+	<error name="12011" value="notiId is wrong" />
+	<error name="12012" value="notification is not existed" />
+	<error name="12013" value="it is not a phone No or email" />
+	<error name="12014" value="username or password can not be null" />
+	<error name="12015" value="username is not existed" />
+	<error name="12016" value="password is not accurate" />
+	<error name="12017" value="username or password is wrong" />
+	<error name="12018" value="your weibo code is wrong" />
+	<error name="12019" value="your weixin code is wrong" />
+	<error name="14001" value="uid is not existed" />    setResMsg(MsgUtil.getErrorMsgByCode("14001"));
+	<error name="15001" value="you have applied" />
+	<error name="15002" value="you are already teacher" />
+	<error name="15003" value="user has been registered" />
+	
+	<!-- teacher 2-->
+	<error name="22001" value="teacher is not existed" />    setResMsg(MsgUtil.getErrorMsgByCode("22001"));
+	<error name="22002" value="teacher is not on service" />    setResMsg(MsgUtil.getErrorMsgByCode("22002"));
+	<error name="24001" value="you are not a teacher" /> setResMsg(MsgUtil.getErrorMsgByCode("24001"));
+	<error name="24002" value="uid don't match teacherId" />setResMsg(MsgUtil.getErrorMsgByCode("24002"));
+	
+	
+	<!-- manager 3-->
+	<error name="30001" value="decrypt failed" />
+	<error name="31001" value="data is not correct" />
+	<error name="32001" value="BAD PASSWROD" />
+	<error name="32002" value="username is not existed" />
+	<error name="32003" value="application is not existed" />
+	<error name="32004" value="application has been checked" />
+	<error name="32005" value="checkForm is not existed" />
+	<error name="32006" value="checkForm has been deal" />
+	<error name="32007" value="kind is wrong" />
+	<error name="32008" value="state is wrong" />
+	<error name="32009" value="page is wrong" />
+	<error name="34001" value="manager is not existed" />
+	
+	<!-- order 4-->
+	<error name="40001" value="server error"/>
+	<error name="41001" value="input data is wrong"/>
+	<error name="42001" value="order is not existed" />   setResMsg(MsgUtil.getErrorMsgByCode("42001"));
+	<error name="43001" value="alipay error" />
+	<error name="43002" value="connect to paypal failed, please try again"/>
+	<error name="44001" value="this order is not belong to you" />  setResMsg(MsgUtil.getErrorMsgByCode("44001"));
+	<error name="44002" value="order state is not accurate" /> setResMsg(MsgUtil.getErrorMsgByCode("44002"));
+	<error name="44003" value="deal colunm has error data" />
+	<error name="45001" value="voucher is not existed" /> setResMsg(MsgUtil.getErrorMsgByCode("44002"));
+	<error name="45002" value="voucher is overdue" />
+	<error name="45003" value="voucher has been used" />
+	<error name="45004" value="order do not match the payment" />
+	
+	<!-- function 5-->
+	<!-- <error name="53001" value="recommendation engine error" /> -->
+	<error name="51001" value="input data is wrong"/>
+	<error name="52001" value="username is not accurate"/>
+	<error name="53002" value="can not connect to search engine" />
+	<error name="53003" value="error when search" />
+	<error name="53004" value="Submit data to recommendation engine failed" />
+	<error name="53005" value="search engine error" />
+	<error name="55001" value="you can not get now" />
+	
+	<!-- distributor 6-->
+	<error name="64001" value="did is not existed" />    setResMsg(MsgUtil.getErrorMsgByCode("64001"));
+	
 </service-error>

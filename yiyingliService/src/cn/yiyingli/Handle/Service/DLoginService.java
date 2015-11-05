@@ -5,11 +5,22 @@ import java.util.UUID;
 
 import cn.yiyingli.Handle.DMsgService;
 import cn.yiyingli.Persistant.Distributor;
+import cn.yiyingli.Service.DistributorService;
 import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.RSAUtil;
 
 public class DLoginService extends DMsgService {
+
+	private DistributorService distributorService;
+
+	public DistributorService getDistributorService() {
+		return distributorService;
+	}
+
+	public void setDistributorService(DistributorService distributorService) {
+		this.distributorService = distributorService;
+	}
 
 	@Override
 	protected boolean checkData() {

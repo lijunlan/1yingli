@@ -2,29 +2,18 @@ package cn.yiyingli.Handle.Service;
 
 import java.util.Calendar;
 
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.ApplicationForm;
 import cn.yiyingli.Persistant.Manager;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.ApplicationFormService;
-import cn.yiyingli.Service.ManagerMarkService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.MsgUtil;
 
-public class MDoneApplicationFormService extends MsgService {
+public class MDoneApplicationFormService extends MMsgService {
 
 	private ApplicationFormService applicationFormService;
-
-	private ManagerMarkService managerMarkService;
-
-	public ManagerMarkService getManagerMarkService() {
-		return managerMarkService;
-	}
-
-	public void setManagerMarkService(ManagerMarkService managerMarkService) {
-		this.managerMarkService = managerMarkService;
-	}
 
 	public ApplicationFormService getApplicationFormService() {
 		return applicationFormService;
@@ -36,29 +25,27 @@ public class MDoneApplicationFormService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("mid") && getData().containsKey("afId") && getData().containsKey("accept")
+		return super.checkData() && getData().containsKey("afId") && getData().containsKey("accept")
 				&& getData().containsKey("description");
 	}
 
 	@Override
 	public void doit() {
-		String mid = (String) getData().get("mid");
+		super.doit();
+		Manager manager = getManager();
 		String afId = (String) getData().get("afId");
 		String accept = (String) getData().get("accept");
 		String description = (String) getData().get("description");
-		Manager manager = getManagerMarkService().queryManager(mid);
-		if (manager == null) {
-			setResMsg(MsgUtil.getErrorMsg("manager is not existed"));
-			return;
-		}
 		ApplicationForm af = getApplicationFormService().query(Long.valueOf(afId));
 		if (af == null) {
-			setResMsg(MsgUtil.getErrorMsg("application is not existed"));
+			setResMsg(MsgUtil.getErrorMsgByCode("32003"));
 			return;
 		}
 		if (af.getState() != ApplicationFormService.APPLICATION_STATE_CHECKING_SHORT) {
-			setResMsg(MsgUtil.getErrorMsg("application has been checked"));
+			setResMsg(MsgUtil.getErrorMsgByCode("32004"));
+			return;
 		}
+
 		boolean acpt = Boolean.valueOf(accept);
 		User user = af.getUser();
 		Teacher teacher = af.getTeacher();
@@ -74,6 +61,7 @@ public class MDoneApplicationFormService extends MsgService {
 		af.setCheckInfo(description);
 		af.setEndManager(manager);
 		af.setEndTime(String.valueOf(Calendar.getInstance().getTimeInMillis()));
+
 		getApplicationFormService().update(af);
 		setResMsg(MsgUtil.getSuccessMsg("application has been done"));
 	}

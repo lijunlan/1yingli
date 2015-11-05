@@ -6,20 +6,16 @@ import java.util.Date;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.CheckForm;
-import cn.yiyingli.Persistant.Manager;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.CheckFormService;
-import cn.yiyingli.Service.ManagerMarkService;
 import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
-public class MGetCheckFormListService extends MsgService {
+public class MGetCheckFormListService extends MMsgService {
 
 	private CheckFormService checkFormService;
-
-	private ManagerMarkService managerMarkService;
 
 	public CheckFormService getCheckFormService() {
 		return checkFormService;
@@ -29,29 +25,11 @@ public class MGetCheckFormListService extends MsgService {
 		this.checkFormService = checkFormService;
 	}
 
-	public ManagerMarkService getManagerMarkService() {
-		return managerMarkService;
-	}
-
-	public void setManagerMarkService(ManagerMarkService managerMarkService) {
-		this.managerMarkService = managerMarkService;
-	}
-
-	@Override
-	protected boolean checkData() {
-		return getData().containsKey("mid");
-	}
-
 	private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
 
 	@Override
 	public void doit() {
-		String mid = (String) getData().get("mid");
-		Manager manager = getManagerMarkService().queryManager(mid);
-		if (manager == null) {
-			setResMsg(MsgUtil.getErrorMsg("manager is not existed"));
-			return;
-		}
+		super.doit();
 		List<CheckForm> checkForms = getCheckFormService().queryList();
 		List<String> exCheckForms = new ArrayList<String>();
 		for (CheckForm checkForm : checkForms) {

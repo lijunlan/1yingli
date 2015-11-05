@@ -4,27 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Distributor;
-import cn.yiyingli.Persistant.Manager;
 import cn.yiyingli.Service.DistributorService;
-import cn.yiyingli.Service.ManagerMarkService;
 import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
-public class MGetDistributorListService extends MsgService {
-
-	private ManagerMarkService managerMarkService;
+public class MGetDistributorListService extends MMsgService {
 
 	private DistributorService distributorService;
-
-	public ManagerMarkService getManagerMarkService() {
-		return managerMarkService;
-	}
-
-	public void setManagerMarkService(ManagerMarkService managerMarkService) {
-		this.managerMarkService = managerMarkService;
-	}
 
 	public DistributorService getDistributorService() {
 		return distributorService;
@@ -36,17 +24,12 @@ public class MGetDistributorListService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("mid") && getData().containsKey("page");
+		return super.checkData() && getData().containsKey("page");
 	}
 
 	@Override
 	public void doit() {
-		String mid = (String) getData().get("mid");
-		Manager manager = getManagerMarkService().queryManager(mid);
-		if (manager == null) {
-			setResMsg(MsgUtil.getErrorMsg("manager is not existed"));
-			return;
-		}
+		super.doit();
 		int page = Integer.valueOf((String) getData().get("page"));
 		long count = getDistributorService().queryCount();
 		List<Distributor> distributors = getDistributorService().queryList(page);

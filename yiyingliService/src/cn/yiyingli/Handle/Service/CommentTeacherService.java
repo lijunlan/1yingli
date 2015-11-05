@@ -2,7 +2,7 @@ package cn.yiyingli.Handle.Service;
 
 import java.util.Calendar;
 
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Comment;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.Teacher;
@@ -11,17 +11,14 @@ import cn.yiyingli.Service.CommentService;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Service.TeacherService;
-import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
 
-public class CommentTeacherService extends MsgService {
+public class CommentTeacherService extends UMsgService {
 
 	private OrderService orderService;
 
 	private TeacherService teacherService;
-
-	private UserMarkService userMarkService;
 
 	private CommentService commentService;
 
@@ -43,14 +40,6 @@ public class CommentTeacherService extends MsgService {
 		this.teacherService = teacherService;
 	}
 
-	public UserMarkService getUserMarkService() {
-		return userMarkService;
-	}
-
-	public void setUserMarkService(UserMarkService userMarkService) {
-		this.userMarkService = userMarkService;
-	}
-
 	public CommentService getCommentService() {
 		return commentService;
 	}
@@ -69,22 +58,18 @@ public class CommentTeacherService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("orderId") && getData().containsKey("teacherId") && getData().containsKey("score")
-				&& getData().containsKey("content") && getData().containsKey("uid");
+		return super.checkData() && getData().containsKey("orderId") && getData().containsKey("teacherId")
+				&& getData().containsKey("score") && getData().containsKey("content");
 	}
 
 	@Override
 	public void doit() {
-		String uid = (String) getData().get("uid");
-		User user = getUserMarkService().queryUser(uid);
-		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("uid is not existed"));
-			return;
-		}
+		super.doit();
+		User user = getUser();
 		String teacherId = (String) getData().get("teacherId");
 		Teacher teacher = getTeacherService().query(Long.valueOf(teacherId), false);
 		if (teacher == null) {
-			setResMsg(MsgUtil.getErrorMsg("teacher is not existed"));
+			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
 		}
 
@@ -92,16 +77,16 @@ public class CommentTeacherService extends MsgService {
 			String oid = (String) getData().get("orderId");
 			Order order = getOrderService().queryByShowId(oid, false);
 			if (order == null) {
-				setResMsg(MsgUtil.getErrorMsg("order is not existed"));
+				setResMsg(MsgUtil.getErrorMsgByCode("42001"));
 				return;
 			}
 			if (order.getCreateUser().getId().longValue() != user.getId().longValue()) {
-				setResMsg(MsgUtil.getErrorMsg("this order is not belong to you"));
+				setResMsg(MsgUtil.getErrorMsgByCode("44001"));
 				return;
 			}
 			String state = order.getState().split(",")[0];
 			if (!OrderService.ORDER_STATE_WAIT_COMMENT.equals(state)) {
-				setResMsg(MsgUtil.getErrorMsg("order state is not accurate"));
+				setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 				return;
 			}
 			order.setState(OrderService.ORDER_STATE_WAIT_TCOMMENT + "," + order.getState());
@@ -121,13 +106,12 @@ public class CommentTeacherService extends MsgService {
 							+ comment.getScore() + "分。评价内容" + comment.getContent() + ")",
 					order.getTeacher(), getNotificationService());
 			NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
-					+ order.getTeacher().getName() + ",学员已经对咨询进行了评价(评价分数:"
- + comment.getScore() + "分。评价内容"
+					+ order.getTeacher().getName() + ",学员已经对咨询进行了评价(评价分数:" + comment.getScore() + "分。评价内容"
 					+ comment.getContent() + ")");
 			setResMsg(MsgUtil.getSuccessMsg("comment successfully"));
 		} catch (Exception e) {
 			e.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("input data is wrong"));
+			setResMsg(MsgUtil.getErrorMsgByCode("41001"));
 			return;
 		}
 	}

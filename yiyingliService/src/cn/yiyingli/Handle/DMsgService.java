@@ -1,21 +1,20 @@
 package cn.yiyingli.Handle;
 
+import cn.yiyingli.Persistant.Distributor;
 import cn.yiyingli.Service.DistributorMarkService;
-import cn.yiyingli.Service.DistributorService;
+import cn.yiyingli.Util.MsgUtil;
 
+/**
+ * 分销用户专用抽象类</b>已经实现did鉴权，并且已经获取distributor实例
+ * 
+ * @author sdll18
+ *
+ */
 public abstract class DMsgService extends MsgService {
-
-	private DistributorService distributorService;
 
 	private DistributorMarkService distributorMarkService;
 
-	public DistributorService getDistributorService() {
-		return distributorService;
-	}
-
-	public void setDistributorService(DistributorService distributorService) {
-		this.distributorService = distributorService;
-	}
+	private Distributor distributor;
 
 	public DistributorMarkService getDistributorMarkService() {
 		return distributorMarkService;
@@ -25,4 +24,27 @@ public abstract class DMsgService extends MsgService {
 		this.distributorMarkService = distributorMarkService;
 	}
 
+	protected Distributor getDistributor() {
+		return distributor;
+	}
+
+	private void setDistributor(Distributor distributor) {
+		this.distributor = distributor;
+	}
+
+	@Override
+	protected boolean checkData() {
+		return getData().containsKey("did");
+	}
+
+	@Override
+	public void doit() {
+		String did = (String) getData().get("did");
+		Distributor distributor = getDistributorMarkService().queryDistributor(did);
+		if (distributor == null) {
+			setResMsg(MsgUtil.getErrorMsgByCode("64001"));
+			return;
+		}
+		setDistributor(distributor);
+	}
 }

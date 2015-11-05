@@ -1,29 +1,18 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
-import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
 
-public class CancelOrderAfterAcceptService extends MsgService {
-
-	private UserMarkService userMarkService;
+public class CancelOrderAfterAcceptService extends UMsgService {
 
 	private OrderService orderService;
 
 	private NotificationService notificationService;
-
-	public UserMarkService getUserMarkService() {
-		return userMarkService;
-	}
-
-	public void setUserMarkService(UserMarkService userMarkService) {
-		this.userMarkService = userMarkService;
-	}
 
 	public OrderService getOrderService() {
 		return orderService;
@@ -48,25 +37,21 @@ public class CancelOrderAfterAcceptService extends MsgService {
 
 	@Override
 	public void doit() {
-		String uid = (String) getData().get("uid");
-		User user = getUserMarkService().queryUser(uid);
-		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("uid is not existed"));
-			return;
-		}
+		super.doit();
+		User user = getUser();
 		String oid = (String) getData().get("orderId");
 		Order order = getOrderService().queryByShowId(oid, false);
 		if (order == null) {
-			setResMsg(MsgUtil.getErrorMsg("order is not existed"));
+			setResMsg(MsgUtil.getErrorMsgByCode("42001"));
 			return;
 		}
 		if (order.getCreateUser().getId().longValue() != user.getId().longValue()) {
-			setResMsg(MsgUtil.getErrorMsg("this order is not belong to you"));
+			setResMsg(MsgUtil.getErrorMsgByCode("44001"));
 			return;
 		}
 		String state = order.getState().split(",")[0];
 		if (!OrderService.ORDER_STATE_TEACHER_ACCEPT.equals(state)) {
-			setResMsg(MsgUtil.getErrorMsg("order state is not accurate"));
+			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
 		order.setState(OrderService.ORDER_STATE_USER_REGRET + "," + order.getState());

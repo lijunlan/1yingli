@@ -4,19 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Notification;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.NotificationService;
-import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
-public class GetNotificationService extends MsgService {
+public class GetNotificationService extends UMsgService {
 
 	private NotificationService notificationService;
-
-	private UserMarkService userMarkService;
 
 	public NotificationService getNotificationService() {
 		return notificationService;
@@ -26,27 +23,15 @@ public class GetNotificationService extends MsgService {
 		this.notificationService = notificationService;
 	}
 
-	public UserMarkService getUserMarkService() {
-		return userMarkService;
-	}
-
-	public void setUserMarkService(UserMarkService userMarkService) {
-		this.userMarkService = userMarkService;
-	}
-
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("uid") && (getData().containsKey("page") || getData().containsKey("notiId"));
+		return super.checkData() && (getData().containsKey("page") || getData().containsKey("notiId"));
 	}
 
 	@Override
 	public void doit() {
-		String uid = (String) getData().get("uid");
-		User user = getUserMarkService().queryUser(uid);
-		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("uid is not existed"));
-			return;
-		}
+		super.doit();
+		User user = getUser();
 		if (getData().get("page") != null) {
 			long count = getNotificationService().querySumNo(user.getId());
 			int page = 0;
@@ -64,11 +49,11 @@ public class GetNotificationService extends MsgService {
 				try {
 					page = Integer.parseInt((String) getData().get("page"));
 				} catch (Exception e) {
-					setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+					setResMsg(MsgUtil.getErrorMsgByCode("12010"));
 					return;
 				}
 				if (page <= 0) {
-					setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+					setResMsg(MsgUtil.getErrorMsgByCode("12010"));
 					return;
 				}
 			}
@@ -89,12 +74,12 @@ public class GetNotificationService extends MsgService {
 			try {
 				Long.parseLong(notiId);
 			} catch (Exception e) {
-				setResMsg(MsgUtil.getErrorMsg("notiId is wrong"));
+				setResMsg(MsgUtil.getErrorMsgByCode("12011"));
 				return;
 			}
 			Notification notification = getNotificationService().query(nid, false);
 			if (notification == null) {
-				setResMsg(MsgUtil.getErrorMsg("notification is not existed"));
+				setResMsg(MsgUtil.getErrorMsgByCode("12012"));
 				return;
 			}
 			SuperMap map = new SuperMap();

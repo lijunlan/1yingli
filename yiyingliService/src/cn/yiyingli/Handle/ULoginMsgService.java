@@ -9,6 +9,16 @@ import cn.yiyingli.Util.TimeTaskUtil;
 
 public abstract class ULoginMsgService extends UMsgService {
 
+	private UserService userService;
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 	protected void returnUser(User user) {
 		String _UUID = UUID.randomUUID().toString();
 		getUserMarkService().save(String.valueOf(user.getId()), _UUID);

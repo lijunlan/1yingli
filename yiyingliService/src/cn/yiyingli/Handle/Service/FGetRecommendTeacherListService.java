@@ -48,7 +48,7 @@ public class FGetRecommendTeacherListService extends MsgService {
 			String uid = (String) getData().get("uid");
 			User user = getUserMarkService().queryUser(uid);
 			if (user == null) {
-				setResMsg(MsgUtil.getErrorMsg("uid is not existed"));
+				setResMsg(MsgUtil.getErrorMsgByCode("14001"));
 				return;
 			}
 			result = SendMsgToBaiduUtil.getRecommendListIndividuation(user.getId() + "");
@@ -63,7 +63,7 @@ public class FGetRecommendTeacherListService extends MsgService {
 		JSONObject r = JSONObject.fromObject(result);
 		if (r.getInt("Code") != 300 && r.getInt("Code") != 301 && r.getInt("Code") != 302 && r.getInt("Code") != 303
 				&& r.getInt("Code") != 304) {
-			setResMsg(MsgUtil.getErrorMsg("recommendation engine error"));
+			setResMsg(MsgUtil.getErrorMsgByCode("53001"));
 			return;
 		}
 		JSONArray ra = r.getJSONArray("Results");

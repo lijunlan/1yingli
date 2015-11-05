@@ -3,29 +3,17 @@ package cn.yiyingli.Handle.Service;
 import java.util.Calendar;
 import java.util.UUID;
 
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Distributor;
-import cn.yiyingli.Persistant.Manager;
 import cn.yiyingli.Service.DistributorService;
-import cn.yiyingli.Service.ManagerMarkService;
 import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.RSAUtil;
 
-public class MCreateDistributorService extends MsgService {
-
-	private ManagerMarkService managerMarkService;
+public class MCreateDistributorService extends MMsgService {
 
 	private DistributorService distributorService;
-
-	public ManagerMarkService getManagerMarkService() {
-		return managerMarkService;
-	}
-
-	public void setManagerMarkService(ManagerMarkService managerMarkService) {
-		this.managerMarkService = managerMarkService;
-	}
 
 	public DistributorService getDistributorService() {
 		return distributorService;
@@ -37,18 +25,14 @@ public class MCreateDistributorService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("mid") && getData().containsKey("username") && getData().containsKey("password")
+		return super.checkData() && getData().containsKey("username") && getData().containsKey("password")
 				&& getData().containsKey("voucherMoney") && getData().containsKey("name")
 				&& getData().containsKey("sendVoucher") && getData().containsKey("voucherCount");
 	}
 
 	@Override
 	public void doit() {
-		String mid = (String) getData().get("mid");
-		Manager manager = getManagerMarkService().queryManager(mid);
-		if (manager == null) {
-			setResMsg(MsgUtil.getErrorMsg("manager is not existed"));
-		}
+		super.doit();
 		String username = (String) getData().get("username");
 		String password = (String) getData().get("password");
 		String name = (String) getData().get("name");
@@ -59,11 +43,11 @@ public class MCreateDistributorService extends MsgService {
 			password = RSAUtil.decryptStr(password, RSAUtil.RSAKEY_BASE_PATH);
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("server error"));
+			setResMsg(MsgUtil.getErrorMsgByCode("30001"));
 			return;
 		}
 		if (!CheckUtil.checkPassword(password)) {
-			setResMsg(MsgUtil.getErrorMsg("BAD PASSWROD!"));
+			setResMsg(MsgUtil.getErrorMsgByCode("32001"));
 			return;
 		}
 		password = MD5Util.MD5(password);

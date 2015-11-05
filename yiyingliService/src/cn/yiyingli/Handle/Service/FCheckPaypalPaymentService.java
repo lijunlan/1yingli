@@ -32,12 +32,12 @@ public class FCheckPaypalPaymentService extends MsgService {
 		String oid = (String) getData().get("orderId");
 		Order order = getOrderService().queryByShowId(oid, false);
 		if (order == null) {
-			setResMsg(MsgUtil.getErrorMsg("order is not existed"));
+			setResMsg(MsgUtil.getErrorMsgByCode("42001"));
 			return;
 		}
 		String state = order.getState().split(",")[0];
 		if (!OrderService.ORDER_STATE_NOT_PAID.equals(state)) {
-			setResMsg(MsgUtil.getErrorMsg("order state is not accurate"));
+			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
 		String paymentId = (String) getData().get("paymentId");
@@ -47,15 +47,15 @@ public class FCheckPaypalPaymentService extends MsgService {
 				order.setState(OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
 				getOrderService().update(order);
 				setResMsg(MsgUtil.getSuccessMsg("check payment successfully"));
-			}else{ 
-				setResMsg(MsgUtil.getErrorMsg("order do not match the payment"));
+			} else {
+				setResMsg(MsgUtil.getErrorMsgByCode("45004"));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("server error"));
+			setResMsg(MsgUtil.getErrorMsgByCode("40001"));
 		} catch (PayPalRESTException e) {
 			e.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("connect to paypal failed, please try again"));
+			setResMsg(MsgUtil.getErrorMsgByCode("40002"));
 		}
 	}
 

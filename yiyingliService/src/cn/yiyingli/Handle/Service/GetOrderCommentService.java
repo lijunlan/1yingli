@@ -3,22 +3,15 @@ package cn.yiyingli.Handle.Service;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.TMsgService;
 import cn.yiyingli.Persistant.Comment;
 import cn.yiyingli.Persistant.Teacher;
-import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.CommentService;
-import cn.yiyingli.Service.TeacherService;
-import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.MsgUtil;
 
-public class GetOrderCommentService extends MsgService {
+public class GetOrderCommentService extends TMsgService {
 
 	private CommentService commentService;
-
-	private TeacherService teacherService;
-
-	private UserMarkService userMarkService;
 
 	public CommentService getCommentService() {
 		return commentService;
@@ -28,45 +21,15 @@ public class GetOrderCommentService extends MsgService {
 		this.commentService = commentService;
 	}
 
-	public TeacherService getTeacherService() {
-		return teacherService;
-	}
-
-	public void setTeacherService(TeacherService teacherService) {
-		this.teacherService = teacherService;
-	}
-
-	public UserMarkService getUserMarkService() {
-		return userMarkService;
-	}
-
-	public void setUserMarkService(UserMarkService userMarkService) {
-		this.userMarkService = userMarkService;
-	}
-
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("teacherId") && getData().containsKey("orderId") && getData().containsKey("uid");
+		return super.checkData() && getData().containsKey("orderId");
 	}
 
 	@Override
 	public void doit() {
-		String uid = (String) getData().get("uid");
-		User user = getUserMarkService().queryUser(uid);
-		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("uid is not existed"));
-			return;
-		}
-		Teacher teacher = getTeacherService().queryByUserId(user.getId(), false);
-		if (teacher == null) {
-			setResMsg(MsgUtil.getErrorMsg("you are not a teacher"));
-			return;
-		}
-		String teacherId = (String) getData().get("teacherId");
-		if (!teacherId.equals(teacher.getId() + "")) {
-			setResMsg(MsgUtil.getErrorMsg("uid don't match teacherId"));
-			return;
-		}
+		super.doit();
+		Teacher teacher = getTeacher();
 		try {
 			String oid = (String) getData().get("orderId");
 			List<Comment> commentTU = getCommentService().queryDoubleByOrderIdAndTeacherId(Long.valueOf(oid),
@@ -95,7 +58,7 @@ public class GetOrderCommentService extends MsgService {
 			setResMsg(map.finishByJson());
 		} catch (Exception e) {
 			e.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("input data is wrong"));
+			setResMsg(MsgUtil.getErrorMsgByCode("41001"));
 			return;
 		}
 	}

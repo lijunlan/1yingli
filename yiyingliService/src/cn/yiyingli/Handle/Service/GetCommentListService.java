@@ -6,27 +6,16 @@ import java.util.Date;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Comment;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.CommentService;
-import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
-public class GetCommentListService extends MsgService {
-
-	private UserMarkService userMarkService;
+public class GetCommentListService extends UMsgService {
 
 	private CommentService commentService;
-
-	public UserMarkService getUserMarkService() {
-		return userMarkService;
-	}
-
-	public void setUserMarkService(UserMarkService userMarkService) {
-		this.userMarkService = userMarkService;
-	}
 
 	public CommentService getCommentService() {
 		return commentService;
@@ -38,34 +27,30 @@ public class GetCommentListService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("uid") && getData().containsKey("page") && getData().containsKey("kind");
+		return super.checkData() && getData().containsKey("page") && getData().containsKey("kind");
 	}
 
 	private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
 
 	@Override
 	public void doit() {
-		String uid = (String) getData().get("uid");
+		super.doit();
+		User user = getUser();
 		String kind = (String) getData().get("kind");
-		User user = getUserMarkService().queryUser(uid);
-		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("uid is not existed"));
-			return;
-		}
 		short k = 0;
 		if (String.valueOf(CommentService.COMMENT_KIND_FROMUSER_SHORT).equals(kind)) {
 			k = CommentService.COMMENT_KIND_FROMUSER_SHORT;
 		} else if (String.valueOf(CommentService.COMMENT_KIND_FROMTEACHER_SHORT).equals(kind)) {
 			k = CommentService.COMMENT_KIND_FROMTEACHER_SHORT;
 		} else {
-			setResMsg(MsgUtil.getErrorMsg("kind is not accurate"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12009"));
 			return;
 		}
-		
+
 		long count = 0;
-		if(k==CommentService.COMMENT_KIND_FROMTEACHER_SHORT){
+		if (k == CommentService.COMMENT_KIND_FROMTEACHER_SHORT) {
 			count = user.getReceiveCommentNumber();
-		}else{
+		} else {
 			count = user.getSendCommentNumber();
 		}
 		int page = 0;
@@ -83,11 +68,11 @@ public class GetCommentListService extends MsgService {
 			try {
 				page = Integer.parseInt((String) getData().get("page"));
 			} catch (Exception e) {
-				setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+				setResMsg(MsgUtil.getErrorMsgByCode("12010"));
 				return;
 			}
 			if (page <= 0) {
-				setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+				setResMsg(MsgUtil.getErrorMsgByCode("12010"));
 				return;
 			}
 		}

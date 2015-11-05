@@ -57,6 +57,10 @@ public class FTimeTaskCallbackService extends MsgService {
 				String data = (String) getData().get("data");
 				Map<String, String> oMap = Json.getMap(data);
 				Order order = getOrderService().queryByShowId(oMap.get("orderId"), false);
+				if (order == null) {
+					setResMsg(MsgUtil.getSuccessMsg("time task done"));
+					return;
+				}
 				String state = order.getState();
 				String instate = oMap.get("state");
 				if (!state.equals(instate)) {
@@ -108,7 +112,7 @@ public class FTimeTaskCallbackService extends MsgService {
 							"尊敬的导师，订单号为" + order.getOrderNo() + "的订单，已经自动确认咨询完毕，您的酬劳会在24小时内到账。", order.getTeacher(),
 							getNotificationService());
 					NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
-							+ order.getTeacher().getName() + ",已经自动确认咨询完毕");	
+							+ order.getTeacher().getName() + ",已经自动确认咨询完毕");
 					break;
 				case OrderService.ORDER_STATE_USER_DISLIKE:
 					order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + state);
@@ -120,7 +124,7 @@ public class FTimeTaskCallbackService extends MsgService {
 							"尊敬的导师，订单号为" + order.getOrderNo() + "的订单，由于您未作出响应，已经自动确认为同意退款。", order.getTeacher(),
 							getNotificationService());
 					NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
-							+ order.getTeacher().getName() + "，由于导师未作出响应，已经自动确认为同意退款。");	
+							+ order.getTeacher().getName() + "，由于导师未作出响应，已经自动确认为同意退款。");
 					break;
 				case OrderService.ORDER_STATE_USER_REGRET:
 					order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + state);
@@ -132,7 +136,7 @@ public class FTimeTaskCallbackService extends MsgService {
 							"尊敬的导师，订单号为" + order.getOrderNo() + "的订单，由于您未作出响应，已经自动确认为同意退款。", order.getTeacher(),
 							getNotificationService());
 					NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
-							+ order.getTeacher().getName() + "，由于导师未作出响应，已经自动确认为同意退款。");	
+							+ order.getTeacher().getName() + "，由于导师未作出响应，已经自动确认为同意退款。");
 					break;
 				default:
 
