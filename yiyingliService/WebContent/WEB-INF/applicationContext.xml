@@ -1898,9 +1898,6 @@
 
 	<bean id="fCheckPaypalPaymentService" class="cn.yiyingli.Handle.Service.FCheckPaypalPaymentService"
 		scope="prototype">
-		<property name="userMarkService">
-			<ref local="userMarkService" />
-		</property>
 		<property name="orderService">
 			<ref local="orderService" />
 		</property>
