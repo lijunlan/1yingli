@@ -6,7 +6,7 @@ import java.util.Map;
 
 public abstract class MsgService {
 
-	private String resMsg = "{'state':'unknown error}";
+	private String resMsg = "{\"state\":\"unknown error\"}";
 	private Map<String, Object> inMap;
 
 	protected Map<String, Object> getInMap() {

@@ -79,6 +79,7 @@ public class MRestartOrderService extends MsgService {
 				getNotificationService());
 		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
 				+ order.getTeacher().getName() + ",订单状态已经被管理员(" + manager.getName() + ")恢复");
+		setResMsg(MsgUtil.getSuccessMsg("restart successfully"));
 	}
 
 }

@@ -51,35 +51,38 @@ public class UserServiceImpl implements UserService {
 	public void save(User user) throws Exception {
 		User u = getUserDao().query(user.getUsername(), false);
 		if (u == null) {
-			getUserDao().save(user);
-			if (user.getDistributor() != null && user.getDistributor().getSendVoucher()
-					&& user.getDistributor().getVoucherCount() > 0) {
-				Distributor distributor = user.getDistributor();
-				float money = distributor.getVoucherMoney();
-				int count = distributor.getVoucherCount();
-				List<String> vouchers = new ArrayList<String>();
-				for (int i = 1; i <= count; i++) {
-					String number = CouponNumberUtil.getNewNumber(16);
-					Voucher voucher = new Voucher();
-					long time = Calendar.getInstance().getTimeInMillis();
-					long endTime = time + 1000 * 60 * 60 * 24 * 30;
-					voucher.setCreateTime(time + "");
-					voucher.setOrigin("System,Distributor:" + distributor.getId() + "," + distributor.getName());
-					voucher.setStartTime(time + "");
-					voucher.setEndTime(endTime + "");
-					voucher.setMoney(money);
-					voucher.setNumber(number);
-					voucher.setUsed(false);
-					getVoucherDao().save(voucher);
-					vouchers.add(number);
+			if (user.getDistributor() != null) {
+				getUserDao().saveAndCount(user, user.getDistributor());
+				if (user.getDistributor().getSendVoucher() && user.getDistributor().getVoucherCount() > 0) {
+					Distributor distributor = user.getDistributor();
+					float money = distributor.getVoucherMoney();
+					int count = distributor.getVoucherCount();
+					List<String> vouchers = new ArrayList<String>();
+					for (int i = 1; i <= count; i++) {
+						String number = CouponNumberUtil.getNewNumber(16);
+						Voucher voucher = new Voucher();
+						long time = Calendar.getInstance().getTimeInMillis();
+						long endTime = time + 1000 * 60 * 60 * 24 * 30;
+						voucher.setCreateTime(time + "");
+						voucher.setOrigin("System,Distributor:" + distributor.getId() + "," + distributor.getName());
+						voucher.setStartTime(time + "");
+						voucher.setEndTime(endTime + "");
+						voucher.setMoney(money);
+						voucher.setNumber(number);
+						voucher.setUsed(false);
+						getVoucherDao().save(voucher);
+						vouchers.add(number);
+					}
+					StringBuffer sb = new StringBuffer();
+					sb.append("感谢您在一英里平台注册，以下是送您的优惠码(" + count + "个):");
+					for (String v : vouchers) {
+						sb.append(v + ",");
+					}
+					sb.append("，优惠码即时生效，每次消费可以使用一个，每个可抵扣人民币" + money + "元，有效期为30天。");
+					NotifyUtil.notifyUserNormal(user.getPhone(), user.getEmail(), "优惠码", sb.toString(), user);
 				}
-				StringBuffer sb = new StringBuffer();
-				sb.append("感谢您在一英里平台注册，以下是送您的优惠码(" + count + "个):");
-				for (String v : vouchers) {
-					sb.append(v + ",");
-				}
-				sb.append("，优惠码即时生效，每次消费可以使用一个，每个可抵扣人民币" + money + "元，有效期为30天。");
-				NotifyUtil.notifyUserNormal(user.getPhone(), user.getEmail(), "优惠码", sb.toString(), user);
+			} else {
+				getUserDao().save(user);
 			}
 		} else {
 			throw new Exception("phone,email or weixin,weibo has been registered");
