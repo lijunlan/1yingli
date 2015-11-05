@@ -130,6 +130,7 @@
 		<method name="suggest" beanName="fSuggestService" />
 		<method name="recordRecommend" beanName="fRecordRecommendService" />
 		<method name="getRecommendTeacherList" beanName="fGetRecommendTeacherListService" />
+		<method name="checkPaypalPayment" beanName="fCheckPaypalPaymentService" />
 		<!-- <method name="fMoneyReturned" beanName="fMoneyReturnedService" /> -->
 	</style>
 	<style name="notification">

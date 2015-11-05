@@ -82,15 +82,7 @@ public class GetSingleUserWeixinInfoUtil {
 
 			HttpGet httpget = new HttpGet(
 					"https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token + "&openid=" + openid);
-					// HttpParams params = httpclient.getParams();
 
-			// params.setParameter("grant_type", "client_credential");
-			// params.setParameter("appid", "wxd042cdef58e2e669");
-			// params.setParameter("secret",
-			// "ff966d65e05fbdcc80bce43c7d8c2896");
-
-			// httpget.setParams(params);
-			// System.out.println("REQUEST:" + httpget.getURI());
 			ResponseHandler responseHandler = new BasicResponseHandler();
 			String responseBody = httpclient.execute(httpget, responseHandler);
 			JSONObject data = JSONObject.fromObject(responseBody);
@@ -146,14 +138,7 @@ public class GetSingleUserWeixinInfoUtil {
 						+ SECRET_MOBILE + "&code=" + code + "&grant_type=authorization_code";
 			}
 			HttpGet httpget = new HttpGet(urls);
-			// HttpParams params = httpclient.getParams();
-
-			// params.setParameter("grant_type", "client_credential");
-			// params.setParameter("appid", "wxd042cdef58e2e669");
-			// params.setParameter("secret",
-			// "ff966d65e05fbdcc80bce43c7d8c2896");
-
-			// httpget.setParams(params);
+			
 			// System.out.println("REQUEST:" + httpget.getURI());
 			ResponseHandler responseHandler = new BasicResponseHandler();
 			String responseBody = httpclient.execute(httpget, responseHandler);
