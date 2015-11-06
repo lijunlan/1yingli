@@ -45,7 +45,7 @@ public class FCheckPaypalPaymentService extends MsgService {
 			PayPalMobileConfirm payPalMobileConfirm = PayPalMobileConfirm.getInstance();
 			if (payPalMobileConfirm.checkPayment(paymentId, order)) {
 				order.setState(OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
-				getOrderService().update(order);
+				getOrderService().updateAndPlusNumber(order);
 				setResMsg(MsgUtil.getSuccessMsg("check payment successfully"));
 			} else {
 				setResMsg(MsgUtil.getErrorMsgByCode("45004"));

@@ -113,15 +113,19 @@ public class OrderServiceImpl implements OrderService {
 			TimeTaskUtil.sendTimeTask("change", "order",
 					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 5) + "",
 					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
-		} else if (order.getState().startsWith(ORDER_STATE_FINISH_PAID)) {
-			TimeTaskUtil.sendTimeTask("change", "order",
-					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
-					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
-		}
+		} 
+//		else if (order.getState().startsWith(ORDER_STATE_FINISH_PAID)) {
+//			TimeTaskUtil.sendTimeTask("change", "order",
+//					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
+//					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+//		}
 	}
 
 	@Override
 	public void updateAndPlusNumber(Order order) {
+		if (order.getState().startsWith(ORDER_STATE_FINISH_PAID)) {
+			order.setPayTime(Calendar.getInstance().getTimeInMillis() + "");
+		}
 		getOrderDao().updateWithTeacherNumber(order, order.getTeacher());
 		if (order.getState().startsWith(ORDER_STATE_FINISH_PAID)) {
 			NotifyUtil.notifyManager(new SuperMap().put("type", "waitConfirm").finishByJson());
