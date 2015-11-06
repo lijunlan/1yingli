@@ -9,6 +9,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -19,6 +20,8 @@ import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
 import net.sf.json.JSONObject;
 
 @SuppressWarnings("deprecation")
@@ -51,7 +54,7 @@ public class GetSingleUserWeixinInfoUtil {
 		System.out.println(id + "\n" + nickname + "\n" + p + ci + co + "\n" + icon);
 	}
 
-	@SuppressWarnings({ "resource", "rawtypes", "unchecked" })
+	@SuppressWarnings({ "resource" })
 	public static JSONObject getUserInfo(String openid, String access_token) {
 		try {
 
@@ -83,9 +86,12 @@ public class GetSingleUserWeixinInfoUtil {
 			HttpGet httpget = new HttpGet(
 					"https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token + "&openid=" + openid);
 
-			ResponseHandler responseHandler = new BasicResponseHandler();
-			String responseBody = httpclient.execute(httpget, responseHandler);
-			JSONObject data = JSONObject.fromObject(responseBody);
+			HttpResponse response = httpclient.execute(httpget);
+			String result = "{}";
+			if (response.getStatusLine().getStatusCode() == 200) {
+				result = EntityUtils.toString(response.getEntity(), "utf-8");
+			}
+			JSONObject data = JSONObject.fromObject(result);
 			return data;
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
@@ -138,7 +144,7 @@ public class GetSingleUserWeixinInfoUtil {
 						+ SECRET_MOBILE + "&code=" + code + "&grant_type=authorization_code";
 			}
 			HttpGet httpget = new HttpGet(urls);
-			
+
 			// System.out.println("REQUEST:" + httpget.getURI());
 			ResponseHandler responseHandler = new BasicResponseHandler();
 			String responseBody = httpclient.execute(httpget, responseHandler);
