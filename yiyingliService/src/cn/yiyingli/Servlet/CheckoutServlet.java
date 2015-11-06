@@ -71,35 +71,37 @@ public class CheckoutServlet extends HttpServlet {
 		Map<String, String> checkoutDetails = new HashMap<String, String>();
 		// 检查前台传来的数据
 		if (request.getParameter("oid") == null || request.getParameter("uid") == null) {
-			returnMsg(response, MsgUtil.getErrorMsg("data is incomplete"));
+			returnMsg(response, MsgUtil.getErrorMsgByCode("00001"));
 			return;
 		}
 		UserMarkService userMarkService = (UserMarkService) getApplicationContext().getBean("userMarkService");
 		OrderService orderService = (OrderService) getApplicationContext().getBean("orderService");
-		LogUtil.info("receive>>>>PAYPAL orderId:" + request.getParameter("oid") + "\t uid:" + request.getParameter("uid"),
+		LogUtil.info(
+				"receive>>>>PAYPAL orderId:" + request.getParameter("oid") + "\t uid:" + request.getParameter("uid"),
 				this.getClass());
 		// 商户网站订单系统中唯一订单号，必填
 		Order order = orderService.queryByShowId(request.getParameter("oid"), false);
 		if (order == null) {
-			returnMsg(response, MsgUtil.getErrorMsg("order is not existed"));
+			returnMsg(response, MsgUtil.getErrorMsgByCode("42001"));
 			return;
 		}
 		// 用户id
 		String uid = request.getParameter("uid");
 		User user = userMarkService.queryUser(uid);
 		if (user == null) {
-			returnMsg(response, MsgUtil.getErrorMsg("uid is not existed"));
+			returnMsg(response, MsgUtil.getErrorMsgByCode("14001"));
 			return;
 		}
 		if (order.getCreateUser().getId().longValue() != user.getId().longValue()) {
-			LogUtil.info("receive>>>>ORDER IS NOT BELONG TO YOU createOrderId:" + order.getCreateUser().getId() + ",userId:" + user.getId() + ","
-					+ (order.getCreateUser().getId() == user.getId()), this.getClass());
-			returnMsg(response, MsgUtil.getErrorMsg("this order is not belong to you"));
+			LogUtil.info("receive>>>>ORDER IS NOT BELONG TO YOU createOrderId:" + order.getCreateUser().getId()
+					+ ",userId:" + user.getId() + "," + (order.getCreateUser().getId() == user.getId()),
+					this.getClass());
+			returnMsg(response, MsgUtil.getErrorMsgByCode("44001"));
 			return;
 		}
 		String state = order.getState();
 		if (!OrderService.ORDER_STATE_NOT_PAID.equals(state)) {
-			returnMsg(response, MsgUtil.getErrorMsg("order state is not accurate"));
+			returnMsg(response, MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
 		// 由后台插入相关数据

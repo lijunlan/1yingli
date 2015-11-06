@@ -65,21 +65,21 @@ public class RegisterService extends MsgService {
 			nickName = nickName.substring(0, 7);
 		}
 		if (!(CheckUtil.checkMobileNumber(username) || CheckUtil.checkEmail(username)) || "".equals(password)) {
-			setResMsg(MsgUtil.getErrorMsg("username or password is wrong"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12017"));
 			return;
 		}
 
 		CheckNo no = getCheckNoService().query(username);
 		long time = Calendar.getInstance().getTimeInMillis();
 		if (no == null) {
-			setResMsg(MsgUtil.getErrorMsg("this phone or email have no checkNo"));
+			setResMsg(MsgUtil.getErrorMsgByCode("52002"));
 			return;
 		}
 		if (!(no.getCheckNo().equals(checkNo))) {
-			setResMsg(MsgUtil.getErrorMsg("checkNo is wrong"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12001"));
 			return;
 		} else if (time > Long.valueOf(no.getEndTime())) {
-			setResMsg(MsgUtil.getErrorMsg("checkNo is overdue"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12002"));
 			getCheckNoService().remove(no);
 			return;
 		} else {
@@ -89,18 +89,18 @@ public class RegisterService extends MsgService {
 			password = RSAUtil.decryptStr(password, RSAUtil.RSAKEY_BASE_PATH);
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("error"));
+			setResMsg(MsgUtil.getErrorMsgByCode("10001"));
 			return;
 		}
 		if (!CheckUtil.checkPassword(password)) {
-			setResMsg(MsgUtil.getErrorMsg("BAD PASSWROD!"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12005"));
 			return;
 		}
 		if (getData().containsKey("distributorNO")) {
 			String dno = (String) getData().get("distributorNO");
 			distributor = getDistributorService().queryByNo(dno);
 			if (distributor == null) {
-				setResMsg(MsgUtil.getErrorMsg("distributorNO is not existed"));
+				setResMsg(MsgUtil.getErrorMsgByCode("62001"));
 				return;
 			}
 		}
@@ -114,7 +114,7 @@ public class RegisterService extends MsgService {
 		try {
 			getUserService().save(user);
 		} catch (Exception e) {
-			setResMsg(MsgUtil.getErrorMsg("username is exsited"));
+			setResMsg(MsgUtil.getErrorMsgByCode("15003"));
 			return;
 		}
 		setResMsg(MsgUtil.getSuccessMsg("register successfully"));

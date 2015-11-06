@@ -2,15 +2,14 @@ package cn.yiyingli.Handle.Service;
 
 import java.util.Calendar;
 
-import cn.yiyingli.Handle.UMsgService;
+import cn.yiyingli.Handle.TMsgService;
 import cn.yiyingli.Persistant.CheckNo;
-import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.CheckNoService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.MsgUtil;
 
-public class ChangePhoneService extends UMsgService {
+public class TCheckPhoneService extends TMsgService {
 
 	private UserService userService;
 
@@ -39,7 +38,6 @@ public class ChangePhoneService extends UMsgService {
 
 	@Override
 	public void doit() {
-		User user = getUser();
 		String phone = (String) getData().get("phone");
 		String checkNo = (String) getData().get("checkNo");
 		CheckNo no = getCheckNoService().query(phone);
@@ -55,11 +53,16 @@ public class ChangePhoneService extends UMsgService {
 			getCheckNoService().remove(no);
 		}
 		if (CheckUtil.checkMobileNumber(phone)) {
-			user.setPhone(phone);
-			getUserService().updateWithTeacher(user);
-			setResMsg(MsgUtil.getSuccessMsg("phone number has been changed"));
+			if (getTeacher().getPhone().equals(phone)) {
+				getTeacher().setCheckPhone(true);
+			} else {
+				setResMsg(MsgUtil.getErrorMsgByCode("22003"));
+				return;
+			}
+			getTeacherService().update(getTeacher());
+			setResMsg(MsgUtil.getSuccessMsg("phone number has been checked"));
 		} else {
-			setResMsg(MsgUtil.getErrorMsgByCode("12007"));
+			setResMsg(MsgUtil.getErrorMsgByCode("22004"));
 		}
 	}
 

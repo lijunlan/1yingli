@@ -5,11 +5,22 @@ import java.util.UUID;
 
 import cn.yiyingli.Handle.DMsgService;
 import cn.yiyingli.Persistant.Distributor;
+import cn.yiyingli.Service.DistributorService;
 import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.RSAUtil;
 
 public class DLoginService extends DMsgService {
+
+	private DistributorService distributorService;
+
+	public DistributorService getDistributorService() {
+		return distributorService;
+	}
+
+	public void setDistributorService(DistributorService distributorService) {
+		this.distributorService = distributorService;
+	}
 
 	@Override
 	protected boolean checkData() {
@@ -21,7 +32,7 @@ public class DLoginService extends DMsgService {
 		String username = (String) getData().get("username");
 		String password = (String) getData().get("password");
 		if ("".equals(username) || "".equals(password)) {
-			setResMsg(MsgUtil.getErrorMsg("username or password can not be null"));
+			setResMsg(MsgUtil.getErrorMsgByCode("62002"));
 			return;
 		}
 		try {
@@ -29,12 +40,12 @@ public class DLoginService extends DMsgService {
 			password = MD5Util.MD5(password);
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("error"));
+			setResMsg(MsgUtil.getErrorMsgByCode("60001"));
 			return;
 		}
 		Distributor distributor = getDistributorService().queryByUsername(username);
 		if (distributor == null) {
-			setResMsg(MsgUtil.getErrorMsg("distributor is not existed"));
+			setResMsg(MsgUtil.getErrorMsgByCode("62003"));
 			return;
 		}
 		if (password.equals(distributor.getPassword())) {
@@ -44,7 +55,7 @@ public class DLoginService extends DMsgService {
 			getDistributorService().update(distributor);
 			setResMsg("{\"did\":\"" + _UUID + "\",\"state\":\"success\",\"dname\":\"" + distributor.getName() + "\"}");
 		} else {
-			setResMsg(MsgUtil.getErrorMsg("password is not accurate"));
+			setResMsg(MsgUtil.getErrorMsgByCode("62004"));
 		}
 	}
 }

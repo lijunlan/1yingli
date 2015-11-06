@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.ApplicationForm;
 import cn.yiyingli.Persistant.StudyExperience;
 import cn.yiyingli.Persistant.TService;
@@ -15,15 +15,12 @@ import cn.yiyingli.Persistant.WorkExperience;
 import cn.yiyingli.Service.ApplicationFormService;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Service.TipService;
-import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.MsgUtil;
 
-public class CreateApplicationFormService extends MsgService {
+public class CreateApplicationFormService extends UMsgService {
 
 	private ApplicationFormService applicationFormService;
-
-	private UserMarkService userMarkService;
 
 	private TipService tipService;
 
@@ -33,14 +30,6 @@ public class CreateApplicationFormService extends MsgService {
 
 	public void setApplicationFormService(ApplicationFormService applicationFormService) {
 		this.applicationFormService = applicationFormService;
-	}
-
-	public UserMarkService getUserMarkService() {
-		return userMarkService;
-	}
-
-	public void setUserMarkService(UserMarkService userMarkService) {
-		this.userMarkService = userMarkService;
 	}
 
 	public TipService getTipService() {
@@ -53,26 +42,19 @@ public class CreateApplicationFormService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("uid") && getData().containsKey("application");
+		return super.checkData() && getData().containsKey("application");
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doit() {
-		String uid = (String) getData().get("uid");
-		User user = getUserMarkService().queryUser(uid);
-		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("uid is not existed"));
-			return;
-		}
+		User user = getUser();
 		Map<String, Object> application = (Map<String, Object>) getData().get("application");
 		String name = (String) application.get("name");
 		String phone = (String) application.get("phone");
 		String address = (String) application.get("address");
 		String mail = (String) application.get("mail");
-		if (name == null || phone == null || address == null || mail == null) {
-			setResMsg(MsgUtil.getErrorMsg("data is not complete"));
-		}
+
 		List<Object> workExperiences = (List<Object>) application.get("workExperience");
 		List<Object> studyExperiences = (List<Object>) application.get("studyExperience");
 		Map<String, Object> service = (Map<String, Object>) application.get("service");
@@ -146,10 +128,10 @@ public class CreateApplicationFormService extends MsgService {
 		applicationForm.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		applicationForm.setUser(user);
 		if (user.getTeacherState() == UserService.TEACHER_STATE_CHECKING_SHORT) {
-			setResMsg(MsgUtil.getErrorMsg("you have applied"));
+			setResMsg(MsgUtil.getErrorMsgByCode("15001"));
 			return;
 		} else if (user.getTeacherState() == UserService.TEACHER_STATE_ON_SHORT) {
-			setResMsg(MsgUtil.getErrorMsg("you are already teacher"));
+			setResMsg(MsgUtil.getErrorMsgByCode("15002"));
 			return;
 		} else {
 			user.setTeacherState(UserService.TEACHER_STATE_CHECKING_SHORT);

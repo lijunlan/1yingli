@@ -23,7 +23,7 @@ public class LoginByWeiboService extends ULoginMsgService {
 			String code = (String) getData().get("weibo_code");
 			AccessToken accessToken = GetSingleUserWeiboInfoUtil.getAccessToken(code);
 			if (accessToken == null) {
-				setResMsg(MsgUtil.getErrorMsg("your weibo code is wrong"));
+				setResMsg(MsgUtil.getErrorMsgByCode("12018"));
 				return;
 			}
 			weiboUser = GetSingleUserWeiboInfoUtil.getUserInfo(accessToken);
@@ -34,7 +34,7 @@ public class LoginByWeiboService extends ULoginMsgService {
 		}
 
 		if (weiboUser == null) {
-			setResMsg(MsgUtil.getErrorMsg("your weibo code is wrong"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12018"));
 			return;
 		}
 
@@ -54,7 +54,8 @@ public class LoginByWeiboService extends ULoginMsgService {
 			try {
 				getUserService().save(user);
 			} catch (Exception e) {
-				setResMsg(MsgUtil.getErrorMsg(e.getMessage()));
+				e.printStackTrace();
+				setResMsg(MsgUtil.getErrorMsgByCode("15003"));
 				return;
 			}
 			returnUser(user);

@@ -3,19 +3,16 @@ package cn.yiyingli.Handle.Service;
 import java.util.Calendar;
 import java.util.UUID;
 
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Manager;
-import cn.yiyingli.Service.ManagerMarkService;
 import cn.yiyingli.Service.ManagerService;
 import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.RSAUtil;
 
-public class MLoginService extends MsgService {
+public class MLoginService extends MMsgService {
 
 	private ManagerService managerService;
-
-	private ManagerMarkService managerMarkService;
 
 	public ManagerService getManagerService() {
 		return managerService;
@@ -23,14 +20,6 @@ public class MLoginService extends MsgService {
 
 	public void setManagerService(ManagerService managerService) {
 		this.managerService = managerService;
-	}
-
-	public ManagerMarkService getManagerMarkService() {
-		return managerMarkService;
-	}
-
-	public void setManagerMarkService(ManagerMarkService managerMarkService) {
-		this.managerMarkService = managerMarkService;
 	}
 
 	@Override
@@ -43,7 +32,7 @@ public class MLoginService extends MsgService {
 		String username = (String) getData().get("username");
 		String password = (String) getData().get("password");
 		if ("".equals(username) || "".equals(password)) {
-			setResMsg(MsgUtil.getErrorMsg("username or password can not be null"));
+			setResMsg(MsgUtil.getErrorMsgByCode("32010"));
 			return;
 		}
 		try {
@@ -51,12 +40,12 @@ public class MLoginService extends MsgService {
 			password = MD5Util.MD5(password);
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("error"));
+			setResMsg(MsgUtil.getErrorMsgByCode("30001"));
 			return;
 		}
 		Manager manager = getManagerService().query(username);
 		if (manager == null) {
-			setResMsg(MsgUtil.getErrorMsg("username is not exsited"));
+			setResMsg(MsgUtil.getErrorMsgByCode("32011"));
 			return;
 		}
 		if (password.equals(manager.getPassword())) {
@@ -66,7 +55,7 @@ public class MLoginService extends MsgService {
 			getManagerService().update(manager);
 			setResMsg("{\"mid\":\"" + _UUID + "\",\"state\":\"success\",\"mname\":\"" + manager.getName() + "\"}");
 		} else {
-			setResMsg(MsgUtil.getErrorMsg("password is not accurate"));
+			setResMsg(MsgUtil.getErrorMsgByCode("32012"));
 		}
 	}
 

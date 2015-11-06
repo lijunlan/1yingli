@@ -4,7 +4,7 @@ import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Service.CheckFormService;
 import cn.yiyingli.Service.ManagerMarkService;
 
-public class MGetCheckFormService extends MsgService {
+public class _MGetCheckFormService extends MsgService {
 
 	private CheckFormService checkFormService;
 

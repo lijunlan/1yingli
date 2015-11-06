@@ -5,27 +5,16 @@ import java.util.List;
 
 import cn.yiyingli.ExchangeData.ExOrderUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.OrderService;
-import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
-public class GetOrderListService extends MsgService {
-
-	private UserMarkService userMarkService;
+public class GetOrderListService extends UMsgService {
 
 	private OrderService orderService;
-
-	public UserMarkService getUserMarkService() {
-		return userMarkService;
-	}
-
-	public void setUserMarkService(UserMarkService userMarkService) {
-		this.userMarkService = userMarkService;
-	}
 
 	public OrderService getOrderService() {
 		return orderService;
@@ -37,17 +26,12 @@ public class GetOrderListService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("uid") && getData().containsKey("page") || getData().containsKey("state");
+		return super.checkData() && getData().containsKey("page") || getData().containsKey("state");
 	}
 
 	@Override
 	public void doit() {
-		String uid = (String) getData().get("uid");
-		User user = getUserMarkService().queryUser(uid);
-		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("uid is not existed"));
-			return;
-		}
+		User user = getUser();
 		int page = 0;
 		long count = user.getOrderNumber();
 		SuperMap toSend = MsgUtil.getSuccessMap();
@@ -64,11 +48,11 @@ public class GetOrderListService extends MsgService {
 			try {
 				page = Integer.parseInt((String) getData().get("page"));
 			} catch (Exception e) {
-				setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+				setResMsg(MsgUtil.getErrorMsgByCode("12010"));
 				return;
 			}
 			if (page <= 0) {
-				setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+				setResMsg(MsgUtil.getErrorMsgByCode("12010"));
 				return;
 			}
 		}
