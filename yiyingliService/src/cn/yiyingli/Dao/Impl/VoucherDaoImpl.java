@@ -82,7 +82,7 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 
 			@Override
 			public List<Voucher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Voucher v";
+				String hql = "from Voucher v ORDER BY v.createTime DESC";
 				if (lazy) {
 					hql = "from Voucher v left join fetch v.useOrder left join fetch v.ownUser ORDER BY v.createTime DESC";
 				}
@@ -106,8 +106,8 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 			public List<Voucher> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from Voucher v where v.ownUser.id=" + userId + " ORDER BY v.createTime DESC";
 				if (lazy) {
-					hql = "from Voucher v left join fetch v.useOrder left join fetch v.ownUser where v.ownUser.id=" + userId
-							+ " ORDER BY v.createTime DESC";
+					hql = "from Voucher v left join fetch v.useOrder left join fetch v.ownUser where v.ownUser.id="
+							+ userId + " ORDER BY v.createTime DESC";
 				}
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
