@@ -1,35 +1,23 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Handle.MsgService;
-import cn.yiyingli.Persistant.Manager;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.StudyExperience;
 import cn.yiyingli.Persistant.TService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.Tip;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.WorkExperience;
-import cn.yiyingli.Service.ManagerMarkService;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.MsgUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-public class MGetTeacherInfoService extends MsgService {
-
-	private ManagerMarkService managerMarkService;
+public class MGetTeacherInfoService extends MMsgService {
 
 	private TeacherService teacherService;
 
 	private UserService userService;
-
-	public ManagerMarkService getManagerMarkService() {
-		return managerMarkService;
-	}
-
-	public void setManagerMarkService(ManagerMarkService managerMarkService) {
-		this.managerMarkService = managerMarkService;
-	}
 
 	public TeacherService getTeacherService() {
 		return teacherService;
@@ -49,21 +37,15 @@ public class MGetTeacherInfoService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("username") && getData().containsKey("mid");
+		return super.checkData() && getData().containsKey("username");
 	}
 
 	@Override
 	public void doit() {
-		String mid = (String) getData().get("mid");
-		Manager manager = getManagerMarkService().queryManager(mid);
-		if (manager == null) {
-			setResMsg(MsgUtil.getErrorMsg("manager is not existed"));
-			return;
-		}
 		String username = (String) getData().get("username");
 		User user = getUserService().queryWithTeacher(username, false);
 		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("username is not existed"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12015"));
 			return;
 		}
 		try {
@@ -136,7 +118,7 @@ public class MGetTeacherInfoService extends MsgService {
 			setResMsg(toSend.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg(e.getMessage()));
+			setResMsg(MsgUtil.getErrorMsgByCode("31001"));
 		}
 	}
 

@@ -49,7 +49,7 @@ public class SearchByTipService extends MsgService {
 			msg = Json.getJsonByEx(exList);
 		} catch (Exception e) {
 			e.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("error"));
+			setResMsg(MsgUtil.getErrorMsgByCode("50001"));
 			return;
 		}
 		setResMsg(msg);

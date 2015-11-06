@@ -5,27 +5,16 @@ import java.util.List;
 
 import cn.yiyingli.ExchangeData.ExTeacherSimpleShowUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.TeacherService;
-import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
-public class GetLikeTeachersService extends MsgService {
-
-	private UserMarkService userMarkService;
+public class GetLikeTeachersService extends UMsgService {
 
 	private TeacherService teacherService;
-
-	public UserMarkService getUserMarkService() {
-		return userMarkService;
-	}
-
-	public void setUserMarkService(UserMarkService userMarkService) {
-		this.userMarkService = userMarkService;
-	}
 
 	public TeacherService getTeacherService() {
 		return teacherService;
@@ -37,17 +26,12 @@ public class GetLikeTeachersService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("uid") && getData().containsKey("page");
+		return super.checkData() && getData().containsKey("page");
 	}
 
 	@Override
 	public void doit() {
-		String uid = (String) getData().get("uid");
-		User user = getUserMarkService().queryUser(uid);
-		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("uid is not existed"));
-			return;
-		}
+		User user = getUser();
 		int page = 0;
 		SuperMap toSend = MsgUtil.getSuccessMap();
 		if (getData().get("page").equals("max")) {
@@ -63,11 +47,11 @@ public class GetLikeTeachersService extends MsgService {
 			try {
 				page = Integer.parseInt((String) getData().get("page"));
 			} catch (Exception e) {
-				setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+				setResMsg(MsgUtil.getErrorMsgByCode("12010"));
 				return;
 			}
 			if (page <= 0) {
-				setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+				setResMsg(MsgUtil.getErrorMsgByCode("12010"));
 				return;
 			}
 		}

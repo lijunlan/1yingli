@@ -80,7 +80,7 @@ public class GetTeacherSimpleInfoListService extends MsgService {
 			saveRecord(tipId);
 			setResMsg(MsgUtil.getSuccessMap().put("data", Json.getJson(exTeachers)).finishByJson());
 		} catch (NumberFormatException e) {
-			setResMsg(MsgUtil.getErrorMsg("input data is wrong"));
+			setResMsg(MsgUtil.getErrorMsgByCode("51001"));
 			return;
 		}
 	}

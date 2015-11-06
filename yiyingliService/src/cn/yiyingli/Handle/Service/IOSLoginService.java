@@ -42,7 +42,7 @@ public class IOSLoginService extends MsgService {
 		String username = (String) getData().get("username");
 		String password = (String) getData().get("password");
 		if ("".equals(username) || "".equals(password)) {
-			setResMsg(MsgUtil.getErrorMsg("username or password can not be null"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12014"));
 			return;
 		}
 		try {
@@ -50,12 +50,12 @@ public class IOSLoginService extends MsgService {
 			password = MD5Util.MD5(password);
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("error"));
+			setResMsg(MsgUtil.getErrorMsgByCode("10001"));
 			return;
 		}
 		User user = getUserService().queryWithTeacher(username, false);
 		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("username is not existed"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12015"));
 			return;
 		}
 		if (password.equals(user.getPassword())) {
@@ -70,7 +70,7 @@ public class IOSLoginService extends MsgService {
 						+ (user.getIconUrl() != null ? user.getIconUrl() : "") + "\",\"state\":\"success\"}");
 			}
 		} else {
-			setResMsg(MsgUtil.getErrorMsg("password is not accurate"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12016"));
 		}
 	}
 

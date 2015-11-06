@@ -11,7 +11,7 @@ import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.SendMailUtil;
 import cn.yiyingli.Util.SendMessageUtil;
 
-public class GetCheckNoService extends MsgService {
+public class FGetCheckNoService extends MsgService {
 
 	private CheckNoService checkNoService;
 
@@ -32,7 +32,7 @@ public class GetCheckNoService extends MsgService {
 	public void doit() {
 		String username = (String) getData().get("username");
 		if (!(CheckUtil.checkMobileNumber(username) || CheckUtil.checkEmail(username))) {
-			setResMsg(MsgUtil.getErrorMsg("username is not accurate"));
+			setResMsg(MsgUtil.getErrorMsgByCode("52001"));
 			return;
 		}
 		CheckNo cn = getCheckNoService().query(username);
@@ -41,7 +41,7 @@ public class GetCheckNoService extends MsgService {
 			if (time > Long.valueOf(cn.getEndTime())) {
 				getCheckNoService().remove(cn);
 			} else {
-				setResMsg(MsgUtil.getErrorMsg("you can not get now"));
+				setResMsg(MsgUtil.getErrorMsgByCode("55001"));
 				return;
 			}
 		}

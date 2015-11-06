@@ -38,7 +38,7 @@ public class MGetTeacherAllInfoService extends MsgService {
 	public void doit() {
 		Teacher teacher = getTeacherService().queryWithTips(Long.valueOf((String) getData().get("teacherId")), false);
 		if (teacher == null) {
-			setResMsg(MsgUtil.getErrorMsg("teacher is not exsited"));
+			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
 		}
 		SuperMap map = MsgUtil.getSuccessMap();

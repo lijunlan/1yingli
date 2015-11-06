@@ -6,19 +6,15 @@ import java.util.Date;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
-import cn.yiyingli.Handle.MsgService;
-import cn.yiyingli.Persistant.Manager;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Teacher;
-import cn.yiyingli.Service.ManagerMarkService;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
-public class MGetTeacherListService extends MsgService {
+public class MGetTeacherListService extends MMsgService {
 
 	private TeacherService teacherService;
-
-	private ManagerMarkService managerMarkService;
 
 	public TeacherService getTeacherService() {
 		return teacherService;
@@ -28,32 +24,18 @@ public class MGetTeacherListService extends MsgService {
 		this.teacherService = teacherService;
 	}
 
-	public ManagerMarkService getManagerMarkService() {
-		return managerMarkService;
-	}
-
-	public void setManagerMarkService(ManagerMarkService managerMarkService) {
-		this.managerMarkService = managerMarkService;
-	}
-
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("mid") && getData().containsKey("page");
+		return super.checkData() && getData().containsKey("page");
 	}
 
 	private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
 
 	@Override
 	public void doit() {
-		String mid = (String) getData().get("mid");
-		Manager manager = getManagerMarkService().queryManager(mid);
-		if (manager == null) {
-			setResMsg(MsgUtil.getErrorMsg("manager is not existed"));
-			return;
-		}
 		String page = (String) getData().get("page");
-		if(Integer.valueOf(page)<=0){
-			setResMsg(MsgUtil.getErrorMsg("WRONG　PAGE!"));
+		if (Integer.valueOf(page) <= 0) {
+			setResMsg(MsgUtil.getErrorMsgByCode("32009"));
 			return;
 		}
 		List<Teacher> teachers = getTeacherService().queryList(Integer.valueOf(page), false);

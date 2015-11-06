@@ -32,7 +32,7 @@
 		<method name="changePassword" beanName="changePasswordService" />
 		<method name="iosChangePassword" beanName="iosChangePasswordService" />
 		<method name="changeIcon" beanName="changeIconService" />
-		<method name="checkPhone" beanName="checkPhoneService" />
+		<method name="checkPhone" beanName="tCheckPhoneService" />
 		<method name="getCommentList" beanName="getCommentListService" />
 		<method name="getLikeTeachers" beanName="getLikeTeachersService" />
 		<method name="getNotificationCount" beanName="getNotificationCountService" />
@@ -59,7 +59,7 @@
 		<method name="getOrderCount" beanName="tGetOrderCountService" />
 		<method name="getCommentCount" beanName="tGetCommentCountService" />
 		<method name="getTeacherCheckInfo" beanName="tGetTeacherCheckInfoService" />
-		<method name="changeTip" beanName="changeTipsService" />
+		<method name="changeTip" beanName="tChangeTipsService" />
 		<method name="commentUser" beanName="tCommentUserService" />
 		<method name="createCheckForm" beanName="createCheckFormService" />
 		<method name="changeBG" beanName="tChangeBGService" />
@@ -120,7 +120,7 @@
 		<method name="removeBackground" beanName="mRemoveBackgroundService" />
 	</style>
 	<style name="function">
-		<method name="getCheckNo" beanName="getCheckNoService"></method>
+		<method name="getCheckNo" beanName="fGetCheckNoService"></method>
 		<method name="searchByTip" beanName="searchByTipService"></method>
 		<method name="getTips" beanName="getTipsService"></method>
 		<method name="getSearchHint" beanName="fGetSearchHintService"></method>
@@ -130,6 +130,7 @@
 		<method name="suggest" beanName="fSuggestService" />
 		<method name="recordRecommend" beanName="fRecordRecommendService" />
 		<method name="getRecommendTeacherList" beanName="fGetRecommendTeacherListService" />
+		<method name="checkPaypalPayment" beanName="fCheckPaypalPaymentService" />
 		<!-- <method name="fMoneyReturned" beanName="fMoneyReturnedService" /> -->
 	</style>
 	<style name="notification">
@@ -138,7 +139,6 @@
 	</style>
 	<style name="order">
 		<method name="createOrder" beanName="createOrderService" />
-		<method name="createOrderWithoutLogin" beanName="createOrderWithoutLoginService" />
 		<method name="getListByTeacher" beanName="tGetOrderListService" />
 		<method name="getByTeacher" beanName="tGetOrderInfoService" />
 		<method name="getListByUser" beanName="getOrderListService" />

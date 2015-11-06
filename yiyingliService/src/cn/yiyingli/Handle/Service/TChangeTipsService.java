@@ -9,7 +9,7 @@ import cn.yiyingli.Persistant.Tip;
 import cn.yiyingli.Service.TipService;
 import cn.yiyingli.Util.MsgUtil;
 
-public class TEditSpecialTipService extends TMsgService {
+public class TChangeTipsService extends TMsgService {
 
 	private TipService tipService;
 
@@ -32,13 +32,17 @@ public class TEditSpecialTipService extends TMsgService {
 		Teacher teacher = getTeacher();
 		List<Object> tips = (List<Object>) getData().get("tips");
 		teacher.getTips().clear();
+		getTeacherService().update(teacher);
+		long tipMark = 0;
 		for (Object t : tips) {
 			Long tid = Long.valueOf((String) ((Map<String, Object>) t).get("id"));
+			tipMark = tipMark | tid;
 			Tip mT = getTipService().query(tid);
 			teacher.getTips().add(mT);
 		}
+		teacher.setTipMark(tipMark);
 		getTeacherService().update(teacher);
-		setResMsg(MsgUtil.getSuccessMsg("tips has changed"));
+		setResMsg(MsgUtil.getSuccessMsg("tips have changed"));
 	}
 
 }

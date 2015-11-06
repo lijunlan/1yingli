@@ -2,19 +2,16 @@ package cn.yiyingli.Handle.Service;
 
 import java.util.Calendar;
 
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Manager;
 import cn.yiyingli.Persistant.Voucher;
-import cn.yiyingli.Service.ManagerMarkService;
 import cn.yiyingli.Service.VoucherService;
 import cn.yiyingli.Util.CouponNumberUtil;
 import cn.yiyingli.Util.MsgUtil;
 
-public class MCreateVoucherService extends MsgService {
+public class MCreateVoucherService extends MMsgService {
 
 	private VoucherService voucherService;
-
-	private ManagerMarkService managerMarkService;
 
 	public VoucherService getVoucherService() {
 		return voucherService;
@@ -24,28 +21,15 @@ public class MCreateVoucherService extends MsgService {
 		this.voucherService = voucherService;
 	}
 
-	public ManagerMarkService getManagerMarkService() {
-		return managerMarkService;
-	}
-
-	public void setManagerMarkService(ManagerMarkService managerMarkService) {
-		this.managerMarkService = managerMarkService;
-	}
-
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("mid") && getData().containsKey("count") && getData().containsKey("endTime")
+		return super.checkData() && getData().containsKey("count") && getData().containsKey("endTime")
 				&& getData().containsKey("startTime") && getData().containsKey("money");
 	}
 
 	@Override
 	public void doit() {
-		String mid = (String) getData().get("mid");
-		Manager manager = getManagerMarkService().queryManager(mid);
-		if (manager == null) {
-			setResMsg(MsgUtil.getErrorMsg("manager is not existed"));
-			return;
-		}
+		Manager manager = getManager();
 		int count = Integer.valueOf((String) getData().get("count"));
 		float money = Float.valueOf((String) getData().get("money"));
 		String endTime = (String) getData().get("endTime");

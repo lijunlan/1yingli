@@ -48,7 +48,7 @@ public class TGetCommentListService extends MsgService {
 		String teacherId = (String) getData().get("teacherId");
 		Teacher teacher = getTeacherService().query(Long.valueOf(teacherId), false);
 		if (teacher == null) {
-			setResMsg(MsgUtil.getErrorMsg("teahcerId is not existed"));
+			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
 		}
 		int page = 0;
@@ -66,11 +66,11 @@ public class TGetCommentListService extends MsgService {
 			try {
 				page = Integer.parseInt((String) getData().get("page"));
 			} catch (Exception e) {
-				setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+				setResMsg(MsgUtil.getErrorMsgByCode("22005"));
 				return;
 			}
 			if (page <= 0) {
-				setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+				setResMsg(MsgUtil.getErrorMsgByCode("22005"));
 				return;
 			}
 		}

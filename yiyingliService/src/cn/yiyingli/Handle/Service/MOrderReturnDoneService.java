@@ -1,29 +1,17 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Handle.MsgService;
-import cn.yiyingli.Persistant.Manager;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Order;
-import cn.yiyingli.Service.ManagerMarkService;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
 
-public class MOrderReturnDoneService extends MsgService {
-
-	private ManagerMarkService managerMarkService;
+public class MOrderReturnDoneService extends MMsgService {
 
 	private OrderService orderService;
 
 	private NotificationService notificationService;
-
-	public ManagerMarkService getManagerMarkService() {
-		return managerMarkService;
-	}
-
-	public void setManagerMarkService(ManagerMarkService managerMarkService) {
-		this.managerMarkService = managerMarkService;
-	}
 
 	public OrderService getOrderService() {
 		return orderService;
@@ -43,29 +31,23 @@ public class MOrderReturnDoneService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("orderId") && getData().containsKey("mid");
+		return super.checkData() && getData().containsKey("orderId");
 	}
 
 	@Override
 	public void doit() {
-		String mid = (String) getData().get("mid");
-		Manager manager = getManagerMarkService().queryManager(mid);
-		if (manager == null) {
-			setResMsg(MsgUtil.getErrorMsg("manager is not existed"));
-			return;
-		}
 		String oid = (String) getData().get("orderId");
 		Order order = getOrderService().queryByShowId(oid, false);
 		if (order == null) {
-			setResMsg(MsgUtil.getErrorMsg("order is not existed"));
+			setResMsg(MsgUtil.getErrorMsgByCode("42001"));
 			return;
 		}
 		String state = order.getState().split(",")[0];
 		if (!OrderService.ORDER_STATE_WAIT_RETURN.equals(state)) {
 			if (OrderService.ORDER_STATE_END_FAILED.equals(state)) {
-				setResMsg(MsgUtil.getErrorMsg("the state has changed automaticly"));
+				setResMsg(MsgUtil.getErrorMsgByCode("45005"));
 			} else {
-				setResMsg(MsgUtil.getErrorMsg("order state is not accurate"));
+				setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 				return;
 			}
 		}

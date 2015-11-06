@@ -20,7 +20,7 @@ import cn.yiyingli.Util.MsgUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-public class FGetSearchHintService extends MsgService{
+public class FGetSearchHintService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
@@ -30,50 +30,51 @@ public class FGetSearchHintService extends MsgService{
 	@Override
 	public void doit() {
 		try {
-            Map<String, Object> opts = new HashMap<String, Object>();
-            String accessKeyId = AliyunConfiguration.ACCESS_ID;
-            String accessKeySecret = AliyunConfiguration.ACCESS_KEY;
-            String host = ConfigurationXmlUtil.getInstance().getSettingData().get("searchHintUrl");
-            CloudsearchClient client = new CloudsearchClient(accessKeyId, accessKeySecret, host, opts, KeyTypeEnum.ALIYUN);
-            
-            String indexName = "yiyinglihint";
-            String suggestName = "hinttest";
-            CloudsearchSuggest suggest = new CloudsearchSuggest(indexName, suggestName, client);
+			Map<String, Object> opts = new HashMap<String, Object>();
+			String accessKeyId = AliyunConfiguration.ACCESS_ID;
+			String accessKeySecret = AliyunConfiguration.ACCESS_KEY;
+			String host = ConfigurationXmlUtil.getInstance().getSettingData().get("searchHintUrl");
+			CloudsearchClient client = new CloudsearchClient(accessKeyId, accessKeySecret, host, opts,
+					KeyTypeEnum.ALIYUN);
 
-            suggest.setHit(10);
-            String word = (String) getData().get("word");
-            suggest.setQuery(word);
-            String result = suggest.search();
+			String indexName = "yiyinglihint";
+			String suggestName = "hinttest";
+			CloudsearchSuggest suggest = new CloudsearchSuggest(indexName, suggestName, client);
 
-            JSONObject jsonResult = JSONObject.fromObject(result);
-            List<String> suggestions = new ArrayList<String>();
+			suggest.setHit(10);
+			String word = (String) getData().get("word");
+			suggest.setQuery(word);
+			String result = suggest.search();
 
-            if (!jsonResult.has("errors")) {
-                JSONArray itemsJsonArray = (JSONArray) jsonResult.get("suggestions");
-                for (int i = 0; i < itemsJsonArray.size(); i++){
-                    JSONObject item = (JSONObject) itemsJsonArray.get(i);
-                    suggestions.add(item.getString("suggestion"));
-                }
-                Map<String,Object> ret = new HashMap<String,Object>();
-                ret.put("result",suggestions);
-                ret.put("status","OK");
-                setResMsg(JSONObject.fromObject(ret).toString());
-            } else {
-            	 Map<String,Object> ret = new HashMap<String,Object>();
-                 ret.put("errors","service error");
-                 ret.put("status","FAIL");
-                 setResMsg(JSONObject.fromObject(ret).toString());
-            }
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-            setResMsg(MsgUtil.getErrorMsg("service error"));
-        } catch (ClientProtocolException e) {
-        	e.printStackTrace();
-        	setResMsg(MsgUtil.getErrorMsg("service error"));
-        } catch (IOException e) {
-        	e.printStackTrace();
-        	setResMsg(MsgUtil.getErrorMsg("service error"));
-        }
+			JSONObject jsonResult = JSONObject.fromObject(result);
+			List<String> suggestions = new ArrayList<String>();
+
+			if (!jsonResult.has("errors")) {
+				JSONArray itemsJsonArray = (JSONArray) jsonResult.get("suggestions");
+				for (int i = 0; i < itemsJsonArray.size(); i++) {
+					JSONObject item = (JSONObject) itemsJsonArray.get(i);
+					suggestions.add(item.getString("suggestion"));
+				}
+				Map<String, Object> ret = new HashMap<String, Object>();
+				ret.put("result", suggestions);
+				ret.put("status", "OK");
+				setResMsg(JSONObject.fromObject(ret).toString());
+			} else {
+				Map<String, Object> ret = new HashMap<String, Object>();
+				ret.put("errors", "service error");
+				ret.put("status", "FAIL");
+				setResMsg(JSONObject.fromObject(ret).toString());
+			}
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+			setResMsg(MsgUtil.getErrorMsgByCode("53002"));
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+			setResMsg(MsgUtil.getErrorMsgByCode("53003"));
+		} catch (IOException e) {
+			e.printStackTrace();
+			setResMsg(MsgUtil.getErrorMsgByCode("53002"));
+		}
 	}
 
 }
