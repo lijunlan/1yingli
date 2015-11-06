@@ -12,7 +12,7 @@ var code = $_GET('code');
 $.ajax({
         cache : true,
         type : "POST",
-        url : config.base_url,
+        url : "http://service.1yingli.cn/yiyingliService/manage",
         data : "{'style':'user','method':'loginByWeibo','weibo_code':'"+code+"'}",
         async : false,
         error : function(request) {
@@ -52,7 +52,7 @@ function weixin(){
     $.ajax({
             cache : true,
             type : "POST",
-            url : config.base_url,
+            url : "http://service.1yingli.cn/yiyingliService/manage",
             data : "{'style':'user','method':'loginByWeixin','weixin_code':'"+code+"'}",
             async : false,
             error : function(request) {
@@ -60,6 +60,7 @@ function weixin(){
                     },
             success : function(data, textStatu) {
                 var json = eval("(" + data + ")");
+                console.log(json);
                 if(json.state =="success" ){
                     var uid = json.uid;
                     var nickName = json.nickName;

@@ -108,7 +108,7 @@ header,footer,section {display:block;}
 .face-face{  width: 90px;height: 90px;border-radius: 45px;  }
 .personal-info-pic{  float: left;width: 353px;margin-left: 15px;  }
 .personal-info-pic p{  font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 12px;margin-top: 30px;width: 353px;  }
-#select-picture{  width: 438px;height: 30px; border: 1px solid rgba(0,0,0,0.15);  }
+#select-picture{  width: 438px;height: 30px; border: 1px solid rgba(0,0,0,0.15);  position: relative}
 #picture-src{
     width: 337px;
     height: 30px;
