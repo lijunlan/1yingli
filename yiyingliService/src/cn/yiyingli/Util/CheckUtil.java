@@ -83,6 +83,8 @@ public class CheckUtil {
 		boolean flag = false;
 		try {
 			// 验证是不是6-20位纯数字
+			if(psw.length()<6||psw.length()>20)
+				return false;
 			Pattern regex1 = Pattern.compile("[0-9]{6,20}");
 			Matcher matcher = regex1.matcher(psw);
 			flag = matcher.matches();

@@ -46,6 +46,7 @@ public class ExOrderUtil {
 
 	public static void assembleOrderToManager(SuperMap map, Order o) {
 		map.put("orderId", o.getOrderNo());
+		map.put("payTime", o.getPayTime());
 		map.put("createTime", o.getCreateTime());
 		map.put("title", o.getServiceTitle());
 		map.put("price", o.getMoney().toString());
