@@ -50,7 +50,7 @@ public class AlipayServlet extends HttpServlet {
 		OrderService orderService = (OrderService) getApplicationContext().getBean("orderService");
 
 		if (req.getParameter("oid") == null || req.getParameter("uid") == null) {
-			returnMsg(resp, MsgUtil.getErrorMsg("data is incomplete"));
+			returnMsg(resp, MsgUtil.getErrorMsgByCode("00001"));
 			return;
 		}
 		LogUtil.info("receive>>>>orderId:" + req.getParameter("oid") + "\t uid:" + req.getParameter("uid"),
@@ -61,26 +61,26 @@ public class AlipayServlet extends HttpServlet {
 		// 商户网站订单系统中唯一订单号，必填
 		Order order = orderService.queryByShowId(oid, false);
 		if (order == null) {
-			returnMsg(resp, MsgUtil.getErrorMsg("order is not existed"));
+			returnMsg(resp, MsgUtil.getErrorMsgByCode("42001"));
 			return;
 		}
 		// 用户id
 		String uid = req.getParameter("uid");
 		User user = userMarkService.queryUser(uid);
 		if (user == null) {
-			returnMsg(resp, MsgUtil.getErrorMsg("uid is not existed"));
+			returnMsg(resp, MsgUtil.getErrorMsgByCode("14001"));
 			return;
 		}
 
 		if (order.getCreateUser().getId().longValue() != user.getId().longValue()) {
 			LogUtil.info("receive>>>>createOrderId:" + order.getCreateUser().getId() + ",userId:" + user.getId() + ","
 					+ (order.getCreateUser().getId() == user.getId()), this.getClass());
-			returnMsg(resp, MsgUtil.getErrorMsg("this order is not belong to you"));
+			returnMsg(resp, MsgUtil.getErrorMsgByCode("44001"));
 			return;
 		}
 		String state = order.getState();
 		if (!OrderService.ORDER_STATE_NOT_PAID.equals(state)) {
-			returnMsg(resp, MsgUtil.getErrorMsg("order state is not accurate"));
+			returnMsg(resp, MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
 		// 订单名称
@@ -128,12 +128,10 @@ public class AlipayServlet extends HttpServlet {
 		// 过期时间 24h
 		parms.put("it_b_pay", "24h");
 
-		// PrintWriter out = resp.getWriter();
 		String sHtmlText = AlipaySubmit.buildRequest(parms, "get", "确认");
 		sHtmlText = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">"
 				+ "<title>支付宝</title>" + "</head>" + sHtmlText + "<body></body></html>";
 		returnMsg(resp, sHtmlText);
-		// out.println(sHtmlText);
 	}
 
 	/**

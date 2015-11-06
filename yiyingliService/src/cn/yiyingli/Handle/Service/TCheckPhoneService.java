@@ -44,10 +44,10 @@ public class TCheckPhoneService extends TMsgService {
 		CheckNo no = getCheckNoService().query(phone);
 		long time = Calendar.getInstance().getTimeInMillis();
 		if (no == null || !(no.getCheckNo().equals(checkNo))) {
-			setResMsg(MsgUtil.getErrorMsg("checkNo is wrong"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12001"));
 			return;
 		} else if (time > Long.valueOf(no.getEndTime())) {
-			setResMsg(MsgUtil.getErrorMsg("checkNo is overdue"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12002"));
 			getCheckNoService().remove(no);
 			return;
 		} else {
@@ -57,13 +57,13 @@ public class TCheckPhoneService extends TMsgService {
 			if (getTeacher().getPhone().equals(phone)) {
 				getTeacher().setCheckPhone(true);
 			} else {
-				setResMsg(MsgUtil.getErrorMsg("phone number is wrong"));
+				setResMsg(MsgUtil.getErrorMsgByCode("22003"));
 				return;
 			}
 			getTeacherService().update(getTeacher());
 			setResMsg(MsgUtil.getSuccessMsg("phone number has been checked"));
 		} else {
-			setResMsg(MsgUtil.getErrorMsg("phone number is not accurate"));
+			setResMsg(MsgUtil.getErrorMsgByCode("22004"));
 		}
 	}
 

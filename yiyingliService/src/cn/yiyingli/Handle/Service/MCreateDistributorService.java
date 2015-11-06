@@ -67,7 +67,7 @@ public class MCreateDistributorService extends MMsgService {
 
 		getDistributorService().save(distributor);
 
-		setResMsg(MsgUtil.getErrorMsg("create distributor successfully"));
+		setResMsg(MsgUtil.getSuccessMsg("create distributor successfully"));
 	}
 
 }

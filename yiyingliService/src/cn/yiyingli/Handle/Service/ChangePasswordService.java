@@ -38,7 +38,7 @@ public class ChangePasswordService extends UMsgService {
 		try {
 			password = RSAUtil.decryptStr(password, RSAUtil.RSAKEY_BASE_PATH);
 			if (!CheckUtil.checkPassword(password)) {
-				setResMsg(MsgUtil.getErrorMsg("12005"));
+				setResMsg(MsgUtil.getErrorMsgByCode("12005"));
 				return;
 			}
 			password = MD5Util.MD5(password);
@@ -46,7 +46,7 @@ public class ChangePasswordService extends UMsgService {
 			oldpassword = MD5Util.MD5(oldpassword);
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("10001"));
+			setResMsg(MsgUtil.getErrorMsgByCode("10001"));
 			return;
 		}
 		if (oldpassword.equals(user.getPassword())) {
@@ -54,7 +54,7 @@ public class ChangePasswordService extends UMsgService {
 			getUserService().update(user);
 			setResMsg(MsgUtil.getSuccessMsg("password has changed"));
 		} else {
-			setResMsg(MsgUtil.getErrorMsg("12006"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12006"));
 		}
 	}
 

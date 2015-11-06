@@ -5,23 +5,16 @@ import java.util.List;
 
 import cn.yiyingli.ExchangeData.ExOrderUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.TMsgService;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.Teacher;
-import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.OrderService;
-import cn.yiyingli.Service.TeacherService;
-import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
-public class TGetOrderListService extends MsgService {
+public class TGetOrderListService extends TMsgService {
 
 	private OrderService orderService;
-
-	private TeacherService teacherService;
-
-	private UserMarkService userMarkService;
 
 	public OrderService getOrderService() {
 		return orderService;
@@ -31,46 +24,15 @@ public class TGetOrderListService extends MsgService {
 		this.orderService = orderService;
 	}
 
-	public UserMarkService getUserMarkService() {
-		return userMarkService;
-	}
-
-	public void setUserMarkService(UserMarkService userMarkService) {
-		this.userMarkService = userMarkService;
-	}
-
-	public TeacherService getTeacherService() {
-		return teacherService;
-	}
-
-	public void setTeacherService(TeacherService teacherService) {
-		this.teacherService = teacherService;
-	}
-
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("teacherId") && getData().containsKey("uid") && getData().containsKey("page")
-				|| getData().containsKey("state");
+		return super.checkData() && getData().containsKey("page") || getData().containsKey("state");
 	}
 
 	@Override
 	public void doit() {
-		String uid = (String) getData().get("uid");
-		User user = getUserMarkService().queryUser(uid);
-		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("uid is not existed"));
-			return;
-		}
-		Teacher teacher = getTeacherService().queryByUserIdWithTService(user.getId(), false);
-		if (teacher == null) {
-			setResMsg(MsgUtil.getErrorMsg("you are not a teacher"));
-			return;
-		}
-		String teacherId = (String) getData().get("teacherId");
-		if (!teacherId.equals(teacher.getId() + "")) {
-			setResMsg(MsgUtil.getErrorMsg("uid don't match teacherId"));
-			return;
-		}
+		super.doit();
+		Teacher teacher = getTeacher();
 		int page = 0;
 		SuperMap toSend = MsgUtil.getSuccessMap();
 		if (getData().get("page").equals("max")) {
@@ -86,11 +48,11 @@ public class TGetOrderListService extends MsgService {
 			try {
 				page = Integer.parseInt((String) getData().get("page"));
 			} catch (Exception e) {
-				setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+				setResMsg(MsgUtil.getErrorMsgByCode("22005"));
 				return;
 			}
 			if (page <= 0) {
-				setResMsg(MsgUtil.getErrorMsg("page is wrong"));
+				setResMsg(MsgUtil.getErrorMsgByCode("22005"));
 				return;
 			}
 		}

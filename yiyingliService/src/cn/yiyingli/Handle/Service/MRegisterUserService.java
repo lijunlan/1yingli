@@ -1,9 +1,7 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Handle.MsgService;
-import cn.yiyingli.Persistant.Manager;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.User;
-import cn.yiyingli.Service.ManagerMarkService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.MD5Util;
@@ -11,11 +9,9 @@ import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.RSAUtil;
 import cn.yiyingli.toPersistant.PUserUtil;
 
-public class MRegisterUserService extends MsgService {
+public class MRegisterUserService extends MMsgService {
 
 	private UserService userService;
-
-	private ManagerMarkService managerMarkService;
 
 	public UserService getUserService() {
 		return userService;
@@ -25,33 +21,20 @@ public class MRegisterUserService extends MsgService {
 		this.userService = userService;
 	}
 
-	public ManagerMarkService getManagerMarkService() {
-		return managerMarkService;
-	}
-
-	public void setManagerMarkService(ManagerMarkService managerMarkService) {
-		this.managerMarkService = managerMarkService;
-	}
-
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("username") && getData().containsKey("password")
-				&& getData().containsKey("nickName") && getData().containsKey("mid");
+		return super.checkData() && getData().containsKey("username") && getData().containsKey("password")
+				&& getData().containsKey("nickName");
 	}
 
 	@Override
 	public void doit() {
-		String mid = (String) getData().get("mid");
-		Manager manager = getManagerMarkService().queryManager(mid);
-		if (manager == null) {
-			setResMsg(MsgUtil.getErrorMsg("manager is not existed"));
-			return;
-		}
+		super.doit();
 		String username = (String) getData().get("username");
 		String password = (String) getData().get("password");
 		String nickName = (String) getData().get("nickName");
 		if (!(CheckUtil.checkMobileNumber(username) || CheckUtil.checkEmail(username)) || "".equals(password)) {
-			setResMsg(MsgUtil.getErrorMsg("username or password is wrong"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12017"));
 			return;
 		}
 
@@ -59,11 +42,11 @@ public class MRegisterUserService extends MsgService {
 			password = RSAUtil.decryptStr(password, RSAUtil.RSAKEY_BASE_PATH);
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("server error"));
+			setResMsg(MsgUtil.getErrorMsgByCode("10001"));
 			return;
 		}
 		if (!CheckUtil.checkPassword(password)) {
-			setResMsg(MsgUtil.getErrorMsg("BAD PASSWROD!"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12005"));
 			return;
 		}
 		password = MD5Util.MD5(password);
@@ -76,7 +59,7 @@ public class MRegisterUserService extends MsgService {
 		try {
 			getUserService().save(user);
 		} catch (Exception e) {
-			setResMsg(MsgUtil.getErrorMsg("username is exsited"));
+			setResMsg(MsgUtil.getErrorMsgByCode("15003"));
 			return;
 		}
 		setResMsg(MsgUtil.getSuccessMsg("register successfully"));

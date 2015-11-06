@@ -1,29 +1,18 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Manager;
 import cn.yiyingli.Persistant.Order;
-import cn.yiyingli.Service.ManagerMarkService;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
 
-public class MRestartOrderService extends MsgService {
-
-	private ManagerMarkService managerMarkService;
+public class MRestartOrderService extends MMsgService {
 
 	private OrderService orderService;
 
 	private NotificationService notificationService;
-
-	public ManagerMarkService getManagerMarkService() {
-		return managerMarkService;
-	}
-
-	public void setManagerMarkService(ManagerMarkService managerMarkService) {
-		this.managerMarkService = managerMarkService;
-	}
 
 	public OrderService getOrderService() {
 		return orderService;
@@ -43,31 +32,27 @@ public class MRestartOrderService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("mid") && getData().containsKey("orderId");
+		return super.checkData() && getData().containsKey("orderId");
 	}
 
 	@Override
 	public void doit() {
-		String mid = (String) getData().get("mid");
-		Manager manager = getManagerMarkService().queryManager(mid);
-		if (manager == null) {
-			setResMsg(MsgUtil.getErrorMsg("manager is not existed"));
-			return;
-		}
+		super.doit();
+		Manager manager = getManager();
 		String oid = (String) getData().get("orderId");
 		Order order = getOrderService().queryByShowId(oid, false);
 		if (order == null) {
-			setResMsg(MsgUtil.getErrorMsg("order is not existed"));
+			setResMsg(MsgUtil.getErrorMsgByCode("42001"));
 			return;
 		}
 		String state = order.getState().split(",")[0];
 		if (!OrderService.ORDER_STATE_WAIT_RETURN.equals(state)) {
-			setResMsg(MsgUtil.getErrorMsg("order state is not accurate"));
+			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
 		String[] ss = order.getState().split(",");
 		if (ss.length < 2) {
-			setResMsg(MsgUtil.getErrorMsg("the state of this can not be changed. last state is needed"));
+			setResMsg(MsgUtil.getErrorMsgByCode("44005"));
 		}
 		order.setState(ss[1] + "," + order.getState());
 		getOrderService().updateAndSendTimeTask(order);
