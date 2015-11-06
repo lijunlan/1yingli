@@ -8,7 +8,6 @@ public class GetIntroduceService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		String introduce = user.getResume();
 		setResMsg(MsgUtil.getSuccessMap().put("introduce", introduce).put("name", user.getOname())

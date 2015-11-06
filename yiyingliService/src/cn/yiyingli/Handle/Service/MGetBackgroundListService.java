@@ -29,7 +29,6 @@ public class MGetBackgroundListService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		int page;
 		try {
 			page = Integer.parseInt((String) getData().get("page"));

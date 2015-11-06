@@ -38,13 +38,15 @@ public abstract class UMsgService extends MsgService {
 	}
 
 	@Override
-	public void doit() {
+	public boolean validate() {
 		String uid = (String) getData().get("uid");
 		User user = getUserMarkService().queryUser(uid);
 		if (user == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("14001"));
-			return;
+			return false;
 		}
 		setUser(user);
+		return true;
 	}
+
 }

@@ -31,7 +31,6 @@ public class TGetOrderListService extends TMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Teacher teacher = getTeacher();
 		int page = 0;
 		SuperMap toSend = MsgUtil.getSuccessMap();

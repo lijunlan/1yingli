@@ -29,7 +29,6 @@ public class TChangeTipsService extends TMsgService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doit() {
-		super.doit();
 		Teacher teacher = getTeacher();
 		List<Object> tips = (List<Object>) getData().get("tips");
 		teacher.getTips().clear();

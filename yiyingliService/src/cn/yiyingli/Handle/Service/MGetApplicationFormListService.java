@@ -24,7 +24,6 @@ public class MGetApplicationFormListService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		List<ApplicationForm> applicationForms = getApplicationFormService().queryList();
 		List<ExApplicationForm> exApplicationForms = new ArrayList<ExApplicationForm>();
 		for (ApplicationForm applicationForm : applicationForms) {

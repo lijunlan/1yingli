@@ -37,7 +37,6 @@ public class MRestartOrderService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Manager manager = getManager();
 		String oid = (String) getData().get("orderId");
 		Order order = getOrderService().queryByShowId(oid, false);

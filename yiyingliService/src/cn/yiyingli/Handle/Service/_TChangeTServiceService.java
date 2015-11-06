@@ -26,7 +26,6 @@ public class _TChangeTServiceService extends TMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Teacher teacher = getTeacher();
 		try {
 			Float price = Float.valueOf((String) getData().get("price"));

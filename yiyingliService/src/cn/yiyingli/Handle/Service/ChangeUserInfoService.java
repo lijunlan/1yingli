@@ -25,7 +25,6 @@ public class ChangeUserInfoService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		String name = (String) getData().get("name");
 		String address = (String) getData().get("address");

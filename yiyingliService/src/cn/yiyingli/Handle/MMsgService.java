@@ -32,13 +32,14 @@ public abstract class MMsgService extends MsgService {
 	}
 
 	@Override
-	public void doit() {
+	public boolean validate() {
 		String mid = (String) getData().get("mid");
 		Manager manager = getManagerMarkService().queryManager(mid);
 		if (manager == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("34001"));
-			return;
+			return false;
 		}
 		setManager(manager);
+		return true;
 	}
 }

@@ -25,7 +25,6 @@ public class IsLikeTeacherService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		String teacherId = (String) getData().get("teacherId");
 		Teacher teacher = getTeacherService().query(Long.valueOf(teacherId), false);

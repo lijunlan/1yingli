@@ -2,8 +2,6 @@ package cn.yiyingli.Handle;
 
 import java.util.Map;
 
-
-
 public abstract class MsgService {
 
 	private String resMsg = "{\"state\":\"unknown error\"}";
@@ -34,6 +32,10 @@ public abstract class MsgService {
 	}
 
 	protected abstract boolean checkData();
+
+	public boolean validate() {
+		return true;
+	}
 
 	public abstract void doit();
 

@@ -25,7 +25,6 @@ public class MAddBackgroundService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Background bg = new Background();
 		String url = (String) getData().get("url");
 		bg.setUrl(url);

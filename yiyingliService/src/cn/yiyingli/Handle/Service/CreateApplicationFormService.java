@@ -48,7 +48,6 @@ public class CreateApplicationFormService extends UMsgService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		Map<String, Object> application = (Map<String, Object>) getData().get("application");
 		String name = (String) application.get("name");

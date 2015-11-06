@@ -27,7 +27,6 @@ public class GetOrderInfoService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		String oid = (String) getData().get("orderId");
 		Order o = getOrderService().queryByShowId(oid, false);

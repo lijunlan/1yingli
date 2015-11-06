@@ -30,7 +30,6 @@ public class MGetOrderByOIdService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		String id = (String) getData().get("id");
 		SuperMap toSend = MsgUtil.getSuccessMap();
 		Order o = getOrderService().queryByOrderNo(id);

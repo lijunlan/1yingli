@@ -27,7 +27,6 @@ public class TGetOrderInfoService extends TMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Teacher teacher = getTeacher();
 		String oid = (String) getData().get("orderId");
 		Order o = getOrderService().queryByShowId(oid, false);

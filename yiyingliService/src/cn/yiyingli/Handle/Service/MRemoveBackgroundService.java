@@ -25,7 +25,6 @@ public class MRemoveBackgroundService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		long id = Long.parseLong((String) getData().get("id"));
 		Background bg = getBackgroundService().query(id);
 		if (bg == null) {

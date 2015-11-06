@@ -54,24 +54,25 @@ public abstract class TMsgService extends MsgService {
 	}
 
 	@Override
-	public void doit() {
+	public boolean validate() {
 		String uid = (String) getData().get("uid");
 		User user = getUserMarkService().queryUser(uid);
 		if (user == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("14001"));
-			return;
+			return false;
 		}
 		setUser(user);
 		Teacher teacher = getTeacherService().queryByUserId(user.getId(), false);
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("24001"));
-			return;
+			return false;
 		}
 		setTeacher(teacher);
 		String teacherId = (String) getData().get("teacherId");
 		if (!teacherId.equals(teacher.getId() + "")) {
 			setResMsg(MsgUtil.getErrorMsgByCode("24002"));
-			return;
+			return false;
 		}
+		return true;
 	}
 }

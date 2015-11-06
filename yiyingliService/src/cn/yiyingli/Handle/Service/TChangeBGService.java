@@ -15,7 +15,6 @@ public class TChangeBGService extends TMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Teacher teacher = getTeacher();
 		String url = (String) getData().get("bgurl");
 		url = HtmlUtils.htmlEscape(url);

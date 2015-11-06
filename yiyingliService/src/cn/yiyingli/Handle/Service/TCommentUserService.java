@@ -52,7 +52,6 @@ public class TCommentUserService extends TMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Teacher teacher = getTeacher();
 		try {
 			String oid = (String) getData().get("orderId");

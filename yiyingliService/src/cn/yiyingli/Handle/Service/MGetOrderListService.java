@@ -32,7 +32,6 @@ public class MGetOrderListService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		List<Order> orders;
 		SuperMap toSend = MsgUtil.getSuccessMap();
 		if (getData().containsKey("salaryState")) {

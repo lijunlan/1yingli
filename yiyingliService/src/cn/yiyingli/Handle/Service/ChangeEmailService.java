@@ -39,7 +39,6 @@ public class ChangeEmailService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		String email = (String) getData().get("email");
 		String checkNo = (String) getData().get("checkNo");

@@ -98,7 +98,9 @@ public class MessageHandle {
 	private void doit() {
 		if (util != null) {
 			if (util.setDataMap(data)) {
-				util.doit();
+				if (util.validate()) {
+					util.doit();
+				}
 				returnMsg(util.getResponseMsg());
 			} else {
 				returnError(MsgUtil.getErrorMsgByCode("00001"));

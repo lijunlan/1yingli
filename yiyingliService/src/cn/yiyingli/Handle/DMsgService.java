@@ -14,7 +14,7 @@ public abstract class DMsgService extends MsgService {
 
 	private DistributorMarkService distributorMarkService;
 
-	private Distributor distributor;
+	private Distributor _distributor;
 
 	public DistributorMarkService getDistributorMarkService() {
 		return distributorMarkService;
@@ -25,11 +25,11 @@ public abstract class DMsgService extends MsgService {
 	}
 
 	protected Distributor getDistributor() {
-		return distributor;
+		return _distributor;
 	}
 
 	private void setDistributor(Distributor distributor) {
-		this.distributor = distributor;
+		this._distributor = distributor;
 	}
 
 	@Override
@@ -38,13 +38,15 @@ public abstract class DMsgService extends MsgService {
 	}
 
 	@Override
-	public void doit() {
+	public boolean validate() {
 		String did = (String) getData().get("did");
-		Distributor distributor = getDistributorMarkService().queryDistributor(did);
-		if (distributor == null) {
+		Distributor m_distributor = getDistributorMarkService().queryDistributor(did);
+		if (m_distributor == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("64001"));
-			return;
+			return false;
 		}
-		setDistributor(distributor);
+		setDistributor(m_distributor);
+		return true;
 	}
+
 }

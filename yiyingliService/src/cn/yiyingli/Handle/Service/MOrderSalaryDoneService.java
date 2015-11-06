@@ -36,7 +36,6 @@ public class MOrderSalaryDoneService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		String oid = (String) getData().get("orderId");
 		Order order = getOrderService().queryByShowId(oid, false);
 		if (order == null) {

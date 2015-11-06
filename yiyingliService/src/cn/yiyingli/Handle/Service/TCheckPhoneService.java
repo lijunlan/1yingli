@@ -38,7 +38,6 @@ public class TCheckPhoneService extends TMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		String phone = (String) getData().get("phone");
 		String checkNo = (String) getData().get("checkNo");
 		CheckNo no = getCheckNoService().query(phone);

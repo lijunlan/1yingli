@@ -79,7 +79,6 @@ public class CreateOrderService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		Teacher teacher = getTeacherService().query(Long.valueOf((String) getData().get("teacherId")), false);
 		if (teacher == null) {

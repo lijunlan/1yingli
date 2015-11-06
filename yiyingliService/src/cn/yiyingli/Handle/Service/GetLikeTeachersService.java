@@ -31,7 +31,6 @@ public class GetLikeTeachersService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		int page = 0;
 		SuperMap toSend = MsgUtil.getSuccessMap();

@@ -13,7 +13,6 @@ public class TChangeIntroduceService extends TMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Teacher teacher = getTeacher();
 		String introduce = (String) getData().get("introduce");
 		teacher.setIntroduce(introduce);

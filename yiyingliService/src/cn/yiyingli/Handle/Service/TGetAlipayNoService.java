@@ -8,7 +8,6 @@ public class TGetAlipayNoService extends TMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Teacher teacher = getTeacher();
 		String alipayNo = teacher.getAlipay();
 		setResMsg(MsgUtil.getSuccessMap().put("alipayNo", alipayNo).finishByJson());

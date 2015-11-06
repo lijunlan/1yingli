@@ -31,7 +31,6 @@ public class MDoneApplicationFormService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Manager manager = getManager();
 		String afId = (String) getData().get("afId");
 		String accept = (String) getData().get("accept");

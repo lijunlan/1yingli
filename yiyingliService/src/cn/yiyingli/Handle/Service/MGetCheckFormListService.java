@@ -29,7 +29,6 @@ public class MGetCheckFormListService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		List<CheckForm> checkForms = getCheckFormService().queryList();
 		List<String> exCheckForms = new ArrayList<String>();
 		for (CheckForm checkForm : checkForms) {

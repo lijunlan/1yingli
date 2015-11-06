@@ -37,7 +37,6 @@ public class TAgreeOrderService extends TMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Teacher teacher = getTeacher();
 		String oid = (String) getData().get("orderId");
 		Order order = getOrderService().queryByShowId(oid, false);

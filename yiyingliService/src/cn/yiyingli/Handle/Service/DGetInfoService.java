@@ -14,7 +14,6 @@ public class DGetInfoService extends DMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Distributor distributor = getDistributor();
 		SuperMap map = MsgUtil.getSuccessMap();
 		map.put("registerNumber", distributor.getRegisterNumber());

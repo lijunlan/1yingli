@@ -29,7 +29,6 @@ public class MCreateVoucherService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Manager manager = getManager();
 		int count = Integer.valueOf((String) getData().get("count"));
 		float money = Float.valueOf((String) getData().get("money"));

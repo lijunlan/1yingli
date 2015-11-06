@@ -31,7 +31,6 @@ public class GetOrderListService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		int page = 0;
 		long count = user.getOrderNumber();

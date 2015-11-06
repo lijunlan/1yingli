@@ -14,7 +14,6 @@ public class GetCommentCountService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		String kind = (String) getData().get("kind");
 		short k = 0;

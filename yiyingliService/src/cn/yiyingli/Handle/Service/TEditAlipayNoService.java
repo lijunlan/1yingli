@@ -13,7 +13,6 @@ public class TEditAlipayNoService extends TMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Teacher teacher = getTeacher();
 		String alipayNo = (String) getData().get("alipayNo");
 		teacher.setAlipay(alipayNo);

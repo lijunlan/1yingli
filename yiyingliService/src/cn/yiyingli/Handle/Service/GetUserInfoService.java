@@ -9,7 +9,6 @@ public class GetUserInfoService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		SuperMap map = MsgUtil.getSuccessMap();
 		map.put("address", user.getAddress());

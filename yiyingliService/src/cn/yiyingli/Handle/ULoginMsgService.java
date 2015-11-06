@@ -4,10 +4,13 @@ import java.util.Calendar;
 import java.util.UUID;
 
 import cn.yiyingli.Persistant.User;
+import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.TimeTaskUtil;
 
-public abstract class ULoginMsgService extends UMsgService {
+public abstract class ULoginMsgService extends MsgService {
+
+	private UserMarkService userMarkService;
 
 	private UserService userService;
 
@@ -17,6 +20,14 @@ public abstract class ULoginMsgService extends UMsgService {
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+	public UserMarkService getUserMarkService() {
+		return userMarkService;
+	}
+
+	public void setUserMarkService(UserMarkService userMarkService) {
+		this.userMarkService = userMarkService;
 	}
 
 	protected void returnUser(User user) {

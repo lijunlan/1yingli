@@ -33,7 +33,6 @@ public class MGetUserListService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		String page = (String) getData().get("page");
 		if (Integer.valueOf(page) <= 0) {
 			setResMsg(MsgUtil.getErrorMsgByCode("32009"));

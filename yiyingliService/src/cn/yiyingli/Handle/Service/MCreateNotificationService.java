@@ -38,7 +38,6 @@ public class MCreateNotificationService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		String title = (String) getData().get("title");
 		String userId = (String) getData().get("userId");
 		User user = getUserService().query(Long.valueOf(userId), false);

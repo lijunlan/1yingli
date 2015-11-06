@@ -8,7 +8,6 @@ public class GetPhoneNOService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		String phone = user.getPhone();
 		setResMsg(MsgUtil.getSuccessMap().put("phone", phone).finishByJson());

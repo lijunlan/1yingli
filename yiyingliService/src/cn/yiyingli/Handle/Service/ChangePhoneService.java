@@ -39,7 +39,6 @@ public class ChangePhoneService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		String phone = (String) getData().get("phone");
 		String checkNo = (String) getData().get("checkNo");

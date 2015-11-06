@@ -29,7 +29,6 @@ public class MGetDistributorListService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		int page = Integer.valueOf((String) getData().get("page"));
 		long count = getDistributorService().queryCount();
 		List<Distributor> distributors = getDistributorService().queryList(page);

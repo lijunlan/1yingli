@@ -7,10 +7,7 @@ public class GetTeacherStateService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
-
 		setResMsg(MsgUtil.getSuccessMap().put("teacherState", getUser().getTeacherState()).finishByJson());
-
 	}
 
 }

@@ -32,7 +32,6 @@ public class MCreateDistributorService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		String username = (String) getData().get("username");
 		String password = (String) getData().get("password");
 		String name = (String) getData().get("name");

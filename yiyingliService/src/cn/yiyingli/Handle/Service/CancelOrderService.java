@@ -44,7 +44,6 @@ public class CancelOrderService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		String oid = (String) getData().get("orderId");
 		Order order = getOrderService().queryByShowId(oid, false);

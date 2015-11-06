@@ -13,7 +13,6 @@ public class TChangeSimpleInfoService extends TMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Teacher teacher = getTeacher();
 		String simpleinfo = (String) getData().get("simpleinfo");
 		teacher.setSimpleInfo(simpleinfo);

@@ -28,7 +28,6 @@ public class TEditTServiceService extends TMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Teacher teacher = getTeacher();
 		User user = getUser();
 		try {

@@ -12,7 +12,8 @@ public class MsgUtil {
 		String msg = ErrorTransformUtil.getInstance().getSettingData().get(errCode);
 		if (msg == null)
 			msg = "unknown";
-		return new SuperMap().put("state", "error").put("errCode", errCode).put("msg", "").finishByJson();
+		return new SuperMap().put("state", "error").put("errCode", errCode)
+				.put("msg", ErrorTransformUtil.getInstance().getSettingData().get(errCode)).finishByJson();
 	}
 
 	public static String getSuccessMsg(String msg) {

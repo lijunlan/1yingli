@@ -26,7 +26,6 @@ public class ChangeIconService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		String iconUrl = (String) getData().get("iconUrl");
 		iconUrl = HtmlUtils.htmlEscape(iconUrl);

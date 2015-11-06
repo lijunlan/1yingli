@@ -25,7 +25,6 @@ public class MGetApplicationFormService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		String afId = (String) getData().get("afId");
 		ApplicationForm ca = getApplicationFormService().query(Long.valueOf(afId));
 		if (ca == null) {

@@ -19,7 +19,6 @@ public class GetNotificationCountService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		int page = 0;
 		long count = getNotificationService().querySumNo(user.getId());

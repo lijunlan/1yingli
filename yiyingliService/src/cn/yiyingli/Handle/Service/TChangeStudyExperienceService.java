@@ -29,7 +29,6 @@ public class TChangeStudyExperienceService extends TMsgService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doit() {
-		super.doit();
 		Teacher teacher = getTeacher();
 		List<Object> studyExperiences = (List<Object>) getData().get("studyExperience");
 		teacher.getStudyExperiences().clear();

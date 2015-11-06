@@ -29,7 +29,6 @@ public class CreateCheckFormService extends TMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Teacher teacher = getTeacher();
 		CheckForm checkForm = new CheckForm();
 		if (getData().containsKey("idcardUrl")) {

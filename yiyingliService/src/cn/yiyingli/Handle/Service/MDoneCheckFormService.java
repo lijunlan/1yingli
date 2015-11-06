@@ -30,7 +30,6 @@ public class MDoneCheckFormService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		Manager manager = getManager();
 		String cfId = (String) getData().get("cfId");
 		String accept = (String) getData().get("accept");

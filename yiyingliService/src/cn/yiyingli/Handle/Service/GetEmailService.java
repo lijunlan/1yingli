@@ -8,7 +8,6 @@ public class GetEmailService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		String email = user.getEmail();
 		setResMsg(MsgUtil.getSuccessMap().put("email", email).finishByJson());

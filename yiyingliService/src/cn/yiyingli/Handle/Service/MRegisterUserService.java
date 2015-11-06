@@ -29,7 +29,6 @@ public class MRegisterUserService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		String username = (String) getData().get("username");
 		String password = (String) getData().get("password");
 		String nickName = (String) getData().get("nickName");

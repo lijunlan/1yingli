@@ -30,7 +30,6 @@ public class GetNotificationService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		if (getData().get("page") != null) {
 			long count = getNotificationService().querySumNo(user.getId());

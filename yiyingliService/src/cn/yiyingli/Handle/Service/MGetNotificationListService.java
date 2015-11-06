@@ -33,7 +33,6 @@ public class MGetNotificationListService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		String page = (String) getData().get("page");
 		List<Notification> notifications = getNotificationService().queryList(Integer.valueOf(page), 10, true);
 		List<String> exNotifications = new ArrayList<String>();

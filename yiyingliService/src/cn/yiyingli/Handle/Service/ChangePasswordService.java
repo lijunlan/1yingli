@@ -27,7 +27,6 @@ public class ChangePasswordService extends UMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		User user = getUser();
 		String password = (String) getData().get("password");
 		String oldpassword = (String) getData().get("oldpassword");

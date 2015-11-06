@@ -57,7 +57,6 @@ public class MCreateTeacherService extends MMsgService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doit() {
-		super.doit();
 		String username = (String) getData().get("username");
 		User user = getUserService().queryWithTeacher(username, false);
 		if (user == null) {

@@ -30,7 +30,6 @@ public class MGetOrderListByNameService extends MMsgService {
 
 	@Override
 	public void doit() {
-		super.doit();
 		SuperMap toSend = MsgUtil.getSuccessMap();
 		String name = (String) getData().get("name");
 		int page = 0;
