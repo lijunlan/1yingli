@@ -109,17 +109,17 @@ public class FSearchService extends MsgService {
 				setResMsg(MsgUtil.getSuccessMap().put("result", items.toString()).put("viewtotal", viewtotal)
 						.finishByJson());
 			} else {
-				setResMsg(MsgUtil.getErrorMsg("service error"));
+				setResMsg(MsgUtil.getErrorMsgByCode("53005"));
 			}
 		} catch (ClassCastException e) {
 			e.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("input data is wrong"));
+			setResMsg(MsgUtil.getErrorMsgByCode("51001"));
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("service error"));
+			setResMsg(MsgUtil.getErrorMsgByCode("53003"));
 		} catch (IOException e) {
 			e.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("service error"));
+			setResMsg(MsgUtil.getErrorMsgByCode("53002"));
 		}
 	}
 

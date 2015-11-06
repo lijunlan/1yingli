@@ -8,6 +8,14 @@ public class MsgUtil {
 		return "{\"state\":\"error\",\"msg\":\"" + msg + "\"}";
 	}
 
+	public static String getErrorMsgByCode(String errCode) {
+		String msg = ErrorTransformUtil.getInstance().getSettingData().get(errCode);
+		if (msg == null)
+			msg = "unknown";
+		return new SuperMap().put("state", "error").put("errCode", errCode)
+				.put("msg", ErrorTransformUtil.getInstance().getSettingData().get(errCode)).finishByJson();
+	}
+
 	public static String getSuccessMsg(String msg) {
 		return "{\"state\":\"success\",\"msg\":\"" + msg + "\"}";
 	}
@@ -17,7 +25,7 @@ public class MsgUtil {
 		tmp.put("state", "success");
 		return tmp;
 	}
-	
+
 	public static SuperMap getErrorMap() {
 		SuperMap tmp = new SuperMap();
 		tmp.put("state", "error");

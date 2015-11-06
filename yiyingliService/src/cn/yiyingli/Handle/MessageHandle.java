@@ -25,8 +25,13 @@ public class MessageHandle {
 	 */
 	public static void deal(HttpServletRequest rq, HttpServletResponse rp, ApplicationContext context) {
 		MessageHandle mHandle = new MessageHandle(rq, rp, context);
-		mHandle.start();
-		mHandle.doit();
+		try {
+			mHandle.start();
+			mHandle.doit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			mHandle.returnError(MsgUtil.getErrorMsgByCode("00000"));
+		}
 	}
 
 	private HttpServletRequest req;
@@ -75,14 +80,14 @@ public class MessageHandle {
 					util = (MsgService) applicationContext.getBean(methodData.get(method));
 					data.put("IP", req.getRemoteAddr());
 				} else {
-					returnError(MsgUtil.getErrorMsg("method is not acurate"));
+					returnError(MsgUtil.getErrorMsgByCode("00002"));
 				}
 			} else {
-				returnError(MsgUtil.getErrorMsg("style is not acurate"));
+				returnError(MsgUtil.getErrorMsgByCode("00003"));
 			}
 
 		} else {
-			returnError(MsgUtil.getErrorMsg("the style or method field is not included"));
+			returnError(MsgUtil.getErrorMsgByCode("00004"));
 		}
 	}
 
@@ -93,10 +98,12 @@ public class MessageHandle {
 	private void doit() {
 		if (util != null) {
 			if (util.setDataMap(data)) {
-				util.doit();
+				if (util.validate()) {
+					util.doit();
+				}
 				returnMsg(util.getResponseMsg());
 			} else {
-				returnError(MsgUtil.getErrorMsg("data is incomplete"));
+				returnError(MsgUtil.getErrorMsgByCode("00001"));
 			}
 		}
 	}

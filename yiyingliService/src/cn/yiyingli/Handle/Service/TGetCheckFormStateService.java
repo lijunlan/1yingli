@@ -28,7 +28,7 @@ public class TGetCheckFormStateService extends MsgService {
 		String teacherId = (String) getData().get("teacherId");
 		Teacher teacher = getTeacherService().query(Long.valueOf(teacherId), false);
 		if (teacher == null) {
-			setResMsg(MsgUtil.getErrorMsg("teahcerId is not existed"));
+			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
 		}
 		SuperMap map = MsgUtil.getSuccessMap();

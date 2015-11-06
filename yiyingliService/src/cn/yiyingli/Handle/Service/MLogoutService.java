@@ -1,20 +1,9 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Handle.MsgService;
-import cn.yiyingli.Service.ManagerMarkService;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Util.MsgUtil;
 
-public class MLogoutService extends MsgService {
-
-	private ManagerMarkService managerMarkService;
-
-	public ManagerMarkService getManagerMarkService() {
-		return managerMarkService;
-	}
-
-	public void setManagerMarkService(ManagerMarkService managerMarkService) {
-		this.managerMarkService = managerMarkService;
-	}
+public class MLogoutService extends MMsgService {
 
 	@Override
 	protected boolean checkData() {

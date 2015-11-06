@@ -29,7 +29,7 @@ public class GetTeacherSimpleInfoService extends MsgService {
 	public void doit() {
 		Teacher teacher = getTeacherService().query(Long.valueOf((String) getData().get("teacherId")), false);
 		if (teacher == null) {
-			setResMsg(MsgUtil.getErrorMsg("teacher is not exsited"));
+			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
 		}
 		SuperMap map = MsgUtil.getSuccessMap();
@@ -41,7 +41,7 @@ public class GetTeacherSimpleInfoService extends MsgService {
 		map.put("teacherId", teacher.getId());
 		TService tService = teacher.gettService();
 		map.put("timeperweek", tService.getTimesPerWeek());
-		//map.put("serviceTitle", tService.getTitle());
+		// map.put("serviceTitle", tService.getTitle());
 		map.put("serviceContent", tService.getContent());
 
 		setResMsg(map.finishByJson());

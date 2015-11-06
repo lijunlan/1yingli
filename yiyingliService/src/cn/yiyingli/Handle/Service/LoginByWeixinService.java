@@ -2,6 +2,7 @@ package cn.yiyingli.Handle.Service;
 
 import cn.yiyingli.Handle.ULoginMsgService;
 import cn.yiyingli.Persistant.User;
+import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Weixin.Util.GetSingleUserWeixinInfoUtil;
@@ -30,15 +31,17 @@ public class LoginByWeixinService extends ULoginMsgService {
 			accessToken = GetSingleUserWeixinInfoUtil.getAccessToken(code, GetSingleUserWeixinInfoUtil.KIND_WEB);
 		}
 		if (accessToken == null || accessToken.containsKey("errcode")) {
-			setResMsg(MsgUtil.getErrorMsg(
-					(String) (accessToken == null ? "your weixin code is wrong" : accessToken.get("errmsg"))));
+			LogUtil.error((String) (accessToken == null ? "your weixin code is wrong" : accessToken.get("errmsg")),
+					this.getClass());
+			setResMsg(MsgUtil.getErrorMsgByCode("12019"));
 			return;
 		}
 		JSONObject userInfo = GetSingleUserWeixinInfoUtil.getUserInfo((String) accessToken.get("openid"),
 				(String) accessToken.get("access_token"));
 		if (userInfo == null || userInfo.containsKey("errcode")) {
-			setResMsg(MsgUtil.getErrorMsg(
-					(String) (accessToken == null ? "your weixin code is wrong" : accessToken.get("errmsg"))));
+			LogUtil.error((String) (accessToken == null ? "your weixin code is wrong" : accessToken.get("errmsg")),
+					this.getClass());
+			setResMsg(MsgUtil.getErrorMsgByCode("12019"));
 			return;
 		}
 		String p = (String) userInfo.get("province");
@@ -61,7 +64,8 @@ public class LoginByWeixinService extends ULoginMsgService {
 			try {
 				getUserService().save(user);
 			} catch (Exception e) {
-				setResMsg(MsgUtil.getErrorMsg(e.getMessage()));
+				e.printStackTrace();
+				setResMsg(MsgUtil.getErrorMsgByCode("15003"));
 				return;
 			}
 			returnUser(user);

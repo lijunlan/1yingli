@@ -38,7 +38,7 @@ public class TGetBackgroundsService extends MsgService {
 				}
 				setResMsg(MsgUtil.getSuccessMap().put("urls", urls).finishByJson());
 			} catch (Exception e) {
-				setResMsg(MsgUtil.getErrorMsg("input data is wrong"));
+				setResMsg(MsgUtil.getErrorMsgByCode("51001"));
 				return;
 			}
 		} else {

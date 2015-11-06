@@ -37,7 +37,7 @@ public class FRecordRecommendService extends MsgService {
 		String uid = (String) getData().get("uid");
 		User user = getUserMarkService().queryUser(uid);
 		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("uid is not existed"));
+			setResMsg(MsgUtil.getErrorMsgByCode("14001"));
 			return;
 		}
 		String now_tid = (String) getData().get("now_tid");
@@ -58,7 +58,7 @@ public class FRecordRecommendService extends MsgService {
 		String r = SendMsgToBaiduUtil.updataUserData(send.toString());
 		JSONObject ro = JSONObject.fromObject(r);
 		if (ro.getInt("Code") != 100) {
-			setResMsg(MsgUtil.getErrorMsg("Submit data to recommendation engine failed"));
+			setResMsg(MsgUtil.getErrorMsgByCode("53004"));
 			return;
 		}
 		setResMsg(MsgUtil.getSuccessMsg("Submit data to recommendation engine successfully"));

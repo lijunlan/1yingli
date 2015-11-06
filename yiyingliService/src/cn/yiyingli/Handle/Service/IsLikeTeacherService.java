@@ -1,25 +1,14 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.TeacherService;
-import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.MsgUtil;
 
-public class IsLikeTeacherService extends MsgService {
-
-	private UserMarkService userMarkService;
+public class IsLikeTeacherService extends UMsgService {
 
 	private TeacherService teacherService;
-
-	public UserMarkService getUserMarkService() {
-		return userMarkService;
-	}
-
-	public void setUserMarkService(UserMarkService userMarkService) {
-		this.userMarkService = userMarkService;
-	}
 
 	public TeacherService getTeacherService() {
 		return teacherService;
@@ -31,21 +20,16 @@ public class IsLikeTeacherService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("uid") && getData().containsKey("teacherId");
+		return super.checkData() && getData().containsKey("teacherId");
 	}
 
 	@Override
 	public void doit() {
-		String uid = (String) getData().get("uid");
-		User user = getUserMarkService().queryUser(uid);
-		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("uid is not existed"));
-			return;
-		}
+		User user = getUser();
 		String teacherId = (String) getData().get("teacherId");
 		Teacher teacher = getTeacherService().query(Long.valueOf(teacherId), false);
 		if (teacher == null) {
-			setResMsg(MsgUtil.getErrorMsg("teahcerId is not existed"));
+			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
 		}
 		if (getTeacherService().queryCheckLikeUser(teacher.getId(), user.getId())) {

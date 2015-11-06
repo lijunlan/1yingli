@@ -598,9 +598,6 @@
 		<property name="userMarkService">
 			<ref local="userMarkService" />
 		</property>
-		<property name="userService">
-			<ref local="userService" />
-		</property>
 	</bean>
 
 	<bean id="getUserSimpleInfoService" class="cn.yiyingli.Handle.Service.GetUserSimpleInfoService"
@@ -881,7 +878,7 @@
 		</property>
 	</bean>
 
-	<bean id="getCheckNoService" class="cn.yiyingli.Handle.Service.GetCheckNoService"
+	<bean id="fGetCheckNoService" class="cn.yiyingli.Handle.Service.FGetCheckNoService"
 		scope="prototype">
 		<property name="checkNoService">
 			<ref local="checkNoService" />
@@ -1071,7 +1068,7 @@
 		</property>
 	</bean>
 
-	<bean id="changeTipsService" class="cn.yiyingli.Handle.Service.ChangeTipsService"
+	<bean id="tChangeTipsService" class="cn.yiyingli.Handle.Service.TChangeTipsService"
 		scope="prototype">
 		<property name="userMarkService">
 			<ref local="userMarkService" />
@@ -1131,7 +1128,7 @@
 		</property>
 	</bean>
 
-	<bean id="checkPhoneService" class="cn.yiyingli.Handle.Service.CheckPhoneService"
+	<bean id="tCheckPhoneService" class="cn.yiyingli.Handle.Service.TCheckPhoneService"
 		scope="prototype">
 		<property name="teacherService">
 			<ref local="teacherService" />
@@ -1817,32 +1814,6 @@
 		</property>
 	</bean>
 
-	<bean id="createOrderWithoutLoginService"
-		class="cn.yiyingli.Handle.Service.CreateOrderWithoutLoginService"
-		scope="prototype">
-		<property name="userMarkService">
-			<ref local="userMarkService" />
-		</property>
-		<property name="teacherService">
-			<ref local="teacherService" />
-		</property>
-		<property name="orderService">
-			<ref local="orderService" />
-		</property>
-		<property name="userService">
-			<ref local="userService" />
-		</property>
-		<property name="notificationService">
-			<ref local="notificationService" />
-		</property>
-		<property name="voucherService">
-			<ref local="voucherService" />
-		</property>
-		<property name="checkNoService">
-			<ref local="checkNoService" />
-		</property>
-	</bean>
-
 	<bean id="mRestartOrderService" class="cn.yiyingli.Handle.Service.MRestartOrderService"
 		scope="prototype">
 		<property name="managerMarkService">
@@ -1898,9 +1869,6 @@
 
 	<bean id="fCheckPaypalPaymentService" class="cn.yiyingli.Handle.Service.FCheckPaypalPaymentService"
 		scope="prototype">
-		<property name="userMarkService">
-			<ref local="userMarkService" />
-		</property>
 		<property name="orderService">
 			<ref local="orderService" />
 		</property>

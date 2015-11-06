@@ -1,16 +1,13 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.User;
-import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.MsgUtil;
 
-public class ChangeUserInfoService extends MsgService {
+public class ChangeUserInfoService extends UMsgService {
 
 	private UserService userService;
-
-	private UserMarkService userMarkService;
 
 	public UserService getUserService() {
 		return userService;
@@ -20,28 +17,15 @@ public class ChangeUserInfoService extends MsgService {
 		this.userService = userService;
 	}
 
-	public UserMarkService getUserMarkService() {
-		return userMarkService;
-	}
-
-	public void setUserMarkService(UserMarkService userMarkService) {
-		this.userMarkService = userMarkService;
-	}
-
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("uid") && getData().containsKey("nickName") && getData().containsKey("name")
+		return super.checkData() && getData().containsKey("nickName") && getData().containsKey("name")
 				&& getData().containsKey("address") && getData().containsKey("resume");
 	}
 
 	@Override
 	public void doit() {
-		String uid = (String) getData().get("uid");
-		User user = getUserMarkService().queryUser(uid);
-		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("uid is not existed"));
-			return;
-		}
+		User user = getUser();
 		String name = (String) getData().get("name");
 		String address = (String) getData().get("address");
 		String nickName = (String) getData().get("nickName");

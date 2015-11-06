@@ -45,17 +45,17 @@ public class IOSForgetPasswordService extends MsgService {
 		String password = (String) getData().get("password");
 		String checkNo = (String) getData().get("checkNo");
 		if (!(CheckUtil.checkEmail(no) || CheckUtil.checkMobileNumber(no))) {
-			setResMsg(MsgUtil.getErrorMsg("it is not a phone No or email"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12013"));
 			return;
 		}
 		CheckNo mNo = getCheckNoService().query(no);
 		long time = Calendar.getInstance().getTimeInMillis();
 
 		if (mNo == null || !(mNo.getCheckNo().equals(checkNo))) {
-			setResMsg(MsgUtil.getErrorMsg("checkNo is wrong"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12001"));
 			return;
 		} else if (time > Long.valueOf(mNo.getEndTime())) {
-			setResMsg(MsgUtil.getErrorMsg("checkNo is overdue"));
+			setResMsg(MsgUtil.getErrorMsgByCode("12002"));
 			getCheckNoService().remove(mNo);
 			return;
 		} else {
@@ -63,19 +63,19 @@ public class IOSForgetPasswordService extends MsgService {
 		}
 		User user = getUserService().query(no, false);
 		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsg("phone or email has not been registered"));
+			setResMsg(MsgUtil.getErrorMsgByCode("15003"));
 			return;
 		}
 		try {
 			password = RSAUtil.decryptStrIOS(password, RSAUtil.RSAKEY_BASE_PATH);
 			if (!CheckUtil.checkPassword(password)) {
-				setResMsg(MsgUtil.getErrorMsg("BAD PASSWROD!"));
+				setResMsg(MsgUtil.getErrorMsgByCode("12005"));
 				return;
 			}
 			password = MD5Util.MD5(password);
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsg("error"));
+			setResMsg(MsgUtil.getErrorMsgByCode("10001"));
 			return;
 		}
 		user.setPassword(password);

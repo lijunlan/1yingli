@@ -1,14 +1,11 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Handle.MsgService;
-import cn.yiyingli.Service.ManagerMarkService;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Service.UserService;
 
-public class MGetUserService extends MsgService {
+public class _MGetUserService extends MMsgService {
 
 	private UserService userService;
-
-	private ManagerMarkService managerMarkService;
 
 	public UserService getUserService() {
 		return userService;
@@ -16,14 +13,6 @@ public class MGetUserService extends MsgService {
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
-	}
-
-	public ManagerMarkService getManagerMarkService() {
-		return managerMarkService;
-	}
-
-	public void setManagerMarkService(ManagerMarkService managerMarkService) {
-		this.managerMarkService = managerMarkService;
 	}
 
 	@Override

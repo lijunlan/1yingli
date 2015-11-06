@@ -26,8 +26,8 @@ public class TGetIntroduceService extends MsgService {
 	public void doit() {
 		String teacherId = (String) getData().get("teacherId");
 		Teacher teacher = getTeacherService().query(Long.valueOf(teacherId), false);
-		if(teacher==null){
-			setResMsg(MsgUtil.getErrorMsg("teahcerId is not existed"));
+		if (teacher == null) {
+			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
 		}
 		setResMsg(MsgUtil.getSuccessMap().put("introduce", teacher.getIntroduce()).finishByJson());
