@@ -96,6 +96,9 @@ public class Order {
 	@Column(name = "ENDTIME", nullable = true)
 	private String endTime;
 
+	@Column(name = "PAYTIME", nullable = true)
+	private String payTime;
+
 	@ManyToOne(targetEntity = TService.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TSERVICE_ID", updatable = false)
 	private TService tService;
@@ -333,6 +336,14 @@ public class Order {
 
 	public void setDistributor(Distributor distributor) {
 		this.distributor = distributor;
+	}
+
+	public String getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(String payTime) {
+		this.payTime = payTime;
 	}
 
 }
