@@ -82,7 +82,7 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 
 			@Override
 			public List<Voucher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Voucher v ORDER BY v.createTime DESC";
+				String hql = "from Voucher v left join fetch v.useOrder ORDER BY v.createTime DESC";
 				if (lazy) {
 					hql = "from Voucher v left join fetch v.useOrder left join fetch v.ownUser ORDER BY v.createTime DESC";
 				}
