@@ -3,16 +3,19 @@ package cn.yiyingli.Handle.Service;
 import java.util.Calendar;
 import java.util.UUID;
 
-import cn.yiyingli.Handle.MMsgService;
+import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Manager;
+import cn.yiyingli.Service.ManagerMarkService;
 import cn.yiyingli.Service.ManagerService;
 import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.RSAUtil;
 
-public class MLoginService extends MMsgService {
+public class MLoginService extends MsgService {
 
 	private ManagerService managerService;
+
+	private ManagerMarkService managerMarkService;
 
 	public ManagerService getManagerService() {
 		return managerService;
@@ -20,6 +23,14 @@ public class MLoginService extends MMsgService {
 
 	public void setManagerService(ManagerService managerService) {
 		this.managerService = managerService;
+	}
+
+	public ManagerMarkService getManagerMarkService() {
+		return managerMarkService;
+	}
+
+	public void setManagerMarkService(ManagerMarkService managerMarkService) {
+		this.managerMarkService = managerMarkService;
 	}
 
 	@Override

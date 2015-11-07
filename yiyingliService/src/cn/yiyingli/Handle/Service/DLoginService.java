@@ -3,16 +3,19 @@ package cn.yiyingli.Handle.Service;
 import java.util.Calendar;
 import java.util.UUID;
 
-import cn.yiyingli.Handle.DMsgService;
+import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Distributor;
+import cn.yiyingli.Service.DistributorMarkService;
 import cn.yiyingli.Service.DistributorService;
 import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.RSAUtil;
 
-public class DLoginService extends DMsgService {
+public class DLoginService extends MsgService {
 
 	private DistributorService distributorService;
+
+	private DistributorMarkService distributorMarkService;
 
 	public DistributorService getDistributorService() {
 		return distributorService;
@@ -20,6 +23,14 @@ public class DLoginService extends DMsgService {
 
 	public void setDistributorService(DistributorService distributorService) {
 		this.distributorService = distributorService;
+	}
+
+	public DistributorMarkService getDistributorMarkService() {
+		return distributorMarkService;
+	}
+
+	public void setDistributorMarkService(DistributorMarkService distributorMarkService) {
+		this.distributorMarkService = distributorMarkService;
 	}
 
 	@Override
