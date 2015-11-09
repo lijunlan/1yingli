@@ -150,6 +150,7 @@ public class CreateOrderService extends UMsgService {
 				return;
 			} else {
 				money = money - voucher.getMoney();
+				order.getUseVouchers().add(voucher);
 				voucher.setUsed(true);
 				voucher.setUseOrder(order);
 			}
