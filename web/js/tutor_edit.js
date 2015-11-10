@@ -86,7 +86,7 @@ $(document).ready(function(){
 		$("#title").next().hide();					   
 	});
 	$("#price").mousedown(function(){
-		$("#price").next().next().hide();					   
+		$("#price").next().next().next().next().hide();					   
 	});
 	$("#simpleinfo").mousedown(function(){
 		var p_message = $("#simpleinfo").next().next().next();
@@ -165,15 +165,19 @@ $(document).ready(function(){
     $("#sure_titlePrice").click(function(){
         var title = $("#title").val();
         var price = $("#price").val();
-        var time = '1';
+        var time = $("#time").val();
 		var isTrue = true;
 		if(!title) {
 			isTrue = false;
 			$("#title").next().show();
 		}
-		if(!price || price == 0) {
+		if(!price || price == 0 || isNaN(price)) {
 			isTrue = false;
-			$("#price").next().next().show();
+			$("#price").next().next().next().next().show();
+		}
+		if(!time || time == 0 || isNaN(time)) {
+			isTrue = false;
+			$("#price").next().next().next().next().show();
 		}
 		if(!isTrue) {
 			return;
@@ -209,6 +213,7 @@ $(document).ready(function(){
                             $("#edit_titlePrice_block").hide();
                             $("#stitle").html(title);
                             $("#oldPrice").html(price);
+                            $("#oldTime").html(time);
                         }
                     }
         });
@@ -287,7 +292,6 @@ $(document).ready(function(){
 			toSend.teacherId = tid;
 			toSend.uid = uid;
 			toSend.studyExperience = schoolExp;
-			
 			$.ajax({
 				cache : true,
 				type : "POST",
@@ -311,6 +315,7 @@ $(document).ready(function(){
 			toSend1.teacherId = tid;
 			toSend1.uid = uid;
 			toSend1.workExperience = workExp;
+			toSend1.desprition = '';
 			$.ajax({
 				cache : true,
 				type : "POST",
@@ -409,6 +414,7 @@ function sure_resume(resume){
 			obj.schoolName = schoolName;
 			obj.degree = degree;
 			obj.major = major;
+			obj.description = '';
 			if(endYearTime == "至今"){
 				obj.endTime = endYearTime;
 			} else {
@@ -457,7 +463,7 @@ function sure_resume(resume){
 			var obj = new Object();
 			obj.companyName = companyName;
 			obj.position = position;
-
+			obj.description = '';
 			if($("#co_ed_ye_time").val() == "至今") {
 				obj.endTime = $("#co_ed_ye_time").val();	
 			} else {
@@ -679,7 +685,7 @@ function refreshTeacherInfo(){
                         var serviceContent = json.serviceContent;
                         $("#scontent").html(serviceContent);
                         $("#stitle").html(serviceTitle);
-                        $("#sprice").html("￥<span id='oldPrice'>"+price+"</span>元/"+serviceTime+"小时");
+                        $("#sprice").html("￥<span id='oldPrice'>"+price+"</span>元/<span id='oldTime'>"+serviceTime+"</span>小时");
                         $("#sprice1").html("￥"+price+"元/"+serviceTime+"小时");
 
                         var checkEmail = json.checkEmail;

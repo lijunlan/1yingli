@@ -119,7 +119,7 @@ function changePage(p){
                         var tid = content.teacherId;
                         con = content;
                         orderId = content.orderId;
-                        html = html + "<li class='yourTutor-list'><div class='yourTutor-id'><p>编号:</p><p id='111' style='float:left;'>"+content.orderId+"</p><p style='font-size: initial;padding-top: 12px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'><span>时间：</span>"+d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate()+"&nbsp&nbsp"+d.getHours()+":"+d.getMinutes()+"</p></div><div class='yourTutor-01'><img src=\""+(content.teacherUrl==""?"http://image.1yingli.cn/img/img.png":content.teacherUrl)+"\" alt=''/></div><div class='yourTutor-02'><p>咨询话题</p><h1 style='overflow:hidden; white-space: nowrap; text-overflow:ellipsis;'>"+content.title+"</h1><a style='color: #56bbe8;text-align:center;display: block;' href='personal.html?tid="+tid+"'>"+content.teacherName+"</a></div><div class='yourTutor-03'><p>"+content.price+"元"+"</p><p>/"+content.time+"小时"+"</p></div><div class='yourTutor-04'><div class='order-details' style='color:#56bbe8; cursor: pointer;'><a class='see'><p>查看详情</p></a></div></div><div class='yourTutor-05'>"+Situation(tid,i,orderId)+"</div></li>";
+                        html = html + "<li class='yourTutor-list'><div class='yourTutor-id'><p>编号:</p><p id='111' style='float:left;'>"+content.orderId+"</p><p style='font-size: initial;padding-top: 12px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'><span>时间：</span>"+d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate()+"&nbsp&nbsp"+d.getHours()+":"+d.getMinutes()+"</p></div><div class='yourTutor-01'><img src=\""+(content.teacherUrl==""?"http://image.1yingli.cn/img/img.png":content.teacherUrl)+"\" alt=''/></div><div class='yourTutor-02'><p>咨询话题</p><h1 style='overflow:hidden; white-space: nowrap; text-overflow:ellipsis;'>"+content.title+"</h1><a style='color: #56bbe8;text-align:center;display: block;' href='personal.html?tid="+tid+"'>"+content.teacherName+"</a></div><div class='yourTutor-03'><p>"+content.price+"元"+"</p><p>/"+content.time+"小时"+"</p></div><div class='yourTutor-04'><div class='order-details' style='color:#56bbe8; cursor: pointer;'><a class='see'><p>查看详情</p></a></div></div><div class='yourTutor-05'>"+Situation(tid,i,orderId,content.okTime)+"</div></li>";
                         Situation(tid,i,orderId);
                     });
                     if(!html){
@@ -201,7 +201,7 @@ function changePage(p){
 }
 
 //导师栏目最右侧
-function Situation(tid,i,orderId){
+function Situation(tid,i,orderId,okTime){
     switch (i){
         case "0100":
             return "<a class='states'><p>"+"未支付"+"</p></a><a class='state' href='javascript:openshow("+tid+","+i+","+orderId+");'><p>"+"等待学员付款"+"</p></a>";
@@ -216,7 +216,7 @@ function Situation(tid,i,orderId){
             return "<a class='states'><p>"+"接受订单"+"</p></a><a class='state' href='javascript:openshow("+tid+","+i+","+orderId+");'><p>"+"等待确认时间"+"</p></a>";
             break;
         case "0500":
-            return "<a class='states'><p>"+"确定时间"+"</p></a><a class='state' href='javascript:openshow("+tid+","+i+","+orderId+");'><p>"+"等待导师服务"+"</p></a>";
+            return "<a class='states'><p style='margin-top:10%' id='timeSureHidden'>"+"时间已确定"+"</p><p style='margin-top:0px;'>"+okTime+"</p></a><a class='state' href='javascript:openshow("+tid+","+i+","+orderId+");'><p>"+"等待导师服务"+"</p></a>";
             break;
         case "0620":
             return "<a class='states'><p>"+"服务完毕"+"</p></a><a class='state' href='javascript:openshow("+tid+","+i+","+orderId+");'><p>"+"反馈提交"+"</p></a>";
@@ -366,7 +366,7 @@ function openshow(tid,i,orderId){
         case 320:
             $(".mark").show();
             $(".mark").show();
-            $(".no1").slideDown().html("<p>导师已确认时间，等待导师服务</p><p></p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>3</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><button id='tgd' style='margin:20px 70px 0px 200px;'>服务满意</button><button id='nogd' style='margin:0;'>服务不满意</button><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
+            $(".no1").slideDown().html("<p>导师已确认时间，等待导师服务</p><p></p><div class='order-step'><div class='yuan yuan-01'><span>1</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>2</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>3</span></div><div class='xian xian-01'></div><div class='yuan yuan-01'><span>4</span></div><div class='xian'></div><div class='yuan'><span>5</span></div></div><ul class='order-step-text'><li>学员申请</li><li>导师确认</li><li>协商时间</li><li>服务进行</li><li>双方评价</li></ul><div class='serviceChoose'> <button id='tgd' style='margin:0px 25px 0px 0px;'>满意</button><button id='nogd' style='margin:0;'>不满意</button></div><img class='Tutor_icon' src='http://image.1yingli.cn/img/schedule_close.png' alt=''/></div>");
             $(".Tutor_icon").click(function(){
                 $(".no1").hide();
                 $(".mark").hide();
@@ -787,7 +787,7 @@ function detail(oid){
                 },
         success : function(data, textStatu) {
             var json = eval("(" + data + ")"); 
-            $(".details").fadeIn().html("<img class='Tutor_icon' src='http://image.1yingli.cn/img/order_close_icon.png' alt=''/><div class='details_top'><div class='details_top_content'>"+json.title+"</div> </div><div class='details_content'><div class='details_person_img'><img src=\""+(json.teacherUrl==""?"http://image.1yingli.cn/img/img.png":json.teacherUrl)+"\" style='width:173px; height:173px;' alt=''/></div><div class='details_person_name'>"+json.teacherName+"</div><div class='details_person_price'>"+json.price+"元/1小时</div><div class='details_person_topic'> 话题 ："+json.title+"</div></div><div class='details_person_problem'><p class='quest1'>学员提的问题:</p><p class='text1'>"+json.question+"</p></div><div class='details_person_status'><p class='quest2'>学员目前状况:</p><p class='text2'>"+json.userIntroduce+"</p></div><div class='details_person_time'><p class='quest3'>预约时间:</p><p class='text3'>"+json.selectTimes+"</p></div><div class='details_person_contract'><p style='font-size:16px;font-weight: bolder;'>联系方式:</p><p style='width:150px;height:15px;font-size:13px;margin:5px 20px 0 0; float:left;'>手机号码："+json.phone+"</p><p style='width:150px;height:15px;font-size:13px;margin:5px 20px 0 0; float:left;'>微信："+json.contact+"</p><p style='width:180px;height:15px;font-size:13px;margin:5px 0 0 0; float:left;'>邮箱："+json.email+"</p></div><div class='details_bottom'><div style='height:20px;font-size: 14px; color: #000; padding-top: 8px;'>订单号："+json.orderId+"</div> </div>");
+            $(".details").fadeIn().html("<img class='Tutor_icon' src='http://image.1yingli.cn/img/order_close_icon.png' alt=''/><div class='details_top'><div class='details_top_content'>"+json.title+"</div> </div><div class='details_content'><div class='details_person_img'><img src=\""+(json.teacherUrl==""?"http://image.1yingli.cn/img/img.png":json.teacherUrl)+"\" style='width:173px; height:173px;' alt=''/></div><div class='details_person_name'>"+json.teacherName+"</div><div class='details_person_price'>"+json.price+"元/"+json.time+"小时</div><div class='details_person_topic'> 话题 ："+json.title+"</div></div><div class='details_person_problem'><p class='quest1'>学员提的问题:</p><p class='text1'>"+json.question+"</p></div><div class='details_person_status'><p class='quest2'>学员目前状况:</p><p class='text2'>"+json.userIntroduce+"</p></div><div class='details_person_time'><p class='quest3'>预约时间:</p><p class='text3'>"+json.selectTimes+"</p></div><div class='details_person_contract'><p style='font-size:16px;font-weight: bolder;'>联系方式:</p><p style='width:150px;height:15px;font-size:13px;margin:5px 20px 0 0; float:left;'>手机号码："+json.phone+"</p><p style='width:150px;height:15px;font-size:13px;margin:5px 20px 0 0; float:left;'>微信："+json.contact+"</p><p style='width:180px;height:15px;font-size:13px;margin:5px 0 0 0; float:left;'>邮箱："+json.email+"</p></div><div class='details_bottom'><div style='height:20px;font-size: 14px; color: #000; padding-top: 8px;'>订单号："+json.orderId+"</div> </div>");
             $(".Tutor_icon").click(function(){
                     $(".mark").hide();
                     $(".details").fadeOut();

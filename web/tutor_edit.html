@@ -99,7 +99,12 @@
 							<div class="block_left">
 								<span>话题 : </span><input id="title" maxlength="20" style="width:300px;margin-top: 12px;height:17px;text-indent:5px;font-size:12px;"><span class="errorMessage" style="display:none">话题不能为空。</span>
 								<span style="width:100%;padding-left:30px;font-size:12px;">(此标题显示在主题模块导师头部下方，字数限20字以内)</span>
-								<span>价格 : </span><input id="price" maxlength="5" style="width:60px;margin-top: 12px;height:17px;text-indent:5px;font-size:12px;"><span style="margin-left:4px;font-size:12px;margin-top: 12px;">60分钟</span><span class="errorMessage" style="display:none;font-size:12px;margin-top: 12px;">价格不能为空且不能为零。</span>
+								<span>价格 : </span>
+									<input id="price" maxlength="6" style="width:40px;margin-top: 12px;height:17px;text-indent:2px;font-size:12px;">
+									<span style="margin-left:2px;font-size:12px;margin-top: 12px;">元</span>
+									<input id="time" type="number" value="0.5" step="0.5" min="0.5" max="4" id="topic-time" style="width:40px; margin-top: 12px;">
+									<span style="margin-left:2px;font-size:12px;margin-top: 12px;">小时</span>
+									<span class="errorMessage" style="display:none;font-size:12px;margin-top: 12px;">价格、时间不能为空且不能为零。</span>
 								<span style="width:100%;padding-left:30px;font-size:12px;">(建议:开始设置价格在300元以下，咨询次数上升，累计好评后再升高价格)</span>
 							</div>
 							<div class="block_right"> 
