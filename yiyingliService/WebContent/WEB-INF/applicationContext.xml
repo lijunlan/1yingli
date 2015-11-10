@@ -1859,9 +1859,6 @@
 
 	<bean id="dGetInfoService" class="cn.yiyingli.Handle.Service.DGetInfoService"
 		scope="prototype">
-		<property name="distributorService">
-			<ref local="distributorService" />
-		</property>
 		<property name="distributorMarkService">
 			<ref local="distributorMarkService" />
 		</property>

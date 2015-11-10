@@ -44,6 +44,6 @@ public abstract class ULoginMsgService extends MsgService {
 					+ (user.getIconUrl() != null ? user.getIconUrl() : "") + "\",\"state\":\"success\"}");
 		}
 		TimeTaskUtil.sendTimeTask("remove", "userMark",
-				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 12) + "", _UUID);
+				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 7) + "", _UUID);
 	}
 }
