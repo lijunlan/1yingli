@@ -23,6 +23,7 @@ public class PTeacherUtil {
 			String checkWork, String checkStudy, String showWeight1, String showWeight2, String showWeight4,
 			String showWeight8, String showWeight16, String homeWeight, String saleWeight, Teacher teacher,
 			TipService tipService) {
+		teacher.getTips().clear();
 		if (Boolean.valueOf(checkPhone)) {
 			teacher.setCheckPhone(true);
 		} else {

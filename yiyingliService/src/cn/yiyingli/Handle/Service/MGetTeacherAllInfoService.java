@@ -59,6 +59,8 @@ public class MGetTeacherAllInfoService extends MsgService {
 		map.put("showWeight4", teacher.getShowWeight4());
 		map.put("showWeight8", teacher.getShowWeight8());
 		map.put("showWeight16", teacher.getShowWeight16());
+		map.put("homeWeight", teacher.getHomeWeight());
+		map.put("saleWeight", teacher.getSaleWeight());
 		TService tService = teacher.gettService();
 		map.put("timeperweek", tService.getTimesPerWeek());
 		map.put("freeTime", tService.getFreeTime());
