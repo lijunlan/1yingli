@@ -426,7 +426,7 @@ function refreshTeacherInfo(){
                     var talkWay = json.talkWay;
                     var commentNo = json.commentNo;
                     //总页数设置
-                    totalPage = Math.ceil(commentNo/12);
+                    totalPage = Math.ceil(commentNo/5);
                     $("#commentNo").html(commentNo+"条评价");
 
                     var ts = talkWay.split(",");
