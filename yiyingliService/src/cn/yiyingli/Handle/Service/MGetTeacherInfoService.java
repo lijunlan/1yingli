@@ -63,6 +63,8 @@ public class MGetTeacherInfoService extends MMsgService {
 			t.put("showWeight4", teacher.getShowWeight4());
 			t.put("showWeight8", teacher.getShowWeight8());
 			t.put("showWeight16", teacher.getShowWeight16());
+			t.put("homeWeight", teacher.getHomeWeight());
+			t.put("saleWeight", teacher.getSaleWeight());
 			t.put("checkIDCard",
 					teacher.getCheckIDCardState() == TeacherService.CHECK_STATE_SUCCESS_SHORT ? "true" : "false");
 			t.put("checkStudy",
