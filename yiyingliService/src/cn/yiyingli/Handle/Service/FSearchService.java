@@ -40,7 +40,7 @@ public class FSearchService extends MsgService {
 			CloudsearchClient client = new CloudsearchClient(accessKeyId, accessKeySecret, host, opts,
 					KeyTypeEnum.ALIYUN);
 			CloudsearchSearch search = new CloudsearchSearch(client);
-			search.addIndex("yiyinglitest");
+			search.addIndex("yiyingli");
 			search.setStartHit((p - 1) * TeacherService.PAGE_SIZE_INT);
 			search.setHits(TeacherService.PAGE_SIZE_INT);
 			if (getData().containsKey("word")) {

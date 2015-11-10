@@ -22,7 +22,7 @@ public class Comment {
 	@Column(name = "SCORE", nullable = false)
 	private Short score;
 
-	@Column(name = "CONTENT", nullable = false)
+	@Column(name = "CONTENT", nullable = false, length = 500)
 	private String content;
 
 	@Column(name = "CREATETIME", nullable = false)
@@ -30,7 +30,7 @@ public class Comment {
 
 	@Column(name = "KIND", nullable = false)
 	private Short kind;
-	
+
 	@Column(name = "SERVICETITLE", nullable = false)
 	private String serviceTitle;
 
@@ -45,7 +45,6 @@ public class Comment {
 	@ManyToOne(targetEntity = Order.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "ORDER_ID", updatable = false)
 	private Order ownOrder;
-	
 
 	public Long getId() {
 		return id;

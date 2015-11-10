@@ -159,7 +159,7 @@ public class CreateOrderService extends UMsgService {
 			money = 0.01F;
 		order.setMoney(money);
 		order.setOriginMoney(originMoney);
-		getOrderService().save(order);
+		String orderNo = getOrderService().save(order);
 		if (voucher != null) {
 			getVoucherService().update(voucher);
 		}
@@ -171,7 +171,8 @@ public class CreateOrderService extends UMsgService {
 				"尊敬的学员，您的导师预约订单已经创建。订单号" + order.getOrderNo() + "，请在48小时内完成支付，超时系统会自动取消订单。", user,
 				getNotificationService());
 
-		setResMsg(MsgUtil.getSuccessMsg("create order successfully"));
+		setResMsg(
+				MsgUtil.getSuccessMap().put("orderNo", orderNo).put("msg", "create order successfully").finishByJson());
 	}
 
 }
