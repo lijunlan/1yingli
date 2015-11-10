@@ -15,6 +15,10 @@ public interface TeacherService {
 
 	public static final int PAGE_SIZE_INT = 9;
 
+	public static final int HOME_PAGE_SIZE = 4;
+
+	public static final int SALE_PAGE_SIZE = 9;
+
 	void save(Teacher teacher);
 
 	void saveWithDetailInfo(Teacher teacher);
@@ -56,12 +60,20 @@ public interface TeacherService {
 	Teacher queryByUserIdWithTService(long userid, boolean lazy);
 
 	List<Teacher> queryByIds(List<Long> ids);
-	
-	List<Teacher> queryListOnservice(int page,int pageSize,boolean lazy);
+
+	List<Teacher> queryListOnservice(int page, int pageSize, boolean lazy);
 
 	List<Teacher> queryList(int page, int pageSize, boolean lazy);
 
 	List<Teacher> queryList(int page, boolean lazy);
+
+	List<Teacher> queryListByHomePage(int pageSize);
+
+	List<Teacher> queryListBySale(int page, int pageSize);
+
+	List<Teacher> queryListByHomePage();
+
+	List<Teacher> queryListBySale(int page);
 
 	List<Teacher> queryByTipOrderByShow(int size, long tipMark, boolean lazy);
 
