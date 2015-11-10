@@ -447,4 +447,29 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Teacher> queryListByHomePage(final int pageSize) {
+		List<Teacher> list = new ArrayList<Teacher>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
+
+			@Override
+			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from Teacher t left join fetch t.tService where t.onService=true ORDER BY t.homeWeight DESC";
+				Query query = session.createQuery(hql);
+				query.setFirstResult(0);
+				query.setMaxResults(pageSize);
+				List<Teacher> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@Override
+	public List<Teacher> queryListBySale(int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
