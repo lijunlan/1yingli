@@ -120,6 +120,8 @@
 		<method name="removeBackground" beanName="mRemoveBackgroundService" />
 	</style>
 	<style name="function">
+		<method name="getHomeTeacherList" beanName="fGetHomeTeacherListService"></method>
+		<method name="getSaleTeacherList" beanName="fGetSaleTeacherListService"></method>
 		<method name="teacherDemand" beanName="fTeacherDemandService"></method>
 		<method name="getCheckNo" beanName="fGetCheckNoService"></method>
 		<method name="searchByTip" beanName="searchByTipService"></method>
