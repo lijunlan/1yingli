@@ -79,6 +79,12 @@ public class Teacher {
 	@Column(name = "SHOWWEIGHT16", nullable = true)
 	private Integer showWeight16;
 
+	@Column(name = "HOMEWEIGHT", nullable = true)
+	private Integer homeWeight;
+
+	@Column(name = "SALEWEIGHT", nullable = true)
+	private Integer saleWeight;
+
 	@Column(name = "LEVEL", nullable = false)
 	private Short level;
 
@@ -530,6 +536,22 @@ public class Teacher {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public Integer getHomeWeight() {
+		return homeWeight;
+	}
+
+	public void setHomeWeight(Integer homeWeight) {
+		this.homeWeight = homeWeight;
+	}
+
+	public Integer getSaleWeight() {
+		return saleWeight;
+	}
+
+	public void setSaleWeight(Integer saleWeight) {
+		this.saleWeight = saleWeight;
 	}
 
 }
