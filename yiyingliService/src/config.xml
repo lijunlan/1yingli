@@ -90,6 +90,7 @@
 		<method name="login" beanName="dLoginService" />
 	</style>
 	<style name="manager">
+		<method name="getTeacherDemand" beanName="mGetTeacherDemandService"></method>
 		<method name="createDistributor" beanName="mCreateDistributorService"></method>
 		<method name="getDistributorList" beanName="mGetDistributorListService"></method>
 		<method name="restartOrder" beanName="mRestartOrderService"></method>
