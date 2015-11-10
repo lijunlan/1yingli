@@ -622,7 +622,7 @@ function changePage(p){
         type : "POST",
         url : config.base_url,
         data : $.toJSON(toSend),
-        async : true,
+        async : false,
         error : function(request) {
                     //alert("Connection error");
                 },

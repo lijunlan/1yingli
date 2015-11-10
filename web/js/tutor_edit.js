@@ -160,6 +160,9 @@ $(document).ready(function(){
         $("#price").val($("#oldPrice").html());
         $("#time").val($("#oldTime").html());
     });
+    $("#time").change(function() {
+        $(this).val((Math.floor($(this).val() * 2)) /2);
+    });
     $("#cancel_titlePrice").click(function(){
         $("#edit_titlePrice_block").hide();
     });
