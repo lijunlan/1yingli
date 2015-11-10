@@ -11,7 +11,7 @@ public interface CommentService {
 
 	public static final short COMMENT_KIND_FROMTEACHER_SHORT = 2;
 
-	public static final int PAGE_SIZE_INT = 12;
+	public static final int PAGE_SIZE_INT = 5;
 
 	void save(Comment comment);
 
