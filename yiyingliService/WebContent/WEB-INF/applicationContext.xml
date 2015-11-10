@@ -33,6 +33,7 @@
 				<value>cn.yiyingli.Persistant.UserLikeTeacher</value>
 				<value>cn.yiyingli.Persistant.Distributor</value>
 				<value>cn.yiyingli.Persistant.DistributorMark</value>
+				<value>cn.yiyingli.Persistant.TeacherDemand</value>
 			</list>
 		</property>
 	</bean>
@@ -63,6 +64,13 @@
 
 
 	<!-- !!!!!Dao!!!!! -->
+	<bean id="teacherDemandDao" class="cn.yiyingli.Dao.Impl.TeacherDemandDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+
 	<bean id="distributorMarkDao" class="cn.yiyingli.Dao.Impl.DistributorMarkDaoImpl">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
@@ -208,6 +216,12 @@
 		</property>
 	</bean>
 
+	<bean id="teacherDemandService" parent="baseTxService">
+		<property name="target">
+			<ref local="teacherDemandServiceImpl" />
+		</property>
+	</bean>
+
 	<bean id="commentService" parent="baseTxService">
 		<property name="target">
 			<ref local="commentServiceImpl" />
@@ -341,6 +355,13 @@
 	</bean>
 
 	<!--!!!!Data Service Impl!!!!! -->
+	<bean id="teacherDemandServiceImpl" class="cn.yiyingli.Service.TeacherDemandServiceImpl">
+		<property name="teacherDemandDao">
+			<ref local="teacherDemandDao" />
+		</property>
+	</bean>
+
+
 	<bean id="distributorServiceImpl" class="cn.yiyingli.Service.Impl.DistributorServiceImpl">
 		<property name="distributorDao">
 			<ref local="distributorDao" />
@@ -552,7 +573,6 @@
 	</bean>
 
 	<!--!!!!Handle Service!!!!! -->
-
 	<bean id="loginService" class="cn.yiyingli.Handle.Service.LoginService"
 		scope="prototype">
 		<property name="userMarkService">
@@ -560,6 +580,13 @@
 		</property>
 		<property name="userService">
 			<ref local="userService" />
+		</property>
+	</bean>
+
+	<bean id="fTeacherDemandService" class="cn.yiyingli.Handle.Service.FTeacherDemandService"
+		scope="prototype">
+		<property name="teacherDemandService">
+			<ref local="teacherDemandService" />
 		</property>
 	</bean>
 
@@ -1859,9 +1886,6 @@
 
 	<bean id="dGetInfoService" class="cn.yiyingli.Handle.Service.DGetInfoService"
 		scope="prototype">
-		<property name="distributorService">
-			<ref local="distributorService" />
-		</property>
 		<property name="distributorMarkService">
 			<ref local="distributorMarkService" />
 		</property>
