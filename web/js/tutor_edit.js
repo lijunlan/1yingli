@@ -158,6 +158,7 @@ $(document).ready(function(){
         $("#edit_titlePrice_block").show();
         $("#title").val($("#stitle").html());
         $("#price").val($("#oldPrice").html());
+        $("#time").val($("#oldTime").html());
     });
     $("#cancel_titlePrice").click(function(){
         $("#edit_titlePrice_block").hide();
