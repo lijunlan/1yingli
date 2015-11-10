@@ -1,4 +1,4 @@
-﻿$(document).ready(function(){
+$(document).ready(function(){
    
     var teacherId = $_GET("tid");
     if(teacherId==null||teacherId==""){
