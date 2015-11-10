@@ -153,7 +153,7 @@ function changePage(p){
                     i = content.state.split(",")[0];
                     con = content;
                     orderId = content.orderId
-                    html = html + "<li class='Tutor-list'><div class='Tutor-id'><p>编号:<p id='111' style='float:left;'>"+content.orderId+"</p><p style='font-size: initial;padding-top: 12px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'><span>时间：</span>"+d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate()+"&nbsp&nbsp"+d.getHours()+":"+d.getMinutes()+"</p></div><div class='Tutor-01'><img src=\""+(content.iconUrl==""?"http://image.1yingli.cn/img/img.png":content.iconUrl)+"\" alt=''/><div class='name'>"+content.name+"</div></div></div><div class='Tutor-03'><p>"+content.originPrice+"元</p><p>/"+content.time+"分钟</p></div><div class='Tutor-04'><div class='order-details' style='color:#56bbe8; cursor: pointer;'><a class='see'><p>查看详情</p></a></div></div><div class='Tutor-05'>"+Situation(i,orderId)+"</div></li>";
+                    html = html + "<li class='Tutor-list'><div class='Tutor-id'><p>编号:<p id='111' style='float:left;'>"+content.orderId+"</p><p style='font-size: initial;padding-top: 12px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'><span>时间：</span>"+d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate()+"&nbsp&nbsp"+d.getHours()+":"+d.getMinutes()+"</p></div><div class='Tutor-01'><img src=\""+(content.iconUrl==""?"http://image.1yingli.cn/img/img.png":content.iconUrl)+"\" alt=''/><div class='name'>"+content.name+"</div></div></div><div class='Tutor-03'><p>"+content.originPrice+"元</p><p>/"+content.time+"分钟</p></div><div class='Tutor-04'><div class='order-details' style='color:#56bbe8; cursor: pointer;'><a class='see'><p>查看详情</p></a></div></div><div class='Tutor-05'>"+Situation(i,orderId,content.okTime)+"</div></li>";
                 });
             $(".Tutor-lists").html(html);
             } else {
@@ -226,7 +226,7 @@ function changePage(p){
 }
 
 //导师栏目最右侧
-function Situation(i,orderId){
+function Situation(i,orderId, okTime){
     switch (i){
         case "0200":
             return "<a class='states'><p>"+"未支付"+"</p></a><a class='state' href='javascript:openshow("+i+","+orderId+");'><p>"+"学员放弃支付"+"</p></a>";
@@ -238,7 +238,7 @@ function Situation(i,orderId){
             return "<a class='states'><p>"+"接受订单"+"</p></a><a class='state' href='javascript:openshow("+i+","+orderId+");'><p>"+"等待确认时间"+"</p></a>";
             break;
         case "0500":
-            return "<a class='states'><p>"+"确定时间"+"</p></a><a class='state' href='javascript:openshow("+i+","+orderId+");'><p>"+"等待服务"+"</p></a>";
+            return "<a class='states'><p style='margin-top:10%;'>"+"时间已确定<br>"+ okTime +"</p></a><a class='state' href='javascript:openshow("+i+","+orderId+");'><p>"+"等待服务"+"</p></a>";
             break;
         case "0620":
             return "<a class='states'><p>"+"服务完毕"+"</p></a><a class='state' href='javascript:openshow("+i+","+orderId+");'><p>"+"用户不满"+"</p></a>";
