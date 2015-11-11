@@ -42,6 +42,16 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 	}
 
 	@Override
+	public void updateWithOrderId(Voucher voucher, long orderId) {
+		getHibernateTemplate().update(voucher);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session.createSQLQuery(
+				"update voucher set voucher.ORDER_ID=" + orderId + " where voucher.VOUCHER_ID=" + voucher.getId());
+		query.executeUpdate();
+	}
+
+	@Override
 	public void updateFromSql(String sql) {
 		getHibernateTemplate().bulkUpdate(sql);
 	}

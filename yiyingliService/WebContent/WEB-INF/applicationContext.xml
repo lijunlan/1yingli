@@ -1897,10 +1897,14 @@
 			<ref local="orderService" />
 		</property>
 	</bean>
+
 	<bean id="mGetTeacherDemandService" class="cn.yiyingli.Handle.Service.MGetTeacherDemandService"
 		scope="prototype">
 		<property name="teacherDemandService">
 			<ref local="teacherDemandService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
 		</property>
 	</bean>
 
