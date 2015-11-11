@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.TeacherDemand;
 import cn.yiyingli.Service.TeacherDemandService;
 import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
-public class MGetTeacherDemandService extends MsgService {
+public class MGetTeacherDemandService extends MMsgService {
 
 	private TeacherDemandService teacherDemandService;
 	

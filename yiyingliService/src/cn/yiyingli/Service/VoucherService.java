@@ -18,6 +18,8 @@ public interface VoucherService {
 
 	void update(Voucher voucher);
 
+	void updateWithOrderId(Voucher voucher, long orderId);
+
 	Voucher query(long id, boolean lazy);
 
 	Voucher query(String vno, boolean lazy);

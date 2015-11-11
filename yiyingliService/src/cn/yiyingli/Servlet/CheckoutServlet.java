@@ -108,7 +108,8 @@ public class CheckoutServlet extends HttpServlet {
 		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0", URLEncoder.encode(order.getServiceTitle(), "UTF-8"));
 		// 货物id，这里填写的是订单号
 		checkoutDetails.put("L_PAYMENTREQUEST_0_NUMBER0", order.getOrderNo());
-		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0", URLEncoder.encode("【一英里】" + order.getServiceTitle(), "UTF-8"));
+		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0",
+				URLEncoder.encode("【一英里】[" + order.getTeacher().getName() + "]" + order.getServiceTitle(), "UTF-8"));
 		checkoutDetails.put("L_PAYMENTREQUEST_0_QTY0", "1");
 		// 商品价格
 		float price = order.getMoney();

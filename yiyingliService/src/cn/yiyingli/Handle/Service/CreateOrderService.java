@@ -135,6 +135,7 @@ public class CreateOrderService extends UMsgService {
 		float money = teacher.gettService().getPriceTotal();
 		float originMoney = teacher.gettService().getPriceTotal();
 		long ntime = Calendar.getInstance().getTimeInMillis();
+		boolean isUseVoucher = false;
 		Voucher voucher = null;
 		if (getData().containsKey("voucher")) {
 			String vno = (String) getData().get("voucher");
@@ -150,9 +151,8 @@ public class CreateOrderService extends UMsgService {
 				return;
 			} else {
 				money = money - voucher.getMoney();
-				order.getUseVouchers().add(voucher);
 				voucher.setUsed(true);
-				voucher.setUseOrder(order);
+				isUseVoucher = true;
 			}
 		}
 		if (money < 0.01)
@@ -160,8 +160,8 @@ public class CreateOrderService extends UMsgService {
 		order.setMoney(money);
 		order.setOriginMoney(originMoney);
 		String orderNo = getOrderService().save(order);
-		if (voucher != null) {
-			getVoucherService().update(voucher);
+		if (isUseVoucher) {
+			getVoucherService().updateWithOrderId(voucher, order.getId());
 		}
 
 		SendMsgToBaiduUtil.updateUserTrainDataOrder(user.getId() + "", teacher.getId() + "",
