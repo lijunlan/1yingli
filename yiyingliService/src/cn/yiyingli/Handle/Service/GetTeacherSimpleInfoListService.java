@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import cn.yiyingli.ExchangeData.LikeNoShowUtil;
-import cn.yiyingli.ExchangeData.ExTeacherSimpleShowUtil;
+import cn.yiyingli.ExchangeData.ExTeacherNormal;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Record;
-import cn.yiyingli.Persistant.TService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.RecordService;
@@ -64,17 +62,7 @@ public class GetTeacherSimpleInfoListService extends MsgService {
 			List<Teacher> teachers = getTeacherService().queryByTipOrderByShow(Long.valueOf(tipId), false);
 			List<String> exTeachers = new ArrayList<String>();
 			for (Teacher teacher : teachers) {
-				SuperMap map = new SuperMap();
-				map.put("name", teacher.getName());
-				map.put("iconUrl", teacher.getIconUrl());
-				ExTeacherSimpleShowUtil.getSimpleShowByTip(teacher, map, Long.valueOf(tipId));
-				map.put("level", teacher.getLevel());
-				LikeNoShowUtil.setLikeNo(teacher, map);
-				map.put("teacherId", teacher.getId());
-				TService tService = teacher.gettService();
-				map.put("timeperweek", tService.getTimesPerWeek());
-				map.put("serviceTitle", tService.getTitle());
-				map.put("serviceContent", tService.getContent());
+				SuperMap map = ExTeacherNormal.assembleSimpleTeacher(teacher);
 				exTeachers.add(map.finishByJson());
 			}
 			saveRecord(tipId);

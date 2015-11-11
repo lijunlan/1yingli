@@ -304,4 +304,24 @@ public class TeacherServiceImpl implements TeacherService {
 		return getTeacherDao().queryByTipOrderByShow(TeacherService.PAGE_SIZE_INT, tipMark, lazy);
 	}
 
+	@Override
+	public List<Teacher> queryListByHomePage(int pageSize) {
+		return getTeacherDao().queryListByHomePage(pageSize);
+	}
+
+	@Override
+	public List<Teacher> queryListBySale(int page, int pageSize) {
+		return getTeacherDao().queryListBySale(page, pageSize);
+	}
+
+	@Override
+	public List<Teacher> queryListByHomePage() {
+		return getTeacherDao().queryListByHomePage(HOME_PAGE_SIZE);
+	}
+
+	@Override
+	public List<Teacher> queryListBySale(int page) {
+		return getTeacherDao().queryListBySale(page, SALE_PAGE_SIZE);
+	}
+
 }

@@ -1,5 +1,4 @@
-;var list,i,con,orderId,cval,ppay,ptime,star,ass;
-
+var list,i,con,orderId,cval,ppay,ptime,star,ass;
 var uid = $.cookie('uid');
 $(document).ready(function(){    
     var u = $.cookie('uid');
