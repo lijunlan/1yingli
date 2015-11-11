@@ -211,10 +211,8 @@ $(document).ready(function(){
             success : function(data, textStatu) {
                         var json = eval("(" + data + ")");
                         if (json.state == "success") {
+                        	refreshTeacherInfo();
                             $("#edit_titlePrice_block").hide();
-                            $("#stitle").html(title);
-                            $("#oldPrice").html(price);
-                            $("#oldTime").html(time);
                         }
                     }
         });

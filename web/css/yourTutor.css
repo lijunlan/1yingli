@@ -457,10 +457,21 @@
     #erro div:nth-of-type(1) {
         width: 290px !important;
     }
+    #sureService {
+        width: 290px !important;
+        left: 50% !important;
+        margin-left: -145px !important;
+    }
+    #sureService div:nth-of-type(1) {
+        width: 290px !important;
+    }
     #erro a{
         left: 30% !important;
     }
     #succ a{
+        left: 30% !important;
+    }
+    #sureService a{
         left: 30% !important;
     }
     #timeSureHidden {
@@ -1252,4 +1263,34 @@ width:520px;height:35px;border:1px solid #eeeeee;margin: 0;overflow-y: auto;over
     
     #erro a{
         text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;
+    }
+
+    #sureService {
+        width: 400px;height: 200px;margin: auto;position: absolute;top: 30%;left: 42%;border-radius: 10px;z-index: 101;background: #fff; display:none;border: 1px solid #ccc;
+    }
+
+    #sureService div:nth-of-type(1){
+        width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;
+    }
+    
+    #sureService div:nth-of-type(1) span{
+        font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;line-height: 35px;
+    }
+    #sureService div:nth-of-type(2){
+        font-size: 20px;color: #b6b6b6;    
+        line-height: 120px;
+        text-align: center;
+        
+    }
+    
+    #sureService a{
+        cursor: pointer;text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;
+    }
+
+    .closeService{
+        position: absolute;
+        right: 0px;
+        top: 2px;
+        cursor: pointer;
+        border-radius: 8px;
     }

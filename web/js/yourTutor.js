@@ -1,4 +1,4 @@
-var list,i,con,orderId,cval,ppay,ptime,star,ass;
+;var list,i,con,orderId,cval,ppay,ptime,star,ass;
 
 var uid = $.cookie('uid');
 $(document).ready(function(){    
@@ -40,6 +40,15 @@ function closeChoose_pay_method(){
 function closeAssess(){
     $(".mark").hide();
     $("#assess").hide();
+}
+function sureCancelService(){
+    $(".mark").hide();
+    $("#sureService").hide();
+}
+function sureServiceNo() {
+    var order = $("#serviceNoOrderId").val()
+    nogood(order);
+    $("#sureService").hide();
 }
 
 var totalPage = 1;
@@ -383,7 +392,8 @@ function openshow(tid,i,orderId){
             $("#nogd").click(function(){
                 var order = orderId.toString(10);
                 $(".no1").hide();
-                nogood(order);
+                $("#serviceNoOrderId").val(order);
+                $("#sureService").show();
             });
             break;
         case 400:
@@ -741,31 +751,31 @@ function noserve(order){
 }
 
 function nogood(order){
-        var toSend = new Object();
-        toSend.style= "order";
-        toSend.method = "dissatisfyOrder";
-        toSend.uid = uid;        
-        toSend.orderId = order;
-        $.ajax({
-            cache : true,
-            type : "POST",
-            url : config.base_url,
-            data : $.toJSON(toSend),
-            async : false,
-            error : function(request) {
-                        $(".mark").show();
-                        $("#box").show();
-                    },
-            success : function(data, textStatu) {
-                var json = eval("(" + data + ")");
-                if (json.state == "success") {
+    var toSend = new Object();
+    toSend.style= "order";
+    toSend.method = "dissatisfyOrder";
+    toSend.uid = uid;        
+    toSend.orderId = order;
+    $.ajax({
+        cache : true,
+        type : "POST",
+        url : config.base_url,
+        data : $.toJSON(toSend),
+        async : false,
+        error : function(request) {
                     $(".mark").show();
-                    $("#succ").show();
-                } else {
-                    $(".mark").show();
-                    $("#erro").show();
-                }
+                    $("#box").show();
+                },
+        success : function(data, textStatu) {
+            var json = eval("(" + data + ")");
+            if (json.state == "success") {
+                $(".mark").show();
+                $("#succ").show();
+            } else {
+                $(".mark").show();
+                $("#erro").show();
             }
+        }
     });
 }
 

@@ -141,8 +141,19 @@
 <!-- 提交信息有误 -->
 <div id="erro">
     <div><span >来自一英里的信息</span></div>
-    <div >提交的信息有误</div>
+    <div>提交的信息有误</div>
     <a href="yourTutor.html" >返回</a>
+</div>
+
+<!-- 提交服务不满意 -->
+<div id="sureService">
+	<img class='closeService' src='http://image.1yingli.cn/img/order_close_icon.png' onclick="sureCancelService()" />
+    <div>
+    	<span>来自一英里的信息</span>
+    </div>
+    <div>确定导师服务不满意</div>
+    <a class="sureServiceNo" onclick="sureServiceNo();" href="#">确定</a>
+    <input id="serviceNoOrderId" type="hidden">
 </div>
 
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
