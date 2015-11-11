@@ -21,6 +21,7 @@ public class ExOrderUtil {
 		map.put("selectTimes", o.getSelectTime());
 		map.put("okTime", o.getOkTime());
 		map.put("contact", o.getCustomerContact());
+		map.put("refuseReason", o.getRefuseReason());
 	}
 
 	public static void assembleOrderToUser(SuperMap map, Order o) {
@@ -34,6 +35,7 @@ public class ExOrderUtil {
 		map.put("teacherName", o.getTeacher().getName());
 		map.put("teacherUrl", o.getTeacher().getIconUrl());
 		map.put("state", o.getState());
+		map.put("refuseReason", o.getRefuseReason());
 		map.put("question", o.getQuestion());
 		map.put("userIntroduce", o.getUserIntroduce());
 		map.put("selectTimes", o.getSelectTime());
@@ -45,6 +47,7 @@ public class ExOrderUtil {
 	}
 
 	public static void assembleOrderToManager(SuperMap map, Order o) {
+		map.put("refuseReason", o.getRefuseReason());
 		map.put("orderId", o.getOrderNo());
 		map.put("payTime", o.getPayTime());
 		map.put("createTime", o.getCreateTime());

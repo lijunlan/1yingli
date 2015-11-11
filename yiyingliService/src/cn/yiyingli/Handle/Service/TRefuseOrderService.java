@@ -58,14 +58,14 @@ public class TRefuseOrderService extends TMsgService {
 		order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
 		getOrderService().update(order);
 
-		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-				"尊敬的学员，抱歉的通知您，订单号为" + order.getOrderNo() + "的订单已经被导师(" + teacher.getName() + ")拒绝，我们会在24小时内为您退款。",
+		NotifyUtil.notifyUserOrder(order.getCustomerPhone(),
+				order.getCustomerEmail(), "尊敬的学员，抱歉的通知您，订单号为" + order.getOrderNo() + "的订单已经被导师(" + teacher.getName()
+						+ ")拒绝，拒绝理由：" + refuseReason + "，我们会在24小时内为您退款。",
 				order.getCreateUser(), getNotificationService());
-		NotifyUtil.notifyTeacher(teacher.getPhone(), teacher.getEmail(),
-				"尊敬的导师，您已经拒绝订单号为" + order.getOrderNo() + "的订单。学员姓名：" + order.getCustomerName(), teacher,
-				getNotificationService());
+		NotifyUtil.notifyTeacher(teacher.getPhone(), teacher.getEmail(), "尊敬的导师，您已经拒绝订单号为" + order.getOrderNo()
+				+ "的订单。学员姓名：" + order.getCustomerName() + ",拒绝理由:" + refuseReason, teacher, getNotificationService());
 		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + "，导师已经拒绝订单.");
+				+ order.getTeacher().getName() + "，导师已经拒绝订单.拒绝理由：" + refuseReason);
 		setResMsg(MsgUtil.getSuccessMsg("refuse order successfully"));
 	}
 
