@@ -853,6 +853,7 @@ header,footer,section {display:block;}
 
 .serviceChoose {
     text-align: center;
+    margin-top: 25px;
 }
 #shelter{
     background-color:black;

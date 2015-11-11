@@ -935,7 +935,7 @@ em {
 }
 
 .one_person .price {
-    width: 150px;
+    width: 160px;
     height: 139px;
     float: right;
 }
@@ -943,6 +943,9 @@ em {
 .money {
     font-size: 25px;
     margin-top: 10px;
+    overflow: hidden;
+    height: 30px;
+    word-wrap: break-word;
 }
 
 .person_topic {
