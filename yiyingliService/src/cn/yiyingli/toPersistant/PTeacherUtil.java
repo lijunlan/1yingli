@@ -80,13 +80,6 @@ public class PTeacherUtil {
 		teacher.setHomeWeight(Integer.valueOf(homeWeight.equals("") ? "" : homeWeight));
 		teacher.setSaleWeight(Integer.valueOf(saleWeight.equals("") ? "" : saleWeight));
 
-		teacher.setCommentNumber(0L);
-		teacher.setLevel((short) 5);
-		teacher.setOrderNumber(0L);
-		teacher.setLikeNumber(0L);
-		teacher.setTipMark(0L);
-		teacher.setOnService(true);
-
 		List<WorkExperience> wes = new ArrayList<WorkExperience>();
 		for (Object we : workExperiences) {
 			WorkExperience workExperience = new WorkExperience();
@@ -131,6 +124,11 @@ public class PTeacherUtil {
 		refreshTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone, address, mail, iconUrl,
 				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, showWeight1, showWeight2,
 				showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, teacher, tipService);
+		teacher.setCommentNumber(0L);
+		teacher.setLevel((short) 5);
+		teacher.setOrderNumber(0L);
+		teacher.setLikeNumber(0L);
+		teacher.setOnService(true);
 		return teacher;
 	}
 }
