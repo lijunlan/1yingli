@@ -85,7 +85,7 @@ public class MCreateTeacherService extends MMsgService {
 		String showWeight16 = (String) tdata.get("showWeight16");
 		String homeWeight = (String) tdata.get("homeWeight");
 		String saleWeight = (String) tdata.get("saleWeight");
-		Teacher teacher = PTeacherUtil.assembleTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name,
+		Teacher teacher = PTeacherUtil.assembleTeacherByManager(user, workExperiences, studyExperiences, tips, simpleinfo, name,
 				phone, address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
 				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight,
 				getTipService());

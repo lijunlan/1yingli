@@ -54,7 +54,6 @@ public class PTeacherUtil {
 			teacher.setCheckDegreeState(TeacherService.CHECK_STATE_NONE_SHORT);
 		}
 
-		user.setTeacherState(UserService.TEACHER_STATE_ON_SHORT);
 		user.setAddress(address);
 		user.setName(name);
 		user.setPhone(phone);
@@ -129,6 +128,32 @@ public class PTeacherUtil {
 		teacher.setOrderNumber(0L);
 		teacher.setLikeNumber(0L);
 		teacher.setOnService(true);
+		return teacher;
+	}
+	
+	public static Teacher assembleTeacherByApplication(User user, List<Object> workExperiences,
+			List<Object> studyExperiences, List<Object> tips, String simpleinfo, String name, String phone,
+			String address, String mail, String iconUrl, String introduce, String checkPhone, String checkIDCard,
+			String checkEmail, String checkWork, String checkStudy, String showWeight1, String showWeight2,
+			String showWeight4, String showWeight8, String showWeight16, String homeWeight, String saleWeight,
+			TipService tipService){
+		Teacher teacher = assembleTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
+				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
+				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, tipService);
+		user.setTeacherState(UserService.TEACHER_STATE_CHECKING_SHORT);
+		return teacher;
+	}
+
+	public static Teacher assembleTeacherByManager(User user, List<Object> workExperiences,
+			List<Object> studyExperiences, List<Object> tips, String simpleinfo, String name, String phone,
+			String address, String mail, String iconUrl, String introduce, String checkPhone, String checkIDCard,
+			String checkEmail, String checkWork, String checkStudy, String showWeight1, String showWeight2,
+			String showWeight4, String showWeight8, String showWeight16, String homeWeight, String saleWeight,
+			TipService tipService) {
+		Teacher teacher = assembleTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
+				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
+				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, tipService);
+		user.setTeacherState(UserService.TEACHER_STATE_ON_SHORT);
 		return teacher;
 	}
 }
