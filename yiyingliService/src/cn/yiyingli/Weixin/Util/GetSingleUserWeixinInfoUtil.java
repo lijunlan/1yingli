@@ -69,6 +69,7 @@ public class GetSingleUserWeixinInfoUtil {
 				}
 
 				public void checkServerTrusted(X509Certificate[] xcs, String string) throws CertificateException {
+					
 				}
 
 				public X509Certificate[] getAcceptedIssuers() {
@@ -144,8 +145,7 @@ public class GetSingleUserWeixinInfoUtil {
 						+ SECRET_MOBILE + "&code=" + code + "&grant_type=authorization_code";
 			}
 			HttpGet httpget = new HttpGet(urls);
-
-			// System.out.println("REQUEST:" + httpget.getURI());
+			
 			ResponseHandler responseHandler = new BasicResponseHandler();
 			String responseBody = httpclient.execute(httpget, responseHandler);
 			JSONObject data = JSONObject.fromObject(responseBody);
