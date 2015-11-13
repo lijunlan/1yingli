@@ -127,7 +127,6 @@ public class PTeacherUtil {
 		teacher.setLevel((short) 5);
 		teacher.setOrderNumber(0L);
 		teacher.setLikeNumber(0L);
-		teacher.setOnService(true);
 		return teacher;
 	}
 	
@@ -141,6 +140,7 @@ public class PTeacherUtil {
 				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
 				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, tipService);
 		user.setTeacherState(UserService.TEACHER_STATE_CHECKING_SHORT);
+		teacher.setOnService(false);
 		return teacher;
 	}
 
@@ -154,6 +154,7 @@ public class PTeacherUtil {
 				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
 				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, tipService);
 		user.setTeacherState(UserService.TEACHER_STATE_ON_SHORT);
+		teacher.setOnService(true);
 		return teacher;
 	}
 }

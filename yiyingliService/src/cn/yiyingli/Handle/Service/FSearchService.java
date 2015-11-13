@@ -43,35 +43,50 @@ public class FSearchService extends MsgService {
 			search.addIndex("yiyingli");
 			search.setStartHit((p - 1) * TeacherService.PAGE_SIZE_INT);
 			search.setHits(TeacherService.PAGE_SIZE_INT);
+			String query = "";
 			if (getData().containsKey("word")) {
 				String wd = (String) getData().get("word");
 				wd = URLDecoder.decode(wd, "utf-8");
 				String[] qss = wd.split(",");
-				String query = "";
+				// String tq = "";
 				for (int i = 0; i < qss.length; i++) {
 					String qs = qss[i];
+					// if (i == 0) {
+					// tq = tq + "'" + qs + "'";
+					// } else {
+					// tq = tq + "&'" + qs + "'";
+					// }
+					// query = "default:" + tq + "^99 OR si:" + tq + "^99 OR n:"
+					// + tq + "^99 OR cn:" + tq
+					// + "^99 OR sn:" + tq + "^99 OR st:" + tq + "^99 OR sc:" +
+					// tq + "^50 OR i:" + tq
+					// + "^50";
 					if (i == 0) {
-						query = query + "(default:'" + qs + "'^99 OR si:'" + qs + "'^99 OR n:'" + qs + "'^99 OR cn:'"
-								+ qs + "'^99 OR sn:'" + qs + "'^99 OR st:'" + qs + "'^99 OR sc:'" + qs + "'^60 OR i:'"
-								+ qs + "'^60)";
+						query = query + "(default:'" + qs + "' OR si:'" + qs + "' OR n:'" + qs + "' OR cn:'" + qs
+								+ "' OR sn:'" + qs + "' OR st:'" + qs + "' OR sc:'" + qs + "'^50 OR i:'" + qs + "'^50)";
 					} else {
-						query = query + "AND (default:'" + qs + "'^99 OR si:'" + qs + "'^99 OR n:'" + qs
-								+ "'^99 OR cn:'" + qs + "'^99 OR sn:'" + qs + "'^99 OR st:'" + qs + "'^99 OR sc:'" + qs
-								+ "'^60 OR i:'" + qs + "'^60)";
+						query = query + "AND(default:'" + qs + "' OR si:'" + qs + "' OR n:'" + qs + "' OR cn:'" + qs
+								+ "' OR sn:'" + qs + "' OR st:'" + qs + "' OR sc:'" + qs + "'^50 OR i:'" + qs + "'^50)";
 					}
 				}
 				// System.out.println(query);
-				search.setQueryString(query);
-			} else if (getData().containsKey("tips")) {
+			}
+			search.setQueryString(query);
+
+			if (getData().containsKey("tips")) {
 				String tips = (String) getData().get("tips");
 				tips = URLDecoder.decode(tips, "utf-8");
 				String[] ts = tips.split(",");
-				StringBuffer sb = new StringBuffer("default:'' OR tc:'" + ts[0] + "'");
-				for (int i = 1; i < ts.length; i++) {
-					sb.append(" OR tc:'" + ts[i] + "'");
+				if (ts.length > 1) {
+					StringBuffer sb = new StringBuffer("default:'' OR tc:'" + ts[0] + "'");
+					for (int i = 1; i < ts.length; i++) {
+						sb.append(" OR tc:'" + ts[i] + "'");
+					}
+					// System.out.println(sb.toString());
+					search.setQueryString(sb.toString());
+				} else {
+					search.addFilter("tipcontent=\"" + ts[0] + "\"");
 				}
-				// System.out.println(sb.toString());
-				search.setQueryString(sb.toString());
 			}
 			search.setFormat("json");
 
