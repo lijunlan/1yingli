@@ -31,8 +31,8 @@
 }
 #search-input {
 	width: 317px;
-	height: 30px;
-	line-height: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	border: 1px solid rgba(0,0,0,0.3);
 	font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
 	font-size: 15px;
