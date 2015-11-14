@@ -152,18 +152,20 @@ body{
 }
 #login-username{
      width: 263px;
-     height: 31px;
-     line-height: 33px;
+     padding: 5px 0px;
+     margin-bottom: 3px;
      margin: 15px 18px 8px 18px;
      background: white;
+     line-height: 20px;
      border-radius: 0px;
      border: 1px solid rgba(0,0,0,0.3);
-    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+     font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
  }
 #login-password{
     width: 263px;
-    height: 31px;
-    line-height: 33px;
+    line-height: 20px;
+    padding: 5px 0px;
+    margin-bottom: 3px;
     margin: 0 18px 8px 18px;
     background: white;
     border-radius: 0px;

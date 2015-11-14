@@ -142,9 +142,9 @@ textarea::-webkit-input-placeholder {
     overflow: hidden;
 }
 .header-footer-content input{
-	line-height: 18px;
-    height: 38px;
-    padding: 10px 15px; 
+	line-height: 20px;
+    height: 40px;
+    padding: 11px 0 8px 15px; 
     font-size: 16px;
     width: 500px;  
     background-color: white;  
@@ -153,7 +153,7 @@ textarea::-webkit-input-placeholder {
     float: left;
 }
 .header-foot button{
-    height: 38px;
+    line-height: 40px;
     width: 133px;
     background: #56bbe8;
     border: 0;
