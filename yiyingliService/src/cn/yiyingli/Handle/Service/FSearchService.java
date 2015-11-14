@@ -40,36 +40,27 @@ public class FSearchService extends MsgService {
 			CloudsearchClient client = new CloudsearchClient(accessKeyId, accessKeySecret, host, opts,
 					KeyTypeEnum.ALIYUN);
 			CloudsearchSearch search = new CloudsearchSearch(client);
-			search.addIndex("yiyingli");
+			search.addIndex("yiyingli2test");
 			search.setStartHit((p - 1) * TeacherService.PAGE_SIZE_INT);
 			search.setHits(TeacherService.PAGE_SIZE_INT);
+			search.addFilter("onservice=1");
 			String query = "";
 			if (getData().containsKey("word")) {
 				String wd = (String) getData().get("word");
 				wd = URLDecoder.decode(wd, "utf-8");
 				String[] qss = wd.split(",");
-				// String tq = "";
 				for (int i = 0; i < qss.length; i++) {
 					String qs = qss[i];
-					// if (i == 0) {
-					// tq = tq + "'" + qs + "'";
-					// } else {
-					// tq = tq + "&'" + qs + "'";
-					// }
-					// query = "default:" + tq + "^99 OR si:" + tq + "^99 OR n:"
-					// + tq + "^99 OR cn:" + tq
-					// + "^99 OR sn:" + tq + "^99 OR st:" + tq + "^99 OR sc:" +
-					// tq + "^50 OR i:" + tq
-					// + "^50";
-					if (i == 0) {
-						query = query + "(default:'" + qs + "' OR si:'" + qs + "' OR n:'" + qs + "' OR cn:'" + qs
-								+ "' OR sn:'" + qs + "' OR st:'" + qs + "' OR sc:'" + qs + "'^50 OR i:'" + qs + "'^50)";
+					if (i == 0) {// default:'" + qs + "' OR
+						query = query + "(si:'" + qs + "' OR n:'" + qs + "' OR cn:'" + qs + "'^70 OR sn:'" + qs
+								+ "'^70 OR sc:'" + qs + "'^75 OR i:'" + qs + "'^40 OR t:'" + qs + "' OR ta:'" + qs
+								+ "' OR p:'" + qs + "'^70 OR d:'" + qs + "'^70 OR m:'" + qs + "'^70)";
 					} else {
-						query = query + "AND(default:'" + qs + "' OR si:'" + qs + "' OR n:'" + qs + "' OR cn:'" + qs
-								+ "' OR sn:'" + qs + "' OR st:'" + qs + "' OR sc:'" + qs + "'^50 OR i:'" + qs + "'^50)";
+						query = query + "AND(si:'" + qs + "' OR n:'" + qs + "' OR cn:'" + qs + "'^70 OR sn:'" + qs
+								+ "'^70 OR sc:'" + qs + "'^75 OR i:'" + qs + "'^40 OR t:'" + qs + "' OR ta:'" + qs
+								+ "' OR p:'" + qs + "'^70 OR d:'" + qs + "'^70 OR m:'" + qs + "'^70)";
 					}
 				}
-				// System.out.println(query);
 			}
 			search.setQueryString(query);
 
@@ -78,11 +69,10 @@ public class FSearchService extends MsgService {
 				tips = URLDecoder.decode(tips, "utf-8");
 				String[] ts = tips.split(",");
 				if (ts.length > 1) {
-					StringBuffer sb = new StringBuffer("default:'' OR tc:'" + ts[0] + "'");
+					StringBuffer sb = new StringBuffer("tc:'" + ts[0] + "'");
 					for (int i = 1; i < ts.length; i++) {
 						sb.append(" OR tc:'" + ts[i] + "'");
 					}
-					// System.out.println(sb.toString());
 					search.setQueryString(sb.toString());
 				} else {
 					search.addFilter("tipcontent=\"" + ts[0] + "\"");
@@ -94,19 +84,15 @@ public class FSearchService extends MsgService {
 				String filter = (String) getData().get("filter");
 				if (filter.startsWith("likeno")) {
 					if (filter.endsWith("+")) {
-						// search.setFirstFormulaName("orderbylikenumbera");
 						search.addSort("likeno", "+");
 					} else {
-						// search.setFirstFormulaName("orderbylikenumberd");
 						search.addSort("likeno", "-");
 					}
 				} else if (filter.startsWith("price")) {
 					if (filter.endsWith("+")) {
 						search.addSort("serviceprice", "+");
-						// search.setFirstFormulaName("orderbypricea");
 					} else {
 						search.addSort("serviceprice", "-");
-						// search.setFirstFormulaName("orderbypriced");
 					}
 				}
 			}
