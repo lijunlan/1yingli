@@ -145,10 +145,14 @@ textarea::-webkit-input-placeholder {
 	line-height: 38px;
 	padding-left: 15px;
     font-size: 16px;
-    height: 38px;  width: 500px;  background-color: white;  border-radius: 3px 0 0 3px;  border: 0;  float: left;
+    width: 500px;  
+    background-color: white;  
+    border-radius: 3px 0 0 3px;  
+    border: 0;  
+    float: left;
 }
 .header-foot button{
-    height: 38px;
+    line-height: 38px;
     width: 133px;
     background: #56bbe8;
     border: 0;
@@ -325,6 +329,27 @@ textarea::-webkit-input-placeholder {
         top: 30%;
     }
 }
+
+@-moz-keyframes moveH1 {
+    0%{
+        left: 0;
+        top: 30%;
+    }
+    100%{
+        left: 20%;
+        top: 30%;
+    }
+}
+@-o-keyframes moveH1 {
+    0%{
+        left: 0;
+        top: 30%;
+    }
+    100%{
+        left: 20%;
+        top: 30%;
+    }
+}
 @-webkit-keyframes moveH1 {
     0%{
         left: 0;
@@ -340,10 +365,31 @@ textarea::-webkit-input-placeholder {
     position: absolute;
     left: 20%;
     top: 45%;
+    width: 300px;
 }
 @keyframes moveP{
     0%{
-        left: 50%;
+        left: 60%;
+        top: 45%;
+    }
+    100%{
+        left: 20%;
+        top: 45%;
+    }
+}
+@-moz-keyframes moveP {
+    0%{
+        left: 60%;
+        top: 45%;
+    }
+    100%{
+        left: 20%;
+        top: 45%;
+    }
+}
+@-o-keyframes moveP {
+    0%{
+        left: 60%;
         top: 45%;
     }
     100%{
@@ -353,11 +399,11 @@ textarea::-webkit-input-placeholder {
 }
 @-webkit-keyframes moveP {
     0%{
-        left: 80%;
+        left: 60%;
         top: 45%;
     }
     100%{
-        left: 50%;
+        left: 20%;
         top: 45%;
     }
 }
