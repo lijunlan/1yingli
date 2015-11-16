@@ -119,7 +119,7 @@ public class AlipayServlet extends HttpServlet {
 			parms.put("return_url", req.getParameter("callback"));
 		}
 		parms.put("out_trade_no", oid);
-		parms.put("subject", "【一英里】" + subject);
+		parms.put("subject", "【一英里】[" + order.getTeacher().getName() + "]" + subject);
 		parms.put("total_fee", total_fee);
 		parms.put("body", body);
 		parms.put("show_url", show_url);

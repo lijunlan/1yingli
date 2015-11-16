@@ -355,7 +355,7 @@
 	</bean>
 
 	<!--!!!!Data Service Impl!!!!! -->
-	<bean id="teacherDemandServiceImpl" class="cn.yiyingli.Service.TeacherDemandServiceImpl">
+	<bean id="teacherDemandServiceImpl" class="cn.yiyingli.Service.Impl.TeacherDemandServiceImpl">
 		<property name="teacherDemandDao">
 			<ref local="teacherDemandDao" />
 		</property>
@@ -1895,6 +1895,16 @@
 		scope="prototype">
 		<property name="orderService">
 			<ref local="orderService" />
+		</property>
+	</bean>
+
+	<bean id="mGetTeacherDemandService" class="cn.yiyingli.Handle.Service.MGetTeacherDemandService"
+		scope="prototype">
+		<property name="teacherDemandService">
+			<ref local="teacherDemandService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
 		</property>
 	</bean>
 

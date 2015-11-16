@@ -39,6 +39,7 @@ public class CommentDaoImpl extends HibernateDaoSupport implements CommentDao {
 				"update teacher set teacher.COMMENTNUMBER=(select count(*) from comment where comment.TEACHER_ID='"
 						+ teacher.getId() + "' and kind=" + kind + ") where teacher.TEACHER_ID=" + teacher.getId());
 		query.executeUpdate();
+		session.flush();
 		query = session.createSQLQuery(
 				"update user set user.SENDCOMMENTNUMBER=(select count(*) from comment where comment.USER_ID='"
 						+ user.getId() + "' and kind=" + kind + ") where user.USER_ID=" + user.getId());

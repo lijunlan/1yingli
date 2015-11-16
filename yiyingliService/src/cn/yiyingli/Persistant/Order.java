@@ -29,6 +29,7 @@ public class Order {
 	@Column(name = "MONEY", nullable = false)
 	private Float money;
 
+	//课程时长
 	@Column(name = "TIME", nullable = false)
 	private Float time;
 
@@ -76,9 +77,11 @@ public class Order {
 	@Column(name = "SERVICETITLE", nullable = false)
 	private String serviceTitle;
 
+	//学员选择时间
 	@Column(name = "SELECTTIME", nullable = false)
 	private String selectTime;
-
+	
+	//导师确定时间
 	@Column(name = "OKTIME", nullable = true)
 	private String okTime;
 
@@ -86,6 +89,7 @@ public class Order {
 	@JoinColumn(name = "ORDER_ID", updatable = false)
 	private Set<Comment> comments = new HashSet<Comment>();
 
+	//订单生成时间
 	@Column(name = "CREATETIME", nullable = false)
 	private String createTime;
 

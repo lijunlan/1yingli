@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+$(document).ready(function () {
     var uid = $.cookie('uid');
     info();
     $("#close").click(function () {

@@ -46,7 +46,7 @@
             <div id="login-form" action="" method="get">
                 <input  id="login-username" name="username" type="text" placeholder="手机号/邮箱" style="padding-left: 7px;font-size:16px;"/>
                 <p id="usernameError" style="margin-bottom:5px;margin-left:43px;display:none;">用户名不能为空！</p>
-                <input id="login-password" name="password" type="password" placeholder="密码" style="padding-left: 7px;font-size:20px;font-weight: bold;letter-spacing: 0px;" />
+                <input id="login-password" name="password" type="password" placeholder="密码" style="padding-left: 7px;font-size:16px;letter-spacing: 0px;" />
                 <p id="passwordError" style="margin-bottom:5px;margin-left:43px;display:none;">密码最少为6位数！</p>
                 <br/>
                 <br/>
@@ -139,7 +139,23 @@
             }
 
             $("#close").click(function(){
-                self.location=document.referrer;
+                if(document.referrer){
+                     if(document.referrer.indexOf("1yingli.cn/login")>0){
+                        self.location = "http://www.1yingli.cn";
+                        return;
+                    }
+                    if(document.referrer.indexOf("account")>0||document.referrer.indexOf("general")>0 ||document.referrer.indexOf("assessSheet")>0||
+                       document.referrer.indexOf("bct0")>0 || document.referrer.indexOf("likeList")>0 || document.referrer.indexOf("yourTutor")>0 ||
+                       document.referrer.indexOf("controlPanel")>0 || document.referrer.indexOf("tutor")>0 || document.referrer.indexOf("tutor_edit")>0 ||
+                       document.referrer.indexOf("account_binding")>0||document.referrer.indexOf("studentassess")>0) {
+                        self.location = "http://www.1yingli.cn";
+                    	return;
+                    }
+                    history.go(-1);
+                } else {
+                        self.location = "http://www.1yingli.cn";  
+                        return;                  
+                }
             })
 
             var kind = $_GET("kind");
@@ -392,6 +408,7 @@
                         	if(document.referrer){
                                 if(document.referrer.indexOf("1yingli.cn/login")>0){
                                     self.location = "http://www.1yingli.cn";
+                                    return;
                                 }
                                 self.location = document.referrer;
                             } else {

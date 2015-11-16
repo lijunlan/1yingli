@@ -457,8 +457,8 @@ em {
     font-size: 12px;
     left: 10px;
     width: 260px;
-    height: 20px;
-    line-height: 20px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 #result-content-header-list-01 {
@@ -935,7 +935,7 @@ em {
 }
 
 .one_person .price {
-    width: 150px;
+    width: 160px;
     height: 139px;
     float: right;
 }
@@ -943,6 +943,9 @@ em {
 .money {
     font-size: 25px;
     margin-top: 10px;
+    overflow: hidden;
+    height: 30px;
+    word-wrap: break-word;
 }
 
 .person_topic {
@@ -982,8 +985,7 @@ em {
 
 .selectType {
     font-size: 13px;
-    height: 20px;
-    line-height: 23px;
+    line-height: 16px;
     border-radius: 5px;
     outline: none;
     border: 1px solid #56BBE8;

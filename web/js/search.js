@@ -1,7 +1,25 @@
+var word = "";//主题搜索字
+var page = "";//页码
+var sort = "";//排序
+var id = "";//所选这的主题
+var findName1 = "";//搜索关键字
+var findName = "";//搜索关键字
+var tips1;
+var tips2;
+var tips3;
+var tips4;
+var tips5;
+
+//搜索页面跳转
+function getSelfLocation() {
+	//self.location = 'search.html?tip1='+tips1+'&tip2='+tips2+'&tip3='+tips3+'&tip4='+tips4+'&tip5='+tips5+'&word='+word+'&page='+page+'&findName='+findName+'&findName1='+findName1+'&sort='+sort+'&id='+id;
+	self.location = 'search.html?tip1='+tips1+'&tip2='+tips2+'&tip3='+tips3+'&tip4='+tips4+'&tip5='+tips5+'&word='+word+'&page='+page+'&sort='+sort+'&id='+id;
+	return;
+}
 $(document).ready(function(){
 	refresh(page);
 
-	<!--人物模块动态效果-->
+	//人物模块动态效果
 	$(".one_person").hover(function(){
         $(this).css("-moz-box-shadow","0px 0px 10px #D9D9D9");
         $(this).css("box-shadow","0px 0px 10px #D9D9D9");
@@ -11,7 +29,7 @@ $(document).ready(function(){
         $(this).css("box-shadow","0px 0px 0px #D9D9D9");
     });
 
-    <!--排序颜色和事件-->
+    //排序颜色和事件
     $("#result-content-header-list-01").click(function(){
 			findBySort("");
     });
@@ -30,105 +48,117 @@ $(document).ready(function(){
 		}
     });
 
-	<!--闭当前标签-->
-	$("#selected-condition-close-01").click(function(){
-		var tips1 = encodeURIComponent($_GET('tip1'));
-		var tips2 = encodeURIComponent($_GET('tip2'));
-		var tips3 = encodeURIComponent($_GET('tip3'));
-		var tips4 = encodeURIComponent($_GET('tip4'));
-		var tips5 = encodeURIComponent($_GET('tip5'));
-		self.location = 'search.html?tip1=&tip2='+tips2+'&tip3='+tips3+'&tip4='+tips4+'&tip5='+tips5;
-    });
-    $("#selected-condition-close-02").click(function(){
-		var tips1 = encodeURIComponent($_GET('tip1'));
-		var tips2 = encodeURIComponent($_GET('tip2'));
-		var tips3 = encodeURIComponent($_GET('tip3'));
-		var tips4 = encodeURIComponent($_GET('tip4'));
-		var tips5 = encodeURIComponent($_GET('tip5'));
-		self.location = 'search.html?tip1='+tips1+'&tip2=&tip3='+tips3+'&tip4='+tips4+'&tip5='+tips5;
-    });
-    $("#selected-condition-close-03").click(function(){
-        var tips1 = encodeURIComponent($_GET('tip1'));
-		var tips2 = encodeURIComponent($_GET('tip2'));
-		var tips3 = encodeURIComponent($_GET('tip3'));
-		var tips4 = encodeURIComponent($_GET('tip4'));
-		var tips5 = encodeURIComponent($_GET('tip5'));
-		self.location = 'search.html?tip1='+tips1+'&tip2='+tips2+'&tip3=&tip4='+tips4+'&tip5='+tips5;
-    });
-    $("#selected-condition-close-04").click(function(){
-        var tips1 = encodeURIComponent($_GET('tip1'));
-		var tips2 = encodeURIComponent($_GET('tip2'));
-		var tips3 = encodeURIComponent($_GET('tip3'));
-		var tips4 = encodeURIComponent($_GET('tip4'));
-		var tips5 = encodeURIComponent($_GET('tip5'));
-		self.location = 'search.html?tip1='+tips1+'&tip2='+tips2+'&tip3='+tips3+'&tip4=&tip5='+tips5;
-    });
-    $("#selected-condition-close-05").click(function(){
-        var tips1 = encodeURIComponent($_GET('tip1'));
-		var tips2 = encodeURIComponent($_GET('tip2'));
-		var tips3 = encodeURIComponent($_GET('tip3'));
-		var tips4 = encodeURIComponent($_GET('tip4'));
-		var tips5 = encodeURIComponent($_GET('tip5'));
-		self.location = 'search.html?tip1='+tips1+'&tip2='+tips2+'&tip3='+tips3+'&tip4='+tips4+'&tip5=';
-    });
+    //默认国家选择
+    var tips1 = decodeURIComponent($_GET('tip1'));
+    if (tips1 && tips1 != "null") {
+        $("#select_Country").val(tips1);
+    }
+    //默认学历选择
+    var tips2 = decodeURIComponent($_GET('tip2'));
+    if (tips2 && tips2 != "null") {
+        $("#select_Position").val(tips2);
+    }
+    //默认学历选择
+    var tips3 = decodeURIComponent($_GET('tip3'));
+    if (tips3 && tips3 != "null") {
+        $("#select_major").val(tips3);
+    }
+    //默认兴趣选择
+    var tips4 = decodeURIComponent($_GET('tip4'));
+    if (tips4 && tips4 != "null") {
+        $("#select_like").val(tips4);
+    }
+
+    //下拉菜单
+    var hit = 10;
+    //PC页面中间搜索框
+    setTimeout(function () {
+        $("#search-input1").autocomplete({
+            delay: 0,
+            source: function (request, response) {
+                var toSend = new Object();
+                toSend.style = "function";
+                toSend.method = "getSearchHint";
+                toSend.word = $("#search-input1").val();
+                $.ajax({
+                    url: config.base_url,
+                    type: "POST",
+                    dataType: 'json',
+                    data: $.toJSON(toSend),
+                    success: function (data) {
+                        if (data.status === 'OK' && data.result) {
+                            if (data.result.length >= hit) {
+                                response(data.result.slice(0, hit));
+                            } else {
+                                response(data.result);
+                            }
+                        } else if (data.status === 'FAIL' && data.errors) {
+                            //alert(data.errors[0].message);
+                        }
+                    }
+                });
+            }
+        }).bind("input.autocomplete", function () {
+            $("#search-input1").autocomplete("search", $("#search-input1").val());
+        }).bind('autocompleteselect', function(e,ui) {
+            self.location = 'search.html?findName1=' + encodeURIComponent(encodeURIComponent(ui.item.value));
+        }).focus();
+    }, 0);
 });
 
+//特殊标签的取消
+function closeTip(tipName) {
+	getParameter();
+	if(tipName == 'tips1') {
+		tips1 = ""
+	}
+	if(tipName == 'tips2') {
+		tips2 = ""
+	}
+	if(tipName == 'tips3') {
+		tips3 = ""
+	}
+	if(tipName == 'tips4') {
+		tips4 = ""
+	}
+	if(tipName == 'tips5') {
+		tips5 = ""
+	}
+	getSelfLocation();
+}
 
 //通过标签搜索
 function findByTips(tip01, tip02, tip03, tip04, tip05){
-	var tips1 = encodeURIComponent(encodeURIComponent(tip01));
-	var tips2 = encodeURIComponent(encodeURIComponent(tip02));
-	var tips3 = encodeURIComponent(encodeURIComponent(tip03));
-	var tips4 = encodeURIComponent(encodeURIComponent(tip04));
-	var tips5 = encodeURIComponent(encodeURIComponent(tip05));
-	if(!tip01){
-		tips1 = encodeURIComponent($_GET('tip1'));
+	getParameter();
+	if(tip01){
+		tips1 = encodeURIComponent(encodeURIComponent(tip01));
 	}
-	if(!tip02){
-		tips2 = encodeURIComponent($_GET('tip2'));
+	if(tip02){
+		tips2 = encodeURIComponent(encodeURIComponent(tip02));
 	}
-	if(!tip03){
-		tips3 = encodeURIComponent($_GET('tip3'));
+	if(tip03){
+		tips3 = encodeURIComponent(encodeURIComponent(tip03));
 	}
-	if(!tip04){
-		tips4 = encodeURIComponent($_GET('tip4'));
+	if(tip04){
+		tips4 = encodeURIComponent(encodeURIComponent(tip04));
 	}
-	if(!tip05){
-		tips5 = encodeURIComponent($_GET('tip5'));
+	if(tip05){
+		tips5 = encodeURIComponent(encodeURIComponent(tip05));
 	}
-
-	self.location = 'search.html?tip1='+tips1+'&tip2='+tips2+'&tip3='+tips3+'&tip4='+tips4+'&tip5='+tips5;
+	getSelfLocation();	
 }
 
 //搜索排序
 function findBySort(sortName) {
-	page = $_GET('page');//页码
-	findName = encodeURIComponent($_GET('findName'));//搜索关键字
-	findName1 = encodeURIComponent($_GET('findName1'));//搜索关键字
-	id = $_GET('id');//所选这的主题
-	word = encodeURIComponent($_GET('word'));//主题搜索字
-	tips1 = encodeURIComponent($_GET('tip1'));//标签1
-	tips2 = encodeURIComponent($_GET('tip2'));//标签2
-	tips3 = encodeURIComponent($_GET('tip3'));//标签3
-	tips4 = encodeURIComponent($_GET('tip4'));//标签4
-	tips5 = encodeURIComponent($_GET('tip5'));//标签5
-	self.location = 'search.html?tip1='+tips1+'&tip2='+tips2+'&tip3='+tips3+'&tip4='+tips4+'&tip5='+tips5+'&word='+word+'&page='+page+'&findName='+findName+'&findName1='+findName1+'&sort='+sortName+'&id='+id;
+	getParameter();
+	sort = sortName;
+	getSelfLocation();
 }
-
 //页码跳转
 function refreshPage(pageNumber) {
+	getParameter();
 	page = pageNumber;//页码
-	findName = encodeURIComponent($_GET('findName'));//搜索关键字
-	findName1 = encodeURIComponent($_GET('findName1'));//搜索关键字
-	id = $_GET('id');//所选这的主题
-	word = encodeURIComponent($_GET('word'));//主题搜索字
-	tips1 = encodeURIComponent($_GET('tip1'));//标签1
-	tips2 = encodeURIComponent($_GET('tip2'));//标签2
-	tips3 = encodeURIComponent($_GET('tip3'));//标签3
-	tips4 = encodeURIComponent($_GET('tip4'));//标签4
-	tips5 = encodeURIComponent($_GET('tip5'));//标签5
-	sort = $_GET('sort');//排序
-	self.location = 'search.html?tip1='+tips1+'&tip2='+tips2+'&tip3='+tips3+'&tip4='+tips4+'&tip5='+tips5+'&word='+word+'&page='+page+'&findName='+findName+'&findName1='+findName1+'&sort='+sort+'&id='+id;
+	getSelfLocation();
 }
 
 function refresh(){
@@ -227,23 +257,15 @@ function refresh(){
     toSend.page =  page + "";
 	toSend.filter = sort;
     if(findName&&findName!='null') {
-    	toSend.word = findName;
+    	toSend.word = tip + "," + findName;
     	$("#search-input").val(decodeURIComponent(findName));
-    	$("#hot-theme-list-01").css("color", "#34495E");
-		$("#hot-theme-list-01").css("border-bottom", "4px solid #34495E");
-		$("#search-input").focus();
     } else if(findName1&&findName1!='null') {
-    	toSend.word = findName1;
+    	toSend.word = tip + "," + findName1;
     	$("#search-input1").val(decodeURIComponent(findName1));
-    	$("#hot-theme-list-01").css("color", "#34495E");
-		$("#hot-theme-list-01").css("border-bottom", "4px solid #34495E");
-		$("#search-input1").blur();
-    } else if(tip){
-		toSend.word = tip;
-	} else {
-    	toSend.tips = word;
+    } else {
+    	toSend.word = tip;
     }
-
+    toSend.tips = word;
 
 	setTimeout($.ajax({
 		cache: true,
@@ -261,7 +283,7 @@ function refresh(){
 				var result = $.parseJSON(json.result);
 				html = "";
 				$.each(result, function (index, content) {
-					html = html + "<div class='one_person' ><a href='personal.html?tid=" + content.id + "' target='_blank'><img src='" + content.iconurl + "' ><div class='import_info'><p class='person_topic'>" + content.servicetitle + "</p><p class='person_info'>" + content.name + "<span>&nbsp;&nbsp;" + content.simpleinfo + "</span> </p><p class='person_likes'>" + content.servicecontent + "</p></div><div class='price'> <p class='money'>" + parseInt(content.serviceprice) + "元/" + parseInt(content.servicetime) + "时</p><p class='like'><img style='margin-left:0px;' src='http://image.1yingli.cn/img/heart.png' >" + content.likeno + " 人想见</p><p class='times'>本周可咨询" + content.timeperweek + "次</p></div></a></div>";
+					html = html + "<div class='one_person' ><a href='personal.html?tid=" + content.id + "' target='_blank'><img src='" + content.iconurl + "' ><div class='import_info'><p class='person_topic'>" + content.servicetitle + "</p><p class='person_info'>" + content.name + "<span>&nbsp;&nbsp;" + content.simpleinfo + "</span> </p><p class='person_likes'>" + content.servicecontent + "</p></div><div class='price'> <p class='money'>" + parseInt(content.serviceprice) + "元/" + parseFloat(content.servicetime).toFixed(1) + "时</p><p class='like'><img style='margin-left:0px;' src='http://image.1yingli.cn/img/heart.png' >" + content.likeno + " 人想见</p><p class='times'>本周可咨询" + content.timeperweek + "次</p></div></a></div>";
 				});
 				if (html == "") {
 					html = "<h1>没有找到相关导师</h1>"
@@ -269,17 +291,14 @@ function refresh(){
 				$("#sercher_result").html(html);
 				totalPage = Math.ceil(json.viewtotal / 9);
 				makePager();
-				//totalPage = 30;
 			} else {
-				//alert(json.msg);
+				alert(json.msg);
 			}
 		}
 	}), 100);
 }
 
 function makePager() {
-	//先删除后添加页数
-	//页码设置
 	var basePage = 10;
 	var leastPage = 2
 	var showPage = 4;
@@ -331,7 +350,6 @@ function makePager() {
 	}
 	$("#btn" + page).attr("class", "active");
 }
-
 //分页排序
 var totalPage = 1;
 var page = 1;
@@ -361,9 +379,4 @@ function firstPage(){
     if(page != 1) {
    		refreshPage(1);
     }
-}
-
-function mobile_search() {
-    var findName1 = encodeURIComponent(encodeURIComponent($("#mobile_search").val()));
-    self.location = 'search.html?findName1=' + findName1;
 }

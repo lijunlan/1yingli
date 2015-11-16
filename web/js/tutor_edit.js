@@ -158,6 +158,7 @@ $(document).ready(function(){
         $("#edit_titlePrice_block").show();
         $("#title").val($("#stitle").html());
         $("#price").val($("#oldPrice").html());
+        $("#time").val($("#oldTime").html());
     });
     $("#cancel_titlePrice").click(function(){
         $("#edit_titlePrice_block").hide();
@@ -210,10 +211,8 @@ $(document).ready(function(){
             success : function(data, textStatu) {
                         var json = eval("(" + data + ")");
                         if (json.state == "success") {
+                        	refreshTeacherInfo();
                             $("#edit_titlePrice_block").hide();
-                            $("#stitle").html(title);
-                            $("#oldPrice").html(price);
-                            $("#oldTime").html(time);
                         }
                     }
         });
