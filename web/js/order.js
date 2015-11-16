@@ -169,6 +169,24 @@ function ordern() {
                     $.cookie("nickName", '', {expires: -1, path: '/', domain: ".1yingli.cn", secure: false, raw: false});
                     $.cookie("iconUrl", '', {expires: -1, path: '/', domain: ".1yingli.cn", secure: false, raw: false});
                     $.cookie("tid", '', {expires: -1, path: '/', domain: ".1yingli.cn", secure: false, raw: false});
+                } else if (json.errCode == "12008") {
+                    $(".mark").show();
+                    if($(window).width() < 768) {
+                        $('.order-flex').css('display','none');
+                    }
+                    $("#box").show();
+                    $("#bomb").html("输入的邮箱或电话号码有误，请重新修改");
+                    $("#connect").attr('href', 'javascript:void(0);');
+                    $("#connect").click(function () {
+                        $("#box").hide();
+                        $("#frame").show();
+                    });
+                } else {
+                    $(".mark").show();
+                    if($(window).width() < 768) {
+                        $('.order-flex').css('display','none');
+                    }
+                    $("#erro").show();
                 }
             }
         }
@@ -222,9 +240,8 @@ function ordery() {
                 } else if (json.msg == "voucher has been used") {
                     $("#disco").html("优惠码被使用过了");
                     $("#frame1").show();
-                } else if (json.msg == "BAD PHONE NUMBER OR BAD EMAIL") {
+                } else if (json.errCode == "12008") {
                     $(".mark").show();
-
                     if($(window).width() < 768) {
                         $('.order-flex').css('display','none');
                     }
@@ -237,7 +254,6 @@ function ordery() {
                     });
                 } else {
                     $(".mark").show();
-
                     if($(window).width() < 768) {
                         $('.order-flex').css('display','none');
                     }

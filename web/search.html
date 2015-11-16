@@ -160,7 +160,7 @@
                             <p></p>
                             <a href="javascript:void(0);"><img
                                     src="http://image.1yingli.cn/img/selected_condition_close.png" alt=""
-                                    class="selected-condition-close" id="selected-condition-close-01"/></a>
+                                    class="selected-condition-close" id="selected-condition-close-01" onclick="closeTip('tips1')"/></a>
                         </div>
                     </li>
                     <li class="selected-list" id="selected-list-02">
@@ -168,7 +168,7 @@
                             <p></p>
                             <a href="javascript:void(0);"><img
                                     src="http://image.1yingli.cn/img/selected_condition_close.png" alt=""
-                                    class="selected-condition-close" id="selected-condition-close-02"/></a>
+                                    class="selected-condition-close" id="selected-condition-close-02" onclick="closeTip('tips2')"/></a>
                         </div>
                     </li>
                     <li class="selected-list" id="selected-list-03">
@@ -176,7 +176,7 @@
                             <p></p>
                             <a href="javascript:void(0);"><img
                                     src="http://image.1yingli.cn/img/selected_condition_close.png" alt=""
-                                    class="selected-condition-close" id="selected-condition-close-03"/></a>
+                                    class="selected-condition-close" id="selected-condition-close-03" onclick="closeTip('tips3')"/></a>
                         </div>
                     </li>
                     <li class="selected-list" id="selected-list-04">
@@ -184,7 +184,7 @@
                             <p></p>
                             <a href="javascript:void(0);"><img
                                     src="http://image.1yingli.cn/img/selected_condition_close.png" alt=""
-                                    class="selected-condition-close" id="selected-condition-close-04"/></a>
+                                    class="selected-condition-close" id="selected-condition-close-04" onclick="closeTip('tips4')"/></a>
                         </div>
                     </li>
                     <li class="selected-list" id="selected-list-05">
@@ -192,7 +192,7 @@
                             <p></p>
                             <a href="javascript:void(0);"><img
                                     src="http://image.1yingli.cn/img/selected_condition_close.png" alt=""
-                                    class="selected-condition-close" id="selected-condition-close-05"/></a>
+                                    class="selected-condition-close" id="selected-condition-close-05" onclick="closeTip('tips5')"/></a>
                         </div>
                     </li>
                 </ul>
@@ -247,96 +247,4 @@
 <script type="text/javascript" src="js/header.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/search.js"></script>
-<script type="text/javascript">
-    //下拉菜单
-    var hit = 10; // 显示的下拉提示列表的长度
-    setTimeout(function () {
-        $("#search-input1").autocomplete({
-            delay: 0,
-            source: function (request, response) {
-                var toSend = new Object();
-                toSend.style = "function";
-                toSend.method = "getSearchHint";
-                toSend.word = $("#search-input1").val();
-                $.ajax({
-                    url: config.base_url,
-                    type: "POST",
-                    dataType: 'json',
-                    data: $.toJSON(toSend),
-                    success: function (data) {
-                        if (data.status === 'OK' && data.result) {
-                            if (data.result.length >= hit) {
-                                response(data.result.slice(0, hit));
-                            } else {
-                                response(data.result);
-                            }
-                        } else if (data.status === 'FAIL' && data.errors) {
-                            //alert(data.errors[0].message);
-                        }
-                    }
-                });
-            }
-        }).bind("input.autocomplete", function () {
-            $("#search-input1").autocomplete("search", $("#search-input1").val());
-        }).bind('autocompleteselect', function(e,ui) {
-            self.location = 'search.html?findName=' + encodeURIComponent(encodeURIComponent(ui.item.value));
-        }).focus();
-        $("#mobile_search").autocomplete({
-            delay: 0,
-            source: function (request, response) {
-                var toSend = new Object();
-                toSend.style = "function";
-                toSend.method = "getSearchHint";
-                toSend.word = $("#mobile_search").val();
-                $.ajax({
-                    url: config.base_url,
-                    type: "POST",
-                    dataType: 'json',
-                    data: $.toJSON(toSend),
-                    success: function (data) {
-                        if (data.status === 'OK' && data.result) {
-                            if (data.result.length >= hit) {
-                                response(data.result.slice(0, hit));
-                            } else {
-                                response(data.result);
-                            }
-                        } else if (data.status === 'FAIL' && data.errors) {
-                            //alert(data.errors[0].message);
-                        }
-                    }
-                });
-            }
-        }).bind("input.autocomplete", function () {
-            $("#mobile_search").autocomplete("search", $("#mobile_search").val());
-        }).bind('autocompleteselect', function(e,ui) {
-            self.location = 'search.html?findName=' + encodeURIComponent(encodeURIComponent(ui.item.value));
-        });
-
-        $('#mobile_search_button').click(function () {
-            mobile_search();
-        });
-    }, 0);
-
-
-    //默认国家选择
-    var tips1 = decodeURIComponent($_GET('tip1'));
-    if (tips1 && tips1 != "null") {
-        $("#select_Country").val(tips1);
-    }
-    //默认学历选择
-    var tips2 = decodeURIComponent($_GET('tip2'));
-    if (tips2 && tips2 != "null") {
-        $("#select_Position").val(tips2);
-    }
-    //默认学历选择
-    var tips3 = decodeURIComponent($_GET('tip3'));
-    if (tips3 && tips3 != "null") {
-        $("#select_major").val(tips3);
-    }
-    //默认兴趣选择
-    var tips4 = decodeURIComponent($_GET('tip4'));
-    if (tips4 && tips4 != "null") {
-        $("#select_like").val(tips4);
-    }
-</script>
 </body>

@@ -251,7 +251,36 @@ function submitInfo(){
                 self.location='bct4.html';
                 return;
             } else {
-                
+                if(json.errCode == "140001" || json.msg == "uid is not existed") {
+                    $(".mark").show();
+                    $("#box").show();
+                    $("#bomb").html("帐号信息已失效，请重新登录");
+                    $("#connect").attr('href', 'login.html');
+                    $("#connect").css('left', '15%');
+                    $("#cancel").show();
+                    $.cookie("uid", '', {expires: -1, path: '/', domain: ".1yingli.cn", secure: false, raw: false});
+                    $.cookie("nickName", '', {
+                        expires: -1,
+                        path: '/',
+                        domain: ".1yingli.cn",
+                        secure: false,
+                        raw: false
+                    });
+                    $.cookie("iconUrl", '', {expires: -1, path: '/', domain: ".1yingli.cn", secure: false, raw: false});
+                    $.cookie("tid", '', {expires: -1, path: '/', domain: ".1yingli.cn", secure: false, raw: false});
+                } else if (json.errCode == "150001" || json.msg == "you have applied") {
+                    $(".mark").show();
+                    $("#box").show();
+                    $("#bomb").html("您已经申请过了");
+                    $("#connect").attr('href', 'home.html');
+                } else if (json.errCode == "150002" || json.msg == "you are already teacher") {
+                    $(".mark").show();
+                    $("#box").show();
+                    $("#bomb").html("您已经是导师");
+                    $("#connect").attr('href', 'home.html');
+                }
+
+
             }
         }
     });

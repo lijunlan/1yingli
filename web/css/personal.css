@@ -1905,7 +1905,7 @@ abbr, acronym {
     margin-top: 15px;
     font-size: 16px;
     overflow: hidden;
-    height: 20px;
+    height: 23px;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
