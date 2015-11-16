@@ -27,70 +27,7 @@
     <!--header break -->
     //tutorSheet.html
     $(".top-nav").html("<div class='nav-center'><ul><li><a href='controlPanel.html'>消息中心</a></li><li><a href='yourTutor.html'>我的导师</a></li><li><a href='tutor.html'>导师中心</a></li><li><a href='general.html'>个人资料</a></li><li> <a href='likeList.html'>心愿名单</a> </li></ul></div>");
-
-    //getEmailCount();
-
-    //下拉菜单
-    var hit = 10; // 显示的下拉提示列表的长度
-    setTimeout(function() {
-        $("#search-input").autocomplete({
-            delay: 0,
-            source: function(request, response) {
-                var toSend = new Object();
-                toSend.style = "function";
-                toSend.method = "getSearchHint";
-                toSend.word = $( "#search-input" ).val();
-                $.ajax({
-                    url: config.base_url,
-                    type : "POST",
-                    dataType: 'json',
-                    data: $.toJSON(toSend),
-                    success: function(data) {
-                        if(data.status === 'OK' && data.result) {
-                            if(data.result.length >= hit) {
-                                response(data.result.slice(0, hit));
-                            } else {
-                                response(data.result);
-                            }
-                        } else if( data.status === 'FAIL' && data.errors ){
-                            //alert(data.errors[0].message);
-                        }
-                    }
-                });
-            }
-        }).bind("input.autocomplete", function () {
-            $( "#search-input" ).autocomplete("search", $( "#search-input" ).val());
-        }).bind('autocompleteselect', function(e,ui) {
-            self.location = 'search.html?findName=' + encodeURIComponent(encodeURIComponent(ui.item.value));
-        }).focus();
-    }, 0);
 });
-
-function logout(){
-    $.ajax({
-        cache : true,
-        type : "POST",
-        url : config.base_url,
-        data : "{'style':'user','method':'logout','uid':'" + $.cookie('uid') + "'}",
-        async : false,
-        error : function(request) {
-                    alert("Connection error");
-                },
-        success : function(data, textStatu) {
-            var json = eval("(" + data + ")");
-            if (json.state == "success") {
-                $.cookie("uid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                $.cookie("nickName",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                $.cookie("iconUrl",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                $.cookie("tid",'',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false});
-                self.location='home.html';
-                return;
-            } else {
-                alert(json.msg);
-            }
-        }
-    });
-}
 
 function getEmailCount() {
     $.ajax({
