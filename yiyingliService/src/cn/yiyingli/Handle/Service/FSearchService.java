@@ -48,17 +48,19 @@ public class FSearchService extends MsgService {
 			if (getData().containsKey("word")) {
 				String wd = (String) getData().get("word");
 				wd = URLDecoder.decode(wd, "utf-8");
-				String[] qss = wd.split(",");
-				for (int i = 0; i < qss.length; i++) {
-					String qs = qss[i];
-					if (i == 0) {// default:'" + qs + "' OR
-						query = query + "(si:'" + qs + "' OR n:'" + qs + "' OR cn:'" + qs + "'^70 OR sn:'" + qs
-								+ "'^70 OR sc:'" + qs + "'^75 OR i:'" + qs + "'^40 OR t:'" + qs + "' OR ta:'" + qs
-								+ "' OR p:'" + qs + "'^70 OR d:'" + qs + "'^70 OR m:'" + qs + "'^70)";
-					} else {
-						query = query + "AND(si:'" + qs + "' OR n:'" + qs + "' OR cn:'" + qs + "'^70 OR sn:'" + qs
-								+ "'^70 OR sc:'" + qs + "'^75 OR i:'" + qs + "'^40 OR t:'" + qs + "' OR ta:'" + qs
-								+ "' OR p:'" + qs + "'^70 OR d:'" + qs + "'^70 OR m:'" + qs + "'^70)";
+				if (!"".equals(wd)) {
+					String[] qss = wd.split(",");
+					for (int i = 0; i < qss.length; i++) {
+						String qs = qss[i];
+						if (i == 0) {// default:'" + qs + "' OR
+							query = query + "(si:'" + qs + "' OR n:'" + qs + "' OR cn:'" + qs + "'^70 OR sn:'" + qs
+									+ "'^70 OR sc:'" + qs + "'^75 OR i:'" + qs + "'^40 OR t:'" + qs + "' OR ta:'" + qs
+									+ "' OR p:'" + qs + "'^70 OR d:'" + qs + "'^70 OR m:'" + qs + "'^70)";
+						} else {
+							query = query + "AND(si:'" + qs + "' OR n:'" + qs + "' OR cn:'" + qs + "'^70 OR sn:'" + qs
+									+ "'^70 OR sc:'" + qs + "'^75 OR i:'" + qs + "'^40 OR t:'" + qs + "' OR ta:'" + qs
+									+ "' OR p:'" + qs + "'^70 OR d:'" + qs + "'^70 OR m:'" + qs + "'^70)";
+						}
 					}
 				}
 			}
@@ -69,11 +71,11 @@ public class FSearchService extends MsgService {
 				tips = URLDecoder.decode(tips, "utf-8");
 				String[] ts = tips.split(",");
 				if (ts.length > 1) {
-					StringBuffer sb = new StringBuffer("tc:'" + ts[0] + "'");
-					for (int i = 1; i < ts.length; i++) {
-						sb.append(" OR tc:'" + ts[i] + "'");
-					}
-					search.setQueryString(sb.toString());
+					// StringBuffer sb = new StringBuffer("tc:'" + ts[0] + "'");
+					// for (int i = 1; i < ts.length; i++) {
+					// sb.append(" OR tc:'" + ts[i] + "'");
+					// }
+					// search.setQueryString("");
 				} else {
 					search.addFilter("tipcontent=\"" + ts[0] + "\"");
 				}
