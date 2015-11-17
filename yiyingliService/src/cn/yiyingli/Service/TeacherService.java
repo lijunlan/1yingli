@@ -15,7 +15,7 @@ public interface TeacherService {
 
 	public static final int PAGE_SIZE_INT = 9;
 
-	public static final int HOME_PAGE_SIZE = 4;
+	public static final int HOME_PAGE_SIZE = 5;
 
 	public static final int SALE_PAGE_SIZE = 9;
 

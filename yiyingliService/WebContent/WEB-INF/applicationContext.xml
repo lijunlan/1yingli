@@ -1908,4 +1908,18 @@
 		</property>
 	</bean>
 
+	<bean id="fGetHomeTeacherListService" class="cn.yiyingli.Handle.Service.FGetHomeTeacherListService"
+		scope="prototype">
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="fGetSaleTeacherListService" class="cn.yiyingli.Handle.Service.FGetSaleTeacherListService"
+		scope="prototype">
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
 </beans>

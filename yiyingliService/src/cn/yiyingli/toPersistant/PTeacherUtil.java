@@ -70,7 +70,6 @@ public class PTeacherUtil {
 		teacher.setIconUrl(iconUrl);
 		teacher.setIntroduce(introduce);
 		teacher.setSimpleInfo(simpleinfo);
-		teacher.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		teacher.setShowWeight1(Integer.valueOf(showWeight1.equals("") ? "" : showWeight1));
 		teacher.setShowWeight2(Integer.valueOf(showWeight2.equals("") ? "" : showWeight2));
 		teacher.setShowWeight4(Integer.valueOf(showWeight4.equals("") ? "" : showWeight4));
@@ -127,7 +126,6 @@ public class PTeacherUtil {
 		teacher.setLevel((short) 5);
 		teacher.setOrderNumber(0L);
 		teacher.setLikeNumber(0L);
-		teacher.setOnService(true);
 		return teacher;
 	}
 	
@@ -141,6 +139,7 @@ public class PTeacherUtil {
 				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
 				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, tipService);
 		user.setTeacherState(UserService.TEACHER_STATE_CHECKING_SHORT);
+		teacher.setOnService(false);
 		return teacher;
 	}
 
@@ -153,7 +152,9 @@ public class PTeacherUtil {
 		Teacher teacher = assembleTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
 				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
 				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, tipService);
+		teacher.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		user.setTeacherState(UserService.TEACHER_STATE_ON_SHORT);
+		teacher.setOnService(true);
 		return teacher;
 	}
 }
