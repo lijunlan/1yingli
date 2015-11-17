@@ -211,11 +211,11 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<User>>() {
 			@Override
 			public List<User> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from User u ORDER BY u.phone DESC";
+				String hql = "from User u ORDER BY u.createTime DESC";
 				if (lazy) {
 					hql = "from User u left join fetch u.orders left join fetch u.linkinInfos "
 							+ "left join fetch u.teacher left join fetch u.cvs left join fetch u.ownSiteDiscounts"
-							+ " left join fetch u.givecomments ORDER BY u.phone DESC";
+							+ " left join fetch u.givecomments ORDER BY u.createTime DESC";
 				}
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
