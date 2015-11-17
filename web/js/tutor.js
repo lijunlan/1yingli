@@ -127,7 +127,7 @@ function changePage(p){
     toSend.method = "getListByTeacher";
     toSend.uid = uid;
     toSend.teacherId = tid;
-    if(p == undefined) {
+    if(p == undefined || p.trim() == '' ) {
         p = 1;
     }
     toSend.page = "" + p;

@@ -1,4 +1,12 @@
-﻿var word = "";//主题搜索字
+﻿function $_GET(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null)
+        return unescape(r[2]);
+    return null;
+}
+
+var word = "";//主题搜索字
 var page = "";//页码
 var sort = "";//排序
 var id = "";//所选这的主题

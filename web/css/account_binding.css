@@ -10,9 +10,9 @@ header,footer,section {display:block;}
 .f-cb:after,.m-trip-detail li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
 .f-right{float:right;}
 .f-left{float:left;}
-::-webkit-input-placeholder{color:#99a4ae;font-size:15px;line-height: 29px;font-family:Helvetica,ff-tisa-web-pro-1,ff-tisa-web-pro-2,"Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3","microsoft yahei";text-indent: 10px;}
-::-ms-input-placeholder{color:#99a4ae;font-size:15px;line-height: 29px;font-family:Helvetica,ff-tisa-web-pro-1,ff-tisa-web-pro-2,"Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3","microsoft yahei";text-indent: 10px;}
-::-moz-input-placeholder{color:#99a4ae;font-size:15px;line-height: 29px;font-family:Helvetica,ff-tisa-web-pro-1,ff-tisa-web-pro-2,"Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3","microsoft yahei";text-indent: 10px;}
+/*::-webkit-input-placeholder{color:#99a4ae;font-size:15px;line-height: 29px;font-family:Helvetica,ff-tisa-web-pro-1,ff-tisa-web-pro-2,"Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3","microsoft yahei";text-indent: 10px;}*/
+/*::-ms-input-placeholder{color:#99a4ae;font-size:15px;line-height: 29px;font-family:Helvetica,ff-tisa-web-pro-1,ff-tisa-web-pro-2,"Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3","microsoft yahei";text-indent: 10px;}*/
+/*::-moz-input-placeholder{color:#99a4ae;font-size:15px;line-height: 29px;font-family:Helvetica,ff-tisa-web-pro-1,ff-tisa-web-pro-2,"Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3","microsoft yahei";text-indent: 10px;}*/
 
 .g-hd{height: 70px;background:#fff;}
 .g-hd .left{height: 70px;}
