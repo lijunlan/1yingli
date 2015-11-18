@@ -232,19 +232,19 @@ function findByTheme(themeName, id) {
     self.location = 'search.html?word=' + w + '&id=' + id;
 }
 
-//页面头部搜索框
+//所有页面头部搜索框
 function searchByInput() {
     getParameter();
     findName = encodeURIComponent(encodeURIComponent($("#search-input").val()));
-    self.location = 'search.html?tip1='+tips1+'&tip2='+tips2+'&tip3='+tips3+'&tip4='+tips4+'&tip5='+tips5+'&word='+word+'&page='+page+'&findName='+findName+'&findName1='+findName1+'&sort='+sort+'&id='+id;
+    self.location = 'search.html?findName=' + findName;
     return;
 }
 
-//页面中间搜索框
+//搜索页面中间搜索框
 function searchByInput1() {
     getParameter();
     findName1 = encodeURIComponent(encodeURIComponent($("#search-input1").val()));
-    self.location = 'search.html?tip1='+tips1+'&tip2='+tips2+'&tip3='+tips3+'&tip4='+tips4+'&tip5='+tips5+'&word='+word+'&page='+page+'&findName='+findName+'&findName1='+findName1+'&sort='+sort+'&id='+id;
+    self.location = 'search.html?findName1=' + findName1;
     return;
 }
 function KeyDown() {
