@@ -53,6 +53,7 @@
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
 	</style>
 	<style name="teacher">
+		<method name="getPassageList" beanName="tGetPassageListService" />
 		<method name="getAllInfo" beanName="tGetAllInfoService" />
 		<method name="changeTitlePrice" beanName="tChangeTitlePriceService" />
 		<method name="changeSimpleInfo" beanName="tChangeSimpleInfoService" />
@@ -90,6 +91,8 @@
 		<method name="login" beanName="dLoginService" />
 	</style>
 	<style name="manager">
+		<method name="validatePassage" beanName="mValidatePassageService"></method>
+		<method name="getPassageList" beanName="mGetPassageListService"></method>
 		<method name="getTeacherDemand" beanName="mGetTeacherDemandService"></method>
 		<method name="createDistributor" beanName="mCreateDistributorService"></method>
 		<method name="getDistributorList" beanName="mGetDistributorListService"></method>
@@ -121,6 +124,8 @@
 		<method name="removeBackground" beanName="mRemoveBackgroundService" />
 	</style>
 	<style name="function">
+		<method name="getPassage" beanName="fGetPassageService" />
+		<method name="getPassageList" beanName="fGetPassageListService" />
 		<method name="getSaleTeacherList" beanName="fGetSaleTeacherListService" />
 		<method name="getHomeTeacherList" beanName="fGetHomeTeacherListService" />
 		<method name="teacherDemand" beanName="fTeacherDemandService"></method>

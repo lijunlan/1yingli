@@ -373,6 +373,9 @@
 		<property name="passageDao">
 			<ref local="passageDao" />
 		</property>
+		<property name="teacherDao">
+			<ref local="teacherDao" />
+		</property>
 		<property name="userDao">
 			<ref local="userDao" />
 		</property>

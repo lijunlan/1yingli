@@ -29,18 +29,18 @@ public class ExPassage {
 
 	public static void assembleForManager(Passage p, SuperMap map) {
 		map.put("content", p.getContent());
-		map.put("content", p.getCreateTime());
-		map.put("content", p.getEditorName());
-		map.put("content", p.getId());
-		map.put("content", p.getImageUrl());
-		map.put("content", p.getLikeNumber());
-		map.put("content", p.getLookNumber());
-		map.put("content", p.getOwnTeacher().getId());
-		map.put("content", p.getRefuseReason());
-		map.put("content", p.getOnshow());
-		map.put("content", p.getState());
-		map.put("content", p.getTag());
-		map.put("content", p.getTitle());
+		map.put("createTime", p.getCreateTime());
+		map.put("editorName", p.getEditorName());
+		map.put("passageId", p.getId());
+		map.put("imageUrl", p.getImageUrl());
+		map.put("likeNumber", p.getLikeNumber());
+		map.put("lookNumber", p.getLookNumber());
+		map.put("teacherId", p.getOwnTeacher().getId());
+		map.put("refuseReason", p.getRefuseReason());
+		map.put("onshow", p.getOnshow());
+		map.put("state", p.getState());
+		map.put("tag", p.getTag());
+		map.put("title", p.getTitle());
 	}
 
 }
