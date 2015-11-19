@@ -19,6 +19,8 @@ public interface RecordService {
 
 	public static final short RECORD_KIND_SEE_TIP = 1;
 
+	public static final short RECORD_KIND_SEE_PASSAGE = 2;
+
 	//
 	public static final int PAGE_SIZE = 12;
 

@@ -46,6 +46,15 @@ public class Teacher {
 	@Column(name = "LIKENUMBER", nullable = false)
 	private Long likeNumber;
 
+	@Column(name = "PASSAGENUMBER", nullable = false)
+	private Long passageNumber;
+
+	@Column(name = "CHECKPASSAGENUMBER", nullable = false)
+	private Long checkPassageNumber;
+
+	@Column(name = "REFUSEPASSAGENUMBER", nullable = false)
+	private Long refusePassageNumber;
+
 	@Column(name = "INTRODUCE", nullable = true, length = 500)
 	private String introduce;
 
@@ -179,6 +188,10 @@ public class Teacher {
 	@OneToMany(targetEntity = Order.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Set<Order> receiveOrders = new HashSet<Order>();
+
+	@OneToMany(targetEntity = Passage.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "TEACHER_ID", updatable = false)
+	private Set<Passage> passages = new HashSet<Passage>();
 
 	@Column(name = "CREATETIME", nullable = true)
 	private String createTime;
@@ -378,14 +391,6 @@ public class Teacher {
 		this.studyExperiences = studyExperiences;
 	}
 
-	// public Set<User> getLikedUsers() {
-	// return likedUsers;
-	// }
-	//
-	// public void setLikedUsers(Set<User> likedUsers) {
-	// this.likedUsers = likedUsers;
-	// }
-
 	public Set<Tip> getTips() {
 		return tips;
 	}
@@ -552,6 +557,38 @@ public class Teacher {
 
 	public void setSaleWeight(Integer saleWeight) {
 		this.saleWeight = saleWeight;
+	}
+
+	public Long getPassageNumber() {
+		return passageNumber;
+	}
+
+	public void setPassageNumber(Long passageNumber) {
+		this.passageNumber = passageNumber;
+	}
+
+	public Long getCheckPassageNumber() {
+		return checkPassageNumber;
+	}
+
+	public void setCheckPassageNumber(Long checkPassageNumber) {
+		this.checkPassageNumber = checkPassageNumber;
+	}
+
+	public Long getRefusePassageNumber() {
+		return refusePassageNumber;
+	}
+
+	public void setRefusePassageNumber(Long refusePassageNumber) {
+		this.refusePassageNumber = refusePassageNumber;
+	}
+
+	public Set<Passage> getPassages() {
+		return passages;
+	}
+
+	public void setPassages(Set<Passage> passages) {
+		this.passages = passages;
 	}
 
 }

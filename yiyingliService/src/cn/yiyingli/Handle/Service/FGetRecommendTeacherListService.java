@@ -44,14 +44,18 @@ public class FGetRecommendTeacherListService extends MsgService {
 	@Override
 	public void doit() {
 		String result = "";
+		boolean isUser = false;
+		long userId = 0L;
 		if (getData().containsKey("uid")) {
 			String uid = (String) getData().get("uid");
 			User user = getUserMarkService().queryUser(uid);
-			if (user == null) {
-				setResMsg(MsgUtil.getErrorMsgByCode("14001"));
-				return;
+			if (user != null) {
+				isUser = true;
+				userId = user.getId();
 			}
-			result = SendMsgToBaiduUtil.getRecommendListIndividuation(user.getId() + "");
+		}
+		if (isUser) {
+			result = SendMsgToBaiduUtil.getRecommendListIndividuation(userId + "");
 		} else {
 			String teacherId = (String) getData().get("teacherId");
 			result = SendMsgToBaiduUtil.getRecommendListAbout(teacherId);

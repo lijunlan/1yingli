@@ -50,7 +50,7 @@ public class FGetCheckNoService extends MsgService {
 		no.setUsername(username);
 		no.setCheckNo(checkNo);
 		long startTime = Calendar.getInstance().getTimeInMillis();
-		long endTime = startTime + 3 * 60 * 1000;
+		long endTime = startTime + 2 * 60 * 1000;
 		no.setCreateTime(String.valueOf(startTime));
 		no.setEndTime(String.valueOf(endTime));
 		getCheckNoService().save(no);

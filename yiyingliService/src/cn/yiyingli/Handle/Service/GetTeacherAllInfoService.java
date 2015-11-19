@@ -1,7 +1,7 @@
 package cn.yiyingli.Handle.Service;
 
 import java.util.Calendar;
-import cn.yiyingli.ExchangeData.ExTeacherNormal;
+import cn.yiyingli.ExchangeData.ExTeacher;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Record;
@@ -61,7 +61,7 @@ public class GetTeacherAllInfoService extends MsgService {
 		}
 		SuperMap map = MsgUtil.getSuccessMap();
 
-		ExTeacherNormal.assembleDetailTeacher(teacher, map);
+		ExTeacher.assembleDetailTeacher(teacher, map);
 
 		saveRecord(teacher);
 

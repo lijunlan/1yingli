@@ -34,6 +34,8 @@
 				<value>cn.yiyingli.Persistant.Distributor</value>
 				<value>cn.yiyingli.Persistant.DistributorMark</value>
 				<value>cn.yiyingli.Persistant.TeacherDemand</value>
+				<value>cn.yiyingli.Persistant.Passage</value>
+				<value>cn.yiyingli.Persistant.UserLikePassage</value>
 			</list>
 		</property>
 	</bean>
@@ -64,6 +66,12 @@
 
 
 	<!-- !!!!!Dao!!!!! -->
+	<bean id="passageDao" class="cn.yiyingli.Dao.Impl.PassageDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
 	<bean id="teacherDemandDao" class="cn.yiyingli.Dao.Impl.TeacherDemandDaoImpl">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
@@ -210,6 +218,12 @@
 	</bean>
 
 	<!-- !!!!!Data Transaction Service !!!! -->
+	<bean id="passageService" parent="baseTxService">
+		<property name="target">
+			<ref local="passageServiceImpl" />
+		</property>
+	</bean>
+
 	<bean id="distributorMarkService" parent="baseTxService">
 		<property name="target">
 			<ref local="distributorMarkServiceImpl" />
@@ -355,6 +369,15 @@
 	</bean>
 
 	<!--!!!!Data Service Impl!!!!! -->
+	<bean id="passageServiceImpl" class="cn.yiyingli.Service.Impl.PassageServiceImpl">
+		<property name="passageDao">
+			<ref local="passageDao" />
+		</property>
+		<property name="userDao">
+			<ref local="userDao" />
+		</property>
+	</bean>
+
 	<bean id="teacherDemandServiceImpl" class="cn.yiyingli.Service.Impl.TeacherDemandServiceImpl">
 		<property name="teacherDemandDao">
 			<ref local="teacherDemandDao" />
@@ -1919,6 +1942,62 @@
 		scope="prototype">
 		<property name="teacherService">
 			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="mGetPassageListService" class="cn.yiyingli.Handle.Service.MGetPassageListService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
+
+	<bean id="mValidatePassageService" class="cn.yiyingli.Handle.Service.MValidatePassageService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
+
+	<bean id="fGetPassageListService" class="cn.yiyingli.Handle.Service.FGetPassageListService"
+		scope="prototype">
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="fGetPassageService" class="cn.yiyingli.Handle.Service.FGetPassageService"
+		scope="prototype">
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+		<property name="recordService">
+			<ref local="recordService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="tGetPassageListService" class="cn.yiyingli.Handle.Service.TGetPassageListService"
+		scope="prototype">
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
 		</property>
 	</bean>
 
