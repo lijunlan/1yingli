@@ -1,5 +1,6 @@
 package cn.yiyingli.Handle.Service;
 
+import cn.yiyingli.Dao.PassageDao;
 import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Passage;
 import cn.yiyingli.Service.PassageService;
@@ -33,17 +34,17 @@ public class MValidatePassageService extends MMsgService {
 			return;
 		}
 		if (validate) {
-			passage.setState(PassageService.PASSAGE_STATE_OK);
+			passage.setState(PassageDao.PASSAGE_STATE_OK);
 			passage.setOnshow(true);
 		} else {
-			passage.setState(PassageService.PASSAGE_STATE_REFUSE);
+			passage.setState(PassageDao.PASSAGE_STATE_REFUSE);
 			passage.setOnshow(false);
 			if (getData().containsKey("refuseReason")) {
 				String refuseReason = (String) getData().get("refuseReason");
 				passage.setRefuseReason(refuseReason);
 			}
 		}
-		getPassageService().update(passage);
+		getPassageService().update(passage, true);
 		setResMsg(MsgUtil.getSuccessMsg("validate passage successfully"));
 	}
 

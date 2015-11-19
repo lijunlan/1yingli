@@ -7,12 +7,6 @@ import cn.yiyingli.Persistant.User;
 
 public interface PassageService {
 
-	public static final Short PASSAGE_STATE_CHECKING = 0;
-
-	public static final Short PASSAGE_STATE_REFUSE = 1;
-
-	public static final Short PASSAGE_STATE_OK = 2;
-
 	public static final int PAGE_SIZE = 3;
 
 	public static final int PAGE_SIZE_MANAGER = 10;
@@ -27,7 +21,7 @@ public interface PassageService {
 
 	void remove(long id);
 
-	void update(Passage passage);
+	void update(Passage passage, boolean stateChange);
 
 	void updateUserLike(Passage passage, User user);
 

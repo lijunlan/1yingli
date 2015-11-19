@@ -3,6 +3,7 @@ package cn.yiyingli.Handle.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.yiyingli.Dao.PassageDao;
 import cn.yiyingli.ExchangeData.ExPassage;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.TMsgService;
@@ -33,11 +34,11 @@ public class TGetPassageListService extends TMsgService {
 		int page = Integer.valueOf((String) getData().get("page"));
 		short state = Short.valueOf((String) getData().get("state"));
 		long count = 0L;
-		if (state == PassageService.PASSAGE_STATE_CHECKING) {
+		if (state == PassageDao.PASSAGE_STATE_CHECKING) {
 			count = getTeacher().getCheckPassageNumber();
-		} else if (state == PassageService.PASSAGE_STATE_OK) {
+		} else if (state == PassageDao.PASSAGE_STATE_OK) {
 			count = getTeacher().getPassageNumber();
-		} else if (state == PassageService.PASSAGE_STATE_REFUSE) {
+		} else if (state == PassageDao.PASSAGE_STATE_REFUSE) {
 			count = getTeacher().getRefusePassageNumber();
 		} else {
 			count = 0L;

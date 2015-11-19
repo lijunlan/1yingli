@@ -2,9 +2,9 @@ package cn.yiyingli.toPersistant;
 
 import java.util.Calendar;
 
+import cn.yiyingli.Dao.PassageDao;
 import cn.yiyingli.Persistant.Passage;
 import cn.yiyingli.Persistant.Teacher;
-import cn.yiyingli.Service.PassageService;
 
 public class PPassageUtil {
 
@@ -18,7 +18,7 @@ public class PPassageUtil {
 		passage.setLookNumber(0L);
 		passage.setOwnTeacher(teacher);
 		passage.setOnshow(false);
-		passage.setState(PassageService.PASSAGE_STATE_CHECKING);
+		passage.setState(PassageDao.PASSAGE_STATE_CHECKING);
 		passage.setTag(tag);
 		passage.setTitle(title);
 	}

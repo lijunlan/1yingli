@@ -13,7 +13,6 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import cn.yiyingli.Dao.PassageDao;
 import cn.yiyingli.Persistant.Passage;
 import cn.yiyingli.Persistant.Teacher;
-import cn.yiyingli.Service.PassageService;
 
 public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 
@@ -45,7 +44,7 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 
 	@Override
 	public Passage query(long id) {
-		String hql = "from Passage p  where p.id=?";
+		String hql = "from Passage p left join fetch p.ownTeacher where p.id=?";
 		@SuppressWarnings("unchecked")
 		List<Passage> list = getHibernateTemplate().find(hql, id);
 		if (list.isEmpty())
@@ -56,7 +55,7 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 
 	@Override
 	public Passage queryByUser(long id) {
-		String hql = "from Passage p  where p.id=? and p.state=" + PassageService.PASSAGE_STATE_OK;
+		String hql = "from Passage p  where p.id=? and p.state=" + PASSAGE_STATE_OK;
 		@SuppressWarnings("unchecked")
 		List<Passage> list = getHibernateTemplate().find(hql, id);
 		if (list.isEmpty())
@@ -67,8 +66,7 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 
 	@Override
 	public Passage queryByUserWithTeacher(long id) {
-		String hql = "from Passage p left join fetch p.ownTeacher where p.id=? and p.state="
-				+ PassageService.PASSAGE_STATE_OK;
+		String hql = "from Passage p left join fetch p.ownTeacher where p.id=? and p.state=" + PASSAGE_STATE_OK;
 		@SuppressWarnings("unchecked")
 		List<Passage> list = getHibernateTemplate().find(hql, id);
 		if (list.isEmpty())

@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import cn.yiyingli.Dao.PassageDao;
+import cn.yiyingli.Dao.TeacherDao;
 import cn.yiyingli.Dao.UserDao;
 import cn.yiyingli.Persistant.Passage;
 import cn.yiyingli.Persistant.User;
@@ -13,6 +14,8 @@ import cn.yiyingli.Service.PassageService;
 public class PassageServiceImpl implements PassageService {
 
 	private PassageDao passageDao;
+
+	private TeacherDao teacherDao;
 
 	private UserDao userDao;
 
@@ -32,9 +35,18 @@ public class PassageServiceImpl implements PassageService {
 		this.userDao = userDao;
 	}
 
+	public TeacherDao getTeacherDao() {
+		return teacherDao;
+	}
+
+	public void setTeacherDao(TeacherDao teacherDao) {
+		this.teacherDao = teacherDao;
+	}
+
 	@Override
 	public void save(Passage passage) {
 		getPassageDao().save(passage);
+		getTeacherDao().updateCheckPassageNo(passage.getOwnTeacher());
 	}
 
 	@Override
@@ -53,8 +65,19 @@ public class PassageServiceImpl implements PassageService {
 	}
 
 	@Override
-	public void update(Passage passage) {
-		getPassageDao().update(passage);
+	public void update(Passage passage, boolean stateChange) {
+		if (stateChange) {
+			getPassageDao().update(passage);
+			if (passage.getState() == PassageDao.PASSAGE_STATE_OK) {
+				getTeacherDao().updatePassageNo(passage.getOwnTeacher());
+			} else if (passage.getState() == PassageDao.PASSAGE_STATE_CHECKING) {
+				getTeacherDao().updateCheckPassageNo(passage.getOwnTeacher());
+			} else if (passage.getState() == PassageDao.PASSAGE_STATE_REFUSE) {
+				getTeacherDao().updateRefusePassageNo(passage.getOwnTeacher());
+			}
+		} else {
+			getPassageDao().update(passage);
+		}
 	}
 
 	@Override

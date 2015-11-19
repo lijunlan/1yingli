@@ -76,7 +76,7 @@ public class FGetPassageService extends MsgService {
 		Long no = passage.getLookNumber();
 		no++;
 		passage.setLookNumber(no);
-		getPassageService().update(passage);
+		getPassageService().update(passage,false);
 
 		Record r = new Record();
 		r.setKind(RecordService.RECORD_KIND_SEE_PASSAGE);

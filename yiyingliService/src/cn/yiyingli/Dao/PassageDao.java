@@ -5,6 +5,12 @@ import java.util.List;
 import cn.yiyingli.Persistant.Passage;
 
 public interface PassageDao {
+	
+	public static final Short PASSAGE_STATE_CHECKING = 0;
+
+	public static final Short PASSAGE_STATE_REFUSE = 1;
+
+	public static final Short PASSAGE_STATE_OK = 2;
 
 	void save(Passage passage);
 

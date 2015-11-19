@@ -3,6 +3,7 @@ package cn.yiyingli.Handle.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.yiyingli.Dao.PassageDao;
 import cn.yiyingli.ExchangeData.ExPassage;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
@@ -50,7 +51,7 @@ public class FGetPassageListService extends MsgService {
 		}
 		int page = Integer.valueOf((String) getData().get("page"));
 		List<Passage> passages = getPassageService().queryListByTeacherAndState(page, tid,
-				PassageService.PASSAGE_STATE_OK);
+				PassageDao.PASSAGE_STATE_OK);
 		List<String> sends = new ArrayList<String>();
 		for (Passage p : passages) {
 			SuperMap map = new SuperMap();
