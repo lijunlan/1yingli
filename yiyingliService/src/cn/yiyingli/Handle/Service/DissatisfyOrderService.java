@@ -57,10 +57,11 @@ public class DissatisfyOrderService extends UMsgService {
 		getOrderService().updateAndSendTimeTask(order);
 
 		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-				"尊敬的学员，您对这次咨询不满意，申请退款。订单号" + order.getOrderNo() + "，请等待导师确认", user, getNotificationService());
+				"尊敬的学员,您好,由于您对这次咨询(订单号" + order.getOrderNo() + ")不满意,申请退款,我们已将您的意见反馈给导师,请等待导师确认", user,
+				getNotificationService());
 		NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
-				"尊敬的导师，订单号为" + order.getOrderNo() + "的订单，学员(" + order.getCustomerName()
-						+ ")对这次咨询不满意，申请退款，等待您的确认，请在5天内进行同意或拒绝，超时系统会自动同意退款",
+				"尊敬的导师,您好,很抱歉我们收到学员(" + order.getCustomerName() + ")不满意此次咨询(订单号" + order.getOrderNo()
+						+ ")的反馈,要求申请退款,等待您的回复,请您在五天内进行同意或拒绝哦,超时系统将自动同意退款.",
 				order.getTeacher(), getNotificationService());
 		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
 				+ order.getTeacher().getName() + ",学员对这次咨询不满意，申请退款，");

@@ -56,7 +56,7 @@ public class MOrderReturnDoneService extends MMsgService {
 		getOrderService().update(order);
 
 		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-				"尊敬的学员，订单号为" + order.getOrderNo() + "的订单，已经成功退款，请注意查收.如有疑问请咨询lijunlan@1yingli.cn.",
+				"尊敬的学员,您的订单(" + order.getOrderNo() + ")已经成功退款,请注意查收.如有疑问请咨询客服.",
 				order.getCreateUser(), getNotificationService());
 		setResMsg(MsgUtil.getSuccessMsg("update order state successfully"));
 	}

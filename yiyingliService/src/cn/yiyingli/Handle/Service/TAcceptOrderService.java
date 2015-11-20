@@ -62,13 +62,14 @@ public class TAcceptOrderService extends TMsgService {
 		order.setState(OrderService.ORDER_STATE_TEACHER_ACCEPT + "," + order.getState());
 		getOrderService().updateAndSendTimeTask(order);
 
-		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-				"尊敬的学员，订单号为" + order.getOrderNo() + "的订单已经被导师(" + teacher.getName() + ")接受，请及时跟导师确认咨询时间。",
+		NotifyUtil.notifyUserOrder(
+				order.getCustomerPhone(), order.getCustomerEmail(), "尊敬的学员,您好,您的订单(" + order.getOrderNo() + ")已被导师("
+						+ teacher.getName() + ")接受,导师将通过您提供的联系方式与您联系,请及时与导师确认咨询时间哦。",
 				order.getCreateUser(), getNotificationService());
 		NotifyUtil.notifyTeacher(teacher.getPhone(), teacher.getEmail(),
-				"尊敬的导师，您已经接受订单号为" + order.getOrderNo() + "的订单，请及时跟学员(" + order.getCustomerName() + ",电话："
-						+ order.getCustomerPhone() + ",邮箱：" + order.getCustomerEmail()
-						+ ")联系并确定咨询时间，并在1天内到一英里平台登记约定时间，超时系统会自动取消订单。",
+				"尊敬的导师,您好,您已接受订单(" + order.getOrderNo() + "),请及时与学员确认时间,并在1天内到一英里平台登记咨询时间,超时系统将自动取消订单哦。(学员姓名:"
+						+ order.getCustomerName() + ",电话:" + order.getCustomerPhone() + ",邮箱:"
+						+ order.getCustomerEmail() + ",微信:" + order.getCustomerContact() + ")",
 				teacher, getNotificationService());
 		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
 				+ order.getTeacher().getName() + "，导师已经接受订单。");

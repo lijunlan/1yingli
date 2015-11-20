@@ -58,11 +58,11 @@ public class TSelectNoTimeService extends TMsgService {
 		getOrderService().update(order);
 
 		NotifyUtil.notifyUserOrder(
-				order.getCustomerPhone(), order.getCustomerEmail(), "尊敬的学员，抱歉的通知您，订单号为" + order.getOrderNo()
-						+ "的订单由于双方无法选择合适时间已经被导师(" + teacher.getName() + ")取消，我们会在24小时内为您退款。",
+				order.getCustomerPhone(), order.getCustomerEmail(), "尊敬的学员,抱歉的通知您,您的订单(" + order.getOrderNo()
+						+ ")由于双方无法选择合适的时间已经被导师(" + teacher.getName() + ")取消,请在平台选择其他优秀的导师进行咨询。本次预付款将在24小时内为您退款。",
 				order.getCreateUser(), getNotificationService());
 		NotifyUtil.notifyTeacher(teacher.getPhone(), teacher.getEmail(),
-				"尊敬的导师，订单号为" + order.getOrderNo() + "的订单。由于您跟学员没有商量好咨询时间，已经被您取消。", teacher, getNotificationService());
+				"尊敬的导师,订单号为" + order.getOrderNo() + "的订单。由于您跟学员没有商量好咨询时间，已经被您取消。", teacher, getNotificationService());
 		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
 				+ order.getTeacher().getName() + "，由于导师跟学员没有商量好咨询时间，已经被导师取消。");
 		setResMsg(MsgUtil.getSuccessMsg("accept order successfully"));

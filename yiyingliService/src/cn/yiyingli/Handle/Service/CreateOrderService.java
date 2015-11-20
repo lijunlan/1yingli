@@ -168,7 +168,7 @@ public class CreateOrderService extends UMsgService {
 				Calendar.getInstance().getTimeInMillis() + "");
 
 		NotifyUtil.notifyUserOrder(phone, email,
-				"尊敬的学员，您的导师预约订单已经创建。订单号" + order.getOrderNo() + "，请在48小时内完成支付，超时系统会自动取消订单。", user,
+				"尊敬的学员,您好,导师预约订单(订单号" + order.getOrderNo() + ")已经创建,为了能及时预约到心动导师,请在48小时内完成支付哦,超时系统将自动取消订单。", user,
 				getNotificationService());
 
 		setResMsg(

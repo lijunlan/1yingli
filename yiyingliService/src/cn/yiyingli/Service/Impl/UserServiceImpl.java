@@ -76,9 +76,9 @@ public class UserServiceImpl implements UserService {
 					StringBuffer sb = new StringBuffer();
 					sb.append("感谢您在一英里平台注册，以下是送您的优惠码(" + count + "个):");
 					for (String v : vouchers) {
-						sb.append(v + ",");
+						sb.append(v + "   ");
 					}
-					sb.append("，优惠码即时生效，每次消费可以使用一个，每个可抵扣人民币" + money + "元，有效期为30天。");
+					sb.append(",优惠码即时生效，每次消费可以使用一个优惠码，每个可抵扣人民币" + money + "元，有效期为30天。");
 					NotifyUtil.notifyUserNormal(user.getPhone(), user.getEmail(), "优惠码", sb.toString(), user);
 				}
 			} else {
