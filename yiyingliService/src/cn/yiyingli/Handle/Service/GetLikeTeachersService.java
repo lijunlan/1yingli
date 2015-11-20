@@ -36,6 +36,7 @@ public class GetLikeTeachersService extends UMsgService {
 		SuperMap toSend = MsgUtil.getSuccessMap();
 		if (getData().get("page").equals("max")) {
 			long count = user.getLikeTeacherNumber();
+			toSend.put("count", count);
 			if (count % TeacherService.PAGE_SIZE_INT > 0)
 				page = (int) (count / TeacherService.PAGE_SIZE_INT) + 1;
 			else

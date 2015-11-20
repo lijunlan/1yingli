@@ -55,7 +55,7 @@ public class FRecordRecommendService extends MsgService {
 		toBaidu.put("Timestamp", formatter.format(new Date()));
 		JSONArray send = new JSONArray();
 		send.add(toBaidu);
-		String r = SendMsgToBaiduUtil.updataUserData(send.toString());
+		String r = SendMsgToBaiduUtil.updataUserClickData(send.toString());
 		JSONObject ro = JSONObject.fromObject(r);
 		if (ro.getInt("Code") != 100) {
 			setResMsg(MsgUtil.getErrorMsgByCode("53004"));
