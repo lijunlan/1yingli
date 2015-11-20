@@ -13,7 +13,7 @@ var tips5;
 //搜索页面跳转
 function getSelfLocation() {
 	//self.location = 'search.html?tip1='+tips1+'&tip2='+tips2+'&tip3='+tips3+'&tip4='+tips4+'&tip5='+tips5+'&word='+word+'&page='+page+'&findName='+findName+'&findName1='+findName1+'&sort='+sort+'&id='+id;
-	self.location = 'search.html?tip1='+tips1+'&tip2='+tips2+'&tip3='+tips3+'&tip4='+tips4+'&tip5='+tips5+'&word='+word+'&page='+page+'&sort='+sort+'&id='+id;
+	self.location = 'search.html?tip1='+tips1+'&tip2='+tips2+'&tip3='+tips3+'&tip4='+tips4+'&tip5='+tips5+'&word='+word+'&sort='+sort+'&id='+id;
 	return;
 }
 $(document).ready(function(){
@@ -126,7 +126,6 @@ function closeTip(tipName) {
 	}
 	getSelfLocation();
 }
-
 //通过标签搜索
 function findByTips(tip01, tip02, tip03, tip04, tip05){
 	getParameter();
@@ -145,7 +144,7 @@ function findByTips(tip01, tip02, tip03, tip04, tip05){
 	if(tip05){
 		tips5 = encodeURIComponent(encodeURIComponent(tip05));
 	}
-	getSelfLocation();	
+	getSelfLocation();
 }
 
 //搜索排序
@@ -158,7 +157,7 @@ function findBySort(sortName) {
 function refreshPage(pageNumber) {
 	getParameter();
 	page = pageNumber;//页码
-	getSelfLocation();
+	self.location = 'search.html?tip1='+tips1+'&tip2='+tips2+'&tip3='+tips3+'&tip4='+tips4+'&tip5='+tips5+'&word='+word+'&page='+page+'&findName='+findName+'&findName1='+findName1+'&sort='+sort+'&id='+id;
 }
 
 function refresh(){

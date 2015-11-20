@@ -32,11 +32,12 @@ $.ajax({
                     $.cookie("tid",tid,{path:'/',domain:".1yingli.cn",secure:false,raw:false});
                 }
                 var callback = $_GET("callback");
+                alert(callback);
                 if(callback!=null&&callback!=""){
                     callback = decodeURIComponent(callback);
                     self.location = callback;
                 }else{
-                    history.go(-2);
+                    history.go(-3);
                 }
 			}else{
 				self.location = 'login.html';
