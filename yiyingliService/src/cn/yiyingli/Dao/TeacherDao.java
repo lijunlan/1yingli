@@ -22,6 +22,12 @@ public interface TeacherDao {
 
 	void update(Teacher teacher);
 
+	void updateCheckPassageNo(Teacher teacher);
+	
+	void updatePassageNo(Teacher teacher);
+	
+	void updateRefusePassageNo(Teacher teacher);
+
 	void updateFromSql(String sql);
 
 	Teacher query(long id, boolean lazy);

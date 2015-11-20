@@ -119,6 +119,10 @@ public class User {
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private Set<UserLikeTeacher> userLikeTeachers = new HashSet<UserLikeTeacher>();
 
+	@OneToMany(targetEntity = UserLikePassage.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID", updatable = false)
+	private Set<UserLikePassage> userLikePassages = new HashSet<UserLikePassage>();
+
 	@OneToMany(targetEntity = Notification.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private Set<Notification> notifications = new HashSet<Notification>();
@@ -439,6 +443,14 @@ public class User {
 
 	public void setDistributor(Distributor distributor) {
 		this.distributor = distributor;
+	}
+
+	public Set<UserLikePassage> getUserLikePassages() {
+		return userLikePassages;
+	}
+
+	public void setUserLikePassages(Set<UserLikePassage> userLikePassages) {
+		this.userLikePassages = userLikePassages;
 	}
 
 }

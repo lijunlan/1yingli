@@ -3,7 +3,7 @@ package cn.yiyingli.Handle.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.yiyingli.ExchangeData.ExTeacherNormal;
+import cn.yiyingli.ExchangeData.ExTeacher;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Teacher;
@@ -33,7 +33,7 @@ public class FGetHomeTeacherListService extends MsgService {
 		List<Teacher> teachers = getTeacherService().queryListByHomePage();
 		List<String> exTeachers = new ArrayList<String>();
 		for (Teacher teacher : teachers) {
-			SuperMap map = ExTeacherNormal.assembleSimpleTeacher(teacher);
+			SuperMap map = ExTeacher.assembleSimpleTeacher(teacher);
 			exTeachers.add(map.finishByJson());
 		}
 		setResMsg(MsgUtil.getSuccessMap().put("data", Json.getJson(exTeachers)).finishByJson());

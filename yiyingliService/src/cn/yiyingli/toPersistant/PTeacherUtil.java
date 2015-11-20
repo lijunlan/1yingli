@@ -126,15 +126,18 @@ public class PTeacherUtil {
 		teacher.setLevel((short) 5);
 		teacher.setOrderNumber(0L);
 		teacher.setLikeNumber(0L);
+		teacher.setPassageNumber(0L);
+		teacher.setCheckPassageNumber(0L);
+		teacher.setRefusePassageNumber(0L);
 		return teacher;
 	}
-	
+
 	public static Teacher assembleTeacherByApplication(User user, List<Object> workExperiences,
 			List<Object> studyExperiences, List<Object> tips, String simpleinfo, String name, String phone,
 			String address, String mail, String iconUrl, String introduce, String checkPhone, String checkIDCard,
 			String checkEmail, String checkWork, String checkStudy, String showWeight1, String showWeight2,
 			String showWeight4, String showWeight8, String showWeight16, String homeWeight, String saleWeight,
-			TipService tipService){
+			TipService tipService) {
 		Teacher teacher = assembleTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
 				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
 				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, tipService);
