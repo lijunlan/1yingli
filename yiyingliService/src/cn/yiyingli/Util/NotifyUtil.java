@@ -36,14 +36,16 @@ public class NotifyUtil {
 
 	public static boolean notifyUserNormal(String phone, String email, String title, String message, User user,
 			NotificationService notificationService) {
+		String m1 = message + "(<a href=\"http://www.1yingli.cn/tutor.html\">查看订单</a>)";
+		String m2 = message + "(http://www.1yingli.cn/tutor.html)";
 		if (CheckUtil.checkMobileNumber(phone)) {
-			SendMessageUtil.sendMessage(phone, message);
+			SendMessageUtil.sendMessage(phone, m2);
 		}
 		if (CheckUtil.checkEmail(email)) {
-			SendMailUtil.sendMessage(email, title, message);
+			SendMailUtil.sendMessage(email, title, m1);
 		}
 		// web
-		sendNotification(user, notificationService, message);
+		sendNotification(user, notificationService, m1);
 		// mobile
 		String[] usernames = { user.getUsername() };
 		CloudPushUtil.IOSpushMessageToAccount(usernames, message);
