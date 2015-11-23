@@ -21,6 +21,7 @@ public class ExTeacher {
 		map.put("simpleinfo", teacher.getSimpleInfo());
 		map.put("level", teacher.getLevel());
 		LikeNoShowUtil.setLikeNo(teacher, map);
+		LikeNoShowUtil.setFinishNo(teacher, map);
 		map.put("teacherId", teacher.getId());
 		TService tService = teacher.gettService();
 		map.put("timeperweek", tService.getTimesPerWeek());
@@ -38,6 +39,7 @@ public class ExTeacher {
 		map.put("email", teacher.getEmail());
 		map.put("introduce", teacher.getIntroduce());
 		LikeNoShowUtil.setLikeNo(teacher, map);
+		LikeNoShowUtil.setFinishNo(teacher, map);
 		map.put("address", teacher.getAddress());
 		map.put("talkWay", teacher.getTalkWay());
 		map.put("teacherId", teacher.getId());
@@ -106,6 +108,7 @@ public class ExTeacher {
 		map.put("email", teacher.getEmail());
 		map.put("introduce", teacher.getIntroduce());
 		LikeNoShowUtil.setLikeNo(teacher, map);
+		LikeNoShowUtil.setFinishNo(teacher, map);
 		map.put("address", teacher.getAddress());
 		map.put("talkWay", teacher.getTalkWay());
 		map.put("teacherId", teacher.getId());

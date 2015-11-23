@@ -121,6 +121,9 @@ public class Teacher {
 	@Column(name = "ORDERNUMBER", nullable = false)
 	private Long orderNumber;
 
+	@Column(name = "FINISHORDERNUMBER", nullable = false)
+	private Long finishOrderNumber;
+
 	// @Column(name = "CHECKIDCARD", nullable = false)
 	// private Boolean checkIDCard;
 	//
@@ -589,6 +592,14 @@ public class Teacher {
 
 	public void setPassages(Set<Passage> passages) {
 		this.passages = passages;
+	}
+
+	public Long getFinishOrderNumber() {
+		return finishOrderNumber;
+	}
+
+	public void setFinishOrderNumber(Long finishOrderNumber) {
+		this.finishOrderNumber = finishOrderNumber;
 	}
 
 }
