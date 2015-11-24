@@ -2004,4 +2004,14 @@
 		</property>
 	</bean>
 
+	<bean id="tCreatePassageService" class="cn.yiyingli.Handle.Service.TCreatePassageService"
+		scope="prototype">
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
 </beans>

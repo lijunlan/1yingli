@@ -53,6 +53,7 @@
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
 	</style>
 	<style name="teacher">
+		<method name="createPassage" beanName="tCreatePassageService" />
 		<method name="getPassageList" beanName="tGetPassageListService" />
 		<method name="getAllInfo" beanName="tGetAllInfoService" />
 		<method name="changeTitlePrice" beanName="tChangeTitlePriceService" />
