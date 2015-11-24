@@ -93,8 +93,8 @@ public class FGetRecommendTeacherListService extends MsgService {
 			jsonTeacher.put("url", teacher.getIconUrl());
 			jsonTeacher.put("topic", teacher.gettService().getTitle());
 			jsonTeacher.put("simpleInfo", teacher.getSimpleInfo());
-			LikeNoShowUtil.setFinishNo(teacher, map);
-			LikeNoShowUtil.setLikeNo(teacher, map);
+			LikeNoShowUtil.setFinishNo(teacher, jsonTeacher);
+			LikeNoShowUtil.setLikeNo(teacher, jsonTeacher);
 			jsonTeachers.add(jsonTeacher);
 		}
 		map.put("data", jsonTeachers.toString());

@@ -62,7 +62,7 @@ public class UpLoadImageServlet extends HttpServlet {
 					ObjectMetadata objectMeta = new ObjectMetadata();
 					objectMeta.setContentLength(item.getSize());
 					objectMeta.setContentType("image/*");
-					String key = getImageKey() + "." + endName;
+					String key = "icon/" + getImageKey() + "." + endName;
 					client.putObject(AliyunConfiguration.BUCKET_NAME, key, item.getInputStream(), objectMeta);
 					// item.write(saveFile);
 					returnMsg(resp, new SuperMap().put("state", "success").put("url",
