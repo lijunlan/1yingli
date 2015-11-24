@@ -8,8 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-
+import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +30,7 @@ import cn.yiyingli.Util.ConfigurationXmlUtil;
 public class UpLoadImageServlet extends HttpServlet {
 
 	private static String getImageKey() {
-		return Calendar.getInstance().getTimeInMillis() + UUID.randomUUID().toString();
+		return Calendar.getInstance().getTimeInMillis() + "" + (new Random().nextInt(99999) + 100000);
 	}
 
 	@Override
@@ -66,11 +65,9 @@ public class UpLoadImageServlet extends HttpServlet {
 					String key = getImageKey() + "." + endName;
 					client.putObject(AliyunConfiguration.BUCKET_NAME, key, item.getInputStream(), objectMeta);
 					// item.write(saveFile);
-					returnMsg(resp,
-							new SuperMap().put("state", "success")
-									.put("url", ConfigurationXmlUtil.getInstance().getSettingData().get("imagePath")
-											+ "/" + key + "@!icon")
-									.finishByJson());
+					returnMsg(resp, new SuperMap().put("state", "success").put("url",
+							ConfigurationXmlUtil.getInstance().getSettingData().get("imagePath") + "/" + key + "@!icon")
+							.finishByJson());
 				} else {
 					map.put(item.getName(), item.getString());
 				}

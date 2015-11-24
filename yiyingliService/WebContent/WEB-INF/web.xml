@@ -44,7 +44,7 @@
     </servlet-mapping> 
     
    <servlet>
-    <description>上传图片</description>
+    <description>上传头像图片</description>
     <display-name>UploadImage</display-name>
     <servlet-name>UploadImage</servlet-name>
     <servlet-class>
@@ -55,6 +55,20 @@
    <servlet-mapping>
     <servlet-name>UploadImage</servlet-name>
     <url-pattern>/upimage</url-pattern>
+  </servlet-mapping>
+  
+     <servlet>
+    <description>上传文章图片</description>
+    <display-name>UploadPImage</display-name>
+    <servlet-name>UploadPImage</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.UpLoadImageServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>UploadPImage</servlet-name>
+    <url-pattern>/uppassageimage</url-pattern>
   </servlet-mapping>
   
   <servlet>
