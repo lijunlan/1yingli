@@ -72,7 +72,11 @@ function changePage(p) {
     toSend.style = "teacher";
     toSend.method = "getCommentList";
     toSend.teacherId = $.cookie('tid');
-    toSend.page= p + "";
+    if (p == undefined || (typeof p == 'string' && p.trim() == '')) {
+        toSend.page = '1';
+    } else {
+        toSend.page = "" + p;
+    }
     $.ajax({
         cache : true,
         type : "POST",
