@@ -45,7 +45,7 @@ public class NotifyUtil {
 			SendMailUtil.sendMessage(email, title, m1);
 		}
 		// web
-		sendNotification(user, notificationService, m1);
+		sendNotification(user, notificationService, message);
 		// mobile
 		String[] usernames = { user.getUsername() };
 		CloudPushUtil.IOSpushMessageToAccount(usernames, message);

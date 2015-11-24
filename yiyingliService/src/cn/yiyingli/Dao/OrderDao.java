@@ -28,11 +28,11 @@ public interface OrderDao {
 	void updateDistriOrderNumber(Order order, Distributor distributor);
 
 	/**
-	 * 操作包括更新分销人订单数据，和导师订单数据，并且更新订单状态
+	 * 操作包括更新分销人订单数据，并且更新订单状态
 	 * 
 	 * @param order
 	 */
-	void updateOrderWhenFinished(Order order);
+	void updateOrderWhenOrderFinish(Order order);
 
 	Order query(long id, boolean lazy);
 

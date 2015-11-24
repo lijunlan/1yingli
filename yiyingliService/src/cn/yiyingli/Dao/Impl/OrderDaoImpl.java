@@ -89,21 +89,21 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 	}
 
 	@Override
-	public void updateOrderWhenFinished(Order order) {
+	public void updateOrderWhenOrderFinish(Order order) {
 		getHibernateTemplate().update(order);
 		Session session = getSessionFactory().getCurrentSession();
 		session.flush();
 		Query query = session.createSQLQuery(
+				"update teacher set teacher.FINISHORDERNUMBER=(select count(*) from orders where orders.TEACHER_ID="
+						+ order.getTeacher().getId() + " and orders.STATE like '%1000%') where teacher.TEACHER_ID="
+						+ order.getTeacher().getId());
+		query.executeUpdate();
+		session.flush();
+		query = session.createSQLQuery(
 				"update distributor set distributor.DEALNUMBER=(select count(*) from orders where orders.DISTRIBUTOR_ID=(select orders.DISTRIBUTOR_ID from orders where orders.ORDER_ID='"
 						+ order.getId()
 						+ "') and orders.STATE like '%1000%') where distributor.DISTRIBUTOR_ID=(select orders.DISTRIBUTOR_ID from orders where orders.ORDER_ID='"
 						+ order.getId() + "')");
-		query.executeUpdate();
-		session.flush();
-		query = session.createSQLQuery(
-				"update teacher set teacher.FINISHORDERNUMBER=(select count(*) from orders where orders.TEACHER_ID="
-						+ order.getTeacher().getId() + " and orders.STATE like '%1000%') where teahcer.TEACHER_ID="
-						+ order.getTeacher().getId());
 		query.executeUpdate();
 	}
 

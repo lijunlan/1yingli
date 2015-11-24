@@ -80,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
 	public void update(Order order) {
 		// 如果订单完成，给分销人更新数据
 		if (order.getState().startsWith(ORDER_STATE_WAIT_COMMENT)) {
-			getOrderDao().updateOrderWhenFinished(order);
+			getOrderDao().updateOrderWhenOrderFinish(order);
 		} else {
 			getOrderDao().update(order);
 		}
