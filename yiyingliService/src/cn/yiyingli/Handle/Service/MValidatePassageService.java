@@ -35,10 +35,8 @@ public class MValidatePassageService extends MMsgService {
 		}
 		if (validate) {
 			passage.setState(PassageDao.PASSAGE_STATE_OK);
-			passage.setOnshow(true);
 		} else {
 			passage.setState(PassageDao.PASSAGE_STATE_REFUSE);
-			passage.setOnshow(false);
 			if (getData().containsKey("refuseReason")) {
 				String refuseReason = (String) getData().get("refuseReason");
 				passage.setRefuseReason(refuseReason);

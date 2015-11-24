@@ -23,8 +23,8 @@ public class SendMsgToBaiduUtil {
 		System.out.println(sendGet("http://api2.santo.cc/submit?command=USER_BALANCE&uid=yyl-ipxmt&pwd=IQ8R1Wpy"));
 	}
 
-	public static String updataUserData(String json) {
-		return sendPost("http://ds.recsys.baidu.com/s/130426/253211?token=8d116fa25cfde0085776beee152741e2", json);
+	public static String updataUserClickData(String json) {
+		return sendPost("http://ds.recsys.baidu.com/s/130426/253052?token=8d116fa25cfde0085776beee152741e2", json);
 	}
 
 	public static String getRecommendListAbout(String tid) {

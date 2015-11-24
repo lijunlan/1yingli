@@ -59,12 +59,12 @@ public class TEnsureTimeService extends TMsgService {
 		getOrderService().updateAndSendTimeTask(order);
 
 		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-				"尊敬的用户，订单号" + order.getOrderNo() + "，已经约定好咨询时间(" + okTime + ")，请等待咨询，并在一周内确认咨询或申请退款，系统会在2周后自动确认咨询成功",
+				"尊敬的学员,您好,您已与导师(" + teacher.getName() + ")约好咨询时间(" + okTime + "),请等待咨询,并在2周内确认咨询或取消咨询,系统将在2周后自动确认咨询成功.",
 				order.getCreateUser(), getNotificationService());
 		NotifyUtil.notifyTeacher(teacher.getPhone(), teacher.getEmail(),
-				"尊敬的导师，订单号" + order.getOrderNo() + "，您已经与用户(" + order.getCustomerName() + "，电话:"
-						+ order.getCustomerPhone() + "，邮箱：" + order.getCustomerEmail() + ")约定好时间，请在" + okTime
-						+ "，按时提供服务。系统会在2周后自动确认咨询成功",
+				"尊敬的导师,您好,您与学员(" + order.getCustomerName() + ",电话:" + order.getCustomerPhone() + ",邮箱:"
+						+ order.getCustomerEmail() + ",微信:" + order.getCustomerContact() + ")约定好时间,请在" + okTime
+						+ "进行咨询.系统会在2周后自动确认咨询成功.",
 				teacher, getNotificationService());
 		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
 				+ order.getTeacher().getName() + "，导师已经与学员约定好时间。" + okTime);

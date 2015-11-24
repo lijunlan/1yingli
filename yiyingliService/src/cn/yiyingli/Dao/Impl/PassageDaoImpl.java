@@ -44,9 +44,9 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 
 	@Override
 	public Passage query(long id) {
-		String hql = "from Passage p left join fetch p.ownTeacher where p.id=?";
+		String hql = "from Passage p left join fetch p.ownTeacher where p.id=? and p.onshow=?";
 		@SuppressWarnings("unchecked")
-		List<Passage> list = getHibernateTemplate().find(hql, id);
+		List<Passage> list = getHibernateTemplate().find(hql, id, true);
 		if (list.isEmpty())
 			return null;
 		else
@@ -55,9 +55,9 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 
 	@Override
 	public Passage queryByUser(long id) {
-		String hql = "from Passage p  where p.id=? and p.state=" + PASSAGE_STATE_OK;
+		String hql = "from Passage p  where p.id=? and p.state=? and p.onshow=?";
 		@SuppressWarnings("unchecked")
-		List<Passage> list = getHibernateTemplate().find(hql, id);
+		List<Passage> list = getHibernateTemplate().find(hql, id, PASSAGE_STATE_OK, true);
 		if (list.isEmpty())
 			return null;
 		else
@@ -66,9 +66,9 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 
 	@Override
 	public Passage queryByUserWithTeacher(long id) {
-		String hql = "from Passage p left join fetch p.ownTeacher where p.id=? and p.state=" + PASSAGE_STATE_OK;
+		String hql = "from Passage p left join fetch p.ownTeacher where p.id=? and p.state=? and p.onshow=?";
 		@SuppressWarnings("unchecked")
-		List<Passage> list = getHibernateTemplate().find(hql, id);
+		List<Passage> list = getHibernateTemplate().find(hql, id, PASSAGE_STATE_OK, true);
 		if (list.isEmpty())
 			return null;
 		else
@@ -95,7 +95,7 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 
 			@Override
 			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Passage p left join fetch p.ownTeacher ORDER BY o.createTime DESC";
+				String hql = "from Passage p left join fetch p.ownTeacher ORDER BY p.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -116,7 +116,7 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 			@Override
 			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from Passage p left join fetch p.ownTeacher where p.ownTeacher.id=" + teacherId
-						+ " and p.state=" + state + " ORDER BY o.createTime DESC";
+						+ " and p.state=" + state + " and p.onshow="+true+" ORDER BY p.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -136,7 +136,7 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 			@Override
 			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from Passage p left join fetch p.ownTeacher where p.state=" + state
-						+ " ORDER BY o.createTime DESC";
+						+ " and p.onshow="+true+" ORDER BY p.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -156,7 +156,7 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 			@Override
 			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from Passage p left join fetch p.ownTeacher where p.show=" + show
-						+ " ORDER BY o.createTime DESC";
+						+ " ORDER BY p.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
