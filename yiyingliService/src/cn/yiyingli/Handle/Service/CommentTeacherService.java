@@ -100,12 +100,8 @@ public class CommentTeacherService extends UMsgService {
 			comment.setUser(user);
 
 			// 加积分(英里数)
-			if (!order.getOnSale()) {
-				float time = order.getTime();
-				long m = (long) (10 * time);
-				teacher.setMile(teacher.getMile() + m);
-			}
 			teacher.setMile(teacher.getMile() + 2L);
+			
 			getCommentService().saveWithOrderAndTeacher(comment, order, teacher);
 
 			NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
