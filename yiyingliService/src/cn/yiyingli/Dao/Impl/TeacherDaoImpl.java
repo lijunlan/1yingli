@@ -79,24 +79,26 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_OK
 						+ ") where teacher.TEACHER_ID=" + teacher.getId());
 		query.executeUpdate();
+		session.flush();
+		query = session.createSQLQuery(
+				"update teacher set teacher.CHECKPASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
+						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_CHECKING
+						+ ") where teacher.TEACHER_ID=" + teacher.getId());
+		query.executeUpdate();
+		session.flush();
+		query = session.createSQLQuery(
+				"update teacher set teacher.REFUSEPASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
+						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_REFUSE
+						+ ") where teacher.TEACHER_ID=" + teacher.getId());
+		query.executeUpdate();
 	}
 
 	@Override
 	public void updateCheckPassageNo(Teacher teacher) {
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = session.createSQLQuery(
-				"update teacher set teacher.PASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
+				"update teacher set teacher.CHECKPASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
 						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_CHECKING
-						+ ") where teacher.TEACHER_ID=" + teacher.getId());
-		query.executeUpdate();
-	}
-
-	@Override
-	public void updateRefusePassageNo(Teacher teacher) {
-		Session session = getSessionFactory().getCurrentSession();
-		Query query = session.createSQLQuery(
-				"update teacher set teacher.PASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
-						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_REFUSE
 						+ ") where teacher.TEACHER_ID=" + teacher.getId());
 		query.executeUpdate();
 	}

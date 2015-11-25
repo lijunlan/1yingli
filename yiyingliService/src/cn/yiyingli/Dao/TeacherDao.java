@@ -21,12 +21,10 @@ public interface TeacherDao {
 	void merge(Teacher teacher);
 
 	void update(Teacher teacher);
-
-	void updateCheckPassageNo(Teacher teacher);
 	
 	void updatePassageNo(Teacher teacher);
-	
-	void updateRefusePassageNo(Teacher teacher);
+
+	void updateCheckPassageNo(Teacher teacher);
 
 	void updateFromSql(String sql);
 

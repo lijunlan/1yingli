@@ -68,13 +68,7 @@ public class PassageServiceImpl implements PassageService {
 	public void update(Passage passage, boolean stateChange) {
 		if (stateChange) {
 			getPassageDao().update(passage);
-			if (passage.getState() == PassageDao.PASSAGE_STATE_OK) {
-				getTeacherDao().updatePassageNo(passage.getOwnTeacher());
-			} else if (passage.getState() == PassageDao.PASSAGE_STATE_CHECKING) {
-				getTeacherDao().updateCheckPassageNo(passage.getOwnTeacher());
-			} else if (passage.getState() == PassageDao.PASSAGE_STATE_REFUSE) {
-				getTeacherDao().updateRefusePassageNo(passage.getOwnTeacher());
-			}
+			getTeacherDao().updatePassageNo(passage.getOwnTeacher());
 		} else {
 			getPassageDao().update(passage);
 		}
@@ -96,6 +90,11 @@ public class PassageServiceImpl implements PassageService {
 	@Override
 	public Passage query(long id) {
 		return getPassageDao().query(id);
+	}
+
+	@Override
+	public Passage queryWithTeacherById(long id) {
+		return getPassageDao().queryWithTeacherById(id);
 	}
 
 	@Override

@@ -26,6 +26,8 @@ public interface PassageService {
 	void updateUserLike(Passage passage, User user);
 
 	Passage query(long id);
+	
+	Passage queryWithTeacherById(long id);
 
 	Passage queryByUser(long id);
 

@@ -2006,6 +2006,22 @@
 
 	<bean id="tCreatePassageService" class="cn.yiyingli.Handle.Service.TCreatePassageService"
 		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="tGetPassageService" class="cn.yiyingli.Handle.Service.TGetPassageService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
 		<property name="passageService">
 			<ref local="passageService" />
 		</property>
