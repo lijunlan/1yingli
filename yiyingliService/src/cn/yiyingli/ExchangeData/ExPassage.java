@@ -14,6 +14,7 @@ public class ExPassage {
 		map.put("teacherIcon", passage.getOwnTeacher().getIconUrl());
 		map.put("teacherId", passage.getOwnTeacher().getId());
 		map.put("tag", passage.getTag());
+		map.put("content", passage.getContent());
 		map.put("likeno", passage.getLikeNumber());
 	}
 
