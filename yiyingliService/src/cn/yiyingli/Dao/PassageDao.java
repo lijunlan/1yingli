@@ -5,7 +5,7 @@ import java.util.List;
 import cn.yiyingli.Persistant.Passage;
 
 public interface PassageDao {
-	
+
 	public static final Short PASSAGE_STATE_CHECKING = 0;
 
 	public static final Short PASSAGE_STATE_REFUSE = 1;
@@ -23,6 +23,8 @@ public interface PassageDao {
 	void update(Passage passage);
 
 	Passage query(long id);
+
+	Passage queryWithTeacherById(long id);
 
 	Passage queryByUser(long id);
 

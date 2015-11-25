@@ -5,6 +5,7 @@ import cn.yiyingli.Persistant.Passage;
 public class ExPassage {
 
 	public static void assembleDetail(Passage passage, SuperMap map) {
+		map.put("passageId", passage.getId());
 		map.put("title", passage.getTitle());
 		map.put("createTime", passage.getCreateTime());
 		map.put("editorName", passage.getEditorName());

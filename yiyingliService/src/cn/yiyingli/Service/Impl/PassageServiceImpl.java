@@ -93,6 +93,11 @@ public class PassageServiceImpl implements PassageService {
 	}
 
 	@Override
+	public Passage queryWithTeacherById(long id) {
+		return getPassageDao().queryWithTeacherById(id);
+	}
+
+	@Override
 	public Passage queryByUser(long id) {
 		return getPassageDao().queryByUser(id);
 	}
