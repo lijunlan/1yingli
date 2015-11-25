@@ -122,15 +122,6 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
-	public Long queryOrderNumberByTime(long teahcerId, String startTime, String endTime) {
-		Session session = getSessionFactory().getCurrentSession();
-		Query query = session
-				.createSQLQuery("select count(*) from orders where orders.STATE like '%1000%' and orders.TEACHER_ID="
-						+ teahcerId + " and orders.ENDTIME>=" + startTime + " and orders.ENDTIME<=" + endTime);
-		return ((Number) query.uniqueResult()).longValue();
-	}
-
-	@Override
 	public List<Teacher> queryByIds(long[] ids) {
 		if (ids.length <= 0)
 			return new ArrayList<Teacher>();
