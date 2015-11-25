@@ -74,7 +74,6 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	@Override
 	public void updatePassageNo(Teacher teacher) {
 		Session session = getSessionFactory().getCurrentSession();
-		session.flush();
 		Query query = session.createSQLQuery(
 				"update teacher set teacher.PASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
 						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_OK
@@ -85,7 +84,6 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	@Override
 	public void updateCheckPassageNo(Teacher teacher) {
 		Session session = getSessionFactory().getCurrentSession();
-		session.flush();
 		Query query = session.createSQLQuery(
 				"update teacher set teacher.PASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
 						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_CHECKING
@@ -96,7 +94,6 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	@Override
 	public void updateRefusePassageNo(Teacher teacher) {
 		Session session = getSessionFactory().getCurrentSession();
-		session.flush();
 		Query query = session.createSQLQuery(
 				"update teacher set teacher.PASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
 						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_REFUSE
@@ -122,6 +119,15 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 			return null;
 		else
 			return list.get(0);
+	}
+
+	@Override
+	public Long queryOrderNumberByTime(long teahcerId, String startTime, String endTime) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session
+				.createSQLQuery("select count(*) from orders where orders.STATE like '%1000%' and orders.TEACHER_ID="
+						+ teahcerId + " and orders.ENDTIME>=" + startTime + " and orders.ENDTIME<=" + endTime);
+		return ((Number) query.uniqueResult()).longValue();
 	}
 
 	@Override

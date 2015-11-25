@@ -124,6 +124,9 @@ public class Teacher {
 	@Column(name = "FINISHORDERNUMBER", nullable = false)
 	private Long finishOrderNumber;
 
+	@Column(name = "MILE", nullable = false)
+	private Long mile;
+
 	// @Column(name = "CHECKIDCARD", nullable = false)
 	// private Boolean checkIDCard;
 	//
@@ -600,6 +603,14 @@ public class Teacher {
 
 	public void setFinishOrderNumber(Long finishOrderNumber) {
 		this.finishOrderNumber = finishOrderNumber;
+	}
+
+	public Long getMile() {
+		return mile;
+	}
+
+	public void setMile(Long mile) {
+		this.mile = mile;
 	}
 
 }

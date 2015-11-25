@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import cn.yiyingli.util.MsgUtil;
@@ -16,7 +17,8 @@ import net.sf.json.JSONObject;
 public class MainFunction {
 
 	public static void main(String[] args) throws SQLException {
-		updateTeacherData();
+		System.out.println(Calendar.getInstance().getTimeInMillis()); 
+		//updateTeacherData();
 		// updateUserTrainDataRecord();
 		// updateUserTrainDataLike();
 		// updateUserTrainDataOrder();

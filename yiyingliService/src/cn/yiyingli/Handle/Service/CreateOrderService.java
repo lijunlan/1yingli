@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Persistant.TService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.Voucher;
@@ -16,6 +17,7 @@ import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.SendMsgToBaiduUtil;
+import cn.yiyingli.toPersistant.POrderUtil;
 
 public class CreateOrderService extends UMsgService {
 
@@ -102,25 +104,6 @@ public class CreateOrderService extends UMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("12008"));
 			return;
 		}
-		Order order = new Order();
-		order.setCustomerEmail(email);
-		order.setCustomerName(name);
-		order.setCustomerPhone(phone);
-		order.setCustomerContact(contact);
-		order.setCreateUser(user);
-
-		order.setQuestion(question);
-		order.setSelectTime(time);
-		order.setServiceTitle(teacher.gettService().getTitle());
-		order.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
-		order.setState(OrderService.ORDER_STATE_NOT_PAID);
-		order.setTeacher(teacher);
-		order.setAlipayNo(teacher.getAlipay());
-		order.setTime(teacher.gettService().getTime());
-		order.settService(teacher.gettService());
-		order.setUserIntroduce(resume);
-		order.setSalaryState(OrderService.ORDER_SALARY_STATE_OFF);
-		order.setDistributor(user.getDistributor());
 
 		user.setResume(resume);
 		user.setOname(name);
@@ -132,8 +115,16 @@ public class CreateOrderService extends UMsgService {
 
 		getUserService().update(user);
 
-		float money = teacher.gettService().getPriceTotal();
-		float originMoney = teacher.gettService().getPriceTotal();
+		TService tService = teacher.gettService();
+
+		boolean onSale = tService.getOnSale();
+		float money = 0F;
+		float originMoney = 0F;
+		if (onSale) {
+			originMoney = money = tService.getPriceTemp();
+		} else {
+			originMoney = money = tService.getPriceTotal();
+		}
 		long ntime = Calendar.getInstance().getTimeInMillis();
 		boolean isUseVoucher = false;
 		Voucher voucher = null;
@@ -155,10 +146,12 @@ public class CreateOrderService extends UMsgService {
 				isUseVoucher = true;
 			}
 		}
-		if (money < 0.01)
+		if (money < 0.01) {
 			money = 0.01F;
-		order.setMoney(money);
-		order.setOriginMoney(originMoney);
+		}
+		Order order = new Order();
+		POrderUtil.createOrder(user, teacher, phone, email, contact, name, question, time, resume, money, originMoney,
+				onSale, order);
 		String orderNo = getOrderService().save(order);
 		if (isUseVoucher) {
 			getVoucherService().updateWithOrderId(voucher, order.getId());

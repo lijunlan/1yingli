@@ -11,6 +11,7 @@ import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Service.TipService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.MsgUtil;
+import cn.yiyingli.toPersistant.PTServiceUtil;
 import cn.yiyingli.toPersistant.PTeacherUtil;
 
 public class MCreateTeacherService extends MMsgService {
@@ -85,27 +86,20 @@ public class MCreateTeacherService extends MMsgService {
 		String showWeight16 = (String) tdata.get("showWeight16");
 		String homeWeight = (String) tdata.get("homeWeight");
 		String saleWeight = (String) tdata.get("saleWeight");
-		Teacher teacher = PTeacherUtil.assembleTeacherByManager(user, workExperiences, studyExperiences, tips, simpleinfo, name,
-				phone, address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
-				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight,
-				getTipService());
+		Teacher teacher = PTeacherUtil.assembleTeacherByManager(user, workExperiences, studyExperiences, tips,
+				simpleinfo, name, phone, address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail,
+				checkWork, checkStudy, showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight,
+				saleWeight, getTipService());
 
-		TService tService = new TService();
 		String serviceTitle = (String) service.get("title");
 		String serviceTime = (String) service.get("time");
 		String servicePrice = (String) service.get("price");
 		String serviceTimePerWeek = (String) service.get("timeperweek");
 		String serviceContent = (String) service.get("content");
 
-		tService.setTitle(serviceTitle);
-		tService.setTime(Float.valueOf(serviceTime));
-		tService.setPriceTotal(Float.valueOf(servicePrice));
-		tService.setTimesPerWeek(Integer.valueOf(serviceTimePerWeek));
-		tService.setContent(serviceContent);
-		tService.setReason("");
-		tService.setAdvantage("");
-		tService.setTeacher(teacher);
-		teacher.settService(tService);
+		TService tService = new TService();
+		PTServiceUtil.assembleWithTeacherByManager(teacher, serviceTitle, serviceTime, servicePrice, serviceTimePerWeek,
+				serviceContent, tService);
 		getTeacherService().saveWithDetailInfo(teacher);
 		setResMsg(MsgUtil.getSuccessMsg("insert teacher successfully"));
 	}

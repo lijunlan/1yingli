@@ -78,6 +78,8 @@
 	<error name="32011" value="username is not existed" />
 	<error name="32012" value="password is not accurate" />
 	<error name="32013" value="background id is not existed" />
+	<error name="32014" value="user id is not existed" />
+	<error name="32015" value="teacher id is not existed" />
 	<error name="34001" value="manager is not existed" />
 	
 	

@@ -11,6 +11,7 @@ import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Service.TipService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.MsgUtil;
+import cn.yiyingli.toPersistant.PTServiceUtil;
 import cn.yiyingli.toPersistant.PTeacherUtil;
 
 public class MEditTeacherService extends MMsgService {
@@ -98,15 +99,14 @@ public class MEditTeacherService extends MMsgService {
 		String serviceTimePerWeek = (String) service.get("timeperweek");
 		String serviceContent = (String) service.get("content");
 
-		tService.setTitle(serviceTitle);
-		tService.setTime(Float.valueOf(serviceTime));
-		tService.setPriceTotal(Float.valueOf(servicePrice));
-		tService.setTimesPerWeek(Integer.valueOf(serviceTimePerWeek));
-		tService.setContent(serviceContent);
-		tService.setReason("");
-		tService.setAdvantage("");
-		tService.setTeacher(teacher);
-		teacher.settService(tService);
+		if (service.containsKey("onsale") && service.containsKey("pricetemp")) {
+			PTServiceUtil.editWithTeacherByManager(teacher, tService, serviceTitle, serviceTime, servicePrice,
+					serviceTimePerWeek, serviceContent, (String) service.get("onsale"),
+					(String) service.get("pricetemp"));
+		} else {
+			PTServiceUtil.editWithTeacherByManager(teacher, tService, serviceTitle, serviceTime, servicePrice,
+					serviceTimePerWeek, serviceContent, tService.getOnSale() + "", tService.getPriceTemp() + "");
+		}
 		getTeacherService().updateWithDetailInfo(teacher);
 		setResMsg(MsgUtil.getSuccessMsg("edit teacher successfully"));
 	}

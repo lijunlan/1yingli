@@ -31,6 +31,7 @@ public class PUserUtil {
 		user.setNickName(nickName);
 		user.setReceiveCommentNumber(0L);
 		user.setSendCommentNumber(0L);
+		user.setMile(0L);
 		user.setIconUrl(icon);
 		if (distributor != null)
 			user.setDistributor(distributor);

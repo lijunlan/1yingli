@@ -103,6 +103,9 @@ public class User {
 	@Column(name = "FORBID", nullable = false)
 	private Boolean forbid;
 
+	@Column(name = "MILE", nullable = false)
+	private Long mile;
+
 	@OneToMany(targetEntity = ApplicationForm.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private Set<ApplicationForm> applicationForms = new HashSet<ApplicationForm>();
@@ -451,6 +454,14 @@ public class User {
 
 	public void setUserLikePassages(Set<UserLikePassage> userLikePassages) {
 		this.userLikePassages = userLikePassages;
+	}
+
+	public Long getMile() {
+		return mile;
+	}
+
+	public void setMile(Long mile) {
+		this.mile = mile;
 	}
 
 }

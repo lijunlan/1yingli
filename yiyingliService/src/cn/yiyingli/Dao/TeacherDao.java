@@ -29,6 +29,8 @@ public interface TeacherDao {
 	void updateRefusePassageNo(Teacher teacher);
 
 	void updateFromSql(String sql);
+	
+	Long queryOrderNumberByTime(long teahcerId,String startTime,String endTime);
 
 	Teacher query(long id, boolean lazy);
 

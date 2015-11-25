@@ -1,5 +1,6 @@
 package cn.yiyingli.Handle.Service;
 
+import cn.yiyingli.ExchangeData.ExUser;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.User;
@@ -11,12 +12,7 @@ public class GetUserInfoService extends UMsgService {
 	public void doit() {
 		User user = getUser();
 		SuperMap map = MsgUtil.getSuccessMap();
-		map.put("address", user.getAddress());
-		map.put("nickName", user.getNickName());
-		map.put("name", user.getName());
-		map.put("phone", user.getPhone());
-		map.put("email", user.getEmail());
-		map.put("resume", user.getResume());
+		ExUser.assembleUserInfo(user, map);
 		setResMsg(map.finishByJson());
 	}
 

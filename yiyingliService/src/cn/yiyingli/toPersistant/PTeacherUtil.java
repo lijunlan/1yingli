@@ -130,6 +130,7 @@ public class PTeacherUtil {
 		teacher.setPassageNumber(0L);
 		teacher.setCheckPassageNumber(0L);
 		teacher.setRefusePassageNumber(0L);
+		teacher.setMile(0L);
 		return teacher;
 	}
 
