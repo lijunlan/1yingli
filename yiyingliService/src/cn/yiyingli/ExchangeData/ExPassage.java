@@ -18,7 +18,11 @@ public class ExPassage {
 
 	public static void assembleSimple(Passage p, SuperMap map) {
 		map.put("title", p.getTitle());
-		map.put("simplecontent", p.getContent().substring(0, 50) + "...");
+		if (p.getContent().length() > 50) {
+			map.put("simplecontent", p.getContent().substring(0, 50) + "...");
+		} else {
+			map.put("simplecontent", p.getContent());
+		}
 		map.put("imageUrl", p.getImageUrl());
 		map.put("passageId", p.getId());
 		map.put("createTime", p.getCreateTime());
