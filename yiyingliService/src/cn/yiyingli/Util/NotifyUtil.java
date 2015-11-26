@@ -37,7 +37,7 @@ public class NotifyUtil {
 	public static boolean notifyUserNormal(String phone, String email, String title, String message, User user,
 			NotificationService notificationService) {
 		String m1 = message + "(<a href=\"http://www.1yingli.cn/tutor.html\">查看订单</a>)";
-		String m2 = message + "(http://www.1yingli.cn/tutor.html)";
+		String m2 = message + "(http://www.1yingli.cn/yourTutor.html)";
 		if (CheckUtil.checkMobileNumber(phone)) {
 			SendMessageUtil.sendMessage(phone, m2);
 		}

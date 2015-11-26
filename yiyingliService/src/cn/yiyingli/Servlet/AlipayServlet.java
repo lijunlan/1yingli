@@ -16,6 +16,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.yiyingli.Alipay.AlipayConfig;
 import cn.yiyingli.Alipay.AlipaySubmit;
+import cn.yiyingli.Handle.RemoteIPUtil;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.OrderService;
@@ -92,7 +93,7 @@ public class AlipayServlet extends HttpServlet {
 		// 必填
 
 		// 订单描述
-		String body = order.getState();
+		String body = order.getServiceTitle();
 
 		// 商品展示地址
 		String show_url = "http://www.1yingli.cn/personal.html?tid=" + order.getTeacher().getId();
@@ -103,7 +104,7 @@ public class AlipayServlet extends HttpServlet {
 		// 若要使用请调用类文件submit中的query_timestamp函数
 
 		// 客户端的IP地址
-		String exter_invoke_ip = req.getRemoteAddr();
+		String exter_invoke_ip = RemoteIPUtil.getAddr(req);
 		// 非局域网的外网IP地址，如：221.0.0.1
 
 		parms.put("service", "create_direct_pay_by_user");

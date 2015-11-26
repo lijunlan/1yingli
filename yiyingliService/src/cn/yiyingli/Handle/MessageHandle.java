@@ -47,27 +47,6 @@ public class MessageHandle {
 	}
 
 	/**
-	 * get IP address<br/>
-	 * 防止集群、代理
-	 * 
-	 * @param request
-	 * @return ip
-	 */
-	private static String getAddr(HttpServletRequest request) {
-		String ip = request.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
-		return ip;
-	}
-
-	/**
 	 * get json data from the httpRequest's content
 	 * 
 	 * @param rq
@@ -99,7 +78,7 @@ public class MessageHandle {
 				Map<String, String> methodData = configData.get(style);
 				if (methodData.containsKey(method)) {
 					util = (MsgService) applicationContext.getBean(methodData.get(method));
-					data.put("IP", getAddr(req));
+					data.put("IP", RemoteIPUtil.getAddr(req));
 				} else {
 					returnError(MsgUtil.getErrorMsgByCode("00002"));
 				}
