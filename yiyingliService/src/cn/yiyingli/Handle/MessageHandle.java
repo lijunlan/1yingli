@@ -61,7 +61,7 @@ public class MessageHandle {
 		}
 		LogUtil.info("receive->>>" + receive, MessageHandle.class);
 		// System.out.println(sBuffer.toString());
-		return receive;
+		return receive.replaceAll("\b", "");
 	}
 
 	/**

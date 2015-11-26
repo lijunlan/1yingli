@@ -6,6 +6,7 @@ import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.OrderService;
+import cn.yiyingli.Util.StringUtil;
 
 public class POrderUtil {
 
@@ -19,7 +20,7 @@ public class POrderUtil {
 		order.setCreateUser(user);
 		order.setQuestion(question);
 		order.setSelectTime(time);
-		order.setServiceTitle(teacher.gettService().getTitle());
+		order.setServiceTitle(StringUtil.replaceBlank(teacher.gettService().getTitle().trim()));
 		order.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		order.setState(OrderService.ORDER_STATE_NOT_PAID);
 		order.setTeacher(teacher);
