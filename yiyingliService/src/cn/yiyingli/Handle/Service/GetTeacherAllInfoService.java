@@ -61,7 +61,7 @@ public class GetTeacherAllInfoService extends MsgService {
 		}
 		SuperMap map = MsgUtil.getSuccessMap();
 
-		ExTeacher.assembleDetailTeacher(teacher, map);
+		ExTeacher.assembleDetailForUser(teacher, map);
 
 		saveRecord(teacher);
 

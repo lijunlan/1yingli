@@ -21,7 +21,7 @@ public class PTeacherUtil {
 			List<Object> tips, String simpleinfo, String name, String phone, String address, String mail,
 			String iconUrl, String introduce, String checkPhone, String checkIDCard, String checkEmail,
 			String checkWork, String checkStudy, String showWeight1, String showWeight2, String showWeight4,
-			String showWeight8, String showWeight16, String homeWeight, String saleWeight, Teacher teacher,
+			String showWeight8, String showWeight16, String homeWeight, String saleWeight, long mile, Teacher teacher,
 			TipService tipService) {
 		teacher.getTips().clear();
 		if (Boolean.valueOf(checkPhone)) {
@@ -62,6 +62,7 @@ public class PTeacherUtil {
 		user.setTeacher(teacher);
 		teacher.setUser(user);
 
+		teacher.setMile(mile);
 		teacher.setAddress(address);
 		teacher.setUsername(user.getUsername());
 		teacher.setName(name);
@@ -121,7 +122,7 @@ public class PTeacherUtil {
 		Teacher teacher = new Teacher();
 		refreshTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone, address, mail, iconUrl,
 				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, showWeight1, showWeight2,
-				showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, teacher, tipService);
+				showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, 0L, teacher, tipService);
 		teacher.setCommentNumber(0L);
 		teacher.setLevel((short) 5);
 		teacher.setOrderNumber(0L);
@@ -130,7 +131,6 @@ public class PTeacherUtil {
 		teacher.setPassageNumber(0L);
 		teacher.setCheckPassageNumber(0L);
 		teacher.setRefusePassageNumber(0L);
-		teacher.setMile(0L);
 		return teacher;
 	}
 

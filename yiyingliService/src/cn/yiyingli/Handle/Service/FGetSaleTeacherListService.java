@@ -42,7 +42,7 @@ public class FGetSaleTeacherListService extends MsgService {
 		List<Teacher> teachers = getTeacherService().queryListBySale(p);
 		List<String> exTeachers = new ArrayList<String>();
 		for (Teacher teacher : teachers) {
-			SuperMap map = ExTeacher.assembleSimpleTeacher(teacher);
+			SuperMap map = ExTeacher.assembleSimpleForUser(teacher);
 			exTeachers.add(map.finishByJson());
 		}
 		if (exTeachers.size() == TeacherService.SALE_PAGE_SIZE) {

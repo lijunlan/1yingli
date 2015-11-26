@@ -93,6 +93,7 @@
 		<method name="login" beanName="dLoginService" />
 	</style>
 	<style name="manager">
+		<method name="searchTeacher" beanName="mSearchTeacherService" />
 		<method name="editTeacherMile" beanName="mEditTeacherMileService" />
 		<method name="editUserMile" beanName="mEditUserMileService" />
 		<method name="validatePassage" beanName="mValidatePassageService"></method>

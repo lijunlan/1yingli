@@ -21,7 +21,7 @@ public interface TeacherDao {
 	void merge(Teacher teacher);
 
 	void update(Teacher teacher);
-	
+
 	void updatePassageNo(Teacher teacher);
 
 	void updateCheckPassageNo(Teacher teacher);
@@ -43,6 +43,8 @@ public interface TeacherDao {
 	Teacher queryByUserIdWithTService(long userid, boolean lazy);
 
 	List<Teacher> queryByIds(long[] ids);
+
+	List<Teacher> queryByNameOrUsername(String word);
 
 	List<Teacher> queryLikeListByUserId(long userid, int page, int pageSize, boolean lazy);
 

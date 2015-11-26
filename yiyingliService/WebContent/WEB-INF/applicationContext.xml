@@ -1713,6 +1713,9 @@
 		<property name="teacherService">
 			<ref local="teacherService" />
 		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
 	</bean>
 
 	<bean id="mGetOrderByOIdService" class="cn.yiyingli.Handle.Service.MGetOrderByOIdService"
@@ -2044,6 +2047,16 @@
 		scope="prototype">
 		<property name="userService">
 			<ref local="userService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+	
+	<bean id="mSearchTeacherService" class="cn.yiyingli.Handle.Service.MSearchTeacherService"
+		scope="prototype">
+		<property name="teacherService">
+			<ref local="teacherService" />
 		</property>
 		<property name="managerMarkService">
 			<ref local="managerMarkService" />

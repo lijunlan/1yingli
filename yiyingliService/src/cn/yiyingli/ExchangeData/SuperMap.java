@@ -1,14 +1,13 @@
 package cn.yiyingli.ExchangeData;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import cn.yiyingli.Util.Json;
+import net.sf.json.JSONObject;
 
 
 public class SuperMap {
 
-	private Map<String, String> map = new HashMap<String, String>();
+	private JSONObject map =new JSONObject();
 
 	public SuperMap() {
 
@@ -17,6 +16,7 @@ public class SuperMap {
 	/**
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public Map<String, String> finish() {
 		return map;
 	}
@@ -25,7 +25,7 @@ public class SuperMap {
 	 * @return
 	 */
 	public String finishByJson() {
-		return Json.getJson(map);
+		return map.toString();
 	}
 
 	/**

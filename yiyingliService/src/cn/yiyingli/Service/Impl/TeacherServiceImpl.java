@@ -127,6 +127,11 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
+	public List<Teacher> queryByNameOrUsername(String word) {
+		return getTeacherDao().queryByNameOrUsername(word);
+	}
+
+	@Override
 	public List<Teacher> queryByIds(List<Long> ids) {
 		long[] idarray = new long[ids.size()];
 		for (int i = 0; i < ids.size(); i++) {

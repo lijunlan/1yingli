@@ -33,7 +33,7 @@ public class FGetHomeTeacherListService extends MsgService {
 		List<Teacher> teachers = getTeacherService().queryListByHomePage();
 		List<String> exTeachers = new ArrayList<String>();
 		for (Teacher teacher : teachers) {
-			SuperMap map = ExTeacher.assembleSimpleTeacher(teacher);
+			SuperMap map = ExTeacher.assembleSimpleForUser(teacher);
 			exTeachers.add(map.finishByJson());
 		}
 		setResMsg(MsgUtil.getSuccessMap().put("data", Json.getJson(exTeachers)).finishByJson());
