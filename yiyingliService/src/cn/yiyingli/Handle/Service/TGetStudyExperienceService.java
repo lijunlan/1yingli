@@ -1,13 +1,13 @@
 package cn.yiyingli.Handle.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.StudyExperience;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.TeacherService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class TGetStudyExperienceService extends MsgService {
@@ -36,7 +36,7 @@ public class TGetStudyExperienceService extends MsgService {
 			return;
 		}
 		List<StudyExperience> studyExperiences = teacher.getStudyExperiences();
-		List<String> toSend = new ArrayList<String>();
+		ExList toSend = new ExArrayList();
 		for (StudyExperience se : studyExperiences) {
 			SuperMap map = new SuperMap();
 			map.put("schoolName", se.getSchoolName());
@@ -45,9 +45,9 @@ public class TGetStudyExperienceService extends MsgService {
 			map.put("description", se.getDescription());
 			map.put("startTime", se.getStartTime());
 			map.put("endTime", se.getEndTime());
-			toSend.add(map.finishByJson());
+			toSend.add(map.finish());
 		}
-		setResMsg(MsgUtil.getSuccessMap().put("studyExperience", Json.getJson(toSend)).finishByJson());
+		setResMsg(MsgUtil.getSuccessMap().put("studyExperience", toSend).finishByJson());
 	}
 
 }

@@ -1,10 +1,9 @@
 package cn.yiyingli.ExchangeData;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Persistant.ApplicationForm;
 import cn.yiyingli.Persistant.StudyExperience;
 import cn.yiyingli.Persistant.TService;
@@ -13,7 +12,7 @@ import cn.yiyingli.Persistant.Tip;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.WorkExperience;
 import cn.yiyingli.Service.ApplicationFormService;
-import cn.yiyingli.Util.Json;
+import net.sf.json.JSONObject;
 
 public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 
@@ -33,11 +32,11 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 
 	private String email;
 
-	private List<String> workExperience;
+	private ExList workExperience;
 
-	private List<String> studyExperience;
+	private ExList studyExperience;
 
-	private List<String> tips;
+	private ExList tips;
 
 	private String checkInfo;
 
@@ -113,27 +112,27 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 		this.email = email;
 	}
 
-	public List<String> getWorkExperience() {
+	public ExList getWorkExperience() {
 		return workExperience;
 	}
 
-	public void setWorkExperience(List<String> workExperience) {
+	public void setWorkExperience(ExList workExperience) {
 		this.workExperience = workExperience;
 	}
 
-	public List<String> getStudyExperience() {
+	public ExList getStudyExperience() {
 		return studyExperience;
 	}
 
-	public void setStudyExperience(List<String> studyExperience) {
+	public void setStudyExperience(ExList studyExperience) {
 		this.studyExperience = studyExperience;
 	}
 
-	public List<String> getTips() {
+	public ExList getTips() {
 		return tips;
 	}
 
-	public void setTips(List<String> tips) {
+	public void setTips(ExList tips) {
 		this.tips = tips;
 	}
 
@@ -253,12 +252,42 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 		}
 		map.put("createTime", SIMPLE_DATE_FORMAT.format(new Date(Long.valueOf(createTime))));
 		map.put("state", state2String(state));
-		map.put("workExperience", Json.getJson(workExperience));
-		map.put("schoolExperience", Json.getJson(studyExperience));
-		map.put("tips", Json.getJson(tips));
+		map.put("workExperience", workExperience);
+		map.put("schoolExperience", studyExperience);
+		map.put("tips", tips);
 		map.put("afId", afId);
 		map.put("username", username);
 		return map.finishByJson();
+	}
+
+	@Override
+	public JSONObject finish() {
+		SuperMap map = new SuperMap();
+		map.put("userId", userId);
+		map.put("phone", phone);
+		map.put("name", name);
+		map.put("address", address);
+		map.put("email", email);
+		map.put("checkInfo", checkInfo);
+		map.put("serviceReason", serviceReason);
+		map.put("serviceTitle", serviceTitle);
+		map.put("serviceAdvantage", serviceAdvantage);
+		map.put("serviceContent", serviceContent);
+		map.put("servicePrice", servicePrice);
+		map.put("serviceTime", serviceTime);
+		if ("".equals(endTime) || endTime == null) {
+			map.put("endTime", endTime);
+		} else {
+			map.put("endTime", SIMPLE_DATE_FORMAT.format(new Date(Long.valueOf(endTime))));
+		}
+		map.put("createTime", SIMPLE_DATE_FORMAT.format(new Date(Long.valueOf(createTime))));
+		map.put("state", state2String(state));
+		map.put("workExperience", workExperience);
+		map.put("schoolExperience", studyExperience);
+		map.put("tips", tips);
+		map.put("afId", afId);
+		map.put("username", username);
+		return map.finish();
 	}
 
 	private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
@@ -285,9 +314,9 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 		setServicePrice(String.valueOf(tService.getPriceTotal()));
 		setServiceTime(String.valueOf(tService.getTime()));
 		setServiceTitle(tService.getTitle());
-		workExperience = new ArrayList<String>();
-		studyExperience = new ArrayList<String>();
-		tips = new ArrayList<String>();
+		workExperience = new ExArrayList();
+		studyExperience = new ExArrayList();
+		tips = new ExArrayList();
 		for (WorkExperience we : teacher.getWorkExperiences()) {
 			SuperMap map = new SuperMap();
 			map.put("company", we.getCompanyName());
@@ -296,7 +325,7 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 			map.put("startTime", we.getStartTime());
 			map.put("description", we.getDescription());
 			map.put("position", we.getPosition());
-			workExperience.add(map.finishByJson());
+			workExperience.add(map.finish());
 		}
 		for (StudyExperience se : teacher.getStudyExperiences()) {
 			SuperMap map = new SuperMap();
@@ -307,13 +336,13 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 			map.put("major", se.getMajor());
 			map.put("degree", se.getDegree());
 			map.put("description", se.getDescription());
-			studyExperience.add(map.finishByJson());
+			studyExperience.add(map.finish());
 		}
 		for (Tip t : teacher.getTips()) {
 			SuperMap map = new SuperMap();
 			map.put("tId", t.getId());
 			map.put("name", t.getName());
-			tips.add(map.finishByJson());
+			tips.add(map.finish());
 		}
 	}
 

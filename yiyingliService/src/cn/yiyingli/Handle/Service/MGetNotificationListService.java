@@ -1,15 +1,15 @@
 package cn.yiyingli.Handle.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Notification;
 import cn.yiyingli.Service.NotificationService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class MGetNotificationListService extends MMsgService {
@@ -35,7 +35,7 @@ public class MGetNotificationListService extends MMsgService {
 	public void doit() {
 		String page = (String) getData().get("page");
 		List<Notification> notifications = getNotificationService().queryList(Integer.valueOf(page), 10, true);
-		List<String> exNotifications = new ArrayList<String>();
+		ExList exNotifications = new ExArrayList();
 		for (Notification notification : notifications) {
 			SuperMap map = new SuperMap();
 			map.put("content", notification.getContent());
@@ -43,10 +43,9 @@ public class MGetNotificationListService extends MMsgService {
 			map.put("title", notification.getTitle());
 			map.put("url", notification.getUrl());
 			map.put("userId", notification.getToUser().getId());
-			exNotifications.add(map.finishByJson());
+			exNotifications.add(map.finish());
 		}
-		String json = Json.getJson(exNotifications);
-		setResMsg(MsgUtil.getSuccessMap().put("data", json).finishByJson());
+		setResMsg(MsgUtil.getSuccessMap().put("data", exNotifications).finishByJson());
 
 	}
 

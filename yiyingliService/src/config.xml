@@ -135,7 +135,6 @@
 		<method name="getHomeTeacherList" beanName="fGetHomeTeacherListService" />
 		<method name="teacherDemand" beanName="fTeacherDemandService"></method>
 		<method name="getCheckNo" beanName="fGetCheckNoService"></method>
-		<method name="searchByTip" beanName="searchByTipService"></method>
 		<method name="getTips" beanName="getTipsService"></method>
 		<method name="getSearchHint" beanName="fGetSearchHintService"></method>
 		<method name="createApplication" beanName="createApplicationFormService"></method>

@@ -1,15 +1,15 @@
 package cn.yiyingli.Handle.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.UserService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class MGetUserListService extends MMsgService {
@@ -39,7 +39,7 @@ public class MGetUserListService extends MMsgService {
 			return;
 		}
 		List<User> users = getUserService().queryList(Integer.valueOf(page), false);
-		List<String> exUsers = new ArrayList<String>();
+		ExList exUsers = new ExArrayList();
 		for (User user : users) {
 			SuperMap map = new SuperMap();
 			map.put("address", user.getAddress());
@@ -52,10 +52,9 @@ public class MGetUserListService extends MMsgService {
 			map.put("resume", user.getResume());
 			map.put("isTeacher", user.getTeacherState() == UserService.TEACHER_STATE_ON_SHORT ? "yes" : "no");
 			map.put("username", user.getUsername());
-			exUsers.add(map.finishByJson());
+			exUsers.add(map.finish());
 		}
-		String json = Json.getJson(exUsers);
-		setResMsg(MsgUtil.getSuccessMap().put("data", json).finishByJson());
+		setResMsg(MsgUtil.getSuccessMap().put("data", exUsers).finishByJson());
 	}
 
 }

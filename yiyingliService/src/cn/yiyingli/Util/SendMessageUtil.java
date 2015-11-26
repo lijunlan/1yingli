@@ -47,8 +47,8 @@ public class SendMessageUtil {
 				while (true) {
 					try {
 						SuperMap map = sendQueue.take();
-						String phone = map.finish().get("phone");
-						String msg = map.finish().get("msg");
+						String phone = map.finish().getString("phone");
+						String msg = map.finish().getString("msg");
 						if (CheckUtil.checkMobileNumber(phone)) {
 							sendChinaMsg(phone, msg);
 						} else {

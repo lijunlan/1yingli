@@ -1,13 +1,13 @@
 package cn.yiyingli.Handle.Service;
 
 import cn.yiyingli.ExchangeData.ExTeacher;
+import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.MsgUtil;
-import net.sf.json.JSONObject;
 
 public class MGetTeacherInfoService extends MMsgService {
 
@@ -46,13 +46,16 @@ public class MGetTeacherInfoService extends MMsgService {
 		}
 		try {
 			Teacher teacher = getTeacherService().queryAll(user.getTeacher().getId());
-			JSONObject t = new JSONObject();
-			ExTeacher.assembleDetailForManagerThroughJSONObject(teacher, t);
-
-			JSONObject toSend = new JSONObject();
-			toSend.put("teacher", t);
-			toSend.put("state", "success");
-			setResMsg(toSend.toString());
+//			JSONObject t = new JSONObject();
+//			ExTeacher.assembleDetailForManagerThroughJSONObject(teacher, t);
+//
+//			JSONObject toSend = new JSONObject();
+//			toSend.put("teacher", t);
+//			toSend.put("state", "success");
+//			setResMsg(toSend.toString());
+			SuperMap map = MsgUtil.getSuccessMap();
+			ExTeacher.assembleDetailForManager(teacher, map);
+			setResMsg(map.finishByJson());
 		} catch (Exception e) {
 			e.printStackTrace();
 			setResMsg(MsgUtil.getErrorMsgByCode("31001"));

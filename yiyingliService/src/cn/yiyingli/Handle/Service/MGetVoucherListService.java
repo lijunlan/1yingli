@@ -1,13 +1,13 @@
 package cn.yiyingli.Handle.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Voucher;
 import cn.yiyingli.Service.VoucherService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class MGetVoucherListService extends MMsgService {
@@ -40,7 +40,7 @@ public class MGetVoucherListService extends MMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("32009"));
 			return;
 		}
-		List<String> toSend = new ArrayList<String>();
+		ExList toSend = new ExArrayList();
 		List<Voucher> listV = getVoucherService().queryList(page, false);
 		for (Voucher v : listV) {
 			SuperMap map = new SuperMap();
@@ -58,9 +58,9 @@ public class MGetVoucherListService extends MMsgService {
 			} else {
 				map.put("userId", v.getUseOrder().getOrderNo());
 			}
-			toSend.add(map.finishByJson());
+			toSend.add(map.finish());
 		}
-		setResMsg(MsgUtil.getSuccessMap().put("data", Json.getJson(toSend)).finishByJson());
+		setResMsg(MsgUtil.getSuccessMap().put("data", toSend).finishByJson());
 	}
 
 }

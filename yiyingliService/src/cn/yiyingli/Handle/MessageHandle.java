@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 
 import cn.yiyingli.Util.ConfigurationXmlUtil;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
+import net.sf.json.JSONObject;
 
 public class MessageHandle {
 
@@ -38,7 +38,7 @@ public class MessageHandle {
 	private HttpServletResponse resp;
 	private MsgService util;
 	private ApplicationContext applicationContext;
-	private Map<String, Object> data;
+	private JSONObject data;
 
 	private MessageHandle(HttpServletRequest rq, HttpServletResponse rp, ApplicationContext context) {
 		req = rq;
@@ -73,7 +73,7 @@ public class MessageHandle {
 	 * @param rq
 	 * @return
 	 */
-	private static String getJson(HttpServletRequest rq) {
+	private static String getStringData(HttpServletRequest rq) {
 		String receive = "";
 		try {
 			receive = org.apache.commons.io.IOUtils.toString(rq.getInputStream());
@@ -90,7 +90,7 @@ public class MessageHandle {
 	 * choose method to deal with the application by the <b>style</b> field
 	 */
 	private void start() {
-		data = Json.getMapPro(getJson(req));
+		data = JSONObject.fromObject(getStringData(req));
 		Map<String, Map<String, String>> configData = ConfigurationXmlUtil.getInstance().getConfigData();
 		if (data.containsKey("style") && data.containsKey("method")) {
 			String style = (String) data.get("style");

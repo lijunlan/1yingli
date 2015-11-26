@@ -1,18 +1,18 @@
 package cn.yiyingli.ExchangeData;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Persistant.StudyExperience;
 import cn.yiyingli.Persistant.TService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.Tip;
 import cn.yiyingli.Persistant.WorkExperience;
 import cn.yiyingli.Service.TeacherService;
-import cn.yiyingli.Util.Json;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -169,7 +169,7 @@ public class ExTeacher {
 		List<WorkExperience> wes = teacher.getWorkExperiences();
 		List<StudyExperience> ses = teacher.getStudyExperiences();
 		Set<Tip> tips = teacher.getTips();
-		List<String> toSendSe = new ArrayList<String>();
+		ExList toSendSe = new ExArrayList();
 		for (StudyExperience se : ses) {
 			SuperMap m = new SuperMap();
 			m.put("schoolName", se.getSchoolName());
@@ -178,9 +178,9 @@ public class ExTeacher {
 			m.put("description", se.getDescription());
 			m.put("startTime", se.getStartTime());
 			m.put("endTime", se.getEndTime());
-			toSendSe.add(m.finishByJson());
+			toSendSe.add(m.finish());
 		}
-		List<String> toSendwe = new ArrayList<String>();
+		ExList toSendwe = new ExArrayList();
 		for (WorkExperience we : wes) {
 			SuperMap m = new SuperMap();
 			m.put("companyName", we.getCompanyName());
@@ -188,23 +188,29 @@ public class ExTeacher {
 			m.put("description", we.getDescription());
 			m.put("startTime", we.getStartTime());
 			m.put("endTime", we.getEndTime());
-			toSendwe.add(m.finishByJson());
+			toSendwe.add(m.finish());
 		}
-		List<String> toSendtip = new ArrayList<String>();
+		ExList toSendtip = new ExArrayList();
 		for (Tip t : tips) {
 			SuperMap m = new SuperMap();
 			m.put("id", t.getId());
-			toSendtip.add(m.finishByJson());
+			toSendtip.add(m.finish());
 		}
-		map.put("workExperience", Json.getJson(toSendwe));
-		map.put("studyExperience", Json.getJson(toSendSe));
-		map.put("tips", Json.getJson(toSendtip));
+		map.put("workExperience", toSendwe);
+		map.put("studyExperience", toSendSe);
+		map.put("tips", toSendtip);
 	}
 
 	public static void assembleDetailForUser(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
 		map.put("bgUrl", teacher.getBgUrl());
 	}
+	
+	public static void assembleDetailForTeacher(Teacher teacher, SuperMap map) {
+		assembleDetailNormal(teacher, map);
+		map.put("bgUrl", teacher.getBgUrl());
+	}
+
 
 	public static void assembleDetailForManager(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);

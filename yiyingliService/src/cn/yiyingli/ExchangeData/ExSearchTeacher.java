@@ -1,6 +1,7 @@
 package cn.yiyingli.ExchangeData;
 
 import cn.yiyingli.Persistant.Teacher;
+import net.sf.json.JSONObject;
 
 public class ExSearchTeacher implements ExDataToShow<Teacher> {
 
@@ -136,6 +137,23 @@ public class ExSearchTeacher implements ExDataToShow<Teacher> {
 		firstIdentity = persistant.getFirstIdentity();
 		serviceContent = persistant.gettService().getContent();
 		level = String.valueOf(persistant.getLevel());
+	}
+
+	@Override
+	public JSONObject finish() {
+		SuperMap map = new SuperMap();
+		map.put("teacherId", teacherId);
+		map.put("iconUrl", iconUrl);
+		map.put("price", price);
+		map.put("introduce", introduce);
+		map.put("name", name);
+		map.put("tServiceId", tServiceId);
+		map.put("number", number);
+		map.put("title", title);
+		map.put("firstIdentity", firstIdentity);
+		map.put("level", level);
+		map.put("serviceContent", serviceContent);
+		return map.finish();
 	}
 
 }

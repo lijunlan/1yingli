@@ -1,15 +1,13 @@
 package cn.yiyingli.Handle.Service;
 
-import java.util.Map;
-
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Service.UserMarkService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
+import net.sf.json.JSONObject;
 
 public class FTimeTaskCallbackService extends MsgService {
 
@@ -55,14 +53,14 @@ public class FTimeTaskCallbackService extends MsgService {
 		if ("order".equals(kind)) {
 			if ("change".equals(action)) {
 				String data = (String) getData().get("data");
-				Map<String, String> oMap = Json.getMap(data);
-				Order order = getOrderService().queryByShowId(oMap.get("orderId"), false);
+				JSONObject oMap = JSONObject.fromObject(data);
+				Order order = getOrderService().queryByShowId(oMap.getString("orderId"), false);
 				if (order == null) {
 					setResMsg(MsgUtil.getSuccessMsg("time task done"));
 					return;
 				}
 				String state = order.getState();
-				String instate = oMap.get("state");
+				String instate = oMap.getString("state");
 				if (!state.equals(instate)) {
 					setResMsg(MsgUtil.getSuccessMsg("time task done"));
 					return;
@@ -72,8 +70,8 @@ public class FTimeTaskCallbackService extends MsgService {
 					order.setState(OrderService.ORDER_STATE_CANCEL_PAID + "," + state);
 					getOrderService().update(order);
 					NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-							"尊敬的学员,您好,由于您超时未支付订单(" + order.getOrderNo() + "),系统已自动关闭,如若需要,请重新创建订单", order.getCreateUser(),
-							getNotificationService());
+							"尊敬的学员,您好,由于您超时未支付订单(" + order.getOrderNo() + "),系统已自动关闭,如若需要,请重新创建订单",
+							order.getCreateUser(), getNotificationService());
 					break;
 				case OrderService.ORDER_STATE_FINISH_PAID:
 					order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + state);
@@ -83,8 +81,8 @@ public class FTimeTaskCallbackService extends MsgService {
 									+ ")超时未响应,系统已自动进入退款状态,我们将在24小时内为您退款",
 							order.getCreateUser(), getNotificationService());
 					NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
-							"尊敬的导师,您好,您的订单(" + order.getOrderNo() + ")由于超时未作出响应，系统已自动进入退款状态,如有疑问,请与我们的客服联系.", order.getTeacher(),
-							getNotificationService());
+							"尊敬的导师,您好,您的订单(" + order.getOrderNo() + ")由于超时未作出响应，系统已自动进入退款状态,如有疑问,请与我们的客服联系.",
+							order.getTeacher(), getNotificationService());
 					NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
 							+ order.getTeacher().getName() + ",由于导师超时未作出响应，已经自动进入退款状态");
 					break;
@@ -106,8 +104,8 @@ public class FTimeTaskCallbackService extends MsgService {
 					order.setSalaryState(OrderService.ORDER_SALARY_STATE_NEED);
 					getOrderService().update(order);
 					NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-							"尊敬的学员,您好,您的订单(" + order.getOrderNo() + ")已经自动确认咨询完毕.请到一英里平台对本次咨询进行评价,留下您宝贵的意见.", order.getCreateUser(),
-							getNotificationService());
+							"尊敬的学员,您好,您的订单(" + order.getOrderNo() + ")已经自动确认咨询完毕.请到一英里平台对本次咨询进行评价,留下您宝贵的意见.",
+							order.getCreateUser(), getNotificationService());
 					NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
 							"尊敬的导师,您的订单(" + order.getOrderNo() + ")已自动确认咨询完毕,您的酬劳将在24小时内到账,请注意查收.", order.getTeacher(),
 							getNotificationService());
@@ -121,8 +119,8 @@ public class FTimeTaskCallbackService extends MsgService {
 							"尊敬的学员,您的订单(" + order.getOrderNo() + ")由于导师未作出响应,系统已自动确认为同意退款,我们将竭尽全力在24内退还到您的账户,请注意查收.",
 							order.getCreateUser(), getNotificationService());
 					NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
-							"尊敬的导师,您的订单(" + order.getOrderNo() + ")由于您未作出响应,系统已自动确认同意退款,如有疑问,请与客服联系.", order.getTeacher(),
-							getNotificationService());
+							"尊敬的导师,您的订单(" + order.getOrderNo() + ")由于您未作出响应,系统已自动确认同意退款,如有疑问,请与客服联系.",
+							order.getTeacher(), getNotificationService());
 					NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
 							+ order.getTeacher().getName() + "，由于导师未作出响应，已经自动确认为同意退款。");
 					break;
@@ -133,8 +131,8 @@ public class FTimeTaskCallbackService extends MsgService {
 							"尊敬的学员,您的订单(" + order.getOrderNo() + ")由于导师未作出响应,系统已经自动确认为同意退款,我们将竭尽全力在24内退还到您的账户,请注意查收.",
 							order.getCreateUser(), getNotificationService());
 					NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
-							"尊敬的导师，您的订单(" + order.getOrderNo() + ")由于您未作出响应,系统已自动确认同意退款,如有疑问,请与客服联系.", order.getTeacher(),
-							getNotificationService());
+							"尊敬的导师，您的订单(" + order.getOrderNo() + ")由于您未作出响应,系统已自动确认同意退款,如有疑问,请与客服联系.",
+							order.getTeacher(), getNotificationService());
 					NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
 							+ order.getTeacher().getName() + "，由于导师未作出响应，已经自动确认为同意退款。");
 					break;

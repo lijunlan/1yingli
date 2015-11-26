@@ -1,15 +1,15 @@
 package cn.yiyingli.Handle.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.yiyingli.Dao.PassageDao;
 import cn.yiyingli.ExchangeData.ExPassage;
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.TMsgService;
 import cn.yiyingli.Persistant.Passage;
 import cn.yiyingli.Service.PassageService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class TGetPassageListService extends TMsgService {
@@ -45,14 +45,14 @@ public class TGetPassageListService extends TMsgService {
 		}
 		List<Passage> passages = getPassageService().queryListByTeacherAndState(page, PassageService.PAGE_SIZE_TEACHER,
 				getTeacher().getId(), state);
-		List<String> sends = new ArrayList<String>();
+		ExList sends = new ExArrayList();
 		for (Passage p : passages) {
 			SuperMap map = new SuperMap();
 			ExPassage.assembleSimple(p, map);
-			sends.add(map.finishByJson());
+			sends.add(map.finish());
 		}
 		SuperMap toSend = MsgUtil.getSuccessMap();
-		toSend.put("data", Json.getJson(sends)).put("count", count);
+		toSend.put("data", sends).put("count", count);
 		setResMsg(toSend.finishByJson());
 	}
 

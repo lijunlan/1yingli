@@ -1,13 +1,10 @@
 package cn.yiyingli.ExchangeData;
 
-import java.util.Map;
-
 import net.sf.json.JSONObject;
-
 
 public class SuperMap {
 
-	private JSONObject map =new JSONObject();
+	private JSONObject map = new JSONObject();
 
 	public SuperMap() {
 
@@ -16,8 +13,7 @@ public class SuperMap {
 	/**
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	public Map<String, String> finish() {
+	public JSONObject finish() {
 		return map;
 	}
 
@@ -34,33 +30,37 @@ public class SuperMap {
 	 * @return
 	 */
 	public SuperMap put(String key, String value) {
-		if (value == null)
+		if (value == null) {
 			value = "";
+		}
 		map.put(key, value);
 		return this;
 	}
 
 	public SuperMap put(String key, Integer value) {
-		if (value == null)
+		if (value == null) {
 			map.put(key, "");
-		else
+		} else {
 			map.put(key, String.valueOf(value));
+		}
 		return this;
 	}
 
 	public SuperMap put(String key, Boolean value) {
-		if (value == null)
+		if (value == null) {
 			map.put(key, "");
-		else
+		} else {
 			map.put(key, String.valueOf(value));
+		}
 		return this;
 	}
 
 	public SuperMap put(String key, Object value) {
-		if (value == null)
+		if (value == null) {
 			map.put(key, "");
-		else
-			map.put(key, String.valueOf(value));
+		} else {
+			map.put(key, value);
+		}
 		return this;
 	}
 

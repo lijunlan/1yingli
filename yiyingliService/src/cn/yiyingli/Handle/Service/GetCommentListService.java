@@ -1,16 +1,16 @@
 package cn.yiyingli.Handle.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Comment;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.CommentService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class GetCommentListService extends UMsgService {
@@ -76,7 +76,7 @@ public class GetCommentListService extends UMsgService {
 			}
 		}
 		List<Comment> comments = getCommentService().queryListByUserId(user.getId(), page, k, true);
-		List<String> sends = new ArrayList<String>();
+		ExList sends = new ExArrayList();
 		for (Comment c : comments) {
 			SuperMap map = new SuperMap();
 			map.put("commentId", c.getId());
@@ -86,9 +86,9 @@ public class GetCommentListService extends UMsgService {
 			map.put("name", c.getTeacher().getName());
 			map.put("url", c.getTeacher().getIconUrl());
 			map.put("teacherId", c.getTeacher().getId());
-			sends.add(map.finishByJson());
+			sends.add(map.finish());
 		}
-		setResMsg(toSend.put("data", Json.getJson(sends)).finishByJson());
+		setResMsg(toSend.put("data", sends).finishByJson());
 	}
 
 }
