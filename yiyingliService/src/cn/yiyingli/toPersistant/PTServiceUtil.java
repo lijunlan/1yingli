@@ -24,6 +24,14 @@ public class PTServiceUtil {
 		tService.setTitle(title);
 	}
 
+	public static void assembleByTeacherEdit(String timeperweek, String price, String pricetemp, String time,
+			String onsale, String servicetitle, String servicecontent, TService tService) {
+		assemble("", servicecontent, Float.valueOf(price), "", Float.valueOf(time), servicetitle, tService);
+		tService.setTimesPerWeek(Integer.valueOf(timeperweek));
+		tService.setPriceTemp(Float.valueOf(pricetemp));
+		tService.setOnSale(Boolean.valueOf(onsale));
+	}
+
 	public static void assembleWithTeacherByManager(Teacher teacher, String serviceTitle, String serviceTime,
 			String servicePrice, String serviceTimePerWeek, String serviceContent, TService tService) {
 		assemble("", serviceContent, Float.valueOf(servicePrice), "", Float.valueOf(serviceTime), serviceTitle,

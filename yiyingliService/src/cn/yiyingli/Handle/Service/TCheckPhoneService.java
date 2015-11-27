@@ -59,7 +59,7 @@ public class TCheckPhoneService extends TMsgService {
 				setResMsg(MsgUtil.getErrorMsgByCode("22003"));
 				return;
 			}
-			getTeacherService().update(getTeacher());
+			getTeacherService().update(getTeacher(), false);
 			setResMsg(MsgUtil.getSuccessMsg("phone number has been checked"));
 		} else {
 			setResMsg(MsgUtil.getErrorMsgByCode("22004"));

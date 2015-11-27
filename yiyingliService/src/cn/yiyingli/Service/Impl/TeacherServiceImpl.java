@@ -108,15 +108,15 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public void update(Teacher teacher) {
+	public void update(Teacher teacher, boolean refreshRecommend) {
 		getTeacherDao().update(teacher);
-		if (teacher.getOnService()) {
+		if (refreshRecommend && teacher.getOnService()) {
 			SendMsgToBaiduUtil.updateTeacherData(teacher);
 		}
 	}
 
 	@Override
-	public void updateWithUser(Teacher teacher, long userId) {
+	public void updateWithUser(Teacher teacher, long userId, boolean refreshRecommend) {
 		User user = getUserDao().query(userId, false);
 		user.setEmail(teacher.getEmail());
 		user.setPhone(teacher.getPhone());
@@ -124,17 +124,16 @@ public class TeacherServiceImpl implements TeacherService {
 		user.setAddress(teacher.getAddress());
 		getUserDao().merge(user);
 		getTeacherDao().merge(teacher);
-		if (teacher.getOnService()) {
+		if (refreshRecommend && teacher.getOnService()) {
 			SendMsgToBaiduUtil.updateTeacherData(teacher);
 		}
 	}
 
 	@Override
-	public void updateWithDetailInfo(Teacher teacher) {
-		getUserDao().update(teacher.getUser());
+	public void updateWithDetailInfo(Teacher teacher, boolean refreshRecommend) {
 		getTeacherDao().update(teacher);
 		gettServiceDao().update(teacher.gettService());
-		if (teacher.getOnService()) {
+		if (refreshRecommend && teacher.getOnService()) {
 			SendMsgToBaiduUtil.updateTeacherData(teacher);
 		}
 	}
@@ -281,15 +280,19 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public void updateStudyExp(Teacher teacher) {
+	public void updateStudyExp(Teacher teacher, boolean refreshRecommend) {
 		getStudyExperienceDao().removeByTeacherId(teacher.getId());
-		update(teacher);
+		if (refreshRecommend && teacher.getOnService()) {
+			getTeacherDao().update(teacher);
+		}
 	}
 
 	@Override
-	public void updateWorkExp(Teacher teacher) {
+	public void updateWorkExp(Teacher teacher, boolean refreshRecommend) {
 		getWorkExperienceDao().removeByTeacherId(teacher.getId());
-		update(teacher);
+		if (refreshRecommend && teacher.getOnService()) {
+			getTeacherDao().update(teacher);
+		}
 	}
 
 	@Override

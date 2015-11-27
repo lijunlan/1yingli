@@ -1,6 +1,7 @@
 package cn.yiyingli.ExchangeData;
 
 import cn.yiyingli.Persistant.Passage;
+import cn.yiyingli.Util.StringUtil;
 
 public class ExPassage {
 
@@ -20,11 +21,7 @@ public class ExPassage {
 
 	public static void assembleSimple(Passage p, SuperMap map) {
 		map.put("title", p.getTitle());
-		if (p.getContent().length() > 50) {
-			map.put("simplecontent", p.getContent().substring(0, 50) + "...");
-		} else {
-			map.put("simplecontent", p.getContent());
-		}
+		map.put("simplecontent", StringUtil.subStringHTML(p.getContent(), 50, "..."));
 		map.put("imageUrl", p.getImageUrl());
 		map.put("passageId", p.getId());
 		map.put("createTime", p.getCreateTime());

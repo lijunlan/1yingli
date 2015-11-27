@@ -42,7 +42,7 @@ public class TEditTServiceService extends TMsgService {
 			PTServiceUtil.editTimePerWeekByTeacher(timeperweek, tService);
 			teacher.setAddress(address);
 			teacher.setTalkWay(talkWay);
-			getTeacherService().updateWithUser(teacher, user.getId());
+			getTeacherService().updateWithUser(teacher, user.getId(),false);
 			setResMsg(MsgUtil.getSuccessMsg("tservice info has changed"));
 		} catch (Exception e) {
 			e.printStackTrace();

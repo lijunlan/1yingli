@@ -2052,7 +2052,7 @@
 			<ref local="managerMarkService" />
 		</property>
 	</bean>
-	
+
 	<bean id="mSearchTeacherService" class="cn.yiyingli.Handle.Service.MSearchTeacherService"
 		scope="prototype">
 		<property name="teacherService">
@@ -2060,6 +2060,45 @@
 		</property>
 		<property name="managerMarkService">
 			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="tEditPayPalService" class="cn.yiyingli.Handle.Service.TEditPayPalService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="tEditDetailInfoService" class="cn.yiyingli.Handle.Service.TEditDetailInfoService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="tServiceService">
+			<ref local="tServiceService" />
+		</property>
+		<property name="tipService">
+			<ref local="tipService" />
+		</property>
+	</bean>
+
+	<bean id="tEditSimpleInfoService" class="cn.yiyingli.Handle.Service.TEditSimpleInfoService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="tServiceService">
+			<ref local="tServiceService" />
 		</property>
 	</bean>
 

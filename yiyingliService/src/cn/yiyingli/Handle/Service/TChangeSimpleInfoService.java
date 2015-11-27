@@ -16,7 +16,7 @@ public class TChangeSimpleInfoService extends TMsgService {
 		Teacher teacher = getTeacher();
 		String simpleinfo = (String) getData().get("simpleinfo");
 		teacher.setSimpleInfo(simpleinfo);
-		getTeacherService().update(teacher);
+		getTeacherService().update(teacher,false);
 		setResMsg(MsgUtil.getSuccessMsg("simpleinfo has changed"));
 
 	}

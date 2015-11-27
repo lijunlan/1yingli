@@ -189,9 +189,9 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 
 	@Override
 	public List<Teacher> queryByNameOrUsername(String word) {
-		String hql = "from Teacher t where t.user.username=? or t.name like %?%";
+		String hql = "from Teacher t where t.user.username=? or t.name like %" + word + "%";
 		@SuppressWarnings("unchecked")
-		List<Teacher> list = getHibernateTemplate().find(hql, word, word);
+		List<Teacher> list = getHibernateTemplate().find(hql, word);
 		return list;
 	}
 

@@ -16,7 +16,7 @@ public class TEditAlipayNoService extends TMsgService {
 		Teacher teacher = getTeacher();
 		String alipayNo = (String) getData().get("alipayNo");
 		teacher.setAlipay(alipayNo);
-		getTeacherService().update(teacher);
+		getTeacherService().update(teacher, false);
 		setResMsg(MsgUtil.getSuccessMsg("alipayNo has changed"));
 	}
 

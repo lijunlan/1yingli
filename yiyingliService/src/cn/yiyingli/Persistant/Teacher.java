@@ -106,6 +106,9 @@ public class Teacher {
 	@Column(name = "ALIPAY", nullable = true)
 	private String alipay;
 
+	@Column(name = "PAYPAL", nullable = true)
+	private String paypal;
+
 	@Column(name = "CHECKEMAIL", nullable = false)
 	private Boolean checkEmail;
 
@@ -611,6 +614,14 @@ public class Teacher {
 
 	public void setMile(Long mile) {
 		this.mile = mile;
+	}
+
+	public String getPaypal() {
+		return paypal;
+	}
+
+	public void setPaypal(String paypal) {
+		this.paypal = paypal;
 	}
 
 }

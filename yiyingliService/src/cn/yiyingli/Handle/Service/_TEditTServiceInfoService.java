@@ -37,7 +37,7 @@ public class _TEditTServiceInfoService extends TMsgService {
 			tService.setFreeTime(freetime);
 			teacher.setAddress(address);
 			teacher.setTalkWay(talkWay);
-			getTeacherService().update(teacher);
+			getTeacherService().update(teacher,false);
 			setResMsg(MsgUtil.getSuccessMsg("tservice info has changed"));
 		} catch (Exception e) {
 			setResMsg(MsgUtil.getErrorMsgByCode("21001"));

@@ -32,7 +32,7 @@ public class MEditTeacherMileService extends MMsgService {
 		}
 		long mile = Long.valueOf((String) getData().get("mile"));
 		teacher.setMile(mile);
-		getTeacherService().update(teacher);
+		getTeacherService().update(teacher,false);
 		setResMsg(MsgUtil.getSuccessMsg("change teacher's mile successfully"));
 
 	}

@@ -19,7 +19,7 @@ public class TChangeBGService extends TMsgService {
 		String url = (String) getData().get("bgurl");
 		url = HtmlUtils.htmlEscape(url);
 		teacher.setBgUrl(url);
-		getTeacherService().update(teacher);
+		getTeacherService().update(teacher,false);
 		setResMsg(MsgUtil.getSuccessMsg("background url has changed"));
 	}
 

@@ -42,7 +42,7 @@ public class TChangeWorkExperienceService extends TMsgService {
 			workExperience.setOwnTeacher(teacher);
 			teacher.getWorkExperiences().add(workExperience);
 		}
-		getTeacherService().updateWorkExp(teacher);
+		getTeacherService().updateWorkExp(teacher,false);
 		setResMsg(MsgUtil.getSuccessMsg("workExp has changed"));
 	}
 

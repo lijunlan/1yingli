@@ -109,7 +109,7 @@ public class MEditTeacherService extends MMsgService {
 			PTServiceUtil.editWithTeacherByManager(teacher, tService, serviceTitle, serviceTime, servicePrice,
 					serviceTimePerWeek, serviceContent, tService.getOnSale() + "", tService.getPriceTemp() + "");
 		}
-		getTeacherService().updateWithDetailInfo(teacher);
+		getTeacherService().updateWithDetailInfo(teacher,true);
 		setResMsg(MsgUtil.getSuccessMsg("edit teacher successfully"));
 	}
 

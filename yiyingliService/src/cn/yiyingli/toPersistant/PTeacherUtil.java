@@ -13,8 +13,72 @@ import cn.yiyingli.Persistant.WorkExperience;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Service.TipService;
 import cn.yiyingli.Service.UserService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class PTeacherUtil {
+
+	public static void editTeacherByTeacherSimple(JSONObject map, Teacher teacher) {
+		String simpleinfo = map.getString("simpleinfo");
+		String address = map.getString("address");
+		String talkWay = map.getString("talkWay");
+		teacher.setSimpleInfo(simpleinfo);
+		teacher.setAddress(address);
+		teacher.setTalkWay(talkWay);
+	}
+
+	public static void editTeacherByTeacherDetail(JSONObject map, Teacher teacher, TipService tipService) {
+		editTeacherByTeacherSimple(map, teacher);
+
+		String bgUrl = map.getString("bgUrl");
+		String introduce = map.getString("introduce");
+		teacher.setBgUrl(bgUrl);
+		teacher.setIntroduce(introduce);
+
+		JSONArray studyExperiences = map.getJSONArray("studyExperience");
+		JSONArray workExperiences = map.getJSONArray("workExperience");
+		JSONArray tips = map.getJSONArray("tips");
+
+		List<WorkExperience> wes = new ArrayList<WorkExperience>();
+		for (Object weobj : workExperiences) {
+			JSONObject we = (JSONObject) weobj;
+			WorkExperience workExperience = new WorkExperience();
+			workExperience.setCompanyName(we.getString("companyName"));
+			workExperience.setDescription(we.getString("description"));
+			workExperience.setEndTime(we.getString("endTime"));
+			workExperience.setStartTime(we.getString("startTime"));
+			workExperience.setPosition(we.getString("position"));
+			workExperience.setOwnTeacher(teacher);
+			wes.add(workExperience);
+		}
+		teacher.setWorkExperiences(wes);
+		List<StudyExperience> ses = new ArrayList<StudyExperience>();
+		for (Object seobj : studyExperiences) {
+			JSONObject se = (JSONObject) seobj;
+			StudyExperience studyExperience = new StudyExperience();
+			studyExperience.setDegree(se.getString("degree"));
+			studyExperience.setDescription(se.getString("description"));
+			studyExperience.setEndTime(se.getString("endTime"));
+			studyExperience.setMajor(se.getString("major"));
+			studyExperience.setSchoolName(se.getString("schoolName"));
+			studyExperience.setStartTime(se.getString("startTime"));
+			studyExperience.setOwnTeacher(teacher);
+			ses.add(studyExperience);
+		}
+		teacher.setStudyExperiences(ses);
+
+		long tipMark = 0;
+		if (tips != null) {
+			for (Object tobj : tips) {
+				JSONObject t = (JSONObject) tobj;
+				Long tid = Long.valueOf(t.getString("id"));
+				tipMark = tipMark | tid;
+				Tip mT = tipService.query(tid);
+				teacher.getTips().add(mT);
+			}
+		}
+		teacher.setTipMark(tipMark);
+	}
 
 	@SuppressWarnings("unchecked")
 	public static void refreshTeacher(User user, List<Object> workExperiences, List<Object> studyExperiences,

@@ -31,19 +31,19 @@ public interface TeacherService {
 
 	void removeAllTip(long teacherId);
 
-	void update(Teacher teacher);
+	void update(Teacher teacher, boolean refreshRecommend);
 
-	void updateWithDetailInfo(Teacher teacher);
+	void updateWithDetailInfo(Teacher teacher, boolean refreshRecommend);
 
-	void updateWithUser(Teacher teacher, long userId);
+	void updateWithUser(Teacher teacher, long userId, boolean refreshRecommend);
 
 	void updateUserLike(Teacher teacher, User user);
 
 	void updateUserUnlike(long teacherId, long userId);
 
-	void updateStudyExp(Teacher teacher);
+	void updateStudyExp(Teacher teacher, boolean refreshRecommend);
 
-	void updateWorkExp(Teacher teacher);
+	void updateWorkExp(Teacher teacher, boolean refreshRecommend);
 
 	Teacher query(long id, boolean lazy);
 
@@ -60,7 +60,7 @@ public interface TeacherService {
 	Teacher queryByUserIdWithTService(long userid, boolean lazy);
 
 	List<Teacher> queryByIds(List<Long> ids);
-	
+
 	List<Teacher> queryByNameOrUsername(String word);
 
 	List<Teacher> queryListOnservice(int page, int pageSize, boolean lazy);

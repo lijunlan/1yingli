@@ -54,6 +54,9 @@
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
 	</style>
 	<style name="teacher">
+		<method name="editSimpleInfo" beanName="tEditSimpleInfoService" />
+		<method name="editPayPal" beanName="tEditPayPalService" />
+		<method name="editDetailInfo" beanName="tEditDetailInfoService" />
 		<method name="getPassage" beanName="tGetPassageService" />
 		<method name="createPassage" beanName="tCreatePassageService" />
 		<method name="getPassageList" beanName="tGetPassageListService" />

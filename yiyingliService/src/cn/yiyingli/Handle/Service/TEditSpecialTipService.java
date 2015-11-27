@@ -37,7 +37,7 @@ public class TEditSpecialTipService extends TMsgService {
 			Tip mT = getTipService().query(tid);
 			teacher.getTips().add(mT);
 		}
-		getTeacherService().update(teacher);
+		getTeacherService().update(teacher,false);
 		setResMsg(MsgUtil.getSuccessMsg("tips has changed"));
 	}
 

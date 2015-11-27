@@ -43,7 +43,7 @@ public class TChangeStudyExperienceService extends TMsgService {
 			studyExperience.setOwnTeacher(teacher);
 			teacher.getStudyExperiences().add(studyExperience);
 		}
-		getTeacherService().updateStudyExp(teacher);
+		getTeacherService().updateStudyExp(teacher,false);
 		setResMsg(MsgUtil.getSuccessMsg("studyExp has changed"));
 	}
 
