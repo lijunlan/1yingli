@@ -102,6 +102,9 @@ public class Order {
 	@Column(name = "PAYTIME", nullable = true)
 	private String payTime;
 
+	@Column(name = "PAYMETHOD", nullable = true)
+	private short payMethod;
+
 	@ManyToOne(targetEntity = TService.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TSERVICE_ID", updatable = false)
 	private TService tService;
@@ -355,6 +358,14 @@ public class Order {
 
 	public void setOnSale(Boolean onSale) {
 		this.onSale = onSale;
+	}
+
+	public short getPayMethod() {
+		return payMethod;
+	}
+
+	public void setPayMethod(short payMethod) {
+		this.payMethod = payMethod;
 	}
 
 }

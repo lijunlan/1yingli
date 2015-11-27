@@ -107,7 +107,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 					return;
 				}
 				order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
-				orderService.updateAndPlusNumber(order);
+				finishOrder(orderService, order); 
 
 				NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 						"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经付款完成，请等待导师接受订单", order.getCreateUser(),
@@ -143,7 +143,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 					return;
 				}
 				order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
-				orderService.updateAndPlusNumber(order);
+				finishOrder(orderService, order);
 
 				NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 						"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经付款完成，请等待导师接受订单", order.getCreateUser(),
@@ -202,6 +202,11 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 			OutputStream stream = resp.getOutputStream();
 			stream.write("fail".getBytes("UTF-8"));
 		}
+	}
+
+	private void finishOrder(OrderService orderService, Order order) {
+		order.setPayMethod(OrderService.ORDER_PAYMETHOD_ALIPAY);
+		orderService.updateAndPlusNumber(order);
 	}
 
 	private void returnSuccess(HttpServletResponse resp) throws IOException, UnsupportedEncodingException {

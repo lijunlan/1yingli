@@ -122,7 +122,7 @@ public class ReturnServlet extends HttpServlet {
 			checkoutDetails.put("PAYMENTREQUEST_0_CURRENCYCODE", results.get("PAYMENTREQUEST_0_CURRENCYCODE"));
 			checkoutDetails.put("PAYMENTREQUEST_0_PAYMENTACTION", results.get("PAYMENTREQUEST_0_PAYMENTACTION"));
 
-			checkoutDetails.put("paymentType","Sale");
+			checkoutDetails.put("paymentType", "Sale");
 			checkoutDetails.put("currencyCodeType", "USD");
 			checkoutDetails.put("TOKEN", token);
 			checkoutDetails.put("payer_id", payerID);
@@ -196,6 +196,7 @@ public class ReturnServlet extends HttpServlet {
 						// 订单貌似没有异常，因此根据Paypal信息处理订单
 						order.setState(
 								cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
+						order.setPayMethod(OrderService.ORDER_PAYMETHOD_PAYPAL);
 						orderService.updateAndPlusNumber(order);
 						NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 								"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经付款完成，请等待导师接受订单", order.getCreateUser(),
