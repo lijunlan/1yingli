@@ -105,11 +105,13 @@ public class PTeacherUtil {
 		}
 		teacher.setStudyExperiences(ses);
 		long tipMark = 0;
-		for (Object t : tips) {
-			Long tid = Long.valueOf((String) ((Map<String, Object>) t).get("id"));
-			tipMark = tipMark | tid;
-			Tip mT = tipService.query(tid);
-			teacher.getTips().add(mT);
+		if (tips != null) {
+			for (Object t : tips) {
+				Long tid = Long.valueOf((String) ((Map<String, Object>) t).get("id"));
+				tipMark = tipMark | tid;
+				Tip mT = tipService.query(tid);
+				teacher.getTips().add(mT);
+			}
 		}
 		teacher.setTipMark(tipMark);
 	}

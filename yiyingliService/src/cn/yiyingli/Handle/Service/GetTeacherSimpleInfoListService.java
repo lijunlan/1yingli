@@ -62,7 +62,8 @@ public class GetTeacherSimpleInfoListService extends MsgService {
 			List<Teacher> teachers = getTeacherService().queryByTipOrderByShow(Long.valueOf(tipId), false);
 			ExList exTeachers = new ExArrayList();
 			for (Teacher teacher : teachers) {
-				SuperMap map = ExTeacher.assembleSimpleForUser(teacher);
+				SuperMap map = new SuperMap();
+				ExTeacher.assembleSimpleForUser(teacher, map);
 				exTeachers.add(map.finish());
 			}
 			saveRecord(tipId);

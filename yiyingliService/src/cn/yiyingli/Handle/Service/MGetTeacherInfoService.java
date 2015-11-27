@@ -46,13 +46,6 @@ public class MGetTeacherInfoService extends MMsgService {
 		}
 		try {
 			Teacher teacher = getTeacherService().queryAll(user.getTeacher().getId());
-//			JSONObject t = new JSONObject();
-//			ExTeacher.assembleDetailForManagerThroughJSONObject(teacher, t);
-//
-//			JSONObject toSend = new JSONObject();
-//			toSend.put("teacher", t);
-//			toSend.put("state", "success");
-//			setResMsg(toSend.toString());
 			SuperMap map = MsgUtil.getSuccessMap();
 			ExTeacher.assembleDetailForManager(teacher, map);
 			setResMsg(map.finishByJson());

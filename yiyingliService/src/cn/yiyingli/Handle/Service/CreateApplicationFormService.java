@@ -72,9 +72,10 @@ public class CreateApplicationFormService extends UMsgService {
 
 		String advantage = (String) service.get("advantage");
 		String content = (String) service.get("content");
-		float price = Float.valueOf((String) service.get("price"));
+		float price = service.get("price") == null ? 0.0F : Float.valueOf((String) service.get("price"));
 		String reason = (String) service.get("reason");
-		float time = Float.valueOf((String) service.get("time"));
+		float time = service.get("time") == null ? 0.0F : Float.valueOf((String) service.get("time"));
+
 		String title = (String) service.get("title");
 
 		TService tService = new TService();

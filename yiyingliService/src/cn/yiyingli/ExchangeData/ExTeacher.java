@@ -13,27 +13,35 @@ import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.Tip;
 import cn.yiyingli.Persistant.WorkExperience;
 import cn.yiyingli.Service.TeacherService;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 public class ExTeacher {
 
 	private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
 
-	public static SuperMap assembleSimpleForUser(Teacher teacher) {
-		SuperMap map = new SuperMap();
-		map.put("name", teacher.getName());
-		map.put("iconUrl", teacher.getIconUrl());
-		map.put("simpleinfo", teacher.getSimpleInfo());
+	public static void assembleSimpleForUserLike(Teacher teacher, SuperMap map) {
+		assembleSimpleNormal(teacher, map);
+		map.put("price", teacher.gettService().getPriceTotal());
+		map.put("time", teacher.gettService().getTime());
+		map.put("title", teacher.gettService().getTitle());
+
+	}
+
+	public static void assembleSimpleForUser(Teacher teacher, SuperMap map) {
+		assembleSimpleNormal(teacher, map);
 		map.put("level", teacher.getLevel());
 		LikeNoShowUtil.setLikeNo(teacher, map);
 		LikeNoShowUtil.setFinishNo(teacher, map);
-		map.put("teacherId", teacher.getId());
 		TService tService = teacher.gettService();
-		map.put("timeperweek", tService.getTimesPerWeek());
 		map.put("serviceTitle", tService.getTitle());
 		map.put("serviceContent", tService.getContent());
-		return map;
+	}
+
+	private static void assembleSimpleNormal(Teacher teacher, SuperMap map) {
+		map.put("name", teacher.getName());
+		map.put("teacherId", teacher.getId());
+		map.put("iconUrl", teacher.getIconUrl());
+		map.put("simpleinfo", teacher.getSimpleInfo());
+		map.put("timeperweek", teacher.gettService().getTimesPerWeek());
 	}
 
 	public static void assembleSimpleForManager(Teacher teacher, SuperMap map) {
@@ -59,77 +67,10 @@ public class ExTeacher {
 		map.put("onService", teacher.getOnService());
 	}
 
-	public static void assembleDetailForManagerThroughJSONObject(Teacher teacher, JSONObject t) {
-		t.put("name", teacher.getName());
-		t.put("phone", teacher.getPhone());
-		t.put("address", teacher.getAddress());
-		t.put("email", teacher.getEmail());
-		t.put("iconUrl", teacher.getIconUrl());
-		t.put("introduce", teacher.getIntroduce());
-		t.put("mile", teacher.getMile());
-		t.put("simpleinfo", teacher.getSimpleInfo());
-		t.put("showWeight1", teacher.getShowWeight1());
-		t.put("showWeight2", teacher.getShowWeight2());
-		t.put("showWeight4", teacher.getShowWeight4());
-		t.put("showWeight8", teacher.getShowWeight8());
-		t.put("showWeight16", teacher.getShowWeight16());
-		t.put("homeWeight", teacher.getHomeWeight());
-		t.put("saleWeight", teacher.getSaleWeight());
-		t.put("checkIDCard",
-				teacher.getCheckIDCardState() == TeacherService.CHECK_STATE_SUCCESS_SHORT ? "true" : "false");
-		t.put("checkStudy",
-				teacher.getCheckDegreeState() == TeacherService.CHECK_STATE_SUCCESS_SHORT ? "true" : "false");
-		t.put("checkWork", teacher.getCheckWorkState() == TeacherService.CHECK_STATE_SUCCESS_SHORT ? "true" : "false");
-		t.put("checkPhone", teacher.getCheckPhone() + "");
-		t.put("checkEmail", teacher.getCheckEmail() + "");
-
-		TService tService = teacher.gettService();
-		t.put("serviceTitle", tService.getTitle());
-		t.put("serviceTime", tService.getTime() + "");
-		t.put("serviceOnsale", tService.getOnSale());
-		t.put("servicePricetemp", tService.getPriceTemp());
-		t.put("servicePrice", tService.getPriceTotal() + "");
-		t.put("serviceTimePerWeek", tService.getTimesPerWeek() + "");
-		t.put("serviceContent", tService.getContent());
-
-		JSONArray tips = new JSONArray();
-		for (Tip tip : teacher.getTips()) {
-			JSONObject temp = new JSONObject();
-			temp.put("id", tip.getId());
-			tips.add(temp);
-		}
-		t.put("tips", tips);
-
-		JSONArray workExp = new JSONArray();
-		for (WorkExperience we : teacher.getWorkExperiences()) {
-			JSONObject temp = new JSONObject();
-			temp.put("companyName", we.getCompanyName());
-			temp.put("position", we.getPosition());
-			temp.put("startTime", we.getStartTime());
-			temp.put("endTime", we.getEndTime());
-			temp.put("description", we.getDescription());
-			workExp.add(temp);
-		}
-		t.put("workExperience", workExp);
-
-		JSONArray studyExp = new JSONArray();
-		for (StudyExperience se : teacher.getStudyExperiences()) {
-			JSONObject temp = new JSONObject();
-			temp.put("schoolName", se.getSchoolName());
-			temp.put("major", se.getMajor());
-			temp.put("degree", se.getDegree());
-			temp.put("description", se.getDescription());
-			temp.put("startTime", se.getStartTime());
-			temp.put("endTime", se.getEndTime());
-			studyExp.add(temp);
-		}
-		t.put("studyExperience", studyExp);
-	}
-
 	private static void assembleDetailNormal(Teacher teacher, SuperMap map) {
+		map.put("simpleinfo", teacher.getSimpleInfo());
 		map.put("name", teacher.getName());
 		map.put("iconUrl", teacher.getIconUrl());
-		ExTeacherSimpleShowUtil.getSimpleShowByTip(teacher, map);
 		map.put("phone", teacher.getPhone());
 		map.put("mile", teacher.getMile());
 		map.put("email", teacher.getEmail());
@@ -205,16 +146,14 @@ public class ExTeacher {
 		assembleDetailNormal(teacher, map);
 		map.put("bgUrl", teacher.getBgUrl());
 	}
-	
+
 	public static void assembleDetailForTeacher(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
 		map.put("bgUrl", teacher.getBgUrl());
 	}
 
-
 	public static void assembleDetailForManager(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
-		map.put("simpleinfo", teacher.getSimpleInfo());
 		map.put("mile", teacher.getMile());
 		map.put("showWeight1", teacher.getShowWeight1());
 		map.put("showWeight2", teacher.getShowWeight2());

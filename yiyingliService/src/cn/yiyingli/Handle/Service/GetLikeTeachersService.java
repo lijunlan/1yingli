@@ -2,7 +2,7 @@ package cn.yiyingli.Handle.Service;
 
 import java.util.List;
 
-import cn.yiyingli.ExchangeData.ExTeacherSimpleShowUtil;
+import cn.yiyingli.ExchangeData.ExTeacher;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
@@ -50,14 +50,7 @@ public class GetLikeTeachersService extends UMsgService {
 		ExList sends = new ExArrayList();
 		for (Teacher t : teachers) {
 			SuperMap map = new SuperMap();
-			map.put("name", t.getName());
-			map.put("teacherId", t.getId());
-			map.put("iconUrl", t.getIconUrl());
-			map.put("price", t.gettService().getPriceTotal());
-			map.put("time", t.gettService().getTime());
-			map.put("title", t.gettService().getTitle());
-			map.put("timeperweek", t.gettService().getTimesPerWeek());
-			ExTeacherSimpleShowUtil.getSimpleShowByTip(t, map);
+			ExTeacher.assembleSimpleForUserLike(t, map);
 			sends.add(map.finish());
 		}
 		setResMsg(toSend.put("data", sends).finishByJson());

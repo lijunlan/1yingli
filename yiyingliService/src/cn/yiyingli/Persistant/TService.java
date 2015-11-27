@@ -48,10 +48,10 @@ public class TService {
 	@Column(name = "TIMESPERWEEK", nullable = true)
 	private Integer timesPerWeek;
 
-	@Column(name = "REASON", nullable = false, length = 500)
+	@Column(name = "REASON", nullable = true, length = 500)
 	private String reason;
 
-	@Column(name = "ADVANTAGE", nullable = false, length = 1000)
+	@Column(name = "ADVANTAGE", nullable = true, length = 1000)
 	private String advantage;
 
 	@OneToOne
