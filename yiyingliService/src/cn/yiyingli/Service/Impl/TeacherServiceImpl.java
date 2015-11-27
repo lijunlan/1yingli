@@ -12,6 +12,7 @@ import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.UserLikeTeacher;
 import cn.yiyingli.Service.TeacherService;
+import cn.yiyingli.Util.SendMsgToBaiduUtil;
 
 public class TeacherServiceImpl implements TeacherService {
 
@@ -68,10 +69,16 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public void save(Teacher teacher) {
 		getTeacherDao().save(teacher);
+		if (teacher.getOnService()) {
+			SendMsgToBaiduUtil.updateTeacherData(teacher);
+		}
 	}
 
 	@Override
 	public Long saveAndReturnId(Teacher teacher) {
+		if (teacher.getOnService()) {
+			SendMsgToBaiduUtil.updateTeacherData(teacher);
+		}
 		return getTeacherDao().saveAndReturnId(teacher);
 	}
 
@@ -80,7 +87,9 @@ public class TeacherServiceImpl implements TeacherService {
 		getUserDao().update(teacher.getUser());
 		getTeacherDao().save(teacher);
 		gettServiceDao().save(teacher.gettService());
-
+		if (teacher.getOnService()) {
+			SendMsgToBaiduUtil.updateTeacherData(teacher);
+		}
 	}
 
 	@Override
@@ -101,6 +110,9 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public void update(Teacher teacher) {
 		getTeacherDao().update(teacher);
+		if (teacher.getOnService()) {
+			SendMsgToBaiduUtil.updateTeacherData(teacher);
+		}
 	}
 
 	@Override
@@ -112,6 +124,9 @@ public class TeacherServiceImpl implements TeacherService {
 		user.setAddress(teacher.getAddress());
 		getUserDao().merge(user);
 		getTeacherDao().merge(teacher);
+		if (teacher.getOnService()) {
+			SendMsgToBaiduUtil.updateTeacherData(teacher);
+		}
 	}
 
 	@Override
@@ -119,6 +134,9 @@ public class TeacherServiceImpl implements TeacherService {
 		getUserDao().update(teacher.getUser());
 		getTeacherDao().update(teacher);
 		gettServiceDao().update(teacher.gettService());
+		if (teacher.getOnService()) {
+			SendMsgToBaiduUtil.updateTeacherData(teacher);
+		}
 	}
 
 	@Override

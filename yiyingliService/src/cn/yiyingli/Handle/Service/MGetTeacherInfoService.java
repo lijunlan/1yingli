@@ -46,6 +46,10 @@ public class MGetTeacherInfoService extends MMsgService {
 		}
 		try {
 			Teacher teacher = getTeacherService().queryAll(user.getTeacher().getId());
+			if (teacher == null) {
+				setResMsg(MsgUtil.getErrorMsgByCode("32002"));
+				return;
+			}
 			SuperMap map = MsgUtil.getSuccessMap();
 			ExTeacher.assembleDetailForManager(teacher, map);
 			setResMsg(map.finishByJson());

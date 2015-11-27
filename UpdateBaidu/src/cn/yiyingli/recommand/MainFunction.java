@@ -17,8 +17,8 @@ import net.sf.json.JSONObject;
 public class MainFunction {
 
 	public static void main(String[] args) throws SQLException {
-		System.out.println(Calendar.getInstance().getTimeInMillis()); 
-		//updateTeacherData();
+		//System.out.println(Calendar.getInstance().getTimeInMillis()); 
+		updateTeacherData();
 		// updateUserTrainDataRecord();
 		// updateUserTrainDataLike();
 		// updateUserTrainDataOrder();
@@ -86,7 +86,7 @@ public class MainFunction {
 
 	private static void updateTeacherData() {
 		JSONArray jarray = new JSONArray();
-		for (int i = 228; i <= 232; i++) {
+		for (int i = 237; i <= 237; i++) {
 			JSONObject obj = updateTeacherData(i + "");
 			if(obj!=null){
 				jarray.add(obj);

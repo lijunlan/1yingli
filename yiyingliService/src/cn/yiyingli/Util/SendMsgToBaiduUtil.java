@@ -3,7 +3,6 @@ package cn.yiyingli.Util;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -14,6 +13,8 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import cn.yiyingli.ExchangeData.ExTeacherForBaidu;
+import cn.yiyingli.Persistant.Teacher;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -74,6 +75,16 @@ public class SendMsgToBaiduUtil {
 		DateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
 		toBaidu.put("Timestamp", formatter.format(new Date(time)));
 		return toBaidu;
+	}
+
+	public static void updateTeacherData(Teacher teacher) {
+		JSONArray jarray = new JSONArray();
+		JSONObject obj = ExTeacherForBaidu.assembleTeacher(teacher);
+		if (obj != null) {
+			jarray.add(obj);
+			sendPost("http://ds.recsys.baidu.com/s/130426/253211?token=8d116fa25cfde0085776beee152741e2",
+					jarray.toString());
+		}
 	}
 
 	private static String sendGet(String url) {
