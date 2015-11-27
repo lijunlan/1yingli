@@ -13,7 +13,7 @@
 		value="http://api.recsys.baidu.com/s/130426/326542/rs?token=8d116fa25cfde0085776beee152741e2" />
 	<baiduPersonalUrl
 		value="http://api.recsys.baidu.com/s/130426/326544/rs?token=8d116fa25cfde0085776beee152741e2" />
-	<debug value="false" />
+	<debug value="true" />
 	<style name="user">
 		<method name="getTeacherState" beanName="getTeacherStateService" />
 		<method name="getCommentCount" beanName="getCommentCountService" />
@@ -54,6 +54,7 @@
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
 	</style>
 	<style name="teacher">
+		<method name="getPaypalNo" beanName="tGetPaypalNoService" />
 		<method name="editSimpleInfo" beanName="tEditSimpleInfoService" />
 		<method name="editPayPal" beanName="tEditPayPalService" />
 		<method name="editDetailInfo" beanName="tEditDetailInfoService" />

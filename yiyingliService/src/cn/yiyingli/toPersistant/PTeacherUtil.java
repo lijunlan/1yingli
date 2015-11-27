@@ -35,8 +35,8 @@ public class PTeacherUtil {
 		teacher.setBgUrl(bgUrl);
 		teacher.setIntroduce(introduce);
 
-		JSONArray studyExperiences = map.getJSONArray("studyExperience");
-		JSONArray workExperiences = map.getJSONArray("workExperience");
+		JSONArray studyExperiences = map.getJSONArray("studyExperiences");
+		JSONArray workExperiences = map.getJSONArray("workExperiences");
 		JSONArray tips = map.getJSONArray("tips");
 
 		List<WorkExperience> wes = new ArrayList<WorkExperience>();
