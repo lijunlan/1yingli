@@ -34,6 +34,9 @@ public class TimeTaskUtil {
 	}
 
 	public void addSend(SuperMap map) {
+		if (!"false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
+			return;
+		}
 		try {
 			sendQueue.put(map);
 		} catch (InterruptedException e) {

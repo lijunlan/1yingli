@@ -1,5 +1,5 @@
 <?xml version = "1.0" encoding= "UTF-8"?>
-<!DOCTYPE service-configuration PUBLIC "config.dtd" "http://source.1yingli.cn/config.dtd">
+<!DOCTYPE service-configuration PUBLIC "config.dtd" "http://source.1yingli.cn/config1.dtd">
 <service-configuration>
 	<cachePath value="/TEMP/" />
 	<imagePath value="http://image.1yingli.cn" />
@@ -13,6 +13,7 @@
 		value="http://api.recsys.baidu.com/s/130426/326542/rs?token=8d116fa25cfde0085776beee152741e2" />
 	<baiduPersonalUrl
 		value="http://api.recsys.baidu.com/s/130426/326544/rs?token=8d116fa25cfde0085776beee152741e2" />
+	<debug value="true" />
 	<style name="user">
 		<method name="getTeacherState" beanName="getTeacherStateService" />
 		<method name="getCommentCount" beanName="getCommentCountService" />

@@ -78,6 +78,9 @@ public class SendMsgToBaiduUtil {
 	}
 
 	public static void updateTeacherData(Teacher teacher) {
+		if (!"false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
+			return;
+		}
 		JSONArray jarray = new JSONArray();
 		JSONObject obj = ExTeacherForBaidu.assembleTeacher(teacher);
 		if (obj != null) {
