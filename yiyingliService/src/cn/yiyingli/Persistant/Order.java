@@ -66,6 +66,12 @@ public class Order {
 	private String alipayNo;
 
 	/**
+	 * 用户alipay账号
+	 */
+	@Column(name = "PAYPALNO", nullable = true)
+	private String paypalNo;
+
+	/**
 	 * 支付宝流水号
 	 */
 	@Column(name = "UNIQUENO", nullable = true)
@@ -103,7 +109,7 @@ public class Order {
 	private String payTime;
 
 	@Column(name = "PAYMETHOD", nullable = true)
-	private short payMethod;
+	private Short payMethod;
 
 	@ManyToOne(targetEntity = TService.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TSERVICE_ID", updatable = false)
@@ -360,12 +366,20 @@ public class Order {
 		this.onSale = onSale;
 	}
 
-	public short getPayMethod() {
+	public Short getPayMethod() {
 		return payMethod;
 	}
 
-	public void setPayMethod(short payMethod) {
+	public void setPayMethod(Short payMethod) {
 		this.payMethod = payMethod;
+	}
+
+	public String getPaypalNo() {
+		return paypalNo;
+	}
+
+	public void setPaypalNo(String paypalNo) {
+		this.paypalNo = paypalNo;
 	}
 
 }

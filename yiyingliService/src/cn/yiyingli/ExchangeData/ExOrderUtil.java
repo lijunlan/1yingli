@@ -1,6 +1,7 @@
 package cn.yiyingli.ExchangeData;
 
 import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Service.OrderService;
 
 public class ExOrderUtil {
 
@@ -26,11 +27,27 @@ public class ExOrderUtil {
 
 	public static void assembleOrderToManager(SuperMap map, Order o) {
 		assembleOrderNormal(map, o);
+		if (o.getPayMethod() != null) {
+			switch (o.getPayMethod()) {
+			case OrderService.ORDER_PAYMETHOD_ALIPAY:
+				map.put("payMethod", "alipay");
+				break;
+			case OrderService.ORDER_PAYMETHOD_PAYPAL:
+				map.put("payMethod", "paypal");
+				break;
+			default:
+				map.put("payMethod", o.getPayMethod() + "");
+				break;
+			}
+		} else {
+			map.put("payMethod", "none");
+		}
 		map.put("distriName", o.getDistributor() != null ? o.getDistributor().getName() : "");
 		map.put("payTime", o.getPayTime());
 		map.put("teacherName", o.getTeacher().getName());
 		map.put("teacherUrl", o.getTeacher().getIconUrl());
 		map.put("teacherAlipayNo", o.getAlipayNo());
+		map.put("teacherPaypalNo", o.getPaypalNo());
 		map.put("customerName", o.getCustomerName());
 		map.put("customerPhone", o.getCustomerPhone());
 		map.put("customerEmail", o.getCustomerEmail());

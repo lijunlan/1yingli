@@ -24,6 +24,7 @@ public class POrderUtil {
 		order.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		order.setState(OrderService.ORDER_STATE_NOT_PAID);
 		order.setTeacher(teacher);
+		order.setPaypalNo(teacher.getPaypal());
 		order.setAlipayNo(teacher.getAlipay());
 		order.setTime(teacher.gettService().getTime());
 		order.settService(teacher.gettService());
