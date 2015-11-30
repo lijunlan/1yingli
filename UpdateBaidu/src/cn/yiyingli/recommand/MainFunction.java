@@ -9,6 +9,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import cn.yiyingli.util.MsgUtil;
 import net.sf.json.JSONArray;
@@ -17,11 +19,70 @@ import net.sf.json.JSONObject;
 public class MainFunction {
 
 	public static void main(String[] args) throws SQLException {
-		//System.out.println(Calendar.getInstance().getTimeInMillis()); 
-		updateTeacherData();
+		// System.out.println(Calendar.getInstance().getTimeInMillis());
+		// updateTeacherData();
 		// updateUserTrainDataRecord();
 		// updateUserTrainDataLike();
 		// updateUserTrainDataOrder();
+		editTeacherData();
+	}
+
+	public static String replaceBlank(String str) {
+		String dest = "";
+		if (str != null) {
+			Pattern p = Pattern.compile("\\s*|\t|\r|\n");
+			Matcher m = p.matcher(str);
+			dest = m.replaceAll("");
+		}
+		dest = dest.replaceAll("'", "\"");
+		return dest.replaceAll("\b", "");
+	}
+
+	/**
+	 * 删除content里面的h1标签的样式
+	 */
+	private static void editTeacherData() {
+		for (int i = 121; i <= 121; i++) {
+			JSONObject send = new JSONObject();
+			send.put("style", "teacher");
+			send.put("method", "getAllInfo");
+			send.put("teacherId", i + "");
+			String result = MsgUtil.sendMsgToService(send.toString());
+			JSONObject receive = JSONObject.fromObject(result);
+			if (!receive.getString("state").equals("error")) {
+				String content = receive.getString("serviceContent");
+				int start = content.indexOf("<h1") + 3;
+				int end = content.indexOf(">", start);
+				System.out.println(start + " " + end);
+				if (start < 0 || end < 0 || start > end)
+					continue;
+				content = content.replace(content.substring(start, end), "");
+				content = replaceBlank(content);
+				System.out.println("");
+				System.out.println(content);
+				String sql;
+				Connection conn = null;
+				String url = "jdbc:mysql://yiyingli.mysql.rds.aliyuncs.com:3306/fortest?user=sdll18&password=ll1992917&useUnicode=true&characterEncoding=UTF8";
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					conn = DriverManager.getConnection(url);
+					Statement stmt = conn.createStatement();
+					sql = "update tservice set tservice.CONTENT='" + content + "' where tservice.TEACHER_ID="
+							+ receive.getString("teacherId") + ";";
+					System.out.println(sql);
+					int rs = stmt.executeUpdate(sql);
+					System.out.println(rs);
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 	}
 
 	private static void updateUserTrainDataOrder() {
@@ -88,7 +149,7 @@ public class MainFunction {
 		JSONArray jarray = new JSONArray();
 		for (int i = 238; i <= 239; i++) {
 			JSONObject obj = updateTeacherData(i + "");
-			if(obj!=null){
+			if (obj != null) {
 				jarray.add(obj);
 			}
 		}

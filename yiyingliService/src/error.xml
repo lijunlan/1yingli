@@ -45,6 +45,7 @@
 	<error name="12017" value="username or password is wrong" />
 	<error name="12018" value="your weibo code is wrong" />
 	<error name="12019" value="your weixin code is wrong" />
+	<error name="12020" value="passage is not existed" />
 	<error name="14001" value="uid is not existed" />    
 	<error name="15001" value="you have applied" />
 	<error name="15002" value="you are already teacher" />

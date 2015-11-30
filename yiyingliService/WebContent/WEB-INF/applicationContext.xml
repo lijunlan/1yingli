@@ -2112,4 +2112,14 @@
 		</property>
 	</bean>
 
+	<bean id="likePassageService" class="cn.yiyingli.Handle.Service.LikePassageService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
+
 </beans>
