@@ -144,6 +144,11 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
+	public Teacher queryWithUser(long id, boolean lazy) {
+		return getTeacherDao().queryWithUser(id, lazy);
+	}
+
+	@Override
 	public List<Teacher> queryByNameOrUsername(String word) {
 		return getTeacherDao().queryByNameOrUsername(word);
 	}

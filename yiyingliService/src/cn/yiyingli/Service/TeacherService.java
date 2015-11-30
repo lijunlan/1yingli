@@ -46,6 +46,8 @@ public interface TeacherService {
 	void updateWorkExp(Teacher teacher, boolean refreshRecommend);
 
 	Teacher query(long id, boolean lazy);
+	
+	Teacher queryWithUser(long id, boolean lazy);
 
 	Boolean queryCheckLikeUser(long teacherId, long userId);
 

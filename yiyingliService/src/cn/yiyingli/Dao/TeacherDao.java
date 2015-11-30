@@ -29,6 +29,8 @@ public interface TeacherDao {
 	void updateFromSql(String sql);
 
 	Teacher query(long id, boolean lazy);
+	
+	Teacher queryWithUser(long id, boolean lazy);
 
 	Boolean queryCheckLikeUser(long teacherId, long userId);
 

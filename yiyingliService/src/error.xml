@@ -98,6 +98,7 @@
 	<error name="44004" value="order salary state is not accurate" />
 	<error name="44005"
 		value="the state of this can not be changed. last state is needed" />
+	<error name="44006" value="can not make deal with yourself" />
 	<error name="45001" value="voucher is not existed" />
 	<error name="45002" value="voucher is overdue" />
 	<error name="45003" value="voucher has been used" />

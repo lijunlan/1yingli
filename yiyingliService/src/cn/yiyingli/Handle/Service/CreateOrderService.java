@@ -82,13 +82,17 @@ public class CreateOrderService extends UMsgService {
 	@Override
 	public void doit() {
 		User user = getUser();
-		Teacher teacher = getTeacherService().query(Long.valueOf((String) getData().get("teacherId")), false);
+		Teacher teacher = getTeacherService().queryWithUser(Long.valueOf((String) getData().get("teacherId")), false);
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
 		}
 		if (!teacher.getOnService()) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22002"));
+			return;
+		}
+		if (teacher.getUser().getId().longValue() == user.getId().longValue()) {
+			setResMsg(MsgUtil.getErrorMsgByCode("44006"));
 			return;
 		}
 		String phone = (String) getData().get("phone");
