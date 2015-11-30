@@ -22,7 +22,8 @@ public class TCreatePassageService extends TMsgService {
 	@Override
 	public boolean checkData() {
 		return super.checkData() && getData().containsKey("title") && getData().containsKey("tag")
-				&& getData().containsKey("content") && getData().containsKey("imageUrl");
+				&& getData().containsKey("content") && getData().containsKey("imageUrl")
+				&& getData().containsKey("summary");
 	}
 
 	@Override
@@ -32,9 +33,10 @@ public class TCreatePassageService extends TMsgService {
 		String tag = (String) getData().get("tag");
 		String content = (String) getData().get("content");
 		String imageUrl = (String) getData().get("imageUrl");
+		String summary = getData().getString("summary");
 
 		Passage passage = new Passage();
-		PPassageUtil.toSavePassage(teacher, title, tag, content, imageUrl, passage);
+		PPassageUtil.toSavePassage(teacher, title, tag, summary, content, imageUrl, passage);
 
 		getPassageService().save(passage);
 		setResMsg(MsgUtil.getSuccessMsg("create passage successfully"));

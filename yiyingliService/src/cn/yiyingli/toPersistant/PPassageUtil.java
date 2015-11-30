@@ -8,9 +8,10 @@ import cn.yiyingli.Persistant.Teacher;
 
 public class PPassageUtil {
 
-	public static void toSavePassage(Teacher teacher, String title, String tag, String content, String imageUrl,
-			Passage passage) {
+	public static void toSavePassage(Teacher teacher, String title, String tag, String summary, String content,
+			String imageUrl, Passage passage) {
 		passage.setContent(content);
+		passage.setSummary(summary);
 		passage.setEditorName(teacher.getName());
 		passage.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		passage.setImageUrl(imageUrl);

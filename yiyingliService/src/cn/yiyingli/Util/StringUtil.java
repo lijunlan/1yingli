@@ -34,7 +34,6 @@ public class StringUtil {
 		if (con != null) {
 			content = con.replaceAll("</?[^>]+>", "");// 剔出了<html>的标签
 			content = content.replace("&nbsp;", "");
-			content = content.replace(".", "");
 			content = content.replace("\"", "‘");
 			content = content.replace("'", "‘");
 			if (content.length() > length) {

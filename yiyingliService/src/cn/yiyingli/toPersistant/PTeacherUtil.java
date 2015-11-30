@@ -67,6 +67,7 @@ public class PTeacherUtil {
 		}
 		teacher.setStudyExperiences(ses);
 
+		teacher.getTips().clear();
 		long tipMark = 0;
 		if (tips != null) {
 			for (Object tobj : tips) {
@@ -87,7 +88,6 @@ public class PTeacherUtil {
 			String checkWork, String checkStudy, String showWeight1, String showWeight2, String showWeight4,
 			String showWeight8, String showWeight16, String homeWeight, String saleWeight, long mile, Teacher teacher,
 			TipService tipService) {
-		teacher.getTips().clear();
 		if (Boolean.valueOf(checkPhone)) {
 			teacher.setCheckPhone(true);
 		} else {
@@ -167,6 +167,8 @@ public class PTeacherUtil {
 			studyExperience.setOwnTeacher(teacher);
 			ses.add(studyExperience);
 		}
+
+		teacher.getTips().clear();
 		teacher.setStudyExperiences(ses);
 		long tipMark = 0;
 		if (tips != null) {
