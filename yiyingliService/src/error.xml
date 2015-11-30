@@ -2,32 +2,32 @@
 <!DOCTYPE service-error PUBLIC "error.dtd" "http://source.1yingli.cn/error.dtd">
 <!-- error code e.g. 1000 -->
 <service-error>
-<!-- system start with 0 -->
+	<!-- system start with 0 -->
 	<!-- user start with 1 -->
 	<!-- teacher start with 2 -->
 	<!-- manager start with 3 -->
 	<!-- order start with 4 -->
 	<!-- function start with 5 -->
 	<!-- distributor start with 6 -->
-	
+
 	<!-- system error the second number is 0 -->
 	<!-- data frame error the second number is 1 -->
 	<!-- input data error the second number is 2 -->
 	<!-- third party error the second number is 3 -->
 	<!-- authority error the second number is 4 -->
 	<!-- logic error the second number is 5 -->
-	
+
 	<!-- system 0 -->
 	<error name="00000" value="internal error" />
 	<error name="00001" value="data is incomplete" />
 	<error name="00002" value="method is not acurate" />
 	<error name="00003" value="style is not acurate" />
 	<error name="00004" value="the style or method field is not included" />
-	
-	<!-- user 1-->
+
+	<!-- user 1 -->
 	<error name="10001" value="decrypt failed" />
-	<error name="12001" value="checkNo is wrong" /> 
-	<error name="12002" value="checkNo is overdue" /> 
+	<error name="12001" value="checkNo is wrong" />
+	<error name="12002" value="checkNo is overdue" />
 	<error name="12003" value="email is not accurate" />
 	<error name="12004" value="oldpassword or newpassword can not be null" />
 	<error name="12005" value="BAD PASSWROD" />
@@ -46,25 +46,26 @@
 	<error name="12018" value="your weibo code is wrong" />
 	<error name="12019" value="your weixin code is wrong" />
 	<error name="12020" value="passage is not existed" />
-	<error name="14001" value="uid is not existed" />    
+	<error name="12021" value="passage has been praised" />
+	<error name="14001" value="uid is not existed" />
 	<error name="15001" value="you have applied" />
 	<error name="15002" value="you are already teacher" />
 	<error name="15003" value="user has been registered" />
-	
-	<!-- teacher 2-->
-	<error name="21001" value="input data is wrong"/>
-	<error name="22001" value="teacher is not existed" />    
-	<error name="22002" value="teacher is not on service" />    
-	<error name="22003" value="phone number is wrong" /> 
+
+	<!-- teacher 2 -->
+	<error name="21001" value="input data is wrong" />
+	<error name="22001" value="teacher is not existed" />
+	<error name="22002" value="teacher is not on service" />
+	<error name="22003" value="phone number is wrong" />
 	<error name="22004" value="phone number is not accurate" />
 	<error name="22005" value="page is wrong" />
-	<error name="22006" value="passage is not existed" />   
-	<error name="22007" value="passage is not belong to you" />     
-	<error name="24001" value="you are not a teacher" /> 
+	<error name="22006" value="passage is not existed" />
+	<error name="22007" value="passage is not belong to you" />
+	<error name="24001" value="you are not a teacher" />
 	<error name="24002" value="uid don't match teacherId" />
-	
-	
-	<!-- manager 3-->
+
+
+	<!-- manager 3 -->
 	<error name="30001" value="decrypt failed" />
 	<error name="31001" value="data is not correct" />
 	<error name="32001" value="BAD PASSWROD" />
@@ -83,44 +84,45 @@
 	<error name="32014" value="user id is not existed" />
 	<error name="32015" value="teacher id is not existed" />
 	<error name="34001" value="manager is not existed" />
-	
-	
-	<!-- order 4-->
-	<error name="40001" value="server error"/>
-	<error name="41001" value="input data is wrong"/>
-	<error name="42001" value="order is not existed" />   
+
+
+	<!-- order 4 -->
+	<error name="40001" value="server error" />
+	<error name="41001" value="input data is wrong" />
+	<error name="42001" value="order is not existed" />
 	<error name="43001" value="alipay error" />
-	<error name="43002" value="connect to paypal failed, please try again"/>
-	<error name="44001" value="this order is not belong to you" />  
-	<error name="44002" value="order state is not accurate" /> 
+	<error name="43002" value="connect to paypal failed, please try again" />
+	<error name="44001" value="this order is not belong to you" />
+	<error name="44002" value="order state is not accurate" />
 	<error name="44003" value="deal colunm has error data" />
 	<error name="44004" value="order salary state is not accurate" />
-	<error name="44005" value="the state of this can not be changed. last state is needed" />
-	<error name="45001" value="voucher is not existed" /> 
+	<error name="44005"
+		value="the state of this can not be changed. last state is needed" />
+	<error name="45001" value="voucher is not existed" />
 	<error name="45002" value="voucher is overdue" />
 	<error name="45003" value="voucher has been used" />
 	<error name="45004" value="order do not match the payment" />
 	<error name="45005" value="the state has changed automaticly" />
-	
-	<!-- function 5-->
+
+	<!-- function 5 -->
 	<!-- <error name="53001" value="recommendation engine error" /> -->
-	<error name="50001" value="internal error"/>
-	<error name="51001" value="input data is wrong"/>
-	<error name="52001" value="username is not accurate"/>
-	<error name="52002" value="this phone or email have no checkNo"/>
+	<error name="50001" value="internal error" />
+	<error name="51001" value="input data is wrong" />
+	<error name="52001" value="username is not accurate" />
+	<error name="52002" value="this phone or email have no checkNo" />
 	<error name="53002" value="can not connect to search engine" />
 	<error name="53003" value="error when search" />
 	<error name="53004" value="Submit data to recommendation engine failed" />
 	<error name="53005" value="search engine error" />
 	<error name="55001" value="you can not get now" />
-	
-	<!-- distributor 6-->
+
+	<!-- distributor 6 -->
 	<error name="60001" value="decrypt failed" />
 	<error name="62001" value="distributorNO is not existed" />
 	<error name="62002" value="username or password can not be null" />
 	<error name="62003" value="username is not existed" />
 	<error name="62004" value="password is not accurate" />
-	<error name="64001" value="did is not existed" />    
-	
-	
+	<error name="64001" value="did is not existed" />
+
+
 </service-error>

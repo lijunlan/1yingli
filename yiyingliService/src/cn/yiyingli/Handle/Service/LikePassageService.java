@@ -30,8 +30,12 @@ public class LikePassageService extends UMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("12020"));
 			return;
 		}
-		getPassageService().updateUserLike(passage, getUser());
-		setResMsg(MsgUtil.getSuccessMsg("like passage successfully"));
+		boolean result = getPassageService().updateUserLike(passage, getUser());
+		if (result) {
+			setResMsg(MsgUtil.getSuccessMsg("like passage successfully"));
+		} else {
+			setResMsg(MsgUtil.getErrorMsgByCode("12021"));
+		}
 	}
 
 }

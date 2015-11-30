@@ -23,7 +23,7 @@ public interface PassageService {
 
 	void update(Passage passage, boolean stateChange);
 
-	void updateUserLike(Passage passage, User user);
+	boolean updateUserLike(Passage passage, User user);
 
 	Passage query(long id);
 	

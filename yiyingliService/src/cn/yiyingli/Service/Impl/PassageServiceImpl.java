@@ -75,15 +75,16 @@ public class PassageServiceImpl implements PassageService {
 	}
 
 	@Override
-	public void updateUserLike(Passage passage, User user) {
+	public boolean updateUserLike(Passage passage, User user) {
 		if (getPassageDao().queryCheckLikeUser(passage.getId(), user.getId())) {
-			return;
+			return false;
 		} else {
 			UserLikePassage userLikePassage = new UserLikePassage();
 			userLikePassage.setPassage(passage);
 			userLikePassage.setUser(user);
 			userLikePassage.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 			getUserDao().updateLikePassage(userLikePassage);
+			return true;
 		}
 	}
 
