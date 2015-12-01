@@ -3,6 +3,7 @@ package cn.yiyingli.Dao;
 import java.util.List;
 
 import cn.yiyingli.Persistant.Passage;
+import cn.yiyingli.Persistant.Teacher;
 
 public interface PassageDao {
 
@@ -12,7 +13,7 @@ public interface PassageDao {
 
 	public static final Short PASSAGE_STATE_OK = 2;
 
-	void save(Passage passage);
+	void saveAndCount(Passage passage, Teacher teacher);
 
 	Long saveAndReturnId(Passage passage);
 
@@ -21,6 +22,8 @@ public interface PassageDao {
 	void remove(long id);
 
 	void update(Passage passage);
+
+	void updateAndCount(Passage passage, Teacher teacher);
 
 	Passage query(long id);
 

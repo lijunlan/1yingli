@@ -17,8 +17,15 @@ import cn.yiyingli.Persistant.Teacher;
 public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 
 	@Override
-	public void save(Passage passage) {
+	public void saveAndCount(Passage passage, Teacher teacher) {
 		getHibernateTemplate().save(passage);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session.createSQLQuery(
+				"update teacher set teacher.CHECKPASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
+						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_CHECKING
+						+ ") where teacher.TEACHER_ID=" + teacher.getId());
+		query.executeUpdate();
 	}
 
 	@Override
@@ -40,6 +47,30 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 	@Override
 	public void update(Passage passage) {
 		getHibernateTemplate().update(passage);
+	}
+
+	@Override
+	public void updateAndCount(Passage passage, Teacher teacher) {
+		getHibernateTemplate().update(passage);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session.createSQLQuery(
+				"update teacher set teacher.PASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
+						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_OK
+						+ ") where teacher.TEACHER_ID=" + teacher.getId());
+		query.executeUpdate();
+		session.flush();
+		query = session.createSQLQuery(
+				"update teacher set teacher.CHECKPASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
+						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_CHECKING
+						+ ") where teacher.TEACHER_ID=" + teacher.getId());
+		query.executeUpdate();
+		session.flush();
+		query = session.createSQLQuery(
+				"update teacher set teacher.REFUSEPASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
+						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_REFUSE
+						+ ") where teacher.TEACHER_ID=" + teacher.getId());
+		query.executeUpdate();
 	}
 
 	@Override
