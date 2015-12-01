@@ -2,17 +2,17 @@
 var fun = 1;
 //页数
 var page = 1;
-var url = window.location.href
+var url = window.location.href;
 var mid;
 //表示订单的普通状态
 var state = "0100";
 //表示订单是否已经支付导师
 var salaryState = 0;
 //一页最多显示12个订单
-var order = new Array(12)
-checkLogin()
-registNotify()
-document.getElementById("admin_name").innerText = $.cookie('mname')
+var order = new Array(12);
+checkLogin();
+registNotify();
+document.getElementById("admin_name").innerText = $.cookie('mname');
 
 //订单回退
 var restart = function (oid) {
@@ -303,9 +303,9 @@ function changePage(action) {
 	//fun==1说明当前是按类别浏览
 	//fun==2说明当前正在搜索
 	if (fun == 1) {
-		$('button#get').trigger("click")
+		$('button#get').trigger("click");
 	} else if (fun == 2) {
-		$('button#searchButton').trigger("click")
+		$('button#searchButton').trigger("click");
 	}
 }
 

@@ -109,17 +109,17 @@ var errorType = {
 function myAjax(JsonStr, action) {
 	$.ajax({
 		type: "POST",
-		url: "http://test.1yingli.cn/yiyingliService/manage",
+		url: "http://service.1yingli.cn/yiyingliService/manage",
 		data: $.toJSON(JsonStr),
 		success: function (data, status) {
 			var result = JSON.parse(data);
 			//请求返回错误的处理
 			if (result.state != "success") {
 				//设置提示框显示的文字
-				$('#modalMsg').text("详情:" + errorType[result.errCode])
+				$('#modalMsg').text("详情:" + errorType[result.errCode]);
 				//倘若错误为manager不存在，就让按钮显示重新登录，并有相应功能
 				if (result.errCode == '34001') {
-					$('#confirmSpan').html('重新登录')
+					$('#confirmSpan').html('重新登录');
 					$('#my-confirm').modal({
 						onConfirm: function (options) {
 							self.location = "login.html";
@@ -128,7 +128,7 @@ function myAjax(JsonStr, action) {
 				}
 				//否则，显示关闭，点击没有任何功能 
 				else {
-					$('#confirmSpan').html('关闭')
+					$('#confirmSpan').html('关闭');
 					$('#my-confirm').modal({
 						onConfirm: function (options) {
 							$('#my-confirm').modal('close');
@@ -151,7 +151,7 @@ function myAjax(JsonStr, action) {
 				//如果传进来的是回调函数
 				if (typeof action == 'function') {
 					if (typeof result == 'string') {
-						result = JSON.parse(result)
+						result = JSON.parse(result);
 					}
 					//一般不返回大量数据，仅返回“成功”的操作，回调函数不需要任何参数
 					if (action.length == 0) {
@@ -182,9 +182,9 @@ function logout() {
 		url: "http://service.1yingli.cn/yiyingliService/manage",
 		data: "{'style': 'manager','method':'logout','mid':'" + mid + "'}",
 		success: function (data, status) {
-			$.cookie('mid', '', { expires: -1 })
-			$.cookie('mname', '', { expires: -1 })
-			window.location.reload()
+			$.cookie('mid', '', { expires: -1 });
+			$.cookie('mname', '', { expires: -1 });
+			window.location.reload();
 		}
 	});
 }
@@ -193,18 +193,18 @@ function logout() {
 function checkLogin() {
 	mid = $.cookie('mid');
 	if (mid == null) {
-		$.cookie('mname', '', { expires: -1 })
-		self.location = "login.html"
+		$.cookie('mname', '', { expires: -1 });
+		self.location = "login.html";
 	}
-	myJson.mid = mid
-	document.getElementById("admin_name").innerText = $.cookie('mname')
+	myJson.mid = mid;
+	document.getElementById("admin_name").innerText = $.cookie('mname');
 }
 
 // 基于网页的弹窗存在时间
-var time = 60 * 60 * 24
+var time = 60 * 60 * 24;
 // 基于网页的弹窗
 function messenger(msg, url) {
-	play('media/notify.mp3')
+	play('media/notify.mp3');
 	Messenger().post({
 		message: msg,
 		type: 'error',
@@ -228,27 +228,27 @@ function notifyMe(title, content, url) {
 	try {
 		//某些未知的浏览器
 		if (!Notification) {
-			messenger(content, url)
+			messenger(content, url);
 			return;
 		}
 	} catch (e) {
 		// ie
-		messenger(content, url)
+		messenger(content, url);
 	}
 	//对于支持的浏览器请求弹窗的权限失败
 	if (Notification.permission !== "granted") {
 		Notification.requestPermission();
-		messenger(content, url)
-		return
+		messenger(content, url);
+		return;
 	} else {
 		//播放提示音
-		play('media/notify.mp3')
+		play('media/notify.mp3');
 		var notification = new Notification(title, {
 			icon: 'icon/notify.jpg',
 			body: content,
 		});
 		notification.onclick = function () {
-			self.location = url
+			self.location = url;
 		};
 
 	}
@@ -272,15 +272,15 @@ function onData(event) {
 		// 先进行URLDECODE
 		json = decodeURIComponent(json);
 		result = eval("(" + json + ")");
-		play('media/notify.mp3')
+		play('media/notify.mp3');
 		if (result.type == "withdraw") {
-			notifyMe("您有新的订单变化", "有订单需要退款", "orderService.html?state=0700")
+			notifyMe("您有新的订单变化", "有订单需要退款", "orderService.html?state=0700");
 		} else if (result.type == "managerIn") {
-			notifyMe("您有新的订单变化", "有订单需要客服介入", "orderService.html?state=1300")
+			notifyMe("您有新的订单变化", "有订单需要客服介入", "orderService.html?state=1300");
 		} else if (result.type == "salary") {
-			notifyMe("您有新的订单变化", "有订单需要平台打款", "orderService.html?state=0900")
+			notifyMe("您有新的订单变化", "有订单需要平台打款", "orderService.html?state=0900");
 		} else if (result.type == "waitConfirm") {
-			notifyMe("您有新的订单变化", "已有用户支付订单", "orderService.html?state=0300")
+			notifyMe("您有新的订单变化", "已有用户支付订单", "orderService.html?state=0300");
 		}
 	}
 }

@@ -1,8 +1,8 @@
 var mid;
-var page = 1
-checkLogin()
-registNotify()
-document.getElementById("admin_name").innerText = $.cookie('mname')
+var page = 1;
+checkLogin();
+registNotify();
+document.getElementById("admin_name").innerText = $.cookie('mname');
 
 
 var changeTable = function (result) {
@@ -51,7 +51,7 @@ $(function () {
 		step: 1
 	});
 	document.getElementById("lastPage").disabled = true;
-	getList()
+	getList();
 	if (page == 1)
 		document.getElementById("lastPage").disabled = true;
 	document.getElementById("pageInput").value = page;
@@ -59,12 +59,12 @@ $(function () {
 
 function changePage(action) {
 	if (action == "last") {
-		page--
+		page--;
 	} else if (action == "next") {
-		page++
+		page++;
 	}
-	document.getElementById("pageInput").value = page
-	$('button#get').trigger("click")
+	document.getElementById("pageInput").value = page;
+	$('button#get').trigger("click");
 }
 
 function get() {

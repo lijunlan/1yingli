@@ -1,15 +1,15 @@
 var mid;
-checkLogin()
-registNotify()
-page = 1
+checkLogin();
+registNotify();
+page = 1;
 function getList() {
-	myJson.method = "getBackgroundList"
-	myJson.page = page.toString()
-	myAjax(myJson, changeTable)
+	myJson.method = "getBackgroundList";
+	myJson.page = page.toString();
+	myAjax(myJson, changeTable);
 }
 function removePic(id) {
-	myJson.method = "removeBackground"
-	myJson.id = id.toString()
+	myJson.method = "removeBackground";
+	myJson.id = id.toString();
 	myAjax(myJson, get);
 }
 function changeTable(result) {
@@ -17,23 +17,23 @@ function changeTable(result) {
 	$("#backgroundTable").append("<thead><tr><th>操作</th><th>图片</th></tr></thead><tbody>");
 	var list = result.data;
 	$.each(list, function (index, data) {
-		var row = "<tr id='"+ data.id +"'><td>"
-		row += data.id
-		+ "<br><button class=\"am-btn am-btn-secondary\" onclick=\"removePic("
+		var row = "<tr id='" + data.id + "'><td>";
+		row += data.id;
+		+ "<br><button class=\"am-btn am-btn-secondary\" onclick=\"removePic(";
 		+ data.id + ")\">删除</button></td><td>";
 		row += "<img alt=\" \" \" src=\"" + data.url + "\" /></td></tr>";
 		$("#backgroundTable").append(row);
 	})
-	$("#backgroundTable").append("</tbody>")
+	$("#backgroundTable").append("</tbody>");
 }
 function addBackground(url) {
-	myJson.method = "addBackground"
-	myJson.url = url.toString()
-	myAjax(myJson, get)
+	myJson.method = "addBackground";
+	myJson.url = url.toString();
+	myAjax(myJson, get);
 }
 
 $(function () {
-	getList()
+	getList();
 	if (page == 1) {
 		document.getElementById("lastPage").disabled = true;
 	}
@@ -41,24 +41,24 @@ $(function () {
 })
 function changePage(action) {
 	if (action == "last") {
-		page--
+		page--;
 	} else if (action == "next") {
-		page++
+		page++;
 	}
 	document.getElementById("pageInput").value = page;
 	if (page <= 1)
 		document.getElementById("lastPage").disabled = true;
 	else
 		document.getElementById("lastPage").disabled = false;
-	getList()
+	getList();
 }
 function get() {
-	page = document.getElementById("pageInput").value
+	page = document.getElementById("pageInput").value;
 	if (page <= 1)
 		document.getElementById("lastPage").disabled = true;
 	else
 		document.getElementById("lastPage").disabled = false;
-	getList()
+	getList();
 }
 $(document).ready(
 	function () {
@@ -83,7 +83,7 @@ $(document).ready(
 			},
 			'onSelect': function (queue) {
 				//alert(queue.queued + ' files were added to the queue.');
-				$("#imagelist").fadeIn()
+				$("#imagelist").fadeIn();
 			},
 			'onUpload': function (
 				filesToUpload) {
@@ -95,12 +95,11 @@ $(document).ready(
 			'onUploadComplete': function (
 				file, data) {
 				//alert('The file ' + file.name + ' uploaded successfully.');
-				var json = eval("(" + data
-					+ ")");
+				var json = eval("(" + data + ")");
 				if (json.state == "success") {
 					$("#imagelist")
 						.fadeOut(3000);
-					addBackground(json.url)
+					addBackground(json.url);
 				} else {
 					$(".mark").show();
 					$("#box").show();

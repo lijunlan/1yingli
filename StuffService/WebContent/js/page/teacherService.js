@@ -41,9 +41,9 @@ var changeTable = function (result) {
 		+ "<th>邮箱</th><th>级别</th><th>英里数</th><th>详细信息</th></tr>");
 	var list = result.data;
 	$.each(list, function (index, data) {
-		var tmp = parseInt(data.createTime, 10)
-		var d = new Date(tmp)
-		var row = "<tr><td>"
+		var tmp = parseInt(data.createTime, 10);
+		var d = new Date(tmp);
+		var row = "<tr><td>";
 		row += data.tid + "</td><td>";
 		row += data.name + "</td><td>";
 		row += data.onService + "</td><td>";
@@ -67,17 +67,17 @@ function editMile(tid) {
 	myJson.teacherId = tid.toString();
 	myJson.mile = $('#input' + tid).val().toString();
 	if(fun == 1){
-		myAjax(myJson, get)
+		myAjax(myJson, get);
 	}else if(fun == 2){
-		myAjax(myJson, search)
+		myAjax(myJson, search);
 	}
 	
 }
 
 $(function () {
-	myJson.method = "getTeacherList"
-	myJson.page = page.toString()
-	myAjax(myJson, changeTable)
+	myJson.method = "getTeacherList";
+	myJson.page = page.toString();
+	myAjax(myJson, changeTable);
 	if (page == 1)
 		document.getElementById("lastPage").disabled = true;
 	document.getElementById("pageInput").value = page;
@@ -85,26 +85,26 @@ $(function () {
 
 function changePage(action) {
 	if (action == "last") {
-		page--
+		page--;
 	} else if (action == "next") {
-		page++
+		page++;
 	}
 	document.getElementById("pageInput").value = page;
 	if (page <= 1)
 		document.getElementById("lastPage").disabled = true;
 	else
 		document.getElementById("lastPage").disabled = false;
-	myJson.method = "getTeacherList"
-	myJson.page = page.toString()
-	myAjax(myJson, changeTable)
+	myJson.method = "getTeacherList";
+	myJson.page = page.toString();
+	myAjax(myJson, changeTable);
 }
 
 function get() {
 	fun = 1;
-	page = document.getElementById("pageInput").value
-	myJson.method = "getTeacherList"
-	myJson.page = page.toString()
-	myAjax(myJson, changeTable)
+	page = document.getElementById("pageInput").value;
+	myJson.method = "getTeacherList";
+	myJson.page = page.toString();
+	myAjax(myJson, changeTable);
 	if (document.getElementById("pageInput").value > 1)
 		document.getElementById("lastPage").disabled = false;
 }

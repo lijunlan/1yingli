@@ -1,11 +1,11 @@
 function go() {
 	if (document.getElementById("username").value == ""
 		|| document.getElementById("password").value == "") {
-		$('#modalMsg').text("用戶名和密碼不能為空")
-		$('#modal-container-390574').modal('show')
+		$('#modalMsg').text("用戶名和密碼不能為空");
+		$('#modal-container-390574').modal('show');
 		return;
 	}
-	var password = encryptedStr(document.getElementById("password").value, publickey)
+	var password = encryptedStr(document.getElementById("password").value, publickey);
 	var json = new Object();
 	json.style = 'manager';
 	json.method = 'login';
