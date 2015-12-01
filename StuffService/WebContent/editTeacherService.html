@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>编辑导师信息</title>
+<link rel="stylesheet" href="css/messenger.css">
+<link rel="stylesheet" href="css/messenger-theme-future.css">
+<link rel="stylesheet" href="css/uploadifive.css">
+<link rel="stylesheet" href="css/bootstrapSwitch.css">
+<link rel="stylesheet" href="assets/css/amazeui.min.css">
+<link rel="stylesheet" href="assets/css/admin.css">
+</head>
+
+<body>
+
+	<!--------------------------------------------- 头部 --------------------------------------------------------------->
+	<header class="am-topbar admin-header">
+		<div class="am-topbar-brand">
+			<a href="index.html"><strong>One Mile</strong> <small>一英里后台管理系统</small></a>
+		</div>
+		<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+			<ul
+				class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+
+				<li class="am-dropdown" data-am-dropdown=""><a
+					class="am-dropdown-toggle" data-am-dropdown-toggle=""
+					href="javascript:;"> <span class="am-icon-users"></span> <label
+						id="admin_name">管理员</label>,你好
+				</a></li>
+				<li class="am-hide-sm-only"><a onclick="logout()"><span
+						class="am-icon-sign-out"></span> <span class="admin-fullText">注销</span></a></li>
+			</ul>
+		</div>
+	</header>
+	<!--------------------------------------------- 侧边 --------------------------------------------------------------->
+	<div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+		<div class="am-offcanvas-bar admin-offcanvas-bar" data-am-sticky>
+			<ul class="am-list admin-sidebar-list">
+				<li><a href="index.html"><span class="am-icon-home"></span>
+						首页</a></li>
+				<li class="admin-parent"><a class="am-cf am-collapsed"
+					data-am-collapse="{target: '#collapse-nav'}"><span
+						class="am-icon-file"></span> 功能模块 <span
+						class="am-icon-angle-right am-fr am-margin-right"></span></a>
+					<ul class="am-list admin-sidebar-sub am-collapse" id="collapse-nav"
+						style="height: 0px;">
+						<li><a href="orderService.html" class="am-cf"><span
+								class="am-icon-file-text"></span> 订单管理</a></li>
+						<li><a href="teacherService.html"><span
+								class="am-icon-mortar-board"></span>导师查询</a></li>
+						<li><a href="customerService.html"><span
+								class="am-icon-user"></span> 客户查询</a></li>
+						<li><a href="manage_application.html"><span
+								class="am-icon-plus-square"></span> 导师申请查询</a></li>
+						<li><a href="voucherService.html"><span
+								class="am-icon-usd"></span> 生成优惠券</a></li>
+						<li><a href="uploadBackgroundService.html"><span
+								class="am-icon-file-picture-o"></span> 背景图片管理</a></li>
+						<li><a href="distributionService.html"><span
+								class="am-icon-sitemap"></span> 分销管理</a></li>
+						<li><a href="teacherDemandService.html"><span
+								class="am-icon-inbox"></span> 建议</a></li>
+						<li><a href="editTeacherService.html"><span
+								class="am-icon-pencil"></span> 编辑导师</a></li>
+						<li><a href="articleService.html"><span
+								class="am-icon-leanpub"></span> 文章管理</a></li>
+					</ul></li>
+
+				<li><a onclick="logout()"><span class="am-icon-sign-out"></span>
+						注销</a></li>
+			</ul>
+			<div class="am-panel am-panel-default admin-sidebar-panel">
+				<div class="am-panel-bd">
+					<p>
+						<span class="am-icon-gears"></span> 功能
+					</p>
+					<div>
+						<input id="inputSearchUsername" placeholder="用户名"
+							class="am-form-field am-round"></input> <br>
+						<button id="get" class="am-btn am-btn-secondary am-btn-block"
+							onclick="get()">获取导师</button>
+						<br>
+						<button id="clean" class="am-btn am-btn-secondary am-btn-block"
+							onclick="clean()">清空页面</button>
+						<br>
+
+					</div>
+					<p>
+						<span class="am-icon-gears"></span> 注册
+					</p>
+					<div>
+						<input id="inputRegistNickname" placeholder="昵称"
+							class="am-form-field am-round"></input> <br> <input
+							id="inputRegistUsername" placeholder="用户名"
+							class="am-form-field am-round"></input> <br> <input
+							id="inputRegistPassword" placeholder="密码"
+							class="am-form-field am-round" type="password"></input> <br>
+						<button class="am-btn am-btn-secondary am-btn-block"
+							onclick="regist()">注册</button>
+						<br>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--------------------------------------------- 主要部分 --------------------------------------------------------------->
+	<div class="admin-content">
+		<div class="am-cf am-padding">
+			<div class="am-fl am-cf">
+				<strong class="am-text-primary am-text-lg">首页</strong> / <small>功能模块</small>
+				/ <small>编辑导师</small>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">请选择操作</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<div id='actionDiv' class="switch" data-on-label="创建导师" data-off-label="修改导师" data-off="info">
+						<input id='action' type="checkbox" checked />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">用户名</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-user am-icon-fw"></i></span> <input id="username"
+						type="text" class="am-form-field" placeholder="导师账号的用户名">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">导师经历</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-newspaper-o am-icon-fw"></i></span> <input id="simpleinfo"
+						type="text" class="am-form-field" placeholder="在网站上显示的经历">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">姓名</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-bitcoin am-icon-fw"></i></span> <input id="name"
+						type="text" class="am-form-field" placeholder="导师的名字">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">手机</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-phone am-icon-fw"></i></span> <input id="phone"
+						type="text" class="am-form-field" placeholder="导师的手机号码">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">地址</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-location-arrow am-icon-fw"></i></span> <input id="address"
+						type="text" class="am-form-field" placeholder="导师的常驻地址">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">邮箱</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-envelope-o am-icon-fw"></i></span> <input id="email"
+						type="text" class="am-form-field" placeholder="导师的邮箱">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">照片URL</div>
+			<div class="am-u-sm-8 am-u-md-4" id="divForIcon">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-file-photo-o am-icon-fw"></i></span> <input id="iconUrl"
+						type="text" class="am-form-field" placeholder="点击右侧按钮上传导师头像">
+				</div>
+				<div>
+					<img id="littleIcon" src="icon/littleIcon.png"
+						class="am-img-thumbnail">
+				</div>
+			</div>
+			<div class="am-hide-sm-only am-u-md-3">
+				<a id="select-picture-src" class="am-btn am-btn-secondary am-round"></a>
+				<button class="am-btn am-btn-secondary am-round" id="submit"
+					onclick="javascript:$('#select-picture-src').uploadifive('upload')">上传</button>
+				<div id="imagelist" style="min-height: 10px; max-height: 55px"></div>
+			</div>
+			<div class="am-hide-sm-only am-u-md-3"></div>
+
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">话题</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-edit am-icon-fw"></i></span> <input id="serviceTitle"
+						type="text" class="am-form-field" placeholder="title">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">英里数</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-edit am-icon-fw"></i></span> <input id="mileValue"
+						type="text" class="am-form-field" placeholder="英里数">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">时间</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-dashboard am-icon-fw"></i></span> <input id="serviceTime"
+						type="text" class="am-form-field" placeholder="时间">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">价格</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-dollar am-icon-fw"></i></span> <input id="servicePrice"
+						type="text" class="am-form-field" placeholder="每次服务价格">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">每周服务次数</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-group am-icon-fw"></i></span> <input
+						id="serviceTimePerWeek" type="text" class="am-form-field"
+						placeholder="导师每周服务次数">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-12 am-u-md-2 am-text-right">服务内容</div>
+			<div class="am-u-sm-12 am-u-md-10">
+				<textarea id="serviceContent" rows="10" placeholder="请输入导师服务的具体内容"
+					style="margin-top: 0px; margin-bottom: 0px; height: 208px; width: 500px"></textarea>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-12 am-u-md-2 am-text-right">自我介绍</div>
+			<div class="am-u-sm-12 am-u-md-10">
+				<textarea id="introduce" rows="10" placeholder=""
+					style="margin-top: 0px; margin-bottom: 0px; height: 208px; width: 500px"></textarea>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-12 am-u-md-2 am-text-right">工作经历</div>
+			<div class="am-u-sm-12 am-u-md-10">
+				<textarea id="showWorkExp" disabled="disabled" rows="10"
+					placeholder=""
+					style="margin-top: 0px; margin-bottom: 0px; height: 208px; width: 500px"></textarea>
+			</div>
+			<div class="am-hide-sm-only am-u-md-6">
+				<button id="addWorkExp" class="am-btn am-btn-secondary am-round"
+					onclick="addWorkExp()">添加</button>
+				<button class="am-btn am-btn-secondary am-round"
+					onclick="deleteWorkExp()">删除上一条</button>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-12 am-u-md-2 am-text-right">教育经历</div>
+			<div class="am-u-sm-12 am-u-md-10">
+				<textarea id="showStudyExp" disabled="disabled" rows="10"
+					placeholder=""
+					style="margin-top: 0px; margin-bottom: 0px; height: 208px; width: 500px"></textarea>
+			</div>
+			<div class="am-hide-sm-only am-u-md-6">
+				<button id="addStudyExp" class="am-btn am-btn-secondary am-round"
+					onclick="addStudyExp()">添加</button>
+				<button class="am-btn am-btn-secondary am-round"
+					onclick="deleteStudyExp()">删除上一条</button>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">导师标签</div>
+			<div id='teacherLabel' class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<label class="am-checkbox"> <input id="checkbox1"
+					type="checkbox" value="" data-am-ucheck name='checkbox'>
+					留学领航
+				</label> <label class="am-checkbox"> <input id="checkbox2"
+					type="checkbox" value="" data-am-ucheck name='checkbox'>
+					求职就业
+				</label> <label class="am-checkbox"> <input id="checkbox4"
+					type="checkbox" value="" data-am-ucheck name='checkbox'>
+					创业助力
+				</label> <label class="am-checkbox"> <input id="checkbox8"
+					type="checkbox" value="" data-am-ucheck name='checkbox'>
+					校园生活
+				</label> <label class="am-checkbox"> <input id="checkbox16"
+					type="checkbox" value="" data-am-ucheck name='checkbox'>
+					猎奇分享
+				</label> <label class="am-checkbox"> <input id="checkbox32"
+					type="checkbox" value="" data-am-ucheck name='checkbox'> 学霸
+				</label> <label class="am-checkbox"> <input id="checkbox64"
+					type="checkbox" value="" data-am-ucheck name='checkbox'> 奇葩
+				</label> <label class="am-checkbox"> <input id="checkbox128"
+					type="checkbox" value="" data-am-ucheck name='checkbox'>
+					开飞机
+				</label> <label class="am-checkbox"> <input id="checkbox256"
+					type="checkbox" value="" data-am-ucheck name='checkbox'> 跑酷
+				</label> <label class="am-checkbox"> <input id="checkbox512"
+					type="checkbox" value="" data-am-ucheck name='checkbox'> 赛车
+				</label> <label class="am-checkbox"> <input id="checkbox1024"
+					type="checkbox" value="" data-am-ucheck name='checkbox'> 潜水
+				</label> <label class="am-checkbox"> <input id="checkbox2048"
+					type="checkbox" value="" data-am-ucheck name='checkbox'> 骑马
+				</label>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">导师认证情况</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<label class="am-checkbox"> <input id="checkPhone"
+					type="checkbox" value="" data-am-ucheck name='checkbox'>
+					认证手机
+				</label> <label class="am-checkbox"> <input id="checkEmail"
+					type="checkbox" value="" data-am-ucheck name='checkbox'>
+					认证邮箱
+				</label> <label class="am-checkbox"> <input id="checkId"
+					type="checkbox" value="" data-am-ucheck name='checkbox'>
+					认证身份证
+				</label> <label class="am-checkbox"> <input id="checkJob"
+					type="checkbox" value="" data-am-ucheck name='checkbox'>
+					认证职业
+				</label> <label class="am-checkbox"> <input id="checkEducation"
+					type="checkbox" value="" data-am-ucheck name='checkbox'>
+					认证教育
+				</label>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">显示权重-留学领航</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-bar-chart am-icon-fw"></i></span> <input id="showWeight1"
+						type="text" class="am-form-field" placeholder="留学领航">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">显示权重-校园生活</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-bar-chart am-icon-fw"></i></span> <input id="showWeight8"
+						type="text" class="am-form-field" placeholder="校园生活">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">显示权重-求职就业</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-bar-chart am-icon-fw"></i></span> <input id="showWeight2"
+						type="text" class="am-form-field" placeholder="求职就业">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">显示权重-创业助力</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-bar-chart am-icon-fw"></i></span> <input id="showWeight4"
+						type="text" class="am-form-field" placeholder="创业助力">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">显示权重-猎奇分享</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-bar-chart am-icon-fw"></i></span> <input id="showWeight16"
+						type="text" class="am-form-field" placeholder="猎奇分享">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">主页权重</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-bar-chart am-icon-fw"></i></span> <input id="homeWeight"
+						type="text" class="am-form-field" placeholder="主页权重">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">打折权重</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-bar-chart am-icon-fw"></i></span> <input id="saleWeight"
+						type="text" class="am-form-field" placeholder="打折权重">
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right"></div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end am-u-sm-offset-2">
+				<button id="submit" onclick="submit()"
+					class="am-btn am-btn-secondary am-btn-block">提交</button>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<!------------------------------------------------- 工作经历  ------------------------------------------------>
+	<div class="am-modal am-modal-prompt" tabindex="-1" id="workExpModal">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">添加工作经历</div>
+			<div class="am-modal-bd">
+				公司名称 <input id="inputCompany" type="text"
+					class="am-modal-prompt-input"> 职位 <input id="inputPosition"
+					type="text" class="am-modal-prompt-input"> 开始时间，e.g. 2001,9
+				<input id="inputWorkStartTime" type="text"
+					class="am-modal-prompt-input"> 结束时间，e.g. 2010,10 or 至今 <input
+					id="inputWorkEndTime" type="text" class="am-modal-prompt-input">
+				工作经历 <br>
+				<textarea id="textWorkExp" rows="10" placeholder=""
+					style="margin-top: 0px; margin-bottom: 0px; height: 208px; width: 350px"></textarea>
+			</div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn" data-am-modal-cancel>取消</span> <span
+					class="am-modal-btn" data-am-modal-confirm>提交</span>
+			</div>
+		</div>
+	</div>
+
+	<!------------------------------------------------- 学习经历  ------------------------------------------------>
+	<div class="am-modal am-modal-prompt" tabindex="-1" id="studyExpModal">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">添加学习经历</div>
+			<div class="am-modal-bd">
+				学校名称 <input id="inputSchool" type="text"
+					class="am-modal-prompt-input"> 学位 <input id="inputDegree"
+					type="text" class="am-modal-prompt-input"> 专业 <input
+					id="inputMajor" type="text" class="am-modal-prompt-input">
+				开始时间，e.g. 2001,9 <input id="inputStudyStartTime" type="text"
+					class="am-modal-prompt-input"> 结束时间，e.g. 2010,10 or 至今 <input
+					id="inputStudyEndTime" type="text" class="am-modal-prompt-input">
+				教育经历 <br>
+				<textarea id="textStudyExp" rows="10" placeholder=""
+					style="margin-top: 0px; margin-bottom: 0px; height: 208px; width: 350px"></textarea>
+			</div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn" data-am-modal-cancel>取消</span> <span
+					class="am-modal-btn" data-am-modal-confirm>提交</span>
+			</div>
+		</div>
+	</div>
+
+	<!---------------------------------------------声音和警告框------------------------------------------------>
+	<div id="sound"></div>
+	<div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">出错</div>
+			<div class="am-modal-bd">
+				<p id="modalMsg"></p>
+			</div>
+			<div class="am-modal-footer">
+				<span id='confirmSpan' class="am-modal-btn" data-am-modal-confirm>关闭</span>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="js/libs/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/libs/ajax-pushlet-client.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/libs/swfobject.js"></script>
+	<script type="text/javascript" src="js/libs/messenger.min.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.json-2.4.min.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.uploadifive.min.js"></script>
+	<script type="text/javascript" src="js/libs/bootstrapSwitch.js"></script>
+	<script type="text/javascript" src="js/libs/RSA.js"></script>
+	<script type="text/javascript" src="js/libs/BigInt.js"></script>
+	<script type="text/javascript" src="js/libs/Barrett.js"></script>
+	<script type="text/javascript" src="js/libs/RSAencrypt.js"></script>
+	<script type="text/javascript" src="assets/js/amazeui.min.js"></script>
+	<script type="text/javascript" src="js/page/StuffService-common.js"></script>
+	<script type="text/javascript" src='js/page/editTeacherService.js'></script>
+</body>
+
+</html>

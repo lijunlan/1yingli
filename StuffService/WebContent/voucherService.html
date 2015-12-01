@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>优惠券管理</title>
+	<link rel="stylesheet" type="text/css" href="css/messenger.css">
+	<link rel="stylesheet" type="text/css" href="css/messenger-theme-future.css">
+	<link rel="stylesheet" type="text/css" href="css/buttons.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css">
+	<link rel="stylesheet" href="assets/css/amazeui.min.css">
+	<link rel="stylesheet" href="assets/css/admin.css">
+</head>
+
+<body>
+
+	<!--------------------------------------------- 头部 --------------------------------------------------------------->
+	<header class="am-topbar admin-header">
+		<div class="am-topbar-brand">
+			<a href="index.html"><strong>One Mile</strong> <small>一英里后台管理系统</small></a>
+		</div>
+		<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+			<ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+				<li class="am-dropdown" data-am-dropdown="">
+					<a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;"> <span class="am-icon-users"></span>
+						<label id="admin_name">管理员</label>,你好
+					</a>
+				</li>
+				<li class="am-hide-sm-only"><a onclick="logout()"><span
+					class="am-icon-sign-out"></span> <span class="admin-fullText">注销</span></a></li>
+			</ul>
+		</div>
+	</header>
+	<!--------------------------------------------- 侧边 --------------------------------------------------------------->
+	<div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+		<div class="am-offcanvas-bar admin-offcanvas-bar" data-am-sticky>
+			<ul class="am-list admin-sidebar-list">
+				<li><a href="index.html"><span class="am-icon-home"></span>
+						首页</a></li>
+				<li class="admin-parent"><a class="am-cf am-collapsed" data-am-collapse="{target: '#collapse-nav'}"><span
+						class="am-icon-file"></span> 功能模块 <span
+						class="am-icon-angle-right am-fr am-margin-right"></span></a>
+					<ul class="am-list admin-sidebar-sub am-collapse" id="collapse-nav" style="height: 0px;">
+						<li><a href="orderService.html" class="am-cf"><span
+								class="am-icon-file-text"></span> 订单管理</a></li>
+						<li><a href="teacherService.html"><span
+								class="am-icon-mortar-board"></span>导师查询</a></li>
+						<li><a href="customerService.html"><span
+								class="am-icon-user"></span> 客户查询</a></li>
+						<li><a href="manage_application.html"><span
+								class="am-icon-plus-square"></span> 导师申请查询</a></li>
+						<li><a href="voucherService.html"><span
+								class="am-icon-usd"></span> 生成优惠券</a></li>
+						<li><a href="uploadBackgroundService.html"><span
+								class="am-icon-file-picture-o"></span> 背景图片管理</a></li>
+						<li><a href="distributionService.html"><span
+								class="am-icon-sitemap"></span> 分销管理</a></li>
+						<li><a href="teacherDemandService.html"><span
+								class="am-icon-inbox"></span> 建议</a></li>
+						<li><a href="editTeacherService.html"><span
+								class="am-icon-pencil"></span> 编辑导师</a></li>
+						<li><a href="articleService.html"><span
+								class="am-icon-leanpub"></span> 文章管理</a></li>
+					</ul>
+				</li>
+
+				<li><a onclick="logout()"><span class="am-icon-sign-out"></span>
+						注销</a></li>
+			</ul>
+			<div class="am-panel am-panel-default admin-sidebar-panel">
+				<div class="am-panel-bd">
+					<p>
+						<span class="am-icon-gears"></span> 功能
+					</p>
+					<div>
+						<button id="lastPage" onclick="changePage('last')" class="am-btn am-btn-default am-round">上一页</button>
+						<input id="pageInput" style="width: 20px"></input>
+						<button id="nextPage" onclick="changePage('next')" class="am-btn am-btn-default am-round">下一页</button>
+						<br>
+						<br>
+						<button id="get" class="am-btn am-btn-secondary am-btn-block" onclick="get()">获取列表</button>
+						<br>
+					</div>
+				</div>
+			</div>
+			<div class="am-panel am-panel-default admin-sidebar-panel">
+				<div class="am-panel-bd">
+					<p>
+						<span class="am-icon-gears"></span> 新增优惠券
+					</p>
+					<div>
+						<fieldset>
+							<legend>创建新的优惠券</legend>
+							<span class="help-block">填写优惠的金额</span>
+							<input id="inputMoney" class="am-form-field" type="text" placeholder="优惠金额" /> <span class="help-block">填写优惠券数量</span>
+							<input class="am-form-field" id="inputCount" type="text" placeholder="优惠券数量" /> <span class="help-block">填写优惠券使用开始时间</span>
+							<input type="text" class="am-form-field" placeholder="优惠开始时间" id="chooseBeginTime" />
+							<span class="help-block">填写优惠券使用截止时间</span>
+							<input type="text" class="am-form-field" placeholder="优惠截止时间" id="chooseEndTime" />
+							<button class="am-btn am-btn-secondary am-btn-block" id="submit">创建</button>
+						</fieldset>
+						<br>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--------------------------------------------- 主要部分 --------------------------------------------------------------->
+	<div class="admin-content">
+		<div class="am-cf am-padding">
+			<div class="am-fl am-cf">
+				<strong class="am-text-primary am-text-lg">首页</strong> / <small>功能模块</small> / <small>优惠券管理</small>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
+
+					<table class="am-table am-table-bordered" id="voucherTable">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>创建时间</th>
+								<th>优惠金额</th>
+								<th>优惠券验证码</th>
+								<th>开始时间</th>
+								<th>结束时间</th>
+								<th>订单ID</th>
+								<th>是否使用</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!---------------------------------------------声音和弹出框--------------------------------------------------------------->
+	<div id="sound"></div>
+	<div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">出错</div>
+			<div class="am-modal-bd">
+				<p id="modalMsg"></p>
+			</div>
+			<div class="am-modal-footer">
+				<span id='confirmSpan' class="am-modal-btn" data-am-modal-confirm>关闭</span>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="js/libs/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/libs/ajax-pushlet-client.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/libs/swfobject.js"></script>
+	<script type="text/javascript" src="js/libs/messenger.min.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.datetimepicker.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.json-2.4.min.js"></script>
+	<script type="text/javascript" src="assets/js/amazeui.min.js"></script>
+	<script type="text/javascript" src="assets/js/app.js"></script>
+	<script type="text/javascript" src="js/page/StuffService-common.js"></script>
+	<script type="text/javascript" src='js/page/voucherService.js'></script>
+</body>
+
+</html>
