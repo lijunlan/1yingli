@@ -20,11 +20,11 @@ public class MainFunction {
 
 	public static void main(String[] args) throws SQLException {
 		// System.out.println(Calendar.getInstance().getTimeInMillis());
-		// updateTeacherData();
+		updateTeacherData();
 		// updateUserTrainDataRecord();
 		// updateUserTrainDataLike();
 		// updateUserTrainDataOrder();
-		editTeacherData();
+		// editTeacherData();
 	}
 
 	public static String replaceBlank(String str) {
@@ -147,7 +147,7 @@ public class MainFunction {
 
 	private static void updateTeacherData() {
 		JSONArray jarray = new JSONArray();
-		for (int i = 238; i <= 239; i++) {
+		for (int i = 240; i <= 240; i++) {
 			JSONObject obj = updateTeacherData(i + "");
 			if (obj != null) {
 				jarray.add(obj);

@@ -20,7 +20,7 @@ public class ExPassage {
 
 	public static void assembleSimple(Passage p, SuperMap map) {
 		map.put("title", p.getTitle());
-		map.put("simplecontent", p.getSummary());
+		map.put("summary", p.getSummary());
 		map.put("imageUrl", p.getImageUrl());
 		map.put("passageId", p.getId());
 		map.put("createTime", p.getCreateTime());
