@@ -152,6 +152,9 @@ function changeTable(result) {
 		createTime = new Date(createTime);
 		//audit模式下显示的东西，state = 0
 		if (fun == 'audit') {
+			if(data.state != 0){
+				return true;
+			}
 			newTab = "<div class='am-panel'><div class='am-panel-hd'>"
 			+ "<h4 class='am-panel-title' data-am-collapse=\"{parent: '#" + fun + "Accordion', target: '#" + data.passageId + "Audit'}\">"
 			+ "<font color='red'>【" + tmpState + "】</font>" + data.title + " <font color='#63B8FF'>" + data.editorName + "创作于"

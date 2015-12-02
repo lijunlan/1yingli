@@ -157,9 +157,9 @@ var changeTable = function (result) {
 		row += data.teacherName + "</td><td>";
 		//根据订单是否要支付导师或已经支付导师，显示学员是否已经评价导师
 		if (salaryState == 1 || salaryState == 2 || fun == 2) {
-			if (data.state.split(',')[0] == '1000' || data.state.split(',')[0] == '1100') {
+			if (data.state.split(',')[0] == '1000' ) {
 				row += "NO</td><td>";
-			} else if (data.state.split(',')[0] == '1010') {
+			} else if (data.state.split(',')[0] == '1010' || data.state.split(',')[0] == '1100') {
 				row += "YES</td><td>";
 			} else {
 				row += "</td><td>";
@@ -180,7 +180,7 @@ var changeTable = function (result) {
 			row += "</td><td>";
 		}
 		//显示订单详情
-		row += "<button class='am-btn am-btn-primary' onclick='showDetail(" + index + "," + fun + ")'>点击显示详情</button></td></tr>";
+		row += "<button class='am-btn am-btn-primary' onclick='showDetail(" + index + "," + fun + ")'>详情</button></td></tr>";
 		$("#infoTable").append(row);
 	})
 }

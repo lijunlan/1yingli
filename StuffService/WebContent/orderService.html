@@ -2,12 +2,12 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>订单管理</title>
-	<link rel="stylesheet" href="css/messenger.css">
-	<link rel="stylesheet" href="css/messenger-theme-future.css">
-	<link rel="stylesheet" href="assets/css/amazeui.min.css">
-	<link rel="stylesheet" href="assets/css/admin.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>订单管理</title>
+<link rel="stylesheet" href="css/messenger.css">
+<link rel="stylesheet" href="css/messenger-theme-future.css">
+<link rel="stylesheet" href="assets/css/amazeui.min.css">
+<link rel="stylesheet" href="assets/css/admin.css">
 
 </head>
 
@@ -19,14 +19,15 @@
 			<a href="index.html"><strong>One Mile</strong> <small>一英里后台管理系统</small></a>
 		</div>
 		<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
-			<ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
-				<li class="am-dropdown" data-am-dropdown="">
-					<a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;"> <span class="am-icon-users"></span>
-						<label id="admin_name">管理员</label>,你好
-					</a>
-				</li>
+			<ul
+				class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+				<li class="am-dropdown" data-am-dropdown=""><a
+					class="am-dropdown-toggle" data-am-dropdown-toggle=""
+					href="javascript:;"> <span class="am-icon-users"></span> <label
+						id="admin_name">管理员</label>,你好
+				</a></li>
 				<li class="am-hide-sm-only"><a onclick="logout()"><span
-					class="am-icon-sign-out"></span> <span class="admin-fullText">注销</span></a></li>
+						class="am-icon-sign-out"></span> <span class="admin-fullText">注销</span></a></li>
 			</ul>
 		</div>
 	</header>
@@ -37,10 +38,12 @@
 			<ul class="am-list admin-sidebar-list">
 				<li><a href="index.html"><span class="am-icon-home"></span>
 						首页</a></li>
-				<li class="admin-parent"><a class="am-cf am-collapsed" data-am-collapse="{target: '#collapse-nav'}"><span
+				<li class="admin-parent"><a class="am-cf am-collapsed"
+					data-am-collapse="{target: '#collapse-nav'}"><span
 						class="am-icon-file"></span> 功能模块 <span
 						class="am-icon-angle-right am-fr am-margin-right"></span></a>
-					<ul class="am-list admin-sidebar-sub am-collapse" id="collapse-nav" style="height: 0px;">
+					<ul class="am-list admin-sidebar-sub am-collapse" id="collapse-nav"
+						style="height: 0px;">
 						<li><a href="orderService.html" class="am-cf"><span
 								class="am-icon-file-text"></span> 订单管理</a></li>
 						<li><a href="teacherService.html"><span
@@ -61,8 +64,7 @@
 								class="am-icon-pencil"></span> 编辑导师</a></li>
 						<li><a href="articleService.html"><span
 								class="am-icon-leanpub"></span> 文章管理</a></li>
-					</ul>
-				</li>
+					</ul></li>
 
 				<li><a onclick="logout()"><span class="am-icon-sign-out"></span>
 						注销</a></li>
@@ -74,7 +76,8 @@
 						<span class="am-icon-gears"></span> 功能
 					</p>
 					<div>
-						<select name="orderState" id="orderState" data-am-selected="{maxHeight: 200}">
+						<select name="orderState" id="orderState"
+							data-am-selected="{maxHeight: 200}">
 							<option value="1">已下单尚未支付</option>
 							<option value="2">客户放弃支付</option>
 							<option value="3">完成支付等待确认</option>
@@ -95,27 +98,31 @@
 						</select>
 
 						<form id="disList">
-							<label class="am-radio">
-								<input type="radio" name="distribution" value="ASC" data-am-ucheck> 按分销人升序排列
-							</label>
-							<label class="am-radio">
-								<input type="radio" name="distribution" value="DESC" data-am-ucheck> 按分销人降序排列
-							</label>
-							<label class="am-radio">
-								<input type="radio" name="distribution" value="NO" data-am-ucheck checked> 不按分销人排列
+							<label class="am-radio"> <input type="radio"
+								name="distribution" value="ASC" data-am-ucheck> 按分销人升序排列
+							</label> <label class="am-radio"> <input type="radio"
+								name="distribution" value="DESC" data-am-ucheck>
+								按分销人降序排列
+							</label> <label class="am-radio"> <input type="radio"
+								name="distribution" value="NO" data-am-ucheck checked>
+								不按分销人排列
 							</label>
 						</form>
 
-						<button id="lastPage" onclick="changePage('last')" class="am-btn am-btn-default am-round">上一页</button>
+						<button id="lastPage" onclick="changePage('last')"
+							class="am-btn am-btn-default am-round">上一页</button>
 						<input id="pageInput" style="width: 20px"></input>
-						<button id="nextPage" onclick="changePage('next')" class="am-btn am-btn-default am-round">下一页</button>
-						<br>
-						<br>
-						<button id="get" class="am-btn am-btn-secondary am-btn-block" onclick="get()">获取订单</button>
+						<button id="nextPage" onclick="changePage('next')"
+							class="am-btn am-btn-default am-round">下一页</button>
+						<br> <br>
+						<button id="get" class="am-btn am-btn-secondary am-btn-block"
+							onclick="get()">获取订单</button>
 						<br>
 
 						<div class="am-input-group am-input-group-sm">
-							<input type="text" class="am-form-field" id="search" placeholder="搜索：订单id，姓名"> <span class="am-input-group-btn">
+							<input type="text" class="am-form-field" id="search"
+								placeholder="搜索：订单id，姓名"> <span
+								class="am-input-group-btn">
 								<button class="am-btn am-btn-default" type="button"
 									onclick="search()" id="searchButton">搜索</button>
 							</span>
@@ -130,24 +137,29 @@
 	<div class="admin-content">
 		<div class="am-cf am-padding">
 			<div class="am-fl am-cf">
-				<strong class="am-text-primary am-text-lg">首页</strong> / <small>功能模块</small> / <small>订单管理</small>
+				<strong class="am-text-primary am-text-lg">首页</strong> / <small>功能模块</small>
+				/ <small>订单管理</small>
 			</div>
 		</div>
-		<table class="am-table am-table-bordered am-table-centered" id="infoTable">
-			<tr>
-				<th>订单号</th>
-				<th>支付时间</th>
-				<th>交易金额</th>
-				<th>原始价格</th>
-				<th>客户姓名</th>
-				<th>电话</th>
-				<th>微信</th>
-				<th>邮箱</th>
-				<th>导师</th>
-				<th>操作</th>
-				<th>点击显示详情</th>
-			</tr>
-		</table>
+		<div class="am-scrollable-horizontal">
+			<table class="am-table am-table-bordered am-table-centered"
+				id="infoTable">
+				<tr>
+					<th>订单号</th>
+					<th>支付时间</th>
+					<th>交易金额</th>
+					<th>原始价格</th>
+					<th>客户姓名</th>
+					<th>电话</th>
+					<th>微信</th>
+					<th>邮箱</th>
+					<th>导师</th>
+					<th>操作</th>
+					<th>点击显示详情</th>
+				</tr>
+			</table>
+		</div>
+
 		<br>
 	</div>
 
@@ -166,10 +178,12 @@
 	</div>
 
 	<!-----------------------------------------------订单详情-------------------------------------------------------------->
-	<div class="am-modal am-modal-no-btn" tabindex="-1" id="modalOrderDetail">
+	<div class="am-modal am-modal-no-btn" tabindex="-1"
+		id="modalOrderDetail">
 		<div class="am-modal-dialog">
 			<div class="am-modal-hd">
-				订单详情<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+				订单详情<a href="javascript: void(0)" class="am-close am-close-spin"
+					data-am-modal-close>&times;</a>
 			</div>
 			<div class="am-modal-bd" id="modalDetail"></div>
 		</div>
