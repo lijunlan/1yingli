@@ -64,7 +64,7 @@ public class RegisterService extends MsgService {
 		if (nickName.length() > 7) {
 			nickName = nickName.substring(0, 7);
 		}
-		if (!(CheckUtil.checkMobileNumber(username) || CheckUtil.checkEmail(username)) || "".equals(password)) {
+		if (!(CheckUtil.checkGlobleMobileNumber(username) || CheckUtil.checkEmail(username)) || "".equals(password)) {
 			setResMsg(MsgUtil.getErrorMsgByCode("12017"));
 			return;
 		}
@@ -106,7 +106,7 @@ public class RegisterService extends MsgService {
 		}
 		password = MD5Util.MD5(password);
 		User user = PUserUtil.assembleUser(username, password, nickName, null, null, distributor);
-		if (CheckUtil.checkMobileNumber(username)) {
+		if (CheckUtil.checkGlobleMobileNumber(username)) {
 			user.setPhone(username);
 		} else {
 			user.setEmail(username);

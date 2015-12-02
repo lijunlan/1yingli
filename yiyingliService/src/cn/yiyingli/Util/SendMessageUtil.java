@@ -102,11 +102,11 @@ public class SendMessageUtil {
 	}
 
 	public static void sendCheckNo(String phone, String checkNo) {
-		SendMessageUtil.getInstance().addSend(phone, "尊敬的用户，您的短信验证码为 " + checkNo + "(3分钟内有效)");
+		SendMessageUtil.getInstance().addSend(phone.replaceAll("-", ""), "尊敬的用户，您的短信验证码为 " + checkNo + "(3分钟内有效)");
 	}
 
 	public static void sendMessage(String phone, String msg) {
-		SendMessageUtil.getInstance().addSend(phone, msg);
+		SendMessageUtil.getInstance().addSend(phone.replaceAll("-", ""), msg);
 	}
 
 	/**
