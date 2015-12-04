@@ -31,10 +31,11 @@ public class CheckUtil {
 	}
 
 	public static boolean checkGlobleMobileNumber(String number) {
+		String tmp = number.replaceAll("-", "");
 		boolean flag = false;
 		try {
 			Pattern regex = Pattern.compile("[1-9][0-9]{5,14}");
-			Matcher matcher = regex.matcher(number);
+			Matcher matcher = regex.matcher(tmp);
 			flag = matcher.matches();
 		} catch (Exception e) {
 			flag = false;
@@ -83,7 +84,7 @@ public class CheckUtil {
 		boolean flag = false;
 		try {
 			// 验证是不是6-20位纯数字
-			if(psw.length()<6||psw.length()>20)
+			if (psw.length() < 6 || psw.length() > 20)
 				return false;
 			Pattern regex1 = Pattern.compile("[0-9]{6,20}");
 			Matcher matcher = regex1.matcher(psw);

@@ -45,8 +45,7 @@ public class PassageServiceImpl implements PassageService {
 
 	@Override
 	public void save(Passage passage) {
-		getPassageDao().save(passage);
-		getTeacherDao().updateCheckPassageNo(passage.getOwnTeacher());
+		getPassageDao().saveAndCount(passage, passage.getOwnTeacher());
 	}
 
 	@Override
@@ -67,8 +66,7 @@ public class PassageServiceImpl implements PassageService {
 	@Override
 	public void update(Passage passage, boolean stateChange) {
 		if (stateChange) {
-			getPassageDao().update(passage);
-			getTeacherDao().updatePassageNo(passage.getOwnTeacher());
+			getPassageDao().updateAndCount(passage, passage.getOwnTeacher());
 		} else {
 			getPassageDao().update(passage);
 		}
