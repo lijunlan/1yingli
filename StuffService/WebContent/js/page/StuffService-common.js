@@ -109,7 +109,8 @@ var errorType = {
 function myAjax(JsonStr, action) {
 	$.ajax({
 		type: "POST",
-		url: "http://service.1yingli.cn/yiyingliService/manage",
+		//url: "http://service.1yingli.cn/yiyingliService/manage",
+		url: "http://120.26.83.33/yiyingliManagerService/manage",
 		data: $.toJSON(JsonStr),
 		success: function (data, status) {
 			var result = JSON.parse(data);
@@ -179,7 +180,7 @@ function logout() {
 	mid = $.cookie('mid');
 	$.ajax({
 		type: "POST",
-		url: "http://service.1yingli.cn/yiyingliService/manage",
+		url: "http://120.26.83.33/yiyingliManagerService/manage",
 		data: "{'style': 'manager','method':'logout','mid':'" + mid + "'}",
 		success: function (data, status) {
 			$.cookie('mid', '', { expires: -1 });

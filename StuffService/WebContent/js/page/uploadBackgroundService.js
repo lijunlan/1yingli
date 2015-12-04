@@ -18,10 +18,10 @@ function changeTable(result) {
 	var list = result.data;
 	$.each(list, function (index, data) {
 		var row = "<tr id='" + data.id + "'><td>";
-		row += data.id;
-		+ "<br><button class=\"am-btn am-btn-secondary\" onclick=\"removePic(";
-		+ data.id + ")\">删除</button></td><td>";
-		row += "<img alt=\" \" \" src=\"" + data.url + "\" /></td></tr>";
+		row += data.id
+		+ "<br><button class='am-btn am-btn-secondary' onclick='removePic("
+		+ data.id + ")'>删除</button></td><td>";
+		row += "<img src='" + data.url + "' /></td></tr>";
 		$("#backgroundTable").append(row);
 	})
 	$("#backgroundTable").append("</tbody>");

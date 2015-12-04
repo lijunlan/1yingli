@@ -2,13 +2,13 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>上传背景图片</title>
-	<link rel="stylesheet" href="css/messenger.css">
-	<link rel="stylesheet" href="css/messenger-theme-future.css">
-	<link rel="stylesheet" href="css/uploadifive.css">
-	<link rel="stylesheet" href="assets/css/amazeui.min.css">
-	<link rel="stylesheet" href="assets/css/admin.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>上传背景图片</title>
+<link rel="stylesheet" href="css/messenger.css">
+<link rel="stylesheet" href="css/messenger-theme-future.css">
+<link rel="stylesheet" href="css/uploadifive.css">
+<link rel="stylesheet" href="assets/css/amazeui.min.css">
+<link rel="stylesheet" href="assets/css/admin.css">
 </head>
 
 <body>
@@ -18,14 +18,15 @@
 			<a href="index.html"><strong>One Mile</strong> <small>一英里后台管理系统</small></a>
 		</div>
 		<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
-			<ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
-				<li class="am-dropdown" data-am-dropdown="">
-					<a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;"> <span class="am-icon-users"></span>
-						<label id="admin_name">管理员</label>,你好
-					</a>
-				</li>
+			<ul
+				class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+				<li class="am-dropdown" data-am-dropdown=""><a
+					class="am-dropdown-toggle" data-am-dropdown-toggle=""
+					href="javascript:;"> <span class="am-icon-users"></span> <label
+						id="admin_name">管理员</label>,你好
+				</a></li>
 				<li class="am-hide-sm-only"><a onclick="logout()"><span
-					class="am-icon-sign-out"></span> <span class="admin-fullText">注销</span></a></li>
+						class="am-icon-sign-out"></span> <span class="admin-fullText">注销</span></a></li>
 			</ul>
 		</div>
 	</header>
@@ -35,10 +36,12 @@
 			<ul class="am-list admin-sidebar-list">
 				<li><a href="index.html"><span class="am-icon-home"></span>
 						首页</a></li>
-				<li class="admin-parent"><a class="am-cf am-collapsed" data-am-collapse="{target: '#collapse-nav'}"><span
+				<li class="admin-parent"><a class="am-cf am-collapsed"
+					data-am-collapse="{target: '#collapse-nav'}"><span
 						class="am-icon-file"></span> 功能模块 <span
 						class="am-icon-angle-right am-fr am-margin-right"></span></a>
-					<ul class="am-list admin-sidebar-sub am-collapse" id="collapse-nav" style="height: 0px;">
+					<ul class="am-list admin-sidebar-sub am-collapse" id="collapse-nav"
+						style="height: 0px;">
 						<li><a href="orderService.html" class="am-cf"><span
 								class="am-icon-file-text"></span> 订单管理</a></li>
 						<li><a href="teacherService.html"><span
@@ -59,8 +62,7 @@
 								class="am-icon-pencil"></span> 编辑导师</a></li>
 						<li><a href="articleService.html"><span
 								class="am-icon-leanpub"></span> 文章管理</a></li>
-					</ul>
-				</li>
+					</ul></li>
 
 				<li><a onclick="logout()"><span class="am-icon-sign-out"></span>
 						注销</a></li>
@@ -71,12 +73,14 @@
 						<span class="am-icon-gears"></span> 功能
 					</p>
 					<div>
-						<button id="lastPage" onclick="changePage('last')" class="am-btn am-btn-default am-round">上一页</button>
+						<button id="lastPage" onclick="changePage('last')"
+							class="am-btn am-btn-default am-round">上一页</button>
 						<input id="pageInput" style="width: 20px"></input>
-						<button id="nextPage" onclick="changePage('next')" class="am-btn am-btn-default am-round">下一页</button>
-						<br>
-						<br>
-						<button id="get" class="am-btn am-btn-secondary am-btn-block" onclick="get()">获取图片</button>
+						<button id="nextPage" onclick="changePage('next')"
+							class="am-btn am-btn-default am-round">下一页</button>
+						<br> <br>
+						<button id="get" class="am-btn am-btn-secondary am-btn-block"
+							onclick="get()">获取图片</button>
 						<br>
 					</div>
 				</div>
@@ -87,8 +91,10 @@
 						<span class="am-icon-gears"></span> 上传背景图片
 					</p>
 					<div>
-						<a id="select-picture-src" class="am-btn am-btn-secondary am-btn-block"></a>
-						<button class="am-btn am-btn-secondary am-round" id="submit" onclick="javascript:$('#select-picture-src').uploadifive('upload')">上传</button>
+						<a id="select-picture-src"
+							class="am-btn am-btn-secondary am-btn-block"></a>
+						<button class="am-btn am-btn-secondary am-round" id="submit"
+							onclick="javascript:$('#select-picture-src').uploadifive('upload')">上传</button>
 						<div id="imagelist" style="min-height: 10px; max-height: 55px"></div>
 
 						<br>
@@ -102,24 +108,22 @@
 	<div class="admin-content">
 		<div class="am-cf am-padding">
 			<div class="am-fl am-cf">
-				<strong class="am-text-primary am-text-lg">首页</strong> / <small>功能模块</small> / <small>背景图片管理</small>
+				<strong class="am-text-primary am-text-lg">首页</strong> / <small>功能模块</small>
+				/ <small>背景图片管理</small>
 			</div>
 		</div>
-		<div class="container-fluid">
-			<div class="row-fluid">
-				<div class="span12">
-					<table class="am-table am-table-bordered" id="backgroundTable">
-						<thead>
-							<tr>
-								<th>操作</th>
-								<th>图片</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-				</div>
-			</div>
+		<div>
+			<table class="am-table am-table-bordered" id="backgroundTable">
+				<thead>
+					<tr>
+						<th>操作</th>
+						<th>图片</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+
 		</div>
 	</div>
 	<div id="sound"></div>
