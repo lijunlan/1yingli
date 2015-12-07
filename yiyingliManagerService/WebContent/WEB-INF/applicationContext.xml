@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="sessionFactory2"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+		scope="singleton">
+		<property name="configLocation" value="classpath:hibernate2.cfg.xml">
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>cn.yiyingli.Persistant.OperateRecord</value>
+				<value>cn.yiyingli.Persistant.MidKeeper</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- !!!Transaction manager2 for a single Hibernate SessionFactory2!!! -->
+	<bean id="transactionManager2"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory2" />
+	</bean>
+
+	<!--配置service层的事务处理类的基类 -->
+
+	<bean id="baseTxService2"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		abstract="true">
+		<property name="transactionManager" ref="transactionManager2" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="remove*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="query*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!-- !!!!!Dao!!!!! -->
+	<bean id="operateDao" class="cn.yiyingli.Dao.Impl.OperateDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory2" />
+		</property>
+	</bean>
+	
+	<bean id="midKeeperDao" class="cn.yiyingli.Dao.Impl.MidKeeperDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory2" />
+		</property>
+	</bean>
+	
+	<!--
+	<bean id="managerMarkDao" class="cn.yiyingli.Dao.Impl.ManagerMarkDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="managerDao" class="cn.yiyingli.Dao.Impl.ManagerDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	
+ 
+	<bean id="recordDao" class="cn.yiyingli.Dao.Impl.RecordDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="userDao" class="cn.yiyingli.Dao.Impl.UserDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="backgroundDao" class="cn.yiyingli.Dao.Impl.BackgroundDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="notificationDao" class="cn.yiyingli.Dao.Impl.NotificationDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="applicationFormDao" class="cn.yiyingli.Dao.Impl.ApplicationFormDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="checkFormDao" class="cn.yiyingli.Dao.Impl.CheckFormDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="tipDao" class="cn.yiyingli.Dao.Impl.TipDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	
+
+	<bean id="orderDao" class="cn.yiyingli.Dao.Impl.OrderDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="teacherDao" class="cn.yiyingli.Dao.Impl.TeacherDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="voucherDao" class="cn.yiyingli.Dao.Impl.VoucherDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="userMarkDao" class="cn.yiyingli.Dao.Impl.UserMarkDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="studyExperienceDao" class="cn.yiyingli.Dao.Impl.StudyExperienceDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="workExperienceDao" class="cn.yiyingli.Dao.Impl.WorkExperienceDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="tServiceDao" class="cn.yiyingli.Dao.Impl.TServiceDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+ -->	
+	
+
+	<!-- !!!!!Data Transaction Service !!!! -->
+	
+	<bean id="operateService" parent="baseTxService2">
+		<property name="target">
+			<ref local="operateServiceImpl" />
+		</property>
+	</bean>
+	
+	<bean id="midKeeperService" parent="baseTxService2">
+		<property name="target">
+			<ref local="midKeeperServiceImpl" />
+		</property>
+	</bean>
+	<!--
+	<bean id="managerMarkService" parent="baseTxService">
+		<property name="target">
+			<ref local="managerMarkServiceImpl" />
+		</property>
+	</bean>
+	 
+	<bean id="recordService" parent="baseTxService">
+		<property name="target">
+			<ref local="recordServiceImpl" />
+		</property>
+	</bean>
+
+	<bean id="notificationService" parent="baseTxService">
+		<property name="target">
+			<ref local="notificationServiceImpl" />
+		</property>
+	</bean>
+
+	<bean id="applicationFormService" parent="baseTxService">
+		<property name="target">
+			<ref local="applicationFormServiceImpl" />
+		</property>
+	</bean>
+
+	<bean id="orderService" parent="baseTxService">
+		<property name="target">
+			<ref local="orderServiceImpl" />
+		</property>
+	</bean>
+
+	<bean id="teacherService" parent="baseTxService">
+		<property name="target">
+			<ref local="teacherServiceImpl" />
+		</property>
+	</bean>
+
+	<bean id="tipService" parent="baseTxService">
+		<property name="target">
+			<ref local="tipServiceImpl" />
+		</property>
+	</bean>
+	
+	<bean id="userService" parent="baseTxService">
+		<property name="target">
+			<ref local="userServiceImpl" />
+		</property>
+	</bean>
+	
+	<bean id="voucherService" parent="baseTxService">
+		<property name="target">
+			<ref local="voucherServiceImpl" />
+		</property>
+	</bean>
+	
+	<bean id="managerService" parent="baseTxService">
+		<property name="target">
+			<ref local="managerServiceImpl" />
+		</property>
+	</bean>
+
+	<bean id="checkFormService" parent="baseTxService">
+		<property name="target">
+			<ref local="checkFormServiceImpl" />
+		</property>
+	</bean>
+
+	<bean id="backgroundService" parent="baseTxService">
+		<property name="target">
+			<ref local="backgroundServiceImpl" />
+		</property>
+	</bean>
+	
+ -->	
+	
+	
+ 
+	<!--!!!!Data Service Impl!!!!! -->
+	
+	
+	<bean id="operateServiceImpl" class="cn.yiyingli.Service.Impl.OperateServiceImpl">
+		<property name="operateDao">
+			<ref local="operateDao" />
+		</property>
+	</bean>
+	
+	<bean id="midKeeperServiceImpl" class="cn.yiyingli.Service.Impl.MidKeeperServiceImpl">
+		<property name="midKeeperDao">
+			<ref local="midKeeperDao" />
+		</property>
+	</bean>
+	
+	<!-- 
+	
+	<bean id="managerMarkServiceImpl" class="cn.yiyingli.Service.Impl.ManagerMarkServiceImpl">
+		<property name="managerMarkDao">
+			<ref local="managerMarkDao" />
+		</property>
+		<property name="managerDao">
+			<ref local="managerDao" />
+		</property>
+	</bean>
+	
+	<bean id="applicationFormServiceImpl" class="cn.yiyingli.Service.Impl.ApplicationFormServiceImpl">
+		<property name="applicationFormDao">
+			<ref local="applicationFormDao" />
+		</property>
+		<property name="notificationDao">
+			<ref local="notificationDao" />
+		</property>
+		<property name="tServiceDao">
+			<ref local="tServiceDao" />
+		</property>
+		<property name="workExperienceDao">
+			<ref local="workExperienceDao" />
+		</property>
+		<property name="studyExperienceDao">
+			<ref local="studyExperienceDao" />
+		</property>
+		<property name="teacherDao">
+			<ref local="teacherDao" />
+		</property>
+		<property name="userDao">
+			<ref local="userDao" />
+		</property>
+		<property name="userMarkDao">
+			<ref local="userMarkDao" />
+		</property>
+	</bean>
+
+	<bean id="notificationServiceImpl" class="cn.yiyingli.Service.Impl.NotificationServiceImpl">
+		<property name="notificationDao">
+			<ref local="notificationDao" />
+		</property>
+		<property name="userMarkDao">
+			<ref local="userMarkDao" />
+		</property>
+		<property name="userDao">
+			<ref local="userDao" />
+		</property>
+	</bean>
+
+	<bean id="recordServiceImpl" class="cn.yiyingli.Service.Impl.RecordServiceImpl">
+		<property name="recordDao">
+			<ref local="recordDao" />
+		</property>
+	</bean>
+
+	<bean id="checkFormServiceImpl" class="cn.yiyingli.Service.Impl.CheckFormServiceImpl">
+		<property name="checkFormDao">
+			<ref local="checkFormDao" />
+		</property>
+		<property name="teacherDao">
+			<ref local="teacherDao" />
+		</property>
+	</bean>
+
+	<bean id="backgroundServiceImpl" class="cn.yiyingli.Service.Impl.BackgroundServiceImpl">
+		<property name="backgroundDao">
+			<ref local="backgroundDao" />
+		</property>
+	</bean>
+
+	<bean id="managerServiceImpl" class="cn.yiyingli.Service.Impl.ManagerServiceImpl">
+		<property name="managerDao">
+			<ref local="managerDao" />
+		</property>
+	</bean>
+
+	
+
+	<bean id="orderServiceImpl" class="cn.yiyingli.Service.Impl.OrderServiceImpl">
+		<property name="orderDao">
+			<ref local="orderDao" />
+		</property>
+		<property name="userDao">
+			<ref local="userDao" />
+		</property>
+		<property name="teacherDao">
+			<ref local="teacherDao" />
+		</property>
+	</bean>
+
+	<bean id="teacherServiceImpl" class="cn.yiyingli.Service.Impl.TeacherServiceImpl">
+		<property name="teacherDao">
+			<ref local="teacherDao" />
+		</property>
+		<property name="userDao">
+			<ref local="userDao" />
+		</property>
+		<property name="workExperienceDao">
+			<ref local="workExperienceDao" />
+		</property>
+		<property name="studyExperienceDao">
+			<ref local="studyExperienceDao" />
+		</property>
+		<property name="tServiceDao">
+			<ref local="tServiceDao" />
+		</property>
+	</bean>
+
+	<bean id="tipServiceImpl" class="cn.yiyingli.Service.Impl.TipServiceImpl">
+		<property name="tipDao">
+			<ref local="tipDao" />
+		</property>
+	</bean>
+
+	<bean id="userServiceImpl" class="cn.yiyingli.Service.Impl.UserServiceImpl">
+		<property name="userDao">
+			<ref local="userDao" />
+		</property>
+		<property name="teacherDao">
+			<ref local="teacherDao" />
+		</property>
+	</bean>
+
+	<bean id="voucherServiceImpl" class="cn.yiyingli.Service.Impl.VoucherServiceImpl">
+		<property name="voucherDao">
+			<ref local="voucherDao" />
+		</property>
+	</bean>
+	
+	 -->
+
+
+	<!-- Handle Service parent -->
+	
+	<bean id="messageProxy" class="cn.yiyingli.Handle.MessageProxy"
+		scope="prototype">
+		<property name="midKeeperService">
+			<ref local="midKeeperService" />
+		</property>
+		<property name="operateService">
+			<ref local="operateService" />
+		</property>
+	</bean>
+	
+	<!-- 
+	<bean id="msgService" class="cn.yiyingli.Handle.MsgService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="operateService">
+			<ref local="operateService" />
+		</property>
+	</bean>
+	
+	 -->
+	
+	<!--!!!!Handle Service!!!!! -->
+	<!-- 
+	<bean id="mLoginService" class="cn.yiyingli.Handle.Service.MLoginService"
+		scope="prototype" parent="msgService">
+		<property name="managerService">
+			<ref local="managerService" />
+		</property>
+	</bean>
+	
+	<bean id="mDoneApplicationFormService" class="cn.yiyingli.Handle.Service.MDoneApplicationFormService"
+		scope="prototype" parent="msgService">
+		<property name="applicationFormService">
+			<ref local="applicationFormService" />
+		</property>
+	</bean>
+
+	<bean id="mDoneCheckFormService" class="cn.yiyingli.Handle.Service.MDoneCheckFormService"
+		scope="prototype" parent="msgService">
+		<property name="checkFormService">
+			<ref local="checkFormService" />
+		</property>
+	</bean>
+	
+	<bean id="mLogoutService" class="cn.yiyingli.Handle.Service.MLogoutService"
+		scope="prototype" parent="msgService">
+	</bean>
+
+	<bean id="mGetApplicationFormListService"
+		class="cn.yiyingli.Handle.Service.MGetApplicationFormListService"
+		scope="prototype" parent="msgService">
+		<property name="applicationFormService">
+			<ref local="applicationFormService" />
+		</property>
+	</bean>
+
+	<bean id="mGetUserListService" class="cn.yiyingli.Handle.Service.MGetUserListService"
+		scope="prototype" parent="msgService">
+		<property name="userService">
+			<ref local="userService" />
+		</property>
+	</bean>
+
+	<bean id="mGetTeacherListService" class="cn.yiyingli.Handle.Service.MGetTeacherListService"
+		scope="prototype" parent="msgService">
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="mGetNotificationListService" class="cn.yiyingli.Handle.Service.MGetNotificationListService"
+		scope="prototype" parent="msgService">
+		<property name="notificationService">
+			<ref local="notificationService" />
+		</property>
+	</bean>
+
+	<bean id="mGetApplicationFormService" class="cn.yiyingli.Handle.Service.MGetApplicationFormService"
+		scope="prototype" parent="msgService">
+		<property name="applicationFormService">
+			<ref local="applicationFormService" />
+		</property>
+	</bean>
+
+	<bean id="mGetCheckFormListService" class="cn.yiyingli.Handle.Service.MGetCheckFormListService"
+		scope="prototype" parent="msgService">
+		<property name="checkFormService">
+			<ref local="checkFormService" />
+		</property>
+	</bean>
+	
+	<bean id="mRegisterUserService" class="cn.yiyingli.Handle.Service.MRegisterUserService"
+		scope="prototype" parent="msgService">
+		<property name="userService">
+			<ref local="userService" />
+		</property>
+	</bean>
+
+	<bean id="mDealOrderService" class="cn.yiyingli.Handle.Service.MDealOrderService"
+		scope="prototype" parent="msgService">
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+		<property name="notificationService">
+			<ref local="notificationService" />
+		</property>
+	</bean>
+	
+	<bean id="mCreateTeacherService" class="cn.yiyingli.Handle.Service.MCreateTeacherService"
+		scope="prototype" parent="msgService">
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="userService">
+			<ref local="userService" />
+		</property>
+		<property name="tipService">
+			<ref local="tipService" />
+		</property>
+	</bean>
+
+	<bean id="mEditTeacherService" class="cn.yiyingli.Handle.Service.MEditTeacherService"
+		scope="prototype" parent="msgService">
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="userService">
+			<ref local="userService" />
+		</property>
+		<property name="tipService">
+			<ref local="tipService" />
+		</property>
+	</bean>
+	
+	<bean id="mGetTeacherInfoService" class="cn.yiyingli.Handle.Service.MGetTeacherInfoService"
+		scope="prototype" parent="msgService">
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="userService">
+			<ref local="userService" />
+		</property>
+	</bean>
+	
+	<bean id="mGetOrderListService" class="cn.yiyingli.Handle.Service.MGetOrderListService"
+		scope="prototype" parent="msgService">
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+	</bean>
+
+	<bean id="mGetTeacherAllInfoService" class="cn.yiyingli.Handle.Service.MGetTeacherAllInfoService"
+		scope="prototype" parent="msgService">
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="mGetOrderByOIdService" class="cn.yiyingli.Handle.Service.MGetOrderByOIdService"
+		scope="prototype" parent="msgService">
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+	</bean>
+
+	<bean id="mGetOrderListByNameService" class="cn.yiyingli.Handle.Service.MGetOrderListByNameService"
+		scope="prototype" parent="msgService">
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+	</bean>
+	
+	<bean id="mCreateVoucherService" class="cn.yiyingli.Handle.Service.MCreateVoucherService"
+		scope="prototype" parent="msgService">
+		<property name="voucherService">
+			<ref local="voucherService" />
+		</property>
+	</bean>
+
+	<bean id="mGetVoucherListService" class="cn.yiyingli.Handle.Service.MGetVoucherListService"
+		scope="prototype" parent="msgService">
+		<property name="voucherService">
+			<ref local="voucherService" />
+		</property>
+	</bean>
+
+	<bean id="mAddBackgroundService" class="cn.yiyingli.Handle.Service.MAddBackgroundService"
+		scope="prototype" parent="msgService">
+		<property name="backgroundService">
+			<ref local="backgroundService" />
+		</property>
+	</bean>
+
+	<bean id="mGetBackgroundListService" class="cn.yiyingli.Handle.Service.MGetBackgroundListService"
+		scope="prototype" parent="msgService">
+		<property name="backgroundService">
+			<ref local="backgroundService" />
+		</property>
+	</bean>
+
+	<bean id="mRemoveBackgroundService" class="cn.yiyingli.Handle.Service.MRemoveBackgroundService"
+		scope="prototype" parent="msgService">
+		<property name="backgroundService">
+			<ref local="backgroundService" />
+		</property>
+	</bean>
+	
+	<bean id="orderSalaryDoneService" class="cn.yiyingli.Handle.Service.MOrderSalaryDoneService"
+		scope="prototype" parent="msgService">
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+		<property name="notificationService">
+			<ref local="notificationService" />
+		</property>
+	</bean>
+
+	<bean id="orderReturnDoneService" class="cn.yiyingli.Handle.Service.MOrderReturnDoneService"
+		scope="prototype" parent="msgService">
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+		<property name="notificationService">
+			<ref local="notificationService" />
+		</property>
+	</bean>
+	
+	<bean id="mRestartOrderService" class="cn.yiyingli.Handle.Service.MRestartOrderService"
+		scope="prototype" parent="msgService">
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+		<property name="notificationService">
+			<ref local="notificationService" />
+		</property>
+	</bean>
+	 -->
+</beans>
