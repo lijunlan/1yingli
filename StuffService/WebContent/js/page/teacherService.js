@@ -23,7 +23,7 @@ function search() {
 	// 判断输入内容
 	reg = /^[0-9]+$/;
 	if (reg.test(keyword)) {
-		// 订单no
+		// teacherNo
 		myJson.teacherId = keyword;
 		delete myJson.word;
 	} else {

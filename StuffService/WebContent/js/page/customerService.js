@@ -12,7 +12,7 @@ $(function () {
 	if (page == 1)
 		document.getElementById("lastPage").disabled = true;
 	document.getElementById("pageInput").value = page;
-})
+});
 
 //根据ajax返回的数据
 var changeTable = function (result) {
