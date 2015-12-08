@@ -63,7 +63,7 @@ public class ForgetPasswordService extends MsgService {
 		}
 		User user = getUserService().query(no, false);
 		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsgByCode("15003"));
+			setResMsg(MsgUtil.getErrorMsgByCode("15004"));
 			return;
 		}
 		try {

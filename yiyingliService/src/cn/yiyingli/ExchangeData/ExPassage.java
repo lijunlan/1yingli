@@ -16,6 +16,7 @@ public class ExPassage {
 		map.put("tag", passage.getTag());
 		map.put("content", passage.getContent());
 		map.put("likeno", passage.getLikeNumber());
+		map.put("simpleinfo", passage.getOwnTeacher().getSimpleInfo());
 	}
 
 	public static void assembleSimple(Passage p, SuperMap map) {
