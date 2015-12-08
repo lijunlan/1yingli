@@ -2,30 +2,6 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>StuffService</display-name>
   <welcome-file-list>
-    <welcome-file>login.jsp</welcome-file>
+    <welcome-file>login.html</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description>登录</description>
-    <display-name>ManageLogin</display-name>
-    <servlet-name>ManageLogin</servlet-name>
-    <servlet-class>
-          cn.yiyingli.Servlet.MLoginServlet
-       </servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ManageLogin</servlet-name>
-    <url-pattern>/manageLogin</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description>获取订单</description>
-    <display-name>MGetOrder</display-name>
-    <servlet-name>MGetOrder</servlet-name>
-    <servlet-class>
-          cn.yiyingli.Servlet.MGetOrderServlet
-       </servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MGetOrder</servlet-name>
-    <url-pattern>/mGetOrder</url-pattern>
-  </servlet-mapping>
 </web-app>
