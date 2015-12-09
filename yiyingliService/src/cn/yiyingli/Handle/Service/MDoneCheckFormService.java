@@ -41,7 +41,7 @@ public class MDoneCheckFormService extends MMsgService {
 		}
 		boolean acpt = Boolean.valueOf(accept);
 		Teacher teacher = checkForm.getTeacher();
-		if (checkForm.getKind() != CheckFormService.CHECK_STATE_CHECKING_SHORT) {
+		if (checkForm.getState() != CheckFormService.CHECK_STATE_CHECKING_SHORT) {
 			setResMsg(MsgUtil.getErrorMsgByCode("32006"));
 		}
 		if (acpt) {
