@@ -89,7 +89,6 @@
 
 	<!-- order 4 -->
 	<error name="40001" value="server error" />
-	<error name="40002" value="paypal error" />
 	<error name="41001" value="input data is wrong" />
 	<error name="42001" value="order is not existed" />
 	<error name="43001" value="alipay error" />
