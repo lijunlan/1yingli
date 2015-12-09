@@ -12,6 +12,7 @@ import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.Voucher;
 import cn.yiyingli.Service.UserService;
+import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.CouponNumberUtil;
 import cn.yiyingli.Util.NotifyUtil;
 
@@ -113,13 +114,16 @@ public class UserServiceImpl implements UserService {
 	public void updateWithTeacher(User user) {
 		if (user.getTeacherState() == TEACHER_STATE_ON_SHORT) {
 			Teacher teacher = getTeacherDao().queryByUserId(user.getId(), false);
-			// teacher.setSex(user.getSex());
-			teacher.setEmail(user.getEmail());
-			teacher.setName(user.getName());
-			teacher.setPhone(user.getPhone());
-			teacher.setIconUrl(user.getIconUrl());
-			getUserDao().merge(user);
-			getTeacherDao().merge(teacher);
+			// 防止TEACHER被强制下架
+			if (teacher != null) {
+				// teacher.setSex(user.getSex());
+				teacher.setEmail(user.getEmail());
+				teacher.setName(user.getName());
+				teacher.setPhone(user.getPhone());
+				teacher.setIconUrl(user.getIconUrl());
+				getUserDao().merge(user);
+				getTeacherDao().merge(teacher);
+			}
 		} else {
 			getUserDao().update(user);
 		}
@@ -142,6 +146,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User queryByNo(String no, boolean lazy) {
+		User user = getUserDao().queryByNo(no, lazy);
+		if (!CheckUtil.checkEmail(no) && user == null) {
+			String[] tmp = no.split("-");
+			if (tmp.length > 1) {
+				user = getUserDao().queryByNo(tmp[1], lazy);
+			}
+		}
 		return getUserDao().queryByNo(no, lazy);
 	}
 
@@ -152,7 +163,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User query(String username, boolean lazy) {
-		return getUserDao().queryWithTeacher(username, lazy);
+		User user = getUserDao().queryWithTeacher(username, lazy);
+		if (!CheckUtil.checkEmail(username) && user == null) {
+			String[] tmp = username.split("-");
+			if (tmp.length > 1) {
+				user = getUserDao().queryWithTeacher(tmp[1], lazy);
+			}
+		}
+		return user;
 	}
 
 	@Override
@@ -167,7 +185,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User queryWithTeacher(String username, boolean lazy) {
-		return getUserDao().queryWithTeacher(username, lazy);
+		User user = getUserDao().queryWithTeacher(username, lazy);
+		if (!CheckUtil.checkEmail(username) && user == null) {
+			String[] tmp = username.split("-");
+			if (tmp.length > 1) {
+				user = getUserDao().queryWithTeacher(tmp[1], lazy);
+			}
+		}
+		return user;
 	}
 
 	@Override
