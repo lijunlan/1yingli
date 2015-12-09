@@ -46,6 +46,7 @@ public class MOrderReturnDoneService extends MMsgService {
 		if (!OrderService.ORDER_STATE_WAIT_RETURN.equals(state)) {
 			if (OrderService.ORDER_STATE_END_FAILED.equals(state)) {
 				setResMsg(MsgUtil.getErrorMsgByCode("45005"));
+				return;
 			} else {
 				setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 				return;
@@ -56,8 +57,8 @@ public class MOrderReturnDoneService extends MMsgService {
 		getOrderService().update(order);
 
 		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-				"尊敬的学员,您的订单(" + order.getOrderNo() + ")已经成功退款,请注意查收.如有疑问请咨询客服.",
-				order.getCreateUser(), getNotificationService());
+				"尊敬的学员,您的订单(" + order.getOrderNo() + ")已经成功退款,请注意查收.如有疑问请咨询客服.", order.getCreateUser(),
+				getNotificationService());
 		setResMsg(MsgUtil.getSuccessMsg("update order state successfully"));
 	}
 

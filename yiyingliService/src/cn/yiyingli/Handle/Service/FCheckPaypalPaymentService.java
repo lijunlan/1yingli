@@ -55,7 +55,7 @@ public class FCheckPaypalPaymentService extends MsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("40001"));
 		} catch (PayPalRESTException e) {
 			e.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsgByCode("40002"));
+			setResMsg(MsgUtil.getErrorMsgByCode("43002"));
 		}
 	}
 
