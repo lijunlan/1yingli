@@ -52,7 +52,7 @@ public class TCheckPhoneService extends TMsgService {
 		} else {
 			getCheckNoService().remove(no);
 		}
-		if (CheckUtil.checkMobileNumber(phone)) {
+		if (CheckUtil.checkMobileNumber(phone) || CheckUtil.checkGlobleMobileNumber(phone)) {
 			if (getTeacher().getPhone().equals(phone)) {
 				getTeacher().setCheckPhone(true);
 			} else {
