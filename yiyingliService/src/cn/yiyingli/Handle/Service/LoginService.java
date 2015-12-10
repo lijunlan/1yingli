@@ -2,7 +2,6 @@ package cn.yiyingli.Handle.Service;
 
 import cn.yiyingli.Handle.ULoginMsgService;
 import cn.yiyingli.Persistant.User;
-import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.RSAUtil;
@@ -31,12 +30,6 @@ public class LoginService extends ULoginMsgService {
 			return;
 		}
 		User user = getUserService().queryWithTeacher(username, false);
-		if (!CheckUtil.checkEmail(username) && user == null) {
-			String[] tmp = username.split("-");
-			if (tmp.length > 1) {
-				user = getUserService().queryWithTeacher(tmp[1], false);
-			}
-		}
 		if (user == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("12015"));
 			return;

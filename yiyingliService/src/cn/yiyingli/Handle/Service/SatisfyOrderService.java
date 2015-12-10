@@ -56,13 +56,14 @@ public class SatisfyOrderService extends UMsgService {
 			return;
 		}
 
-		order.setState(OrderService.ORDER_STATE_WAIT_COMMENT + "," + state);
+		order.setState(OrderService.ORDER_STATE_WAIT_COMMENT + "," + order.getState());
 		order.setSalaryState(OrderService.ORDER_SALARY_STATE_NEED);
 		order.setEndTime(Calendar.getInstance().getTimeInMillis() + "");
 		getOrderService().update(order);
 
 		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-				"尊敬的学员,您好,您已经确认本次咨询(订单号:" + order.getOrderNo() + "),相信您与导师交流得很愉快,请在一英里平台对本次咨询进行评价哦,谢谢。", user, getNotificationService());
+				"尊敬的学员,您好,您已经确认本次咨询(订单号:" + order.getOrderNo() + "),相信您与导师交流得很愉快,请在一英里平台对本次咨询进行评价哦,谢谢。", user,
+				getNotificationService());
 		NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
 				"尊敬的导师,您好,学员对本次咨询(订单号:" + order.getOrderNo() + ")恨满意,感谢您的付出,您的酬劳将在24小时内到账,请注意查收。", order.getTeacher(),
 				getNotificationService());

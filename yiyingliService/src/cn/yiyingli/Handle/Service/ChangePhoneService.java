@@ -54,7 +54,7 @@ public class ChangePhoneService extends UMsgService {
 		} else {
 			getCheckNoService().remove(no);
 		}
-		if (CheckUtil.checkMobileNumber(phone)) {
+		if (CheckUtil.checkMobileNumber(phone) || CheckUtil.checkGlobleMobileNumber(phone)) {
 			user.setPhone(phone);
 			getUserService().updateWithTeacher(user);
 			setResMsg(MsgUtil.getSuccessMsg("phone number has been changed"));
