@@ -155,6 +155,8 @@ public class ExTeacher {
 	public static void assembleDetailForManager(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
 		map.put("mile", teacher.getMile());
+		map.put("alipayNo", teacher.getAlipay());
+		map.put("paypalNo", teacher.getPaypal());
 		map.put("showWeight1", teacher.getShowWeight1());
 		map.put("showWeight2", teacher.getShowWeight2());
 		map.put("showWeight4", teacher.getShowWeight4());
@@ -165,6 +167,7 @@ public class ExTeacher {
 		map.put("checkPassageNumber", teacher.getCheckPassageNumber());
 		map.put("passageNumber", teacher.getPassageNumber());
 		map.put("refusePassageNumber", teacher.getRefusePassageNumber());
+		map.put("onService", teacher.getOnService());
 	}
 
 }
