@@ -120,7 +120,10 @@ function getAndParse(t) {
 	$("#showWeight16").val(t.showWeight16);
 	$("#homeWeight").val(t.homeWeight);
 	$("#saleWeight").val(t.saleWeight);
+	$('#pricetemp').val(t.pricetemp);
 	$('#actionDiv').bootstrapSwitch('setState', false)
+	t.onService == 'true' ? $('#onServiceDiv').bootstrapSwitch('setState', true) : $('#onServiceDiv').bootstrapSwitch('setState', false);
+	t.onsale == 'true' ? $('#onSaleDiv').bootstrapSwitch('setState', true) : $('#onSaleDiv').bootstrapSwitch('setState', false);
 	Messenger().post("加载完成");
 }
 
@@ -206,6 +209,8 @@ function submit() {
 	service.price = $("#servicePrice").val();
 	service.timeperweek = $("#serviceTimePerWeek").val();
 	service.content = $("#serviceContent").val();
+	service.pricetemp = $('#pricetemp').val();
+	service.onsale = document.getElementById('onSale').checked.toString();
 
 	var tmpId = 1 / 2;
 	var i;
@@ -235,7 +240,8 @@ function submit() {
 	teacher.homeWeight = $("#homeWeight").val();
 	teacher.saleWeight = $("#saleWeight").val();
 	teacher.mile = $('#mileValue').val();
-
+	teacher.onService = document.getElementById('onService').checked.toString();
+	
 	send.teacher = teacher;
 	send.style = "manager";
 
@@ -244,6 +250,7 @@ function submit() {
 	}else{
 		send.method = "editTeacher";
 	}
+	
 	send.mid = mid;
 	send.username = $("#username").val();
 

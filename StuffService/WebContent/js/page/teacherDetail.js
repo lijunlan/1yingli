@@ -60,6 +60,8 @@ var changeTable = function (data) {
 	row += "<tr><th>头像链接</th><td colspan=6><img id=\"littleIcon\" src=\"" + data.iconUrl + "\" class=\"am-img-thumbnail\"></td></tr>";
 	row += "<tr><th>电话</th><td colspan=6>" + data.phone + "</td></tr>";
 	row += "<tr><th>邮箱</th><td colspan=6>" + data.email + "</td></tr>";
+	row += "<tr><th>支付宝账号</th><td colspan=6>" + data.alipayNo + "</td></tr>";
+	row += "<tr><th>paypal账号</th><td colspan=6>" + data.paypalNo + "</td></tr>";
 	row += "<tr><th>简介</th><td colspan=6>" + data.introduce + "</td></tr>";
 	row += "<tr><th>粉丝数</th><td colspan=6>" + data.likeNo + "</td></tr>";
 	row += "<tr><th>地址</th><td colspan=6>" + data.address + "</td></tr>";
