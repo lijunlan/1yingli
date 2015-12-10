@@ -87,11 +87,13 @@ public class MEditTeacherService extends MMsgService {
 		String homeWeight = (String) tdata.get("homeWeight");
 		String saleWeight = (String) tdata.get("saleWeight");
 		String mile = (String) tdata.get("mile");
+		String onService = (String) tdata.get("onService");
 
 		Teacher teacher = user.getTeacher();
-		PTeacherUtil.refreshTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone, address,
-				mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, showWeight1,
-				showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight,
+		PTeacherUtil.editTeacherByManagerDetail(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
+				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
+				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight,
+				onService == null ? String.valueOf(teacher.getOnService()) : onService,
 				mile == null ? teacher.getMile() : Long.valueOf(mile), teacher, getTipService());
 
 		TService tService = teacher.gettService();
@@ -109,7 +111,7 @@ public class MEditTeacherService extends MMsgService {
 			PTServiceUtil.editWithTeacherByManager(teacher, tService, serviceTitle, serviceTime, servicePrice,
 					serviceTimePerWeek, serviceContent, tService.getOnSale() + "", tService.getPriceTemp() + "");
 		}
-		getTeacherService().updateWithDetailInfo(teacher,true);
+		getTeacherService().updateWithDetailInfo(teacher, true);
 		setResMsg(MsgUtil.getSuccessMsg("edit teacher successfully"));
 	}
 
