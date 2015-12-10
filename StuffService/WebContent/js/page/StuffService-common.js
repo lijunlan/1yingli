@@ -117,8 +117,8 @@ var errorType = {
 function myAjax(JsonStr, action) {
 	$.ajax({
 		type: "POST",
-		//url: "http://service.1yingli.cn/yiyingliService/manage",
-		url: "http://120.26.83.33/yiyingliManagerService/manage",
+		url: "http://test.1yingli.cn/yiyingliService/manage",
+		//url: "http://120.26.83.33/yiyingliManagerService/manage",
 		data: $.toJSON(JsonStr),
 		success: function (data, status) {
 			var result = JSON.parse(data);
