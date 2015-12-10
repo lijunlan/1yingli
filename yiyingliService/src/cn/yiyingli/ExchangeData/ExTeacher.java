@@ -167,6 +167,7 @@ public class ExTeacher {
 		map.put("checkPassageNumber", teacher.getCheckPassageNumber());
 		map.put("passageNumber", teacher.getPassageNumber());
 		map.put("refusePassageNumber", teacher.getRefusePassageNumber());
+		map.put("onService", teacher.getOnService());
 	}
 
 }
