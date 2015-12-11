@@ -171,7 +171,7 @@ var changeTable = function (result) {
 			+ "')>确认退款</button><button  class='am-btn am-btn-danger' onclick=restart('" + data.orderId + "')>状态回退</button></td><td>";
 		} else if (data.salaryState == "1") {
 			row += "<button class='am-btn am-btn-danger' onclick=payTeacher('" + data.orderId
-			+ "')>确认支付导师</button></td><td>";
+			+ "')>已完成支付</button><button class='am-btn am-btn-danger' onclick='goToPay("+data.orderId+")'>去支付</button></td><td>";
 		} else if (data.state.split(',')[0] == "1300") {
 			row += "<button class='am-btn am-btn-danger' onclick=process('" + data.orderId + "',"
 			+ false + ")>同意退款</button><button class='am-btn am-btn-danger' onclick=process('"
@@ -423,6 +423,26 @@ function get() {
 		document.getElementById("lastPage").disabled = false;
 	page = document.getElementById("pageInput").value;
 }
+
+var goToPay = function(oid){
+	post(URL + 'AlipayTrans',{mid:mid,oid:oid});
+}
+
+function post(URL, PARAMS) {        
+    var temp = document.createElement("form");        
+    temp.action = URL;        
+    temp.method = "post";        
+    temp.style.display = "none";        
+    for (var x in PARAMS) {        
+        var opt = document.createElement("textarea");        
+        opt.name = x;        
+        opt.value = PARAMS[x];      
+        temp.appendChild(opt);        
+    }        
+    document.body.appendChild(temp);        
+    temp.submit();        
+    return temp;        
+}  
 	
 	
 	
