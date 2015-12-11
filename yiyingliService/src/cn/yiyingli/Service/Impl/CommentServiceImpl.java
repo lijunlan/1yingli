@@ -60,25 +60,25 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public void saveWithOrder(Comment comment, Order order) {
+		getOrderDao().update(order);
 		if (comment.getKind() == COMMENT_KIND_FROMUSER_SHORT) {
 			getCommentDao().saveWithTeacherAndUser(comment, comment.getTeacher(), comment.getUser(),
 					COMMENT_KIND_FROMUSER_SHORT);
 		} else {
 			getCommentDao().saveWithUser(comment, comment.getUser(), COMMENT_KIND_FROMTEACHER_SHORT);
 		}
-		getOrderDao().update(order);
 	}
 
 	@Override
 	public void saveWithOrderAndTeacher(Comment comment, Order order, Teacher teacher) {
+		getTeacherDao().update(teacher);
+		getOrderDao().update(order);
 		if (comment.getKind() == COMMENT_KIND_FROMUSER_SHORT) {
 			getCommentDao().saveWithTeacherAndUser(comment, comment.getTeacher(), comment.getUser(),
 					COMMENT_KIND_FROMUSER_SHORT);
 		} else {
 			getCommentDao().saveWithUser(comment, comment.getUser(), COMMENT_KIND_FROMTEACHER_SHORT);
 		}
-		getOrderDao().update(order);
-		getTeacherDao().update(teacher);
 	}
 
 	@Override

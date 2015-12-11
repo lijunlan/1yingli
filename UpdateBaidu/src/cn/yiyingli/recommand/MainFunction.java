@@ -147,7 +147,7 @@ public class MainFunction {
 
 	private static void updateTeacherData() {
 		JSONArray jarray = new JSONArray();
-		for (int i = 1; i <= 251; i++) {
+		for (int i = 1; i <= 252; i++) {
 			JSONObject obj = updateTeacherData(i + "");
 			if (obj != null) {
 				jarray.add(obj);

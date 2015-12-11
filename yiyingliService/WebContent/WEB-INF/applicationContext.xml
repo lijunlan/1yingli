@@ -2133,4 +2133,14 @@
 		</property>
 	</bean>
 
+	<bean id="mGetSuggestionService" class="cn.yiyingli.Handle.Service.MGetSuggestionService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="suggestionService">
+			<ref local="suggestionService" />
+		</property>
+	</bean>
+
 </beans>

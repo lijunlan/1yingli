@@ -100,6 +100,7 @@
 		<method name="login" beanName="dLoginService" />
 	</style>
 	<style name="manager">
+		<method name="getSuggestion" beanName="mGetSuggestionService" />
 		<method name="searchTeacher" beanName="mSearchTeacherService" />
 		<method name="editTeacherMile" beanName="mEditTeacherMileService" />
 		<method name="editUserMile" beanName="mEditUserMileService" />

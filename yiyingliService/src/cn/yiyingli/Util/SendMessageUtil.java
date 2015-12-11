@@ -64,6 +64,7 @@ public class SendMessageUtil {
 	}
 
 	public static void main(String[] args) {
+		sendGlobleMsg("8615659831720", "test");
 		// for (int i = 1; i <= 1; i++) {
 		// new Thread(new Runnable() {
 		// @Override
