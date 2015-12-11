@@ -103,8 +103,8 @@ public class CreateOrderService extends UMsgService {
 		String time = (String) getData().get("selectTime");
 		String resume = (String) getData().get("userIntroduce");
 
-		phone = CheckUtil.getCorrectPhone(phone);
-		if (!(CheckUtil.checkEmail(email) && CheckUtil.checkGlobleMobileNumber(phone))) {
+		if (!(CheckUtil.checkEmail(email)
+				&& (CheckUtil.checkMobileNumber(phone) || CheckUtil.checkGlobleMobileNumber(phone)))) {
 			setResMsg(MsgUtil.getErrorMsgByCode("12008"));
 			return;
 		}
