@@ -21,6 +21,7 @@ import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Service.UserMarkService;
+import cn.yiyingli.Util.ConfigurationXmlUtil;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
 
@@ -43,6 +44,7 @@ public class AlipayServlet extends HttpServlet {
 		setApplicationContext(WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext()));
 	}
 
+	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
 		Map<String, String> parms = new HashMap<String, String>();
@@ -112,7 +114,11 @@ public class AlipayServlet extends HttpServlet {
 		parms.put("seller_email", AlipayConfig.seller_email);
 		parms.put("_input_charset", AlipayConfig.input_charset);
 		parms.put("payment_type", AlipayConfig.payment_type);
-		parms.put("notify_url", AlipayConfig.notify_url);
+		if (!"false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
+			parms.put("notify_url", AlipayConfig.notify_url_debug);
+		} else {
+			parms.put("notify_url", AlipayConfig.notify_url);
+		}
 		// 判断是否使用默认的return_url
 		if (req.getParameter("callback") == null) {
 			parms.put("return_url", AlipayConfig.return_url);

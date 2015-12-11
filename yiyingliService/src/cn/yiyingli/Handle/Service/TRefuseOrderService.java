@@ -56,7 +56,7 @@ public class TRefuseOrderService extends TMsgService {
 		String refuseReason = (String) getData().get("refuseReason");
 		order.setRefuseReason(refuseReason);
 		order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
-		getOrderService().update(order);
+		getOrderService().update(order,false);
 
 		NotifyUtil.notifyUserOrder(order.getCustomerPhone(),
 				order.getCustomerEmail(), "尊敬的学员,抱歉的通知您,您的订单(" + order.getOrderNo() + ")已被导师(" + teacher.getName()

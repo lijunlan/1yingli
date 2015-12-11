@@ -55,7 +55,7 @@ public class MDealOrderService extends MMsgService {
 				// 状态跳为等待付薪状态
 				order.setState(OrderService.ORDER_STATE_WAIT_COMMENT + "," + order.getState());
 				order.setSalaryState(OrderService.ORDER_SALARY_STATE_NEED);
-				getOrderService().update(order);
+				getOrderService().update(order, true);
 				NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 						"尊敬的学员，订单号为" + order.getOrderNo() + "的订单，导师(" + order.getTeacher().getName()
 								+ ")，客服已经协调结束，协调结果：拒绝此次退款。请到一英里平台对本次咨询进行评价",
@@ -69,7 +69,7 @@ public class MDealOrderService extends MMsgService {
 				// 状态跳为订单失败，正常情况下钱将打入导师账户，特殊情况下可人工操作进行特殊处理
 				order.setState(OrderService.ORDER_STATE_END_FAILED + "," + order.getState());
 				order.setSalaryState(OrderService.ORDER_SALARY_STATE_NEED);
-				getOrderService().update(order);
+				getOrderService().update(order, false);
 				NotifyUtil.notifyUserOrder(order.getCustomerPhone(),
 						order.getCustomerEmail(), "尊敬的学员，订单号为" + order.getOrderNo() + "的订单，导师("
 								+ order.getTeacher().getName() + ")，客服已经协调结束，协调结果：拒绝此次退款。",
@@ -87,7 +87,7 @@ public class MDealOrderService extends MMsgService {
 			}
 		} else if (!Boolean.valueOf(deal)) {
 			order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
-			getOrderService().update(order);
+			getOrderService().update(order, false);
 			// 退钱,等待将钱退回学员支付宝
 			NotifyUtil.notifyUserOrder(order.getCustomerPhone(),
 					order.getCustomerEmail(), "尊敬的学员，订单号为" + order.getOrderNo() + "的订单，导师("

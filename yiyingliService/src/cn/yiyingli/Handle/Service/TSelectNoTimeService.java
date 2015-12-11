@@ -55,7 +55,7 @@ public class TSelectNoTimeService extends TMsgService {
 		}
 
 		order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
-		getOrderService().update(order);
+		getOrderService().update(order,false);
 
 		NotifyUtil.notifyUserOrder(order.getCustomerPhone(),
 				order.getCustomerEmail(), "尊敬的学员,抱歉的通知您,您的订单(" + order.getOrderNo() + ")由于双方无法选择合适的时间已经被导师("
