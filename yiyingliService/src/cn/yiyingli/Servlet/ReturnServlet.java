@@ -171,7 +171,7 @@ public class ReturnServlet extends HttpServlet {
 							WarnUtil.sendWarnToCTO("Return from Paypal and order id:" + oid
 									+ ", price is wrong, it should be " + order.getMoney() + ", but it is "
 									+ Float.parseFloat(results2.get("PAYMENTREQUEST_0_AMT")));
-							orderService.update(order);
+							orderService.update(order,false);
 							returnToOnemile(resultParameter + "fail", response);
 							return;
 						}

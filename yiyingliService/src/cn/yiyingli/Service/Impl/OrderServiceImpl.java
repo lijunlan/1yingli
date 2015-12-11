@@ -78,9 +78,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void update(Order order) {
-		// 如果订单完成，给分销人更新数据
-		if (order.getState().startsWith(ORDER_STATE_WAIT_COMMENT)) {
+	public void update(Order order, boolean addMile) {
+		if (addMile) {
 			if (!order.getOnSale()) {
 				Teacher teacher = order.getTeacher();
 				float time = order.getTime();
@@ -92,6 +91,19 @@ public class OrderServiceImpl implements OrderService {
 		} else {
 			getOrderDao().update(order);
 		}
+		// 如果订单完成，给分销人更新数据
+		// if (order.getState().startsWith(ORDER_STATE_WAIT_COMMENT)) {
+		// if (!order.getOnSale()) {
+		// Teacher teacher = order.getTeacher();
+		// float time = order.getTime();
+		// long m = (long) (10 * time);
+		// teacher.setMile(teacher.getMile() + m);
+		// getTeacherDao().update(teacher);
+		// }
+		// getOrderDao().updateOrderWhenOrderFinish(order);
+		// } else {
+		// getOrderDao().update(order);
+		// }
 		// 通知管理员
 		if (order.getState().startsWith(ORDER_STATE_WAIT_RETURN)) {
 			NotifyUtil.notifyManager(new SuperMap().put("type", "withdraw").finishByJson());

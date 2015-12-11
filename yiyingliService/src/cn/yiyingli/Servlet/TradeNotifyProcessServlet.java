@@ -92,7 +92,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 					order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_ABNORMAL + "," + order.getState());
 					WarnUtil.sendWarnToCTO("order id:" + oid + ", price is wrong, it should be " + order.getMoney()
 							+ ", but it is " + price);
-					orderService.update(order);
+					orderService.update(order,false);
 					returnSuccess(resp);
 					return;
 				}
@@ -128,7 +128,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 					order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_ABNORMAL + "," + order.getState());
 					WarnUtil.sendWarnToCTO("TRADE_FINISHED order id:" + oid + ", price is wrong, it should be "
 							+ order.getMoney() + ", but it is " + price);
-					orderService.update(order);
+					orderService.update(order,false);
 					returnSuccess(resp);
 					return;
 				}
@@ -169,7 +169,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 					order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_END_FAILED + "," + order.getState());
 					LogUtil.info("order id: " + oid + ", get notify from Alipay, time up and trade is closed",
 							this.getClass());
-					orderService.update(order);
+					orderService.update(order,false);
 					NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 							"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经取消", order.getCreateUser(), notificationService);
 				} else if (state.equals(cn.yiyingli.Service.OrderService.ORDER_STATE_END_FAILED)
@@ -182,7 +182,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 				} else if (state.equals(OrderService.ORDER_STATE_WAIT_RETURN)) {
 					order.setState(OrderService.ORDER_STATE_END_FAILED + "," + OrderService.ORDER_STATE_RETURN_SUCCESS
 							+ "," + order.getState());
-					orderService.update(order);
+					orderService.update(order,false);
 					LogUtil.info(
 							"order id: " + oid
 									+ ", get notify from Alipay, return money successfully and trade is closed",

@@ -54,7 +54,7 @@ public class CancelOrderAfterPayService extends UMsgService {
 			return;
 		}
 		order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
-		getOrderService().update(order);
+		getOrderService().update(order,false);
 
 		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 				"尊敬的学员，您的订单(" + order.getOrderNo() + ")已经取消，我们将竭尽全力在24小时内为您全额退款", user, getNotificationService());

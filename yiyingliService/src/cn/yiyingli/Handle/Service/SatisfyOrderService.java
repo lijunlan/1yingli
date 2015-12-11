@@ -59,7 +59,7 @@ public class SatisfyOrderService extends UMsgService {
 		order.setState(OrderService.ORDER_STATE_WAIT_COMMENT + "," + order.getState());
 		order.setSalaryState(OrderService.ORDER_SALARY_STATE_NEED);
 		order.setEndTime(Calendar.getInstance().getTimeInMillis() + "");
-		getOrderService().update(order);
+		getOrderService().update(order,true);
 
 		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 				"尊敬的学员,您好,您已经确认本次咨询(订单号:" + order.getOrderNo() + "),相信您与导师交流得很愉快,请在一英里平台对本次咨询进行评价哦,谢谢。", user,

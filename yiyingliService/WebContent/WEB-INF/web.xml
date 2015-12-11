@@ -113,6 +113,35 @@
     <url-pattern>/TradeNotifyProcess</url-pattern>
   </servlet-mapping>  
   
+   <servlet>
+    <description>支付宝转账通知服务</description>
+    <display-name>AlipayTransNotify</display-name>
+    <servlet-name>AlipayTransNotify</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.AlipayTransNotifyServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>AlipayTransNotify</servlet-name>
+    <url-pattern>/AlipayTransNotify</url-pattern>
+  </servlet-mapping>  
+  
+   <servlet>
+    <description>支付宝转账</description>
+    <display-name>AlipayTrans</display-name>
+    <servlet-name>AlipayTrans</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.AlipayTransServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>AlipayTrans</servlet-name>
+    <url-pattern>/AlipayTrans</url-pattern>
+  </servlet-mapping>  
+  
+  
   <servlet>
     <description>支付宝交易请求</description>
     <display-name>Alipay</display-name>
