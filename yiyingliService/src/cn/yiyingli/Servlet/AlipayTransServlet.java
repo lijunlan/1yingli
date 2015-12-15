@@ -94,7 +94,7 @@ public class AlipayTransServlet extends HttpServlet {
 		// 付款当天日期
 		Calendar calendar = Calendar.getInstance();
 		int y = calendar.get(Calendar.YEAR);
-		int m = calendar.get(Calendar.MONTH);
+		int m = calendar.get(Calendar.MONTH) + 1;
 		int d = calendar.get(Calendar.DAY_OF_MONTH);
 		String pay_date = "" + y + (m > 9 ? (m + "") : ("0" + m)) + (d > 9 ? (d + "") : ("0" + d));
 		// 必填，格式：年[4位]月[2位]日[2位]，如：20100801
@@ -112,11 +112,11 @@ public class AlipayTransServlet extends HttpServlet {
 		// 必填，即参数detail_data的值中，“|”字符出现的数量加1，最大支持1000笔（即“|”字符出现的数量999个）
 
 		// 付款详细数据
-		String detail_data = batch_no + "^" + order.getAlipayNo() == null ? order.getTeacher().getAlipay()
-				: order.getAlipayNo() + "^" + order.getTeacher().getName() + "^" + batch_fee + "^【一英里】"
-						+ order.getServiceTitle();
-						// 必填，格式：流水号1^收款方帐号1^真实姓名^付款金额1^备注说明1|流水号2^收款方帐号2^真实姓名^付款金额2^备注说明2....
-
+		String detail_data = batch_no + "^"
+				+ (order.getAlipayNo() == null ? order.getTeacher().getAlipay() : order.getAlipayNo()) + "^"
+				+ order.getTeacher().getName() + "^" + batch_fee + "^【一英里】" + order.getServiceTitle();
+		// 必填，格式：流水号1^收款方帐号1^真实姓名^付款金额1^备注说明1|流水号2^收款方帐号2^真实姓名^付款金额2^备注说明2....
+		
 		//////////////////////////////////////////////////////////////////////////////////
 
 		// 把请求参数打包成数组
