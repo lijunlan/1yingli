@@ -13,11 +13,11 @@ public interface TeacherService {
 
 	public static final short CHECK_STATE_SUCCESS_SHORT = 2;
 
-	public static final int PAGE_SIZE_INT = 10;
+	public static final int PAGE_SIZE_INT = 12;
 
 	public static final int HOME_PAGE_SIZE = 6;
 
-	public static final int SALE_PAGE_SIZE = 10;
+	public static final int SALE_PAGE_SIZE = 12;
 
 	void save(Teacher teacher);
 
