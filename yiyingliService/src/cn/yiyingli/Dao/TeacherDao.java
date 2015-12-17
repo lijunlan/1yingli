@@ -50,7 +50,7 @@ public interface TeacherDao {
 
 	List<Teacher> queryListByHomePage(int pageSize);
 	
-	int queryListBySaleNo();
+	long queryListBySaleNo();
 
 	List<Teacher> queryListBySale(int page, int pageSize);
 

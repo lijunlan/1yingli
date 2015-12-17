@@ -356,7 +356,7 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public int queryListBySaleNo() {
+	public long queryListBySaleNo() {
 		return getTeacherDao().queryListBySaleNo();
 	}
 

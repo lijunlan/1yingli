@@ -41,7 +41,7 @@ public class FGetSaleTeacherListService extends MsgService {
 		}
 		SuperMap toSend = MsgUtil.getSuccessMap();
 		List<Teacher> teachers = getTeacherService().queryListBySale(p);
-		int sum = getTeacherService().queryListBySaleNo();
+		long sum = getTeacherService().queryListBySaleNo();
 		toSend.put("count", sum);
 		ExList exTeachers = new ExArrayList();
 		for (Teacher teacher : teachers) {

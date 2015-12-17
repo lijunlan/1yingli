@@ -77,7 +77,7 @@ public interface TeacherService {
 
 	List<Teacher> queryListByHomePage();
 	
-	int queryListBySaleNo();
+	long queryListBySaleNo();
 
 	List<Teacher> queryListBySale(int page);
 
