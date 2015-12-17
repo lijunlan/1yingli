@@ -39,7 +39,10 @@ public class FGetSaleTeacherListService extends MsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("51001"));
 			return;
 		}
+		SuperMap toSend = MsgUtil.getSuccessMap();
 		List<Teacher> teachers = getTeacherService().queryListBySale(p);
+		int sum = getTeacherService().queryListBySaleNo();
+		toSend.put("count", sum);
 		ExList exTeachers = new ExArrayList();
 		for (Teacher teacher : teachers) {
 			SuperMap map = new SuperMap();
@@ -47,9 +50,9 @@ public class FGetSaleTeacherListService extends MsgService {
 			exTeachers.add(map.finish());
 		}
 		if (exTeachers.size() == TeacherService.SALE_PAGE_SIZE) {
-			setResMsg(MsgUtil.getSuccessMap().put("data", exTeachers).finishByJson());
+			setResMsg(toSend.put("data", exTeachers).finishByJson());
 		} else {
-			setResMsg(MsgUtil.getSuccessMap().put("data", exTeachers).put("page", "max").finishByJson());
+			setResMsg(toSend.put("data", exTeachers).put("page", "max").finishByJson());
 		}
 	}
 

@@ -355,4 +355,9 @@ public class TeacherServiceImpl implements TeacherService {
 		return getTeacherDao().queryListBySale(page, SALE_PAGE_SIZE);
 	}
 
+	@Override
+	public int queryListBySaleNo() {
+		return getTeacherDao().queryListBySaleNo();
+	}
+
 }

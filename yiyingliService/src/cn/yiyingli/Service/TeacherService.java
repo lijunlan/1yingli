@@ -13,11 +13,11 @@ public interface TeacherService {
 
 	public static final short CHECK_STATE_SUCCESS_SHORT = 2;
 
-	public static final int PAGE_SIZE_INT = 9;
+	public static final int PAGE_SIZE_INT = 10;
 
 	public static final int HOME_PAGE_SIZE = 6;
 
-	public static final int SALE_PAGE_SIZE = 9;
+	public static final int SALE_PAGE_SIZE = 10;
 
 	void save(Teacher teacher);
 
@@ -76,6 +76,8 @@ public interface TeacherService {
 	List<Teacher> queryListBySale(int page, int pageSize);
 
 	List<Teacher> queryListByHomePage();
+	
+	int queryListBySaleNo();
 
 	List<Teacher> queryListBySale(int page);
 

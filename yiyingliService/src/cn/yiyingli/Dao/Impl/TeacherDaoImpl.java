@@ -506,4 +506,13 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 		return list;
 	}
 
+	@Override
+	public int queryListBySaleNo() {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		int sum = (int) session.createQuery("select count(*) from Teacher t where t.onService=true and t.saleWeight!=0")
+				.uniqueResult();
+		return sum;
+	}
+
 }
