@@ -25,6 +25,7 @@ public class MainFunction {
 		// updateUserTrainDataLike();
 		// updateUserTrainDataOrder();
 		 editTeacherData();
+		// System.out.println("123");
 		//editTeacherData2();
 	}
 
@@ -87,7 +88,7 @@ public class MainFunction {
 	 * 删除content里面的h1标签的样式
 	 */
 	private static void editTeacherData() {
-		for (int i = 1; i <= 260; i++) {
+		for (int i = 1; i <= 296; i++) {
 			JSONObject send = new JSONObject();
 			send.put("style", "teacher");
 			send.put("method", "getAllInfo");
@@ -109,7 +110,7 @@ public class MainFunction {
 				System.out.println(content);
 				String sql;
 				Connection conn = null;
-				String url = "jdbc:mysql://yiyingli.mysql.rds.aliyuncs.com:3306/fortest?user=sdll18&password=ll1992917&useUnicode=true&characterEncoding=UTF8";
+				String url = "jdbc:mysql://yiyingli.mysql.rds.aliyuncs.com:3306/yiyingli?user=sdll18&password=ll1992917&useUnicode=true&characterEncoding=UTF8";
 				try {
 					Class.forName("com.mysql.jdbc.Driver");
 					conn = DriverManager.getConnection(url);
@@ -194,7 +195,7 @@ public class MainFunction {
 
 	private static void updateTeacherData() {
 		JSONArray jarray = new JSONArray();
-		for (int i = 1; i <= 260; i++) {
+		for (int i = 1; i <= 296; i++) {
 			JSONObject obj = updateTeacherData(i + "");
 			if (obj != null) {
 				jarray.add(obj);
