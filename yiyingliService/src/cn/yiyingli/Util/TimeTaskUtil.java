@@ -85,6 +85,9 @@ public class TimeTaskUtil {
 			HttpResponse response = httpClient.execute(post);
 			if (response.getStatusLine().getStatusCode() == 200) {
 				result = EntityUtils.toString(response.getEntity(), "utf-8");
+			} else {
+				LogUtil.error("error time task:" + post, this.getClass());
+				return false;
 			}
 			LogUtil.info(result, this.getClass());
 			if (result.contains("success"))
