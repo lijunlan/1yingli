@@ -20,11 +20,11 @@ public class MainFunction {
 
 	public static void main(String[] args) throws SQLException {
 		// System.out.println(Calendar.getInstance().getTimeInMillis());
-		//updateTeacherData();
+		updateTeacherData();
 		// updateUserTrainDataRecord();
 		// updateUserTrainDataLike();
 		// updateUserTrainDataOrder();
-		 editTeacherData();
+		 //editTeacherData();
 		// System.out.println("123");
 		//editTeacherData2();
 	}
@@ -195,7 +195,7 @@ public class MainFunction {
 
 	private static void updateTeacherData() {
 		JSONArray jarray = new JSONArray();
-		for (int i = 1; i <= 296; i++) {
+		for (int i = 1; i <= 311; i++) {
 			JSONObject obj = updateTeacherData(i + "");
 			if (obj != null) {
 				jarray.add(obj);
@@ -305,7 +305,7 @@ public class MainFunction {
 			toBaidu.put("Version", 1.0);
 			toBaidu.put("ItemId", tid);
 			toBaidu.put("DisplaySwitch", "On");
-			toBaidu.put("Url", "http://www.1yingli.cn/personal.html?tid=" + tid);
+			toBaidu.put("Url", "http://www.1yingli.cn/#!/teacher/" + tid);
 			JSONObject jsonIndexed = new JSONObject();
 			jsonIndexed.put("Title", title);
 			jsonIndexed.put("Content", content);

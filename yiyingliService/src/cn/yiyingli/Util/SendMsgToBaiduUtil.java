@@ -21,7 +21,8 @@ import net.sf.json.JSONObject;
 public class SendMsgToBaiduUtil {
 
 	public static void main(String[] args) {
-		System.out.println(sendGet("http://api2.santo.cc/submit?command=USER_BALANCE&uid=yyl-ipxmt&pwd=IQ8R1Wpy"));
+		LogUtil.info(sendGet("http://api2.santo.cc/submit?command=USER_BALANCE&uid=yyl-ipxmt&pwd=IQ8R1Wpy"),
+				SendMsgToBaiduUtil.class);
 	}
 
 	public static String updataUserClickData(String json) {
@@ -91,7 +92,7 @@ public class SendMsgToBaiduUtil {
 	}
 
 	private static String sendGet(String url) {
-		System.out.println("send>>>" + url);
+		LogUtil.info("send---->>>" + url, SendMsgToBaiduUtil.class);
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpGet get = new HttpGet(url);
 		String result = "";
@@ -103,12 +104,12 @@ public class SendMsgToBaiduUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("receive>>" + result);
+		LogUtil.info("receive->>>" + result, SendMsgToBaiduUtil.class);
 		return result;
 	}
 
 	private static String sendPost(String url, String json) {
-		System.out.println("send>>>" + json);
+		LogUtil.info("send---->>>" + json, SendMsgToBaiduUtil.class);
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpPost post = new HttpPost(url);
 		post.addHeader(HTTP.CONTENT_TYPE, "text/json");
@@ -125,7 +126,7 @@ public class SendMsgToBaiduUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("receive>>" + result);
+		LogUtil.info("receive->>>" + result, SendMsgToBaiduUtil.class);
 		return result;
 	}
 }
