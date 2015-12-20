@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.context.ApplicationContext;
 
 import cn.yiyingli.Util.ConfigurationXmlUtil;
@@ -30,6 +31,13 @@ public class MessageHandle {
 			mHandle.doit();
 		} catch (Exception e) {
 			e.printStackTrace();
+			try {
+				LogUtil.error(RemoteIPUtil.getAddr(rq) + "=>" + IOUtils.toString(rq.getInputStream()),
+						MessageHandle.class);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				LogUtil.error(RemoteIPUtil.getAddr(rq), MessageHandle.class);
+			}
 			mHandle.returnError(MsgUtil.getErrorMsgByCode("00000"));
 		}
 	}
