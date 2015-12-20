@@ -96,6 +96,12 @@ public class FSearchService extends MsgService {
 					} else {
 						search.addSort("serviceprice", "-");
 					}
+				}else if (filter.startsWith("finishno")) {
+					if (filter.endsWith("+")) {
+						search.addSort("finishno", "+");
+					} else {
+						search.addSort("finishno", "-");
+					}
 				}
 			}
 
