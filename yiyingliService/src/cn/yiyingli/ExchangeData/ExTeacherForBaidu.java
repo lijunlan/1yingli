@@ -57,7 +57,7 @@ public class ExTeacherForBaidu {
 			String Auxiliary = teacher.getSimpleInfo();
 			JSONObject toBaidu = new JSONObject();
 			toBaidu.put("Version", 1.0);
-			toBaidu.put("ItemId", teacher.getId());
+			toBaidu.put("ItemId", ""+teacher.getId());
 			toBaidu.put("DisplaySwitch", "On");
 			toBaidu.put("Url", "http://www.1yingli.cn/#!/teacher/" + teacher.getId());
 			JSONObject jsonIndexed = new JSONObject();
