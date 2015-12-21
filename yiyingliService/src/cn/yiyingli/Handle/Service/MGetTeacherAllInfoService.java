@@ -2,12 +2,12 @@ package cn.yiyingli.Handle.Service;
 
 import cn.yiyingli.ExchangeData.ExTeacher;
 import cn.yiyingli.ExchangeData.SuperMap;
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Util.MsgUtil;
 
-public class MGetTeacherAllInfoService extends MsgService {
+public class MGetTeacherAllInfoService extends MMsgService {
 
 	private TeacherService teacherService;
 
@@ -21,7 +21,7 @@ public class MGetTeacherAllInfoService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("teacherId");
+		return super.checkData() && getData().containsKey("teacherId");
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class MGetTeacherAllInfoService extends MsgService {
 			return;
 		}
 		SuperMap map = MsgUtil.getSuccessMap();
-		ExTeacher.assembleDetailTeacherForManager(teacher, map);
+		ExTeacher.assembleDetailForManager(teacher, map);
 		setResMsg(map.finishByJson());
 	}
 

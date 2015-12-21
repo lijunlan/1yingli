@@ -27,6 +27,12 @@ public class TService {
 	@Column(name = "PRICETOTAL", nullable = false)
 	private Float priceTotal;
 
+	@Column(name = "PRICETEMP", nullable = false)
+	private Float priceTemp;
+
+	@Column(name = "ONSALE", nullable = false)
+	private Boolean onSale;
+
 	@Column(name = "TIME", nullable = false)
 	private Float time;
 
@@ -42,10 +48,10 @@ public class TService {
 	@Column(name = "TIMESPERWEEK", nullable = true)
 	private Integer timesPerWeek;
 
-	@Column(name = "REASON", nullable = false, length = 500)
+	@Column(name = "REASON", nullable = true, length = 500)
 	private String reason;
 
-	@Column(name = "ADVANTAGE", nullable = false, length = 1000)
+	@Column(name = "ADVANTAGE", nullable = true, length = 1000)
 	private String advantage;
 
 	@OneToOne
@@ -55,7 +61,7 @@ public class TService {
 	@OneToMany(targetEntity = Order.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TSERVICE_ID", updatable = false)
 	private Set<Order> orders = new HashSet<Order>();
-	
+
 	@Column(name = "FREETIME", nullable = true)
 	private String freeTime;
 
@@ -165,6 +171,22 @@ public class TService {
 
 	public void setFreeTime(String freeTime) {
 		this.freeTime = freeTime;
+	}
+
+	public Float getPriceTemp() {
+		return priceTemp;
+	}
+
+	public void setPriceTemp(Float priceTemp) {
+		this.priceTemp = priceTemp;
+	}
+
+	public Boolean getOnSale() {
+		return onSale;
+	}
+
+	public void setOnSale(Boolean onSale) {
+		this.onSale = onSale;
 	}
 
 }

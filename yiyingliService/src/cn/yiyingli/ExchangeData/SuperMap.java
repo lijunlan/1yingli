@@ -1,14 +1,10 @@
 package cn.yiyingli.ExchangeData;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import cn.yiyingli.Util.Json;
-
+import net.sf.json.JSONObject;
 
 public class SuperMap {
 
-	private Map<String, String> map = new HashMap<String, String>();
+	private JSONObject map = new JSONObject();
 
 	public SuperMap() {
 
@@ -17,7 +13,7 @@ public class SuperMap {
 	/**
 	 * @return
 	 */
-	public Map<String, String> finish() {
+	public JSONObject finish() {
 		return map;
 	}
 
@@ -25,7 +21,7 @@ public class SuperMap {
 	 * @return
 	 */
 	public String finishByJson() {
-		return Json.getJson(map);
+		return map.toString();
 	}
 
 	/**
@@ -34,33 +30,37 @@ public class SuperMap {
 	 * @return
 	 */
 	public SuperMap put(String key, String value) {
-		if (value == null)
+		if (value == null) {
 			value = "";
+		}
 		map.put(key, value);
 		return this;
 	}
 
 	public SuperMap put(String key, Integer value) {
-		if (value == null)
+		if (value == null) {
 			map.put(key, "");
-		else
+		} else {
 			map.put(key, String.valueOf(value));
+		}
 		return this;
 	}
 
 	public SuperMap put(String key, Boolean value) {
-		if (value == null)
+		if (value == null) {
 			map.put(key, "");
-		else
+		} else {
 			map.put(key, String.valueOf(value));
+		}
 		return this;
 	}
 
 	public SuperMap put(String key, Object value) {
-		if (value == null)
+		if (value == null) {
 			map.put(key, "");
-		else
-			map.put(key, String.valueOf(value));
+		} else {
+			map.put(key, value);
+		}
 		return this;
 	}
 

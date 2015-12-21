@@ -12,6 +12,7 @@ import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.UserLikeTeacher;
 import cn.yiyingli.Service.TeacherService;
+import cn.yiyingli.Util.SendMsgToBaiduUtil;
 
 public class TeacherServiceImpl implements TeacherService {
 
@@ -68,10 +69,16 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public void save(Teacher teacher) {
 		getTeacherDao().save(teacher);
+		if (teacher.getOnService()) {
+			SendMsgToBaiduUtil.updateTeacherData(teacher);
+		}
 	}
 
 	@Override
 	public Long saveAndReturnId(Teacher teacher) {
+		if (teacher.getOnService()) {
+			SendMsgToBaiduUtil.updateTeacherData(teacher);
+		}
 		return getTeacherDao().saveAndReturnId(teacher);
 	}
 
@@ -80,7 +87,9 @@ public class TeacherServiceImpl implements TeacherService {
 		getUserDao().update(teacher.getUser());
 		getTeacherDao().save(teacher);
 		gettServiceDao().save(teacher.gettService());
-
+		if (teacher.getOnService()) {
+			SendMsgToBaiduUtil.updateTeacherData(teacher);
+		}
 	}
 
 	@Override
@@ -99,12 +108,15 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public void update(Teacher teacher) {
+	public void update(Teacher teacher, boolean refreshRecommend) {
 		getTeacherDao().update(teacher);
+		if (refreshRecommend && teacher.getOnService()) {
+			SendMsgToBaiduUtil.updateTeacherData(teacher);
+		}
 	}
 
 	@Override
-	public void updateWithUser(Teacher teacher, long userId) {
+	public void updateWithUser(Teacher teacher, long userId, boolean refreshRecommend) {
 		User user = getUserDao().query(userId, false);
 		user.setEmail(teacher.getEmail());
 		user.setPhone(teacher.getPhone());
@@ -112,18 +124,33 @@ public class TeacherServiceImpl implements TeacherService {
 		user.setAddress(teacher.getAddress());
 		getUserDao().merge(user);
 		getTeacherDao().merge(teacher);
+		if (refreshRecommend && teacher.getOnService()) {
+			SendMsgToBaiduUtil.updateTeacherData(teacher);
+		}
 	}
 
 	@Override
-	public void updateWithDetailInfo(Teacher teacher) {
-		getUserDao().update(teacher.getUser());
+	public void updateWithDetailInfo(Teacher teacher, boolean refreshRecommend) {
 		getTeacherDao().update(teacher);
 		gettServiceDao().update(teacher.gettService());
+		if (refreshRecommend && teacher.getOnService()) {
+			SendMsgToBaiduUtil.updateTeacherData(teacher);
+		}
 	}
 
 	@Override
 	public Teacher query(long id, boolean lazy) {
 		return getTeacherDao().query(id, lazy);
+	}
+
+	@Override
+	public Teacher queryWithUser(long id, boolean lazy) {
+		return getTeacherDao().queryWithUser(id, lazy);
+	}
+
+	@Override
+	public List<Teacher> queryByNameOrUsername(String word) {
+		return getTeacherDao().queryByNameOrUsername(word);
 	}
 
 	@Override
@@ -258,15 +285,19 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public void updateStudyExp(Teacher teacher) {
+	public void updateStudyExp(Teacher teacher, boolean refreshRecommend) {
 		getStudyExperienceDao().removeByTeacherId(teacher.getId());
-		update(teacher);
+		if (refreshRecommend && teacher.getOnService()) {
+			getTeacherDao().update(teacher);
+		}
 	}
 
 	@Override
-	public void updateWorkExp(Teacher teacher) {
+	public void updateWorkExp(Teacher teacher, boolean refreshRecommend) {
 		getWorkExperienceDao().removeByTeacherId(teacher.getId());
-		update(teacher);
+		if (refreshRecommend && teacher.getOnService()) {
+			getTeacherDao().update(teacher);
+		}
 	}
 
 	@Override
@@ -322,6 +353,11 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public List<Teacher> queryListBySale(int page) {
 		return getTeacherDao().queryListBySale(page, SALE_PAGE_SIZE);
+	}
+
+	@Override
+	public long queryListBySaleNo() {
+		return getTeacherDao().queryListBySaleNo();
 	}
 
 }

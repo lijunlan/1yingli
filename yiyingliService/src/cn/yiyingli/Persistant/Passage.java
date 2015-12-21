@@ -39,6 +39,9 @@ public class Passage {
 	@Column(name = "EDITORNAME", nullable = false)
 	private String editorName;
 
+	@Column(name = "SUMMARY", nullable = false)
+	private String summary;
+
 	@Column(name = "CONTENT", nullable = false, length = 1000)
 	private String content;
 
@@ -175,6 +178,14 @@ public class Passage {
 
 	public void setUserLikePassages(Set<UserLikePassage> userLikePassages) {
 		this.userLikePassages = userLikePassages;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
 }

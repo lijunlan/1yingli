@@ -8,6 +8,7 @@ import cn.yiyingli.Dao.TeacherDao;
 import cn.yiyingli.Dao.UserDao;
 import cn.yiyingli.Persistant.Comment;
 import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.CommentService;
 
 public class CommentServiceImpl implements CommentService {
@@ -59,13 +60,25 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public void saveWithOrder(Comment comment, Order order) {
+		getOrderDao().update(order);
 		if (comment.getKind() == COMMENT_KIND_FROMUSER_SHORT) {
 			getCommentDao().saveWithTeacherAndUser(comment, comment.getTeacher(), comment.getUser(),
 					COMMENT_KIND_FROMUSER_SHORT);
 		} else {
 			getCommentDao().saveWithUser(comment, comment.getUser(), COMMENT_KIND_FROMTEACHER_SHORT);
 		}
+	}
+
+	@Override
+	public void saveWithOrderAndTeacher(Comment comment, Order order, Teacher teacher) {
+		getTeacherDao().update(teacher);
 		getOrderDao().update(order);
+		if (comment.getKind() == COMMENT_KIND_FROMUSER_SHORT) {
+			getCommentDao().saveWithTeacherAndUser(comment, comment.getTeacher(), comment.getUser(),
+					COMMENT_KIND_FROMUSER_SHORT);
+		} else {
+			getCommentDao().saveWithUser(comment, comment.getUser(), COMMENT_KIND_FROMTEACHER_SHORT);
+		}
 	}
 
 	@Override

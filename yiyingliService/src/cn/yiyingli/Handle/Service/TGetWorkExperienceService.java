@@ -1,14 +1,14 @@
 package cn.yiyingli.Handle.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.WorkExperience;
 import cn.yiyingli.Service.TeacherService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class TGetWorkExperienceService extends MsgService {
@@ -37,7 +37,7 @@ public class TGetWorkExperienceService extends MsgService {
 			return;
 		}
 		List<WorkExperience> workExperiences = teacher.getWorkExperiences();
-		List<String> toSend = new ArrayList<String>();
+		ExList toSend = new ExArrayList();
 		for (WorkExperience we : workExperiences) {
 			SuperMap map = new SuperMap();
 			map.put("companyName", we.getCompanyName());
@@ -45,9 +45,9 @@ public class TGetWorkExperienceService extends MsgService {
 			map.put("description", we.getDescription());
 			map.put("startTime", we.getStartTime());
 			map.put("endTime", we.getEndTime());
-			toSend.add(map.finishByJson());
+			toSend.add(map.finish());
 		}
-		setResMsg(MsgUtil.getSuccessMap().put("workExperience", Json.getJson(toSend)).finishByJson());
+		setResMsg(MsgUtil.getSuccessMap().put("workExperience", toSend).finishByJson());
 	}
 
 }

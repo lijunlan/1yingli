@@ -10,7 +10,6 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import cn.yiyingli.Dao.PassageDao;
 import cn.yiyingli.Dao.TeacherDao;
 import cn.yiyingli.Persistant.Teacher;
 
@@ -72,39 +71,6 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
-	public void updatePassageNo(Teacher teacher) {
-		Session session = getSessionFactory().getCurrentSession();
-		session.flush();
-		Query query = session.createSQLQuery(
-				"update teacher set teacher.PASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
-						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_OK
-						+ ") where teacher.TEACHER_ID=" + teacher.getId());
-		query.executeUpdate();
-	}
-
-	@Override
-	public void updateCheckPassageNo(Teacher teacher) {
-		Session session = getSessionFactory().getCurrentSession();
-		session.flush();
-		Query query = session.createSQLQuery(
-				"update teacher set teacher.PASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
-						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_CHECKING
-						+ ") where teacher.TEACHER_ID=" + teacher.getId());
-		query.executeUpdate();
-	}
-
-	@Override
-	public void updateRefusePassageNo(Teacher teacher) {
-		Session session = getSessionFactory().getCurrentSession();
-		session.flush();
-		Query query = session.createSQLQuery(
-				"update teacher set teacher.PASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
-						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_REFUSE
-						+ ") where teacher.TEACHER_ID=" + teacher.getId());
-		query.executeUpdate();
-	}
-
-	@Override
 	public void updateFromSql(String sql) {
 		getHibernateTemplate().bulkUpdate(sql);
 	}
@@ -112,6 +78,21 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	@Override
 	public Teacher query(long id, boolean lazy) {
 		String hql = "from Teacher t left join fetch t.tService where t.id=?  and t.onService=true";
+		if (lazy) {
+			hql = "from Teacher t left join fetch t.tips " + " left join fetch t.comments "
+					+ " left join fetch t.tService where t.id=?  and t.onService=true";
+		}
+		@SuppressWarnings("unchecked")
+		List<Teacher> list = getHibernateTemplate().find(hql, id);
+		if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
+
+	@Override
+	public Teacher queryWithUser(long id, boolean lazy) {
+		String hql = "from Teacher t left join fetch t.tService left join fetch t.user where t.id=?  and t.onService=true";
 		if (lazy) {
 			hql = "from Teacher t left join fetch t.tips " + " left join fetch t.comments "
 					+ " left join fetch t.tService where t.id=?  and t.onService=true";
@@ -186,6 +167,14 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 			return null;
 		else
 			return list.get(0);
+	}
+
+	@Override
+	public List<Teacher> queryByNameOrUsername(String word) {
+		String hql = "from Teacher t where t.user.username=? or t.name like ?";
+		@SuppressWarnings("unchecked")
+		List<Teacher> list = getHibernateTemplate().find(hql, word, "%" + word + "%");
+		return list;
 	}
 
 	@Override
@@ -515,6 +504,15 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 			}
 		});
 		return list;
+	}
+
+	@Override
+	public long queryListBySaleNo() {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		long sum = (long) session.createQuery("select count(*) from Teacher t where t.onService=true and t.saleWeight!=0")
+				.uniqueResult();
+		return sum;
 	}
 
 }

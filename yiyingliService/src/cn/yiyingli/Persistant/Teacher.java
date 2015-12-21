@@ -106,6 +106,9 @@ public class Teacher {
 	@Column(name = "ALIPAY", nullable = true)
 	private String alipay;
 
+	@Column(name = "PAYPAL", nullable = true)
+	private String paypal;
+
 	@Column(name = "CHECKEMAIL", nullable = false)
 	private Boolean checkEmail;
 
@@ -123,6 +126,9 @@ public class Teacher {
 
 	@Column(name = "FINISHORDERNUMBER", nullable = false)
 	private Long finishOrderNumber;
+
+	@Column(name = "MILE", nullable = false)
+	private Long mile;
 
 	// @Column(name = "CHECKIDCARD", nullable = false)
 	// private Boolean checkIDCard;
@@ -600,6 +606,22 @@ public class Teacher {
 
 	public void setFinishOrderNumber(Long finishOrderNumber) {
 		this.finishOrderNumber = finishOrderNumber;
+	}
+
+	public Long getMile() {
+		return mile;
+	}
+
+	public void setMile(Long mile) {
+		this.mile = mile;
+	}
+
+	public String getPaypal() {
+		return paypal;
+	}
+
+	public void setPaypal(String paypal) {
+		this.paypal = paypal;
 	}
 
 }

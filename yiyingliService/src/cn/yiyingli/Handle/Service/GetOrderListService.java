@@ -1,15 +1,15 @@
 package cn.yiyingli.Handle.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.ExOrderUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.OrderService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class GetOrderListService extends UMsgService {
@@ -64,14 +64,14 @@ public class GetOrderListService extends UMsgService {
 		} else {
 			orders = getOrderService().queryListByUserId(user.getId(), page, false);
 		}
-		List<String> sends = new ArrayList<String>();
+		ExList sends = new ExArrayList();
 		for (Order o : orders) {
 			SuperMap map = new SuperMap();
 			ExOrderUtil.assembleOrderToUser(map, o);
-			sends.add(map.finishByJson());
+			sends.add(map.finish());
 		}
 		toSend.put("state", "success");
-		setResMsg(toSend.put("data", Json.getJson(sends)).finishByJson());
+		setResMsg(toSend.put("data", sends).finishByJson());
 
 	}
 

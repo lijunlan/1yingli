@@ -13,17 +13,93 @@ import cn.yiyingli.Persistant.WorkExperience;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Service.TipService;
 import cn.yiyingli.Service.UserService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class PTeacherUtil {
+
+	public static void editTeacherByTeacherSimple(JSONObject map, Teacher teacher) {
+		String simpleinfo = map.getString("simpleinfo");
+		String address = map.getString("address");
+		String talkWay = map.getString("talkWay");
+		teacher.setSimpleInfo(simpleinfo);
+		teacher.setAddress(address);
+		teacher.setTalkWay(talkWay);
+	}
+
+	public static void editTeacherByManagerDetail(User user, List<Object> workExperiences,
+			List<Object> studyExperiences, List<Object> tips, String simpleinfo, String name, String phone,
+			String address, String mail, String iconUrl, String introduce, String checkPhone, String checkIDCard,
+			String checkEmail, String checkWork, String checkStudy, String showWeight1, String showWeight2,
+			String showWeight4, String showWeight8, String showWeight16, String homeWeight, String saleWeight,
+			String onService, long mile, Teacher teacher, TipService tipService) {
+		refreshTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone, address, mail, iconUrl,
+				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, showWeight1, showWeight2,
+				showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, mile, teacher, tipService);
+		teacher.setOnService(Boolean.valueOf(onService));
+	}
+
+	public static void editTeacherByTeacherDetail(JSONObject map, Teacher teacher, TipService tipService) {
+		editTeacherByTeacherSimple(map, teacher);
+
+		String bgUrl = map.getString("bgUrl");
+		String introduce = map.getString("introduce");
+		teacher.setBgUrl(bgUrl);
+		teacher.setIntroduce(introduce);
+
+		JSONArray studyExperiences = map.getJSONArray("studyExperiences");
+		JSONArray workExperiences = map.getJSONArray("workExperiences");
+		JSONArray tips = map.getJSONArray("tips");
+
+		List<WorkExperience> wes = new ArrayList<WorkExperience>();
+		for (Object weobj : workExperiences) {
+			JSONObject we = (JSONObject) weobj;
+			WorkExperience workExperience = new WorkExperience();
+			workExperience.setCompanyName(we.getString("companyName"));
+			workExperience.setDescription(we.getString("description"));
+			workExperience.setEndTime(we.getString("endTime"));
+			workExperience.setStartTime(we.getString("startTime"));
+			workExperience.setPosition(we.getString("position"));
+			workExperience.setOwnTeacher(teacher);
+			wes.add(workExperience);
+		}
+		teacher.setWorkExperiences(wes);
+		List<StudyExperience> ses = new ArrayList<StudyExperience>();
+		for (Object seobj : studyExperiences) {
+			JSONObject se = (JSONObject) seobj;
+			StudyExperience studyExperience = new StudyExperience();
+			studyExperience.setDegree(se.getString("degree"));
+			studyExperience.setDescription(se.getString("description"));
+			studyExperience.setEndTime(se.getString("endTime"));
+			studyExperience.setMajor(se.getString("major"));
+			studyExperience.setSchoolName(se.getString("schoolName"));
+			studyExperience.setStartTime(se.getString("startTime"));
+			studyExperience.setOwnTeacher(teacher);
+			ses.add(studyExperience);
+		}
+		teacher.setStudyExperiences(ses);
+
+		teacher.getTips().clear();
+		long tipMark = 0;
+		if (tips != null) {
+			for (Object tobj : tips) {
+				JSONObject t = (JSONObject) tobj;
+				Long tid = Long.valueOf(t.getString("id"));
+				tipMark = tipMark | tid;
+				Tip mT = tipService.query(tid);
+				teacher.getTips().add(mT);
+			}
+		}
+		teacher.setTipMark(tipMark);
+	}
 
 	@SuppressWarnings("unchecked")
 	public static void refreshTeacher(User user, List<Object> workExperiences, List<Object> studyExperiences,
 			List<Object> tips, String simpleinfo, String name, String phone, String address, String mail,
 			String iconUrl, String introduce, String checkPhone, String checkIDCard, String checkEmail,
 			String checkWork, String checkStudy, String showWeight1, String showWeight2, String showWeight4,
-			String showWeight8, String showWeight16, String homeWeight, String saleWeight, Teacher teacher,
+			String showWeight8, String showWeight16, String homeWeight, String saleWeight, long mile, Teacher teacher,
 			TipService tipService) {
-		teacher.getTips().clear();
 		if (Boolean.valueOf(checkPhone)) {
 			teacher.setCheckPhone(true);
 		} else {
@@ -62,6 +138,7 @@ public class PTeacherUtil {
 		user.setTeacher(teacher);
 		teacher.setUser(user);
 
+		teacher.setMile(mile);
 		teacher.setAddress(address);
 		teacher.setUsername(user.getUsername());
 		teacher.setName(name);
@@ -102,13 +179,17 @@ public class PTeacherUtil {
 			studyExperience.setOwnTeacher(teacher);
 			ses.add(studyExperience);
 		}
+
+		teacher.getTips().clear();
 		teacher.setStudyExperiences(ses);
 		long tipMark = 0;
-		for (Object t : tips) {
-			Long tid = Long.valueOf((String) ((Map<String, Object>) t).get("id"));
-			tipMark = tipMark | tid;
-			Tip mT = tipService.query(tid);
-			teacher.getTips().add(mT);
+		if (tips != null) {
+			for (Object t : tips) {
+				Long tid = Long.valueOf((String) ((Map<String, Object>) t).get("id"));
+				tipMark = tipMark | tid;
+				Tip mT = tipService.query(tid);
+				teacher.getTips().add(mT);
+			}
 		}
 		teacher.setTipMark(tipMark);
 	}
@@ -121,7 +202,7 @@ public class PTeacherUtil {
 		Teacher teacher = new Teacher();
 		refreshTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone, address, mail, iconUrl,
 				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, showWeight1, showWeight2,
-				showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, teacher, tipService);
+				showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, 0L, teacher, tipService);
 		teacher.setCommentNumber(0L);
 		teacher.setLevel((short) 5);
 		teacher.setOrderNumber(0L);

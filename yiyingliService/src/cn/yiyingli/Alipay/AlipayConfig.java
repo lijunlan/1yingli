@@ -29,6 +29,8 @@ public class AlipayConfig {
 
 	// 收款支付宝账号
 	public static String seller_email = "onemile666@yeah.net";
+
+	public static String seller_name = "杭州千询科技有限公司";
 	// 商户的私钥
 	public static String MD5Key = "600owbhybce82up8h1kifyzwevr3mpgc";
 	// 支付宝的公钥，无需修改该值
@@ -52,7 +54,13 @@ public class AlipayConfig {
 	public static String notify_url = "http://service.1yingli.cn/yiyingliService/TradeNotifyProcess";
 	// 需http://格式的完整路径，不能加?id=123这类自定义参数
 
+	public static String notify_url_debug = "http://test.1yingli.cn/yiyingliService/TradeNotifyProcess";
+
+	public static String trans_notify_url = "http://service.1yingli.cn/yiyingliService/AlipayTransNotify";
+
+	public static String trans_notify_url_debug = "http://test.1yingli.cn/yiyingliService/AlipayTransNotify";
+
 	// 页面跳转同步通知页面路径
-	public static String return_url = "http://www.1yingli.cn/yourTutor.html";
+	public static String return_url = "http://www.1yingli.cn/#!/myTutor";
 	// 需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.yiyingli.Persistant.Comment;
 import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Persistant.Teacher;
 
 public interface CommentService {
 
@@ -14,8 +15,10 @@ public interface CommentService {
 	public static final int PAGE_SIZE_INT = 5;
 
 	void save(Comment comment);
-
+	
 	void saveWithOrder(Comment comment, Order order);
+
+	void saveWithOrderAndTeacher(Comment comment, Order order, Teacher teacher);
 
 	Long saveAndReturnId(Comment comment);
 

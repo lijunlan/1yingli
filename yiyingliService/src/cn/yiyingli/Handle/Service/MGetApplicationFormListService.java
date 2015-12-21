@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.ExApplicationForm;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.ApplicationForm;
 import cn.yiyingli.Service.ApplicationFormService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class MGetApplicationFormListService extends MMsgService {
@@ -32,8 +33,11 @@ public class MGetApplicationFormListService extends MMsgService {
 			exApplicationForms.add(exApplicationForm);
 		}
 		try {
-			String json = Json.getJsonByEx(exApplicationForms);
-			setResMsg(MsgUtil.getSuccessMap().put("data", json).finishByJson());
+			ExList toSend = new ExArrayList();
+			for (ExApplicationForm exApplicationForm : exApplicationForms) {
+				toSend.add(exApplicationForm.finish());
+			}
+			setResMsg(MsgUtil.getSuccessMap().put("data", toSend).finishByJson());
 		} catch (Exception e) {
 			e.printStackTrace();
 			setResMsg(MsgUtil.getErrorMsgByCode("31001"));

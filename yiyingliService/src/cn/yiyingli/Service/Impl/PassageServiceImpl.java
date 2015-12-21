@@ -45,8 +45,7 @@ public class PassageServiceImpl implements PassageService {
 
 	@Override
 	public void save(Passage passage) {
-		getPassageDao().save(passage);
-		getTeacherDao().updateCheckPassageNo(passage.getOwnTeacher());
+		getPassageDao().saveAndCount(passage, passage.getOwnTeacher());
 	}
 
 	@Override
@@ -67,35 +66,34 @@ public class PassageServiceImpl implements PassageService {
 	@Override
 	public void update(Passage passage, boolean stateChange) {
 		if (stateChange) {
-			getPassageDao().update(passage);
-			if (passage.getState() == PassageDao.PASSAGE_STATE_OK) {
-				getTeacherDao().updatePassageNo(passage.getOwnTeacher());
-			} else if (passage.getState() == PassageDao.PASSAGE_STATE_CHECKING) {
-				getTeacherDao().updateCheckPassageNo(passage.getOwnTeacher());
-			} else if (passage.getState() == PassageDao.PASSAGE_STATE_REFUSE) {
-				getTeacherDao().updateRefusePassageNo(passage.getOwnTeacher());
-			}
+			getPassageDao().updateAndCount(passage, passage.getOwnTeacher());
 		} else {
 			getPassageDao().update(passage);
 		}
 	}
 
 	@Override
-	public void updateUserLike(Passage passage, User user) {
+	public boolean updateUserLike(Passage passage, User user) {
 		if (getPassageDao().queryCheckLikeUser(passage.getId(), user.getId())) {
-			return;
+			return false;
 		} else {
 			UserLikePassage userLikePassage = new UserLikePassage();
 			userLikePassage.setPassage(passage);
 			userLikePassage.setUser(user);
 			userLikePassage.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 			getUserDao().updateLikePassage(userLikePassage);
+			return true;
 		}
 	}
 
 	@Override
 	public Passage query(long id) {
 		return getPassageDao().query(id);
+	}
+
+	@Override
+	public Passage queryWithTeacherById(long id) {
+		return getPassageDao().queryWithTeacherById(id);
 	}
 
 	@Override

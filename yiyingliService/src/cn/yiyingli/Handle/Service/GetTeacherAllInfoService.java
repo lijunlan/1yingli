@@ -61,7 +61,7 @@ public class GetTeacherAllInfoService extends MsgService {
 		}
 		SuperMap map = MsgUtil.getSuccessMap();
 
-		ExTeacher.assembleDetailTeacher(teacher, map);
+		ExTeacher.assembleDetailForUser(teacher, map);
 
 		saveRecord(teacher);
 
@@ -81,7 +81,7 @@ public class GetTeacherAllInfoService extends MsgService {
 			no++;
 		}
 		teacher.setLookNumber(no);
-		getTeacherService().update(teacher);
+		getTeacherService().update(teacher,false);
 
 		Record r = new Record();
 		r.setKind(RecordService.RECORD_KIND_SEE_TEACHER);

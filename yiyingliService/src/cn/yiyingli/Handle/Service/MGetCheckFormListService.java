@@ -1,16 +1,16 @@
 package cn.yiyingli.Handle.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.CheckForm;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.CheckFormService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class MGetCheckFormListService extends MMsgService {
@@ -30,7 +30,7 @@ public class MGetCheckFormListService extends MMsgService {
 	@Override
 	public void doit() {
 		List<CheckForm> checkForms = getCheckFormService().queryList();
-		List<String> exCheckForms = new ArrayList<String>();
+		ExList exCheckForms = new ExArrayList();
 		for (CheckForm checkForm : checkForms) {
 			SuperMap map = new SuperMap();
 			map.put("createTime", SIMPLE_DATE_FORMAT.format(new Date(Long.valueOf(checkForm.getCreateTime()))));
@@ -71,10 +71,9 @@ public class MGetCheckFormListService extends MMsgService {
 			map.put("name", teacher.getName());
 			map.put("phone", teacher.getPhone());
 			map.put("email", teacher.getEmail());
-			exCheckForms.add(map.finishByJson());
+			exCheckForms.add(map.finish());
 		}
-		String json = Json.getJson(exCheckForms);
-		setResMsg(MsgUtil.getSuccessMap().put("data", json).finishByJson());
+		setResMsg(MsgUtil.getSuccessMap().put("data", exCheckForms).finishByJson());
 	}
 
 }

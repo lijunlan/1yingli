@@ -1,17 +1,17 @@
 package cn.yiyingli.Handle.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.yiyingli.Dao.PassageDao;
 import cn.yiyingli.ExchangeData.ExPassage;
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Passage;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.PassageService;
 import cn.yiyingli.Service.TeacherService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class FGetPassageListService extends MsgService {
@@ -50,17 +50,16 @@ public class FGetPassageListService extends MsgService {
 			return;
 		}
 		int page = Integer.valueOf((String) getData().get("page"));
-		List<Passage> passages = getPassageService().queryListByTeacherAndState(page, tid,
-				PassageDao.PASSAGE_STATE_OK);
-		List<String> sends = new ArrayList<String>();
+		List<Passage> passages = getPassageService().queryListByTeacherAndState(page, tid, PassageDao.PASSAGE_STATE_OK);
+		ExList sends = new ExArrayList();
 		for (Passage p : passages) {
 			SuperMap map = new SuperMap();
 			ExPassage.assembleSimple(p, map);
-			sends.add(map.finishByJson());
+			sends.add(map.finish());
 		}
 		SuperMap toSend = MsgUtil.getSuccessMap();
 		toSend.put("count", teacher.getPassageNumber());
-		toSend.put("data", Json.getJson(sends));
+		toSend.put("data", sends);
 		setResMsg(toSend.finishByJson());
 
 	}

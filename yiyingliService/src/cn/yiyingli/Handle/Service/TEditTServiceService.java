@@ -6,6 +6,7 @@ import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.TServiceService;
 import cn.yiyingli.Util.MsgUtil;
+import cn.yiyingli.toPersistant.PTServiceUtil;
 
 public class TEditTServiceService extends TMsgService {
 
@@ -21,8 +22,7 @@ public class TEditTServiceService extends TMsgService {
 
 	@Override
 	protected boolean checkData() {
-		return super.checkData() && getData().containsKey("timeperweek") && getData().containsKey("freetime")
-				&& getData().containsKey("talkWay") && getData().containsKey("price") && getData().containsKey("time")
+		return super.checkData() && getData().containsKey("timeperweek") && getData().containsKey("talkWay")
 				&& getData().containsKey("address");
 	}
 
@@ -32,21 +32,17 @@ public class TEditTServiceService extends TMsgService {
 		User user = getUser();
 		try {
 			int timeperweek = Integer.valueOf((String) getData().get("timeperweek"));
-			String freetime = (String) getData().get("freetime");
+			// String freetime = (String) getData().get("freetime");
 			String talkWay = (String) getData().get("talkWay");
-			float price = Float.valueOf(((String) getData().get("price")));
-			float time = Float.valueOf(((String) getData().get("time")));
+			// float price = Float.valueOf(((String) getData().get("price")));
+			// float time = Float.valueOf(((String) getData().get("time")));
 			String address = (String) getData().get("address");
 
 			TService tService = teacher.gettService();
-			tService.setTimesPerWeek(timeperweek);
-			tService.setFreeTime(freetime);
-			tService.setPriceTotal(price);
-			tService.setTime(time);
-
+			PTServiceUtil.editTimePerWeekByTeacher(timeperweek, tService);
 			teacher.setAddress(address);
 			teacher.setTalkWay(talkWay);
-			getTeacherService().updateWithUser(teacher, user.getId());
+			getTeacherService().updateWithUser(teacher, user.getId(),false);
 			setResMsg(MsgUtil.getSuccessMsg("tservice info has changed"));
 		} catch (Exception e) {
 			e.printStackTrace();

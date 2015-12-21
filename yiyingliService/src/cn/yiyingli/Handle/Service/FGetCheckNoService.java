@@ -31,7 +31,7 @@ public class FGetCheckNoService extends MsgService {
 	@Override
 	public void doit() {
 		String username = (String) getData().get("username");
-		if (!(CheckUtil.checkMobileNumber(username) || CheckUtil.checkEmail(username))) {
+		if (!(CheckUtil.checkGlobleMobileNumber(username) || CheckUtil.checkEmail(username))) {
 			setResMsg(MsgUtil.getErrorMsgByCode("52001"));
 			return;
 		}
@@ -55,10 +55,11 @@ public class FGetCheckNoService extends MsgService {
 		no.setEndTime(String.valueOf(endTime));
 		getCheckNoService().save(no);
 		{
-			if (CheckUtil.checkMobileNumber(username))
+			if (CheckUtil.checkGlobleMobileNumber(username)) {
 				SendMessageUtil.sendCheckNo(username, checkNo);
-			else
+			} else {
 				SendMailUtil.sendMail(username, checkNo);
+			}
 		}
 		setResMsg(MsgUtil.getSuccessMsg("get checkNO successfully"));
 

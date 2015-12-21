@@ -5,6 +5,7 @@ import cn.yiyingli.Persistant.Passage;
 public class ExPassage {
 
 	public static void assembleDetail(Passage passage, SuperMap map) {
+		map.put("passageId", passage.getId());
 		map.put("title", passage.getTitle());
 		map.put("createTime", passage.getCreateTime());
 		map.put("editorName", passage.getEditorName());
@@ -13,12 +14,15 @@ public class ExPassage {
 		map.put("teacherIcon", passage.getOwnTeacher().getIconUrl());
 		map.put("teacherId", passage.getOwnTeacher().getId());
 		map.put("tag", passage.getTag());
+		map.put("content", passage.getContent());
 		map.put("likeno", passage.getLikeNumber());
+		map.put("summary", passage.getSummary());
+		map.put("simpleinfo", passage.getOwnTeacher().getSimpleInfo());
 	}
 
 	public static void assembleSimple(Passage p, SuperMap map) {
 		map.put("title", p.getTitle());
-		map.put("simplecontent", p.getContent().substring(0, 50) + "...");
+		map.put("summary", p.getSummary());
 		map.put("imageUrl", p.getImageUrl());
 		map.put("passageId", p.getId());
 		map.put("createTime", p.getCreateTime());
@@ -29,6 +33,7 @@ public class ExPassage {
 
 	public static void assembleForManager(Passage p, SuperMap map) {
 		map.put("content", p.getContent());
+		map.put("summary", p.getSummary());
 		map.put("createTime", p.getCreateTime());
 		map.put("editorName", p.getEditorName());
 		map.put("passageId", p.getId());

@@ -1,15 +1,15 @@
 package cn.yiyingli.Handle.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.ExOrderUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.TMsgService;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.OrderService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class TGetOrderListService extends TMsgService {
@@ -34,26 +34,17 @@ public class TGetOrderListService extends TMsgService {
 		Teacher teacher = getTeacher();
 		int page = 0;
 		SuperMap toSend = MsgUtil.getSuccessMap();
-		if (getData().get("page").equals("max")) {
-			long count = getOrderService().querySumNoByTeacherId(teacher.getId());
-			if (count % OrderService.PAGE_SIZE_INT > 0)
-				page = (int) (count / OrderService.PAGE_SIZE_INT) + 1;
-			else
-				page = (int) (count / OrderService.PAGE_SIZE_INT);
-			if (page == 0)
-				page = 1;
-			toSend.put("page", page);
-		} else {
-			try {
-				page = Integer.parseInt((String) getData().get("page"));
-			} catch (Exception e) {
-				setResMsg(MsgUtil.getErrorMsgByCode("22005"));
-				return;
-			}
-			if (page <= 0) {
-				setResMsg(MsgUtil.getErrorMsgByCode("22005"));
-				return;
-			}
+		long count = teacher.getOrderNumber();
+		toSend.put("count", count);
+		try {
+			page = Integer.parseInt((String) getData().get("page"));
+		} catch (Exception e) {
+			setResMsg(MsgUtil.getErrorMsgByCode("22005"));
+			return;
+		}
+		if (page <= 0) {
+			setResMsg(MsgUtil.getErrorMsgByCode("22005"));
+			return;
 		}
 		List<Order> orders = null;
 		if (getData().containsKey("state")) {
@@ -63,13 +54,13 @@ public class TGetOrderListService extends TMsgService {
 		} else {
 			orders = getOrderService().queryListByTeacherId(teacher.getId(), page, false);
 		}
-		List<String> sends = new ArrayList<String>();
+		ExList sends = new ExArrayList();
 		for (Order o : orders) {
 			SuperMap map = new SuperMap();
 			ExOrderUtil.assembleOrderToTeacher(map, o);
-			sends.add(map.finishByJson());
+			sends.add(map.finish());
 		}
-		setResMsg(toSend.put("data", Json.getJson(sends)).finishByJson());
+		setResMsg(toSend.put("data", sends).finishByJson());
 	}
 
 }

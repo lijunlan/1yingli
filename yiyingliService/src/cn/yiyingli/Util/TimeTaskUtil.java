@@ -34,6 +34,9 @@ public class TimeTaskUtil {
 	}
 
 	public void addSend(SuperMap map) {
+		if (!"false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
+			return;
+		}
 		try {
 			sendQueue.put(map);
 		} catch (InterruptedException e) {
@@ -82,6 +85,9 @@ public class TimeTaskUtil {
 			HttpResponse response = httpClient.execute(post);
 			if (response.getStatusLine().getStatusCode() == 200) {
 				result = EntityUtils.toString(response.getEntity(), "utf-8");
+			} else {
+				LogUtil.error("error time task:" + post, this.getClass());
+				return false;
 			}
 			LogUtil.info(result, this.getClass());
 			if (result.contains("success"))

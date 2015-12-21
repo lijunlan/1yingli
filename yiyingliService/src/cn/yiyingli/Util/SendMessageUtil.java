@@ -47,8 +47,8 @@ public class SendMessageUtil {
 				while (true) {
 					try {
 						SuperMap map = sendQueue.take();
-						String phone = map.finish().get("phone");
-						String msg = map.finish().get("msg");
+						String phone = map.finish().getString("phone");
+						String msg = map.finish().getString("msg");
 						if (CheckUtil.checkMobileNumber(phone)) {
 							sendChinaMsg(phone, msg);
 						} else {
@@ -64,6 +64,7 @@ public class SendMessageUtil {
 	}
 
 	public static void main(String[] args) {
+		sendGlobleMsg("8615659831720", "test");
 		// for (int i = 1; i <= 1; i++) {
 		// new Thread(new Runnable() {
 		// @Override
@@ -102,11 +103,11 @@ public class SendMessageUtil {
 	}
 
 	public static void sendCheckNo(String phone, String checkNo) {
-		SendMessageUtil.getInstance().addSend(phone, "尊敬的用户，您的短信验证码为 " + checkNo + "(3分钟内有效)");
+		SendMessageUtil.getInstance().addSend(phone.replaceAll("-", ""), "尊敬的用户，您的短信验证码为 " + checkNo + "(3分钟内有效)");
 	}
 
 	public static void sendMessage(String phone, String msg) {
-		SendMessageUtil.getInstance().addSend(phone, msg);
+		SendMessageUtil.getInstance().addSend(phone.replaceAll("-", ""), msg);
 	}
 
 	/**

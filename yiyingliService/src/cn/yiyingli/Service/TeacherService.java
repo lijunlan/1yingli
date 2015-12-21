@@ -13,11 +13,11 @@ public interface TeacherService {
 
 	public static final short CHECK_STATE_SUCCESS_SHORT = 2;
 
-	public static final int PAGE_SIZE_INT = 9;
+	public static final int PAGE_SIZE_INT = 12;
 
-	public static final int HOME_PAGE_SIZE = 5;
+	public static final int HOME_PAGE_SIZE = 10;
 
-	public static final int SALE_PAGE_SIZE = 9;
+	public static final int SALE_PAGE_SIZE = 12;
 
 	void save(Teacher teacher);
 
@@ -31,21 +31,23 @@ public interface TeacherService {
 
 	void removeAllTip(long teacherId);
 
-	void update(Teacher teacher);
+	void update(Teacher teacher, boolean refreshRecommend);
 
-	void updateWithDetailInfo(Teacher teacher);
+	void updateWithDetailInfo(Teacher teacher, boolean refreshRecommend);
 
-	void updateWithUser(Teacher teacher, long userId);
+	void updateWithUser(Teacher teacher, long userId, boolean refreshRecommend);
 
 	void updateUserLike(Teacher teacher, User user);
 
 	void updateUserUnlike(long teacherId, long userId);
 
-	void updateStudyExp(Teacher teacher);
+	void updateStudyExp(Teacher teacher, boolean refreshRecommend);
 
-	void updateWorkExp(Teacher teacher);
+	void updateWorkExp(Teacher teacher, boolean refreshRecommend);
 
 	Teacher query(long id, boolean lazy);
+	
+	Teacher queryWithUser(long id, boolean lazy);
 
 	Boolean queryCheckLikeUser(long teacherId, long userId);
 
@@ -61,6 +63,8 @@ public interface TeacherService {
 
 	List<Teacher> queryByIds(List<Long> ids);
 
+	List<Teacher> queryByNameOrUsername(String word);
+
 	List<Teacher> queryListOnservice(int page, int pageSize, boolean lazy);
 
 	List<Teacher> queryList(int page, int pageSize, boolean lazy);
@@ -72,6 +76,8 @@ public interface TeacherService {
 	List<Teacher> queryListBySale(int page, int pageSize);
 
 	List<Teacher> queryListByHomePage();
+	
+	long queryListBySaleNo();
 
 	List<Teacher> queryListBySale(int page);
 

@@ -11,6 +11,7 @@ import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Service.TipService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.MsgUtil;
+import cn.yiyingli.toPersistant.PTServiceUtil;
 import cn.yiyingli.toPersistant.PTeacherUtil;
 
 public class MEditTeacherService extends MMsgService {
@@ -85,11 +86,15 @@ public class MEditTeacherService extends MMsgService {
 		String showWeight16 = (String) tdata.get("showWeight16");
 		String homeWeight = (String) tdata.get("homeWeight");
 		String saleWeight = (String) tdata.get("saleWeight");
+		String mile = (String) tdata.get("mile");
+		String onService = (String) tdata.get("onService");
 
 		Teacher teacher = user.getTeacher();
-		PTeacherUtil.refreshTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone, address,
-				mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, showWeight1,
-				showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, teacher, getTipService());
+		PTeacherUtil.editTeacherByManagerDetail(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
+				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
+				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight,
+				onService == null ? String.valueOf(teacher.getOnService()) : onService,
+				mile == null ? teacher.getMile() : Long.valueOf(mile), teacher, getTipService());
 
 		TService tService = teacher.gettService();
 		String serviceTitle = (String) service.get("title");
@@ -98,16 +103,15 @@ public class MEditTeacherService extends MMsgService {
 		String serviceTimePerWeek = (String) service.get("timeperweek");
 		String serviceContent = (String) service.get("content");
 
-		tService.setTitle(serviceTitle);
-		tService.setTime(Float.valueOf(serviceTime));
-		tService.setPriceTotal(Float.valueOf(servicePrice));
-		tService.setTimesPerWeek(Integer.valueOf(serviceTimePerWeek));
-		tService.setContent(serviceContent);
-		tService.setReason("");
-		tService.setAdvantage("");
-		tService.setTeacher(teacher);
-		teacher.settService(tService);
-		getTeacherService().updateWithDetailInfo(teacher);
+		if (service.containsKey("onsale") && service.containsKey("pricetemp")) {
+			PTServiceUtil.editWithTeacherByManager(teacher, tService, serviceTitle, serviceTime, servicePrice,
+					serviceTimePerWeek, serviceContent, (String) service.get("onsale"),
+					(String) service.get("pricetemp"));
+		} else {
+			PTServiceUtil.editWithTeacherByManager(teacher, tService, serviceTitle, serviceTime, servicePrice,
+					serviceTimePerWeek, serviceContent, tService.getOnSale() + "", tService.getPriceTemp() + "");
+		}
+		getTeacherService().updateWithDetailInfo(teacher, true);
 		setResMsg(MsgUtil.getSuccessMsg("edit teacher successfully"));
 	}
 

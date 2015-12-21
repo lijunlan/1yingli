@@ -1,14 +1,14 @@
 package cn.yiyingli.Handle.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.ExTeacher;
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.TeacherService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class FGetSaleTeacherListService extends MsgService {
@@ -39,16 +39,20 @@ public class FGetSaleTeacherListService extends MsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("51001"));
 			return;
 		}
+		SuperMap toSend = MsgUtil.getSuccessMap();
 		List<Teacher> teachers = getTeacherService().queryListBySale(p);
-		List<String> exTeachers = new ArrayList<String>();
+		long sum = getTeacherService().queryListBySaleNo();
+		toSend.put("count", sum);
+		ExList exTeachers = new ExArrayList();
 		for (Teacher teacher : teachers) {
-			SuperMap map = ExTeacher.assembleSimpleTeacher(teacher);
-			exTeachers.add(map.finishByJson());
+			SuperMap map = new SuperMap();
+			ExTeacher.assembleSimpleForUser(teacher, map);
+			exTeachers.add(map.finish());
 		}
 		if (exTeachers.size() == TeacherService.SALE_PAGE_SIZE) {
-			setResMsg(MsgUtil.getSuccessMap().put("data", Json.getJson(exTeachers)).finishByJson());
+			setResMsg(toSend.put("data", exTeachers).finishByJson());
 		} else {
-			setResMsg(MsgUtil.getSuccessMap().put("data", Json.getJson(exTeachers)).put("page", "max").finishByJson());
+			setResMsg(toSend.put("data", exTeachers).put("page", "max").finishByJson());
 		}
 	}
 

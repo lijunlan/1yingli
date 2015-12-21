@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 
 import cn.yiyingli.Util.ConfigurationXmlUtil;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
+import net.sf.json.JSONObject;
 
 public class MessageHandle {
 
@@ -30,6 +30,7 @@ public class MessageHandle {
 			mHandle.doit();
 		} catch (Exception e) {
 			e.printStackTrace();
+			LogUtil.error(RemoteIPUtil.getAddr(rq) + "=>" + mHandle.getData().toString(), MessageHandle.class);
 			mHandle.returnError(MsgUtil.getErrorMsgByCode("00000"));
 		}
 	}
@@ -38,7 +39,7 @@ public class MessageHandle {
 	private HttpServletResponse resp;
 	private MsgService util;
 	private ApplicationContext applicationContext;
-	private Map<String, Object> data;
+	private JSONObject data;
 
 	private MessageHandle(HttpServletRequest rq, HttpServletResponse rp, ApplicationContext context) {
 		req = rq;
@@ -46,25 +47,8 @@ public class MessageHandle {
 		applicationContext = context;
 	}
 
-	/**
-	 * get IP address<br/>
-	 * 防止集群、代理
-	 * 
-	 * @param request
-	 * @return ip
-	 */
-	private static String getAddr(HttpServletRequest request) {
-		String ip = request.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
-		return ip;
+	private JSONObject getData() {
+		return data;
 	}
 
 	/**
@@ -73,7 +57,7 @@ public class MessageHandle {
 	 * @param rq
 	 * @return
 	 */
-	private static String getJson(HttpServletRequest rq) {
+	private static String getStringData(HttpServletRequest rq) {
 		String receive = "";
 		try {
 			receive = org.apache.commons.io.IOUtils.toString(rq.getInputStream());
@@ -82,7 +66,7 @@ public class MessageHandle {
 		}
 		LogUtil.info("receive->>>" + receive, MessageHandle.class);
 		// System.out.println(sBuffer.toString());
-		return receive;
+		return receive.replaceAll("\b", "").replaceAll("\f", "");
 	}
 
 	/**
@@ -90,7 +74,7 @@ public class MessageHandle {
 	 * choose method to deal with the application by the <b>style</b> field
 	 */
 	private void start() {
-		data = Json.getMapPro(getJson(req));
+		data = JSONObject.fromObject(getStringData(req));
 		Map<String, Map<String, String>> configData = ConfigurationXmlUtil.getInstance().getConfigData();
 		if (data.containsKey("style") && data.containsKey("method")) {
 			String style = (String) data.get("style");
@@ -99,7 +83,7 @@ public class MessageHandle {
 				Map<String, String> methodData = configData.get(style);
 				if (methodData.containsKey(method)) {
 					util = (MsgService) applicationContext.getBean(methodData.get(method));
-					data.put("IP", getAddr(req));
+					data.put("IP", RemoteIPUtil.getAddr(req));
 				} else {
 					returnError(MsgUtil.getErrorMsgByCode("00002"));
 				}

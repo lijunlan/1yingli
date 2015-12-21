@@ -1713,6 +1713,9 @@
 		<property name="teacherService">
 			<ref local="teacherService" />
 		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
 	</bean>
 
 	<bean id="mGetOrderByOIdService" class="cn.yiyingli.Handle.Service.MGetOrderByOIdService"
@@ -2001,6 +2004,142 @@
 		</property>
 		<property name="userMarkService">
 			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="tCreatePassageService" class="cn.yiyingli.Handle.Service.TCreatePassageService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="tGetPassageService" class="cn.yiyingli.Handle.Service.TGetPassageService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="mEditTeacherMileService" class="cn.yiyingli.Handle.Service.MEditTeacherMileService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="mEditUserMileService" class="cn.yiyingli.Handle.Service.MEditUserMileService"
+		scope="prototype">
+		<property name="userService">
+			<ref local="userService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mSearchTeacherService" class="cn.yiyingli.Handle.Service.MSearchTeacherService"
+		scope="prototype">
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="tEditPayPalService" class="cn.yiyingli.Handle.Service.TEditPayPalService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="tEditDetailInfoService" class="cn.yiyingli.Handle.Service.TEditDetailInfoService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="tServiceService">
+			<ref local="tServiceService" />
+		</property>
+		<property name="tipService">
+			<ref local="tipService" />
+		</property>
+	</bean>
+
+	<bean id="tEditSimpleInfoService" class="cn.yiyingli.Handle.Service.TEditSimpleInfoService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="tServiceService">
+			<ref local="tServiceService" />
+		</property>
+	</bean>
+
+	<bean id="tGetPaypalNoService" class="cn.yiyingli.Handle.Service.TGetPaypalNoService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="likePassageService" class="cn.yiyingli.Handle.Service.LikePassageService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
+
+
+	<bean id="tGetMileService" class="cn.yiyingli.Handle.Service.TGetMileService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="mGetSuggestionService" class="cn.yiyingli.Handle.Service.MGetSuggestionService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="suggestionService">
+			<ref local="suggestionService" />
 		</property>
 	</bean>
 

@@ -1,13 +1,13 @@
 package cn.yiyingli.Handle.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Background;
 import cn.yiyingli.Service.BackgroundService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class MGetBackgroundListService extends MMsgService {
@@ -37,15 +37,15 @@ public class MGetBackgroundListService extends MMsgService {
 			return;
 		}
 		List<Background> bgList = getBackgroundService().queryList(page, 10);
-		List<String> send = new ArrayList<>();
+		ExList send = new ExArrayList();
 		SuperMap toSend = MsgUtil.getSuccessMap();
 		for (Background bg : bgList) {
 			SuperMap tmp = new SuperMap();
 			tmp.put("url", bg.getUrl());
 			tmp.put("id", bg.getId());
-			send.add(tmp.finishByJson());
+			send.add(tmp.finish());
 		}
-		setResMsg(toSend.put("data", Json.getJson(send)).finishByJson());
+		setResMsg(toSend.put("data", send).finishByJson());
 	}
 
 }

@@ -3,7 +3,6 @@ package cn.yiyingli.Util;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -14,13 +13,16 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import cn.yiyingli.ExchangeData.ExTeacherForBaidu;
+import cn.yiyingli.Persistant.Teacher;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class SendMsgToBaiduUtil {
 
 	public static void main(String[] args) {
-		System.out.println(sendGet("http://api2.santo.cc/submit?command=USER_BALANCE&uid=yyl-ipxmt&pwd=IQ8R1Wpy"));
+		LogUtil.info(sendGet("http://api2.santo.cc/submit?command=USER_BALANCE&uid=yyl-ipxmt&pwd=IQ8R1Wpy"),
+				SendMsgToBaiduUtil.class);
 	}
 
 	public static String updataUserClickData(String json) {
@@ -76,8 +78,21 @@ public class SendMsgToBaiduUtil {
 		return toBaidu;
 	}
 
+	public static void updateTeacherData(Teacher teacher) {
+		if (!"false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
+			return;
+		}
+		JSONArray jarray = new JSONArray();
+		JSONObject obj = ExTeacherForBaidu.assembleTeacher(teacher);
+		if (obj != null) {
+			jarray.add(obj);
+			sendPost("http://ds.recsys.baidu.com/s/130426/253211?token=8d116fa25cfde0085776beee152741e2",
+					jarray.toString());
+		}
+	}
+
 	private static String sendGet(String url) {
-		System.out.println("send>>>" + url);
+		LogUtil.info("send---->>>" + url, SendMsgToBaiduUtil.class);
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpGet get = new HttpGet(url);
 		String result = "";
@@ -89,12 +104,12 @@ public class SendMsgToBaiduUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("receive>>" + result);
+		LogUtil.info("receive->>>" + result, SendMsgToBaiduUtil.class);
 		return result;
 	}
 
 	private static String sendPost(String url, String json) {
-		System.out.println("send>>>" + json);
+		LogUtil.info("send---->>>" + json, SendMsgToBaiduUtil.class);
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpPost post = new HttpPost(url);
 		post.addHeader(HTTP.CONTENT_TYPE, "text/json");
@@ -111,7 +126,7 @@ public class SendMsgToBaiduUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("receive>>" + result);
+		LogUtil.info("receive->>>" + result, SendMsgToBaiduUtil.class);
 		return result;
 	}
 }

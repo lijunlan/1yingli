@@ -17,8 +17,15 @@ import cn.yiyingli.Persistant.Teacher;
 public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 
 	@Override
-	public void save(Passage passage) {
+	public void saveAndCount(Passage passage, Teacher teacher) {
 		getHibernateTemplate().save(passage);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session.createSQLQuery(
+				"update teacher set teacher.CHECKPASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
+						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_CHECKING
+						+ ") where teacher.TEACHER_ID=" + teacher.getId());
+		query.executeUpdate();
 	}
 
 	@Override
@@ -43,7 +50,42 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 	}
 
 	@Override
+	public void updateAndCount(Passage passage, Teacher teacher) {
+		getHibernateTemplate().update(passage);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session.createSQLQuery(
+				"update teacher set teacher.PASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
+						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_OK
+						+ ") where teacher.TEACHER_ID=" + teacher.getId());
+		query.executeUpdate();
+		session.flush();
+		query = session.createSQLQuery(
+				"update teacher set teacher.CHECKPASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
+						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_CHECKING
+						+ ") where teacher.TEACHER_ID=" + teacher.getId());
+		query.executeUpdate();
+		session.flush();
+		query = session.createSQLQuery(
+				"update teacher set teacher.REFUSEPASSAGENUMBER=(select count(*) from passage where passage.TEACHER_ID='"
+						+ teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_REFUSE
+						+ ") where teacher.TEACHER_ID=" + teacher.getId());
+		query.executeUpdate();
+	}
+
+	@Override
 	public Passage query(long id) {
+		String hql = "from Passage p left join fetch p.ownTeacher where p.id=? and p.onshow=?";
+		@SuppressWarnings("unchecked")
+		List<Passage> list = getHibernateTemplate().find(hql, id, true);
+		if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
+
+	@Override
+	public Passage queryWithTeacherById(long id) {
 		String hql = "from Passage p left join fetch p.ownTeacher where p.id=? and p.onshow=?";
 		@SuppressWarnings("unchecked")
 		List<Passage> list = getHibernateTemplate().find(hql, id, true);
@@ -116,7 +158,7 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 			@Override
 			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from Passage p left join fetch p.ownTeacher where p.ownTeacher.id=" + teacherId
-						+ " and p.state=" + state + " and p.onshow="+true+" ORDER BY p.createTime DESC";
+						+ " and p.state=" + state + " and p.onshow=" + true + " ORDER BY p.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -135,8 +177,8 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 
 			@Override
 			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Passage p left join fetch p.ownTeacher where p.state=" + state
-						+ " and p.onshow="+true+" ORDER BY p.createTime DESC";
+				String hql = "from Passage p left join fetch p.ownTeacher where p.state=" + state + " and p.onshow="
+						+ true + " ORDER BY p.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);

@@ -16,7 +16,7 @@ public class TChangeIntroduceService extends TMsgService {
 		Teacher teacher = getTeacher();
 		String introduce = (String) getData().get("introduce");
 		teacher.setIntroduce(introduce);
-		getTeacherService().update(teacher);
+		getTeacherService().update(teacher,false);
 		setResMsg(MsgUtil.getSuccessMsg("introduce has changed"));
 	}
 

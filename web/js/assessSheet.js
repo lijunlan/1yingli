@@ -66,13 +66,17 @@ function changePage(p){
 
     //获取总数
     $("#assess-for-you").text("给您的评价("+ getTotalNumber(2) +")");
-    $("#assess-for-others").text("您写的评价("+ getTotalNumber(1) +")");    
+    $("#assess-for-others").text("您写的评价("+ getTotalNumber(1) +")");
 
     var toSend = new Object();
     toSend.style = "user";
     toSend.method = "getCommentList";
     toSend.uid = $.cookie('uid');
-    toSend.page= "" + p;
+    if (p == undefined || (typeof p == 'string' && p.trim() == '')) {
+        toSend.page = '1';
+    } else {
+        toSend.page = "" + p;
+    }
     toSend.kind = "" + type;
     $.ajax({
         cache : true,
@@ -112,7 +116,7 @@ function changePage(p){
                                 + "    <p class=\"date-text\">"+content.createTime+"</p>"
                                 + "</li>";
                 });
-                
+
                 $("#commentList").html(html);
 
             } else {
@@ -148,7 +152,7 @@ function changePage(p){
     $(".page").html(html1);
     if(totalPage <= basePage) {
         for (var i = 1; i <=totalPage; i++) {
-            $("#btnNext").before("<a id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");   
+            $("#btnNext").before("<a id='btn" + i + "' href='javascript:changePage(" + i + ")' >" + i + "</a>");
         };
     } else {
         for (var i = 1; i <=totalPage; i++) {
@@ -176,7 +180,7 @@ function changePage(p){
                 }
                 if(i == afterShowPage) {
                     if(afterShowPage !=totalPage ) {
-                        $("#btnNext").before("..."); 
+                        $("#btnNext").before("...");
                         $("#btnNext").before("<a id='btn" + totalPage + "' href='javascript:changePage(" + totalPage + ")' >" + totalPage + "</a>");
                         break;
                     }

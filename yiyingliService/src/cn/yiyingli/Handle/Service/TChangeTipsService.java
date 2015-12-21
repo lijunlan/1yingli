@@ -32,7 +32,6 @@ public class TChangeTipsService extends TMsgService {
 		Teacher teacher = getTeacher();
 		List<Object> tips = (List<Object>) getData().get("tips");
 		teacher.getTips().clear();
-		getTeacherService().update(teacher);
 		long tipMark = 0;
 		for (Object t : tips) {
 			Long tid = Long.valueOf((String) ((Map<String, Object>) t).get("id"));
@@ -41,7 +40,7 @@ public class TChangeTipsService extends TMsgService {
 			teacher.getTips().add(mT);
 		}
 		teacher.setTipMark(tipMark);
-		getTeacherService().update(teacher);
+		getTeacherService().update(teacher, false);
 		setResMsg(MsgUtil.getSuccessMsg("tips have changed"));
 	}
 

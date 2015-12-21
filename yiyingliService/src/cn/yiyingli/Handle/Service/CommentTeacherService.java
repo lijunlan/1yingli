@@ -98,7 +98,11 @@ public class CommentTeacherService extends UMsgService {
 			comment.setServiceTitle(order.getServiceTitle());
 			comment.setTeacher(teacher);
 			comment.setUser(user);
-			getCommentService().saveWithOrder(comment, order);
+
+			// 加积分(英里数)
+			teacher.setMile(teacher.getMile() + 2L);
+			
+			getCommentService().saveWithOrderAndTeacher(comment, order, teacher);
 
 			NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
 					"尊敬的导师，您好,学员(" + order.getCustomerName() + ")已经对本次咨询(订单号:" + order.getOrderNo() + "),进行了评价,评价分数:"

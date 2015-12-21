@@ -52,14 +52,14 @@ public class TCheckPhoneService extends TMsgService {
 		} else {
 			getCheckNoService().remove(no);
 		}
-		if (CheckUtil.checkMobileNumber(phone)) {
+		if (CheckUtil.checkMobileNumber(phone) || CheckUtil.checkGlobleMobileNumber(phone)) {
 			if (getTeacher().getPhone().equals(phone)) {
 				getTeacher().setCheckPhone(true);
 			} else {
 				setResMsg(MsgUtil.getErrorMsgByCode("22003"));
 				return;
 			}
-			getTeacherService().update(getTeacher());
+			getTeacherService().update(getTeacher(), false);
 			setResMsg(MsgUtil.getSuccessMsg("phone number has been checked"));
 		} else {
 			setResMsg(MsgUtil.getErrorMsgByCode("22004"));

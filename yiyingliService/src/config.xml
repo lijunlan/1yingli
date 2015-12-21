@@ -1,5 +1,5 @@
 <?xml version = "1.0" encoding= "UTF-8"?>
-<!DOCTYPE service-configuration PUBLIC "config.dtd" "http://source.1yingli.cn/config.dtd">
+<!DOCTYPE service-configuration PUBLIC "config.dtd" "http://source.1yingli.cn/config1.dtd">
 <service-configuration>
 	<cachePath value="/TEMP/" />
 	<imagePath value="http://image.1yingli.cn" />
@@ -13,7 +13,9 @@
 		value="http://api.recsys.baidu.com/s/130426/326542/rs?token=8d116fa25cfde0085776beee152741e2" />
 	<baiduPersonalUrl
 		value="http://api.recsys.baidu.com/s/130426/326544/rs?token=8d116fa25cfde0085776beee152741e2" />
+	<debug value="false" />
 	<style name="user">
+		<method name="likePassage" beanName="likePassageService" />
 		<method name="getTeacherState" beanName="getTeacherStateService" />
 		<method name="getCommentCount" beanName="getCommentCountService" />
 		<method name="getLikeTeacherCount" beanName="getLikeTeacherCountService" />
@@ -53,6 +55,13 @@
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
 	</style>
 	<style name="teacher">
+		<method name="getMile" beanName="tGetMileService" />
+		<method name="getPaypalNo" beanName="tGetPaypalNoService" />
+		<method name="editSimpleInfo" beanName="tEditSimpleInfoService" />
+		<method name="editPayPal" beanName="tEditPayPalService" />
+		<method name="editDetailInfo" beanName="tEditDetailInfoService" />
+		<method name="getPassage" beanName="tGetPassageService" />
+		<method name="createPassage" beanName="tCreatePassageService" />
 		<method name="getPassageList" beanName="tGetPassageListService" />
 		<method name="getAllInfo" beanName="tGetAllInfoService" />
 		<method name="changeTitlePrice" beanName="tChangeTitlePriceService" />
@@ -91,6 +100,10 @@
 		<method name="login" beanName="dLoginService" />
 	</style>
 	<style name="manager">
+		<method name="getSuggestion" beanName="mGetSuggestionService" />
+		<method name="searchTeacher" beanName="mSearchTeacherService" />
+		<method name="editTeacherMile" beanName="mEditTeacherMileService" />
+		<method name="editUserMile" beanName="mEditUserMileService" />
 		<method name="validatePassage" beanName="mValidatePassageService"></method>
 		<method name="getPassageList" beanName="mGetPassageListService"></method>
 		<method name="getTeacherDemand" beanName="mGetTeacherDemandService"></method>
@@ -130,7 +143,6 @@
 		<method name="getHomeTeacherList" beanName="fGetHomeTeacherListService" />
 		<method name="teacherDemand" beanName="fTeacherDemandService"></method>
 		<method name="getCheckNo" beanName="fGetCheckNoService"></method>
-		<method name="searchByTip" beanName="searchByTipService"></method>
 		<method name="getTips" beanName="getTipsService"></method>
 		<method name="getSearchHint" beanName="fGetSearchHintService"></method>
 		<method name="createApplication" beanName="createApplicationFormService"></method>

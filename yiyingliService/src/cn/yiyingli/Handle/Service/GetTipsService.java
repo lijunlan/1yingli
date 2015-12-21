@@ -1,13 +1,13 @@
 package cn.yiyingli.Handle.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Tip;
 import cn.yiyingli.Service.TipService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class GetTipsService extends MsgService {
@@ -30,14 +30,14 @@ public class GetTipsService extends MsgService {
 	@Override
 	public void doit() {
 		List<Tip> tips = getTipService().queryNormalList();
-		List<String> toSend = new ArrayList<String>();
+		ExList toSend = new ExArrayList();
 		for (Tip t : tips) {
 			SuperMap map = new SuperMap();
 			map.put("tid", t.getId());
 			map.put("name", t.getName());
-			toSend.add(map.finishByJson());
+			toSend.add(map.finish());
 		}
-		setResMsg(MsgUtil.getSuccessMap().put("tips", Json.getJson(toSend)).finishByJson());
+		setResMsg(MsgUtil.getSuccessMap().put("tips", toSend).finishByJson());
 	}
 
 }

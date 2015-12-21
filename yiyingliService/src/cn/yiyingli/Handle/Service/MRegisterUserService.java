@@ -32,7 +32,8 @@ public class MRegisterUserService extends MMsgService {
 		String username = (String) getData().get("username");
 		String password = (String) getData().get("password");
 		String nickName = (String) getData().get("nickName");
-		if (!(CheckUtil.checkMobileNumber(username) || CheckUtil.checkEmail(username)) || "".equals(password)) {
+		if (!(CheckUtil.checkMobileNumber(username) || CheckUtil.checkGlobleMobileNumber(username)
+				|| CheckUtil.checkEmail(username)) || "".equals(password)) {
 			setResMsg(MsgUtil.getErrorMsgByCode("12017"));
 			return;
 		}
@@ -50,7 +51,7 @@ public class MRegisterUserService extends MMsgService {
 		}
 		password = MD5Util.MD5(password);
 		User user = PUserUtil.assembleUser(username, password, nickName, null, null, null);
-		if (CheckUtil.checkMobileNumber(username)) {
+		if (CheckUtil.checkMobileNumber(username) || CheckUtil.checkGlobleMobileNumber(username)) {
 			user.setPhone(username);
 		} else {
 			user.setEmail(username);

@@ -1,19 +1,11 @@
 package cn.yiyingli.Handle;
 
-import java.util.Map;
+import net.sf.json.JSONObject;
 
 public abstract class MsgService {
 
 	private String resMsg = "{\"state\":\"unknown error\"}";
-	private Map<String, Object> inMap;
-
-	protected Map<String, Object> getInMap() {
-		return inMap;
-	}
-
-	protected void setInMap(Map<String, Object> inMap) {
-		this.inMap = inMap;
-	}
+	private JSONObject inMap;
 
 	protected MsgService() {
 	}
@@ -22,12 +14,12 @@ public abstract class MsgService {
 		return resMsg;
 	}
 
-	public boolean setDataMap(Map<String, Object> data) {
+	public boolean setDataMap(JSONObject data) {
 		inMap = data;
 		return checkData();
 	}
 
-	protected Map<String, Object> getData() {
+	protected JSONObject getData() {
 		return inMap;
 	}
 

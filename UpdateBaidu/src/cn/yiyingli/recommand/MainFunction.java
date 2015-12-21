@@ -7,7 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import cn.yiyingli.util.MsgUtil;
 import net.sf.json.JSONArray;
@@ -16,10 +19,118 @@ import net.sf.json.JSONObject;
 public class MainFunction {
 
 	public static void main(String[] args) throws SQLException {
+		// System.out.println(Calendar.getInstance().getTimeInMillis());
 		updateTeacherData();
 		// updateUserTrainDataRecord();
 		// updateUserTrainDataLike();
 		// updateUserTrainDataOrder();
+		 //editTeacherData();
+		// System.out.println("123");
+		//editTeacherData2();
+	}
+
+	public static String replaceBlank(String str) {
+		String dest = "";
+		if (str != null) {
+			Pattern p = Pattern.compile("\\s*|\t|\r|\n");
+			Matcher m = p.matcher(str);
+			dest = m.replaceAll("");
+		}
+		dest = dest.replaceAll("'", "\"");
+		return dest.replaceAll("\b", "");
+	}
+	
+	/**
+	 * 将content里面的h1标签改成h3
+	 */
+	private static void editTeacherData2() {
+		for (int i = 1; i <= 260; i++) {
+			JSONObject send = new JSONObject();
+			send.put("style", "teacher");
+			send.put("method", "getAllInfo");
+			send.put("teacherId", i + "");
+			String result = MsgUtil.sendMsgToService(send.toString());
+			JSONObject receive = JSONObject.fromObject(result);
+			if (!receive.getString("state").equals("error")) {
+				String content = receive.getString("serviceContent");
+				content =  content.replaceAll("<h1>", "<h3>");
+				content =  content.replaceAll("</h1>", "</h3>");
+				content = replaceBlank(content);
+				System.out.println("");
+				System.out.println(content);
+				String sql;
+				Connection conn = null;
+				String url = "jdbc:mysql://yiyingli.mysql.rds.aliyuncs.com:3306/fortest?user=sdll18&password=ll1992917&useUnicode=true&characterEncoding=UTF8";
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					conn = DriverManager.getConnection(url);
+					Statement stmt = conn.createStatement();
+					sql = "update tservice set tservice.CONTENT='" + content + "' where tservice.TEACHER_ID="
+							+ receive.getString("teacherId") + ";";
+					System.out.println(sql);
+					int rs = stmt.executeUpdate(sql);
+					System.out.println(rs);
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+
+
+	/**
+	 * 删除content里面的h1标签的样式
+	 */
+	private static void editTeacherData() {
+		for (int i = 1; i <= 296; i++) {
+			JSONObject send = new JSONObject();
+			send.put("style", "teacher");
+			send.put("method", "getAllInfo");
+			send.put("teacherId", i + "");
+			String result = MsgUtil.sendMsgToService(send.toString());
+			JSONObject receive = JSONObject.fromObject(result);
+			if (!receive.getString("state").equals("error")) {
+				String content = receive.getString("serviceContent");
+				int start = content.indexOf("<h1") + 3;
+				int end = content.indexOf(">", start);
+				System.out.println(start + " " + end);
+				if (start < 0 || end < 0 || start > end)
+					continue;
+				content = content.replace(content.substring(start, end), "");
+				content =  content.replaceAll("<h1>", "<h3>");
+				content =  content.replaceAll("</h1>", "</h3>");
+				content = replaceBlank(content);
+				System.out.println("");
+				System.out.println(content);
+				String sql;
+				Connection conn = null;
+				String url = "jdbc:mysql://yiyingli.mysql.rds.aliyuncs.com:3306/yiyingli?user=sdll18&password=ll1992917&useUnicode=true&characterEncoding=UTF8";
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					conn = DriverManager.getConnection(url);
+					Statement stmt = conn.createStatement();
+					sql = "update tservice set tservice.CONTENT='" + content + "' where tservice.TEACHER_ID="
+							+ receive.getString("teacherId") + ";";
+					System.out.println(sql);
+					int rs = stmt.executeUpdate(sql);
+					System.out.println(rs);
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 	}
 
 	private static void updateUserTrainDataOrder() {
@@ -84,9 +195,9 @@ public class MainFunction {
 
 	private static void updateTeacherData() {
 		JSONArray jarray = new JSONArray();
-		for (int i = 228; i <= 232; i++) {
+		for (int i = 1; i <= 311; i++) {
 			JSONObject obj = updateTeacherData(i + "");
-			if(obj!=null){
+			if (obj != null) {
 				jarray.add(obj);
 			}
 		}
@@ -194,7 +305,7 @@ public class MainFunction {
 			toBaidu.put("Version", 1.0);
 			toBaidu.put("ItemId", tid);
 			toBaidu.put("DisplaySwitch", "On");
-			toBaidu.put("Url", "http://www.1yingli.cn/personal.html?tid=" + tid);
+			toBaidu.put("Url", "http://www.1yingli.cn/#!/teacher/" + tid);
 			JSONObject jsonIndexed = new JSONObject();
 			jsonIndexed.put("Title", title);
 			jsonIndexed.put("Content", content);

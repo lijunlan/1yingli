@@ -1,5 +1,14 @@
 package cn.yiyingli.Util;
 
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.IAcsClient;
+import com.aliyuncs.dm.model.v20151123.SingleSendMailRequest;
+import com.aliyuncs.dm.model.v20151123.SingleSendMailResponse;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.exceptions.ServerException;
+import com.aliyuncs.profile.DefaultProfile;
+import com.aliyuncs.profile.IClientProfile;
+
 public class SendMailUtil {
 
 	private static final String HTML = "<html lang=\"ch\"><head><meta charset=\"utf-8\"><title>一英里</title><meta name=\"viewport\""
@@ -18,8 +27,28 @@ public class SendMailUtil {
 	}
 
 	public static void main(String[] args) {
-		for (int i = 1; i <= 10; i++) {
-			System.out.println(sendMessage("lijunlan@1yingli.cn", "fwefwe", "呵呵呵呵呵呵呵" + i));
+		// for (int i = 1; i <= 10; i++) {
+		// System.out.println(sendMessage("lijunlan@1yingli.cn", "fwefwe",
+		// "呵呵呵呵呵呵呵" + i));
+		// }
+		IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "T8Idmm00U1mAwzcn",
+				"cZQkX1saEq1eF2g1ADbnO2kcFlJxb9");
+		IAcsClient client = new DefaultAcsClient(profile);
+		SingleSendMailRequest request = new SingleSendMailRequest();
+		try {
+			request.setAccountName("notify@1yingli.net");
+			request.setAddressType(0);
+			request.setTagName("123");
+			request.setReplyToAddress(true);
+			request.setToAddress("lijunlan@1yingli.cn");
+			request.setSubject("邮件主题");
+			request.setHtmlBody("邮件正文");
+			@SuppressWarnings("unused")
+			SingleSendMailResponse httpResponse = client.getAcsResponse(request);
+		} catch (ServerException e) {
+			e.printStackTrace();
+		} catch (ClientException e) {
+			e.printStackTrace();
 		}
 	}
 

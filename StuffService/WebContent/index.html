@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="css/messenger.css">
+<link rel="stylesheet" href="css/fix.css">
+<link rel="stylesheet" href="css/messenger-theme-future.css">
+<link rel="stylesheet" href="assets/css/amazeui.min.css">
+<link rel="stylesheet" href="assets/css/admin.css">
+<title>功能选择</title>
+</head>
+
+<body>
+
+	<!--------------------------------------------- 头部 --------------------------------------------------------------->
+	<header class="am-topbar admin-header">
+		<div class="am-topbar-brand">
+			<a href="index.html"><strong>One Mile</strong> <small>一英里后台管理系统</small></a>
+		</div>
+
+		<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+			<ul
+				class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+
+				<li class="am-dropdown" data-am-dropdown=""><a
+					class="am-dropdown-toggle" data-am-dropdown-toggle=""
+					href="javascript:;"> <span class="am-icon-users"></span> <label
+						id="admin_name">管理员</label>,你好
+				</a></li>
+				<li class="am-hide-sm-only"><a onclick="logout()"><span
+						class="am-icon-sign-out"></span> <span class="admin-fullText">注销</span></a></li>
+			</ul>
+		</div>
+	</header>
+
+	<!--------------------------------------------- 侧边 --------------------------------------------------------------->
+	<div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+		<div class="am-offcanvas-bar admin-offcanvas-bar">
+			<ul class="am-list admin-sidebar-list">
+				<li><a href="index.html"><span class="am-icon-home"></span>
+						首页</a></li>
+				<li class="admin-parent"><a class="am-cf am-collapsed"
+					data-am-collapse="{target: '#collapse-nav'}"><span
+						class="am-icon-file"></span> 功能模块 <span
+						class="am-icon-angle-right am-fr am-margin-right"></span></a>
+					<ul class="am-list admin-sidebar-sub am-collapse" id="collapse-nav"
+						style="height: 0px;">
+						<li><a href="orderService.html" class="am-cf"><span
+								class="am-icon-file-text"></span> 订单管理</a></li>
+						<li><a href="teacherService.html"><span
+								class="am-icon-mortar-board"></span> 导师查询</a></li>
+						<li><a href="customerService.html"><span
+								class="am-icon-user"></span> 客户查询</a></li>
+						<li><a href="manage_application.html"><span
+								class="am-icon-plus-square"></span> 导师申请查询</a></li>
+						<li><a href="voucherService.html"><span
+								class="am-icon-usd"></span> 生成优惠券</a></li>
+						<li><a href="uploadBackgroundService.html"><span
+								class="am-icon-file-picture-o"></span> 背景图片管理</a></li>
+						<li><a href="distributionService.html"><span
+								class="am-icon-sitemap"></span> 分销管理</a></li>
+						<li><a href="teacherDemandService.html"><span
+								class="am-icon-inbox"></span> 导师要求</a></li>
+						<li><a href="editTeacherService.html"><span
+								class="am-icon-pencil"></span> 编辑导师</a></li>
+						<li><a href="articleService.html"><span
+								class="am-icon-leanpub"></span> 文章管理</a></li>
+						<li><a href="suggestionService.html"><span
+								class="am-icon-envelope-o"></span> 用户建议</a></li>
+					</ul></li>
+				<li><a onclick="logout()"><span class="am-icon-sign-out"></span>
+						注销</a></li>
+			</ul>
+			<div class="am-panel am-panel-default admin-sidebar-panel">
+				<div class="am-panel-bd">
+					<p>
+						<span class="am-icon-bookmark"></span> 公告
+					</p>
+					<p>每个人都可以成为别人的大雁，不一定能指明一个好的方向，但至少能告诉别人一个地方的温凉。</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--------------------------------------------- 主要部分 --------------------------------------------------------------->
+	<div class="admin-content">
+		<div class="am-cf am-padding">
+			<div class="am-fl am-cf">
+				<strong class="am-text-primary am-text-lg">首页</strong> / <small>功能模块</small>
+			</div>
+		</div>
+
+		<ul
+			class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
+			<li><a href="orderService.html" class="am-text-success"><span
+					class="am-icon-btn am-icon-file-text"></span><br> <br>订单查询</a></li>
+			<li><a href="teacherService.html" class="am-text-warning"><span
+					class="am-icon-btn am-icon-mortar-board"></span><br> <br>导师查询</a></li>
+			<li><a href="customerService.html" class="am-text-danger"><span
+					class="am-icon-btn am-icon-user"></span><br> <br>客户查询</a></li>
+			<li><a href="manage_application.html" class="am-text-secondary"><span
+					class="am-icon-btn am-icon-plus-square"></span><br> <br>导师申请处理</a></li>
+		</ul>
+		<ul
+			class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
+			<li><a href="voucherService.html" class="am-text-success"><span
+					class="am-icon-btn am-icon-usd"></span><br> <br>生成优惠券</a></li>
+			<li><a href="uploadBackgroundService.html"
+				class="am-text-warning"><span
+					class="am-icon-btn am-icon-file-picture-o"></span><br> <br>背景图片管理</a></li>
+			<li><a href="distributionService.html" class="am-text-danger"><span
+					class="am-icon-btn am-icon-sitemap"></span><br> <br>分销管理</a></li>
+			<li><a href="teacherDemandService.html"
+				class="am-text-secondary"><span
+					class="am-icon-btn am-icon-inbox"></span><br> <br>导师要求</a></li>
+		</ul>
+		<ul
+			class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
+			<li><a href="editTeacherService.html" class="am-text-success"><span
+					class="am-icon-btn am-icon-pencil"></span><br> <br>编辑导师信息</a></li>
+			<li><a href="articleService.html" class="am-text-warning"><span
+					class="am-icon-btn am-icon-leanpub"></span><br> <br>文章管理</a></li>
+			<li><a href="suggestionService.html" class="am-text-danger"><span
+					class="am-icon-btn am-icon-envelope-o"></span><br> <br>用户建议</a></li>
+		</ul>
+	</div>
+	<!--------------------------------------------- 声音 --------------------------------------------------------------->
+	<div id="sound"></div>
+
+	<script type="text/javascript" src="js/libs/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/libs/ajax-pushlet-client.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/libs/swfobject.js"></script>
+	<script type="text/javascript" src="js/libs/messenger.min.js"></script>
+	<script type="text/javascript" src="assets/js/amazeui.min.js"></script>
+	<script type="text/javascript" src="js/page/StuffService-common.js"></script>
+	<script type="text/javascript">
+		var mid;
+		checkLogin()
+		registNotify()
+		//在上边栏显示管理员名字
+		$(document).ready(function() {
+			document.getElementById("admin_name").innerText = $.cookie('mname')
+		})
+	</script>
+</body>
+
+</html>

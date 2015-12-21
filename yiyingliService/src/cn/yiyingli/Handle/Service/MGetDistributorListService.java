@@ -1,13 +1,13 @@
 package cn.yiyingli.Handle.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Distributor;
 import cn.yiyingli.Service.DistributorService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class MGetDistributorListService extends MMsgService {
@@ -32,7 +32,7 @@ public class MGetDistributorListService extends MMsgService {
 		int page = Integer.valueOf((String) getData().get("page"));
 		long count = getDistributorService().queryCount();
 		List<Distributor> distributors = getDistributorService().queryList(page);
-		List<String> toSend = new ArrayList<String>();
+		ExList toSend = new ExArrayList();
 		for (Distributor d : distributors) {
 			SuperMap map = new SuperMap();
 			map.put("id", d.getId());
@@ -47,9 +47,9 @@ public class MGetDistributorListService extends MMsgService {
 			map.put("orderNumber", d.getOrderNumber());
 			map.put("registerNumber", d.getRegisterNumber());
 			map.put("voucherMoney", d.getVoucherMoney());
-			toSend.add(map.finishByJson());
+			toSend.add(map.finish());
 		}
-		setResMsg(MsgUtil.getSuccessMap().put("count", count).put("data", Json.getJson(toSend)).finishByJson());
+		setResMsg(MsgUtil.getSuccessMap().put("count", count).put("data", toSend).finishByJson());
 	}
 
 }

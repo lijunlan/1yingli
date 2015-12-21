@@ -16,10 +16,12 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.yiyingli.Alipay.AlipayConfig;
 import cn.yiyingli.Alipay.AlipaySubmit;
+import cn.yiyingli.Handle.RemoteIPUtil;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Service.UserMarkService;
+import cn.yiyingli.Util.ConfigurationXmlUtil;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
 
@@ -42,6 +44,7 @@ public class AlipayServlet extends HttpServlet {
 		setApplicationContext(WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext()));
 	}
 
+	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
 		Map<String, String> parms = new HashMap<String, String>();
@@ -92,7 +95,7 @@ public class AlipayServlet extends HttpServlet {
 		// 必填
 
 		// 订单描述
-		String body = order.getState();
+		String body = order.getServiceTitle();
 
 		// 商品展示地址
 		String show_url = "http://www.1yingli.cn/personal.html?tid=" + order.getTeacher().getId();
@@ -103,7 +106,7 @@ public class AlipayServlet extends HttpServlet {
 		// 若要使用请调用类文件submit中的query_timestamp函数
 
 		// 客户端的IP地址
-		String exter_invoke_ip = req.getRemoteAddr();
+		String exter_invoke_ip = RemoteIPUtil.getAddr(req);
 		// 非局域网的外网IP地址，如：221.0.0.1
 
 		parms.put("service", "create_direct_pay_by_user");
@@ -111,7 +114,11 @@ public class AlipayServlet extends HttpServlet {
 		parms.put("seller_email", AlipayConfig.seller_email);
 		parms.put("_input_charset", AlipayConfig.input_charset);
 		parms.put("payment_type", AlipayConfig.payment_type);
-		parms.put("notify_url", AlipayConfig.notify_url);
+		if (!"false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
+			parms.put("notify_url", AlipayConfig.notify_url_debug);
+		} else {
+			parms.put("notify_url", AlipayConfig.notify_url);
+		}
 		// 判断是否使用默认的return_url
 		if (req.getParameter("callback") == null) {
 			parms.put("return_url", AlipayConfig.return_url);

@@ -1,14 +1,14 @@
 package cn.yiyingli.Handle.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Notification;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.NotificationService;
-import cn.yiyingli.Util.Json;
 import cn.yiyingli.Util.MsgUtil;
 
 public class GetNotificationService extends UMsgService {
@@ -57,16 +57,16 @@ public class GetNotificationService extends UMsgService {
 				}
 			}
 			List<Notification> notifications = getNotificationService().queryListByUserId(user.getId(), page, 9, false);
-			List<String> sends = new ArrayList<String>();
+			ExList sends = new ExArrayList();
 			for (Notification n : notifications) {
 				SuperMap map = new SuperMap();
 				map.put("title", n.getTitle());
 				map.put("notiId", n.getId());
 				map.put("url", n.getUrl());
 				map.put("time", n.getCreateTime());
-				sends.add(map.finishByJson());
+				sends.add(map.finish());
 			}
-			setResMsg(toSend.put("data", Json.getJson(sends)).finishByJson());
+			setResMsg(toSend.put("data", sends).finishByJson());
 		} else {
 			String notiId = (String) getData().get("notiId");
 			long nid = 0;

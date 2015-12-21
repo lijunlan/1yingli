@@ -44,7 +44,7 @@ public class ForgetPasswordService extends MsgService {
 		String no = (String) getData().get("no");
 		String password = (String) getData().get("password");
 		String checkNo = (String) getData().get("checkNo");
-		if (!(CheckUtil.checkEmail(no) || CheckUtil.checkMobileNumber(no))) {
+		if (!(CheckUtil.checkEmail(no) || CheckUtil.checkGlobleMobileNumber(no))) {
 			setResMsg(MsgUtil.getErrorMsgByCode("12008"));
 			return;
 		}
@@ -63,7 +63,7 @@ public class ForgetPasswordService extends MsgService {
 		}
 		User user = getUserService().query(no, false);
 		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsgByCode("15003"));
+			setResMsg(MsgUtil.getErrorMsgByCode("15004"));
 			return;
 		}
 		try {

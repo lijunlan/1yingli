@@ -29,7 +29,7 @@ public class Order {
 	@Column(name = "MONEY", nullable = false)
 	private Float money;
 
-	//课程时长
+	// 课程时长
 	@Column(name = "TIME", nullable = false)
 	private Float time;
 
@@ -66,6 +66,12 @@ public class Order {
 	private String alipayNo;
 
 	/**
+	 * 用户alipay账号
+	 */
+	@Column(name = "PAYPALNO", nullable = true)
+	private String paypalNo;
+
+	/**
 	 * 支付宝流水号
 	 */
 	@Column(name = "UNIQUENO", nullable = true)
@@ -77,11 +83,11 @@ public class Order {
 	@Column(name = "SERVICETITLE", nullable = false)
 	private String serviceTitle;
 
-	//学员选择时间
+	// 学员选择时间
 	@Column(name = "SELECTTIME", nullable = false)
 	private String selectTime;
-	
-	//导师确定时间
+
+	// 导师确定时间
 	@Column(name = "OKTIME", nullable = true)
 	private String okTime;
 
@@ -89,15 +95,21 @@ public class Order {
 	@JoinColumn(name = "ORDER_ID", updatable = false)
 	private Set<Comment> comments = new HashSet<Comment>();
 
-	//订单生成时间
+	// 订单生成时间
 	@Column(name = "CREATETIME", nullable = false)
 	private String createTime;
+
+	@Column(name = "ONSALE", nullable = false)
+	private Boolean onSale;
 
 	@Column(name = "ENDTIME", nullable = true)
 	private String endTime;
 
 	@Column(name = "PAYTIME", nullable = true)
 	private String payTime;
+
+	@Column(name = "PAYMETHOD", nullable = true)
+	private Short payMethod;
 
 	@ManyToOne(targetEntity = TService.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TSERVICE_ID", updatable = false)
@@ -344,6 +356,30 @@ public class Order {
 
 	public void setPayTime(String payTime) {
 		this.payTime = payTime;
+	}
+
+	public Boolean getOnSale() {
+		return onSale;
+	}
+
+	public void setOnSale(Boolean onSale) {
+		this.onSale = onSale;
+	}
+
+	public Short getPayMethod() {
+		return payMethod;
+	}
+
+	public void setPayMethod(Short payMethod) {
+		this.payMethod = payMethod;
+	}
+
+	public String getPaypalNo() {
+		return paypalNo;
+	}
+
+	public void setPaypalNo(String paypalNo) {
+		this.paypalNo = paypalNo;
 	}
 
 }

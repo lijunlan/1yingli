@@ -13,6 +13,7 @@ import cn.yiyingli.Service.TipService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
+import cn.yiyingli.toPersistant.PTServiceUtil;
 import cn.yiyingli.toPersistant.PTeacherUtil;
 
 public class CreateApplicationFormService extends UMsgService {
@@ -65,25 +66,28 @@ public class CreateApplicationFormService extends UMsgService {
 		List<Object> studyExperiences = (List<Object>) application.get("studyExperience");
 		Map<String, Object> service = (Map<String, Object>) application.get("service");
 		List<Object> tips = (List<Object>) service.get("tips");
-		Teacher teacher = PTeacherUtil.assembleTeacherByApplication(user, workExperiences, studyExperiences, tips, "", name, phone,
-				address, mail, "", "", "false", "false", "false", "false", "false", "-1", "-1", "-1", "-1", "-1", "0",
-				"0", getTipService());
+		Teacher teacher = PTeacherUtil.assembleTeacherByApplication(user, workExperiences, studyExperiences, tips, "",
+				name, phone, address, mail, "", "", "false", "false", "false", "false", "false", "-1", "-1", "-1", "-1",
+				"-1", "0", "0", getTipService());
+
+		String advantage = (String) service.get("advantage");
+		String content = (String) service.get("content");
+		float price = service.get("price") == null ? 0.0F : Float.valueOf((String) service.get("price"));
+		String reason = (String) service.get("reason");
+		float time = service.get("time") == null ? 0.0F : Float.valueOf((String) service.get("time"));
+
+		String title = (String) service.get("title");
 
 		TService tService = new TService();
-		tService.setAdvantage((String) service.get("advantage"));
-		tService.setContent((String) service.get("content"));
-		tService.setPriceTotal(Float.valueOf((String) service.get("price")));
-		tService.setReason((String) service.get("reason"));
-		tService.setTime(Float.valueOf((String) service.get("time")));
-		tService.setTitle((String) service.get("title"));
-		tService.setTeacher(teacher);
-		teacher.settService(tService);
+		PTServiceUtil.assembleWithTeacherByApplication(teacher, advantage, content, price, reason, time, title,
+				tService);
+
 		ApplicationForm applicationForm = new ApplicationForm();
 		applicationForm.setTeacher(teacher);
 		applicationForm.setState(ApplicationFormService.APPLICATION_STATE_CHECKING_SHORT);
 		applicationForm.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		applicationForm.setUser(user);
-		
+
 		getApplicationFormService().save(applicationForm);
 
 		setResMsg(MsgUtil.getSuccessMsg("application has been received"));
