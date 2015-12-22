@@ -24,6 +24,9 @@ public class ServicePro {
 	@Column(name = "SERVICEPRO_ID")
 	private Long id;
 
+	@Column(name = "STYLE", nullable = false)
+	private Short style;
+
 	@Column(name = "TIPS", nullable = false)
 	private String tips;
 
@@ -296,6 +299,14 @@ public class ServicePro {
 
 	public void setOnSale(Boolean onSale) {
 		this.onSale = onSale;
+	}
+
+	public Short getStyle() {
+		return style;
+	}
+
+	public void setStyle(Short style) {
+		this.style = style;
 	}
 
 }
