@@ -5,7 +5,6 @@ import java.util.Calendar;
 
 import cn.yiyingli.BaichuanTaobaoUtil.CloudPushUtil;
 import cn.yiyingli.Dao.NotificationDao;
-import cn.yiyingli.ExchangeData.ExTeacherCopy;
 import cn.yiyingli.Persistant.Notification;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.User;
@@ -20,9 +19,14 @@ public class NotifyUtil {
 	 * @param uid
 	 *            用户标识 UUID
 	 */
-	public static boolean notifyUserOrder(String phone, String email, String message, User user,
+	private static boolean notifyUserOrder(String phone, String email, String message, User user,
 			NotificationService notificationService) {
 		return notifyUserNormal(phone, email, "订单状态改变通知", message, user, notificationService);
+	}
+
+	public static boolean notifyUserOrder(Order order, String message, User user,
+			NotificationService notificationService) {
+		return notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(), message, user, notificationService);
 	}
 
 	public static boolean notifyUserNormal(String phone, String email, String title, String message, User user) {
@@ -60,11 +64,11 @@ public class NotifyUtil {
 	}
 
 	public static boolean notifyTeacher(Order order, String message, NotificationService notificationService) {
-		return notifyTeacher(ExTeacherCopy.getTeacherPhone(order), ExTeacherCopy.getTeacherEmail(order), message,
-				order.getTeacherId(), ExTeacherCopy.getTeacherUsername(order), notificationService);
+		return notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(), message,
+				order.getTeacher().getId(), order.getTeacher().getUsername(), notificationService);
 	}
 
-	public static boolean notifyTeacher(String phone, String email, String message, long teacherId,
+	private static boolean notifyTeacher(String phone, String email, String message, long teacherId,
 			String teacherUserName, NotificationService notificationService) {
 		String m1 = message + "(<a href=\"http://www.1yingli.cn/#!/myStudent\">管理订单</a>)";
 		String m2 = message + "(http://www.1yingli.cn/#!/myStudent)";

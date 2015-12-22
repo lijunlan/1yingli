@@ -80,6 +80,9 @@ public class Order {
 	@Column(name = "REFUSEREASON", nullable = true)
 	private String refuseReason;
 
+	@Column(name = "SERVICEID", nullable = false)
+	private Long serviceId;
+
 	@Column(name = "SERVICETITLE", nullable = false)
 	private String serviceTitle;
 
@@ -110,12 +113,6 @@ public class Order {
 
 	@Column(name = "PAYMETHOD", nullable = true)
 	private Short payMethod;
-
-	/**
-	 * service的数据，以json储存，不会跟着导师更改而更新
-	 */
-	@Column(name = "SERVICEINFO", nullable = false, length = 1000)
-	private String serviceInfo;
 
 	@Column(name = "STATE", nullable = false)
 	private String state;
@@ -374,6 +371,14 @@ public class Order {
 
 	public void setPaypalNo(String paypalNo) {
 		this.paypalNo = paypalNo;
+	}
+
+	public Long getServiceId() {
+		return serviceId;
+	}
+
+	public void setServiceId(Long serviceId) {
+		this.serviceId = serviceId;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import cn.yiyingli.Handle.MMsgService;
+import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.TService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
@@ -97,7 +98,7 @@ public class MCreateTeacherService extends MMsgService {
 		String serviceTimePerWeek = (String) service.get("timeperweek");
 		String serviceContent = (String) service.get("content");
 
-		TService tService = new TService();
+		ServicePro servicePro = new ServicePro();
 		PTServiceUtil.assembleWithTeacherByManager(teacher, serviceTitle, serviceTime, servicePrice, serviceTimePerWeek,
 				serviceContent, tService);
 		getTeacherService().saveWithDetailInfo(teacher);

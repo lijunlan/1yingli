@@ -16,8 +16,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.yiyingli.Alipay.AlipayConfig;
 import cn.yiyingli.Alipay.AlipaySubmit;
-import cn.yiyingli.ExchangeData.ExServiceProCopy;
-import cn.yiyingli.ExchangeData.ExTeacherCopy;
 import cn.yiyingli.Handle.RemoteIPUtil;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.User;

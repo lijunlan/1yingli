@@ -3,7 +3,6 @@ package cn.yiyingli.Handle.Service;
 import cn.yiyingli.ExchangeData.LikeNoShowUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
-import cn.yiyingli.Persistant.TService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Util.MsgUtil;
@@ -40,10 +39,11 @@ public class GetTeacherSimpleInfoService extends MsgService {
 		LikeNoShowUtil.setFinishNo(teacher, map);
 		LikeNoShowUtil.setLikeNo(teacher, map);
 		map.put("teacherId", teacher.getId());
-		TService tService = teacher.gettService();
-		map.put("timeperweek", tService.getTimesPerWeek());
-		// map.put("serviceTitle", tService.getTitle());
-		map.put("serviceContent", tService.getContent());
+		// TODO 展示谈话简要信息
+		// ServicePro servicePro = teacher.getServicePros()
+		// map.put("timeperweek", tService.getTimesPerWeek());
+		// // map.put("serviceTitle", tService.getTitle());
+		// map.put("serviceContent", tService.getContent());
 
 		setResMsg(map.finishByJson());
 	}

@@ -2,7 +2,6 @@ package cn.yiyingli.ExchangeData;
 
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Service.OrderService;
-import net.sf.json.JSONObject;
 
 public class ExOrderUtil {
 
@@ -18,8 +17,8 @@ public class ExOrderUtil {
 	public static void assembleOrderToUser(SuperMap map, Order o) {
 		assembleOrderNormal(map, o);
 		map.put("teacherId", o.getTeacher().getId());
-		map.put("teacherName", ExTeacherCopy.getTeacherName(o));
-		map.put("teacherUrl", ExTeacherCopy.getTeacherIconUrl(o));
+		map.put("teacherName", o.getTeacher().getName());
+		map.put("teacherUrl", o.getTeacher().getIconUrl());
 		map.put("phone", o.getCustomerPhone());
 		map.put("email", o.getCustomerEmail());
 		map.put("name", o.getCustomerName());
@@ -46,8 +45,8 @@ public class ExOrderUtil {
 		map.put("distriName", o.getDistributor() != null ? o.getDistributor().getName() : "");
 		map.put("payTime", o.getPayTime());
 
-		map.put("teacherName", ExTeacherCopy.getTeacherName(o));
-		map.put("teacherUrl", ExTeacherCopy.getTeacherIconUrl(o));
+		map.put("teacherName", o.getTeacher().getName());
+		map.put("teacherUrl", o.getTeacher().getIconUrl());
 		map.put("teacherAlipayNo", o.getAlipayNo());
 		map.put("teacherPaypalNo", o.getPaypalNo());
 		map.put("customerName", o.getCustomerName());
@@ -59,33 +58,18 @@ public class ExOrderUtil {
 
 	private static void assembleOrderNormal(SuperMap map, Order o) {
 		map.put("orderId", o.getOrderNo());
-		map.put("onSale", o.getOnSale());
+		map.put("onsale", o.getOnSale());
 		map.put("createTime", o.getCreateTime());
-		String jsonServiceInfo = o.getServiceInfo();
-		
-		JSONObject jsonService = JSONObject.fromObject(jsonServiceInfo);
-		
-		JSONObject obj = new JSONObject();
-		obj.put("title", jsonService.getString("title"));
-		obj.put("quantifier", jsonService.getString("quantifier"));
-		obj.put("price", jsonService.getDouble("price"));
-		obj.put("priceTemp", jsonService.getDouble("priceTemp"));
-		obj.put("numeral", jsonService.getInt("numeral"));
-		obj.put("onSale", jsonService.getBoolean("onSale"));
-		obj.put("count", jsonService.getInt("count"));
-		obj.put("kind", jsonService.getInt("kind"));
-		obj.put("userIntroduce", jsonService.getString("userIntroduce"));
-		obj.put("question", jsonService.getString("question"));
-		obj.put("selectTimes", jsonService.getString("selectTimes"));
-		obj.put("okTime", jsonService.getString("okTime"));
-		obj.put("onSale", jsonService.getString("onSale"));
-
-		map.put("services", obj.toString());
-
+		map.put("title", o.getServiceTitle());
 		map.put("price", o.getMoney());
 		map.put("originPrice", o.getOriginMoney());
+		map.put("time", o.getTime());
+		map.put("userIntroduce", o.getUserIntroduce());
+		map.put("selectTimes", o.getSelectTime());
 		map.put("refuseReason", o.getRefuseReason());
 		map.put("state", o.getState());
+		map.put("okTime", o.getOkTime());
+		map.put("question", o.getQuestion());
 		map.put("endTime", o.getEndTime());
 	}
 }

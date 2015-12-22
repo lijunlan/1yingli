@@ -149,6 +149,12 @@ public class Teacher {
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Set<ServicePro> servicePros = new HashSet<ServicePro>();
 
+	/**
+	 * 导师默认的闲聊话题，需要跟服务中的同步
+	 */
+	@Column(name = "TOPIC", nullable = true)
+	private String topic;
+
 	@Column(name = "FIRSTIDENTITY", nullable = true)
 	private String firstIdentity;
 
@@ -600,6 +606,14 @@ public class Teacher {
 
 	public void setServicePros(Set<ServicePro> servicePros) {
 		this.servicePros = servicePros;
+	}
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
 	}
 
 }

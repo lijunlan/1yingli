@@ -136,7 +136,7 @@ public class OrderServiceImpl implements OrderService {
 		if (order.getState().startsWith(ORDER_STATE_FINISH_PAID)) {
 			order.setPayTime(Calendar.getInstance().getTimeInMillis() + "");
 		}
-		getOrderDao().updateWithTeacherNumber(order, order.getTeacherId());
+		getOrderDao().updateWithTeacherNumber(order, order.getTeacher().getId());
 		if (order.getState().startsWith(ORDER_STATE_FINISH_PAID)) {
 			NotifyUtil.notifyManager(new SuperMap().put("type", "waitConfirm").finishByJson());
 		}

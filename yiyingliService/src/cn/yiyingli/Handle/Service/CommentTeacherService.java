@@ -2,8 +2,6 @@ package cn.yiyingli.Handle.Service;
 
 import java.util.Calendar;
 
-import cn.yiyingli.ExchangeData.ExServiceProCopy;
-import cn.yiyingli.ExchangeData.ExTeacherCopy;
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Comment;
 import cn.yiyingli.Persistant.Order;
@@ -104,7 +102,7 @@ public class CommentTeacherService extends UMsgService {
 				setResMsg(MsgUtil.getErrorMsgByCode("44001"));
 				return;
 			}
-			if (!ExServiceProCopy.checkServiceAndOrder(order, servicePro)) {
+			if (order.getServiceId().longValue() != servicePro.getId().longValue()) {
 				setResMsg(MsgUtil.getErrorMsgByCode("44007"));
 				return;
 			}
@@ -113,20 +111,15 @@ public class CommentTeacherService extends UMsgService {
 				setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 				return;
 			}
-			int commentNo = order.getServiceCommentNo();
-			int serviceNo = order.getServiceCount();
-			commentNo++;
-			order.setServiceCommentNo(commentNo);
-			if(commentNo==serviceNo){
-				order.setState(OrderService.ORDER_STATE_WAIT_TCOMMENT + "," + order.getState());
-			}
+			order.setState(OrderService.ORDER_STATE_WAIT_TCOMMENT + "," + order.getState());
+
 			Comment comment = new Comment();
 			comment.setContent((String) getData().get("content"));
 			comment.setKind(CommentService.COMMENT_KIND_FROMUSER_SHORT);
 			comment.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 			comment.setServicePro(servicePro);
 			comment.setScore(Short.valueOf((String) getData().get("score")));
-			comment.setServiceTitle(servicePro.getTitle());
+			comment.setServiceTitle(order.getServiceTitle());
 			comment.setTeacher(teacher);
 			comment.setUser(user);
 
@@ -140,7 +133,7 @@ public class CommentTeacherService extends UMsgService {
 							+ "),进行了评价,评价分数:" + comment.getScore() + "分。评价内容" + comment.getContent() + ".",
 					getNotificationService());
 			NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
-					+ ExTeacherCopy.getTeacherName(order) + ",学员已经对咨询进行了评价(评价分数:" + comment.getScore() + "分。评价内容"
+					+ order.getTeacher().getName() + ",学员已经对咨询进行了评价(评价分数:" + comment.getScore() + "分。评价内容"
 					+ comment.getContent() + ")");
 			setResMsg(MsgUtil.getSuccessMsg("comment successfully"));
 		} catch (NumberFormatException e) {
