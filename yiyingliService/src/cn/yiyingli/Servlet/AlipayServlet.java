@@ -98,7 +98,7 @@ public class AlipayServlet extends HttpServlet {
 		String body = order.getServiceTitle();
 
 		// 商品展示地址
-		String show_url = "http://www.1yingli.cn/personal.html?tid=" + order.getTeacher().getId();
+		String show_url = "http://www.1yingli.cn/#!/teacher/" + order.getTeacher().getId();
 		// 需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html
 
 		// 防钓鱼时间戳
