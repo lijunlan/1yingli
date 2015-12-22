@@ -5,8 +5,9 @@ import java.util.Calendar;
 
 import cn.yiyingli.BaichuanTaobaoUtil.CloudPushUtil;
 import cn.yiyingli.Dao.NotificationDao;
+import cn.yiyingli.ExchangeData.ExTeacherCopy;
 import cn.yiyingli.Persistant.Notification;
-import cn.yiyingli.Persistant.Teacher;
+import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.NotificationService;
 
@@ -58,8 +59,13 @@ public class NotifyUtil {
 		return true;
 	}
 
-	public static boolean notifyTeacher(String phone, String email, String message, Teacher teacher,
-			NotificationService notificationService) {
+	public static boolean notifyTeacher(Order order, String message, NotificationService notificationService) {
+		return notifyTeacher(ExTeacherCopy.getTeacherPhone(order), ExTeacherCopy.getTeacherEmail(order), message,
+				order.getTeacherId(), ExTeacherCopy.getTeacherUsername(order), notificationService);
+	}
+
+	public static boolean notifyTeacher(String phone, String email, String message, long teacherId,
+			String teacherUserName, NotificationService notificationService) {
 		String m1 = message + "(<a href=\"http://www.1yingli.cn/#!/myStudent\">管理订单</a>)";
 		String m2 = message + "(http://www.1yingli.cn/#!/myStudent)";
 		if (CheckUtil.checkMobileNumber(phone) || CheckUtil.checkGlobleMobileNumber(phone)) {
@@ -69,9 +75,9 @@ public class NotifyUtil {
 			SendMailUtil.sendMessage(email, "订单状态改变通知", m1);
 		}
 		// web
-		sendNotification(teacher, notificationService, m1);
+		sendNotification(teacherId, notificationService, m1);
 		// mobile
-		String[] usernames = { teacher.getUsername() };
+		String[] usernames = { teacherUserName };
 		CloudPushUtil.IOSpushMessageToAccount(usernames, message);
 		CloudPushUtil.IOSpushNoticeToAccount(usernames, message);
 		return true;
@@ -87,14 +93,14 @@ public class NotifyUtil {
 		return true;
 	}
 
-	public static Notification sendNotification(Teacher teacher, NotificationService notificationService, String msg) {
+	public static Notification sendNotification(long teacherId, NotificationService notificationService, String msg) {
 		Notification notification = new Notification();
 		notification.setRead(false);
 		notification.setTitle(msg);
 		notification.setUrl("#");
 		notification.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		notification.setContent("");
-		notificationService.saveWithTeacher(notification, teacher);
+		notificationService.saveWithTeacher(notification, teacherId);
 		return notification;
 	}
 

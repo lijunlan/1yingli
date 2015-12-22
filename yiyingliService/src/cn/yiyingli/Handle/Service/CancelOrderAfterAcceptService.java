@@ -1,5 +1,6 @@
 package cn.yiyingli.Handle.Service;
 
+import cn.yiyingli.ExchangeData.ExTeacherCopy;
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.User;
@@ -56,14 +57,14 @@ public class CancelOrderAfterAcceptService extends UMsgService {
 		order.setState(OrderService.ORDER_STATE_USER_REGRET + "," + order.getState());
 		getOrderService().updateAndSendTimeTask(order);
 
-		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-				"尊敬的学员，被导师(" + order.getTeacher().getName() + ")接受的订单已经申请取消。订单号" + order.getOrderNo() + "，请等待导师同意",
-				user, getNotificationService());
-		NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
+		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(), "尊敬的学员，被导师("
+				+ ExTeacherCopy.getTeacherName(order) + ")接受的订单已经申请取消。订单号" + order.getOrderNo() + "，请等待导师同意", user,
+				getNotificationService());
+		NotifyUtil.notifyTeacher(order,
 				"尊敬的导师，已经确认的订单(订单号:" + order.getOrderNo() + ")，学员申请取消并退款，等待您的确认，请在5天内进行同意或拒绝，超时系统会自动同意退款",
-				order.getTeacher(), getNotificationService());
+				getNotificationService());
 		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + ",学员申请取消并退款，等待导师的确认，");
+				+ ExTeacherCopy.getTeacherName(order) + ",学员申请取消并退款，等待导师的确认，");
 		setResMsg(MsgUtil.getSuccessMsg("cancel order after accept successfully"));
 	}
 

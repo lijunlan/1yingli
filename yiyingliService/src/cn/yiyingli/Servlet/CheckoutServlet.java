@@ -17,6 +17,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import cn.yiyingli.ExchangeData.ExServiceProCopy;
+import cn.yiyingli.ExchangeData.ExTeacherCopy;
 import cn.yiyingli.PayPal.PayPal;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.User;
@@ -24,17 +27,12 @@ import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
-
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+@SuppressWarnings("serial")
 public class CheckoutServlet extends HttpServlet {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2722761580200224133L;
 
 	private static String page = "http://www.1yingli.cn/#!/myTutor";
 
@@ -105,12 +103,18 @@ public class CheckoutServlet extends HttpServlet {
 			return;
 		}
 		// 由后台插入相关数据
-		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0", URLEncoder.encode(order.getServiceTitle(), "UTF-8"));
+		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0", URLEncoder.encode(
+				"【一英里】[" + ExTeacherCopy.getTeacherName(order) + "]" + ExServiceProCopy.getServiceProMultiTitle(order),
+				"UTF-8"));
 		// 货物id，这里填写的是订单号
 		checkoutDetails.put("L_PAYMENTREQUEST_0_NUMBER0", order.getOrderNo());
-		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0",
-				URLEncoder.encode("【一英里】[" + order.getTeacher().getName() + "]" + order.getServiceTitle(), "UTF-8"));
+
+		// 订单名称
+		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0", URLEncoder.encode(
+				"【一英里】[" + ExTeacherCopy.getTeacherName(order) + "]" + ExServiceProCopy.getServiceProMultiTitle(order),
+				"UTF-8"));
 		checkoutDetails.put("L_PAYMENTREQUEST_0_QTY0", "1");
+
 		// 商品价格
 		float price = order.getMoney();
 		price /= 6;

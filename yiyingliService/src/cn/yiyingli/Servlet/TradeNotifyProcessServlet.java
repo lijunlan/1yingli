@@ -112,9 +112,9 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 				NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 						"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经付款完成，请等待导师接受订单", order.getCreateUser(),
 						notificationService);
-				NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
+				NotifyUtil.notifyTeacher(order,
 						"尊敬的导师，订单号为" + order.getOrderNo() + "的订单，用户(" + order.getCustomerName() + ")已经付款，等待您的接受。",
-						order.getTeacher(), notificationService);
+						notificationService);
 				returnSuccess(resp);
 			} else if (is_trade_success.equals("TRADE_FINISHED")) {
 				if (order == null) {
@@ -148,9 +148,9 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 				NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 						"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经付款完成，请等待导师接受订单", order.getCreateUser(),
 						notificationService);
-				NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
+				NotifyUtil.notifyTeacher(order,
 						"尊敬的导师，订单号为" + order.getOrderNo() + "的订单，用户(" + order.getCustomerName() + ")已经付款，等待您的接受。",
-						order.getTeacher(), notificationService);
+						notificationService);
 				returnSuccess(resp);
 			}
 			// 因为交易超时或者我们主动关闭而导致交易失败,退款

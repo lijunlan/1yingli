@@ -110,14 +110,6 @@ public class User {
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private Set<ApplicationForm> applicationForms = new HashSet<ApplicationForm>();
 
-	// @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-	// @JoinTable(name = "USER_LIKE_TEACHER", joinColumns = {
-	// @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable
-	// = false) }, inverseJoinColumns = {
-	// @JoinColumn(name = "TEACHER_ID", referencedColumnName = "TEACHER_ID",
-	// nullable = false) })
-	// private Set<Teacher> likeTeahcers = new HashSet<Teacher>();
-
 	@OneToMany(targetEntity = UserLikeTeacher.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private Set<UserLikeTeacher> userLikeTeachers = new HashSet<UserLikeTeacher>();
@@ -255,14 +247,6 @@ public class User {
 	public void setForbid(Boolean forbid) {
 		this.forbid = forbid;
 	}
-
-	// public Set<Teacher> getLikeTeahcers() {
-	// return likeTeahcers;
-	// }
-	//
-	// public void setLikeTeahcers(Set<Teacher> likeTeahcers) {
-	// this.likeTeahcers = likeTeahcers;
-	// }
 
 	public Set<Notification> getNotifications() {
 		return notifications;

@@ -130,15 +130,6 @@ public class Teacher {
 	@Column(name = "MILE", nullable = false)
 	private Long mile;
 
-	// @Column(name = "CHECKIDCARD", nullable = false)
-	// private Boolean checkIDCard;
-	//
-	// @Column(name = "CHECKWORK", nullable = false)
-	// private Boolean checkWork;
-	//
-	// @Column(name = "CHECKDEGREE", nullable = false)
-	// private Boolean checkDegree;
-
 	@Column(name = "CHECKIDCARDSTATE", nullable = false)
 	private Short checkIDCardState;
 
@@ -148,17 +139,15 @@ public class Teacher {
 	@Column(name = "CHECKDEGREESTATE", nullable = false)
 	private Short checkDegreeState;
 
-	@Column(name = "FORSEARCH", nullable = true)
-	private String forSearch;
-
 	@Column(name = "SIMPLEINFO", nullable = true)
 	private String simpleInfo;
 
 	@Column(name = "ONSERVICE", nullable = false)
 	private Boolean onService;
 
-	@OneToOne(mappedBy = "teacher", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	private TService tService;
+	@OneToMany(targetEntity = ServicePro.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "TEACHER_ID", updatable = false)
+	private Set<ServicePro> servicePros = new HashSet<ServicePro>();
 
 	@Column(name = "FIRSTIDENTITY", nullable = true)
 	private String firstIdentity;
@@ -173,9 +162,6 @@ public class Teacher {
 	@IndexColumn(name = "STUDY_NO", base = 0)
 	private List<StudyExperience> studyExperiences = new ArrayList<StudyExperience>();
 
-	// @ManyToMany(cascade = CascadeType.REFRESH, mappedBy = "likeTeahcers",
-	// fetch = FetchType.LAZY)
-	// private Set<User> likedUsers = new HashSet<User>();
 	@OneToMany(targetEntity = UserLikeTeacher.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Set<UserLikeTeacher> userLikeTeachers = new HashSet<UserLikeTeacher>();
@@ -366,22 +352,6 @@ public class Teacher {
 
 	public void setCheckDegreeState(Short checkDegreeState) {
 		this.checkDegreeState = checkDegreeState;
-	}
-
-	public String getForSearch() {
-		return forSearch;
-	}
-
-	public void setForSearch(String forSearch) {
-		this.forSearch = forSearch;
-	}
-
-	public TService gettService() {
-		return tService;
-	}
-
-	public void settService(TService tService) {
-		this.tService = tService;
 	}
 
 	public List<WorkExperience> getWorkExperiences() {
@@ -622,6 +592,14 @@ public class Teacher {
 
 	public void setPaypal(String paypal) {
 		this.paypal = paypal;
+	}
+
+	public Set<ServicePro> getServicePros() {
+		return servicePros;
+	}
+
+	public void setServicePros(Set<ServicePro> servicePros) {
+		this.servicePros = servicePros;
 	}
 
 }

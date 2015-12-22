@@ -1,8 +1,5 @@
 package cn.yiyingli.Persistant;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,10 +25,6 @@ public class Order {
 	@Column(name = "MONEY", nullable = false)
 	private Float money;
 
-	// 课程时长
-	@Column(name = "TIME", nullable = false)
-	private Float time;
-
 	@Column(name = "SALARYSTATE", nullable = false)
 	private Short salaryState;
 
@@ -47,17 +39,18 @@ public class Order {
 
 	@Column(name = "CUSTOMERCONTACT", nullable = true)
 	private String customerContact;
+
+	@Column(name = "SERVICECOUNT", nullable = false)
+	private Integer serviceCount;
+
+	@Column(name = "SERVICECOMMENTNO", nullable = false)
+	private Integer serviceCommentNo;
+
 	/**
 	 * 我们自己生成的订单号
 	 */
 	@Column(name = "ORDERNO", nullable = true, unique = true)
 	private String orderNo;
-
-	@Column(name = "QUESTION", nullable = false, length = 500)
-	private String question;
-
-	@Column(name = "USERINTRODUCE", nullable = false, length = 500)
-	private String userIntroduce;
 
 	/**
 	 * 用户alipay账号
@@ -71,17 +64,8 @@ public class Order {
 	@Column(name = "PAYPALNO", nullable = true)
 	private String paypalNo;
 
-	/**
-	 * 支付宝流水号
-	 */
-	@Column(name = "UNIQUENO", nullable = true)
-	private String uniqueNo;
-
 	@Column(name = "REFUSEREASON", nullable = true)
 	private String refuseReason;
-
-	@Column(name = "SERVICETITLE", nullable = false)
-	private String serviceTitle;
 
 	// 学员选择时间
 	@Column(name = "SELECTTIME", nullable = false)
@@ -90,10 +74,6 @@ public class Order {
 	// 导师确定时间
 	@Column(name = "OKTIME", nullable = true)
 	private String okTime;
-
-	@OneToMany(targetEntity = Comment.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	@JoinColumn(name = "ORDER_ID", updatable = false)
-	private Set<Comment> comments = new HashSet<Comment>();
 
 	// 订单生成时间
 	@Column(name = "CREATETIME", nullable = false)
@@ -111,24 +91,25 @@ public class Order {
 	@Column(name = "PAYMETHOD", nullable = true)
 	private Short payMethod;
 
-	@ManyToOne(targetEntity = TService.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "TSERVICE_ID", updatable = false)
-	private TService tService;
-
 	@Column(name = "STATE", nullable = false)
 	private String state;
 
-	@OneToMany(targetEntity = Voucher.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	@JoinColumn(name = "ORDER_ID", updatable = false)
-	private Set<Voucher> useVouchers = new HashSet<Voucher>();
+	@Column(name = "USEVOUCHER", nullable = false)
+	private Integer useVoucher;
 
-	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "TEACHER_ID", updatable = false)
-	private Teacher teacher;
+	/**
+	 * service的数据，以json储存，不会跟着导师更改而更新
+	 */
+	@Column(name = "SERVICEINFO", nullable = false, length = 1000)
+	private String serviceInfo;
 
 	@ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private User createUser;
+
+	@ManyToOne(targetEntity = OrderList.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "ORDERLIST_ID", updatable = false)
+	private OrderList orderList;
 
 	@ManyToOne(targetEntity = Distributor.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "DISTRIBUTOR_ID", updatable = false)
@@ -142,6 +123,14 @@ public class Order {
 		this.id = id;
 	}
 
+	public Float getOriginMoney() {
+		return originMoney;
+	}
+
+	public void setOriginMoney(Float originMoney) {
+		this.originMoney = originMoney;
+	}
+
 	public Float getMoney() {
 		return money;
 	}
@@ -150,148 +139,12 @@ public class Order {
 		this.money = money;
 	}
 
-	public String getQuestion() {
-		return question;
+	public Short getSalaryState() {
+		return salaryState;
 	}
 
-	public void setQuestion(String question) {
-		this.question = question;
-	}
-
-	public String getUserIntroduce() {
-		return userIntroduce;
-	}
-
-	public void setUserIntroduce(String userIntroduce) {
-		this.userIntroduce = userIntroduce;
-	}
-
-	public Set<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
-	}
-
-	public String getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
-
-	public String getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
-
-	public TService gettService() {
-		return tService;
-	}
-
-	public void settService(TService tService) {
-		this.tService = tService;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public Set<Voucher> getUseVouchers() {
-		return useVouchers;
-	}
-
-	public void setUseVouchers(Set<Voucher> useVouchers) {
-		this.useVouchers = useVouchers;
-	}
-
-	public Teacher getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
-
-	public User getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(User createUser) {
-		this.createUser = createUser;
-	}
-
-	public String getSelectTime() {
-		return selectTime;
-	}
-
-	public void setSelectTime(String selectTime) {
-		this.selectTime = selectTime;
-	}
-
-	public String getRefuseReason() {
-		return refuseReason;
-	}
-
-	public void setRefuseReason(String refuseReason) {
-		this.refuseReason = refuseReason;
-	}
-
-	public String getOkTime() {
-		return okTime;
-	}
-
-	public void setOkTime(String okTime) {
-		this.okTime = okTime;
-	}
-
-	public String getServiceTitle() {
-		return serviceTitle;
-	}
-
-	public void setServiceTitle(String serviceTitle) {
-		this.serviceTitle = serviceTitle;
-	}
-
-	public Float getTime() {
-		return time;
-	}
-
-	public void setTime(Float time) {
-		this.time = time;
-	}
-
-	public String getAlipayNo() {
-		return alipayNo;
-	}
-
-	public void setAlipayNo(String alipayNo) {
-		this.alipayNo = alipayNo;
-	}
-
-	public String getUniqueNo() {
-		return uniqueNo;
-	}
-
-	public void setUniqueNo(String uniqueNo) {
-		this.uniqueNo = uniqueNo;
-	}
-
-	public String getOrderNo() {
-		return orderNo;
-	}
-
-	public void setOrderNo(String orderNo) {
-		this.orderNo = orderNo;
+	public void setSalaryState(Short salaryState) {
+		this.salaryState = salaryState;
 	}
 
 	public String getCustomerName() {
@@ -326,36 +179,60 @@ public class Order {
 		this.customerContact = customerContact;
 	}
 
-	public Short getSalaryState() {
-		return salaryState;
+	public String getOrderNo() {
+		return orderNo;
 	}
 
-	public void setSalaryState(Short salaryState) {
-		this.salaryState = salaryState;
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
 	}
 
-	public Float getOriginMoney() {
-		return originMoney;
+	public String getAlipayNo() {
+		return alipayNo;
 	}
 
-	public void setOriginMoney(Float originMoney) {
-		this.originMoney = originMoney;
+	public void setAlipayNo(String alipayNo) {
+		this.alipayNo = alipayNo;
 	}
 
-	public Distributor getDistributor() {
-		return distributor;
+	public String getPaypalNo() {
+		return paypalNo;
 	}
 
-	public void setDistributor(Distributor distributor) {
-		this.distributor = distributor;
+	public void setPaypalNo(String paypalNo) {
+		this.paypalNo = paypalNo;
 	}
 
-	public String getPayTime() {
-		return payTime;
+	public String getRefuseReason() {
+		return refuseReason;
 	}
 
-	public void setPayTime(String payTime) {
-		this.payTime = payTime;
+	public void setRefuseReason(String refuseReason) {
+		this.refuseReason = refuseReason;
+	}
+
+	public String getSelectTime() {
+		return selectTime;
+	}
+
+	public void setSelectTime(String selectTime) {
+		this.selectTime = selectTime;
+	}
+
+	public String getOkTime() {
+		return okTime;
+	}
+
+	public void setOkTime(String okTime) {
+		this.okTime = okTime;
+	}
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 
 	public Boolean getOnSale() {
@@ -366,6 +243,22 @@ public class Order {
 		this.onSale = onSale;
 	}
 
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	public String getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(String payTime) {
+		this.payTime = payTime;
+	}
+
 	public Short getPayMethod() {
 		return payMethod;
 	}
@@ -374,12 +267,60 @@ public class Order {
 		this.payMethod = payMethod;
 	}
 
-	public String getPaypalNo() {
-		return paypalNo;
+	public String getState() {
+		return state;
 	}
 
-	public void setPaypalNo(String paypalNo) {
-		this.paypalNo = paypalNo;
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public Integer getUseVoucher() {
+		return useVoucher;
+	}
+
+	public void setUseVoucher(Integer useVoucher) {
+		this.useVoucher = useVoucher;
+	}
+
+	public String getServiceInfo() {
+		return serviceInfo;
+	}
+
+	public void setServiceInfo(String serviceInfo) {
+		this.serviceInfo = serviceInfo;
+	}
+
+	public User getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(User createUser) {
+		this.createUser = createUser;
+	}
+
+	public Distributor getDistributor() {
+		return distributor;
+	}
+
+	public void setDistributor(Distributor distributor) {
+		this.distributor = distributor;
+	}
+
+	public Integer getServiceCount() {
+		return serviceCount;
+	}
+
+	public void setServiceCount(Integer serviceCount) {
+		this.serviceCount = serviceCount;
+	}
+
+	public Integer getServiceCommentNo() {
+		return serviceCommentNo;
+	}
+
+	public void setServiceCommentNo(Integer serviceCommentNo) {
+		this.serviceCommentNo = serviceCommentNo;
 	}
 
 }

@@ -6,7 +6,6 @@ import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Persistant.ApplicationForm;
 import cn.yiyingli.Persistant.StudyExperience;
-import cn.yiyingli.Persistant.TService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.Tip;
 import cn.yiyingli.Persistant.User;
@@ -307,13 +306,7 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 		setAddress(teacher.getAddress());
 		setUserId(String.valueOf(persistant.getUser().getId()));
 		setAfId(String.valueOf(persistant.getId()));
-		TService tService = teacher.gettService();
-		setServiceAdvantage(tService.getAdvantage());
-		setServiceContent(tService.getContent());
-		setServiceReason(tService.getReason());
-		setServicePrice(String.valueOf(tService.getPriceTotal()));
-		setServiceTime(String.valueOf(tService.getTime()));
-		setServiceTitle(tService.getTitle());
+
 		workExperience = new ExArrayList();
 		studyExperience = new ExArrayList();
 		tips = new ExArrayList();

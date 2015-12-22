@@ -8,21 +8,21 @@ import java.util.Set;
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Persistant.StudyExperience;
-import cn.yiyingli.Persistant.TService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.Tip;
 import cn.yiyingli.Persistant.WorkExperience;
 import cn.yiyingli.Service.TeacherService;
 
+//TODO 搜索出来的导师的元素要改变
 public class ExTeacher {
 
 	private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
 
 	public static void assembleSimpleForUserLike(Teacher teacher, SuperMap map) {
 		assembleSimpleNormal(teacher, map);
-		map.put("price", teacher.gettService().getPriceTotal());
-		map.put("time", teacher.gettService().getTime());
-		map.put("title", teacher.gettService().getTitle());
+		// map.put("price", teacher.gettService().getPriceTotal());
+		// map.put("time", teacher.gettService().getTime());
+		// map.put("title", teacher.gettService().getTitle());
 
 	}
 
@@ -31,9 +31,9 @@ public class ExTeacher {
 		map.put("level", teacher.getLevel());
 		LikeNoShowUtil.setLikeNo(teacher, map);
 		LikeNoShowUtil.setFinishNo(teacher, map);
-		TService tService = teacher.gettService();
-		map.put("serviceTitle", tService.getTitle());
-		map.put("serviceContent", tService.getContent());
+		// TService tService = teacher.gettService();
+		// map.put("serviceTitle", tService.getTitle());
+		// map.put("serviceContent", tService.getContent());
 	}
 
 	private static void assembleSimpleNormal(Teacher teacher, SuperMap map) {
@@ -41,7 +41,7 @@ public class ExTeacher {
 		map.put("teacherId", teacher.getId());
 		map.put("iconUrl", teacher.getIconUrl());
 		map.put("simpleinfo", teacher.getSimpleInfo());
-		map.put("timeperweek", teacher.gettService().getTimesPerWeek());
+		// map.put("timeperweek", teacher.gettService().getTimesPerWeek());
 	}
 
 	public static void assembleSimpleForManager(Teacher teacher, SuperMap map) {
@@ -81,15 +81,15 @@ public class ExTeacher {
 		map.put("talkWay", teacher.getTalkWay());
 		map.put("teacherId", teacher.getId());
 		map.put("commentNo", teacher.getCommentNumber());
-		TService tService = teacher.gettService();
-		map.put("timeperweek", tService.getTimesPerWeek());
-		map.put("freeTime", tService.getFreeTime());
-		map.put("price", tService.getPriceTotal());
-		map.put("onsale", tService.getOnSale());
-		map.put("pricetemp", tService.getPriceTemp());
-		map.put("serviceTime", tService.getTime());
-		map.put("serviceTitle", tService.getTitle());
-		map.put("serviceContent", tService.getContent());
+		// TService tService = teacher.gettService();
+		// map.put("timeperweek", tService.getTimesPerWeek());
+		// map.put("freeTime", tService.getFreeTime());
+		// map.put("price", tService.getPriceTotal());
+		// map.put("onsale", tService.getOnSale());
+		// map.put("pricetemp", tService.getPriceTemp());
+		// map.put("serviceTime", tService.getTime());
+		// map.put("serviceTitle", tService.getTitle());
+		// map.put("serviceContent", tService.getContent());
 		map.put("checkEmail", teacher.getCheckEmail());
 		map.put("checkPhone", teacher.getCheckPhone());
 		if (teacher.getCheckDegreeState() == TeacherService.CHECK_STATE_SUCCESS_SHORT) {

@@ -3,7 +3,6 @@ package cn.yiyingli.Service;
 import java.util.List;
 
 import cn.yiyingli.Persistant.Notification;
-import cn.yiyingli.Persistant.Teacher;
 
 public interface NotificationService {
 
@@ -11,7 +10,7 @@ public interface NotificationService {
 
 	void save(Notification notification);
 
-	void saveWithTeacher(Notification notification, Teacher teacher);
+	void saveWithTeacher(Notification notification, long teacherId);
 
 	Long saveAndReturnId(Notification notification);
 

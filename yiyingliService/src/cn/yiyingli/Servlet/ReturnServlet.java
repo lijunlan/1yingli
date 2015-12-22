@@ -171,7 +171,7 @@ public class ReturnServlet extends HttpServlet {
 							WarnUtil.sendWarnToCTO("Return from Paypal and order id:" + oid
 									+ ", price is wrong, it should be " + order.getMoney() + ", but it is "
 									+ Float.parseFloat(results2.get("PAYMENTREQUEST_0_AMT")));
-							orderService.update(order,false);
+							orderService.update(order, false);
 							returnToOnemile(resultParameter + "fail", response);
 							return;
 						}
@@ -201,10 +201,8 @@ public class ReturnServlet extends HttpServlet {
 						NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 								"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经付款完成，请等待导师接受订单", order.getCreateUser(),
 								notificationService);
-						NotifyUtil.notifyTeacher(order.getTeacher().getPhone(),
-								order.getTeacher().getEmail(), "尊敬的导师，订单号为" + order.getOrderNo() + "的订单，用户("
-										+ order.getCustomerName() + ")已经付款，等待您的接受。",
-								order.getTeacher(), notificationService);
+						NotifyUtil.notifyTeacher(order, "尊敬的导师，订单号为" + order.getOrderNo() + "的订单，用户("
+								+ order.getCustomerName() + ")已经付款，等待您的接受。", notificationService);
 					} else {
 						LogUtil.error("Return from Paypal and payment status is:"
 								+ results2.get("PAYMENTINFO_0_PAYMENTSTATUS"), this.getClass());

@@ -16,6 +16,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.yiyingli.Alipay.AlipayNotify;
+import cn.yiyingli.ExchangeData.ExTeacherCopy;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Util.LogUtil;
@@ -85,8 +86,7 @@ public class AlipayTransNotifyServlet extends HttpServlet {
 					String name = item[2];
 					String money = item[3];
 					Order order = orderService.queryByOrderNo(orderNo);
-					if (!((alipayNo.equals(order.getAlipayNo()) || alipayNo.equals(order.getTeacher().getAlipay()))
-							&& name.equals(order.getTeacher().getName())
+					if (!(alipayNo.equals(order.getAlipayNo()) && name.equals(ExTeacherCopy.getTeacherName(order))
 							&& (Float.valueOf(money) == Float.valueOf(order.getOriginMoney())))) {
 						WarnUtil.sendWarnToCTO("支付订单出错,信息不符合：" + record);
 						LogUtil.error("支付订单出错,信息不符合：" + record, getClass());

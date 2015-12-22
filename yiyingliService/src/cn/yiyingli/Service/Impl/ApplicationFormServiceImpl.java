@@ -4,8 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import cn.yiyingli.Dao.ApplicationFormDao;
 import cn.yiyingli.Dao.NotificationDao;
+import cn.yiyingli.Dao.ServiceProDao;
 import cn.yiyingli.Dao.StudyExperienceDao;
-import cn.yiyingli.Dao.TServiceDao;
 import cn.yiyingli.Dao.TeacherDao;
 import cn.yiyingli.Dao.UserDao;
 import cn.yiyingli.Dao.UserMarkDao;
@@ -25,7 +25,7 @@ public class ApplicationFormServiceImpl implements ApplicationFormService {
 
 	private NotificationDao notificationDao;
 
-	private TServiceDao tServiceDao;
+	private ServiceProDao serviceProDao;
 
 	private WorkExperienceDao workExperienceDao;
 
@@ -53,12 +53,12 @@ public class ApplicationFormServiceImpl implements ApplicationFormService {
 		this.notificationDao = notificationDao;
 	}
 
-	public TServiceDao gettServiceDao() {
-		return tServiceDao;
+	public ServiceProDao getServiceProDao() {
+		return serviceProDao;
 	}
 
-	public void settServiceDao(TServiceDao tServiceDao) {
-		this.tServiceDao = tServiceDao;
+	public void setServiceProDao(ServiceProDao serviceProDao) {
+		this.serviceProDao = serviceProDao;
 	}
 
 	public WorkExperienceDao getWorkExperienceDao() {
@@ -103,9 +103,10 @@ public class ApplicationFormServiceImpl implements ApplicationFormService {
 
 	@Override
 	public void save(ApplicationForm applicationForm) {
+		// TODO 加入存储默认服务的逻辑
 		getApplicationFormDao().save(applicationForm);
 		getUserDao().update(applicationForm.getUser());
-		gettServiceDao().save(applicationForm.getTeacher().gettService());
+		// gettServiceDao().save(applicationForm.getTeacher().gettService());
 		List<StudyExperience> ses = applicationForm.getTeacher().getStudyExperiences();
 		List<WorkExperience> wes = applicationForm.getTeacher().getWorkExperiences();
 		for (StudyExperience se : ses) {

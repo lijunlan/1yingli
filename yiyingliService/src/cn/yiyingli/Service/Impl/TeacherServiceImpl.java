@@ -3,11 +3,13 @@ package cn.yiyingli.Service.Impl;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import cn.yiyingli.Dao.ServiceProDao;
 import cn.yiyingli.Dao.StudyExperienceDao;
-import cn.yiyingli.Dao.TServiceDao;
 import cn.yiyingli.Dao.TeacherDao;
 import cn.yiyingli.Dao.UserDao;
 import cn.yiyingli.Dao.WorkExperienceDao;
+import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.UserLikeTeacher;
@@ -20,7 +22,7 @@ public class TeacherServiceImpl implements TeacherService {
 
 	private UserDao userDao;
 
-	private TServiceDao tServiceDao;
+	private ServiceProDao serviceProDao;
 
 	private StudyExperienceDao studyExperienceDao;
 
@@ -58,12 +60,12 @@ public class TeacherServiceImpl implements TeacherService {
 		this.workExperienceDao = workExperienceDao;
 	}
 
-	public TServiceDao gettServiceDao() {
-		return tServiceDao;
+	public ServiceProDao getServiceProDao() {
+		return serviceProDao;
 	}
 
-	public void settServiceDao(TServiceDao tServiceDao) {
-		this.tServiceDao = tServiceDao;
+	public void setServiceProDao(ServiceProDao serviceProDao) {
+		this.serviceProDao = serviceProDao;
 	}
 
 	@Override
@@ -86,7 +88,10 @@ public class TeacherServiceImpl implements TeacherService {
 	public void saveWithDetailInfo(Teacher teacher) {
 		getUserDao().update(teacher.getUser());
 		getTeacherDao().save(teacher);
-		gettServiceDao().save(teacher.gettService());
+		for (ServicePro servicePro : teacher.getServicePros()) {
+			servicePro.setTeacher(teacher);
+			getServiceProDao().save(servicePro);
+		}
 		if (teacher.getOnService()) {
 			SendMsgToBaiduUtil.updateTeacherData(teacher);
 		}
@@ -132,7 +137,9 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public void updateWithDetailInfo(Teacher teacher, boolean refreshRecommend) {
 		getTeacherDao().update(teacher);
-		gettServiceDao().update(teacher.gettService());
+		for (ServicePro servicePro : teacher.getServicePros()) {
+			getServiceProDao().update(servicePro);
+		}
 		if (refreshRecommend && teacher.getOnService()) {
 			SendMsgToBaiduUtil.updateTeacherData(teacher);
 		}

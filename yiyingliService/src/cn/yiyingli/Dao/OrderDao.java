@@ -4,7 +4,6 @@ import java.util.List;
 
 import cn.yiyingli.Persistant.Distributor;
 import cn.yiyingli.Persistant.Order;
-import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 
 public interface OrderDao {
@@ -23,7 +22,7 @@ public interface OrderDao {
 
 	void updateFromSql(String sql);
 
-	void updateWithTeacherNumber(Order order, Teacher teacher);
+	void updateWithTeacherNumber(Order order, long teacherId);
 
 	void updateDistriOrderNumber(Order order, Distributor distributor);
 

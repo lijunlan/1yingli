@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.ApplicationForm;
-import cn.yiyingli.Persistant.TService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.ApplicationFormService;
@@ -13,7 +12,6 @@ import cn.yiyingli.Service.TipService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
-import cn.yiyingli.toPersistant.PTServiceUtil;
 import cn.yiyingli.toPersistant.PTeacherUtil;
 
 public class CreateApplicationFormService extends UMsgService {
@@ -69,18 +67,6 @@ public class CreateApplicationFormService extends UMsgService {
 		Teacher teacher = PTeacherUtil.assembleTeacherByApplication(user, workExperiences, studyExperiences, tips, "",
 				name, phone, address, mail, "", "", "false", "false", "false", "false", "false", "-1", "-1", "-1", "-1",
 				"-1", "0", "0", getTipService());
-
-		String advantage = (String) service.get("advantage");
-		String content = (String) service.get("content");
-		float price = service.get("price") == null ? 0.0F : Float.valueOf((String) service.get("price"));
-		String reason = (String) service.get("reason");
-		float time = service.get("time") == null ? 0.0F : Float.valueOf((String) service.get("time"));
-
-		String title = (String) service.get("title");
-
-		TService tService = new TService();
-		PTServiceUtil.assembleWithTeacherByApplication(teacher, advantage, content, price, reason, time, title,
-				tService);
 
 		ApplicationForm applicationForm = new ApplicationForm();
 		applicationForm.setTeacher(teacher);

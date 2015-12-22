@@ -14,14 +14,15 @@ import cn.yiyingli.Util.LogUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+//TODO  发给百度的物料数据也要改变
 public class ExTeacherForBaidu {
 
 	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 	public static JSONObject assembleTeacher(Teacher teacher) {
 		try {
-			String title = teacher.gettService().getTitle();
-			String content = teacher.gettService().getContent();
+//			String title = teacher.gettService().getTitle();
+//			String content = teacher.gettService().getContent();
 			JSONArray jsonLabels = new JSONArray();
 			List<WorkExperience> workExperiences = teacher.getWorkExperiences();
 			for (WorkExperience w : workExperiences) {
@@ -61,8 +62,8 @@ public class ExTeacherForBaidu {
 			toBaidu.put("DisplaySwitch", "On");
 			toBaidu.put("Url", "http://www.1yingli.cn/#!/teacher/" + teacher.getId());
 			JSONObject jsonIndexed = new JSONObject();
-			jsonIndexed.put("Title", title);
-			jsonIndexed.put("Content", content);
+//			jsonIndexed.put("Title", title);
+//			jsonIndexed.put("Content", content);
 			jsonIndexed.put("Labels", jsonLabels);
 			toBaidu.put("Indexed", jsonIndexed);
 			JSONObject jsonProperties = new JSONObject();

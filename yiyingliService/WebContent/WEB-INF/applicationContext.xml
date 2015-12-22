@@ -36,6 +36,7 @@
 				<value>cn.yiyingli.Persistant.TeacherDemand</value>
 				<value>cn.yiyingli.Persistant.Passage</value>
 				<value>cn.yiyingli.Persistant.UserLikePassage</value>
+				<value>cn.yiyingli.Persistant.OrderList</value>
 			</list>
 		</property>
 	</bean>

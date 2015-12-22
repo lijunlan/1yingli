@@ -15,7 +15,6 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import cn.yiyingli.Dao.OrderDao;
 import cn.yiyingli.Persistant.Distributor;
 import cn.yiyingli.Persistant.Order;
-import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.OrderService;
 
@@ -65,15 +64,15 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 	}
 
 	@Override
-	public void updateWithTeacherNumber(Order order, Teacher teacher) {
+	public void updateWithTeacherNumber(Order order, long teacherId) {
 		getHibernateTemplate().update(order);
 		Session session = getSessionFactory().getCurrentSession();
 		session.flush();
 		Query query = session.createSQLQuery(
 				"update teacher set teacher.ORDERNUMBER=(select count(*) from orders where orders.TEACHER_ID='"
-						+ teacher.getId()
+						+ teacherId
 						+ "' and orders.STATE not like '0100%' and orders.STATE not like '%0200,0100%') where teacher.TEACHER_ID="
-						+ teacher.getId());
+						+ teacherId);
 		query.executeUpdate();
 	}
 
@@ -95,8 +94,8 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 		session.flush();
 		Query query = session.createSQLQuery(
 				"update teacher set teacher.FINISHORDERNUMBER=(select count(*) from orders where orders.TEACHER_ID="
-						+ order.getTeacher().getId() + " and orders.STATE like '%1000%') where teacher.TEACHER_ID="
-						+ order.getTeacher().getId());
+						+ order.getTeacherId() + " and orders.STATE like '%1000%') where teacher.TEACHER_ID="
+						+ order.getTeacherId());
 		query.executeUpdate();
 		session.flush();
 		query = session.createSQLQuery(

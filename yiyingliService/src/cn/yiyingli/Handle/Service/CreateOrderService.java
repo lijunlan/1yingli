@@ -1,15 +1,17 @@
 package cn.yiyingli.Handle.Service;
 
 import java.util.Calendar;
+import java.util.List;
 
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Order;
-import cn.yiyingli.Persistant.TService;
+import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.Voucher;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
+import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Service.VoucherService;
@@ -17,7 +19,8 @@ import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.SendMsgToBaiduUtil;
-import cn.yiyingli.toPersistant.POrderUtil;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class CreateOrderService extends UMsgService {
 
@@ -30,6 +33,8 @@ public class CreateOrderService extends UMsgService {
 	private NotificationService notificationService;
 
 	private VoucherService voucherService;
+
+	private ServiceProService serviceProService;
 
 	public OrderService getOrderService() {
 		return orderService;
@@ -71,10 +76,17 @@ public class CreateOrderService extends UMsgService {
 		this.voucherService = voucherService;
 	}
 
+	public ServiceProService getServiceProService() {
+		return serviceProService;
+	}
+
+	public void setServiceProService(ServiceProService serviceProService) {
+		this.serviceProService = serviceProService;
+	}
+
 	@Override
 	protected boolean checkData() {
-		return super.checkData() && getData().containsKey("question") && getData().containsKey("userIntroduce")
-				&& getData().containsKey("teacherId") && getData().containsKey("selectTime")
+		return super.checkData() && getData().containsKey("teacherId") && getData().containsKey("serviceList")
 				&& getData().containsKey("name") && getData().containsKey("phone") && getData().containsKey("email")
 				&& getData().containsKey("contact") || getData().containsKey("voucher");
 	}
@@ -95,13 +107,22 @@ public class CreateOrderService extends UMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("44006"));
 			return;
 		}
+		JSONArray jsonArray = getData().getJSONArray("serviceList");
+		long[] serviceProIds = new long[jsonArray.size()];
+		for (int i = 0; i < jsonArray.size(); i++) {
+			JSONObject obj = jsonArray.getJSONObject(i);
+			serviceProIds[i] = obj.getLong(ServiceProService.TAG_ID);
+		}
+		List<ServicePro> servicePros = getServiceProService().queryList(serviceProIds, teacher.getId());
+		if (servicePros.size() != jsonArray.size()) {
+			setResMsg(MsgUtil.getErrorMsgByCode("44008"));
+			return;
+		}
+
 		String phone = (String) getData().get("phone");
 		String email = (String) getData().get("email");
 		String contact = (String) getData().get("contact");
 		String name = (String) getData().get("name");
-		String question = (String) getData().get("question");
-		String time = (String) getData().get("selectTime");
-		String resume = (String) getData().get("userIntroduce");
 
 		if (!(CheckUtil.checkEmail(email)
 				&& (CheckUtil.checkMobileNumber(phone) || CheckUtil.checkGlobleMobileNumber(phone)))) {
@@ -109,19 +130,20 @@ public class CreateOrderService extends UMsgService {
 			return;
 		}
 
-		user.setResume(resume);
 		user.setOname(name);
 		user.setOphone(phone);
 		user.setOemail(email);
-		user.setOquestion(question);
-		user.setOtime(time);
 		user.setContact(contact);
 
 		getUserService().update(user);
 
-		TService tService = teacher.gettService();
+		
+		for (ServicePro sp : servicePros) {
+			// sp.
+			
+		}
 
-		boolean onSale = tService.getOnSale();
+		boolean onSale = servicePro.getOnSale();
 		float money = 0F;
 		float originMoney = 0F;
 		if (onSale) {

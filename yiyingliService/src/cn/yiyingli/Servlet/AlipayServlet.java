@@ -16,6 +16,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.yiyingli.Alipay.AlipayConfig;
 import cn.yiyingli.Alipay.AlipaySubmit;
+import cn.yiyingli.ExchangeData.ExServiceProCopy;
+import cn.yiyingli.ExchangeData.ExTeacherCopy;
 import cn.yiyingli.Handle.RemoteIPUtil;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.User;
@@ -87,7 +89,7 @@ public class AlipayServlet extends HttpServlet {
 			return;
 		}
 		// 订单名称
-		String subject = order.getServiceTitle();
+		String subject = ExServiceProCopy.getServiceProMultiTitle(order);
 		// 必填
 
 		// 付款金额
@@ -95,10 +97,10 @@ public class AlipayServlet extends HttpServlet {
 		// 必填
 
 		// 订单描述
-		String body = order.getServiceTitle();
+		String body = ExServiceProCopy.getServiceProMultiTitle(order);
 
 		// 商品展示地址
-		String show_url = "http://www.1yingli.cn/personal.html?tid=" + order.getTeacher().getId();
+		String show_url = "http://www.1yingli.cn/#!/teacher/" + order.getTeacherId();
 		// 需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html
 
 		// 防钓鱼时间戳
@@ -126,7 +128,7 @@ public class AlipayServlet extends HttpServlet {
 			parms.put("return_url", req.getParameter("callback"));
 		}
 		parms.put("out_trade_no", oid);
-		parms.put("subject", "【一英里】[" + order.getTeacher().getName() + "]" + subject);
+		parms.put("subject", "【一英里】[" + ExTeacherCopy.getTeacherName(order) + "]" + subject);
 		parms.put("total_fee", total_fee);
 		parms.put("body", body);
 		parms.put("show_url", show_url);

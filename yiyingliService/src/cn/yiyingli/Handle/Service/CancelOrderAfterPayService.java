@@ -1,5 +1,6 @@
 package cn.yiyingli.Handle.Service;
 
+import cn.yiyingli.ExchangeData.ExTeacherCopy;
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.User;
@@ -54,14 +55,13 @@ public class CancelOrderAfterPayService extends UMsgService {
 			return;
 		}
 		order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
-		getOrderService().update(order,false);
+		getOrderService().update(order, false);
 
 		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 				"尊敬的学员，您的订单(" + order.getOrderNo() + ")已经取消，我们将竭尽全力在24小时内为您全额退款", user, getNotificationService());
-		NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
-				"尊敬的导师，您的订单(" + order.getOrderNo() + ")已经被学员取消。", order.getTeacher(), getNotificationService());
+		NotifyUtil.notifyTeacher(order, "尊敬的导师，您的订单(" + order.getOrderNo() + ")已经被学员取消。", getNotificationService());
 		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + ",订单已经被学员取消，");
+				+ ExTeacherCopy.getTeacherName(order) + ",订单已经被学员取消，");
 		setResMsg(MsgUtil.getSuccessMsg("cancel order after paid successfully"));
 	}
 

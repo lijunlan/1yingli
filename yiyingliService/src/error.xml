@@ -91,6 +91,7 @@
 	<error name="40001" value="server error" />
 	<error name="41001" value="input data is wrong" />
 	<error name="42001" value="order is not existed" />
+	<error name="42002" value="servicePro is not existed" />
 	<error name="43001" value="alipay error" />
 	<error name="43002" value="connect to paypal failed, please try again" />
 	<error name="44001" value="this order is not belong to you" />
@@ -100,6 +101,9 @@
 	<error name="44005"
 		value="the state of this can not be changed. last state is needed" />
 	<error name="44006" value="can not make deal with yourself" />
+	<error name="44007" value="this servicePro is not belong to the order" />
+	<error name="44008"
+		value="some servicePros are not existed or are not belong to the teacher" />
 	<error name="45001" value="voucher is not existed" />
 	<error name="45002" value="voucher is overdue" />
 	<error name="45003" value="voucher has been used" />
