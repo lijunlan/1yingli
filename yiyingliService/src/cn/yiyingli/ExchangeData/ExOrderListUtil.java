@@ -9,12 +9,15 @@ import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.OrderList;
 
 public class ExOrderListUtil {
-	
+
 	public static void assembleOrderListToUser(OrderList orderList, SuperMap map) {
 		map.put("batchNo", orderList.getOrderListNo());
 		map.put("teacherId", orderList.getTeacher().getId());
 		map.put("teacherName", orderList.getTeacher().getName());
 		map.put("teacherUrl", orderList.getTeacher().getIconUrl());
+		map.put("payMoney", orderList.getPayMoney());
+		map.put("nowMoney", orderList.getNowMoney());
+		map.put("originMoney", orderList.getOriginMoney());
 		ExList toSendOrders = new ExArrayList();
 		for (Order o : orderList.getOrders()) {
 			SuperMap jsonorder = new SuperMap();
