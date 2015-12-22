@@ -61,6 +61,15 @@ public class SendMsgToBaiduUtil {
 		sendMsgToBaiduTrainData(sendList.toString());
 	}
 
+//	public static void updateUserTrainDataOrder(String[] uids, String[] tids, String time) {
+//		JSONArray sendList = new JSONArray();
+//		for (int i = 0; i < (uids.length > tids.length ? tids.length : uids.length); i++) {
+//			sendList.add(
+//					JSONUserTrainData(uids[i], tids[i], "rate", (short) 5, time.equals("") ? 0L : Long.valueOf(time)));
+//		}
+//		sendMsgToBaiduTrainData(sendList.toString());
+//	}
+
 	public static JSONObject JSONUserTrainData(String uid, String tid, String action, short rate, long time) {
 		JSONObject toBaidu = new JSONObject();
 		toBaidu.put("UserId", uid);

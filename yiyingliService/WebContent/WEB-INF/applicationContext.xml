@@ -67,6 +67,12 @@
 
 
 	<!-- !!!!!Dao!!!!! -->
+	<bean id="orderListDao" class="cn.yiyingli.Dao.Impl.OrderListDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
 	<bean id="passageDao" class="cn.yiyingli.Dao.Impl.PassageDaoImpl">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
@@ -219,6 +225,12 @@
 	</bean>
 
 	<!-- !!!!!Data Transaction Service !!!! -->
+	<bean id="orderListService" parent="baseTxService">
+		<property name="target">
+			<ref local="orderListServiceImpl" />
+		</property>
+	</bean>
+
 	<bean id="passageService" parent="baseTxService">
 		<property name="target">
 			<ref local="passageServiceImpl" />
@@ -370,6 +382,12 @@
 	</bean>
 
 	<!--!!!!Data Service Impl!!!!! -->
+	<bean id="orderListServiceImpl" class="cn.yiyingli.Service.Impl.OrderListServiceImpl">
+		<property name="orderListDao">
+			<ref local="orderListDao" />
+		</property>
+	</bean>
+
 	<bean id="passageServiceImpl" class="cn.yiyingli.Service.Impl.PassageServiceImpl">
 		<property name="passageDao">
 			<ref local="passageDao" />
@@ -944,8 +962,8 @@
 		<property name="userMarkService">
 			<ref local="userMarkService" />
 		</property>
-		<property name="orderService">
-			<ref local="orderService" />
+		<property name="orderListService">
+			<ref local="orderListService" />
 		</property>
 	</bean>
 
@@ -1639,23 +1657,6 @@
 		scope="prototype">
 		<property name="teacherService">
 			<ref local="teacherService" />
-		</property>
-	</bean>
-
-	<bean id="getOrderCountService" class="cn.yiyingli.Handle.Service.GetOrderCountService"
-		scope="prototype">
-		<property name="userMarkService">
-			<ref local="userMarkService" />
-		</property>
-	</bean>
-
-	<bean id="tGetOrderCountService" class="cn.yiyingli.Handle.Service.TGetOrderCountService"
-		scope="prototype">
-		<property name="teacherService">
-			<ref local="teacherService" />
-		</property>
-		<property name="userMarkService">
-			<ref local="userMarkService" />
 		</property>
 	</bean>
 

@@ -19,7 +19,7 @@ public class NotifyUtil {
 	 * @param uid
 	 *            用户标识 UUID
 	 */
-	private static boolean notifyUserOrder(String phone, String email, String message, User user,
+	public static boolean notifyUserOrder(String phone, String email, String message, User user,
 			NotificationService notificationService) {
 		return notifyUserNormal(phone, email, "订单状态改变通知", message, user, notificationService);
 	}

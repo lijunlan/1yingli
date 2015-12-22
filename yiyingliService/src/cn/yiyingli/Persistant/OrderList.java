@@ -1,7 +1,9 @@
 package cn.yiyingli.Persistant;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,6 +36,9 @@ public class OrderList {
 	@Column(name = "CREATETIME", nullable = false)
 	private String createTime;
 
+	@Column(name = "PAYTIME", nullable = true)
+	private String payTime;
+
 	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Teacher teacher;
@@ -44,6 +49,25 @@ public class OrderList {
 	@ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private User user;
+
+	@Column(name = "SHOWTOTEACHER", nullable = false)
+	private Boolean showToTeacher;
+
+	@Column(name = "FINISHPAY", nullable = false)
+	private Boolean finishPay;
+
+	@Column(name = "ORIGNMONEY", nullable = false)
+	private Float originMoney;
+
+	@Column(name = "NOWMONEY", nullable = false)
+	private Float nowMoney;
+
+	@Column(name = "PAYMONEY", nullable = false)
+	private Float payMoney;
+
+	@OneToMany(targetEntity = Voucher.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "ORDERLIST_ID", updatable = true)
+	private Set<Voucher> useVouchers = new HashSet<Voucher>();
 
 	public Long getId() {
 		return id;
@@ -91,6 +115,62 @@ public class OrderList {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Boolean getShowToTeacher() {
+		return showToTeacher;
+	}
+
+	public void setShowToTeacher(Boolean showToTeacher) {
+		this.showToTeacher = showToTeacher;
+	}
+
+	public Boolean getFinishPay() {
+		return finishPay;
+	}
+
+	public void setFinishPay(Boolean finishPay) {
+		this.finishPay = finishPay;
+	}
+
+	public void setOriginMoney(Float originMoney) {
+		this.originMoney = originMoney;
+	}
+
+	public Float getPayMoney() {
+		return payMoney;
+	}
+
+	public void setPayMoney(Float payMoney) {
+		this.payMoney = payMoney;
+	}
+
+	public Set<Voucher> getUseVouchers() {
+		return useVouchers;
+	}
+
+	public void setUseVouchers(Set<Voucher> useVouchers) {
+		this.useVouchers = useVouchers;
+	}
+
+	public Float getOriginMoney() {
+		return originMoney;
+	}
+
+	public String getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(String payTime) {
+		this.payTime = payTime;
+	}
+
+	public Float getNowMoney() {
+		return nowMoney;
+	}
+
+	public void setNowMoney(Float nowMoney) {
+		this.nowMoney = nowMoney;
 	}
 
 }

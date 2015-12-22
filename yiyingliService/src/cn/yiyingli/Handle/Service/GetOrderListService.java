@@ -2,26 +2,27 @@ package cn.yiyingli.Handle.Service;
 
 import java.util.List;
 
-import cn.yiyingli.ExchangeData.ExOrderUtil;
+import cn.yiyingli.ExchangeData.ExOrderListUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.UMsgService;
-import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Persistant.User;
+import cn.yiyingli.Service.OrderListService;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Util.MsgUtil;
 
 public class GetOrderListService extends UMsgService {
 
-	private OrderService orderService;
+	private OrderListService orderListService;
 
-	public OrderService getOrderService() {
-		return orderService;
+	public OrderListService getOrderListService() {
+		return orderListService;
 	}
 
-	public void setOrderService(OrderService orderService) {
-		this.orderService = orderService;
+	public void setOrderListService(OrderListService orderListService) {
+		this.orderListService = orderListService;
 	}
 
 	@Override
@@ -29,6 +30,11 @@ public class GetOrderListService extends UMsgService {
 		return super.checkData() && getData().containsKey("page") || getData().containsKey("state");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cn.yiyingli.Handle.MsgService#doit()
+	 */
 	@Override
 	public void doit() {
 		User user = getUser();
@@ -56,22 +62,21 @@ public class GetOrderListService extends UMsgService {
 				return;
 			}
 		}
-		List<Order> orders = null;
+		List<OrderList> orderLists = getOrderListService().queryListByUser(user.getId(), page);
 		if (getData().containsKey("state")) {
 			String s = (String) getData().get("state");
 			String states[] = s.split("\\|");
-			orders = getOrderService().queryListByUserId(user.getId(), states, page, false);
-		} else {
-			orders = getOrderService().queryListByUserId(user.getId(), page, false);
+			ExOrderListUtil.getMatchStateLists(orderLists, states);
 		}
-		ExList sends = new ExArrayList();
-		for (Order o : orders) {
+
+		ExList toSendOrderLists = new ExArrayList();
+		for (OrderList orderList : orderLists) {
 			SuperMap map = new SuperMap();
-			ExOrderUtil.assembleOrderToUser(map, o);
-			sends.add(map.finish());
+			ExOrderListUtil.assembleOrderListToUser(orderList, map);
+			toSendOrderLists.add(map.finish());
 		}
-		toSend.put("state", "success");
-		setResMsg(toSend.put("data", sends).finishByJson());
+
+		setResMsg(toSend.put("data", toSendOrderLists).finishByJson());
 
 	}
 

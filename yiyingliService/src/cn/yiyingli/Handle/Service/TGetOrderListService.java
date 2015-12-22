@@ -2,26 +2,26 @@ package cn.yiyingli.Handle.Service;
 
 import java.util.List;
 
-import cn.yiyingli.ExchangeData.ExOrderUtil;
+import cn.yiyingli.ExchangeData.ExOrderListUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.TMsgService;
-import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Persistant.Teacher;
-import cn.yiyingli.Service.OrderService;
+import cn.yiyingli.Service.OrderListService;
 import cn.yiyingli.Util.MsgUtil;
 
 public class TGetOrderListService extends TMsgService {
 
-	private OrderService orderService;
+	private OrderListService orderListService;
 
-	public OrderService getOrderService() {
-		return orderService;
+	public OrderListService getOrderListService() {
+		return orderListService;
 	}
 
-	public void setOrderService(OrderService orderService) {
-		this.orderService = orderService;
+	public void setOrderListService(OrderListService orderListService) {
+		this.orderListService = orderListService;
 	}
 
 	@Override
@@ -46,21 +46,22 @@ public class TGetOrderListService extends TMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("22005"));
 			return;
 		}
-		List<Order> orders = null;
+
+		List<OrderList> orderLists = getOrderListService().queryListByUser(teacher.getId(), page);
 		if (getData().containsKey("state")) {
 			String s = (String) getData().get("state");
 			String states[] = s.split("\\|");
-			orders = getOrderService().queryListByTeacherId(teacher.getId(), states, page, false);
-		} else {
-			orders = getOrderService().queryListByTeacherId(teacher.getId(), page, false);
+			ExOrderListUtil.getMatchStateLists(orderLists, states);
 		}
-		ExList sends = new ExArrayList();
-		for (Order o : orders) {
+
+		ExList toSendOrderLists = new ExArrayList();
+		for (OrderList orderList : orderLists) {
 			SuperMap map = new SuperMap();
-			ExOrderUtil.assembleOrderToTeacher(map, o);
-			sends.add(map.finish());
+			ExOrderListUtil.assembleOrderListToUser(orderList, map);
+			toSendOrderLists.add(map.finish());
 		}
-		setResMsg(toSend.put("data", sends).finishByJson());
+
+		setResMsg(toSend.put("data", toSendOrderLists).finishByJson());
 	}
 
 }

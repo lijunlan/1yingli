@@ -29,9 +29,14 @@ public class Order {
 	@Column(name = "MONEY", nullable = false)
 	private Float money;
 
-	// 课程时长
-	@Column(name = "TIME", nullable = false)
-	private Float time;
+	@Column(name = "QUANTIFIER", nullable = false)
+	private String quantifier;
+
+	@Column(name = "NUMERAL", nullable = false)
+	private Integer numeral;
+
+	@Column(name = "COUNT", nullable = false)
+	private Integer count;
 
 	@Column(name = "SALARYSTATE", nullable = false)
 	private Short salaryState;
@@ -117,20 +122,20 @@ public class Order {
 	@Column(name = "STATE", nullable = false)
 	private String state;
 
-	@OneToMany(targetEntity = Voucher.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	@JoinColumn(name = "ORDER_ID", updatable = false)
-	private Set<Voucher> useVouchers = new HashSet<Voucher>();
-
 	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "TEACHER_ID", updatable = false)
+	@JoinColumn(name = "TEACHER_ID", updatable = true)
 	private Teacher teacher;
 
 	@ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_ID", updatable = false)
+	@JoinColumn(name = "USER_ID", updatable = true)
 	private User createUser;
 
+	@ManyToOne(targetEntity = OrderList.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "ORDERLIST_ID", updatable = false)
+	private OrderList orderList;
+
 	@ManyToOne(targetEntity = Distributor.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "DISTRIBUTOR_ID", updatable = false)
+	@JoinColumn(name = "DISTRIBUTOR_ID", updatable = true)
 	private Distributor distributor;
 
 	public Long getId() {
@@ -197,14 +202,6 @@ public class Order {
 		this.state = state;
 	}
 
-	public Set<Voucher> getUseVouchers() {
-		return useVouchers;
-	}
-
-	public void setUseVouchers(Set<Voucher> useVouchers) {
-		this.useVouchers = useVouchers;
-	}
-
 	public Teacher getTeacher() {
 		return teacher;
 	}
@@ -253,12 +250,20 @@ public class Order {
 		this.serviceTitle = serviceTitle;
 	}
 
-	public Float getTime() {
-		return time;
+	public String getQuantifier() {
+		return quantifier;
 	}
 
-	public void setTime(Float time) {
-		this.time = time;
+	public void setQuantifier(String quantifier) {
+		this.quantifier = quantifier;
+	}
+
+	public Integer getNumeral() {
+		return numeral;
+	}
+
+	public void setNumeral(Integer numeral) {
+		this.numeral = numeral;
 	}
 
 	public String getAlipayNo() {
@@ -379,6 +384,22 @@ public class Order {
 
 	public void setServiceId(Long serviceId) {
 		this.serviceId = serviceId;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
+	public OrderList getOrderList() {
+		return orderList;
+	}
+
+	public void setOrderList(OrderList orderList) {
+		this.orderList = orderList;
 	}
 
 }

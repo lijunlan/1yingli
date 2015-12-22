@@ -190,6 +190,10 @@ public class Teacher {
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Set<Order> receiveOrders = new HashSet<Order>();
 
+	@OneToMany(targetEntity = OrderList.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "TEACHER_ID", updatable = false)
+	private Set<OrderList> receiveOrderLists = new HashSet<OrderList>();
+
 	@OneToMany(targetEntity = Passage.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Set<Passage> passages = new HashSet<Passage>();
@@ -614,6 +618,14 @@ public class Teacher {
 
 	public void setTopic(String topic) {
 		this.topic = topic;
+	}
+
+	public Set<OrderList> getReceiveOrderLists() {
+		return receiveOrderLists;
+	}
+
+	public void setReceiveOrderLists(Set<OrderList> receiveOrderLists) {
+		this.receiveOrderLists = receiveOrderLists;
 	}
 
 }

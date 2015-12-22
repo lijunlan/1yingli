@@ -8,17 +8,13 @@ public interface ServiceProService {
 
 	public static final String TAG_QUESTION = "question";
 
-	public static final String TAG_DESCRIPTION = "description";
+	public static final String TAG_RESUME = "resume";
 
-	public static final String TAG_PRICE = "price";
-
-	public static final String TAG_PRICE_TEMP = "priceTemp";
+	public static final String TAG_SELECTTIME = "selectTime";
 
 	public static final String TAG_ID = "serviceProId";
-	
-	public static final String TAG_COUNT = "count";
 
-	public static final String TAG_TITLE = "title";
+	public static final String TAG_COUNT = "count";
 
 	void save(ServicePro servicePro);
 

@@ -5,11 +5,13 @@ import java.util.List;
 
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.Voucher;
 import cn.yiyingli.Service.NotificationService;
+import cn.yiyingli.Service.OrderListService;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Service.TeacherService;
@@ -19,6 +21,7 @@ import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.SendMsgToBaiduUtil;
+import cn.yiyingli.toPersistant.POrderUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -35,6 +38,8 @@ public class CreateOrderService extends UMsgService {
 	private VoucherService voucherService;
 
 	private ServiceProService serviceProService;
+
+	private OrderListService orderListService;
 
 	public OrderService getOrderService() {
 		return orderService;
@@ -84,6 +89,14 @@ public class CreateOrderService extends UMsgService {
 		this.serviceProService = serviceProService;
 	}
 
+	public OrderListService getOrderListService() {
+		return orderListService;
+	}
+
+	public void setOrderListService(OrderListService orderListService) {
+		this.orderListService = orderListService;
+	}
+
 	@Override
 	protected boolean checkData() {
 		return super.checkData() && getData().containsKey("teacherId") && getData().containsKey("serviceList")
@@ -107,14 +120,14 @@ public class CreateOrderService extends UMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("44006"));
 			return;
 		}
-		JSONArray jsonArray = getData().getJSONArray("serviceList");
-		long[] serviceProIds = new long[jsonArray.size()];
-		for (int i = 0; i < jsonArray.size(); i++) {
-			JSONObject obj = jsonArray.getJSONObject(i);
+		JSONArray jsonServiceList = getData().getJSONArray("serviceList");
+		long[] serviceProIds = new long[jsonServiceList.size()];
+		for (int i = 0; i < jsonServiceList.size(); i++) {
+			JSONObject obj = jsonServiceList.getJSONObject(i);
 			serviceProIds[i] = obj.getLong(ServiceProService.TAG_ID);
 		}
 		List<ServicePro> servicePros = getServiceProService().queryList(serviceProIds, teacher.getId());
-		if (servicePros.size() != jsonArray.size()) {
+		if (servicePros.size() != jsonServiceList.size()) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44008"));
 			return;
 		}
@@ -130,30 +143,40 @@ public class CreateOrderService extends UMsgService {
 			return;
 		}
 
-		user.setOname(name);
-		user.setOphone(phone);
-		user.setOemail(email);
-		user.setContact(contact);
-
-		getUserService().update(user);
-
-		
-		for (ServicePro sp : servicePros) {
-			// sp.
-			
-		}
-
-		boolean onSale = servicePro.getOnSale();
-		float money = 0F;
-		float originMoney = 0F;
-		if (onSale) {
-			originMoney = money = tService.getPriceTemp();
-		} else {
-			originMoney = money = tService.getPriceTotal();
-		}
 		long ntime = Calendar.getInstance().getTimeInMillis();
+		OrderList orderList = new OrderList();
+		orderList.setCreateTime(ntime + "");
+		orderList.setFinishPay(false);
+		orderList.setOriginMoney(0F);
+		orderList.setNowMoney(0F);
+		orderList.setPayMoney(0F);
+		orderList.setShowToTeacher(false);
+		orderList.setTeacher(teacher);
+		orderList.setUser(user);
+		for (ServicePro sp : servicePros) {
+			long spId = sp.getId();
+			JSONObject jsonService = null;
+			for (int i = 0; i < serviceProIds.length; i++) {
+				if (serviceProIds[i] == spId) {
+					jsonService = jsonServiceList.getJSONObject(i);
+					break;
+				}
+			}
+			Order order = new Order();
+			String question = jsonService.getString(ServiceProService.TAG_QUESTION);
+			String resume = jsonService.getString(ServiceProService.TAG_RESUME);
+			String selectTime = jsonService.getString(ServiceProService.TAG_SELECTTIME);
+			int count = jsonService.getInt(ServiceProService.TAG_COUNT);
+			POrderUtil.createOrder(user, teacher, phone, email, contact, name, question, resume, selectTime, count, sp,
+					order);
+			orderList.setOriginMoney(orderList.getOriginMoney() + order.getOriginMoney());
+			orderList.setNowMoney(orderList.getNowMoney() + order.getMoney());
+			orderList.getOrders().add(order);
+		}
+
 		boolean isUseVoucher = false;
 		Voucher voucher = null;
+		float money = orderList.getNowMoney();
 		if (getData().containsKey("voucher")) {
 			String vno = (String) getData().get("voucher");
 			voucher = getVoucherService().query(vno, false);
@@ -175,23 +198,30 @@ public class CreateOrderService extends UMsgService {
 		if (money < 0.01) {
 			money = 0.01F;
 		}
-		Order order = new Order();
-		POrderUtil.createOrder(user, teacher, phone, email, contact, name, question, time, resume, money, originMoney,
-				onSale, order);
-		String orderNo = getOrderService().save(order);
+		orderList.setPayMoney(money);
+
+		user.setOname(name);
+		user.setOphone(phone);
+		user.setOemail(email);
+		user.setContact(contact);
+
+		getUserService().update(user);
+
+		getOrderListService().save(orderList);
+
 		if (isUseVoucher) {
-			getVoucherService().updateWithOrderId(voucher, order.getId());
+			getVoucherService().updateWithOrderListId(voucher, orderList.getId());
 		}
 
 		SendMsgToBaiduUtil.updateUserTrainDataOrder(user.getId() + "", teacher.getId() + "",
 				Calendar.getInstance().getTimeInMillis() + "");
 
 		NotifyUtil.notifyUserOrder(phone, email,
-				"尊敬的学员,您好,导师预约订单(订单号" + order.getOrderNo() + ")已经创建,为了能及时预约到心动导师,请在48小时内完成支付哦,超时系统将自动取消订单。", user,
-				getNotificationService());
+				"尊敬的学员,您好,您的订单(流水号:" + orderList.getOrderListNo() + ")已经创建,为了能及时预约到心动导师,请在48小时内完成支付哦,超时系统将自动取消订单。",
+				user, getNotificationService());
 
-		setResMsg(
-				MsgUtil.getSuccessMap().put("orderNo", orderNo).put("msg", "create order successfully").finishByJson());
+		setResMsg(MsgUtil.getSuccessMap().put("orderNoList", orderList.getOrderListNo())
+				.put("msg", "create order successfully").finishByJson());
 	}
 
 }

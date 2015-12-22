@@ -2,8 +2,6 @@ package cn.yiyingli.Service.Impl;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
-
 import cn.yiyingli.Dao.OrderDao;
 import cn.yiyingli.Dao.TeacherDao;
 import cn.yiyingli.Dao.UserDao;
@@ -48,13 +46,10 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public String save(Order order) {
 		long id = getOrderDao().saveWithUserNumber(order, order.getCreateUser());
-		order.setOrderNo("" + Calendar.getInstance().get(Calendar.YEAR) + new Random().nextInt(10)
-				+ new Random().nextInt(10) + new Random().nextInt(10) + (100000000L + id));
-		if (order.getDistributor() != null) {
-			getOrderDao().updateDistriOrderNumber(order, order.getDistributor());
-		} else {
-			getOrderDao().update(order);
-		}
+		order.setOrderNo("" + Calendar.getInstance().get(Calendar.YEAR)
+				+ String.valueOf((Calendar.getInstance().get(Calendar.DAY_OF_YEAR) + 1000)).substring(1)
+				+ (100000000L + id));
+		getOrderDao().update(order);
 		TimeTaskUtil.sendTimeTask("change", "order",
 				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
 				new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
@@ -81,8 +76,7 @@ public class OrderServiceImpl implements OrderService {
 		if (addMile) {
 			if (!order.getOnSale()) {
 				// TODO 导师获得英里数逻辑
-				// Teacher teacher = getTeacherDao().query(order.getTeacherId(),
-				// false);
+				// Teacher teacher = order.getTeacher();
 				// float time = order.getTime();
 				// long m = (long) (10 * time);
 				// teacher.setMile(teacher.getMile() + m);

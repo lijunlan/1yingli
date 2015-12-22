@@ -47,7 +47,6 @@
 		<method name="commentTeacher" beanName="commentTeacherService" />
 		<method name="dislikeTeacher" beanName="dislikeTeacherService" />
 		<method name="isLikeTeacher" beanName="isLikeTeacherService" />
-		<method name="getOrderCount" beanName="getOrderCountService" />
 		<method name="forgetPassword" beanName="forgetPasswordService" />
 		<method name="iosForgetPassword" beanName="iosForgetPasswordService" />
 		<!-- <method name="change_info" beanName="" /> <method name="change_password" 
@@ -66,7 +65,6 @@
 		<method name="getAllInfo" beanName="tGetAllInfoService" />
 		<method name="changeTitlePrice" beanName="tChangeTitlePriceService" />
 		<method name="changeSimpleInfo" beanName="tChangeSimpleInfoService" />
-		<method name="getOrderCount" beanName="tGetOrderCountService" />
 		<method name="getCommentCount" beanName="tGetCommentCountService" />
 		<method name="getTeacherCheckInfo" beanName="tGetTeacherCheckInfoService" />
 		<method name="changeTip" beanName="tChangeTipsService" />

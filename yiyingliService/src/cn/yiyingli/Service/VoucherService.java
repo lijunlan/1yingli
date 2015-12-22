@@ -18,7 +18,7 @@ public interface VoucherService {
 
 	void update(Voucher voucher);
 
-	void updateWithOrderId(Voucher voucher, long orderId);
+	void updateWithOrderListId(Voucher voucher, long orderListId);
 
 	Voucher query(long id, boolean lazy);
 
