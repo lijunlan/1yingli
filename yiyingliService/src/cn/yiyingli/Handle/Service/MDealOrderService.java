@@ -56,13 +56,13 @@ public class MDealOrderService extends MMsgService {
 				order.setState(OrderService.ORDER_STATE_WAIT_COMMENT + "," + order.getState());
 				order.setSalaryState(OrderService.ORDER_SALARY_STATE_NEED);
 				getOrderService().update(order, true);
-				NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
+				NotifyUtil.notifyUserOrder(order,
 						"尊敬的学员，订单号为" + order.getOrderNo() + "的订单，导师(" + order.getTeacher().getName()
 								+ ")，客服已经协调结束，协调结果：拒绝此次退款。请到一英里平台对本次咨询进行评价",
 						order.getCreateUser(), getNotificationService());
-				NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
+				NotifyUtil.notifyTeacher(order,
 						"尊敬的导师，订单号为" + order.getOrderNo() + "的订单，客服已经协调结束，协调结果：拒绝此次退款。您的酬劳会在24小时内到账.",
-						order.getTeacher(), getNotificationService());
+						getNotificationService());
 				NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
 						+ order.getTeacher().getName() + "，客服已经协调结束，协调结果：拒绝此次退款。");
 			} else if (order.getState().contains(OrderService.ORDER_STATE_USER_REGRET)) {
@@ -70,12 +70,10 @@ public class MDealOrderService extends MMsgService {
 				order.setState(OrderService.ORDER_STATE_END_FAILED + "," + order.getState());
 				order.setSalaryState(OrderService.ORDER_SALARY_STATE_NEED);
 				getOrderService().update(order, false);
-				NotifyUtil.notifyUserOrder(order.getCustomerPhone(),
-						order.getCustomerEmail(), "尊敬的学员，订单号为" + order.getOrderNo() + "的订单，导师("
-								+ order.getTeacher().getName() + ")，客服已经协调结束，协调结果：拒绝此次退款。",
-						order.getCreateUser(), getNotificationService());
-				NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
-						"尊敬的导师，订单号为" + order.getOrderNo() + "的订单，客服已经协调结束，协调结果：拒绝此次退款。", order.getTeacher(),
+				NotifyUtil.notifyUserOrder(order, "尊敬的学员，订单号为" + order.getOrderNo() + "的订单，导师("
+						+ order.getTeacher().getName() + ")，客服已经协调结束，协调结果：拒绝此次退款。", order.getCreateUser(),
+						getNotificationService());
+				NotifyUtil.notifyTeacher(order, "尊敬的导师，订单号为" + order.getOrderNo() + "的订单，客服已经协调结束，协调结果：拒绝此次退款。",
 						getNotificationService());
 				NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
 						+ order.getTeacher().getName() + "，客服已经协调结束，协调结果：拒绝此次退款。");
@@ -89,12 +87,12 @@ public class MDealOrderService extends MMsgService {
 			order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
 			getOrderService().update(order, false);
 			// 退钱,等待将钱退回学员支付宝
-			NotifyUtil.notifyUserOrder(order.getCustomerPhone(),
-					order.getCustomerEmail(), "尊敬的学员，订单号为" + order.getOrderNo() + "的订单，导师("
-							+ order.getTeacher().getName() + ")，客服已经协调结束，协调结果：同意此次退款。我们将在24小时内给您退款.",
-					order.getCreateUser(), getNotificationService());
-			NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
-					"尊敬的导师，订单号为" + order.getOrderNo() + "的订单，客服已经协调结束，协调结果：同意此次退款。", order.getTeacher(),
+			NotifyUtil
+					.notifyUserOrder(order,
+							"尊敬的学员，订单号为" + order.getOrderNo() + "的订单，导师(" + order.getTeacher().getName()
+									+ ")，客服已经协调结束，协调结果：同意此次退款。我们将在24小时内给您退款.",
+							order.getCreateUser(), getNotificationService());
+			NotifyUtil.notifyTeacher(order, "尊敬的导师，订单号为" + order.getOrderNo() + "的订单，客服已经协调结束，协调结果：同意此次退款。",
 					getNotificationService());
 			NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
 					+ order.getTeacher().getName() + "，客服已经协调结束，协调结果：同意此次退款。");

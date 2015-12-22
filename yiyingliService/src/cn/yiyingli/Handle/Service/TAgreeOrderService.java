@@ -57,13 +57,12 @@ public class TAgreeOrderService extends TMsgService {
 		String okTime = (String) getData().get("okTime");
 		order.setOkTime(okTime);
 		order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
-		getOrderService().update(order,false);
+		getOrderService().update(order, false);
 
-		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
+		NotifyUtil.notifyUserOrder(order,
 				"尊敬的学员，订单号为" + order.getOrderNo() + "的订单，申请退款已经被导师(" + teacher.getName() + ")接受，我们会在24小时内为您退款。",
 				order.getCreateUser(), getNotificationService());
-		NotifyUtil.notifyTeacher(teacher.getPhone(), teacher.getEmail(),
-				"尊敬的导师，您已经同意订单号为" + order.getOrderNo() + "的退款。", teacher, getNotificationService());
+		NotifyUtil.notifyTeacher(order, "尊敬的导师，您已经同意订单号为" + order.getOrderNo() + "的退款。", getNotificationService());
 		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
 				+ order.getTeacher().getName() + "，导师已经同意订单退款。");
 		setResMsg(MsgUtil.getSuccessMsg("agree order successfully"));
