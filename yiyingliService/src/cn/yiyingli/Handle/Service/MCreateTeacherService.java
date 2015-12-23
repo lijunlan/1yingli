@@ -14,6 +14,8 @@ import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.toPersistant.PTServiceUtil;
 import cn.yiyingli.toPersistant.PTeacherUtil;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class MCreateTeacherService extends MMsgService {
 
@@ -62,41 +64,41 @@ public class MCreateTeacherService extends MMsgService {
 			return;
 		}
 
-		Map<String, Object> tdata = (Map<String, Object>) getData().get("teacher");
-		List<Object> workExperiences = (List<Object>) tdata.get("workExperience");
-		List<Object> studyExperiences = (List<Object>) tdata.get("studyExperience");
-		Map<String, Object> service = (Map<String, Object>) tdata.get("service");
-		List<Object> tips = (List<Object>) service.get("tips");
+		JSONObject tdata = getData().getJSONObject("teacher");
+		JSONArray workExperiences = tdata.getJSONArray("workExperience");
+		JSONArray studyExperiences = tdata.getJSONArray("studyExperience");
+		JSONObject service = tdata.getJSONObject("service");
+		JSONArray tips = service.getJSONArray("tips");
 
-		String simpleinfo = (String) tdata.get("simpleinfo");
-		String name = (String) tdata.get("name");
-		String phone = (String) tdata.get("phone");
-		String address = (String) tdata.get("address");
-		String mail = (String) tdata.get("email");
-		String iconUrl = (String) tdata.get("iconUrl");
-		String introduce = (String) tdata.get("introduce");
-		String checkPhone = (String) tdata.get("checkPhone");
-		String checkIDCard = (String) tdata.get("checkIDCard");
-		String checkEmail = (String) tdata.get("checkEmail");
-		String checkWork = (String) tdata.get("checkWork");
-		String checkStudy = (String) tdata.get("checkStudy");
-		String showWeight1 = (String) tdata.get("showWeight1");
-		String showWeight2 = (String) tdata.get("showWeight2");
-		String showWeight4 = (String) tdata.get("showWeight4");
-		String showWeight8 = (String) tdata.get("showWeight8");
-		String showWeight16 = (String) tdata.get("showWeight16");
-		String homeWeight = (String) tdata.get("homeWeight");
-		String saleWeight = (String) tdata.get("saleWeight");
+		String simpleinfo = tdata.getString("simpleinfo");
+		String name = tdata.getString("name");
+		String phone = tdata.getString("phone");
+		String address = tdata.getString("address");
+		String mail = tdata.getString("email");
+		String iconUrl = tdata.getString("iconUrl");
+		String introduce = tdata.getString("introduce");
+		String checkPhone = tdata.getString("checkPhone");
+		String checkIDCard = tdata.getString("checkIDCard");
+		String checkEmail = tdata.getString("checkEmail");
+		String checkWork = tdata.getString("checkWork");
+		String checkStudy = tdata.getString("checkStudy");
+		String showWeight1 = tdata.getString("showWeight1");
+		String showWeight2 = tdata.getString("showWeight2");
+		String showWeight4 = tdata.getString("showWeight4");
+		String showWeight8 = tdata.getString("showWeight8");
+		String showWeight16 = tdata.getString("showWeight16");
+		String homeWeight = tdata.getString("homeWeight");
+		String saleWeight = tdata.getString("saleWeight");
 		Teacher teacher = PTeacherUtil.assembleTeacherByManager(user, workExperiences, studyExperiences, tips,
 				simpleinfo, name, phone, address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail,
 				checkWork, checkStudy, showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight,
 				saleWeight, getTipService());
 
-		String serviceTitle = (String) service.get("title");
-		String serviceTime = (String) service.get("time");
-		String servicePrice = (String) service.get("price");
-		String serviceTimePerWeek = (String) service.get("timeperweek");
-		String serviceContent = (String) service.get("content");
+		String serviceTitle = service.getString("title");
+		String serviceTime = service.getString("time");
+		String servicePrice = service.getString("price");
+		String serviceTimePerWeek = service.getString("timeperweek");
+		String serviceContent = service.getString("content");
 
 		ServicePro servicePro = new ServicePro();
 		PTServiceUtil.assembleWithTeacherByManager(teacher, serviceTitle, serviceTime, servicePrice, serviceTimePerWeek,

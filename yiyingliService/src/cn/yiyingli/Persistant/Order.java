@@ -33,7 +33,7 @@ public class Order {
 	private String quantifier;
 
 	@Column(name = "NUMERAL", nullable = false)
-	private Integer numeral;
+	private Float numeral;
 
 	@Column(name = "COUNT", nullable = false)
 	private Integer count;
@@ -258,11 +258,11 @@ public class Order {
 		this.quantifier = quantifier;
 	}
 
-	public Integer getNumeral() {
+	public Float getNumeral() {
 		return numeral;
 	}
 
-	public void setNumeral(Integer numeral) {
+	public void setNumeral(Float numeral) {
 		this.numeral = numeral;
 	}
 

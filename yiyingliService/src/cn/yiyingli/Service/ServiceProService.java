@@ -16,6 +16,14 @@ public interface ServiceProService {
 
 	public static final String TAG_COUNT = "count";
 
+	public static final short STYLE_TALK = 0;
+
+	public static final short STYLE_SERVICE = 1;
+
+	public static final short STATE_CHECKING = 0;
+
+	public static final short STATE_OK = 1;
+
 	void save(ServicePro servicePro);
 
 	Long saveAndReturnId(ServicePro servicePro);

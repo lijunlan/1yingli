@@ -146,8 +146,9 @@ public class Teacher {
 	private Boolean onService;
 
 	@OneToMany(targetEntity = ServicePro.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	@JoinColumn(name = "TEACHER_ID", updatable = false)
-	private Set<ServicePro> servicePros = new HashSet<ServicePro>();
+	@JoinColumn(name = "TEACHER_ID", updatable = true, insertable = true)
+	@IndexColumn(name = "RANKNO")
+	private List<ServicePro> servicePros = new ArrayList<ServicePro>();
 
 	/**
 	 * 导师默认的闲聊话题，需要跟服务中的同步
@@ -604,11 +605,11 @@ public class Teacher {
 		this.paypal = paypal;
 	}
 
-	public Set<ServicePro> getServicePros() {
+	public List<ServicePro> getServicePros() {
 		return servicePros;
 	}
 
-	public void setServicePros(Set<ServicePro> servicePros) {
+	public void setServicePros(List<ServicePro> servicePros) {
 		this.servicePros = servicePros;
 	}
 

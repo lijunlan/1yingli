@@ -58,13 +58,16 @@ public class ServicePro {
 	private String quantifier;
 
 	@Column(name = "NUMERAL", nullable = false)
-	private Integer numeral;
+	private Float numeral;
 
 	@Column(name = "LIKENO", nullable = false)
 	private Long likeNo;
 
 	@Column(name = "NUMBER", nullable = false)
 	private Integer number;
+
+	@Column(name = "ACCEPTNO", nullable = false)
+	private Long acceptNo;
 
 	@Column(name = "FINISHNO", nullable = false)
 	private Long finishNo;
@@ -95,7 +98,7 @@ public class ServicePro {
 	private Boolean onShow;
 
 	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "TEACHER_ID", updatable = false)
+	@JoinColumn(name = "TEACHER_ID", updatable = true)
 	private Teacher teacher;
 
 	@Column(name = "RANKNO", nullable = false)
@@ -173,11 +176,11 @@ public class ServicePro {
 		this.quantifier = quantifier;
 	}
 
-	public Integer getNumeral() {
+	public Float getNumeral() {
 		return numeral;
 	}
 
-	public void setNumeral(Integer numeral) {
+	public void setNumeral(Float numeral) {
 		this.numeral = numeral;
 	}
 
@@ -307,6 +310,14 @@ public class ServicePro {
 
 	public void setStyle(Short style) {
 		this.style = style;
+	}
+
+	public Long getAcceptNo() {
+		return acceptNo;
+	}
+
+	public void setAcceptNo(Long acceptNo) {
+		this.acceptNo = acceptNo;
 	}
 
 }
