@@ -9,7 +9,6 @@ import cn.yiyingli.Dao.StudyExperienceDao;
 import cn.yiyingli.Dao.TeacherDao;
 import cn.yiyingli.Dao.UserDao;
 import cn.yiyingli.Dao.WorkExperienceDao;
-import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.UserLikeTeacher;
@@ -88,10 +87,10 @@ public class TeacherServiceImpl implements TeacherService {
 	public void saveWithDetailInfo(Teacher teacher) {
 		getUserDao().update(teacher.getUser());
 		getTeacherDao().save(teacher);
-		for (ServicePro servicePro : teacher.getServicePros()) {
-			servicePro.setTeacher(teacher);
-			getServiceProDao().save(servicePro);
-		}
+//		for (ServicePro servicePro : teacher.getServicePros()) {
+//			servicePro.setTeacher(teacher);
+//			getServiceProDao().save(servicePro);
+//		}
 		if (teacher.getOnService()) {
 			SendMsgToBaiduUtil.updateTeacherData(teacher);
 		}
@@ -137,9 +136,9 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public void updateWithDetailInfo(Teacher teacher, boolean refreshRecommend) {
 		getTeacherDao().update(teacher);
-		for (ServicePro servicePro : teacher.getServicePros()) {
-			getServiceProDao().update(servicePro);
-		}
+//		for (ServicePro servicePro : teacher.getServicePros()) {
+//			getServiceProDao().update(servicePro);
+//		}
 		if (refreshRecommend && teacher.getOnService()) {
 			SendMsgToBaiduUtil.updateTeacherData(teacher);
 		}

@@ -36,5 +36,7 @@ public interface ServiceProService {
 
 	ServicePro query(long id);
 
+	ServicePro queryByTeacherIdAndServiceId(long teacherId, long serviceId);
+
 	List<ServicePro> queryList(long[] ids, long teacherId);
 }

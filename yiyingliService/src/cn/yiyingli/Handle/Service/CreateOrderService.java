@@ -146,19 +146,24 @@ public class CreateOrderService extends UMsgService {
 		long ntime = Calendar.getInstance().getTimeInMillis();
 		OrderList orderList = new OrderList();
 		orderList.setCreateTime(ntime + "");
-		orderList.setFinishPay(false);
+		orderList.setState(OrderListService.ORDER_STATE_NOT_PAID);
 		orderList.setOriginMoney(0F);
 		orderList.setNowMoney(0F);
 		orderList.setPayMoney(0F);
 		orderList.setShowToTeacher(false);
 		orderList.setTeacher(teacher);
 		orderList.setUser(user);
-		for (ServicePro sp : servicePros) {
-			long spId = sp.getId();
-			JSONObject jsonService = null;
-			for (int i = 0; i < serviceProIds.length; i++) {
+		orderList.setCustomerName(name);
+		orderList.setCustomerEmail(email);
+		orderList.setCustomerWX(contact);
+		orderList.setCustomerPhone(phone);
+		for (int i = 0; i < serviceProIds.length; i++) {
+			JSONObject jsonService = jsonServiceList.getJSONObject(i);
+			ServicePro servicePro = null;
+			for (ServicePro sp : servicePros) {
+				long spId = sp.getId();
 				if (serviceProIds[i] == spId) {
-					jsonService = jsonServiceList.getJSONObject(i);
+					servicePro = sp;
 					break;
 				}
 			}
@@ -167,14 +172,14 @@ public class CreateOrderService extends UMsgService {
 			String resume = jsonService.getString(ServiceProService.TAG_RESUME);
 			String selectTime = jsonService.getString(ServiceProService.TAG_SELECTTIME);
 			int count = jsonService.getInt(ServiceProService.TAG_COUNT);
-			POrderUtil.createOrder(user, teacher, phone, email, contact, name, question, resume, selectTime, count, sp,
-					order);
+			POrderUtil.createOrder(user, teacher, phone, email, contact, name, question, resume, selectTime, count,
+					servicePro, order);
 			orderList.setOriginMoney(orderList.getOriginMoney() + order.getOriginMoney());
 			orderList.setNowMoney(orderList.getNowMoney() + order.getMoney());
 			orderList.getOrders().add(order);
 		}
 
-		boolean isUseVoucher = false;
+		// boolean isUseVoucher = false;
 		Voucher voucher = null;
 		float money = orderList.getNowMoney();
 		if (getData().containsKey("voucher")) {
@@ -192,7 +197,7 @@ public class CreateOrderService extends UMsgService {
 			} else {
 				money = money - voucher.getMoney();
 				voucher.setUsed(true);
-				isUseVoucher = true;
+				orderList.getUseVouchers().add(voucher);
 			}
 		}
 		if (money < 0.01) {
@@ -208,10 +213,11 @@ public class CreateOrderService extends UMsgService {
 		getUserService().update(user);
 
 		getOrderListService().save(orderList);
-
-		if (isUseVoucher) {
-			getVoucherService().updateWithOrderListId(voucher, orderList.getId());
-		}
+		//
+		// if (isUseVoucher) {
+		// getVoucherService().updateWithOrderListId(voucher,
+		// orderList.getId());
+		// }
 
 		SendMsgToBaiduUtil.updateUserTrainDataOrder(user.getId() + "", teacher.getId() + "",
 				Calendar.getInstance().getTimeInMillis() + "");

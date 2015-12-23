@@ -3,6 +3,7 @@ package cn.yiyingli.Servlet;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletConfig;
@@ -13,12 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.PayPal.PayPal;
 import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Service.NotificationService;
+import cn.yiyingli.Service.OrderListService;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.NotifyUtil;
+import cn.yiyingli.Util.TimeTaskUtil;
 import cn.yiyingli.Util.WarnUtil;
 
 public class ReturnServlet extends HttpServlet {
@@ -81,7 +86,7 @@ public class ReturnServlet extends HttpServlet {
 			returnMsg(response, connectError);
 			return;
 		}
-		String oid = tmp.split("\\|")[0];
+		String olid = tmp.split("\\|")[0];
 		String callback[] = tmp.split("\\|");
 		if (callback.length != 1) {
 			page = callback[1];
@@ -142,20 +147,21 @@ public class ReturnServlet extends HttpServlet {
 				String strAck2 = results2.get("ACK").toString().toUpperCase();
 				if (("Success".equalsIgnoreCase(strAck2) || "SuccessWithWarning".equalsIgnoreCase(strAck))) {
 					// 检查数据库，并修改，最终完成订单
-					OrderService orderService = (OrderService) getApplicationContext().getBean("orderService");
+					OrderListService orderListService = (OrderListService) getApplicationContext()
+							.getBean("orderListService");
 					NotificationService notificationService = (NotificationService) getApplicationContext()
 							.getBean("notificationService");
 					if (results2.get("PAYMENTINFO_0_PAYMENTSTATUS").equals("Completed")) {
-						Order order = orderService.queryByShowId(oid, false);
+						OrderList orderList = orderListService.queryByOrderListNo(olid);
 						// 检查订单是否存在
-						if (order == null) {
-							LogUtil.error("Return from Paypal and order is not exist. order id:" + oid,
+						if (orderList == null) {
+							LogUtil.error("Return from Paypal and orderList is not exist. orderList id:" + olid,
 									this.getClass());
 							returnToOnemile(resultParameter + "fail", response);
 							return;
 						}
 						// 检查订单款项是否正确
-						float price = order.getMoney();
+						float price = orderList.getPayMoney();
 						price /= 6;
 						BigDecimal b = new BigDecimal(price);
 						price = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
@@ -163,46 +169,51 @@ public class ReturnServlet extends HttpServlet {
 							price = 0.01F;
 						if (!(Float.parseFloat(results2.get("PAYMENTINFO_0_AMT")) == price
 								&& (results2.get("PAYMENTINFO_0_CURRENCYCODE").equals("USD")))) {
-							LogUtil.error("Return from Paypal and order id:" + oid + ", price is wrong, it should be "
-									+ order.getMoney() + ", but it is "
+							LogUtil.error("Return from Paypal and orderList id:" + olid
+									+ ", price is wrong, it should be " + orderList.getPayMoney() + ", but it is "
 									+ Float.parseFloat(results2.get("PAYMENTREQUEST_0_AMT")), this.getClass());
-							order.setState(
-									cn.yiyingli.Service.OrderService.ORDER_STATE_ABNORMAL + "," + order.getState());
-							WarnUtil.sendWarnToCTO("Return from Paypal and order id:" + oid
-									+ ", price is wrong, it should be " + order.getMoney() + ", but it is "
+							orderList.setState(OrderListService.ORDER_STATE_ABNORMAL + "," + orderList.getState());
+							WarnUtil.sendWarnToCTO("Return from Paypal and orderList id:" + olid
+									+ ", price is wrong, it should be " + orderList.getPayMoney() + ", but it is "
 									+ Float.parseFloat(results2.get("PAYMENTREQUEST_0_AMT")));
-							orderService.update(order, false);
+							orderListService.update(orderList);
 							returnToOnemile(resultParameter + "fail", response);
 							return;
 						}
 						// 检查订单状态是否正确
-						String state = order.getState().split(",")[0];
+						String state = orderList.getState().split(",")[0];
 						// 该情况应该不会出现
 						if (state.equals(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID)) {
 							LogUtil.error(
-									"Return from Paypal and order id:" + oid
-											+ ", order has paid and maybe this is duplicate notify from Paypal",
+									"Return from Paypal and orderList id:" + olid
+											+ ", orderList has paid and maybe this is duplicate notify from Paypal",
 									this.getClass());
 							returnToOnemile(resultParameter + "fail", response);
 							return;
 						}
 						if (!state.equals(cn.yiyingli.Service.OrderService.ORDER_STATE_NOT_PAID)) {
-							LogUtil.error("Return from Paypal and order id:" + oid + ", state is wrong",
+							LogUtil.error("Return from Paypal and orderList id:" + olid + ", state is wrong",
 									this.getClass());
-							WarnUtil.sendWarnToCTO("Return from Paypal and order id:" + oid + ", state is wrong");
+							WarnUtil.sendWarnToCTO("Return from Paypal and orderList id:" + olid + ", state is wrong");
 							returnToOnemile(resultParameter + "fail", response);
 							return;
 						}
 						// 订单貌似没有异常，因此根据Paypal信息处理订单
-						order.setState(
-								cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
-						order.setPayMethod(OrderService.ORDER_PAYMETHOD_PAYPAL);
-						orderService.updateAndPlusNumber(order);
-						NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-								"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经付款完成，请等待导师接受订单", order.getCreateUser(),
-								notificationService);
-						NotifyUtil.notifyTeacher(order, "尊敬的导师，订单号为" + order.getOrderNo() + "的订单，用户("
-								+ order.getCustomerName() + ")已经付款，等待您的接受。", notificationService);
+						// order.setState(
+						// cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID
+						// + "," + order.getState());
+						// order.setPayMethod(OrderService.ORDER_PAYMETHOD_PAYPAL);
+						// orderService.updateAndPlusNumber(order);
+						// NotifyUtil.notifyUserOrder(order.getCustomerPhone(),
+						// order.getCustomerEmail(),
+						// "尊敬的用户，订单号为" + order.getOrderNo() +
+						// "的订单已经付款完成，请等待导师接受订单", order.getCreateUser(),
+						// notificationService);
+						// NotifyUtil.notifyTeacher(order, "尊敬的导师，订单号为" +
+						// order.getOrderNo() + "的订单，用户("
+						// + order.getCustomerName() + ")已经付款，等待您的接受。",
+						// notificationService);
+						finishOrder(orderListService, orderList, notificationService);
 					} else {
 						LogUtil.error("Return from Paypal and payment status is:"
 								+ results2.get("PAYMENTINFO_0_PAYMENTSTATUS"), this.getClass());
@@ -243,6 +254,27 @@ public class ReturnServlet extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void finishOrder(OrderListService orderListService, OrderList orderList,
+			NotificationService notificationService) {
+		String time = Calendar.getInstance().getTimeInMillis() + "";
+		for (Order order : orderList.getOrders()) {
+			order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
+			order.setPayTime(time);
+			order.setPayMethod(OrderService.ORDER_PAYMETHOD_PAYPAL);
+			NotifyUtil.notifyManager(new SuperMap().put("type", "waitConfirm").finishByJson());
+			TimeTaskUtil.sendTimeTask("change", "order",
+					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
+					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+		}
+		orderList.setState(OrderListService.ORDER_STATE_FINISH_PAID + "," + orderList.getState());
+		orderListService.updateAndPlusNumber(orderList);
+		NotifyUtil.notifyUserOrder(orderList, "尊敬的用户，流水号为" + orderList.getOrderListNo() + "的订单组已经付款完成，请等待导师接受订单",
+				orderList.getUser(), notificationService);
+		NotifyUtil.notifyTeacher(orderList,
+				"尊敬的导师，流水号为" + orderList.getOrderListNo() + "的订单组，用户(" + orderList.getCustomerName() + ")已经付款，等待您的接受。",
+				notificationService);
 	}
 
 	/**

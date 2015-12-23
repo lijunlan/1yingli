@@ -1,18 +1,14 @@
 package cn.yiyingli.Handle.Service;
 
-import java.util.List;
-import java.util.Map;
-
 import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.ServicePro;
-import cn.yiyingli.Persistant.TService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Service.TipService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.MsgUtil;
-import cn.yiyingli.toPersistant.PTServiceUtil;
+import cn.yiyingli.toPersistant.PServiceProUtil;
 import cn.yiyingli.toPersistant.PTeacherUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -95,14 +91,18 @@ public class MCreateTeacherService extends MMsgService {
 				saleWeight, getTipService());
 
 		String serviceTitle = service.getString("title");
-		String serviceTime = service.getString("time");
-		String servicePrice = service.getString("price");
-		String serviceTimePerWeek = service.getString("timeperweek");
+		float numeral = Float.valueOf(service.getString("numeral"));
+		float price = Float.valueOf(service.getString("price"));
+		int count = service.getInt("count");
+		String quantifier = service.getString("quantifier");
 		String serviceContent = service.getString("content");
+		String tip = service.getString("tip");
+		String freeTime = service.getString("freeTime");
 
 		ServicePro servicePro = new ServicePro();
-		PTServiceUtil.assembleWithTeacherByManager(teacher, serviceTitle, serviceTime, servicePrice, serviceTimePerWeek,
-				serviceContent, tService);
+		PServiceProUtil.assembleWithTeacherByManager(teacher, serviceContent, price, numeral, count, quantifier,
+				serviceTitle, tip, freeTime, servicePro);
+
 		getTeacherService().saveWithDetailInfo(teacher);
 		setResMsg(MsgUtil.getSuccessMsg("insert teacher successfully"));
 	}

@@ -26,6 +26,12 @@ public class ExOrderListUtil {
 		}
 	}
 
+	public static String getMultiTitle(OrderList orderList) {
+		List<Order> orders = orderList.getOrders();
+		String subject = orders.get(0).getServiceTitle() + (orders.size() > 1 ? "等" + orders.size() + "项" : "");
+		return subject;
+	}
+
 	public static void getMatchStateLists(List<OrderList> orderLists, String[] states) {
 		for (OrderList orderList : orderLists) {
 			List<Order> toDelete = new ArrayList<Order>();

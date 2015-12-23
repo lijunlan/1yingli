@@ -40,9 +40,9 @@ public class Voucher {
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private User ownUser;
 
-	@ManyToOne(targetEntity = Order.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "ORDER_ID", updatable = false)
-	private Order useOrder;
+	@ManyToOne(targetEntity = OrderList.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "ORDERLIST_ID", updatable = false)
+	private OrderList useOrderList;
 
 	@Column(name = "NUMBER", nullable = false, unique = true)
 	private String number;
@@ -103,12 +103,12 @@ public class Voucher {
 		this.ownUser = ownUser;
 	}
 
-	public Order getUseOrder() {
-		return useOrder;
+	public OrderList getUseOrderList() {
+		return useOrderList;
 	}
 
-	public void setUseOrder(Order useOrder) {
-		this.useOrder = useOrder;
+	public void setUseOrderList(OrderList useOrderList) {
+		this.useOrderList = useOrderList;
 	}
 
 	public String getNumber() {

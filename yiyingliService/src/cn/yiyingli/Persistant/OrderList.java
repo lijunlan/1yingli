@@ -53,8 +53,8 @@ public class OrderList {
 	@Column(name = "SHOWTOTEACHER", nullable = false)
 	private Boolean showToTeacher;
 
-	@Column(name = "FINISHPAY", nullable = false)
-	private Boolean finishPay;
+	@Column(name = "STATE", nullable = false)
+	private String state;
 
 	@Column(name = "ORIGNMONEY", nullable = false)
 	private Float originMoney;
@@ -64,6 +64,18 @@ public class OrderList {
 
 	@Column(name = "PAYMONEY", nullable = false)
 	private Float payMoney;
+
+	@Column(name = "CUSTOMERPHONE", nullable = false)
+	private String customerPhone;
+
+	@Column(name = "CUSTOMEREMAIL", nullable = false)
+	private String customerEmail;
+
+	@Column(name = "CUSTOMERWX", nullable = false)
+	private String customerWX;
+
+	@Column(name = "CUSTOMERNAME", nullable = false)
+	private String customerName;
 
 	@OneToMany(targetEntity = Voucher.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "ORDERLIST_ID", updatable = true)
@@ -125,12 +137,12 @@ public class OrderList {
 		this.showToTeacher = showToTeacher;
 	}
 
-	public Boolean getFinishPay() {
-		return finishPay;
+	public String getState() {
+		return state;
 	}
 
-	public void setFinishPay(Boolean finishPay) {
-		this.finishPay = finishPay;
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public void setOriginMoney(Float originMoney) {
@@ -171,6 +183,38 @@ public class OrderList {
 
 	public void setNowMoney(Float nowMoney) {
 		this.nowMoney = nowMoney;
+	}
+
+	public String getCustomerPhone() {
+		return customerPhone;
+	}
+
+	public void setCustomerPhone(String customerPhone) {
+		this.customerPhone = customerPhone;
+	}
+
+	public String getCustomerEmail() {
+		return customerEmail;
+	}
+
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
+	}
+
+	public String getCustomerWX() {
+		return customerWX;
+	}
+
+	public void setCustomerWX(String customerWX) {
+		this.customerWX = customerWX;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
 }

@@ -2,7 +2,7 @@ package cn.yiyingli.Handle.Service;
 
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
-import cn.yiyingli.Persistant.TService;
+import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Util.MsgUtil;
@@ -32,12 +32,11 @@ public class TGetTServiceInfoService extends MsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
 		}
-		TService tService = teacher.gettService();
+		ServicePro servicePro = teacher.getServicePros().get(0);
+
 		SuperMap map = MsgUtil.getSuccessMap();
 		map.put("address", teacher.getAddress());
-		map.put("timeperweek", tService.getTimesPerWeek());
-		map.put("freetime", tService.getFreeTime());
-		map.put("talkWay", teacher.getTalkWay());
+		map.put("count", servicePro.getNumber());
 		setResMsg(map.finishByJson());
 	}
 

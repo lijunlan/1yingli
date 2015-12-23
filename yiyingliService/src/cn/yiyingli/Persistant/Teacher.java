@@ -31,7 +31,7 @@ public class Teacher {
 	private Long id;
 
 	@OneToOne
-	@JoinColumn(name = "USER_ID", insertable = true, unique = true, updatable = true)
+	@JoinColumn(name = "USER_ID", insertable = false, unique = true, updatable = true)
 	private User user;
 
 	@Column(name = "USERNAME", nullable = false, unique = true)
@@ -72,6 +72,18 @@ public class Teacher {
 
 	@Column(name = "SEX", nullable = true)
 	private Short sex;
+
+	@Column(name = "SCORE", nullable = false)
+	private Integer score;
+
+	@Column(name = "ANSWERTIME", nullable = false)
+	private Long answerTime;
+
+	@Column(name = "ANSWERRATIO", nullable = false)
+	private Float answerRatio;
+
+	@Column(name = "PRAISERATIO", nullable = false)
+	private Float praiseRatio;
 
 	@Column(name = "SHOWWEIGHT1", nullable = true)
 	private Integer showWeight1;
@@ -627,6 +639,38 @@ public class Teacher {
 
 	public void setReceiveOrderLists(Set<OrderList> receiveOrderLists) {
 		this.receiveOrderLists = receiveOrderLists;
+	}
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+
+	public Long getAnswerTime() {
+		return answerTime;
+	}
+
+	public void setAnswerTime(Long answerTime) {
+		this.answerTime = answerTime;
+	}
+
+	public Float getAnswerRatio() {
+		return answerRatio;
+	}
+
+	public void setAnswerRatio(Float answerRatio) {
+		this.answerRatio = answerRatio;
+	}
+
+	public Float getPraiseRatio() {
+		return praiseRatio;
+	}
+
+	public void setPraiseRatio(Float praiseRatio) {
+		this.praiseRatio = praiseRatio;
 	}
 
 }

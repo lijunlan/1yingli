@@ -7,6 +7,7 @@ import cn.yiyingli.BaichuanTaobaoUtil.CloudPushUtil;
 import cn.yiyingli.Dao.NotificationDao;
 import cn.yiyingli.Persistant.Notification;
 import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.NotificationService;
 
@@ -22,6 +23,12 @@ public class NotifyUtil {
 	public static boolean notifyUserOrder(String phone, String email, String message, User user,
 			NotificationService notificationService) {
 		return notifyUserNormal(phone, email, "订单状态改变通知", message, user, notificationService);
+	}
+
+	public static boolean notifyUserOrder(OrderList orderList, String message, User user,
+			NotificationService notificationService) {
+		return notifyUserOrder(orderList.getCustomerPhone(), orderList.getCustomerEmail(), message, user,
+				notificationService);
 	}
 
 	public static boolean notifyUserOrder(Order order, String message, User user,
@@ -61,6 +68,11 @@ public class NotifyUtil {
 	public static boolean notifyBD(String msg) {
 		SendMailUtil.sendMessage("boom@1yingli.cn", "订单状态通知", msg);
 		return true;
+	}
+
+	public static boolean notifyTeacher(OrderList orderList, String message, NotificationService notificationService) {
+		return notifyTeacher(orderList.getTeacher().getPhone(), orderList.getTeacher().getEmail(), message,
+				orderList.getTeacher().getId(), orderList.getTeacher().getUsername(), notificationService);
 	}
 
 	public static boolean notifyTeacher(Order order, String message, NotificationService notificationService) {

@@ -62,6 +62,11 @@ public class OrderListServiceImpl implements OrderListService {
 	}
 
 	@Override
+	public void updateAndPlusNumber(OrderList orderList) {
+		getOrderListDao().updateWithTeacherNumber(orderList, orderList.getTeacher().getId());
+	}
+
+	@Override
 	public OrderList queryByOrderListNo(String orderListNo) {
 		return getOrderListDao().queryByOrderListNo(orderListNo);
 	}

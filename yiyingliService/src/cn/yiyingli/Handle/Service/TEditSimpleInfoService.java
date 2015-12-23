@@ -1,33 +1,34 @@
 package cn.yiyingli.Handle.Service;
 
 import cn.yiyingli.Handle.TMsgService;
-import cn.yiyingli.Persistant.TService;
+import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.Teacher;
-import cn.yiyingli.Service.TServiceService;
+import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Util.MsgUtil;
-import cn.yiyingli.toPersistant.PTServiceUtil;
+import cn.yiyingli.toPersistant.PServiceProUtil;
 import cn.yiyingli.toPersistant.PTeacherUtil;
 import net.sf.json.JSONObject;
 
 public class TEditSimpleInfoService extends TMsgService {
 
-	private TServiceService tServiceService;
+	private ServiceProService serviceProService;
 
-	public TServiceService gettServiceService() {
-		return tServiceService;
+	public ServiceProService getServiceProService() {
+		return serviceProService;
 	}
 
-	public void settServiceService(TServiceService tServiceService) {
-		this.tServiceService = tServiceService;
+	public void setServiceProService(ServiceProService serviceProService) {
+		this.serviceProService = serviceProService;
 	}
 
 	@Override
 	protected boolean checkData() {
 		return super.checkData() && getData().containsKey("simpleinfo") && getData().containsKey("address")
-				&& getData().containsKey("timeperweek") && getData().containsKey("price")
-				&& getData().containsKey("pricetemp") && getData().containsKey("time")
-				&& getData().containsKey("onsale") && getData().containsKey("talkWay")
-				&& getData().containsKey("servicetitle");
+				&& getData().containsKey("count") && getData().containsKey("price")
+				&& getData().containsKey("priceTemp") && getData().containsKey("numeral")
+				&& getData().containsKey("onsale") && getData().containsKey("onshow") && getData().containsKey("kind")
+				&& getData().containsKey("freeTime") && getData().containsKey("tip")
+				&& getData().containsKey("quantifier") && getData().containsKey("servicetitle");
 	}
 
 	@Override
@@ -36,16 +37,21 @@ public class TEditSimpleInfoService extends TMsgService {
 		PTeacherUtil.editTeacherByTeacherSimple(getData(), teacher);
 
 		JSONObject map = getData();
-		String timeperweek = map.getString("timeperweek");
-		String price = map.getString("price");
-		String pricetemp = map.getString("pricetemp");
-		String time = map.getString("time");
+		int count = map.getInt("count");
+		float price = Float.valueOf(map.getString("price"));
+		float priceTemp = Float.valueOf(map.getString("priceTemp"));
+		float numeral = Float.valueOf(map.getString("numeral"));
+		int kind = map.getInt("kind");
+		String freeTime = map.getString("freeTime");
+		String tip = map.getString("tip");
+		String quantifier = map.getString("quantifier");
 		String onsale = map.getString("onsale");
+		String onshow = map.getString("onshow");
 		String servicetitle = map.getString("servicetitle");
 
-		TService tService = teacher.gettService();
-		PTServiceUtil.assembleByTeacherEdit(timeperweek, price, pricetemp, time, onsale, servicetitle,
-				tService.getContent(), tService);
+		ServicePro servicePro = teacher.getServicePros().get(0);
+		PServiceProUtil.assembleByTeacherEdit(count, price, priceTemp, numeral, kind, freeTime, tip, onshow, onsale,
+				quantifier, servicetitle, servicePro.getContent(), servicePro);
 
 		getTeacherService().updateWithDetailInfo(teacher, true);
 		setResMsg(MsgUtil.getSuccessMsg("edit teacher info successfully"));

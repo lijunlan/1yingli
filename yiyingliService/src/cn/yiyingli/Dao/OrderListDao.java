@@ -16,6 +16,8 @@ public interface OrderListDao {
 
 	void update(OrderList orderList);
 
+	void updateWithTeacherNumber(OrderList orderList, long teacherId);
+
 	OrderList queryByOrderListNo(String orderListNo);
 
 	OrderList query(long id);

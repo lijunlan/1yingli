@@ -48,6 +48,17 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 	}
 
 	@Override
+	public ServicePro queryByTeacherIdAndServiceId(long teacherId, long serviceId) {
+		String hql = "from ServicePro sp where sp.id=? and sp.teacher.id=?";
+		@SuppressWarnings("unchecked")
+		List<ServicePro> list = getHibernateTemplate().find(hql, serviceId, teacherId);
+		if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
+
+	@Override
 	public List<ServicePro> queryList(long[] ids, long teacherId) {
 		if (ids.length <= 0)
 			return new ArrayList<ServicePro>();

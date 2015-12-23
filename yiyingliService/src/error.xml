@@ -64,6 +64,8 @@
 	<error name="22007" value="passage is not belong to you" />
 	<error name="24001" value="you are not a teacher" />
 	<error name="24002" value="uid don't match teacherId" />
+	<error name="24003"
+		value="service is not exsited or service is not belong to the teacher" />
 
 
 	<!-- manager 3 -->
@@ -92,6 +94,7 @@
 	<error name="41001" value="input data is wrong" />
 	<error name="42001" value="order is not existed" />
 	<error name="42002" value="servicePro is not existed" />
+	<error name="42003" value="orderList is not existed" />
 	<error name="43001" value="alipay error" />
 	<error name="43002" value="connect to paypal failed, please try again" />
 	<error name="44001" value="this order is not belong to you" />

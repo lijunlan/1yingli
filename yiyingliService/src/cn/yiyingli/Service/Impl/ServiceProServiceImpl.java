@@ -50,6 +50,11 @@ public class ServiceProServiceImpl implements ServiceProService {
 	}
 
 	@Override
+	public ServicePro queryByTeacherIdAndServiceId(long teacherId, long serviceId) {
+		return getServiceProDao().queryByTeacherIdAndServiceId(teacherId, serviceId);
+	}
+
+	@Override
 	public List<ServicePro> queryList(long[] ids, long teacherId) {
 		return getServiceProDao().queryList(ids, teacherId);
 	}

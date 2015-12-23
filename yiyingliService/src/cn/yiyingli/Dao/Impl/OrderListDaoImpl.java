@@ -103,4 +103,18 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 		return list;
 	}
 
+	@Override
+	public void updateWithTeacherNumber(OrderList orderList, long teacherId) {
+		getHibernateTemplate().update(orderList);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session.createSQLQuery(
+				"update teacher set teacher.ORDERNUMBER=(select count(*) from orders where orders.TEACHER_ID='"
+						+ teacherId
+						+ "' and orders.STATE not like '0100%' and orders.STATE not like '%0200,0100%') where teacher.TEACHER_ID="
+						+ teacherId);
+		query.executeUpdate();
+		
+	}
+
 }

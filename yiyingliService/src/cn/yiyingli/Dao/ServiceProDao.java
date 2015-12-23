@@ -18,5 +18,7 @@ public interface ServiceProDao {
 
 	ServicePro querySimple(long id);
 
+	ServicePro queryByTeacherIdAndServiceId(long teacherId, long serviceId);
+
 	List<ServicePro> queryList(long[] ids, long teacherId);
 }

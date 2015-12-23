@@ -112,7 +112,7 @@ public class PServiceProUtil {
 		servicePro.setOnShow(onshow);
 	}
 
-	public static void editTimePerWeekByTeacher(int count, ServicePro servicePro) {
+	public static void editCountByTeacher(int count, ServicePro servicePro) {
 		servicePro.setNumber(count);
 	}
 

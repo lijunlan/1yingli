@@ -44,8 +44,8 @@ public class VoucherServiceImpl implements VoucherService {
 	}
 
 	@Override
-	public void updateWithOrderId(Voucher voucher, long orderId) {
-		getVoucherDao().updateWithOrderId(voucher, orderId);
+	public void updateWithOrderListId(Voucher voucher, long orderListId) {
+		getVoucherDao().updateWithOrderListId(voucher, orderListId);
 	}
 
 	@Override

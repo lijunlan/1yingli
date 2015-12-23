@@ -16,10 +16,11 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.yiyingli.Alipay.AlipayConfig;
 import cn.yiyingli.Alipay.AlipaySubmit;
+import cn.yiyingli.ExchangeData.ExOrderListUtil;
 import cn.yiyingli.Handle.RemoteIPUtil;
-import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Persistant.User;
-import cn.yiyingli.Service.OrderService;
+import cn.yiyingli.Service.OrderListService;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.ConfigurationXmlUtil;
 import cn.yiyingli.Util.LogUtil;
@@ -50,21 +51,21 @@ public class AlipayServlet extends HttpServlet {
 		Map<String, String> parms = new HashMap<String, String>();
 
 		UserMarkService userMarkService = (UserMarkService) getApplicationContext().getBean("userMarkService");
-		OrderService orderService = (OrderService) getApplicationContext().getBean("orderService");
+		OrderListService orderListService = (OrderListService) getApplicationContext().getBean("orderListService");
 
-		if (req.getParameter("oid") == null || req.getParameter("uid") == null) {
+		if (req.getParameter("olid") == null || req.getParameter("uid") == null) {
 			returnMsg(resp, MsgUtil.getErrorMsgByCode("00001"));
 			return;
 		}
-		LogUtil.info("receive>>>>orderId:" + req.getParameter("oid") + "\t uid:" + req.getParameter("uid"),
+		LogUtil.info("receive>>>>orderListId:" + req.getParameter("olid") + "\t uid:" + req.getParameter("uid"),
 				this.getClass());
 
 		// 商户订单号
-		String oid = req.getParameter("oid");
+		String olid = req.getParameter("olid");
 		// 商户网站订单系统中唯一订单号，必填
-		Order order = orderService.queryByShowId(oid, false);
-		if (order == null) {
-			returnMsg(resp, MsgUtil.getErrorMsgByCode("42001"));
+		OrderList orderList = orderListService.queryByOrderListNo(olid);
+		if (orderList == null) {
+			returnMsg(resp, MsgUtil.getErrorMsgByCode("42003"));
 			return;
 		}
 		// 用户id
@@ -75,30 +76,30 @@ public class AlipayServlet extends HttpServlet {
 			return;
 		}
 
-		if (order.getCreateUser().getId().longValue() != user.getId().longValue()) {
-			LogUtil.info("receive>>>>createOrderId:" + order.getCreateUser().getId() + ",userId:" + user.getId() + ","
-					+ (order.getCreateUser().getId() == user.getId()), this.getClass());
+		if (orderList.getUser().getId().longValue() != user.getId().longValue()) {
+			LogUtil.info("receive>>>>createOrderListId:" + orderList.getUser().getId() + ",userId:" + user.getId() + ","
+					+ (orderList.getUser().getId().longValue() == user.getId().longValue()), this.getClass());
 			returnMsg(resp, MsgUtil.getErrorMsgByCode("44001"));
 			return;
 		}
-		String state = order.getState();
-		if (!OrderService.ORDER_STATE_NOT_PAID.equals(state)) {
+		String state = orderList.getState().split(",")[0];
+		if (!OrderListService.ORDER_STATE_NOT_PAID.equals(state)) {
 			returnMsg(resp, MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
 		// 订单名称
-		String subject = ExServiceProCopy.getServiceProMultiTitle(order);
+		String subject = ExOrderListUtil.getMultiTitle(orderList);
 		// 必填
 
 		// 付款金额
-		String total_fee = String.valueOf(order.getMoney());
+		String total_fee = String.valueOf(orderList.getPayMoney());
 		// 必填
 
 		// 订单描述
-		String body = ExServiceProCopy.getServiceProMultiTitle(order);
+		String body = ExOrderListUtil.getMultiTitle(orderList);
 
 		// 商品展示地址
-		String show_url = "http://www.1yingli.cn/#!/teacher/" + order.getTeacherId();
+		String show_url = "http://www.1yingli.cn/#!/teacher/" + orderList.getTeacher().getId();
 		// 需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html
 
 		// 防钓鱼时间戳
@@ -125,8 +126,8 @@ public class AlipayServlet extends HttpServlet {
 		} else {
 			parms.put("return_url", req.getParameter("callback"));
 		}
-		parms.put("out_trade_no", oid);
-		parms.put("subject", "【一英里】[" + ExTeacherCopy.getTeacherName(order) + "]" + subject);
+		parms.put("out_trade_no", olid);
+		parms.put("subject", "【一英里】[" + orderList.getTeacher().getName() + "]" + subject);
 		parms.put("total_fee", total_fee);
 		parms.put("body", body);
 		parms.put("show_url", show_url);

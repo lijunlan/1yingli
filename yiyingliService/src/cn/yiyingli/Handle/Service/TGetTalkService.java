@@ -1,13 +1,14 @@
 package cn.yiyingli.Handle.Service;
 
+import cn.yiyingli.ExchangeData.ExServicePro;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
-import cn.yiyingli.Persistant.TService;
+import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Util.MsgUtil;
 
-public class TGetTServiceService extends MsgService {
+public class TGetTalkService extends MsgService {
 
 	private TeacherService teacherService;
 
@@ -32,12 +33,9 @@ public class TGetTServiceService extends MsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
 		}
-		TService tService = teacher.gettService();
+		ServicePro servicePro = teacher.getServicePros().get(0);
 		SuperMap map = MsgUtil.getSuccessMap();
-		map.put("content", tService.getContent());
-		map.put("title", tService.getTitle());
-		map.put("price", tService.getPriceTotal());
-		map.put("time", tService.getTime());
+		ExServicePro.assembleSimpleTalkForTeacher(servicePro, map);
 		setResMsg(map.finishByJson());
 	}
 
