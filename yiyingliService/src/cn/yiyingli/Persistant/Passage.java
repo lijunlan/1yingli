@@ -64,7 +64,7 @@ public class Passage {
 	private Boolean remove;
 
 	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "TEACHER_ID", updatable = false)
+	@JoinColumn(name = "TEACHER_ID", updatable = true)
 	private Teacher ownTeacher;
 
 	@OneToMany(targetEntity = UserLikePassage.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)

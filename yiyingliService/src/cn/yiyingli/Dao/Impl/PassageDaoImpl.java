@@ -141,7 +141,7 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 			@Override
 			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from Passage p left join fetch p.ownTeacher where p.remove=" + false
-						+ " and ORDER BY p.createTime DESC";
+						+ " ORDER BY p.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);

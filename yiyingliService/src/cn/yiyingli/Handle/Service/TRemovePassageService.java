@@ -1,7 +1,9 @@
 package cn.yiyingli.Handle.Service;
 
+import cn.yiyingli.Dao.PassageDao;
 import cn.yiyingli.Handle.TMsgService;
 import cn.yiyingli.Persistant.Passage;
+import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.PassageService;
 import cn.yiyingli.Util.MsgUtil;
 
@@ -34,6 +36,20 @@ public class TRemovePassageService extends TMsgService {
 			return;
 		}
 		passage.setRemove(true);
+		Teacher teacher = passage.getOwnTeacher();
+		switch (passage.getState()) {
+		case PassageDao.PASSAGE_STATE_REFUSE:
+			teacher.setPassageNumber(teacher.getRefusePassageNumber() - 1);
+			break;
+		case PassageDao.PASSAGE_STATE_OK:
+			teacher.setPassageNumber(teacher.getPassageNumber() - 1);
+			break;
+		case PassageDao.PASSAGE_STATE_CHECKING:
+			teacher.setPassageNumber(teacher.getCheckPassageNumber() - 1);
+			break;
+		default:
+			break;
+		}
 		getPassageService().update(passage, false);
 		setResMsg(MsgUtil.getSuccessMsg("remove passage successfully"));
 	}
