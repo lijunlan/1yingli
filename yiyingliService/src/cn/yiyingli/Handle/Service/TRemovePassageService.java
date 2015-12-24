@@ -50,7 +50,7 @@ public class TRemovePassageService extends TMsgService {
 		default:
 			break;
 		}
-		getPassageService().update(passage, false);
+		getPassageService().update(passage, true);
 		setResMsg(MsgUtil.getSuccessMsg("remove passage successfully"));
 	}
 

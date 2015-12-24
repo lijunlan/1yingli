@@ -63,8 +63,8 @@ public class Passage {
 	@Column(name = "REMOVE", nullable = false)
 	private Boolean remove;
 
-	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "TEACHER_ID", updatable = true)
+	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Teacher ownTeacher;
 
 	@OneToMany(targetEntity = UserLikePassage.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
