@@ -55,6 +55,7 @@
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
 	</style>
 	<style name="teacher">
+		<method name="removePassage" beanName="tRemovePassageService" />
 		<method name="getMile" beanName="tGetMileService" />
 		<method name="getPaypalNo" beanName="tGetPaypalNoService" />
 		<method name="editSimpleInfo" beanName="tEditSimpleInfoService" />
