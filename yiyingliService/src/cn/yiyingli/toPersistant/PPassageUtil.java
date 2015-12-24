@@ -19,6 +19,7 @@ public class PPassageUtil {
 		passage.setLookNumber(0L);
 		passage.setOwnTeacher(teacher);
 		passage.setOnshow(true);
+		passage.setRemove(false);
 		passage.setState(PassageDao.PASSAGE_STATE_CHECKING);
 		passage.setTag(tag);
 		passage.setTitle(title);
