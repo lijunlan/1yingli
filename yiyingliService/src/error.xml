@@ -62,6 +62,7 @@
 	<error name="22005" value="page is wrong" />
 	<error name="22006" value="passage is not existed" />
 	<error name="22007" value="passage is not belong to you" />
+	<error name="22008" value="servicePro is not existed" />
 	<error name="24001" value="you are not a teacher" />
 	<error name="24002" value="uid don't match teacherId" />
 	<error name="24003"

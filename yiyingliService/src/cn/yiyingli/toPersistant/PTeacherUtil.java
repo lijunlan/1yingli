@@ -216,6 +216,8 @@ public class PTeacherUtil {
 		teacher.setPassageNumber(0L);
 		teacher.setCheckPassageNumber(0L);
 		teacher.setRefusePassageNumber(0L);
+		teacher.setServiceProNumberForUser(0);
+		teacher.setServiceProNumberForTeacher(0);
 		return teacher;
 	}
 

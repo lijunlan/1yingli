@@ -104,6 +104,9 @@ public class ServicePro {
 	@Column(name = "RANKNO", nullable = false)
 	private Integer rankNo;
 
+	@Column(name = "REMOVE", nullable = false)
+	private Boolean remove;
+
 	public Long getId() {
 		return id;
 	}
@@ -318,6 +321,14 @@ public class ServicePro {
 
 	public void setAcceptNo(Long acceptNo) {
 		this.acceptNo = acceptNo;
+	}
+
+	public Boolean getRemove() {
+		return remove;
+	}
+
+	public void setRemove(Boolean remove) {
+		this.remove = remove;
 	}
 
 }

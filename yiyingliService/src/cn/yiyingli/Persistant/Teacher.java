@@ -130,6 +130,12 @@ public class Teacher {
 	@Column(name = "CHECKPHONE", nullable = false)
 	private Boolean checkPhone;
 
+	@Column(name = "SERVICEPRONUMBERFORUSER", nullable = false)
+	private Integer serviceProNumberForUser;
+
+	@Column(name = "SERVICEPRONUMBERFORTEACHER", nullable = false)
+	private Integer serviceProNumberForTeacher;
+
 	@Column(name = "COMMENTNUMBER", nullable = false)
 	private Long commentNumber;
 
@@ -671,6 +677,22 @@ public class Teacher {
 
 	public void setPraiseRatio(Float praiseRatio) {
 		this.praiseRatio = praiseRatio;
+	}
+
+	public Integer getServiceProNumberForUser() {
+		return serviceProNumberForUser;
+	}
+
+	public void setServiceProNumberForUser(Integer serviceProNumberForUser) {
+		this.serviceProNumberForUser = serviceProNumberForUser;
+	}
+
+	public Integer getServiceProNumberForTeacher() {
+		return serviceProNumberForTeacher;
+	}
+
+	public void setServiceProNumberForTeacher(Integer serviceProNumberForTeacher) {
+		this.serviceProNumberForTeacher = serviceProNumberForTeacher;
 	}
 
 }

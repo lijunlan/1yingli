@@ -5,6 +5,7 @@ import java.util.Calendar;
 import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.ServiceProService;
+import net.sf.json.JSONObject;
 
 public class PServiceProUtil {
 
@@ -43,6 +44,28 @@ public class PServiceProUtil {
 		servicePro.setQuantifier(quantifier);
 	}
 
+	private static void assemble(JSONObject jsonServicePro, ServicePro servicePro) {
+		assemble(jsonServicePro.getString("content"), Float.valueOf(jsonServicePro.getString("content")),
+				Float.valueOf(jsonServicePro.getString("numeral")), jsonServicePro.getInt("count"),
+				jsonServicePro.getString("quantifier"), jsonServicePro.getString("title"), servicePro);
+	}
+
+	public static void assembleByTeacherEdit(JSONObject jsonServicePro, ServicePro servicePro) {
+		assemble(jsonServicePro, servicePro);
+		String time = Calendar.getInstance().getTimeInMillis() + "";
+		servicePro.setOnSale(Boolean.valueOf(jsonServicePro.getString("onsale")));
+		servicePro.setPriceTemp(Float.valueOf(jsonServicePro.getString("priceTemp")));
+		servicePro.setFreeTime(jsonServicePro.getString("freeTime"));
+		// 类别
+		servicePro.setKind(jsonServicePro.getInt("kind"));
+		servicePro.setOnShow(Boolean.valueOf(jsonServicePro.getString("onshow")));
+		// TODO 修改后是否需要审核
+		// servicePro.setState(ServiceProService.STATE_CHECKING);
+		servicePro.setTips(jsonServicePro.getString("tip"));
+		servicePro.setUpdateTime(time);
+		servicePro.setRemove(false);
+	}
+
 	public static void assembleByTeacherEdit(int count, float price, float priceTemp, float numeral, int kind,
 			String freeTime, String tip, String onshow, String onsale, String quantifier, String servicetitle,
 			String servicecontent, ServicePro servicePro) {
@@ -58,6 +81,33 @@ public class PServiceProUtil {
 		// servicePro.setState(ServiceProService.STATE_CHECKING);
 		servicePro.setTips(tip);
 		servicePro.setUpdateTime(time);
+		servicePro.setRemove(false);
+	}
+
+	public static void assembleWithTeacherByTeacherCreate(Teacher teacher, JSONObject jsonServicePro,
+			ServicePro servicePro) {
+		// TODO
+		assemble(jsonServicePro, servicePro);
+		String time = Calendar.getInstance().getTimeInMillis() + "";
+		servicePro.setOnSale(false);
+		servicePro.setPriceTemp(0F);
+		servicePro.setAnswerRatio(0F);
+		servicePro.setAnswerTime(0L);
+		servicePro.setCreateTime(time);
+		servicePro.setAcceptNo(0L);
+		servicePro.setFinishNo(0L);
+		servicePro.setFreeTime(jsonServicePro.getString("freeTime"));
+		servicePro.setLikeNo(0L);
+		servicePro.setKind(0);
+		servicePro.setOnShow(false);
+		servicePro.setPraiseRatio(0F);
+		servicePro.setScore(0);
+		servicePro.setState(ServiceProService.STATE_CHECKING);
+		servicePro.setTips(jsonServicePro.getString("tip"));
+		servicePro.setUpdateTime(time);
+		servicePro.setTeacher(teacher);
+		servicePro.setStyle(ServiceProService.STYLE_SERVICE);
+		teacher.getServicePros().add(servicePro);
 	}
 
 	public static void editWithTeacherByManager(short state, int count, float price, float priceTemp, float numeral,
