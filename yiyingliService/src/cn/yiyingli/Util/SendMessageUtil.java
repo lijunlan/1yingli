@@ -49,7 +49,7 @@ public class SendMessageUtil {
 						SuperMap map = sendQueue.take();
 						String phone = map.finish().getString("phone");
 						String msg = map.finish().getString("msg");
-						System.out.println(phone);
+						LogUtil.info("send message to phone:" + phone + ";message is:" + msg, SendMessageUtil.class);
 						if (CheckUtil.checkMobileNumber(phone)) {
 							sendChinaMsg(phone, msg);
 						} else {
