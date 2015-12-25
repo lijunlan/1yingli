@@ -49,6 +49,7 @@ public class SendMessageUtil {
 						SuperMap map = sendQueue.take();
 						String phone = map.finish().getString("phone");
 						String msg = map.finish().getString("msg");
+						System.out.println(phone);
 						if (CheckUtil.checkMobileNumber(phone)) {
 							sendChinaMsg(phone, msg);
 						} else {
@@ -64,27 +65,18 @@ public class SendMessageUtil {
 	}
 
 	public static void main(String[] args) {
-		sendGlobleMsg("8615659831720", "test");
-		// for (int i = 1; i <= 1; i++) {
-		// new Thread(new Runnable() {
-		// @Override
-		// public void run() {
-		// for (int i = 1; i <= 1; i++) {
-		// sendMsg("15659831720", "CHECKNO:<a
-		// href=\"http://www.1yingli.cn\">test</a>" +
-		// CheckNoFactory.createCheckNo());
-		// }
-		// }
-		// }).start();
-		// }
-		// System.out.println(sendMessage("8615659831720",
-		// "马总好，我是道哥，测试一用，收到请微信，谢谢~"));
-		// System.out.println(sendMessage("12176076581",
-		// "马总好，我是道哥，测试一用，收到请微信，谢谢~"));
-		// String regEx="[^0-9]";
-		// Pattern p = Pattern.compile(regEx);
-		// Matcher m = p.matcher("+86-15659831720");
-		// System.out.println(m.replaceAll("").trim());
+		for (int i = 1; i <= 1; i++) {
+			final int t = i;
+			Thread thread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					SendMessageUtil.getInstance().addSend("8615888539966", "test one " + t);
+					SendMessageUtil.getInstance().addSend("8613883305755", "test one " + t);
+					SendMessageUtil.getInstance().addSend("8615759262118", "test one " + t);
+				}
+			});
+			thread.start();
+		}
 	}
 
 	private static final String MESSAGE_NAME = "yyl-ipxmt";
@@ -133,6 +125,7 @@ public class SendMessageUtil {
 			if (response.getStatusLine().getStatusCode() == 200) {
 				result = EntityUtils.toString(response.getEntity(), "utf-8");
 			}
+			System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -162,6 +155,7 @@ public class SendMessageUtil {
 			if (response.getStatusLine().getStatusCode() == 200) {
 				result = EntityUtils.toString(response.getEntity(), "utf-8");
 			}
+			System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
