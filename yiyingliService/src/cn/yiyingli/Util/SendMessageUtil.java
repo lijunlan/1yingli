@@ -70,9 +70,9 @@ public class SendMessageUtil {
 			Thread thread = new Thread(new Runnable() {
 				@Override
 				public void run() {
-					SendMessageUtil.getInstance().addSend("8615888539966", "test one " + t);
-					SendMessageUtil.getInstance().addSend("8613883305755", "test one " + t);
-					SendMessageUtil.getInstance().addSend("8615759262118", "test one " + t);
+					SendMessageUtil.getInstance().addSend("8615888539966", "test two " + t);
+					SendMessageUtil.getInstance().addSend("8613883305755", "test two " + t);
+					SendMessageUtil.getInstance().addSend("8615759262118", "test two " + t);
 				}
 			});
 			thread.start();

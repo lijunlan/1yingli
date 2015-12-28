@@ -56,15 +56,20 @@ public class AlipayTransNotifyServlet extends HttpServlet {
 
 		// 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以下仅供参考)//
 		// 批量付款数据中转账成功的详细信息
-
-		String success_details = new String(req.getParameter("success_details").getBytes("ISO-8859-1"), "UTF-8");
-
+		String success_details = null;
+		String fail_details = null;
+		if (req.getParameter("success_details") != null) {
+			success_details = new String(req.getParameter("success_details").getBytes("ISO-8859-1"), "UTF-8");
+			LogUtil.info("success:" + success_details, getClass());
+		}
 		// 批量付款数据中转账失败的详细信息
-		String fail_details = new String(req.getParameter("fail_details").getBytes("ISO-8859-1"), "UTF-8");
-
+		if (req.getParameter("fail_details") != null) {
+			fail_details = new String(req.getParameter("fail_details").getBytes("ISO-8859-1"), "UTF-8");
+			LogUtil.info("fail:" + fail_details, getClass());
+		}
 		// 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以上仅供参考)//
 
-		if (AlipayNotify.verify(params)) {// 验证成功
+		if (AlipayNotify.verify(params) && success_details != null) {// 验证成功
 			//////////////////////////////////////////////////////////////////////////////////////////
 			// String time = req.getParameter("notify_time");
 			// String type = req.getParameter("notify_type");
@@ -78,16 +83,16 @@ public class AlipayTransNotifyServlet extends HttpServlet {
 			// String f_records[] = fail_details.split("\\|");
 			OrderService orderService = (OrderService) getApplicationContext().getBean("orderService");
 			for (String record : s_records) {
-				String item[] = record.split("^");
+				String item[] = record.split("\\^");
 				if ("S".equals(item[4])) {
 					String orderNo = item[0].substring(8);
 					String alipayNo = item[1];
-					String name = item[2];
+					// String name = item[2];
 					String money = item[3];
 					Order order = orderService.queryByOrderNo(orderNo);
 					if (!((alipayNo.equals(order.getAlipayNo()) || alipayNo.equals(order.getTeacher().getAlipay()))
-							&& name.equals(order.getTeacher().getName())
-							&& (Float.valueOf(money) == Float.valueOf(order.getOriginMoney())))) {
+							&& (Float.valueOf(money).floatValue() == Float
+									.valueOf(order.getOriginMoney().floatValue())))) {
 						WarnUtil.sendWarnToCTO("支付订单出错,信息不符合：" + record);
 						LogUtil.error("支付订单出错,信息不符合：" + record, getClass());
 						continue;
@@ -108,9 +113,19 @@ public class AlipayTransNotifyServlet extends HttpServlet {
 			//////////////////////////////////////////////////////////////////////////////////////////
 			returnMsg(resp, "success");
 		} else {// 验证失败
-			WarnUtil.sendWarnToCTO("收到支付失败订单:" + fail_details);
+			WarnUtil.sendWarnToCTO("收到转账失败订单:" + fail_details);
 			LogUtil.error(fail_details, getClass());
-			returnMsg(resp, "fail");
+			returnMsg(resp, "success");
+		}
+	}
+
+	public static void main(String[] args) {
+		String message = "201512282015829100000823^15700099975^??^40.00^S^^20151228536200922^20151228100824|";
+		String s_records[] = message.split("\\|");
+		for (String record : s_records) {
+			System.out.println(record);
+			String item[] = record.split("\\^");
+			System.out.println(item[4]);
 		}
 	}
 
