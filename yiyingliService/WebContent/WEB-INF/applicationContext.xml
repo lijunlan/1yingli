@@ -2142,4 +2142,27 @@
 		</property>
 	</bean>
 
+	<bean id="tRemovePassageService" class="cn.yiyingli.Handle.Service.TRemovePassageService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
+
+	<bean id="mGetAllOrderListService" class="cn.yiyingli.Handle.Service.MGetAllOrderListService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+	</bean>
+
 </beans>

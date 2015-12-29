@@ -49,6 +49,8 @@ public interface OrderDao {
 
 	long querySumNoBySalaryState(short salaryState);
 
+	List<Order> queryListAll(int page, int pageSize);
+
 	List<Order> queryListByState(String state, int page, int pageSize, boolean lazy);
 
 	List<Order> queryListByTeacherId(long teacherId, int page, int pageSize, boolean lazy);

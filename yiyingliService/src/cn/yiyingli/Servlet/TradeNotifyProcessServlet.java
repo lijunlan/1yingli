@@ -108,6 +108,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 					orderList.setState(
 							cn.yiyingli.Service.OrderListService.ORDER_STATE_ABNORMAL + "," + orderList.getState());
 					orderListService.update(orderList);
+
 					returnSuccess(resp);
 					return;
 				}

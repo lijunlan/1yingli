@@ -54,6 +54,7 @@
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
 	</style>
 	<style name="teacher">
+		<method name="removePassage" beanName="tRemovePassageService" />
 		<method name="getMile" beanName="tGetMileService" />
 		<method name="getPaypalNo" beanName="tGetPaypalNoService" />
 		<method name="editSimpleInfo" beanName="tEditSimpleInfoService" />
@@ -98,6 +99,7 @@
 		<method name="login" beanName="dLoginService" />
 	</style>
 	<style name="manager">
+		<method name="getAllOrderList" beanName="mGetAllOrderListService" />
 		<method name="getSuggestion" beanName="mGetSuggestionService" />
 		<method name="searchTeacher" beanName="mSearchTeacherService" />
 		<method name="editTeacherMile" beanName="mEditTeacherMileService" />

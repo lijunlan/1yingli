@@ -7,11 +7,11 @@ import cn.yiyingli.Persistant.Teacher;
 
 public interface PassageDao {
 
-	public static final Short PASSAGE_STATE_CHECKING = 0;
+	public static final short PASSAGE_STATE_CHECKING = 0;
 
-	public static final Short PASSAGE_STATE_REFUSE = 1;
+	public static final short PASSAGE_STATE_REFUSE = 1;
 
-	public static final Short PASSAGE_STATE_OK = 2;
+	public static final short PASSAGE_STATE_OK = 2;
 
 	void saveAndCount(Passage passage, Teacher teacher);
 

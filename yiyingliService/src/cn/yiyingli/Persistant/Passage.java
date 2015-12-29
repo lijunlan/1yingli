@@ -60,6 +60,9 @@ public class Passage {
 	@Column(name = "REFUSEREASON", nullable = true)
 	private String refuseReason;
 
+	@Column(name = "REMOVE", nullable = false)
+	private Boolean remove;
+
 	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Teacher ownTeacher;
@@ -186,6 +189,14 @@ public class Passage {
 
 	public void setSummary(String summary) {
 		this.summary = summary;
+	}
+
+	public Boolean getRemove() {
+		return remove;
+	}
+
+	public void setRemove(Boolean remove) {
+		this.remove = remove;
 	}
 
 }
