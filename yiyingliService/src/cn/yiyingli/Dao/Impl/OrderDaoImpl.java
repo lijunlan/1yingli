@@ -155,6 +155,24 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public List<Order> queryListAll(final int page, final int pageSize) {
+		List<Order> list = new ArrayList<Order>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Order>>() {
+			@Override
+			public List<Order> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from Order o left join fetch o.createUser left join fetch o.teacher ORDER BY o.createTime DESC";
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<Order> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<Order> queryListByState(final String state, final int page, final int pageSize, final boolean lazy) {
 		List<Order> list = new ArrayList<Order>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Order>>() {

@@ -173,6 +173,16 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public List<Order> queryListAll(int page) {
+		return getOrderDao().queryListAll(page, PAGE_SIZE_INT);
+	}
+
+	@Override
+	public List<Order> queryListAll(int page, int pageSize) {
+		return getOrderDao().queryListAll(page, pageSize);
+	}
+
+	@Override
 	public List<Order> queryListByTeacherId(long teacherId, String state, int page, int pageSize, boolean lazy) {
 		return getOrderDao().queryListByTeacherId(teacherId, state, page, pageSize, lazy);
 	}

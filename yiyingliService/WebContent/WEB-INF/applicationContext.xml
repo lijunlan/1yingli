@@ -2156,4 +2156,14 @@
 		</property>
 	</bean>
 
+	<bean id="mGetAllOrderListService" class="cn.yiyingli.Handle.Service.MGetAllOrderListService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+	</bean>
+
 </beans>
