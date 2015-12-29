@@ -21,11 +21,10 @@
 				<value>cn.yiyingli.Persistant.Comment</value>
 				<value>cn.yiyingli.Persistant.StudyExperience</value>
 				<value>cn.yiyingli.Persistant.WorkExperience</value>
-				<value>cn.yiyingli.Persistant.FreeTime</value>
 				<value>cn.yiyingli.Persistant.LinkinInfo</value>
 				<value>cn.yiyingli.Persistant.Teacher</value>
 				<value>cn.yiyingli.Persistant.Tip</value>
-				<value>cn.yiyingli.Persistant.TService</value>
+				<value>cn.yiyingli.Persistant.ServicePro</value>
 				<value>cn.yiyingli.Persistant.Voucher</value>
 				<value>cn.yiyingli.Persistant.CheckNo</value>
 				<value>cn.yiyingli.Persistant.Record</value>
@@ -176,12 +175,6 @@
 		</property>
 	</bean>
 
-	<bean id="freeTimeDao" class="cn.yiyingli.Dao.Impl.FreeTimeDaoImpl">
-		<property name="sessionFactory">
-			<ref local="sessionFactory" />
-		</property>
-	</bean>
-
 	<bean id="linkinInfoDao" class="cn.yiyingli.Dao.Impl.LinkinInfoDaoImpl">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
@@ -194,7 +187,7 @@
 		</property>
 	</bean>
 
-	<bean id="tServiceDao" class="cn.yiyingli.Dao.Impl.TServiceDaoImpl">
+	<bean id="serviceProDao" class="cn.yiyingli.Dao.Impl.ServiceProDaoImpl">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
 		</property>
@@ -297,12 +290,6 @@
 		</property>
 	</bean>
 
-	<bean id="freeTimeService" parent="baseTxService">
-		<property name="target">
-			<ref local="freeTimeServiceImpl" />
-		</property>
-	</bean>
-
 	<bean id="linkinInfoService" parent="baseTxService">
 		<property name="target">
 			<ref local="linkinInfoServiceImpl" />
@@ -327,9 +314,9 @@
 		</property>
 	</bean>
 
-	<bean id="tServiceService" parent="baseTxService">
+	<bean id="serviceProService" parent="baseTxService">
 		<property name="target">
-			<ref local="tServiceServiceImpl" />
+			<ref local="serviceProServiceImpl" />
 		</property>
 	</bean>
 
@@ -429,8 +416,8 @@
 		<property name="notificationDao">
 			<ref local="notificationDao" />
 		</property>
-		<property name="tServiceDao">
-			<ref local="tServiceDao" />
+		<property name="serviceProDao">
+			<ref local="serviceProDao" />
 		</property>
 		<property name="workExperienceDao">
 			<ref local="workExperienceDao" />
@@ -524,11 +511,6 @@
 		</property>
 	</bean>
 
-	<bean id="freeTimeServiceImpl" class="cn.yiyingli.Service.Impl.FreeTimeServiceImpl">
-		<property name="freeTimeDao">
-			<ref local="freeTimeDao" />
-		</property>
-	</bean>
 
 	<bean id="linkinInfoServiceImpl" class="cn.yiyingli.Service.Impl.LinkinInfoServiceImpl">
 		<property name="linkinInfoDao">
@@ -561,8 +543,8 @@
 		<property name="studyExperienceDao">
 			<ref local="studyExperienceDao" />
 		</property>
-		<property name="tServiceDao">
-			<ref local="tServiceDao" />
+		<property name="serviceProDao">
+			<ref local="serviceProDao" />
 		</property>
 	</bean>
 
@@ -572,9 +554,9 @@
 		</property>
 	</bean>
 
-	<bean id="tServiceServiceImpl" class="cn.yiyingli.Service.Impl.TServiceServiceImpl">
-		<property name="tServiceDao">
-			<ref local="tServiceDao" />
+	<bean id="serviceProServiceImpl" class="cn.yiyingli.Service.Impl.ServiceProServiceImpl">
+		<property name="serviceProDao">
+			<ref local="serviceProDao" />
 		</property>
 	</bean>
 
@@ -877,7 +859,7 @@
 		</property>
 	</bean>
 
-	<bean id="tGetTServiceService" class="cn.yiyingli.Handle.Service.TGetTServiceService"
+	<bean id="tGetserviceProService" class="cn.yiyingli.Handle.Service.TGetserviceProService"
 		scope="prototype">
 		<property name="teacherService">
 			<ref local="teacherService" />
@@ -1037,7 +1019,7 @@
 	</bean>
 	<!-- <bean id="tEditTServiceInfoService" class="cn.yiyingli.Handle.Service.TEditTServiceInfoService" 
 		scope="prototype"> <property name="userMarkService"> <ref local="userMarkService" 
-		/> </property> <property name="tServiceService"> <ref local="tServiceService" 
+		/> </property> <property name="serviceProService"> <ref local="serviceProService" 
 		/> </property> <property name="teacherService"> <ref local="teacherService" 
 		/> </property> </bean> -->
 
@@ -1101,10 +1083,10 @@
 		</property>
 	</bean>
 
-	<!-- <bean id="tChangeTServiceService" class="cn.yiyingli.Handle.Service.TChangeTServiceService" 
+	<!-- <bean id="tChangeserviceProService" class="cn.yiyingli.Handle.Service.TChangeserviceProService" 
 		scope="prototype"> <property name="userMarkService"> <ref local="userMarkService" 
 		/> </property> <property name="teacherService"> <ref local="teacherService" 
-		/> </property> <property name="tServiceService"> <ref local="tServiceService" 
+		/> </property> <property name="serviceProService"> <ref local="serviceProService" 
 		/> </property> </bean> -->
 
 	<bean id="tChangeTitlePriceService" class="cn.yiyingli.Handle.Service.TChangeTitlePriceService"
@@ -1115,8 +1097,8 @@
 		<property name="teacherService">
 			<ref local="teacherService" />
 		</property>
-		<property name="tServiceService">
-			<ref local="tServiceService" />
+		<property name="serviceProService">
+			<ref local="serviceProService" />
 		</property>
 	</bean>
 
@@ -1548,7 +1530,7 @@
 		</property>
 	</bean>
 
-	<bean id="tEditTServiceService" class="cn.yiyingli.Handle.Service.TEditTServiceService"
+	<bean id="tEditserviceProService" class="cn.yiyingli.Handle.Service.TEditserviceProService"
 		scope="prototype">
 		<property name="userMarkService">
 			<ref local="userMarkService" />
@@ -1556,8 +1538,8 @@
 		<property name="teacherService">
 			<ref local="teacherService" />
 		</property>
-		<property name="tServiceService">
-			<ref local="tServiceService" />
+		<property name="serviceProService">
+			<ref local="serviceProService" />
 		</property>
 	</bean>
 
@@ -2083,8 +2065,8 @@
 		<property name="teacherService">
 			<ref local="teacherService" />
 		</property>
-		<property name="tServiceService">
-			<ref local="tServiceService" />
+		<property name="serviceProService">
+			<ref local="serviceProService" />
 		</property>
 		<property name="tipService">
 			<ref local="tipService" />
@@ -2099,8 +2081,8 @@
 		<property name="teacherService">
 			<ref local="teacherService" />
 		</property>
-		<property name="tServiceService">
-			<ref local="tServiceService" />
+		<property name="serviceProService">
+			<ref local="serviceProService" />
 		</property>
 	</bean>
 
