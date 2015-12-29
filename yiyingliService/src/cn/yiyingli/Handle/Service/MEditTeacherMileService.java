@@ -25,7 +25,7 @@ public class MEditTeacherMileService extends MMsgService {
 	@Override
 	public void doit() {
 		long teacherId = Long.valueOf((String) getData().get("teacherId"));
-		Teacher teacher = getTeacherService().query(teacherId, false);
+		Teacher teacher = getTeacherService().query(teacherId);
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("32015"));
 			return;

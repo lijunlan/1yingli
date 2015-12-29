@@ -27,7 +27,7 @@ public class DislikeTeacherService extends UMsgService {
 	public void doit() {
 		User user = getUser();
 		String teacherId = (String) getData().get("teacherId");
-		Teacher teacher = getTeacherService().query(Long.valueOf(teacherId), false);
+		Teacher teacher = getTeacherService().query(Long.valueOf(teacherId));
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;

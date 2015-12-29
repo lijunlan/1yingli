@@ -85,7 +85,7 @@ public abstract class TSMsgService extends MsgService {
 			return false;
 		}
 		setUser(user);
-		Teacher teacher = getTeacherService().queryByUserId(user.getId(), false);
+		Teacher teacher = getTeacherService().queryByUserId(user.getId());
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("24001"));
 			return false;

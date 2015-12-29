@@ -107,7 +107,7 @@ public class CreateOrderService extends UMsgService {
 	@Override
 	public void doit() {
 		User user = getUser();
-		Teacher teacher = getTeacherService().queryWithUser(Long.valueOf((String) getData().get("teacherId")), false);
+		Teacher teacher = getTeacherService().queryWithUser(Long.valueOf((String) getData().get("teacherId")));
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;

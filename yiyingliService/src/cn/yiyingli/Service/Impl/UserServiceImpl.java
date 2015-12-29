@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateWithTeacher(User user) {
 		if (user.getTeacherState() == TEACHER_STATE_ON_SHORT) {
-			Teacher teacher = getTeacherDao().queryByUserId(user.getId(), false);
+			Teacher teacher = getTeacherDao().queryByUserId(user.getId());
 			// 防止TEACHER被强制下架
 			if (teacher != null) {
 				// teacher.setSex(user.getSex());

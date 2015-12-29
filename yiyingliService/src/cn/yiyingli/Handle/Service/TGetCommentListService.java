@@ -7,26 +7,15 @@ import java.util.List;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.TMsgService;
 import cn.yiyingli.Persistant.Comment;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.CommentService;
-import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Util.MsgUtil;
 
-public class TGetCommentListService extends MsgService {
-
-	private TeacherService teacherService;
+public class TGetCommentListService extends TMsgService {
 
 	private CommentService commentService;
-
-	public TeacherService getTeacherService() {
-		return teacherService;
-	}
-
-	public void setTeacherService(TeacherService teacherService) {
-		this.teacherService = teacherService;
-	}
 
 	public CommentService getCommentService() {
 		return commentService;
@@ -38,19 +27,16 @@ public class TGetCommentListService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("teacherId") && getData().containsKey("page");
+		return super.checkData() && getData().containsKey("page");
 	}
 
 	private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
 
 	@Override
 	public void doit() {
-		String teacherId = (String) getData().get("teacherId");
-		Teacher teacher = getTeacherService().query(Long.valueOf(teacherId), false);
-		if (teacher == null) {
-			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
-			return;
-		}
+
+		Teacher teacher = getTeacher();
+
 		int page = 0;
 		SuperMap toSend = MsgUtil.getSuccessMap();
 		long count = teacher.getCommentNumber();

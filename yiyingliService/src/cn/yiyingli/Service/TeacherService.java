@@ -45,9 +45,9 @@ public interface TeacherService {
 
 	void updateWorkExp(Teacher teacher, boolean refreshRecommend);
 
-	Teacher query(long id, boolean lazy);
-	
-	Teacher queryWithUser(long id, boolean lazy);
+	Teacher query(long id);
+
+	Teacher queryWithUser(long id);
 
 	Boolean queryCheckLikeUser(long teacherId, long userId);
 
@@ -55,11 +55,11 @@ public interface TeacherService {
 
 	Teacher queryWithTips(long id, boolean lazy);
 
-	Teacher queryWithLikeUser(long teacherId, boolean lazy);
+	Teacher queryWithLikeUser(long teacherId);
 
-	Teacher queryByUserId(long userid, boolean lazy);
+	Teacher queryByUserId(long userid);
 
-	Teacher queryByUserIdWithTService(long userid, boolean lazy);
+	Teacher queryByUserIdWithServicePro(long userid);
 
 	List<Teacher> queryByIds(List<Long> ids);
 
@@ -76,7 +76,7 @@ public interface TeacherService {
 	List<Teacher> queryListBySale(int page, int pageSize);
 
 	List<Teacher> queryListByHomePage();
-	
+
 	long queryListBySaleNo();
 
 	List<Teacher> queryListBySale(int page);
