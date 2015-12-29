@@ -857,6 +857,9 @@
 		<property name="teacherService">
 			<ref local="teacherService" />
 		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
 	</bean>
 
 	<bean id="tGetserviceProService" class="cn.yiyingli.Handle.Service.TGetserviceProService"
@@ -885,12 +888,18 @@
 		<property name="teacherService">
 			<ref local="teacherService" />
 		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
 	</bean>
 
 	<bean id="tGetTeacherCheckInfoService" class="cn.yiyingli.Handle.Service.TGetTeacherCheckInfoService"
 		scope="prototype">
 		<property name="teacherService">
 			<ref local="teacherService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
 		</property>
 	</bean>
 
@@ -908,6 +917,9 @@
 		scope="prototype">
 		<property name="teacherService">
 			<ref local="teacherService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
 		</property>
 	</bean>
 
@@ -929,6 +941,9 @@
 		scope="prototype">
 		<property name="teacherService">
 			<ref local="teacherService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
 		</property>
 	</bean>
 
