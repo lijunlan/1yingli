@@ -24,9 +24,9 @@ public interface TeacherDao {
 
 	void updateFromSql(String sql);
 
-	Teacher query(long id, boolean lazy);
+	Teacher query(long id);
 	
-	Teacher queryWithUser(long id, boolean lazy);
+	Teacher queryWithUser(long id);
 
 	Boolean queryCheckLikeUser(long teacherId, long userId);
 
@@ -34,11 +34,11 @@ public interface TeacherDao {
 
 	Teacher queryWithTips(long id, boolean lazy);
 
-	Teacher queryWithLikeUser(long teacherId, boolean lazy);
+	Teacher queryWithLikeUser(long teacherId);
 
-	Teacher queryByUserId(long userid, boolean lazy);
+	Teacher queryByUserId(long userid);
 
-	Teacher queryByUserIdWithTService(long userid, boolean lazy);
+	Teacher queryByUserIdWithServicePro(long userid);
 
 	List<Teacher> queryByIds(long[] ids);
 
