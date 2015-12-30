@@ -18,17 +18,6 @@ import net.sf.json.JSONObject;
 
 public class MainFunction {
 
-	public static void main(String[] args) throws SQLException {
-		// System.out.println(Calendar.getInstance().getTimeInMillis());
-		updateTeacherData();
-		// updateUserTrainDataRecord();
-		// updateUserTrainDataLike();
-		// updateUserTrainDataOrder();
-		 //editTeacherData();
-		// System.out.println("123");
-		//editTeacherData2();
-	}
-
 	public static String replaceBlank(String str) {
 		String dest = "";
 		if (str != null) {
@@ -39,7 +28,7 @@ public class MainFunction {
 		dest = dest.replaceAll("'", "\"");
 		return dest.replaceAll("\b", "");
 	}
-	
+
 	/**
 	 * 将content里面的h1标签改成h3
 	 */
@@ -53,8 +42,8 @@ public class MainFunction {
 			JSONObject receive = JSONObject.fromObject(result);
 			if (!receive.getString("state").equals("error")) {
 				String content = receive.getString("serviceContent");
-				content =  content.replaceAll("<h1>", "<h3>");
-				content =  content.replaceAll("</h1>", "</h3>");
+				content = content.replaceAll("<h1>", "<h3>");
+				content = content.replaceAll("</h1>", "</h3>");
 				content = replaceBlank(content);
 				System.out.println("");
 				System.out.println(content);
@@ -83,7 +72,6 @@ public class MainFunction {
 		}
 	}
 
-
 	/**
 	 * 删除content里面的h1标签的样式
 	 */
@@ -103,8 +91,8 @@ public class MainFunction {
 				if (start < 0 || end < 0 || start > end)
 					continue;
 				content = content.replace(content.substring(start, end), "");
-				content =  content.replaceAll("<h1>", "<h3>");
-				content =  content.replaceAll("</h1>", "</h3>");
+				content = content.replaceAll("<h1>", "<h3>");
+				content = content.replaceAll("</h1>", "</h3>");
 				content = replaceBlank(content);
 				System.out.println("");
 				System.out.println(content);
@@ -253,6 +241,113 @@ public class MainFunction {
 		DateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
 		toBaidu.put("Timestamp", formatter.format(new Date(time)));
 		return toBaidu;
+	}
+
+	/**
+	 * 去掉字符串中的html源码。<br>
+	 * 
+	 * @param con
+	 *            内容
+	 * 
+	 * @param length
+	 *            截取长度
+	 * 
+	 * @param end
+	 *            原始字符串超过截取长度时，后面增加字符
+	 * @return 去掉后的内容
+	 */
+	public static String subStringHTML(String con, int length, String end) {
+		String content = "";
+		if (con != null) {
+			content = con.replaceAll("</?[^>]+>", "");// 剔出了<html>的标签
+			content = content.replace("&nbsp;", "");
+			content = content.replace("\"", "‘");
+			content = content.replace("'", "‘");
+			if (content.length() > length) {
+				content = content.substring(0, length) + end;
+			}
+		}
+
+		return content;
+	}
+
+	public static void main(String[] args) throws SQLException {
+		// System.out.println(Calendar.getInstance().getTimeInMillis());
+		// updateTeacherData();
+		// updateUserTrainDataRecord();
+		// updateUserTrainDataLike();
+		// updateUserTrainDataOrder();
+		// editTeacherData();
+		// System.out.println("123");
+		// editTeacherData2();
+		updataPassageAllData();
+	}
+
+	private static void updataPassageAllData() {
+		JSONArray list = updatePassageData();
+		MsgUtil.sendMsgToBaidu(list.toString(),
+				"http://ds.recsys.baidu.com/s/136349/264828?token=68cff3a47d0eeedf083c16d5aabe1628");
+	}
+
+	private static JSONArray updatePassageData() {
+		String sql;
+		Connection conn = null;
+		String url = "jdbc:mysql://yiyingli.mysql.rds.aliyuncs.com:3306/yiyingli?user=sdll18&password=ll1992917&useUnicode=true&characterEncoding=UTF8";
+		JSONArray toBaiduList = new JSONArray();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(url);
+			Statement stmt = conn.createStatement();
+			sql = "select * from passage where passage.ONSHOW=1 and passage.STATE=2;";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String content = rs.getString("CONTENT");
+				content = subStringHTML(content, 0xffffff, "");
+				String editor = rs.getString("EDITORNAME");
+				String tag = rs.getString("TAG");
+				String title = rs.getString("TITLE");
+				String pid = rs.getString("PASSAGE_ID");
+				JSONObject toBaidu = new JSONObject();
+				toBaidu.put("Version", 1.0);
+				toBaidu.put("ItemId", pid);
+				toBaidu.put("DisplaySwitch", "On");
+				toBaidu.put("Url", "http://www.1yingli.cn/passage/" + pid);
+				JSONObject indexed = new JSONObject();
+				indexed.put("Title", title);
+				indexed.put("Content", content);
+				JSONArray labels = new JSONArray();
+				String[] tags = tag.split(",");
+				for (String t : tags) {
+					JSONObject l = new JSONObject();
+					l.put("Label", t);
+					l.put("Weight", 5);
+					labels.add(l);
+				}
+				indexed.put("Labels", labels);
+				toBaidu.put("Indexed", indexed);
+
+				JSONObject properties = new JSONObject();
+				properties.put("Quality", 1);
+				JSONArray category = new JSONArray();
+				category.add(editor);
+				properties.put("Category", category);
+				DateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+				properties.put("CreateTime", formatter.format(new Date()));
+				toBaidu.put("Properties", properties);
+				toBaidu.put("Auxiliary", "");
+				toBaiduList.add(toBaidu);
+			}
+			return toBaiduList;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return toBaiduList;
 	}
 
 	private static JSONObject updateTeacherData(String tid) {

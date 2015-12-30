@@ -2166,4 +2166,23 @@
 		</property>
 	</bean>
 
+	<bean id="fGetRecommendPassageListService"
+		class="cn.yiyingli.Handle.Service.FGetRecommendPassageListService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
+
+	<bean id="fRecordRecommandPassageService"
+		class="cn.yiyingli.Handle.Service.FRecordRecommandPassageService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
 </beans>

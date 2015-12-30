@@ -21,12 +21,12 @@ public interface PassageService {
 
 	void remove(long id);
 
-	void update(Passage passage, boolean stateChange);
+	void update(Passage passage, boolean stateChange, boolean updateToBaidu);
 
 	boolean updateUserLike(Passage passage, User user);
 
 	Passage query(long id);
-	
+
 	Passage queryWithTeacherById(long id);
 
 	Passage queryByUser(long id);
@@ -48,5 +48,7 @@ public interface PassageService {
 	List<Passage> queryListByShow(int page, boolean show);
 
 	List<Passage> queryListByTeacherAndState(int page, long teacherId, short state);
+
+	List<Passage> queryListByIds(List<Long> ids);
 
 }

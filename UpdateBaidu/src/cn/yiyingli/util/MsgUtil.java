@@ -15,6 +15,10 @@ public class MsgUtil {
 		return send("http://ds.recsys.baidu.com/s/130426/253211?token=8d116fa25cfde0085776beee152741e2", json);
 	}
 
+	public static String sendMsgToBaidu(String json, String url) {
+		return send(url, json);
+	}
+
 	private static String send(String url, String json) {
 		System.out.println("send>>>" + json);
 		HttpClient httpClient = HttpClients.createDefault();
@@ -36,8 +40,8 @@ public class MsgUtil {
 		System.out.println("receive>>" + result);
 		return result;
 	}
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		send("http://test.1yingli.cn/yiyingliService/manage", "{}");
 	}
 

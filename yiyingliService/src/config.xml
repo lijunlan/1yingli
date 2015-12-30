@@ -139,6 +139,8 @@
 		<method name="removeBackground" beanName="mRemoveBackgroundService" />
 	</style>
 	<style name="function">
+		<method name="recordRecommandPassage" beanName="fRecordRecommandPassageService" />
+		<method name="getRecommendPassageList" beanName="fGetRecommendPassageListService" />
 		<method name="getPassage" beanName="fGetPassageService" />
 		<method name="getPassageList" beanName="fGetPassageListService" />
 		<method name="getSaleTeacherList" beanName="fGetSaleTeacherListService" />

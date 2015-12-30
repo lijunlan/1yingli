@@ -1,5 +1,6 @@
 package cn.yiyingli.Service.Impl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import cn.yiyingli.Persistant.Passage;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.UserLikePassage;
 import cn.yiyingli.Service.PassageService;
+import cn.yiyingli.Util.SendMsgToBaiduUtil;
 
 public class PassageServiceImpl implements PassageService {
 
@@ -64,11 +66,14 @@ public class PassageServiceImpl implements PassageService {
 	}
 
 	@Override
-	public void update(Passage passage, boolean stateChange) {
+	public void update(Passage passage, boolean stateChange, boolean updateToBaidu) {
 		if (stateChange) {
 			getPassageDao().updateAndCount(passage, passage.getOwnTeacher());
 		} else {
 			getPassageDao().update(passage);
+		}
+		if (updateToBaidu) {
+			SendMsgToBaiduUtil.updatePassageData(passage);
 		}
 	}
 
@@ -144,6 +149,25 @@ public class PassageServiceImpl implements PassageService {
 	@Override
 	public List<Passage> queryListByTeacherAndState(int page, long teacherId, short state) {
 		return getPassageDao().queryListByTeacherAndState(page, PAGE_SIZE, teacherId, state);
+	}
+
+	@Override
+	public List<Passage> queryListByIds(List<Long> ids) {
+		long[] idarray = new long[ids.size()];
+		for (int i = 0; i < ids.size(); i++) {
+			idarray[i] = ids.get(i);
+		}
+		List<Passage> passages = getPassageDao().queryListByIds(idarray);
+		List<Passage> results = new ArrayList<Passage>();
+		for (int i = 0; i < ids.size(); i++) {
+			for (int j = 0; j < passages.size(); j++) {
+				if (passages.get(j).getId().longValue() == ids.get(i).longValue()) {
+					results.add(passages.get(j));
+					break;
+				}
+			}
+		}
+		return results;
 	}
 
 }
