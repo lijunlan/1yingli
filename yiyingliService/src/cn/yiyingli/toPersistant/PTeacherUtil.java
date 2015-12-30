@@ -208,6 +208,7 @@ public class PTeacherUtil {
 		teacher.setOrderNumber(0L);
 		teacher.setFinishOrderNumber(0L);
 		teacher.setLikeNumber(0L);
+		teacher.setLookNumber(0L);
 		teacher.setPassageNumber(0L);
 		teacher.setCheckPassageNumber(0L);
 		teacher.setRefusePassageNumber(0L);

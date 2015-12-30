@@ -75,14 +75,8 @@ public class GetTeacherAllInfoService extends MsgService {
 	 * @param teacher
 	 */
 	private void saveRecord(Teacher teacher) {
-		Long no = teacher.getLookNumber();
-		if (no == null) {
-			no = 1L;
-		} else {
-			no++;
-		}
-		teacher.setLookNumber(no);
-		getTeacherService().update(teacher, false);
+
+		getTeacherService().updateAddLookNumber(teacher.getId(), 1L);
 
 		Record r = new Record();
 		r.setKind(RecordService.RECORD_KIND_SEE_TEACHER);

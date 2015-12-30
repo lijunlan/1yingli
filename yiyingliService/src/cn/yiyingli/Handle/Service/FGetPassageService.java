@@ -75,11 +75,7 @@ public class FGetPassageService extends MsgService {
 	 * @param teacher
 	 */
 	private void saveRecord(Passage passage) {
-		Long no = passage.getLookNumber();
-		no++;
-		passage.setLookNumber(no);
-		getPassageService().update(passage, false, false);
-
+		getPassageService().updateAddLookNumber(passage.getId(), 1L);
 		Record r = new Record();
 		r.setKind(RecordService.RECORD_KIND_SEE_PASSAGE);
 		r.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");

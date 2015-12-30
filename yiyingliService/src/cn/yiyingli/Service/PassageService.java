@@ -23,6 +23,8 @@ public interface PassageService {
 
 	void update(Passage passage, boolean stateChange, boolean updateToBaidu);
 
+	void updateAddLookNumber(long passageId, long number);
+
 	boolean updateUserLike(Passage passage, User user);
 
 	Passage query(long id);

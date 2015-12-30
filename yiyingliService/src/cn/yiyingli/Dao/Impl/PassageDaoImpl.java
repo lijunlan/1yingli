@@ -50,6 +50,14 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 	}
 
 	@Override
+	public void updateAddLookNumber(long passageId, long number) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session.createSQLQuery("update passage set passage.LOOKNUMBER=passage.LOOKNUMBER+" + number
+				+ " where passage.PASSAGE_ID=" + passageId);
+		query.executeUpdate();
+	}
+
+	@Override
 	public void updateAndCount(Passage passage, Teacher teacher) {
 		getHibernateTemplate().update(passage);
 		Session session = getSessionFactory().getCurrentSession();

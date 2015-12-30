@@ -74,6 +74,14 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
+	public void updateAddLookNumber(long teacherId, long number) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session.createSQLQuery("update teacher set teacher.LOOKNUMBER=teacher.LOOKNUMBER+" + number
+				+ " where teacher.TEACHER_ID='" + teacherId);
+		query.executeUpdate();
+	}
+
+	@Override
 	public void update(Teacher teacher) {
 		getHibernateTemplate().update(teacher);
 	}

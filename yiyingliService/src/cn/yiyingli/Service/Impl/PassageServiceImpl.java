@@ -78,6 +78,11 @@ public class PassageServiceImpl implements PassageService {
 	}
 
 	@Override
+	public void updateAddLookNumber(long passageId, long number) {
+		getPassageDao().updateAddLookNumber(passageId, number);
+	}
+
+	@Override
 	public boolean updateUserLike(Passage passage, User user) {
 		if (getPassageDao().queryCheckLikeUser(passage.getId(), user.getId())) {
 			return false;

@@ -26,6 +26,8 @@ public interface TeacherDao {
 
 	void updateFromSql(String sql);
 
+	void updateAddLookNumber(long teacherId, long number);
+
 	Teacher query(long id, boolean lazy);
 
 	Teacher queryWithUser(long id, boolean lazy);

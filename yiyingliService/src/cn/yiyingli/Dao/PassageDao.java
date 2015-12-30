@@ -21,6 +21,8 @@ public interface PassageDao {
 
 	void remove(long id);
 
+	void updateAddLookNumber(long passageId, long number);
+
 	void update(Passage passage);
 
 	void updateAndCount(Passage passage, Teacher teacher);
@@ -42,7 +44,7 @@ public interface PassageDao {
 	List<Passage> queryListByShow(int page, int pageSize, boolean show);
 
 	List<Passage> queryListByTeacherAndState(int page, int pageSize, long teacherId, short state);
-	
+
 	List<Passage> queryListByIds(long[] ids);
 
 }
