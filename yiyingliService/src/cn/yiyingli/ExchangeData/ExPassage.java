@@ -17,6 +17,7 @@ public class ExPassage {
 		map.put("content", passage.getContent());
 		map.put("likeno", passage.getLikeNumber());
 		map.put("summary", passage.getSummary());
+		map.put("lookno", passage.getLookNumber());
 		map.put("simpleinfo", passage.getOwnTeacher().getSimpleInfo());
 	}
 

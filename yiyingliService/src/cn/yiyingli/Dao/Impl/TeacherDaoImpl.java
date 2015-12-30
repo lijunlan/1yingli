@@ -69,7 +69,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	public void updateAddMile(long teacherId, long mile) {
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = session.createSQLQuery(
-				"update teacher set teacher.MILE=teacher.MILE+" + mile + " where teacher.TEACHER_ID='" + teacherId);
+				"update teacher set teacher.MILE=teacher.MILE+" + mile + " where teacher.TEACHER_ID=" + teacherId);
 		query.executeUpdate();
 	}
 
@@ -77,7 +77,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	public void updateAddLookNumber(long teacherId, long number) {
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = session.createSQLQuery("update teacher set teacher.LOOKNUMBER=teacher.LOOKNUMBER+" + number
-				+ " where teacher.TEACHER_ID='" + teacherId);
+				+ " where teacher.TEACHER_ID=" + teacherId);
 		query.executeUpdate();
 	}
 

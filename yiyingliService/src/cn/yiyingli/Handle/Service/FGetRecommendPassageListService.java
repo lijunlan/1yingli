@@ -61,8 +61,8 @@ public class FGetRecommendPassageListService extends MsgService {
 		List<Long> ids = new ArrayList<Long>();
 		for (int i = 0; i < ra.size(); i++) {
 			JSONObject jobj = ra.getJSONObject(i);
-			String tid = jobj.getString("ItemId");
-			ids.add(Long.valueOf(tid));
+			String pid = jobj.getString("ItemId");
+			ids.add(Long.valueOf(pid));
 		}
 		List<Passage> passages = null;
 		if (ids.size() > 0) {
@@ -74,7 +74,7 @@ public class FGetRecommendPassageListService extends MsgService {
 		JSONArray jsonPassages = new JSONArray();
 		for (Passage passage : passages) {
 			SuperMap m = new SuperMap();
-			ExPassage.assembleSimple(passage, map);
+			ExPassage.assembleSimple(passage, m);
 			jsonPassages.add(m.finish());
 		}
 		map.put("data", jsonPassages.toString());
