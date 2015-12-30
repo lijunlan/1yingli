@@ -192,6 +192,55 @@ public class MainFunction {
 		MsgUtil.sendMsgToBaidu(jarray.toString());
 	}
 
+	public static void main(String[] args) throws SQLException {
+		// System.out.println(Calendar.getInstance().getTimeInMillis());
+		// updateTeacherData();
+		// updateUserTrainDataRecord();
+		// updateUserTrainDataLike();
+		// updateUserTrainDataOrder();
+		// editTeacherData();
+		// System.out.println("123");
+		// editTeacherData2();
+		// updataPassageAllData();
+		updateUserTrainDataPassageRecord();
+	}
+
+	private static void updateUserTrainDataPassageRecord() {
+		String sql;
+		Connection conn = null;
+		String url = "jdbc:mysql://yiyingli.mysql.rds.aliyuncs.com:3306/yiyingli?user=sdll18&password=ll1992917&useUnicode=true&characterEncoding=UTF8";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(url);
+			Statement stmt = conn.createStatement();
+			sql = "select * from record where record.DATA like '%userId%' and record.DATA like '%passageId%';";
+			ResultSet rs = stmt.executeQuery(sql);
+			JSONArray sendList = new JSONArray();
+			while (rs.next()) {
+				String data = rs.getString("DATA");
+				String time = rs.getString("CREATETIME");
+				int s = data.indexOf("=");
+				int e = data.indexOf("u") - 1;
+				String tid = data.substring(s + 1, e);
+				s = data.lastIndexOf("=");
+				String uid = data.substring(s + 1);
+				sendList.add(JSONUserTrainData(uid, tid, "click", (short) 3, Long.valueOf(time)));
+			}
+			System.out.println(sendList.size());
+			System.out.println(sendList.toString());
+			MsgUtil.sendMsgToBaiduTrainData(sendList.toString(),
+					"http://ds.recsys.baidu.com/s/136349/264829?token=68cff3a47d0eeedf083c16d5aabe1628");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	private static void updateUserTrainDataRecord() {
 		String sql;
 		Connection conn = null;
@@ -269,18 +318,6 @@ public class MainFunction {
 		}
 
 		return content;
-	}
-
-	public static void main(String[] args) throws SQLException {
-		// System.out.println(Calendar.getInstance().getTimeInMillis());
-		// updateTeacherData();
-		// updateUserTrainDataRecord();
-		// updateUserTrainDataLike();
-		// updateUserTrainDataOrder();
-		// editTeacherData();
-		// System.out.println("123");
-		// editTeacherData2();
-		updataPassageAllData();
 	}
 
 	private static void updataPassageAllData() {

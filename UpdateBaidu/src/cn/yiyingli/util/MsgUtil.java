@@ -49,6 +49,10 @@ public class MsgUtil {
 		return send("http://ds.recsys.baidu.com/s/130426/253052?token=8d116fa25cfde0085776beee152741e2", json);
 	}
 
+	public static String sendMsgToBaiduTrainData(String json, String url) {
+		return send(url, json);
+	}
+
 	public static String sendMsgToService(String json) {
 		return send("http://service.1yingli.cn/yiyingliService/manage", json);
 	}
