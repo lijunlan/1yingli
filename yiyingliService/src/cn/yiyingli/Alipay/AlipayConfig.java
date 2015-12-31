@@ -61,6 +61,6 @@ public class AlipayConfig {
 	public static String trans_notify_url_debug = "http://test.1yingli.cn/yiyingliService/AlipayTransNotify";
 
 	// 页面跳转同步通知页面路径
-	public static String return_url = "http://www.1yingli.cn/#!/myTutor";
+	public static String return_url = "http://www.1yingli.cn/myTutor";
 	// 需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 }

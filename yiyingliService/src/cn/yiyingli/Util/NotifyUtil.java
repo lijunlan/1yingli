@@ -36,8 +36,8 @@ public class NotifyUtil {
 
 	public static boolean notifyUserNormal(String phone, String email, String title, String message, User user,
 			NotificationService notificationService) {
-		String m1 = message + "(<a href=\"http://www.1yingli.cn/#!/myTutor\">查看订单</a>)";
-		String m2 = message + "(http://www.1yingli.cn/#!/myTutor)";
+		String m1 = message + "(<a href=\"http://www.1yingli.cn/myTutor\">查看订单</a>)";
+		String m2 = message + "(http://www.1yingli.cn/myTutor)";
 		if (CheckUtil.checkMobileNumber(phone) || CheckUtil.checkGlobleMobileNumber(phone)) {
 			SendMessageUtil.sendMessage(phone, m2);
 		}
@@ -60,8 +60,8 @@ public class NotifyUtil {
 
 	public static boolean notifyTeacher(String phone, String email, String message, Teacher teacher,
 			NotificationService notificationService) {
-		String m1 = message + "(<a href=\"http://www.1yingli.cn/#!/myStudent\">管理订单</a>)";
-		String m2 = message + "(http://www.1yingli.cn/#!/myStudent)";
+		String m1 = message + "(<a href=\"http://www.1yingli.cn/myStudent\">管理订单</a>)";
+		String m2 = message + "(http://www.1yingli.cn/myStudent)";
 		if (CheckUtil.checkMobileNumber(phone) || CheckUtil.checkGlobleMobileNumber(phone)) {
 			SendMessageUtil.sendMessage(phone, m2);
 		}

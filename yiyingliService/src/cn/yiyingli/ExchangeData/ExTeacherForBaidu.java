@@ -59,7 +59,7 @@ public class ExTeacherForBaidu {
 			toBaidu.put("Version", 1.0);
 			toBaidu.put("ItemId", "" + teacher.getId());
 			toBaidu.put("DisplaySwitch", teacher.getOnService() ? "On" : "Off");
-			toBaidu.put("Url", "http://www.1yingli.cn/#!/teacher/" + teacher.getId());
+			toBaidu.put("Url", "http://www.1yingli.cn/teacher/" + teacher.getId());
 			JSONObject jsonIndexed = new JSONObject();
 			jsonIndexed.put("Title", title);
 			jsonIndexed.put("Content", content);
