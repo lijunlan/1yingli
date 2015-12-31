@@ -15,6 +15,7 @@ import cn.yiyingli.AliyunUtil.AliyunConfiguration;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Util.ConfigurationXmlUtil;
+import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -115,7 +116,9 @@ public class FSearchService extends MsgService {
 			}
 
 			search.addSort("RANK");
+			LogUtil.info("query-->>" + query, getClass());
 			String receive = search.search();
+			LogUtil.info("search result>>" + receive, getClass());
 
 			JSONObject jsonReceive = JSONObject.fromObject(receive);
 			String status = jsonReceive.getString("status");
