@@ -51,9 +51,8 @@ public class FSearchService extends MsgService {
 				wd = URLDecoder.decode(wd, "utf-8");
 				if (!"".equals(wd)) {
 					// String[] qss = wd.split(",");
-					query = "(si:'" + wd + "' OR n:'" + wd + "' OR cn:'" + wd + "'^70 OR sn:'" + wd + "'^70 OR sc:'"
-							+ wd + "'^75 OR i:'" + wd + "'^40 OR t:'" + wd + "' OR ta:'" + wd + "' OR p:'" + wd
-							+ "'^70 OR d:'" + wd + "'^70 OR m:'" + wd + "'^70)";
+					query = "n:'" + wd + "' OR sw:'" + wd + "'^70 OR i:'" + wd + "'^40 OR mw:'" + wd + "' OR mw2:'" + wd
+							+ "'^70";
 					// for (int i = 0; i < qss.length; i++) {
 					// String qs = qss[i];
 					// if (i == 0) {// default:'" + qs + "' OR

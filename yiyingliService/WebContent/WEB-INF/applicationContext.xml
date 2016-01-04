@@ -2185,4 +2185,17 @@
 		</property>
 	</bean>
 
+	<bean id="mCreatePassageService" class="cn.yiyingli.Handle.Service.MCreatePassageService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+		<property name="userService">
+			<ref local="userService" />
+		</property>
+	</bean>
+
 </beans>
