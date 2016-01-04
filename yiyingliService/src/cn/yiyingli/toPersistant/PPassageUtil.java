@@ -30,6 +30,15 @@ public class PPassageUtil {
 		passage.setTitle(title);
 	}
 
+	public static void toEditPassageByManager(String title, String tag, String summary, String content, String imageUrl,
+			Passage passage, boolean onshow) {
+		passage.setContent(content);
+		passage.setSummary(summary);
+		passage.setImageUrl(imageUrl);
+		passage.setTag(tag);
+		passage.setTitle(title);
+	}
+
 	public static void toSavePassageByManager(Teacher teacher, String title, String tag, String summary, String content,
 			String imageUrl, Passage passage) {
 		toSavePassage(teacher, title, tag, summary, content, imageUrl, passage);

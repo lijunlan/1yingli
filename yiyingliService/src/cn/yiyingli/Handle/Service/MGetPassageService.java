@@ -1,11 +1,13 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Handle.TMsgService;
+import cn.yiyingli.ExchangeData.ExPassage;
+import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Passage;
 import cn.yiyingli.Service.PassageService;
 import cn.yiyingli.Util.MsgUtil;
 
-public class TRemovePassageService extends TMsgService {
+public class MGetPassageService extends MMsgService {
 
 	private PassageService passageService;
 
@@ -23,18 +25,15 @@ public class TRemovePassageService extends TMsgService {
 
 	@Override
 	public void doit() {
-		long passageId = Long.valueOf((String) getData().get("passageId"));
-		Passage passage = getPassageService().queryWithTeacherById(passageId);
+		Passage passage = getPassageService().queryWithTeacherByManager(getData().getLong("passageId"));
 		if (passage == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22006"));
 			return;
 		}
-		if (passage.getOwnTeacher().getId().longValue() != getTeacher().getId().longValue()) {
-			setResMsg(MsgUtil.getErrorMsgByCode("22007"));
-			return;
-		}
-		getPassageService().remove(passage);
-		setResMsg(MsgUtil.getSuccessMsg("remove passage successfully"));
+		SuperMap map = MsgUtil.getSuccessMap();
+		ExPassage.assembleForManager(passage, map);
+
+		setResMsg(map.finishByJson());
 	}
 
 }

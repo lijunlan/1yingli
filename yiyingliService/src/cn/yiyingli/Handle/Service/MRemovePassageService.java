@@ -1,11 +1,11 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Handle.TMsgService;
+import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Passage;
 import cn.yiyingli.Service.PassageService;
 import cn.yiyingli.Util.MsgUtil;
 
-public class TRemovePassageService extends TMsgService {
+public class MRemovePassageService extends MMsgService {
 
 	private PassageService passageService;
 
@@ -17,20 +17,16 @@ public class TRemovePassageService extends TMsgService {
 		this.passageService = passageService;
 	}
 
+	@Override
 	public boolean checkData() {
 		return super.checkData() && getData().containsKey("passageId");
 	}
 
 	@Override
 	public void doit() {
-		long passageId = Long.valueOf((String) getData().get("passageId"));
-		Passage passage = getPassageService().queryWithTeacherById(passageId);
+		Passage passage = getPassageService().queryWithTeacherByManager(getData().getLong("passageId"));
 		if (passage == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22006"));
-			return;
-		}
-		if (passage.getOwnTeacher().getId().longValue() != getTeacher().getId().longValue()) {
-			setResMsg(MsgUtil.getErrorMsgByCode("22007"));
 			return;
 		}
 		getPassageService().remove(passage);

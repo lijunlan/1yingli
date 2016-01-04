@@ -3,6 +3,7 @@ package cn.yiyingli.Handle.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.yiyingli.Dao.PassageDao;
 import cn.yiyingli.ExchangeData.ExPassage;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
@@ -68,7 +69,7 @@ public class FGetRecommendPassageListService extends MsgService {
 		if (ids.size() > 0) {
 			passages = getPassageService().queryListByIds(ids);
 		} else {
-			passages = getPassageService().queryListByShow(0, 3, true);
+			passages = getPassageService().queryListByRecommand(0, PassageDao.PASSAGE_STATE_OK, true);
 		}
 		SuperMap map = MsgUtil.getSuccessMap();
 		JSONArray jsonPassages = new JSONArray();

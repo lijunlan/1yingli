@@ -2198,4 +2198,34 @@
 		</property>
 	</bean>
 
+	<bean id="mGetPassageService" class="cn.yiyingli.Handle.Service.MGetPassageService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
+
+	<bean id="mEditPassageService" class="cn.yiyingli.Handle.Service.MEditPassageService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
+
+	<bean id="mRemovePassageService" class="cn.yiyingli.Handle.Service.MRemovePassageService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
+
 </beans>

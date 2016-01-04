@@ -57,12 +57,9 @@ public class PassageServiceImpl implements PassageService {
 
 	@Override
 	public void remove(Passage passage) {
-		getPassageDao().remove(passage);
-	}
-
-	@Override
-	public void remove(long id) {
-		getPassageDao().remove(id);
+		getPassageDao().remove(passage.getId(), passage.getState(), passage.getOwnTeacher().getId());
+		passage.setRemove(true);
+		SendMsgToBaiduUtil.updatePassageData(passage);
 	}
 
 	@Override
@@ -99,6 +96,10 @@ public class PassageServiceImpl implements PassageService {
 	@Override
 	public Passage query(long id) {
 		return getPassageDao().query(id);
+	}
+
+	public Passage queryWithTeacherByManager(long id) {
+		return getPassageDao().queryWithTeacherByManager(id);
 	}
 
 	@Override
@@ -153,7 +154,7 @@ public class PassageServiceImpl implements PassageService {
 
 	@Override
 	public List<Passage> queryListByTeacherAndState(int page, long teacherId, short state) {
-		return getPassageDao().queryListByTeacherAndState(page, PAGE_SIZE, teacherId, state);
+		return getPassageDao().queryListByTeacherAndState(page, PAGE_SIZE_PASSAGE, teacherId, state);
 	}
 
 	@Override
@@ -173,6 +174,16 @@ public class PassageServiceImpl implements PassageService {
 			}
 		}
 		return results;
+	}
+
+	@Override
+	public List<Passage> queryListByRecommand(int page, int pageSize, short state, boolean show) {
+		return getPassageDao().queryListByStateAndShow(page, pageSize, state, show);
+	}
+
+	@Override
+	public List<Passage> queryListByRecommand(int page, short state, boolean show) {
+		return getPassageDao().queryListByStateAndShow(page, PAGE_SIZE_PASSAGE, state, show);
 	}
 
 }
