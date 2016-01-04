@@ -13,7 +13,7 @@
 
 <body>
 
-	<!--------------------------------------------- 头部 --------------------------------------------------------------->
+	<!-------------------------------------------- 头部 ---------------------------------------------------------------->
 	<header class="am-topbar admin-header">
 		<div class="am-topbar-brand">
 			<a href="index.html"><strong>One Mile</strong> <small>一英里后台管理系统</small></a>
@@ -35,7 +35,7 @@
 		</div>
 	</header>
 
-	<!--------------------------------------------- 侧边 --------------------------------------------------------------->
+	<!--------------------------------------------- 侧边 ---------------------------------------------------------------->
 	<div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
 		<div class="am-offcanvas-bar admin-offcanvas-bar">
 			<ul class="am-list admin-sidebar-list">
@@ -68,8 +68,13 @@
 						<li><a href="articleService.html"><span
 								class="am-icon-leanpub"></span> 文章管理</a></li>
 						<li><a href="suggestionService.html"><span
-								class="am-icon-envelope-o"></span> 用户建议</a></li>
-					</ul></li>
+								class ="am-icon-envelope-o"></span> 用户建议</a>
+						</li>
+						<li><a href="createPassageService.html"><span
+								class ="am-icon-leanpub"></span> 编辑文章</a>
+						</li>
+					</ul>
+				</li>
 				<li><a onclick="logout()"><span class="am-icon-sign-out"></span>
 						注销</a></li>
 			</ul>
@@ -84,7 +89,7 @@
 		</div>
 	</div>
 
-	<!--------------------------------------------- 主要部分 --------------------------------------------------------------->
+	<!--------------------------------------------- 主要部分 ---------------------------------------------------------------->
 	<div class="admin-content">
 		<div class="am-cf am-padding">
 			<div class="am-fl am-cf">
@@ -124,9 +129,11 @@
 					class="am-icon-btn am-icon-leanpub"></span><br> <br>文章管理</a></li>
 			<li><a href="suggestionService.html" class="am-text-danger"><span
 					class="am-icon-btn am-icon-envelope-o"></span><br> <br>用户建议</a></li>
+			<li><a href="createPassageService.html" class="am-text-warning"><span
+					class="am-icon-btn am-icon-leanpub"></span><br> <br>编辑文章</a></li>	
 		</ul>
 	</div>
-	<!--------------------------------------------- 声音 --------------------------------------------------------------->
+	<!--------------------------------------------- 声音 ---------------------------------------------------------------->
 	<div id="sound"></div>
 
 	<script type="text/javascript" src="js/libs/jquery-2.1.4.min.js"></script>

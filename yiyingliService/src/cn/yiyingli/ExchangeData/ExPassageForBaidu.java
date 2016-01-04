@@ -17,7 +17,7 @@ public class ExPassageForBaidu {
 		JSONObject toBaidu = new JSONObject();
 		toBaidu.put("Version", 1.0);
 		toBaidu.put("ItemId", passage.getId() + "");
-		toBaidu.put("DisplaySwitch", passage.getRemove() ? "Off" : "On");
+		toBaidu.put("DisplaySwitch", (passage.getRemove() && passage.getOnshow()) ? "Off" : "On");
 		toBaidu.put("Url", "http://www.1yingli.cn/passage/" + passage.getId());
 		JSONObject indexed = new JSONObject();
 		indexed.put("Title", passage.getTitle());

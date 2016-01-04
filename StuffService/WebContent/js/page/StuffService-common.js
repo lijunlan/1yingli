@@ -1,8 +1,9 @@
-/**
+﻿/**
  * 变量
  */
 var myJson = new Object();
 var URL = "http://120.26.83.33/yiyingliManagerService/";
+var SERVICE_URL= "http://service.1yingli.cn/yiyingliService/"
 //var URL = "http://test.1yingli.cn/yiyingliService/";
 myJson.style = "manager";
 //RSA key

@@ -31,8 +31,10 @@ public class MGetPassageService extends MMsgService {
 			return;
 		}
 		SuperMap map = MsgUtil.getSuccessMap();
-		ExPassage.assembleForManager(passage, map);
+		SuperMap p = new SuperMap();
+		ExPassage.assembleForManager(passage, p);
 
+		map.put("passage", p.finish());
 		setResMsg(map.finishByJson());
 	}
 
