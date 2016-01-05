@@ -124,9 +124,6 @@ public class Teacher {
 	@Column(name = "CHECKEMAIL", nullable = false)
 	private Boolean checkEmail;
 
-	@Column(name = "TALKWAY", nullable = true)
-	private String talkWay;
-
 	@Column(name = "CHECKPHONE", nullable = false)
 	private Boolean checkPhone;
 
@@ -167,12 +164,6 @@ public class Teacher {
 	@JoinColumn(name = "TEACHER_ID", updatable = true, insertable = true)
 	@IndexColumn(name = "RANKNO")
 	private List<ServicePro> servicePros = new ArrayList<ServicePro>();
-
-	/**
-	 * 导师默认的闲聊话题，需要跟服务中的同步
-	 */
-	@Column(name = "TOPIC", nullable = true)
-	private String topic;
 
 	@Column(name = "FIRSTIDENTITY", nullable = true)
 	private String firstIdentity;
@@ -220,8 +211,25 @@ public class Teacher {
 	@Column(name = "CREATETIME", nullable = true)
 	private String createTime;
 
-	@Column(name = "LOOKNUMBER", nullable = true)
+	@Column(name = "LOOKNUMBER", nullable = false)
 	private Long lookNumber;
+
+	@Column(name = "PRICE", nullable = true)
+	private Float price;
+
+	/**
+	 * 导师默认的闲聊话题，需要跟服务中的同步
+	 */
+	@Column(name = "TOPIC", nullable = false)
+	private String topic;
+
+	public Float getPrice() {
+		return price;
+	}
+
+	public void setPrice(Float price) {
+		this.price = price;
+	}
 
 	public Long getOrderNumber() {
 		return orderNumber;
@@ -453,14 +461,6 @@ public class Teacher {
 
 	public void setCheckForms(Set<CheckForm> checkForms) {
 		this.checkForms = checkForms;
-	}
-
-	public String getTalkWay() {
-		return talkWay;
-	}
-
-	public void setTalkWay(String talkWay) {
-		this.talkWay = talkWay;
 	}
 
 	public Long getLikeNumber() {

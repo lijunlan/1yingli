@@ -1,15 +1,12 @@
 package cn.yiyingli.Handle.Service;
 
 import cn.yiyingli.Handle.MMsgService;
-import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
-import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Service.TipService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.MsgUtil;
-import cn.yiyingli.toPersistant.PServiceProUtil;
 import cn.yiyingli.toPersistant.PTeacherUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -64,8 +61,11 @@ public class MEditTeacherService extends MMsgService {
 		JSONObject tdata = getData().getJSONObject("teacher");
 		JSONArray workExperiences = tdata.getJSONArray("workExperience");
 		JSONArray studyExperiences = tdata.getJSONArray("studyExperience");
-		JSONObject service = tdata.getJSONObject("service");
-		JSONArray tips = service.getJSONArray("tips");
+		// JSONObject service = tdata.getJSONObject("service");
+		JSONArray tips = tdata.getJSONArray("tips");
+
+		String topic = tdata.getString("topic");
+		float price = Float.valueOf(tdata.getString("price"));
 
 		String simpleinfo = (String) tdata.get("simpleinfo");
 		String name = (String) tdata.get("name");
@@ -94,24 +94,26 @@ public class MEditTeacherService extends MMsgService {
 				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
 				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight,
 				onService == null ? String.valueOf(teacher.getOnService()) : onService,
-				mile == null ? teacher.getMile() : Long.valueOf(mile), teacher, getTipService());
+				mile == null ? teacher.getMile() : Long.valueOf(mile), topic, price, teacher, getTipService());
 
-		ServicePro servicePro = teacher.getServicePros().get(0);
-		String serviceTitle = (String) service.get("title");
-		float price = Float.valueOf(service.getString("price"));
-		float priceTemp = Float.valueOf(service.getString("priceTemp"));
-		float numeral = Float.valueOf(service.getString("numeral"));
-		String quantifier = service.getString("quantifier");
-		int kind = service.getInt("kind");
-		String freeTime = service.getString("freeTime");
-		String tip = service.getString("tip");
-		String onshow = service.getString("onshow");
-		String onsale = service.getString("onsale");
-		int count = service.getInt("count");
-		String serviceContent = (String) service.get("content");
-
-		PServiceProUtil.editWithTeacherByManager(ServiceProService.STYLE_TALK, count, price, priceTemp, numeral, kind,
-				freeTime, tip, onshow, onsale, quantifier, serviceTitle, serviceContent, servicePro);
+		// ServicePro servicePro = teacher.getServicePros().get(0);
+		// String serviceTitle = (String) service.get("title");
+		// float price = Float.valueOf(service.getString("price"));
+		// float priceTemp = Float.valueOf(service.getString("priceTemp"));
+		// float numeral = Float.valueOf(service.getString("numeral"));
+		// String quantifier = service.getString("quantifier");
+		// int kind = service.getInt("kind");
+		// String freeTime = service.getString("freeTime");
+		// String tip = service.getString("tip");
+		// String onshow = service.getString("onshow");
+		// String onsale = service.getString("onsale");
+		// int count = service.getInt("count");
+		// String serviceContent = (String) service.get("content");
+		//
+		// PServiceProUtil.editWithTeacherByManager(ServiceProService.STYLE_TALK,
+		// count, price, priceTemp, numeral, kind,
+		// freeTime, tip, onshow, onsale, quantifier, serviceTitle,
+		// serviceContent, servicePro);
 
 		getTeacherService().updateWithDetailInfo(teacher, true);
 		setResMsg(MsgUtil.getSuccessMsg("edit teacher successfully"));

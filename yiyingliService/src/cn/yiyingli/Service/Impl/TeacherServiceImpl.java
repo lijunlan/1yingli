@@ -87,10 +87,6 @@ public class TeacherServiceImpl implements TeacherService {
 	public void saveWithDetailInfo(Teacher teacher) {
 		getUserDao().update(teacher.getUser());
 		getTeacherDao().save(teacher);
-//		for (ServicePro servicePro : teacher.getServicePros()) {
-//			servicePro.setTeacher(teacher);
-//			getServiceProDao().save(servicePro);
-//		}
 		if (teacher.getOnService()) {
 			SendMsgToBaiduUtil.updateTeacherData(teacher);
 		}
@@ -136,9 +132,6 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public void updateWithDetailInfo(Teacher teacher, boolean refreshRecommend) {
 		getTeacherDao().update(teacher);
-//		for (ServicePro servicePro : teacher.getServicePros()) {
-//			getServiceProDao().update(servicePro);
-//		}
 		if (refreshRecommend && teacher.getOnService()) {
 			SendMsgToBaiduUtil.updateTeacherData(teacher);
 		}

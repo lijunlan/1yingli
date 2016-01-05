@@ -1032,11 +1032,6 @@
 			<ref local="teacherService" />
 		</property>
 	</bean>
-	<!-- <bean id="tEditTServiceInfoService" class="cn.yiyingli.Handle.Service.TEditTServiceInfoService" 
-		scope="prototype"> <property name="userMarkService"> <ref local="userMarkService" 
-		/> </property> <property name="serviceProService"> <ref local="serviceProService" 
-		/> </property> <property name="teacherService"> <ref local="teacherService" 
-		/> </property> </bean> -->
 
 	<bean id="tEditSpecialTipService" class="cn.yiyingli.Handle.Service.TEditSpecialTipService"
 		scope="prototype">
@@ -2087,20 +2082,7 @@
 			<ref local="tipService" />
 		</property>
 	</bean>
-
-	<bean id="tEditSimpleInfoService" class="cn.yiyingli.Handle.Service.TEditSimpleInfoService"
-		scope="prototype">
-		<property name="userMarkService">
-			<ref local="userMarkService" />
-		</property>
-		<property name="teacherService">
-			<ref local="teacherService" />
-		</property>
-		<property name="serviceProService">
-			<ref local="serviceProService" />
-		</property>
-	</bean>
-
+	
 	<bean id="tGetPaypalNoService" class="cn.yiyingli.Handle.Service.TGetPaypalNoService"
 		scope="prototype">
 		<property name="userMarkService">

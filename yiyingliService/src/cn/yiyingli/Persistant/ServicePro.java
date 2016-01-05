@@ -24,6 +24,9 @@ public class ServicePro {
 	@Column(name = "SERVICEPRO_ID")
 	private Long id;
 
+	@Column(name = "IMAGEURLS", nullable = false)
+	private String imageUrls;
+
 	@Column(name = "STYLE", nullable = false)
 	private Short style;
 
@@ -329,6 +332,14 @@ public class ServicePro {
 
 	public void setRemove(Boolean remove) {
 		this.remove = remove;
+	}
+
+	public String getImageUrls() {
+		return imageUrls;
+	}
+
+	public void setImageUrls(String imageUrls) {
+		this.imageUrls = imageUrls;
 	}
 
 }

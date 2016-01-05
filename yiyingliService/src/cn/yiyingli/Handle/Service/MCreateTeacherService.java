@@ -1,14 +1,12 @@
 package cn.yiyingli.Handle.Service;
 
 import cn.yiyingli.Handle.MMsgService;
-import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Service.TipService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.MsgUtil;
-import cn.yiyingli.toPersistant.PServiceProUtil;
 import cn.yiyingli.toPersistant.PTeacherUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -63,14 +61,18 @@ public class MCreateTeacherService extends MMsgService {
 		JSONObject tdata = getData().getJSONObject("teacher");
 		JSONArray workExperiences = tdata.getJSONArray("workExperience");
 		JSONArray studyExperiences = tdata.getJSONArray("studyExperience");
-		JSONObject service = tdata.getJSONObject("service");
-		JSONArray tips = service.getJSONArray("tips");
+		// JSONObject service = tdata.getJSONObject("service");
+		JSONArray tips = tdata.getJSONArray("tips");
 
 		String simpleinfo = tdata.getString("simpleinfo");
 		String name = tdata.getString("name");
 		String phone = tdata.getString("phone");
 		String address = tdata.getString("address");
 		String mail = tdata.getString("email");
+
+		String topic = tdata.getString("topic");
+		float price = Float.valueOf(tdata.getString("price"));
+
 		String iconUrl = tdata.getString("iconUrl");
 		String introduce = tdata.getString("introduce");
 		String checkPhone = tdata.getString("checkPhone");
@@ -88,20 +90,20 @@ public class MCreateTeacherService extends MMsgService {
 		Teacher teacher = PTeacherUtil.assembleTeacherByManager(user, workExperiences, studyExperiences, tips,
 				simpleinfo, name, phone, address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail,
 				checkWork, checkStudy, showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight,
-				saleWeight, getTipService());
+				saleWeight, topic, price, getTipService());
 
-		String serviceTitle = service.getString("title");
-		float numeral = Float.valueOf(service.getString("numeral"));
-		float price = Float.valueOf(service.getString("price"));
-		int count = service.getInt("count");
-		String quantifier = service.getString("quantifier");
-		String serviceContent = service.getString("content");
-		String tip = service.getString("tip");
-		String freeTime = service.getString("freeTime");
-
-		ServicePro servicePro = new ServicePro();
-		PServiceProUtil.assembleWithTeacherByManager(teacher, serviceContent, price, numeral, count, quantifier,
-				serviceTitle, tip, freeTime, servicePro);
+//		String serviceTitle = service.getString("title");
+//		float numeral = Float.valueOf(service.getString("numeral"));
+//		float price = Float.valueOf(service.getString("price"));
+//		int count = service.getInt("count");
+//		String quantifier = service.getString("quantifier");
+//		String serviceContent = service.getString("content");
+//		String tip = service.getString("tip");
+//		String freeTime = service.getString("freeTime");
+//
+//		ServicePro servicePro = new ServicePro();
+//		PServiceProUtil.assembleWithTeacherByManager(teacher, serviceContent, price, numeral, count, quantifier,
+//				serviceTitle, tip, freeTime, servicePro);
 
 		getTeacherService().saveWithDetailInfo(teacher);
 		setResMsg(MsgUtil.getSuccessMsg("insert teacher successfully"));

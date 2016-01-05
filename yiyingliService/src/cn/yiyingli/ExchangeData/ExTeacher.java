@@ -29,6 +29,7 @@ public class ExTeacher {
 	public static void assembleSimpleForUser(Teacher teacher, SuperMap map) {
 		assembleSimpleNormal(teacher, map);
 		map.put("level", teacher.getLevel());
+		map.put("introduce", teacher.getIntroduce());
 		LikeNoShowUtil.setLikeNo(teacher, map);
 		LikeNoShowUtil.setFinishNo(teacher, map);
 		// TService tService = teacher.gettService();
@@ -41,12 +42,16 @@ public class ExTeacher {
 		map.put("teacherId", teacher.getId());
 		map.put("iconUrl", teacher.getIconUrl());
 		map.put("simpleinfo", teacher.getSimpleInfo());
+		map.put("price", teacher.getPrice());
+		map.put("topic", teacher.getTopic());
 		// map.put("timeperweek", teacher.gettService().getTimesPerWeek());
 	}
 
 	public static void assembleSimpleForManager(Teacher teacher, SuperMap map) {
 		map.put("address", teacher.getAddress());
 		map.put("mile", teacher.getMile());
+		map.put("price", teacher.getPrice());
+		map.put("topic", teacher.getTopic());
 		map.put("checkDegree",
 				teacher.getCheckDegreeState() == TeacherService.CHECK_STATE_SUCCESS_SHORT ? "yes" : "no");
 		map.put("checkEmail", teacher.getCheckEmail());
@@ -78,9 +83,10 @@ public class ExTeacher {
 		LikeNoShowUtil.setLikeNo(teacher, map);
 		LikeNoShowUtil.setFinishNo(teacher, map);
 		map.put("address", teacher.getAddress());
-		map.put("talkWay", teacher.getTalkWay());
 		map.put("teacherId", teacher.getId());
 		map.put("commentNo", teacher.getCommentNumber());
+		map.put("topic", teacher.getTopic());
+		map.put("price", teacher.getPrice());
 		// TService tService = teacher.gettService();
 		// map.put("timeperweek", tService.getTimesPerWeek());
 		// map.put("freeTime", tService.getFreeTime());

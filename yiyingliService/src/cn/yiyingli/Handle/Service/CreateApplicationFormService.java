@@ -1,8 +1,6 @@
 package cn.yiyingli.Handle.Service;
 
 import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.ApplicationForm;
 import cn.yiyingli.Persistant.Teacher;
@@ -13,6 +11,8 @@ import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.toPersistant.PTeacherUtil;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class CreateApplicationFormService extends UMsgService {
 
@@ -54,19 +54,20 @@ public class CreateApplicationFormService extends UMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("15002"));
 			return;
 		}
-		Map<String, Object> application = (Map<String, Object>) getData().get("application");
-		String name = (String) application.get("name");
-		String phone = (String) application.get("phone");
-		String address = (String) application.get("address");
-		String mail = (String) application.get("mail");
+		JSONObject application = getData().getJSONObject("application");
+		String name = application.getString("name");
+		String phone = application.getString("phone");
+		String address = application.getString("address");
+		String mail = application.getString("mail");
+		// String topic = application.getString("topic");
+		// float price =Float.valueOf(application.getString("price"));
 
-		List<Object> workExperiences = (List<Object>) application.get("workExperience");
-		List<Object> studyExperiences = (List<Object>) application.get("studyExperience");
-		Map<String, Object> service = (Map<String, Object>) application.get("service");
-		List<Object> tips = (List<Object>) service.get("tips");
-		Teacher teacher = PTeacherUtil.assembleTeacherByApplication(user, workExperiences, studyExperiences, tips, "",
-				name, phone, address, mail, "", "", "false", "false", "false", "false", "false", "-1", "-1", "-1", "-1",
-				"-1", "0", "0", getTipService());
+		JSONArray workExperiences = application.getJSONArray("workExperience");
+		JSONArray studyExperiences = application.getJSONArray("studyExperience");
+		// JSONArray tips = application.getJSONArray("tips");
+		Teacher teacher = PTeacherUtil.assembleTeacherByApplication(user, workExperiences, studyExperiences,
+				new JSONArray(), "", name, phone, address, mail, "", "", "false", "false", "false", "false", "false",
+				"-1", "-1", "-1", "-1", "-1", "0", "0", "", 0F, getTipService());
 
 		ApplicationForm applicationForm = new ApplicationForm();
 		applicationForm.setTeacher(teacher);

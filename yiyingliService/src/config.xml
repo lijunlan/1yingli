@@ -57,7 +57,6 @@
 		<method name="removePassage" beanName="tRemovePassageService" />
 		<method name="getMile" beanName="tGetMileService" />
 		<method name="getPaypalNo" beanName="tGetPaypalNoService" />
-		<method name="editSimpleInfo" beanName="tEditSimpleInfoService" />
 		<method name="editPayPal" beanName="tEditPayPalService" />
 		<method name="editDetailInfo" beanName="tEditDetailInfoService" />
 		<method name="getPassage" beanName="tGetPassageService" />
