@@ -9,10 +9,10 @@ import net.sf.json.JSONObject;
 
 public class PServiceProUtil {
 
-	public static void assembleWithTeacherByApplication(Teacher teacher, String imageUrls, String content, float price,
-			float numeral, int count, String quantifier, String title, String tip, String freeTime,
-			ServicePro servicePro) {
-		assemble(content, imageUrls, price, numeral, count, quantifier, title, servicePro);
+	public static void assembleWithTeacherByApplication(Teacher teacher, String imageUrls, String summary,
+			String content, float price, float numeral, int count, String quantifier, String title, String tip,
+			String freeTime, ServicePro servicePro) {
+		assemble(content, imageUrls, summary, price, numeral, count, quantifier, title, servicePro);
 		String time = Calendar.getInstance().getTimeInMillis() + "";
 		servicePro.setOnSale(false);
 		servicePro.setPriceTemp(0F);
@@ -35,10 +35,11 @@ public class PServiceProUtil {
 		teacher.getServicePros().add(servicePro);
 	}
 
-	private static void assemble(String content, String imageUrls, float price, float numeral, int count,
-			String quantifier, String title, ServicePro servicePro) {
+	private static void assemble(String content, String imageUrls, String summary, float price, float numeral,
+			int count, String quantifier, String title, ServicePro servicePro) {
 		servicePro.setImageUrls(imageUrls);
 		servicePro.setContent(content);
+		servicePro.setSummary(summary);
 		servicePro.setPrice(price);
 		servicePro.setTitle(title);
 		servicePro.setNumber(count);
@@ -48,9 +49,9 @@ public class PServiceProUtil {
 
 	private static void assemble(JSONObject jsonServicePro, ServicePro servicePro) {
 		assemble(jsonServicePro.getString("content"), jsonServicePro.getString("imageUrls"),
-				Float.valueOf(jsonServicePro.getString("content")), Float.valueOf(jsonServicePro.getString("numeral")),
-				jsonServicePro.getInt("count"), jsonServicePro.getString("quantifier"),
-				jsonServicePro.getString("title"), servicePro);
+				jsonServicePro.getString("summary"), Float.valueOf(jsonServicePro.getString("content")),
+				Float.valueOf(jsonServicePro.getString("numeral")), jsonServicePro.getInt("count"),
+				jsonServicePro.getString("quantifier"), jsonServicePro.getString("title"), servicePro);
 	}
 
 	public static void assembleByTeacherEdit(JSONObject jsonServicePro, ServicePro servicePro) {
@@ -71,8 +72,8 @@ public class PServiceProUtil {
 
 	public static void assembleByTeacherEdit(int count, float price, float priceTemp, float numeral, int kind,
 			String freeTime, String tip, String onshow, String onsale, String quantifier, String servicetitle,
-			String servicecontent, String imageUrls, ServicePro servicePro) {
-		assemble(servicecontent, imageUrls, price, numeral, count, quantifier, servicetitle, servicePro);
+			String servicecontent, String imageUrls, String summary, ServicePro servicePro) {
+		assemble(servicecontent, imageUrls, summary, price, numeral, count, quantifier, servicetitle, servicePro);
 		String time = Calendar.getInstance().getTimeInMillis() + "";
 		servicePro.setOnSale(Boolean.valueOf(onsale));
 		servicePro.setPriceTemp(priceTemp);
@@ -115,8 +116,8 @@ public class PServiceProUtil {
 
 	public static void editWithTeacherByManager(short state, int count, float price, float priceTemp, float numeral,
 			int kind, String freeTime, String tip, String onshow, String onsale, String quantifier, String servicetitle,
-			String servicecontent, String imageUrls, ServicePro servicePro) {
-		assemble(servicecontent, imageUrls, price, numeral, count, quantifier, servicetitle, servicePro);
+			String servicecontent, String imageUrls, String summary, ServicePro servicePro) {
+		assemble(servicecontent, imageUrls, summary, price, numeral, count, quantifier, servicetitle, servicePro);
 		servicePro.setOnSale(Boolean.valueOf(onsale));
 		servicePro.setPriceTemp(priceTemp);
 		servicePro.setFreeTime(freeTime);
@@ -128,9 +129,9 @@ public class PServiceProUtil {
 	}
 
 	public static void assembleWithTeacherByManager(Teacher teacher, String content, float price, float numeral,
-			int count, String quantifier, String title, String tip, String freeTime, String imageUrls,
+			int count, String quantifier, String title, String tip, String freeTime, String imageUrls, String summary,
 			ServicePro servicePro) {
-		assemble(content, imageUrls, price, numeral, count, quantifier, title, servicePro);
+		assemble(content, imageUrls, summary, price, numeral, count, quantifier, title, servicePro);
 		String time = Calendar.getInstance().getTimeInMillis() + "";
 		servicePro.setOnSale(false);
 		servicePro.setPriceTemp(0F);

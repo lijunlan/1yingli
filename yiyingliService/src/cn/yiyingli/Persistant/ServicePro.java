@@ -42,6 +42,9 @@ public class ServicePro {
 	@Column(name = "TITLE", nullable = false)
 	private String title;
 
+	@Column(name = "SUMMARY", nullable = false)
+	private String summary;
+
 	@Column(name = "PRICE", nullable = false)
 	private Float price;
 
@@ -340,6 +343,14 @@ public class ServicePro {
 
 	public void setImageUrls(String imageUrls) {
 		this.imageUrls = imageUrls;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
 }
