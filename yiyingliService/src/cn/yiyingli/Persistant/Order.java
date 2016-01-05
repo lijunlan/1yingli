@@ -84,7 +84,7 @@ public class Order {
 	/**
 	 * 备注 面向管理员
 	 */
-	@Column(name = "REMARK", nullable = true)
+	@Column(name = "REMARK", nullable = true, length = 500)
 	private String remark;
 
 	/**

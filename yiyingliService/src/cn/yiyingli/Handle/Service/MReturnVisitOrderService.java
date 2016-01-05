@@ -30,7 +30,7 @@ public class MReturnVisitOrderService extends MMsgService {
 			return;
 		}
 		order.setReturnVisit(true);
-		getOrderService().update(order, false);
+		getOrderService().update(order);
 		setResMsg(MsgUtil.getSuccessMsg("return visit successfully"));
 
 	}

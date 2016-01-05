@@ -91,8 +91,29 @@ function showDetail(index, action) {
 	$("#modalDetail").append("<b>导师支付宝：</b>" + order[index].teacherAlipayNo + "<br>");
 	$("#modalDetail").append("<b>导师Paypal：</b>" + order[index].teacherPaypalNo + "<br>");
 	$("#modalDetail").append("<b>客户问题：</b>" + order[index].question + "<br>");
-
+	$("#modalDetail").append("<b>备注：</b>" + order[index].remark + "<br>");
+	$("#modalDetail").append("<b>是否回访：</b>" + (order[index].returnVisit=="true"?"是":"否") + "<br>");
+	if(order[index].returnVisit!="true"){
+		$("#modalDetail").append("<b></b><button onclick=\"returnVisit("+order[index].orderId+")\">确认回访</button><br>");
+	}
+	$("#modalDetail").append("<b>提交备注：</b><textarea id=\"remarkTextArea\"/><br>");
+	$("#modalDetail").append("<b></b><button onclick=\"remark("+order[index].orderId+")\">提交备注</button><br>");
 	$("#modalOrderDetail").modal();
+}
+
+function remark(orderId){
+	myJson.method = "remarkOrder";
+	myJson.orderId = orderId.toString();
+	myJson.remark = $("#remarkTextArea").val();
+	myAjax(myJson, null);
+	Messenger().post("提交备注完成");
+}
+
+function returnVisit(orderId){
+	myJson.method = "returnVisitOrder";
+	myJson.orderId = orderId.toString();
+	myAjax(myJson, null);
+	Messenger().post("回访完成");
 }
 
 //根据ajax返回的数据显示页面

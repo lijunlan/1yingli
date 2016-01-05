@@ -33,7 +33,7 @@ public class MRemarkOrderService extends MMsgService {
 		String remark = getData().getString("remark");
 
 		order.setRemark(order.getRemark() == null ? remark : order.getRemark() + "\n" + remark);
-		getOrderService().update(order, false);
+		getOrderService().update(order);
 		setResMsg(MsgUtil.getSuccessMsg("remark order successfully"));
 	}
 

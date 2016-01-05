@@ -119,6 +119,8 @@ public interface OrderService {
 
 	void remove(long id);
 
+	void update(Order order);
+
 	void update(Order order, boolean addMile);
 
 	void updateAndSendTimeTask(Order order);

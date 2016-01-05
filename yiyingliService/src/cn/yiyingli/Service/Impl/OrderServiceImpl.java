@@ -78,6 +78,11 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public void update(Order order) {
+		getOrderDao().update(order);
+	}
+
+	@Override
 	public void update(Order order, boolean addMile) {
 		if (addMile) {
 			if (!order.getOnSale()) {
