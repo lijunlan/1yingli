@@ -15,6 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * @author Administrator
+ *
+ */
 @Entity
 @Table(name = "ORDERS")
 public class Order {
@@ -70,6 +74,18 @@ public class Order {
 	 */
 	@Column(name = "PAYPALNO", nullable = true)
 	private String paypalNo;
+
+	/**
+	 * 是否回访 面向管理员
+	 */
+	@Column(name = "RETURNVISIT", nullable = false)
+	private Boolean returnVisit;
+
+	/**
+	 * 备注 面向管理员
+	 */
+	@Column(name = "REMARK", nullable = true)
+	private String remark;
 
 	/**
 	 * 支付宝流水号
@@ -380,6 +396,22 @@ public class Order {
 
 	public void setPaypalNo(String paypalNo) {
 		this.paypalNo = paypalNo;
+	}
+
+	public Boolean getReturnVisit() {
+		return returnVisit;
+	}
+
+	public void setReturnVisit(Boolean returnVisit) {
+		this.returnVisit = returnVisit;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }

@@ -101,6 +101,8 @@
 		<method name="login" beanName="dLoginService" />
 	</style>
 	<style name="manager">
+		<method name="remarkOrder" beanName="mRemarkOrderService" />
+		<method name="returnVisitOrder" beanName="mReturnVisitOrderService" />
 		<method name="removePassage" beanName="mRemovePassageService" />
 		<method name="editPassage" beanName="mEditPassageService" />
 		<method name="getPassage" beanName="mGetPassageService" />

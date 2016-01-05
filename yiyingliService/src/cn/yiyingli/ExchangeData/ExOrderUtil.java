@@ -53,6 +53,8 @@ public class ExOrderUtil {
 		map.put("customerEmail", o.getCustomerEmail());
 		map.put("salaryState", o.getSalaryState());
 		map.put("weixin", o.getCustomerContact());
+		map.put("returnVisit", o.getReturnVisit());
+		map.put("remark", o.getRemark() == null ? "" : o.getRemark());
 	}
 
 	private static void assembleOrderNormal(SuperMap map, Order o) {

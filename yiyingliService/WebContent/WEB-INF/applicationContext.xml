@@ -2227,5 +2227,25 @@
 			<ref local="passageService" />
 		</property>
 	</bean>
+	
+	<bean id="mRemarkOrderService" class="cn.yiyingli.Handle.Service.MRemarkOrderService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+	</bean>
+	
+	<bean id="mReturnVisitOrderService" class="cn.yiyingli.Handle.Service.MReturnVisitOrderService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+	</bean>
 
 </beans>
