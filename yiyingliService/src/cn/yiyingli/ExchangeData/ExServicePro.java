@@ -16,6 +16,21 @@ public class ExServicePro {
 		map.put("praiseRatio", servicePro.getPraiseRatio());
 	}
 
+	public static void assembleDetailServiceForManager(ServicePro servicePro, SuperMap map) {
+		// 根据UI修改
+		assembelDetail(servicePro, map);
+		map.put("tip", servicePro.getTips());
+		map.put("finishNo", servicePro.getFinishNo());
+		map.put("answerRatio", servicePro.getAnswerRatio());
+		map.put("answerTime", servicePro.getAnswerTime());
+		map.put("score", servicePro.getScore());
+		map.put("likeNo", servicePro.getLikeNo());
+		map.put("praiseRatio", servicePro.getPraiseRatio());
+		map.put("serviceProState", servicePro.getState());
+		map.put("saleWeight", servicePro.getSaleWeight());
+		map.put("homeWeight", servicePro.getHomeWeight());
+	}
+
 	public static void assembleDetailServiceForTeacher(ServicePro servicePro, SuperMap map) {
 		// 根据UI修改
 		assembelDetail(servicePro, map);
@@ -27,7 +42,7 @@ public class ExServicePro {
 		map.put("likeNo", servicePro.getLikeNo());
 		map.put("praiseRatio", servicePro.getPraiseRatio());
 		map.put("onshow", servicePro.getOnShow());
-		map.put("state", servicePro.getState());
+		map.put("serviceProState", servicePro.getState());
 	}
 
 	public static void assembleSimpleServiceForUser(ServicePro servicePro, SuperMap map) {
