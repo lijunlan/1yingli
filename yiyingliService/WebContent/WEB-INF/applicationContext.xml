@@ -2146,5 +2146,40 @@
 			<ref local="orderService" />
 		</property>
 	</bean>
+	
+	<bean id="fGetSaleServiceProListService" class="cn.yiyingli.Handle.Service.FGetSaleServiceProListService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+	</bean>
+
+
+	<bean id="fGetHomeServiceProListService" class="cn.yiyingli.Handle.Service.FGetHomeServiceProListService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+	</bean>
+	
+	<bean id="mGetServiceProService" class="cn.yiyingli.Handle.Service.MGetServiceProService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+	</bean>
+	
+	<bean id="mEditServiceProService" class="cn.yiyingli.Handle.Service.MEditServiceProService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+	</bean>
 
 </beans>

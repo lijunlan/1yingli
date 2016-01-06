@@ -461,7 +461,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
 			@Override
 			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.servicePros where t.onService=true and t.homeWeight!=0 ORDER BY t.homeWeight DESC";
+				String hql = "from Teacher t where t.onService=true and t.homeWeight!=0 ORDER BY t.homeWeight DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult(0);
 				query.setMaxResults(pageSize);
@@ -479,7 +479,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
 			@Override
 			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.servicePros where t.onService=true and t.saleWeight!=0 ORDER BY t.saleWeight DESC";
+				String hql = "from Teacher t where t.onService=true and t.saleWeight!=0 ORDER BY t.saleWeight DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);

@@ -98,6 +98,8 @@
 		<method name="login" beanName="dLoginService" />
 	</style>
 	<style name="manager">
+		<method name="getServicePro" beanName="mGetServiceProService" />
+		<method name="editServicePro" beanName="mEditServiceProService" />
 		<method name="getAllOrderList" beanName="mGetAllOrderListService" />
 		<method name="getSuggestion" beanName="mGetSuggestionService" />
 		<method name="searchTeacher" beanName="mSearchTeacherService" />
@@ -136,6 +138,8 @@
 		<method name="removeBackground" beanName="mRemoveBackgroundService" />
 	</style>
 	<style name="function">
+		<method name="getSaleServiceProList" beanName="fGetSaleServiceProListService" />
+		<method name="getHomeServiceProList" beanName="fGetHomeServiceProListService" />
 		<method name="getPassage" beanName="fGetPassageService" />
 		<method name="getPassageList" beanName="fGetPassageListService" />
 		<method name="getSaleTeacherList" beanName="fGetSaleTeacherListService" />

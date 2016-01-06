@@ -25,6 +25,10 @@ public interface ServiceProService {
 	public static final short STATE_OK = 1;
 
 	public static final int PAGE_SIZE = 12;
+	
+	public static final int HOMEPAGE_PAGE_SIZE = 6;
+	
+	public static final int SALEPAGE_PAGE_SIZE = 12;
 
 	void save(ServicePro servicePro);
 
@@ -37,7 +41,7 @@ public interface ServiceProService {
 	void update(ServicePro servicePro);
 
 	ServicePro query(long id);
-	
+
 	ServicePro queryByUser(long id);
 
 	ServicePro queryByTeacherIdAndServiceId(long teacherId, long serviceId);
@@ -71,4 +75,14 @@ public interface ServiceProService {
 			int pageSize);
 
 	List<ServicePro> queryListByTeacherIdAndStateAndStyle(long teacherId, short state, short style, int page);
+
+	List<ServicePro> queryListByHomePage(int pageSize);
+
+	List<ServicePro> queryListByHomePage();
+
+	List<ServicePro> queryListBySale(int page, int pageSize);
+
+	List<ServicePro> queryListBySale(int page);
+
+	long queryListBySaleNo();
 }

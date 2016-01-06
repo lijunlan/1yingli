@@ -67,7 +67,8 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 
 	@Override
 	public ServicePro queryByTeacherIdAndServiceId(long teacherId, long serviceId) {
-		String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + true + " and sp.id=? and sp.teacher.id=?";
+		String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + true
+				+ " and sp.id=? and sp.teacher.id=?";
 		@SuppressWarnings("unchecked")
 		List<ServicePro> list = getHibernateTemplate().find(hql, serviceId, teacherId);
 		if (list.isEmpty())
@@ -209,4 +210,49 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ServicePro> queryListByHomePage(final int pageSize) {
+		List<ServicePro> list = new ArrayList<ServicePro>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ServicePro>>() {
+			@Override
+			public List<ServicePro> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from ServicePro sp left join fetch sp.teacher where sp.onShow=true and sp.homeWeight!=0 ORDER BY sp.homeWeight DESC";
+				Query query = session.createQuery(hql);
+				query.setFirstResult(0);
+				query.setMaxResults(pageSize);
+				List<ServicePro> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ServicePro> queryListBySale(final int page, final int pageSize) {
+		List<ServicePro> list = new ArrayList<ServicePro>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ServicePro>>() {
+			@Override
+			public List<ServicePro> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from ServicePro sp left join fetch sp.teacher where sp.onShow=true and sp.saleWeight!=0 ORDER BY sp.saleWeight DESC";
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<ServicePro> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@Override
+	public long queryListBySaleNo() {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		long sum = (long) session
+				.createQuery("select count(*) from ServicePro sp where sp.onShow=true and sp.saleWeight!=0")
+				.uniqueResult();
+		return sum;
+	}
 }

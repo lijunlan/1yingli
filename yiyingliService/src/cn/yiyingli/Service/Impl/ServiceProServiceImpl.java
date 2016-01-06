@@ -138,4 +138,29 @@ public class ServiceProServiceImpl implements ServiceProService {
 				state, style, page, PAGE_SIZE);
 	}
 
+	@Override
+	public List<ServicePro> queryListByHomePage(int pageSize) {
+		return getServiceProDao().queryListByHomePage(pageSize);
+	}
+
+	@Override
+	public List<ServicePro> queryListByHomePage() {
+		return getServiceProDao().queryListByHomePage(HOMEPAGE_PAGE_SIZE);
+	}
+
+	@Override
+	public List<ServicePro> queryListBySale(int page, int pageSize) {
+		return getServiceProDao().queryListBySale(page, pageSize);
+	}
+
+	@Override
+	public List<ServicePro> queryListBySale(int page) {
+		return getServiceProDao().queryListBySale(page, SALEPAGE_PAGE_SIZE);
+	}
+
+	@Override
+	public long queryListBySaleNo() {
+		return getServiceProDao().queryListBySaleNo();
+	}
+
 }

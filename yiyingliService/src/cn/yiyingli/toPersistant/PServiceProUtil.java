@@ -95,8 +95,8 @@ public class PServiceProUtil {
 		String time = Calendar.getInstance().getTimeInMillis() + "";
 		servicePro.setOnSale(false);
 		servicePro.setPriceTemp(0F);
-		servicePro.setHomeWeight(-1);
-		servicePro.setSaleWeight(-1);
+		servicePro.setHomeWeight(0);
+		servicePro.setSaleWeight(0);
 		servicePro.setAnswerRatio(0F);
 		servicePro.setAnswerTime(0L);
 		servicePro.setCreateTime(time);

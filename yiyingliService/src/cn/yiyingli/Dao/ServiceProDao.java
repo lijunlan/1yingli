@@ -23,7 +23,7 @@ public interface ServiceProDao {
 	void update(ServicePro servicePro);
 
 	ServicePro querySimple(long id);
-	
+
 	ServicePro queryByUser(long id);
 
 	ServicePro queryByTeacherIdAndServiceId(long teacherId, long serviceId);
@@ -37,4 +37,10 @@ public interface ServiceProDao {
 
 	List<ServicePro> queryListByTeacherIdAndShowAndStateAndStyle(long teacherId, short showKind, short state,
 			short style, int page, int pageSize);
+
+	List<ServicePro> queryListByHomePage(int pageSize);
+
+	List<ServicePro> queryListBySale(int page, int pageSize);
+
+	long queryListBySaleNo();
 }

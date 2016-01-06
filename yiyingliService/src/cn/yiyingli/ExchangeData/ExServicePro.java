@@ -53,6 +53,8 @@ public class ExServicePro {
 		// map.put("answerTime", servicePro.getAnswerTime());
 		map.put("score", servicePro.getScore());
 		map.put("likeNo", servicePro.getLikeNo());
+		map.put("teacherName", servicePro.getTeacher().getName());
+		map.put("teacherSimpleInfo", servicePro.getTeacher().getSimpleInfo());
 		// map.put("praiseRatio", servicePro.getPraiseRatio());
 	}
 
