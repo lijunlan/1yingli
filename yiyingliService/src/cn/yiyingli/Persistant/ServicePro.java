@@ -113,6 +113,12 @@ public class ServicePro {
 	@Column(name = "REMOVE", nullable = false)
 	private Boolean remove;
 
+	@Column(name = "HOMEWEIGHT", nullable = false)
+	private Integer homeWeight;
+
+	@Column(name = "SALEWEIGHT", nullable = false)
+	private Integer saleWeight;
+
 	public Long getId() {
 		return id;
 	}
@@ -351,6 +357,22 @@ public class ServicePro {
 
 	public void setSummary(String summary) {
 		this.summary = summary;
+	}
+
+	public Integer getHomeWeight() {
+		return homeWeight;
+	}
+
+	public void setHomeWeight(Integer homeWeight) {
+		this.homeWeight = homeWeight;
+	}
+
+	public Integer getSaleWeight() {
+		return saleWeight;
+	}
+
+	public void setSaleWeight(Integer saleWeight) {
+		this.saleWeight = saleWeight;
 	}
 
 }
