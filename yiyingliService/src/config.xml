@@ -100,6 +100,12 @@
 	<style name="manager">
 		<method name="getServicePro" beanName="mGetServiceProService" />
 		<method name="editServicePro" beanName="mEditServiceProService" />
+		<method name="remarkOrder" beanName="mRemarkOrderService" />
+		<method name="returnVisitOrder" beanName="mReturnVisitOrderService" />
+		<method name="removePassage" beanName="mRemovePassageService" />
+		<method name="editPassage" beanName="mEditPassageService" />
+		<method name="getPassage" beanName="mGetPassageService" />
+		<method name="createPassage" beanName="mCreatePassageService" />
 		<method name="getAllOrderList" beanName="mGetAllOrderListService" />
 		<method name="getSuggestion" beanName="mGetSuggestionService" />
 		<method name="searchTeacher" beanName="mSearchTeacherService" />
@@ -140,6 +146,8 @@
 	<style name="function">
 		<method name="getSaleServiceProList" beanName="fGetSaleServiceProListService" />
 		<method name="getHomeServiceProList" beanName="fGetHomeServiceProListService" />
+		<method name="recordRecommandPassage" beanName="fRecordRecommandPassageService" />
+		<method name="getRecommendPassageList" beanName="fGetRecommendPassageListService" />
 		<method name="getPassage" beanName="fGetPassageService" />
 		<method name="getPassageList" beanName="fGetPassageListService" />
 		<method name="getSaleTeacherList" beanName="fGetSaleTeacherListService" />

@@ -77,6 +77,18 @@ public class Order {
 	private String paypalNo;
 
 	/**
+	 * 是否回访 面向管理员
+	 */
+	@Column(name = "RETURNVISIT", nullable = false)
+	private Boolean returnVisit;
+
+	/**
+	 * 备注 面向管理员
+	 */
+	@Column(name = "REMARK", nullable = true, length = 500)
+	private String remark;
+
+	/**
 	 * 支付宝流水号
 	 */
 	@Column(name = "UNIQUENO", nullable = true)
@@ -402,4 +414,19 @@ public class Order {
 		this.orderList = orderList;
 	}
 
+	public Boolean getReturnVisit() {
+		return returnVisit;
+	}
+
+	public void setReturnVisit(Boolean returnVisit) {
+		this.returnVisit = returnVisit;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 }

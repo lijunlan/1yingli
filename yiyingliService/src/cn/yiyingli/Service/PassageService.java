@@ -7,7 +7,7 @@ import cn.yiyingli.Persistant.User;
 
 public interface PassageService {
 
-	public static final int PAGE_SIZE = 3;
+	public static final int PAGE_SIZE_PASSAGE = 3;
 
 	public static final int PAGE_SIZE_MANAGER = 10;
 
@@ -19,14 +19,16 @@ public interface PassageService {
 
 	void remove(Passage passage);
 
-	void remove(long id);
+	void update(Passage passage, boolean stateChange, boolean updateToBaidu);
 
-	void update(Passage passage, boolean stateChange);
+	void updateAddLookNumber(long passageId, long number);
 
 	boolean updateUserLike(Passage passage, User user);
 
 	Passage query(long id);
-	
+
+	Passage queryWithTeacherByManager(long id);
+
 	Passage queryWithTeacherById(long id);
 
 	Passage queryByUser(long id);
@@ -48,5 +50,11 @@ public interface PassageService {
 	List<Passage> queryListByShow(int page, boolean show);
 
 	List<Passage> queryListByTeacherAndState(int page, long teacherId, short state);
+
+	List<Passage> queryListByIds(List<Long> ids);
+
+	List<Passage> queryListByRecommand(int page, int pageSize, short state, boolean show);
+
+	List<Passage> queryListByRecommand(int page, short state, boolean show);
 
 }

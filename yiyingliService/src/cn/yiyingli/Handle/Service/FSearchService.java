@@ -15,6 +15,7 @@ import cn.yiyingli.AliyunUtil.AliyunConfiguration;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Util.ConfigurationXmlUtil;
+import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -49,19 +50,27 @@ public class FSearchService extends MsgService {
 				String wd = (String) getData().get("word");
 				wd = URLDecoder.decode(wd, "utf-8");
 				if (!"".equals(wd)) {
-					String[] qss = wd.split(",");
-					for (int i = 0; i < qss.length; i++) {
-						String qs = qss[i];
-						if (i == 0) {// default:'" + qs + "' OR
-							query = query + "(si:'" + qs + "' OR n:'" + qs + "' OR cn:'" + qs + "'^70 OR sn:'" + qs
-									+ "'^70 OR sc:'" + qs + "'^75 OR i:'" + qs + "'^40 OR t:'" + qs + "' OR ta:'" + qs
-									+ "' OR p:'" + qs + "'^70 OR d:'" + qs + "'^70 OR m:'" + qs + "'^70)";
-						} else {
-							query = query + "AND(si:'" + qs + "' OR n:'" + qs + "' OR cn:'" + qs + "'^70 OR sn:'" + qs
-									+ "'^70 OR sc:'" + qs + "'^75 OR i:'" + qs + "'^40 OR t:'" + qs + "' OR ta:'" + qs
-									+ "' OR p:'" + qs + "'^70 OR d:'" + qs + "'^70 OR m:'" + qs + "'^70)";
-						}
-					}
+					// String[] qss = wd.split(",");
+					query = "n:'" + wd + "' OR sw:'" + wd + "'^70 OR i:'" + wd + "'^40 OR mw:'" + wd + "' OR mw2:'" + wd
+							+ "'^70";
+					// for (int i = 0; i < qss.length; i++) {
+					// String qs = qss[i];
+					// if (i == 0) {// default:'" + qs + "' OR
+					// query = query + "(si:'" + qs + "' OR n:'" + qs + "' OR
+					// cn:'" + qs + "'^70 OR sn:'" + qs
+					// + "'^70 OR sc:'" + qs + "'^75 OR i:'" + qs + "'^40 OR
+					// t:'" + qs + "' OR ta:'" + qs
+					// + "' OR p:'" + qs + "'^70 OR d:'" + qs + "'^70 OR m:'" +
+					// qs + "'^70)";
+					// } else {
+					// query = query + "AND(si:'" + qs + "' OR n:'" + qs + "' OR
+					// cn:'" + qs + "'^70 OR sn:'" + qs
+					// + "'^70 OR sc:'" + qs + "'^75 OR i:'" + qs + "'^40 OR
+					// t:'" + qs + "' OR ta:'" + qs
+					// + "' OR p:'" + qs + "'^70 OR d:'" + qs + "'^70 OR m:'" +
+					// qs + "'^70)";
+					// }
+					// }
 				}
 			}
 			search.setQueryString(query);
@@ -96,7 +105,7 @@ public class FSearchService extends MsgService {
 					} else {
 						search.addSort("serviceprice", "-");
 					}
-				}else if (filter.startsWith("finishno")) {
+				} else if (filter.startsWith("finishno")) {
 					if (filter.endsWith("+")) {
 						search.addSort("finishno", "+");
 					} else {
@@ -106,7 +115,9 @@ public class FSearchService extends MsgService {
 			}
 
 			search.addSort("RANK");
+			LogUtil.info("query-->>" + query, getClass());
 			String receive = search.search();
+			LogUtil.info("search result>>" + receive, getClass());
 
 			JSONObject jsonReceive = JSONObject.fromObject(receive);
 			String status = jsonReceive.getString("status");

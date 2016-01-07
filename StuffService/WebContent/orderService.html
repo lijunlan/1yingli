@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -129,6 +129,9 @@
 									onclick="search()" id="searchButton">搜索</button>
 							</span>
 						</div>
+						
+						<br>
+						<button class="am-btn am-btn-default" type="button" onclick="getAllOrders()" 							id="getAllOrderButton">查看所有订单</button>
 					</div>
 				</div>
 			</div>
@@ -187,7 +190,7 @@
 				订单详情<a href="javascript: void(0)" class="am-close am-close-spin"
 					data-am-modal-close>&times;</a>
 			</div>
-			<div class="am-modal-bd" id="modalDetail"></div>
+			<div class="am-modal-bd" id="modalDetail" style="overflow-y:scroll;position:relative;max-height:700px;"></div>
 		</div>
 	</div>
 

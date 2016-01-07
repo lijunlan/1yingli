@@ -37,5 +37,6 @@ public class POrderUtil {
 		order.setMoney(servicePro.getOnSale() ? servicePro.getPrice() * (float) count
 				: servicePro.getPriceTemp() * (float) count);
 		order.setOriginMoney(servicePro.getPrice() * (float) count);
+		order.setReturnVisit(false);
 	}
 }

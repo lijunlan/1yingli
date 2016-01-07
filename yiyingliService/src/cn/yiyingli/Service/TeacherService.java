@@ -31,6 +31,8 @@ public interface TeacherService {
 
 	void removeAllTip(long teacherId);
 
+	void updateAddLookNumber(long teacherId, long number);
+
 	void update(Teacher teacher, boolean refreshRecommend);
 
 	void updateWithDetailInfo(Teacher teacher, boolean refreshRecommend);

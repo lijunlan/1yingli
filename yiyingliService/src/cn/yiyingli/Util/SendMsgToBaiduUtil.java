@@ -13,7 +13,10 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import cn.yiyingli.Dao.PassageDao;
+import cn.yiyingli.ExchangeData.ExPassageForBaidu;
 import cn.yiyingli.ExchangeData.ExTeacherForBaidu;
+import cn.yiyingli.Persistant.Passage;
 import cn.yiyingli.Persistant.Teacher;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -27,6 +30,14 @@ public class SendMsgToBaiduUtil {
 
 	public static String updataUserClickData(String json) {
 		return sendPost("http://ds.recsys.baidu.com/s/130426/253052?token=8d116fa25cfde0085776beee152741e2", json);
+	}
+
+	public static String updataUserClickData(String json, String url) {
+		return sendPost(url, json);
+	}
+	
+	public static String getRecommendPassageListAbout(String pid) {
+		return sendGet("http://api.recsys.baidu.com/s/136349/332496/rs?token=68cff3a47d0eeedf083c16d5aabe1628" + "&num=3&iid=" + pid);
 	}
 
 	public static String getRecommendListAbout(String tid) {
@@ -44,18 +55,28 @@ public class SendMsgToBaiduUtil {
 		return sendPost("http://ds.recsys.baidu.com/s/130426/253052?token=8d116fa25cfde0085776beee152741e2", json);
 	}
 
+	private static String sendMsgToBaiduTrainData(String json, String url) {
+		return sendPost(url, json);
+	}
+
 	@SuppressWarnings("unused")
 	private static String sendMsgToBaidu(String json) {
 		return sendPost("http://ds.recsys.baidu.com/s/130426/253053?token=8d116fa25cfde0085776beee152741e2", json);
 	}
 
 	public static void updateUserTrainDataLike(String uid, String tid, String time) {
+		if (!"false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
+			return;
+		}
 		JSONArray sendList = new JSONArray();
 		sendList.add(JSONUserTrainData(uid, tid, "rate", (short) 3, time.equals("") ? 0L : Long.valueOf(time)));
 		sendMsgToBaiduTrainData(sendList.toString());
 	}
 
 	public static void updateUserTrainDataOrder(String uid, String tid, String time) {
+		if (!"false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
+			return;
+		}
 		JSONArray sendList = new JSONArray();
 		sendList.add(JSONUserTrainData(uid, tid, "rate", (short) 5, time.equals("") ? 0L : Long.valueOf(time)));
 		sendMsgToBaiduTrainData(sendList.toString());
@@ -85,6 +106,41 @@ public class SendMsgToBaiduUtil {
 		DateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
 		toBaidu.put("Timestamp", formatter.format(new Date(time)));
 		return toBaidu;
+	}
+
+	public static void updatePassageData(Passage passage) {
+		if (!"false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
+			return;
+		}
+		if (passage.getState() != PassageDao.PASSAGE_STATE_OK)
+			return;
+		JSONArray jarray = new JSONArray();
+		JSONObject obj = ExPassageForBaidu.assemblePassage(passage);
+		if (obj != null) {
+			jarray.add(obj);
+			sendPost("http://ds.recsys.baidu.com/s/136349/264828?token=68cff3a47d0eeedf083c16d5aabe1628",
+					jarray.toString());
+		}
+	}
+
+	public static void updatePassageUserTrainDataLike(String uid, String pid, String time) {
+		if (!"false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
+			return;
+		}
+		JSONArray sendList = new JSONArray();
+		sendList.add(JSONUserTrainData(uid, pid, "rate", (short) 5, time.equals("") ? 0L : Long.valueOf(time)));
+		sendMsgToBaiduTrainData(sendList.toString(),
+				"http://ds.recsys.baidu.com/s/136349/264829?token=68cff3a47d0eeedf083c16d5aabe1628");
+	}
+
+	public static void updatePassageUserTrainDataRead(String uid, String pid, String time) {
+		if (!"false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
+			return;
+		}
+		JSONArray sendList = new JSONArray();
+		sendList.add(JSONUserTrainData(uid, pid, "rate", (short) 3, time.equals("") ? 0L : Long.valueOf(time)));
+		sendMsgToBaiduTrainData(sendList.toString(),
+				"http://ds.recsys.baidu.com/s/136349/264829?token=68cff3a47d0eeedf083c16d5aabe1628");
 	}
 
 	public static void updateTeacherData(Teacher teacher) {

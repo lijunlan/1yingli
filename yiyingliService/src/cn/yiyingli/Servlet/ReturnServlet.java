@@ -30,12 +30,12 @@ public class ReturnServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private static String page = "http://www.1yingli.cn/#!/myTutor";
+	private static String page = "http://www.1yingli.cn/myTutor";
 
 	private static final String resultParameter = "?paymentResult=";
 
 	// 当payapl链接失败返回的网页
-	private static final String connectError = "<!DOCTYPE html><html lang=\"en\"><head>    <meta charset=\"UTF-8\">    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">    <title>你的导师</title>    <link rel=\"Shortcut Icon\" href=\"http://image.1yingli.cn/img/logo0.png\">    <link rel=\"Bookmark\" href=\"http://image.1yingli.cn/img/logo0.png\">    <style type=\"text/css\">    	#succ{    		width: 400px;height: 200px;margin: auto;position: fixed;top: 50%;left: 50%;margin-top:-150px;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; border:1px solid #D2D2D2    	}    	.succ_title{    	  width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;    	}    	.succ_title div{    	  font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;    	}    	.succ_content{    		position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;    	}    	#succ a{    		text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;    	}    </style></head><body>	<div id=\"succ\">    	<div class=\"succ_title\"><div>来自一英里的信息</div></div>    	<div class=\"succ_content\">连接PAYPAL失败或PAYPAL订单创建失败，请重试。</div>    	<a href=\"http://www.1yingli.cn/#!/myTutor\">确定</a>		</div></body>";
+	private static final String connectError = "<!DOCTYPE html><html lang=\"en\"><head>    <meta charset=\"UTF-8\">    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">    <title>你的导师</title>    <link rel=\"Shortcut Icon\" href=\"http://image.1yingli.cn/img/logo0.png\">    <link rel=\"Bookmark\" href=\"http://image.1yingli.cn/img/logo0.png\">    <style type=\"text/css\">    	#succ{    		width: 400px;height: 200px;margin: auto;position: fixed;top: 50%;left: 50%;margin-top:-150px;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; border:1px solid #D2D2D2    	}    	.succ_title{    	  width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;    	}    	.succ_title div{    	  font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;    	}    	.succ_content{    		position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;    	}    	#succ a{    		text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;    	}    </style></head><body>	<div id=\"succ\">    	<div class=\"succ_title\"><div>来自一英里的信息</div></div>    	<div class=\"succ_content\">连接PAYPAL失败或PAYPAL订单创建失败，请重试。</div>    	<a href=\"http://www.1yingli.cn/myTutor\">确定</a>		</div></body>";
 
 	private ApplicationContext applicationContext;
 
@@ -91,7 +91,7 @@ public class ReturnServlet extends HttpServlet {
 		if (callback.length != 1) {
 			page = callback[1];
 		} else {
-			page = "http://www.1yingli.cn/#!/myTutor";
+			page = "http://www.1yingli.cn/myTutor";
 		}
 		String strAck = results.get("ACK").toString();
 		if (!(("SUCCESS".equalsIgnoreCase(strAck) || "SUCCESSWITHWARNING".equalsIgnoreCase(strAck)))) {
@@ -176,7 +176,9 @@ public class ReturnServlet extends HttpServlet {
 							WarnUtil.sendWarnToCTO("Return from Paypal and orderList id:" + olid
 									+ ", price is wrong, it should be " + orderList.getPayMoney() + ", but it is "
 									+ Float.parseFloat(results2.get("PAYMENTREQUEST_0_AMT")));
+
 							orderListService.update(orderList);
+
 							returnToOnemile(resultParameter + "fail", response);
 							return;
 						}

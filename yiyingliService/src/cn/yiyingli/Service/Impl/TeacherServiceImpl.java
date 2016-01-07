@@ -116,6 +116,11 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
+	public void updateAddLookNumber(long teacherId, long number) {
+		getTeacherDao().updateAddLookNumber(teacherId, 1L);
+	}
+
+	@Override
 	public void updateWithUser(Teacher teacher, long userId, boolean refreshRecommend) {
 		User user = getUserDao().query(userId, false);
 		user.setEmail(teacher.getEmail());

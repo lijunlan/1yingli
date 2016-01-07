@@ -1,4 +1,4 @@
-//初始化
+﻿//初始化
 var mid;
 checkLogin();
 registNotify();
@@ -18,11 +18,11 @@ var changeTable = function (result) {
 		"<tr><th>ID</th><th>建议</th><th>创建时间</th><th>IP</th></tr>");
 	var list = result.data;
 	$.each(list, function (index, data) {
-		var createTime = parseInt(data.createTime, 10);
+		var createTime = parseInt(data.time, 10);
 		createTime = new Date(createTime);
 		var row = "<tr><td>";
 		row += data.id + "</td><td>";
-		row += data.demand + "</td><td>";
+		row += data.content + "</td><td>";
 		row += createTime.toLocaleString() + "</td><td>";
 		row += data.ip + "</td></tr>";
 		$("#infoTable").append(row);

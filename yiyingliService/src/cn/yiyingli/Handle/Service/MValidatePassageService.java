@@ -42,7 +42,7 @@ public class MValidatePassageService extends MMsgService {
 				passage.setRefuseReason(refuseReason);
 			}
 		}
-		getPassageService().update(passage, true);
+		getPassageService().update(passage, true, true);
 		setResMsg(MsgUtil.getSuccessMsg("validate passage successfully"));
 	}
 

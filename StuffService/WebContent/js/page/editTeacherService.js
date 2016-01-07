@@ -52,7 +52,7 @@ $(document).ready(function () {
 			}
 		}
 	});
-})
+});
 
 //注册导师
 function regist() {

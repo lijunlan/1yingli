@@ -1,4 +1,4 @@
-//初始化
+﻿//初始化
 var mid;
 var page = 1;
 checkLogin();
@@ -60,7 +60,7 @@ var changeTable = function (result) {
 			width: 150,//设置宽高
 			height: 150
 		});
-		qrcode.makeCode("http://www.1yingli.cn/login.html?kind=register&distributorNO=" + data.number);
+		qrcode.makeCode("http://www.1yingli.cn/#!/register?distributorNO=" + data.number);
 
 	})
 	$("#distributionTable").append("</tbody>");

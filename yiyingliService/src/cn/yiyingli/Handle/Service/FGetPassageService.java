@@ -12,7 +12,9 @@ import cn.yiyingli.Service.PassageService;
 import cn.yiyingli.Service.RecordService;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Service.UserService;
+import cn.yiyingli.Util.ConfigurationXmlUtil;
 import cn.yiyingli.Util.MsgUtil;
+import cn.yiyingli.Util.SendMsgToBaiduUtil;
 
 public class FGetPassageService extends MsgService {
 
@@ -73,11 +75,7 @@ public class FGetPassageService extends MsgService {
 	 * @param teacher
 	 */
 	private void saveRecord(Passage passage) {
-		Long no = passage.getLookNumber();
-		no++;
-		passage.setLookNumber(no);
-		getPassageService().update(passage,false);
-
+		getPassageService().updateAddLookNumber(passage.getId(), 1L);
 		Record r = new Record();
 		r.setKind(RecordService.RECORD_KIND_SEE_PASSAGE);
 		r.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
@@ -94,9 +92,10 @@ public class FGetPassageService extends MsgService {
 					r.setType(RecordService.RECORD_TYPE_USER);
 					r.setData("passageId=" + passage.getId() + ",userId=" + user.getId());
 				}
-				// SendMsgToBaiduUtil.updateUserTrainDataLike(user.getId() + "",
-				// teacher.getId() + "",
-				// Calendar.getInstance().getTimeInMillis() + "");
+				if ("false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
+					SendMsgToBaiduUtil.updatePassageUserTrainDataRead(user.getId() + "", passage.getId() + "",
+							Calendar.getInstance().getTimeInMillis() + "");
+				}
 			} else {
 				r.setType(RecordService.RECORD_TYPE_GUEST);
 				r.setData("passageId=" + passage.getId());

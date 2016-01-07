@@ -72,15 +72,19 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public void update(Order order) {
+		getOrderDao().update(order);
+	}
+
+	@Override
 	public void update(Order order, boolean addMile) {
 		if (addMile) {
 			if (!order.getOnSale()) {
-				// TODO 导师获得英里数逻辑
-				// Teacher teacher = order.getTeacher();
-				// float time = order.getTime();
-				// long m = (long) (10 * time);
-				// teacher.setMile(teacher.getMile() + m);
-				// getTeacherDao().update(teacher);
+//				Teacher teacher = order.getTeacher();
+//				float time = order.getTime();
+//				long m = (long) (10 * time);
+//				getTeacherDao().update(teacher);
+//				getTeacherDao().updateAddMile(teacher.getId(), m);
 			}
 			getOrderDao().updateOrderWhenOrderFinish(order);
 		} else {
