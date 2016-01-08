@@ -132,7 +132,7 @@ function submit() {
 
 	servicePro.kind=$("[name='radio'][checked]").val();
 	var tip="";
-	$.each($("[name='checkbox"+kind+"'][checked]"),function(index,data){
+	$.each($("[name='checkbox"+servicePro.kind+"'][checked]"),function(index,data){
 		if(index!=0){
 			tip = tip+","+data.val();
 		}else{
@@ -152,8 +152,8 @@ function submit() {
 
 	servicePro.saleWeight=$("#saleWeight").val();
 	servicePro.homeWeight=$("#homeWeight").val();
+	servicePro.freeTime=$("#freeTime").val();
 	
-
 	servicePro.showWeight1 = $("#showWeight1").val();
 	servicePro.showWeight2 = $("#showWeight2").val();
 	servicePro.showWeight3 = $("#showWeight3").val();

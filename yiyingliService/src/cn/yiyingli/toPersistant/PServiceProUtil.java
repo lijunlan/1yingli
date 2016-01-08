@@ -52,7 +52,7 @@ public class PServiceProUtil {
 
 	private static void assemble(JSONObject jsonServicePro, ServicePro servicePro) {
 		assemble(jsonServicePro.getString("content"), jsonServicePro.getString("imageUrls"),
-				jsonServicePro.getString("summary"), Float.valueOf(jsonServicePro.getString("content")),
+				jsonServicePro.getString("summary"), Float.valueOf(jsonServicePro.getString("price")),
 				Float.valueOf(jsonServicePro.getString("numeral")), jsonServicePro.getInt("count"),
 				jsonServicePro.getString("quantifier"), jsonServicePro.getString("title"), servicePro);
 	}

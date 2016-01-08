@@ -159,8 +159,7 @@ public class Teacher {
 
 	@OneToMany(targetEntity = ServicePro.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = true, insertable = true)
-	@IndexColumn(name = "RANKNO")
-	private List<ServicePro> servicePros = new ArrayList<ServicePro>();
+	private Set<ServicePro> servicePros = new HashSet<ServicePro>();
 
 	@Column(name = "FIRSTIDENTITY", nullable = true)
 	private String firstIdentity;
@@ -612,11 +611,11 @@ public class Teacher {
 		this.paypal = paypal;
 	}
 
-	public List<ServicePro> getServicePros() {
+	public Set<ServicePro> getServicePros() {
 		return servicePros;
 	}
 
-	public void setServicePros(List<ServicePro> servicePros) {
+	public void setServicePros(Set<ServicePro> servicePros) {
 		this.servicePros = servicePros;
 	}
 
