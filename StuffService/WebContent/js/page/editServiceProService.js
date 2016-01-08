@@ -86,11 +86,12 @@ function getAndParse(servicePro) {
 	$("#quantifier").val(servicePro.quantifier);
 	$("#content").val(servicePro.content);
 	
+
 	$("[name='radio']").uCheck('uncheck');
 	var kind = servicePro.kind;
 	$("#radio"+kind).uCheck('check');
 
-	$("[name='checkbox1']").uCheck('uncheck');
+	$("[name='checkbox']").uCheck('uncheck');
 	$("[name='checkbox2']").uCheck('uncheck');
 	$("[name='checkbox3']").uCheck('uncheck');
 	$("[name='checkbox4']").uCheck('uncheck');
@@ -131,7 +132,7 @@ function submit() {
 	servicePro.numeral=$("#numeral").val();
 	$.each($("[name='radio']"),function(index,data){
 		var cb = $(data);
-		if(cb.prop("checked")){
+		if(cb.is(':checked')){
 			servicePro.kind=cb.val();	
 		}
 	});
@@ -139,7 +140,7 @@ function submit() {
 	var tip="";
 	$.each($("[name='checkbox"+servicePro.kind+"']"),function(index,data){
 		var cb = $(data);
-		if(cb.prop("checked")){
+		if(cb.is(':checked')){
 			if(index!=0){
 				tip = tip+","+cb.val();
 			}else{
