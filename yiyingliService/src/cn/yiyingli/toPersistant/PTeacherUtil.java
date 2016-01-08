@@ -28,12 +28,12 @@ public class PTeacherUtil {
 		teacher.setPrice(Float.valueOf(map.getString("price")));
 	}
 
-	public static void editTeacherByManagerDetail(User user, List<Object> workExperiences,
-			List<Object> studyExperiences, List<Object> tips, String simpleinfo, String name, String phone,
-			String address, String mail, String iconUrl, String introduce, String checkPhone, String checkIDCard,
-			String checkEmail, String checkWork, String checkStudy, String showWeight1, String showWeight2,
-			String showWeight4, String showWeight8, String showWeight16, String homeWeight, String saleWeight,
-			String onService, long mile, String topic, float price, Teacher teacher, TipService tipService) {
+	public static void editTeacherByManagerDetail(User user, JSONArray workExperiences, JSONArray studyExperiences,
+			JSONArray tips, String simpleinfo, String name, String phone, String address, String mail, String iconUrl,
+			String introduce, String checkPhone, String checkIDCard, String checkEmail, String checkWork,
+			String checkStudy, String showWeight1, String showWeight2, String showWeight4, String showWeight8,
+			String showWeight16, String homeWeight, String saleWeight, String onService, long mile, String topic,
+			float price, Teacher teacher, TipService tipService) {
 		refreshTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone, address, mail, iconUrl,
 				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, showWeight1, showWeight2,
 				showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, mile, topic, price, teacher,
@@ -96,12 +96,12 @@ public class PTeacherUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void refreshTeacher(User user, List<Object> workExperiences, List<Object> studyExperiences,
-			List<Object> tips, String simpleinfo, String name, String phone, String address, String mail,
-			String iconUrl, String introduce, String checkPhone, String checkIDCard, String checkEmail,
-			String checkWork, String checkStudy, String showWeight1, String showWeight2, String showWeight4,
-			String showWeight8, String showWeight16, String homeWeight, String saleWeight, long mile, String topic,
-			float price, Teacher teacher, TipService tipService) {
+	public static void refreshTeacher(User user, JSONArray workExperiences, JSONArray studyExperiences, JSONArray tips,
+			String simpleinfo, String name, String phone, String address, String mail, String iconUrl, String introduce,
+			String checkPhone, String checkIDCard, String checkEmail, String checkWork, String checkStudy,
+			String showWeight1, String showWeight2, String showWeight4, String showWeight8, String showWeight16,
+			String homeWeight, String saleWeight, long mile, String topic, float price, Teacher teacher,
+			TipService tipService) {
 		if (Boolean.valueOf(checkPhone)) {
 			teacher.setCheckPhone(true);
 		} else {
@@ -189,7 +189,7 @@ public class PTeacherUtil {
 		long tipMark = 0;
 		if (tips != null) {
 			for (Object t : tips) {
-				Long tid = Long.valueOf((String) ((Map<String, Object>) t).get("id"));
+				Long tid = ((JSONObject) t).getLong("id");
 				tipMark = tipMark | tid;
 				Tip mT = tipService.query(tid);
 				teacher.getTips().add(mT);
@@ -198,11 +198,11 @@ public class PTeacherUtil {
 		teacher.setTipMark(tipMark);
 	}
 
-	public static Teacher assembleNewTeacher(User user, List<Object> workExperiences, List<Object> studyExperiences,
-			List<Object> tips, String simpleinfo, String name, String phone, String address, String mail,
-			String iconUrl, String introduce, String checkPhone, String checkIDCard, String checkEmail,
-			String checkWork, String checkStudy, String showWeight1, String showWeight2, String showWeight4,
-			String showWeight8, String showWeight16, String homeWeight, String saleWeight, String topic, float price,
+	public static Teacher assembleNewTeacher(User user, JSONArray workExperiences, JSONArray studyExperiences,
+			JSONArray tips, String simpleinfo, String name, String phone, String address, String mail, String iconUrl,
+			String introduce, String checkPhone, String checkIDCard, String checkEmail, String checkWork,
+			String checkStudy, String showWeight1, String showWeight2, String showWeight4, String showWeight8,
+			String showWeight16, String homeWeight, String saleWeight, String topic, float price,
 			TipService tipService) {
 		Teacher teacher = new Teacher();
 		refreshTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone, address, mail, iconUrl,
@@ -226,12 +226,12 @@ public class PTeacherUtil {
 		return teacher;
 	}
 
-	public static Teacher assembleTeacherByApplication(User user, List<Object> workExperiences,
-			List<Object> studyExperiences, List<Object> tips, String simpleinfo, String name, String phone,
-			String address, String mail, String iconUrl, String introduce, String checkPhone, String checkIDCard,
-			String checkEmail, String checkWork, String checkStudy, String showWeight1, String showWeight2,
-			String showWeight4, String showWeight8, String showWeight16, String homeWeight, String saleWeight,
-			String topic, float price, TipService tipService) {
+	public static Teacher assembleTeacherByApplication(User user, JSONArray workExperiences, JSONArray studyExperiences,
+			JSONArray tips, String simpleinfo, String name, String phone, String address, String mail, String iconUrl,
+			String introduce, String checkPhone, String checkIDCard, String checkEmail, String checkWork,
+			String checkStudy, String showWeight1, String showWeight2, String showWeight4, String showWeight8,
+			String showWeight16, String homeWeight, String saleWeight, String topic, float price,
+			TipService tipService) {
 		Teacher teacher = assembleNewTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
 				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
 				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, topic, price,
@@ -241,12 +241,12 @@ public class PTeacherUtil {
 		return teacher;
 	}
 
-	public static Teacher assembleTeacherByManager(User user, List<Object> workExperiences,
-			List<Object> studyExperiences, List<Object> tips, String simpleinfo, String name, String phone,
-			String address, String mail, String iconUrl, String introduce, String checkPhone, String checkIDCard,
-			String checkEmail, String checkWork, String checkStudy, String showWeight1, String showWeight2,
-			String showWeight4, String showWeight8, String showWeight16, String homeWeight, String saleWeight,
-			String topic, float price, TipService tipService) {
+	public static Teacher assembleTeacherByManager(User user, JSONArray workExperiences, JSONArray studyExperiences,
+			JSONArray tips, String simpleinfo, String name, String phone, String address, String mail, String iconUrl,
+			String introduce, String checkPhone, String checkIDCard, String checkEmail, String checkWork,
+			String checkStudy, String showWeight1, String showWeight2, String showWeight4, String showWeight8,
+			String showWeight16, String homeWeight, String saleWeight, String topic, float price,
+			TipService tipService) {
 		Teacher teacher = assembleNewTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
 				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
 				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, topic, price,

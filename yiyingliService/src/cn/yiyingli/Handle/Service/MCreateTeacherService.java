@@ -48,7 +48,6 @@ public class MCreateTeacherService extends MMsgService {
 		return super.checkData() && getData().containsKey("teacher") && getData().containsKey("username");
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void doit() {
 		String username = (String) getData().get("username");
@@ -92,18 +91,19 @@ public class MCreateTeacherService extends MMsgService {
 				checkWork, checkStudy, showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight,
 				saleWeight, topic, price, getTipService());
 
-//		String serviceTitle = service.getString("title");
-//		float numeral = Float.valueOf(service.getString("numeral"));
-//		float price = Float.valueOf(service.getString("price"));
-//		int count = service.getInt("count");
-//		String quantifier = service.getString("quantifier");
-//		String serviceContent = service.getString("content");
-//		String tip = service.getString("tip");
-//		String freeTime = service.getString("freeTime");
-//
-//		ServicePro servicePro = new ServicePro();
-//		PServiceProUtil.assembleWithTeacherByManager(teacher, serviceContent, price, numeral, count, quantifier,
-//				serviceTitle, tip, freeTime, servicePro);
+		// String serviceTitle = service.getString("title");
+		// float numeral = Float.valueOf(service.getString("numeral"));
+		// float price = Float.valueOf(service.getString("price"));
+		// int count = service.getInt("count");
+		// String quantifier = service.getString("quantifier");
+		// String serviceContent = service.getString("content");
+		// String tip = service.getString("tip");
+		// String freeTime = service.getString("freeTime");
+		//
+		// ServicePro servicePro = new ServicePro();
+		// PServiceProUtil.assembleWithTeacherByManager(teacher, serviceContent,
+		// price, numeral, count, quantifier,
+		// serviceTitle, tip, freeTime, servicePro);
 
 		getTeacherService().saveWithDetailInfo(teacher);
 		setResMsg(MsgUtil.getSuccessMsg("insert teacher successfully"));

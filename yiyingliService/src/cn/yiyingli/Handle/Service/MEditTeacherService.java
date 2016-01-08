@@ -48,7 +48,6 @@ public class MEditTeacherService extends MMsgService {
 		return super.checkData() && getData().containsKey("teacher") && getData().containsKey("username");
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void doit() {
 		String username = (String) getData().get("username");

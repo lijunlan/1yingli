@@ -41,7 +41,6 @@ public class CreateApplicationFormService extends UMsgService {
 		return super.checkData() && getData().containsKey("application");
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void doit() {
 		User user = getUser();

@@ -112,9 +112,6 @@ public class Teacher {
 	@Column(name = "BGURL", nullable = true)
 	private String bgUrl;
 
-	@Column(name = "IMAGEURL", nullable = true)
-	private String imageUrl;
-
 	@Column(name = "ALIPAY", nullable = true)
 	private String alipay;
 
@@ -333,14 +330,6 @@ public class Teacher {
 
 	public void setBgUrl(String bgUrl) {
 		this.bgUrl = bgUrl;
-	}
-
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
 	}
 
 	public String getAlipay() {
