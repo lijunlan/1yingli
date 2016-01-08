@@ -104,6 +104,7 @@ public class ExServicePro {
 	private static void assembelDetail(ServicePro servicePro, SuperMap map) {
 		// 根据UI修改
 		map.put("imageUrls", servicePro.getImageUrls());
+		map.put("summary", servicePro.getSummary());
 		map.put("content", servicePro.getContent());
 		map.put("title", servicePro.getTitle());
 		map.put("price", servicePro.getPrice());
@@ -111,7 +112,7 @@ public class ExServicePro {
 		map.put("count", servicePro.getNumber());
 		map.put("onsale", servicePro.getOnSale());
 		map.put("numeral", servicePro.getNumeral());
-		map.put("quantifier", servicePro.getTips());
+		map.put("quantifier", servicePro.getQuantifier());
 		map.put("freeTime", servicePro.getFreeTime());
 		map.put("kind", servicePro.getKind());
 	}

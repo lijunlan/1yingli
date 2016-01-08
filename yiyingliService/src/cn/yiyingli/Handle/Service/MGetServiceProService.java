@@ -26,6 +26,10 @@ public class MGetServiceProService extends MMsgService {
 	@Override
 	public void doit() {
 		ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"));
+		if(servicePro==null){
+			setResMsg(MsgUtil.getErrorMsgByCode("22008"));
+			return;
+		}
 		SuperMap map = MsgUtil.getSuccessMap();
 		ExServicePro.assembleDetailServiceForManager(servicePro, map);
 		setResMsg(map.finishByJson());
