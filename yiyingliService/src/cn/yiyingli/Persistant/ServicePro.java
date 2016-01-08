@@ -26,7 +26,7 @@ public class ServicePro {
 
 	@Column(name = "IMAGEURLS", nullable = false)
 	private String imageUrls;
-	
+
 	@Column(name = "TIPS", nullable = false)
 	private String tips;
 
@@ -103,9 +103,6 @@ public class ServicePro {
 	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = true)
 	private Teacher teacher;
-
-	@Column(name = "RANKNO", nullable = false)
-	private Integer rankNo;
 
 	@Column(name = "REMOVE", nullable = false)
 	private Boolean remove;
@@ -332,14 +329,6 @@ public class ServicePro {
 
 	public void setFreeTime(String freeTime) {
 		this.freeTime = freeTime;
-	}
-
-	public Integer getRankNo() {
-		return rankNo;
-	}
-
-	public void setRankNo(Integer rankNo) {
-		this.rankNo = rankNo;
 	}
 
 	public Boolean getOnSale() {
