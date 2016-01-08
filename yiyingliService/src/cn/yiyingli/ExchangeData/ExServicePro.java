@@ -19,6 +19,7 @@ public class ExServicePro {
 	public static void assembleDetailServiceForManager(ServicePro servicePro, SuperMap map) {
 		// 根据UI修改
 		assembelDetail(servicePro, map);
+		map.put("onshow", servicePro.getOnShow());
 		map.put("showWeight1", servicePro.getShowWeight1());
 		map.put("showWeight2", servicePro.getShowWeight2());
 		map.put("showWeight3", servicePro.getShowWeight3());

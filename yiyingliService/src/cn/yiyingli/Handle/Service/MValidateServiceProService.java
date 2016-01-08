@@ -28,6 +28,7 @@ public class MValidateServiceProService extends MMsgService {
 		boolean deal = getData().getBoolean("deal");
 		if (deal) {
 			servicePro.setState(ServiceProService.STATE_OK);
+			servicePro.setOnShow(true);
 		} else {
 			servicePro.setState(ServiceProService.STATE_FAILED);
 		}

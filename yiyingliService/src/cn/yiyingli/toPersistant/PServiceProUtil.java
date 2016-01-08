@@ -147,7 +147,7 @@ public class PServiceProUtil {
 		servicePro.setFreeTime(jsonServicePro.getString("freeTime"));
 		servicePro.setLikeNo(0L);
 		servicePro.setKind(0);
-		servicePro.setOnShow(false);
+		servicePro.setOnShow(true);
 		servicePro.setPraiseRatio(0F);
 		servicePro.setScore(0);
 		servicePro.setState(ServiceProService.STATE_OK);

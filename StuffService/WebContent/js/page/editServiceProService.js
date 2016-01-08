@@ -73,8 +73,8 @@ function getAndParse(servicePro) {
 	
 	//TODO
 	$("#iconUrl").val(servicePro.imageUrls);
-	$("#littleIcon").attr('src',servicePro.imageUrls);
 	imageUrls=servicePro.imageUrls;
+	$("#littleIcon").attr('src',servicePro.imageUrls);
 
 
 	$("#title").val(servicePro.title);
@@ -129,14 +129,22 @@ function submit() {
 	servicePro.price=$("#price").val();
 	servicePro.priceTemp=$("#pricetemp").val();
 	servicePro.numeral=$("#numeral").val();
-
-	servicePro.kind=$("[name='radio'][checked]").val();
+	$.each($("[name='radio']"),function(index,data){
+		var cb = $(data);
+		if(cb.prop("checked")){
+			servicePro.kind=cb.val();	
+		}
+	});
+	//servicePro.kind=$("[name='radio'][checked]").val();
 	var tip="";
-	$.each($("[name='checkbox"+servicePro.kind+"'][checked]"),function(index,data){
-		if(index!=0){
-			tip = tip+","+data.val();
-		}else{
-			tip = data.val();
+	$.each($("[name='checkbox"+servicePro.kind+"']"),function(index,data){
+		var cb = $(data);
+		if(cb.prop("checked")){
+			if(index!=0){
+				tip = tip+","+cb.val();
+			}else{
+				tip = cb.val();
+			}
 		}
 	});
 	servicePro.tip=tip;
