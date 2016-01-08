@@ -34,6 +34,11 @@ public class ServiceProServiceImpl implements ServiceProService {
 	}
 
 	@Override
+	public void saveAndPlusNumber(ServicePro servicePro, boolean byManager) {
+		getServiceProDao().saveAndPlusNumber(servicePro, byManager);
+	}
+
+	@Override
 	public void remove(ServicePro servicePro) {
 		getServiceProDao().remove(servicePro);
 	}
@@ -46,6 +51,11 @@ public class ServiceProServiceImpl implements ServiceProService {
 	@Override
 	public void update(ServicePro servicePro) {
 		getServiceProDao().update(servicePro);
+	}
+
+	@Override
+	public void updateAndPlusNumber(ServicePro servicePro, boolean remove) {
+		getServiceProDao().updateAndPlusNumber(servicePro, remove);
 	}
 
 	@Override
@@ -109,33 +119,6 @@ public class ServiceProServiceImpl implements ServiceProService {
 	public List<ServicePro> queryListByTeacherIdAndState(long teacherId, short state, int page) {
 		return getServiceProDao().queryListByTeacherIdAndShowAndState(teacherId, ServiceProDao.SHOW_KIND_NONE, state,
 				page, PAGE_SIZE);
-	}
-
-	@Override
-	public List<ServicePro> queryListByTeacherIdAndShowAndStateAndStyle(long teacherId, boolean show, short state,
-			short style, int page, int pageSize) {
-		return getServiceProDao().queryListByTeacherIdAndShowAndStateAndStyle(teacherId, B2S(show), state, style, page,
-				pageSize);
-	}
-
-	@Override
-	public List<ServicePro> queryListByTeacherIdAndShowAndStateAndStyle(long teacherId, boolean show, short state,
-			short style, int page) {
-		return getServiceProDao().queryListByTeacherIdAndShowAndStateAndStyle(teacherId, B2S(show), state, style, page,
-				PAGE_SIZE);
-	}
-
-	@Override
-	public List<ServicePro> queryListByTeacherIdAndStateAndStyle(long teacherId, short state, short style, int page,
-			int pageSize) {
-		return getServiceProDao().queryListByTeacherIdAndShowAndStateAndStyle(teacherId, ServiceProDao.SHOW_KIND_NONE,
-				state, style, page, pageSize);
-	}
-
-	@Override
-	public List<ServicePro> queryListByTeacherIdAndStateAndStyle(long teacherId, short state, short style, int page) {
-		return getServiceProDao().queryListByTeacherIdAndShowAndStateAndStyle(teacherId, ServiceProDao.SHOW_KIND_NONE,
-				state, style, page, PAGE_SIZE);
 	}
 
 	@Override

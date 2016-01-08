@@ -26,10 +26,7 @@ public class ServicePro {
 
 	@Column(name = "IMAGEURLS", nullable = false)
 	private String imageUrls;
-
-	@Column(name = "STYLE", nullable = false)
-	private Short style;
-
+	
 	@Column(name = "TIPS", nullable = false)
 	private String tips;
 
@@ -118,6 +115,40 @@ public class ServicePro {
 
 	@Column(name = "SALEWEIGHT", nullable = false)
 	private Integer saleWeight;
+
+	/**
+	 * 咨询：超时服务，可视频，可语音，时间灵活，支持多人
+	 * 
+	 */
+	@Column(name = "SHOWWEIGHT1", nullable = false)
+	private Integer showWeight1;
+
+	/**
+	 * 体验：时间灵活，支持多人，轻装上阵，超时服务，接送服务
+	 * 
+	 */
+	@Column(name = "SHOWWEIGHT2", nullable = false)
+	private Integer showWeight2;
+
+	/**
+	 * 批改：支持加急，量大优惠，5天内完成
+	 * 
+	 */
+	@Column(name = "SHOWWEIGHT3", nullable = false)
+	private Integer showWeight3;
+
+	/**
+	 * 技艺教授：时间灵活，支持多人，可长期服务，专业领域
+	 * 
+	 */
+	@Column(name = "SHOWWEIGHT4", nullable = false)
+	private Integer showWeight4;
+
+	/**
+	 * 帮忙：超时服务，时间灵活，上门服务
+	 */
+	@Column(name = "SHOWWEIGHT5", nullable = false)
+	private Integer showWeight5;
 
 	public Long getId() {
 		return id;
@@ -319,14 +350,6 @@ public class ServicePro {
 		this.onSale = onSale;
 	}
 
-	public Short getStyle() {
-		return style;
-	}
-
-	public void setStyle(Short style) {
-		this.style = style;
-	}
-
 	public Long getAcceptNo() {
 		return acceptNo;
 	}
@@ -373,6 +396,46 @@ public class ServicePro {
 
 	public void setSaleWeight(Integer saleWeight) {
 		this.saleWeight = saleWeight;
+	}
+
+	public Integer getShowWeight1() {
+		return showWeight1;
+	}
+
+	public void setShowWeight1(Integer showWeight1) {
+		this.showWeight1 = showWeight1;
+	}
+
+	public Integer getShowWeight2() {
+		return showWeight2;
+	}
+
+	public void setShowWeight2(Integer showWeight2) {
+		this.showWeight2 = showWeight2;
+	}
+
+	public Integer getShowWeight3() {
+		return showWeight3;
+	}
+
+	public void setShowWeight3(Integer showWeight3) {
+		this.showWeight3 = showWeight3;
+	}
+
+	public Integer getShowWeight4() {
+		return showWeight4;
+	}
+
+	public void setShowWeight4(Integer showWeight4) {
+		this.showWeight4 = showWeight4;
+	}
+
+	public Integer getShowWeight5() {
+		return showWeight5;
+	}
+
+	public void setShowWeight5(Integer showWeight5) {
+		this.showWeight5 = showWeight5;
 	}
 
 }

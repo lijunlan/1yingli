@@ -182,8 +182,8 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public Teacher queryWithTips(long id, boolean lazy) {
-		return getTeacherDao().queryWithTips(id, lazy);
+	public Teacher queryWithServiceProList(long id) {
+		return getTeacherDao().queryWithServiceProList(id);
 	}
 
 	@Override

@@ -54,6 +54,10 @@
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
 	</style>
 	<style name="teacher">
+		<method name="removeServicePro" beanName="tRemoveServiceProService" />
+		<method name="getServiceProList" beanName="tGetServiceProListService" />
+		<method name="createServicePro" beanName="tCreateServiceProService" />
+		<method name="editServicePro" beanName="tEditServiceProService" />
 		<method name="removePassage" beanName="tRemovePassageService" />
 		<method name="getMile" beanName="tGetMileService" />
 		<method name="getPaypalNo" beanName="tGetPaypalNoService" />
@@ -98,6 +102,7 @@
 		<method name="login" beanName="dLoginService" />
 	</style>
 	<style name="manager">
+		<method name="createServicePro" beanName="mCreateServiceProService" />
 		<method name="getServicePro" beanName="mGetServiceProService" />
 		<method name="editServicePro" beanName="mEditServiceProService" />
 		<method name="remarkOrder" beanName="mRemarkOrderService" />

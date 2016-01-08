@@ -55,7 +55,7 @@ public interface TeacherService {
 
 	Teacher queryAll(long id);
 
-	Teacher queryWithTips(long id, boolean lazy);
+	Teacher queryWithServiceProList(long id);
 
 	Teacher queryWithLikeUser(long teacherId);
 
@@ -114,4 +114,5 @@ public interface TeacherService {
 	List<Teacher> queryListByTipAndLevel(int page, int pageSize, long tipMark, short level, boolean lazy);
 
 	List<Teacher> queryListByTipAndLevel(int page, long tipMark, short level, boolean lazy);
+
 }

@@ -31,9 +31,8 @@ public class TCreateServiceProService extends TMsgService {
 		ServicePro servicePro = new ServicePro();
 		Teacher teacher = getTeacher();
 		PServiceProUtil.assembleWithTeacherByTeacherCreate(teacher, jsonServicePro, servicePro);
-		teacher.setServiceProNumberForTeacher(teacher.getServiceProNumberForTeacher() + 1);
-		// getServiceProService()
-		getTeacherService().update(teacher, false);
+
+		getServiceProService().saveAndPlusNumber(servicePro, false);
 		setResMsg(MsgUtil.getSuccessMsg("create servicePro successfully"));
 	}
 

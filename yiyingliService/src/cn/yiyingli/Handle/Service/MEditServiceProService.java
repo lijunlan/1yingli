@@ -5,6 +5,7 @@ import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.toPersistant.PServiceProUtil;
+import net.sf.json.JSONObject;
 
 public class MEditServiceProService extends MMsgService {
 
@@ -19,14 +20,7 @@ public class MEditServiceProService extends MMsgService {
 	}
 
 	public boolean checkData() {
-		return super.checkData() && getData().containsKey("serviceProId") && getData().containsKey("count")
-				&& getData().containsKey("price") && getData().containsKey("priceTemp")
-				&& getData().containsKey("numeral") && getData().containsKey("tip") && getData().containsKey("onshow")
-				&& getData().containsKey("onsale") && getData().containsKey("quantifier")
-				&& getData().containsKey("title") && getData().containsKey("content")
-				&& getData().containsKey("imageUrls") && getData().containsKey("summary")
-				&& getData().containsKey("state") && getData().containsKey("kind")
-				&& getData().containsKey("saleWeight") && getData().containsKey("homeWeight");
+		return super.checkData() && getData().containsKey("servicePro") && getData().containsKey("serviceProId");
 	}
 
 	@Override
@@ -36,25 +30,25 @@ public class MEditServiceProService extends MMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("42002"));
 			return;
 		}
-		int count = getData().getInt("count");
-		float price = Float.valueOf(getData().getString("price"));
-		float priceTemp = Float.valueOf(getData().getString("priceTemp"));
-		int numeral = getData().getInt("numeral");
-		// String freeTime = getData().getString("freeTime");
-		String tip = getData().getString("tip");
-		String onshow = getData().getString("onshow");
-		String onsale = getData().getString("onsale");
-		String quantifier = getData().getString("quantifier");
-		String servicetitle = getData().getString("title");
-		String servicecontent = getData().getString("content");
-		String imageUrls = getData().getString("imageUrls");
-		String summary = getData().getString("summary");
-		short state = Short.valueOf(getData().getString("state"));
-		int kind = getData().getInt("kind");
-		int saleWeight = getData().getInt("saleWeight");
-		int homeWeight = getData().getInt("homeWeight");
-		PServiceProUtil.editrByManager(state, count, price, priceTemp, numeral, kind, "", tip, onshow, onsale,
-				quantifier, servicetitle, servicecontent, imageUrls, summary, homeWeight, saleWeight, servicePro);
+		JSONObject jsonServicePro = getData().getJSONObject("servicePro");
+		int count = jsonServicePro.getInt("count");
+		float price = Float.valueOf(jsonServicePro.getString("price"));
+		float priceTemp = Float.valueOf(jsonServicePro.getString("priceTemp"));
+		int numeral = jsonServicePro.getInt("numeral");
+		// String freeTime = jsonServicePro.getString("freeTime");
+		String tip = jsonServicePro.getString("tip");
+		String onshow = jsonServicePro.getString("onshow");
+		String onsale = jsonServicePro.getString("onsale");
+		String quantifier = jsonServicePro.getString("quantifier");
+		String servicetitle = jsonServicePro.getString("title");
+		String servicecontent = jsonServicePro.getString("content");
+		String imageUrls = jsonServicePro.getString("imageUrls");
+		String summary = jsonServicePro.getString("summary");
+		int kind = jsonServicePro.getInt("kind");
+		int saleWeight = jsonServicePro.getInt("saleWeight");
+		int homeWeight = jsonServicePro.getInt("homeWeight");
+		PServiceProUtil.editrByManager(count, price, priceTemp, numeral, kind, "", tip, onshow, onsale, quantifier,
+				servicetitle, servicecontent, imageUrls, summary, homeWeight, saleWeight, servicePro);
 		getServiceProService().update(servicePro);
 		setResMsg(MsgUtil.getSuccessMsg("edit servicePro successfully"));
 	}

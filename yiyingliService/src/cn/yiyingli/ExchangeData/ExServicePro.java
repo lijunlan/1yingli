@@ -75,6 +75,7 @@ public class ExServicePro {
 
 	private static void assembelDetail(ServicePro servicePro, SuperMap map) {
 		// 根据UI修改
+		map.put("imageUrls", servicePro.getImageUrls());
 		map.put("content", servicePro.getContent());
 		map.put("title", servicePro.getTitle());
 		map.put("price", servicePro.getPrice());

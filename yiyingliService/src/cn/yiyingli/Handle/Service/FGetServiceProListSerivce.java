@@ -50,8 +50,8 @@ public class FGetServiceProListSerivce extends MsgService {
 			return;
 		}
 		int page = Integer.valueOf((String) getData().get("page"));
-		List<ServicePro> servicePros = getServiceProService().queryListByTeacherIdAndShowAndStateAndStyle(teacherId,
-				true, ServiceProService.STATE_OK, ServiceProService.STYLE_SERVICE, page);
+		List<ServicePro> servicePros = getServiceProService().queryListByTeacherIdAndShowAndState(teacherId, true,
+				ServiceProService.STATE_OK, page);
 
 		ExList sends = new ExArrayList();
 		for (ServicePro servicePro : servicePros) {

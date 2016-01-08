@@ -28,6 +28,27 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 	}
 
 	@Override
+	public void saveAndPlusNumber(ServicePro servicePro, boolean byManager) {
+		getHibernateTemplate().save(servicePro);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session.createSQLQuery(
+				"update teacher set teacher.SERVICEPRONUMBERFORTEACHER=(select count(*) from servicepro where servicepro.REMOVE=false and servicepro.TEACHER_ID='"
+						+ servicePro.getTeacher().getId() + "') where teacher.TEACHER_ID="
+						+ servicePro.getTeacher().getId());
+		query.executeUpdate();
+		if (byManager) {
+			query = session.createSQLQuery(
+					"update teacher set teacher.SERVICEPRONUMBERFORUSER=(select count(*) from servicepro where servicepro.REMOVE=false and servicepro.STATE="
+							+ ServiceProService.STATE_OK + " and servicepro.TEACHER_ID='"
+							+ servicePro.getTeacher().getId() + "') where teacher.TEACHER_ID="
+							+ servicePro.getTeacher().getId());
+			query.executeUpdate();
+		}
+
+	}
+
+	@Override
 	public void remove(ServicePro servicePro) {
 		getHibernateTemplate().delete(servicePro);
 	}
@@ -40,6 +61,25 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 	@Override
 	public void update(ServicePro servicePro) {
 		getHibernateTemplate().update(servicePro);
+	}
+
+	@Override
+	public void updateAndPlusNumber(ServicePro servicePro, boolean remove) {
+		getHibernateTemplate().update(servicePro);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session.createSQLQuery(
+				"update teacher set teacher.SERVICEPRONUMBERFORUSER=(select count(*) from servicepro where servicepro.REMOVE=false and servicepro.STATE="
+						+ ServiceProService.STATE_OK + " and servicepro.TEACHER_ID='" + servicePro.getTeacher().getId()
+						+ "') where teacher.TEACHER_ID=" + servicePro.getTeacher().getId());
+		query.executeUpdate();
+		if (remove) {
+			query = session.createSQLQuery(
+					"update teacher set teacher.SERVICEPRONUMBERFORTEACHER=(select count(*) from servicepro where servicepro.REMOVE=false and servicepro.TEACHER_ID='"
+							+ servicePro.getTeacher().getId() + "') where teacher.TEACHER_ID="
+							+ servicePro.getTeacher().getId());
+			query.executeUpdate();
+		}
 	}
 
 	@Override
@@ -56,7 +96,7 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 	@Override
 	public ServicePro queryByUser(long id) {
 		String hql = "from ServicePro sp where sp.remove=" + true + " and sp.id=" + id + " and sp.onShow=" + true
-				+ " and style=" + ServiceProService.STYLE_SERVICE + " and state=" + ServiceProService.STATE_OK;
+				+ " and sp.state=" + ServiceProService.STATE_OK;
 		@SuppressWarnings("unchecked")
 		List<ServicePro> list = getHibernateTemplate().find(hql, id);
 		if (list.isEmpty())
@@ -158,46 +198,6 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 				default:
 					hql = "from ServicePro sp where sp.remove=" + true + " and sp.teacher.id=" + teacherId
 							+ " and state=" + state + " ORDER BY sp.rankNo ASC";
-					break;
-				}
-				Query query = session.createQuery(hql);
-				query.setFirstResult((page - 1) * pageSize);
-				query.setMaxResults(pageSize);
-				List<ServicePro> list = query.list();
-				return list;
-			}
-		});
-		return list;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<ServicePro> queryListByTeacherIdAndShowAndStateAndStyle(final long teacherId, final short showKind,
-			final short state, final short style, final int page, final int pageSize) {
-		List<ServicePro> list = new ArrayList<ServicePro>();
-		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ServicePro>>() {
-
-			@Override
-			public List<ServicePro> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "";
-				switch (showKind) {
-				case SHOW_KIND_NONE:
-					hql = "from ServicePro sp where sp.remove=" + true + " and sp.teacher.id=" + teacherId
-							+ " and style=" + style + " and state=" + state + " ORDER BY sp.rankNo ASC";
-					break;
-				case SHOW_KIND_OFF:
-					hql = "from ServicePro sp where sp.remove=" + true + " and sp.teacher.id=" + teacherId
-							+ " and style=" + style + " and state=" + state + " and sp.onShow=" + false
-							+ " ORDER BY sp.rankNo ASC";
-					break;
-				case SHOW_KIND_ON:
-					hql = "from ServicePro sp where sp.remove=" + true + " and sp.teacher.id=" + teacherId
-							+ " and style=" + style + " and state=" + state + " and sp.onShow=" + true
-							+ " ORDER BY sp.rankNo ASC";
-					break;
-				default:
-					hql = "from ServicePro sp where sp.remove=" + true + " and sp.teacher.id=" + teacherId
-							+ " and style=" + style + " and state=" + state + " ORDER BY sp.rankNo ASC";
 					break;
 				}
 				Query query = session.createQuery(hql);

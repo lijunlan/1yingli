@@ -14,6 +14,8 @@ public interface ServiceProDao {
 
 	void save(ServicePro servicePro);
 
+	void saveAndPlusNumber(ServicePro servicePro, boolean byManager);
+
 	Long saveAndReturnId(ServicePro servicePro);
 
 	void remove(ServicePro servicePro);
@@ -21,6 +23,8 @@ public interface ServiceProDao {
 	void remove(long id);
 
 	void update(ServicePro servicePro);
+
+	void updateAndPlusNumber(ServicePro servicePro, boolean remove);
 
 	ServicePro querySimple(long id);
 
@@ -34,9 +38,6 @@ public interface ServiceProDao {
 
 	List<ServicePro> queryListByTeacherIdAndShowAndState(long teacherId, short showKind, short state, int page,
 			int pageSize);
-
-	List<ServicePro> queryListByTeacherIdAndShowAndStateAndStyle(long teacherId, short showKind, short state,
-			short style, int page, int pageSize);
 
 	List<ServicePro> queryListByHomePage(int pageSize);
 

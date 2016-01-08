@@ -16,21 +16,19 @@ public interface ServiceProService {
 
 	public static final String TAG_COUNT = "count";
 
-	public static final short STYLE_TALK = 0;
-
-	public static final short STYLE_SERVICE = 1;
-
 	public static final short STATE_CHECKING = 0;
 
 	public static final short STATE_OK = 1;
 
 	public static final int PAGE_SIZE = 12;
-	
+
 	public static final int HOMEPAGE_PAGE_SIZE = 6;
-	
+
 	public static final int SALEPAGE_PAGE_SIZE = 12;
 
 	void save(ServicePro servicePro);
+
+	void saveAndPlusNumber(ServicePro servicePro, boolean byManager);
 
 	Long saveAndReturnId(ServicePro servicePro);
 
@@ -39,6 +37,8 @@ public interface ServiceProService {
 	void remove(long id);
 
 	void update(ServicePro servicePro);
+
+	void updateAndPlusNumber(ServicePro servicePro, boolean remove);
 
 	ServicePro query(long id);
 
@@ -64,17 +64,6 @@ public interface ServiceProService {
 	List<ServicePro> queryListByTeacherIdAndState(long teacherId, short state, int page, int pageSize);
 
 	List<ServicePro> queryListByTeacherIdAndState(long teacherId, short state, int page);
-
-	List<ServicePro> queryListByTeacherIdAndShowAndStateAndStyle(long teacherId, boolean show, short state, short style,
-			int page, int pageSize);
-
-	List<ServicePro> queryListByTeacherIdAndShowAndStateAndStyle(long teacherId, boolean show, short state, short style,
-			int page);
-
-	List<ServicePro> queryListByTeacherIdAndStateAndStyle(long teacherId, short state, short style, int page,
-			int pageSize);
-
-	List<ServicePro> queryListByTeacherIdAndStateAndStyle(long teacherId, short state, short style, int page);
 
 	List<ServicePro> queryListByHomePage(int pageSize);
 

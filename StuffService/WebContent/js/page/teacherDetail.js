@@ -65,14 +65,9 @@ var changeTable = function (data) {
 	row += "<tr><th>简介</th><td colspan=6>" + data.introduce + "</td></tr>";
 	row += "<tr><th>粉丝数</th><td colspan=6>" + data.likeNo + "</td></tr>";
 	row += "<tr><th>地址</th><td colspan=6>" + data.address + "</td></tr>";
-	row += "<tr><th>交流方式</th><td colspan=6>" + data.talkWay + "</td></tr>";
 	row += "<tr><th>评论数量</th><td colspan=6>" + data.commentNo + "</td></tr>";
-	row += "<tr><th>每周咨询次数</th><td colspan=6>" + data.timeperweek + "</td></tr>";
-	row += "<tr><th>空闲时间</th><td colspan=6>" + data.freeTime + "</td></tr>";
 	row += "<tr><th>服务价格</th><td colspan=6>" + data.price + "</td></tr>";
-	row += "<tr><th>服务时间</th><td colspan=6>" + data.serviceTime + "</td></tr>";
-	row += "<tr><th>服务标题</th><td colspan=6>" + data.serviceTitle + "</td></tr>";
-	row += "<tr><th>服务内容</th><td colspan=6>" + data.serviceContent + "</td></tr>";
+	row += "<tr><th>服务标题</th><td colspan=6>" + data.topic + "</td></tr>";
 	row += "<tr><th>邮箱认证</th><td colspan=6>" + data.checkEmail + "</td></tr>";
 	row += "<tr><th>手机认证</th><td colspan=6>" + data.checkPhone + "</td></tr>";
 	row += "<tr><th>学历认证</th><td colspan=6>" + data.checkDegree + "</td></tr>";

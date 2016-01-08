@@ -88,14 +88,11 @@ function getAndParse(t) {
 	$("#email").val(t.email);
 	$("#iconUrl").val(t.iconUrl);
 	$("#littleIcon").attr('src',t.iconUrl);
-	$("#serviceTitle").val(t.serviceTitle);
+	$("#serviceTitle").val(t.topic);
 	$("#mileValue").val(t.mile);
-	$("#serviceTime").val(t.serviceTime);
 	//兼容不同版本api
 	t.price == null ? $("#servicePrice").val(t.servicePrice) : $("#servicePrice").val(t.price);
-	t.timeperweek == null ? $("#serviceTimePerWeek").val(t.serviceTimePerWeek) : $("#serviceTimePerWeek").val(t.timeperweek);
 	//
-	$("#serviceContent").val(t.serviceContent);
 	$("#introduce").val(t.introduce);
 	WorkExpList = t.workExperience;
 	$("#showWorkExp").val($.toJSON(WorkExpList));
@@ -104,13 +101,13 @@ function getAndParse(t) {
 	$("[name='checkbox']").uCheck('uncheck');
 	$.each(t.tips, function (index, data) {
 		$("#checkbox" + data.id).uCheck('check');
-	})
+	});
 	t.checkPhone == 'true' ? $("#checkPhone").uCheck('check') : $("#checkPhone").uCheck('uncheck');
 	t.checkEmail == 'true' ? $("#checkEmail").uCheck('check') : $("#checkEmail").uCheck('uncheck');
 	t.checkIDCard == 'true' ? $("#checkId").uCheck('check') : $("#checkId").uCheck('uncheck');
 	t.checkWork == 'true' ? $("#checkJob").uCheck('check') : $("#checkJob").uCheck('uncheck');
 	//兼容不同版本api
-	t.checkDegree == null ? checkEducation = t.checkStudy : checkEducation = t.checkDegree
+	t.checkDegree == null ? checkEducation = t.checkStudy : checkEducation = t.checkDegree;
 	checkEducation == 'true' ? $("#checkEducation").uCheck('check') : $("#checkEducation").uCheck('uncheck');
 
 	$("#showWeight1").val(t.showWeight1);
@@ -120,10 +117,8 @@ function getAndParse(t) {
 	$("#showWeight16").val(t.showWeight16);
 	$("#homeWeight").val(t.homeWeight);
 	$("#saleWeight").val(t.saleWeight);
-	$('#pricetemp').val(t.pricetemp);
 	$('#actionDiv').bootstrapSwitch('setState', false)
 	t.onService == 'true' ? $('#onServiceDiv').bootstrapSwitch('setState', true) : $('#onServiceDiv').bootstrapSwitch('setState', false);
-	t.onsale == 'true' ? $('#onSaleDiv').bootstrapSwitch('setState', true) : $('#onSaleDiv').bootstrapSwitch('setState', false);
 	Messenger().post("加载完成");
 }
 
@@ -188,7 +183,6 @@ function deleteStudyExp() {
 //提交保存
 function submit() {
 	var teacher = new Object();
-	var service = new Object();
 	var tips = new Array();
 	var send = new Object();
 	var tmp;
@@ -204,13 +198,8 @@ function submit() {
 	teacher.workExperience = WorkExpList;
 	teacher.studyExperience = StudyExpList;
 
-	service.title = $("#serviceTitle").val();
-	service.time = $("#serviceTime").val();
-	service.price = $("#servicePrice").val();
-	service.timeperweek = $("#serviceTimePerWeek").val();
-	service.content = $("#serviceContent").val();
-	service.pricetemp = $('#pricetemp').val();
-	service.onsale = document.getElementById('onSale').checked.toString();
+	teacher.topic = $("#serviceTitle").val();
+	teacher.price = $("#servicePrice").val();
 
 	var tmpId = 1 / 2;
 	var i;
@@ -226,7 +215,6 @@ function submit() {
 
 	service.tips = tips;
 
-	teacher.service = service;
 	teacher.checkEmail = $("#checkEmail").prop("checked") ? "true" : "false";
 	teacher.checkPhone = $("#checkPhone").prop("checked") ? "true" : "false";
 	teacher.checkWork = $("#checkJob").prop("checked") ? "true" : "false";
