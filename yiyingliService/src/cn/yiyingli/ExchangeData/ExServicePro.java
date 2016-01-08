@@ -45,7 +45,35 @@ public class ExServicePro {
 		map.put("serviceProState", servicePro.getState());
 	}
 
-	public static void assembleSimpleServiceForUser(ServicePro servicePro, SuperMap map) {
+	public static void assembleSimpleServiceProForManager(ServicePro servicePro, SuperMap map) {
+		assembelSimple(servicePro, map);
+		map.put("imageUrls", servicePro.getImageUrls());
+		map.put("state", servicePro.getState());
+		map.put("tip", servicePro.getTips());
+		map.put("finishNo", servicePro.getFinishNo());
+		map.put("answerRatio", servicePro.getAnswerRatio());
+		map.put("answerTime", servicePro.getAnswerTime());
+		map.put("score", servicePro.getScore());
+		map.put("likeNo", servicePro.getLikeNo());
+		// map.put("teacherName", servicePro.getTeacher().getName());
+		// map.put("teacherSimpleInfo",
+		// servicePro.getTeacher().getSimpleInfo());
+		map.put("praiseRatio", servicePro.getPraiseRatio());
+	}
+
+	public static void assembleSimpleServiceProForTeacher(ServicePro servicePro, SuperMap map) {
+		assembelSimple(servicePro, map);
+		map.put("imageUrls", servicePro.getImageUrls());
+		map.put("state", servicePro.getState());
+		map.put("finishNo", servicePro.getFinishNo());
+		map.put("score", servicePro.getScore());
+		map.put("likeNo", servicePro.getLikeNo());
+		map.put("teacherName", servicePro.getTeacher().getName());
+		map.put("teacherSimpleInfo", servicePro.getTeacher().getSimpleInfo());
+
+	}
+
+	public static void assembleSimpleServiceProForUser(ServicePro servicePro, SuperMap map) {
 		assembelSimple(servicePro, map);
 		// map.put("tip", servicePro.getTips());
 		map.put("finishNo", servicePro.getFinishNo());

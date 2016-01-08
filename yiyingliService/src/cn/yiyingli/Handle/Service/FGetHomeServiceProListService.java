@@ -34,7 +34,7 @@ public class FGetHomeServiceProListService extends MsgService {
 		ExList exservicePros = new ExArrayList();
 		for (ServicePro servicePro : servicePros) {
 			SuperMap map = new SuperMap();
-			ExServicePro.assembleSimpleServiceForUser(servicePro, map);
+			ExServicePro.assembleSimpleServiceProForUser(servicePro, map);
 			exservicePros.add(map.finish());
 		}
 		setResMsg(MsgUtil.getSuccessMap().put("data", exservicePros).finishByJson());

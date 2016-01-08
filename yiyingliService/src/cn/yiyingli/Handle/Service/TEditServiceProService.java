@@ -17,7 +17,7 @@ public class TEditServiceProService extends TSMsgService {
 		ServicePro servicePro = getServicePro();
 		JSONObject jsonServicePro = getData().getJSONObject("servicePro");
 		PServiceProUtil.assembleByTeacherEdit(jsonServicePro, servicePro);
-		getServiceProService().updateAndPlusNumber(servicePro,false);
+		getServiceProService().updateAndPlusNumber(servicePro, false);
 		setResMsg(MsgUtil.getSuccessMsg("edit servicePro successfully"));
 	}
 

@@ -46,7 +46,7 @@ public class FGetSaleServiceProListService extends MsgService {
 		ExList exservicePros = new ExArrayList();
 		for (ServicePro servicePro : servicePros) {
 			SuperMap map = new SuperMap();
-			ExServicePro.assembleSimpleServiceForUser(servicePro, map);
+			ExServicePro.assembleSimpleServiceProForUser(servicePro, map);
 			exservicePros.add(map.finish());
 		}
 		if (exservicePros.size() == ServiceProService.SALEPAGE_PAGE_SIZE) {

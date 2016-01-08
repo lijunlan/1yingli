@@ -56,7 +56,7 @@ public class FGetServiceProListSerivce extends MsgService {
 		ExList sends = new ExArrayList();
 		for (ServicePro servicePro : servicePros) {
 			SuperMap map = new SuperMap();
-			ExServicePro.assembleSimpleServiceForUser(servicePro, map);
+			ExServicePro.assembleSimpleServiceProForUser(servicePro, map);
 			sends.add(map.finish());
 		}
 		SuperMap toSend = MsgUtil.getSuccessMap();

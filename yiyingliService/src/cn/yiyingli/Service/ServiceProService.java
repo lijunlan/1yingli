@@ -20,6 +20,8 @@ public interface ServiceProService {
 
 	public static final short STATE_OK = 1;
 
+	public static final short STATE_FAILED = 2;
+
 	public static final int PAGE_SIZE = 12;
 
 	public static final int HOMEPAGE_PAGE_SIZE = 6;
@@ -45,6 +47,10 @@ public interface ServiceProService {
 	ServicePro queryByUser(long id);
 
 	ServicePro queryByTeacherIdAndServiceId(long teacherId, long serviceId);
+
+	List<ServicePro> queryList(int page);
+
+	List<ServicePro> queryList(int page, int pageSize);
 
 	List<ServicePro> queryList(long[] ids, long teacherId);
 

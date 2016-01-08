@@ -32,6 +32,8 @@ public interface ServiceProDao {
 
 	ServicePro queryByTeacherIdAndServiceId(long teacherId, long serviceId);
 
+	List<ServicePro> queryList(int page, int pageSize);
+
 	List<ServicePro> queryList(long[] ids, long teacherId);
 
 	List<ServicePro> queryListByTeacherIdAndShow(long teacherId, short showKind, int page, int pageSize);

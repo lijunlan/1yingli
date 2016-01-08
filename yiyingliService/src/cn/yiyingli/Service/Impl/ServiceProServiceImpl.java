@@ -74,6 +74,16 @@ public class ServiceProServiceImpl implements ServiceProService {
 	}
 
 	@Override
+	public List<ServicePro> queryList(int page) {
+		return getServiceProDao().queryList(page, PAGE_SIZE);
+	}
+
+	@Override
+	public List<ServicePro> queryList(int page, int pageSize) {
+		return getServiceProDao().queryList(page, pageSize);
+	}
+
+	@Override
 	public List<ServicePro> queryList(long[] ids, long teacherId) {
 		return getServiceProDao().queryList(ids, teacherId);
 	}
