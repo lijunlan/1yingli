@@ -72,12 +72,12 @@ function getAndParse(servicePro) {
 	}
 	
 	//TODO
-	$("#iconUrl").val(servicePro.iconUrl);
-	$("#littleIcon").attr('src',servicePro.iconUrl);
+	$("#iconUrl").val(servicePro.imageUrls);
+	$("#littleIcon").attr('src',servicePro.imageUrls);
 	imageUrls=servicePro.imageUrls;
 
 
-	$("#title").val(servicePro.topic);
+	$("#title").val(servicePro.title);
 	//兼容不同版本api
 	$("#price").val(servicePro.price);
 	$("#summary").val(servicePro.summary);
@@ -108,9 +108,9 @@ function getAndParse(servicePro) {
 	
 	$("#showWeight1").val(servicePro.showWeight1);
 	$("#showWeight2").val(servicePro.showWeight2);
+	$("#showWeight3").val(servicePro.showWeight3);
 	$("#showWeight4").val(servicePro.showWeight4);
-	$("#showWeight8").val(servicePro.showWeight8);
-	$("#showWeight16").val(servicePro.showWeight16);
+	$("#showWeight5").val(servicePro.showWeight5);
 	$("#homeWeight").val(servicePro.homeWeight);
 	$("#saleWeight").val(servicePro.saleWeight);
 	$('#actionDiv').bootstrapSwitch('setState', false)
@@ -153,7 +153,7 @@ function submit() {
 	servicePro.saleWeight=$("#saleWeight").val();
 	servicePro.homeWeight=$("#homeWeight").val();
 	servicePro.freeTime=$("#freeTime").val();
-	
+
 	servicePro.showWeight1 = $("#showWeight1").val();
 	servicePro.showWeight2 = $("#showWeight2").val();
 	servicePro.showWeight3 = $("#showWeight3").val();
