@@ -105,6 +105,8 @@ public class PServiceProUtil {
 		servicePro.setHomeWeight(0);
 		servicePro.setSaleWeight(0);
 
+		servicePro.setCommentNo(0L);
+		servicePro.setRemove(false);
 		servicePro.setOnSale(false);
 		servicePro.setPriceTemp(0F);
 		servicePro.setAnswerRatio(0F);
@@ -136,6 +138,7 @@ public class PServiceProUtil {
 		servicePro.setHomeWeight(jsonServicePro.getInt("saleWeight"));
 		servicePro.setSaleWeight(jsonServicePro.getInt("homeWeight"));
 
+		servicePro.setCommentNo(0L);
 		servicePro.setRemove(false);
 		servicePro.setOnSale(false);
 		servicePro.setPriceTemp(0F);

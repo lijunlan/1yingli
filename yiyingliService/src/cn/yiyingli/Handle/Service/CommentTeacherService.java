@@ -70,9 +70,8 @@ public class CommentTeacherService extends UMsgService {
 
 	@Override
 	protected boolean checkData() {
-		return super.checkData() && getData().containsKey("orderId") && getData().containsKey("serviceProId")
-				&& getData().containsKey("teacherId") && getData().containsKey("score")
-				&& getData().containsKey("content");
+		return super.checkData() && getData().containsKey("orderId") && getData().containsKey("teacherId")
+				&& getData().containsKey("score") && getData().containsKey("content");
 	}
 
 	@Override
@@ -82,13 +81,6 @@ public class CommentTeacherService extends UMsgService {
 		Teacher teacher = getTeacherService().query(Long.valueOf(teacherId));
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
-			return;
-		}
-
-		long serviceProId = getData().getLong("serviceProId");
-		ServicePro servicePro = getServiceProService().query(serviceProId);
-		if (servicePro == null) {
-			setResMsg(MsgUtil.getErrorMsgByCode("42002"));
 			return;
 		}
 		try {
@@ -102,10 +94,6 @@ public class CommentTeacherService extends UMsgService {
 				setResMsg(MsgUtil.getErrorMsgByCode("44001"));
 				return;
 			}
-			if (order.getServiceId().longValue() != servicePro.getId().longValue()) {
-				setResMsg(MsgUtil.getErrorMsgByCode("44007"));
-				return;
-			}
 			String state = order.getState().split(",")[0];
 			if (!OrderService.ORDER_STATE_WAIT_COMMENT.equals(state)) {
 				setResMsg(MsgUtil.getErrorMsgByCode("44002"));
@@ -117,11 +105,16 @@ public class CommentTeacherService extends UMsgService {
 			comment.setContent((String) getData().get("content"));
 			comment.setKind(CommentService.COMMENT_KIND_FROMUSER_SHORT);
 			comment.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
-			comment.setServicePro(servicePro);
 			comment.setScore(Short.valueOf((String) getData().get("score")));
 			comment.setServiceTitle(order.getServiceTitle());
 			comment.setTeacher(teacher);
 			comment.setUser(user);
+
+			if (order.getServiceId() != null) {
+				long serviceProId = order.getServiceId();
+				ServicePro servicePro = getServiceProService().query(serviceProId);
+				comment.setServicePro(servicePro);
+			}
 
 			// 加积分(英里数)
 			getCommentService().saveWithOrderAndTeacher(comment, order, teacher);

@@ -150,6 +150,7 @@
 		<method name="removeBackground" beanName="mRemoveBackgroundService" />
 	</style>
 	<style name="function">
+		<method name="getCommentListByServicePro" beanName="fGetCommentListByServiceProService" />
 		<method name="getCommentList" beanName="fGetCommentListService" />
 		<method name="getSaleServiceProList" beanName="fGetSaleServiceProListService" />
 		<method name="getHomeServiceProList" beanName="fGetHomeServiceProListService" />

@@ -76,7 +76,7 @@ public class ServicePro {
 	private Long finishNo;
 
 	@OneToMany(targetEntity = Comment.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	@JoinColumn(name = "SERVICEPRO_ID", updatable = false)
+	@JoinColumn(name = "SERVICEPRO_ID", updatable = true)
 	private Set<Comment> comments = new HashSet<Comment>();
 
 	@Column(name = "SCORE", nullable = false)
@@ -112,6 +112,9 @@ public class ServicePro {
 
 	@Column(name = "SALEWEIGHT", nullable = false)
 	private Integer saleWeight;
+
+	@Column(name = "COMMENTNO", nullable = false)
+	private Long commentNo;
 
 	/**
 	 * 咨询：超时服务，可视频，可语音，时间灵活，支持多人
@@ -425,6 +428,14 @@ public class ServicePro {
 
 	public void setShowWeight5(Integer showWeight5) {
 		this.showWeight5 = showWeight5;
+	}
+
+	public Long getCommentNo() {
+		return commentNo;
+	}
+
+	public void setCommentNo(Long commentNo) {
+		this.commentNo = commentNo;
 	}
 
 }

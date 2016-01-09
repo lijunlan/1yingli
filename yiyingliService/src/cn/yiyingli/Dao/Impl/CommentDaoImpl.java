@@ -39,11 +39,17 @@ public class CommentDaoImpl extends HibernateDaoSupport implements CommentDao {
 				"update teacher set teacher.COMMENTNUMBER=(select count(*) from comment where comment.TEACHER_ID='"
 						+ teacher.getId() + "' and kind=" + kind + ") where teacher.TEACHER_ID=" + teacher.getId());
 		query.executeUpdate();
-		session.flush();
 		query = session.createSQLQuery(
 				"update user set user.SENDCOMMENTNUMBER=(select count(*) from comment where comment.USER_ID='"
 						+ user.getId() + "' and kind=" + kind + ") where user.USER_ID=" + user.getId());
 		query.executeUpdate();
+		if (comment.getServicePro() != null) {
+			query = session.createSQLQuery(
+					"update servicepro set servicepro.COMMENTNO=(select count(*) from comment where comment.SERVICEPRO_ID='"
+							+ comment.getServicePro().getId() + "' and kind=" + kind
+							+ ") where servicepro.SERVICEPRO_ID=" + comment.getServicePro().getId());
+			query.executeUpdate();
+		}
 	}
 
 	@Override
@@ -191,6 +197,26 @@ public class CommentDaoImpl extends HibernateDaoSupport implements CommentDao {
 							+ teacherId + " and c.score=" + score + " and c.kind=" + kind
 							+ " ORDER BY c.createTime DESC";
 				}
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<Comment> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Comment> queryListByServiceProId(final long serviceProId, final int page, final int pageSize,
+			final short kind) {
+		List<Comment> list = new ArrayList<Comment>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Comment>>() {
+			@Override
+			public List<Comment> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from Comment c where c.servicePro.id=" + serviceProId + " and c.kind=" + kind
+						+ " ORDER BY c.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);

@@ -131,22 +131,22 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public List<Comment> queryListByUserId(long userId, int page, short kind, boolean lazy) {
-		return queryListByUserId(userId, page, PAGE_SIZE_INT, kind, lazy);
+		return getCommentDao().queryListByUserId(userId, page, PAGE_SIZE_INT, kind, lazy);
 	}
 
 	@Override
 	public List<Comment> queryListByUserIdAndScore(long userId, short score, int page, short kind, boolean lazy) {
-		return queryListByUserIdAndScore(userId, score, page, PAGE_SIZE_INT, kind, lazy);
+		return getCommentDao().queryListByUserIdAndScore(userId, score, page, PAGE_SIZE_INT, kind, lazy);
 	}
 
 	@Override
 	public List<Comment> queryListByTeacherId(long teacherId, int page, short kind, boolean lazy) {
-		return queryListByTeacherId(teacherId, page, PAGE_SIZE_INT, kind, lazy);
+		return getCommentDao().queryListByTeacherId(teacherId, page, PAGE_SIZE_INT, kind, lazy);
 	}
 
 	@Override
 	public List<Comment> queryListByTeacherIdAndScore(long teacherId, short score, int page, short kind, boolean lazy) {
-		return queryListByTeacherIdAndScore(teacherId, score, page, PAGE_SIZE_INT, kind, lazy);
+		return getCommentDao().queryListByTeacherIdAndScore(teacherId, score, page, PAGE_SIZE_INT, kind, lazy);
 	}
 
 	@Override
@@ -161,7 +161,17 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public List<Comment> queryDoubleByOrderIdAndTeacherId(long orderId, long teacherId, boolean lazy) {
-		return queryDoubleByOrderIdAndTeacherId(orderId, teacherId, lazy);
+		return getCommentDao().queryDoubleByOrderIdAndTeacherId(orderId, teacherId, lazy);
+	}
+
+	@Override
+	public List<Comment> queryListByServiceProId(long serviceProId, int page, int pageSize, short kind) {
+		return getCommentDao().queryListByServiceProId(serviceProId, page, pageSize, kind);
+	}
+
+	@Override
+	public List<Comment> queryListByServiceProId(long serviceProId, int page, short kind) {
+		return getCommentDao().queryListByServiceProId(serviceProId, page, PAGE_SIZE_INT, kind);
 	}
 
 }

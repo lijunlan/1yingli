@@ -43,7 +43,7 @@ public class Comment {
 	private User user;
 
 	@ManyToOne(targetEntity = ServicePro.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "SERVICEPRO_ID", updatable = false)
+	@JoinColumn(name = "SERVICEPRO_ID", updatable = true)
 	private ServicePro servicePro;
 
 	public Long getId() {
