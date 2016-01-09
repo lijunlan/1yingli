@@ -11,44 +11,46 @@ var changeTable = function (result) {
 	$("#infoTable").empty();
 	$("#infoTable").append(
 		"<tr><th>ID</th><th>申请人</th><th>状态</th><th>上架</th>"
-		+ "<th>服务标题</th><th>服务简介</th><th>服务内容</th><th>价格</th><th>操作</th></tr>");
+		+ "<th>服务标题</th><th>服务简介</th><th>价格</th><th>操作</th></tr>");
 	var list = result.data;
 	$.each(list, function (index, data) {
 		var tmp = parseInt(data.createTime, 10);
 		var d = new Date(tmp);
 		var row = "<tr><td>";
-		row += data.tid + "</td><td>";
-		row += data.name + "</td><td>";
-		row += data.onService + "</td><td>";
-		row += data.address + "</td><td>";
-		row += data.email + "</td><td>";
-		row += data.level + "</td><td>";
-		row += "<div><input id='input" + data.tid + "' type='text' value='" + data.mile + "'><button  type='button' onclick='editMile("
-		+ data.tid + ")'>修改</button></div></td><td>";
-		if (data.onService == 'true') {
-			row += "<button onclick='detail("
-			+ data.tid + ")'>详情</button></td>";
-		} else {
-			row += "并没有</td>";
+		row += data.serviceProId + "</td><td>";
+		row += "<a href=\"http://120.26.83.33/StuffServicet/teacherDetail.html?tid="+data.teacherId+"\" target=\"_blank\">"+data.teacherName + "</a></td><td>";
+		row += data.state + "</td><td>";
+		row += data.onshow + "</td><td>";
+		row += data.title + "</td><td>";
+		row += data.summary + "</td><td>";
+		row += data.price+"/"+data.numeral+data.quantifier+ "</td><td>";
+	 	row += "<button onclick='detail("
+			+ data.serviceProId + ")'>详情</button>";
+		if(data.state==0){
+			row += "<button onclick=\"accept("+data.serviceProId+")\">通过</button><button onclick=\"refuse("+data.serviceProId+")\">拒绝</button></td>";
+		}else{
+			row += "</td>";
 		}
 		$("#infoTable").append(row);
-	})
+	});
 };
 
-function editMile(tid) {
-	myJson.method = 'editTeacherMile';
-	myJson.teacherId = tid.toString();
-	myJson.mile = $('#input' + tid).val().toString();
-	if(fun == 1){
-		myAjax(myJson, get);
-	}else if(fun == 2){
-		myAjax(myJson, search);
-	}
-	
+function accept(serviceProId){
+	myJson.method = "validateServicePro";
+	myJson.serviceProId = serviceProId.toString();
+	myJson.deal = true;
+	myAjax(myJson,get);
 }
 
-$(function () {
-	myJson.method = "getTeacherList";
+function refuse(serviceProId){
+	myJson.method = "validateServicePro";
+	myJson.serviceProId = serviceProId.toString();
+	myJson.deal = false;
+	myAjax(myJson,get);
+}
+
+$(function(){
+	myJson.method = "getServiceProList";
 	myJson.page = page.toString();
 	myAjax(myJson, changeTable);
 	if (page == 1)
@@ -67,7 +69,7 @@ function changePage(action) {
 		document.getElementById("lastPage").disabled = true;
 	else
 		document.getElementById("lastPage").disabled = false;
-	myJson.method = "getTeacherList";
+	myJson.method = "getServiceProList";
 	myJson.page = page.toString();
 	myAjax(myJson, changeTable);
 }
@@ -75,7 +77,7 @@ function changePage(action) {
 function get() {
 	fun = 1;
 	page = document.getElementById("pageInput").value;
-	myJson.method = "getTeacherList";
+	myJson.method = "getServiceProList";
 	myJson.page = page.toString();
 	myAjax(myJson, changeTable);
 	if (document.getElementById("pageInput").value > 1)
