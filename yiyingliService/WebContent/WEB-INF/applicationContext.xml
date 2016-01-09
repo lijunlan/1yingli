@@ -903,11 +903,8 @@
 		</property>
 	</bean>
 
-	<bean id="tGetCommentListService" class="cn.yiyingli.Handle.Service.TGetCommentListService"
+	<bean id="fGetCommentListService" class="cn.yiyingli.Handle.Service.FGetCommentListService"
 		scope="prototype">
-		<property name="teacherService">
-			<ref local="teacherService" />
-		</property>
 		<property name="commentService">
 			<ref local="commentService" />
 		</property>

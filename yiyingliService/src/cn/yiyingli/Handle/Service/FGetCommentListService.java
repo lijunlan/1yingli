@@ -7,13 +7,14 @@ import java.util.List;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
+import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Handle.TMsgService;
 import cn.yiyingli.Persistant.Comment;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.CommentService;
 import cn.yiyingli.Util.MsgUtil;
 
-public class TGetCommentListService extends TMsgService {
+public class FGetCommentListService extends MsgService {
 
 	private CommentService commentService;
 
@@ -27,7 +28,7 @@ public class TGetCommentListService extends TMsgService {
 
 	@Override
 	protected boolean checkData() {
-		return super.checkData() && getData().containsKey("page");
+		return getData().containsKey("teacherId") && getData().containsKey("page");
 	}
 
 	private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yy/MM/dd HH:mm:ss");

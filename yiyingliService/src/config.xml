@@ -85,7 +85,6 @@
 		<method name="getBackgrounds" beanName="tGetBackgroundsService" />
 		<method name="getBGService" beanName="tGetBGService" />
 		<method name="getCheckFromState" beanName="tGetCheckFormStateService" />
-		<method name="getCommentList" beanName="tGetCommentListService" />
 		<method name="getIntroduce" beanName="tGetIntroduceService" />
 		<method name="getStudyExp" beanName="tGetStudyExperienceService" />
 		<method name="getTeacherSInfo" beanName="tGetTeacherSimpleInfoService" />
@@ -151,6 +150,7 @@
 		<method name="removeBackground" beanName="mRemoveBackgroundService" />
 	</style>
 	<style name="function">
+		<method name="getCommentList" beanName="fGetCommentListService" />
 		<method name="getSaleServiceProList" beanName="fGetSaleServiceProListService" />
 		<method name="getHomeServiceProList" beanName="fGetHomeServiceProListService" />
 		<method name="recordRecommandPassage" beanName="fRecordRecommandPassageService" />
