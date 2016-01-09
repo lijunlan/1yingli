@@ -908,6 +908,9 @@
 		<property name="commentService">
 			<ref local="commentService" />
 		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
 	</bean>
 
 	<bean id="tGetTServiceInfoService" class="cn.yiyingli.Handle.Service.TGetTServiceInfoService"
