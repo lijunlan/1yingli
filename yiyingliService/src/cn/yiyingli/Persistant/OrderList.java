@@ -65,13 +65,13 @@ public class OrderList {
 	@Column(name = "PAYMONEY", nullable = false)
 	private Float payMoney;
 
-	@Column(name = "CUSTOMERPHONE", nullable = false)
+	@Column(name = "CUSTOMERPHONE", nullable = true)
 	private String customerPhone;
 
-	@Column(name = "CUSTOMEREMAIL", nullable = false)
+	@Column(name = "CUSTOMEREMAIL", nullable = true)
 	private String customerEmail;
 
-	@Column(name = "CUSTOMERWX", nullable = false)
+	@Column(name = "CUSTOMERWX", nullable = true)
 	private String customerWX;
 
 	@Column(name = "CUSTOMERNAME", nullable = false)

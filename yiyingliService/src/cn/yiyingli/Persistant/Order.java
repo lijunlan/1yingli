@@ -97,7 +97,7 @@ public class Order {
 	@Column(name = "REFUSEREASON", nullable = true)
 	private String refuseReason;
 
-	@Column(name = "SERVICEID", nullable = false)
+	@Column(name = "SERVICEID", nullable = true)
 	private Long serviceId;
 
 	@Column(name = "SERVICETITLE", nullable = false)
