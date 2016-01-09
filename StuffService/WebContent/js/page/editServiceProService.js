@@ -14,7 +14,7 @@ $(document).ready(function () {
 		'method': 'post',
 		'fileType': 'image/*',
 		'queueSizeLimit': 10,
-		'multi': false,
+		'multi': true,
 		'uploadScript': 'http://service.1yingli.cn/yiyingliService/upimage',
 		'formData': {
 		},
@@ -40,10 +40,13 @@ $(document).ready(function () {
 			var json = eval("(" + data + ")");
 			if (json.state == "success") {
 				$("#imagelist").fadeOut(3000);
-				$("#iconUrl").val(json.url);
-				//TODO 
-				$("#littleIcon").attr('src',json.url);
-				Messenger().post("背景图片添加完成");
+				if(imageUrls==""){
+					imageUrls += json.url;
+				}else{
+					imageUrls += ","+json.url;
+				}
+				refreshImage();
+				Messenger().post("图片上传完成");
 			} else {
 				$(".mark").show();
 				$("#box").show();
@@ -53,6 +56,22 @@ $(document).ready(function () {
 		}
 	});
 });
+
+function refreshImage(){
+	var ims = imageUrls.split(",");
+	var html = "";
+	$.each(ims,function(index,image){
+		html +="<img src=\""+image+"\" class=\"am-img-thumbnail\">"
+	});
+	$("#iconList").html(html);
+	$("#iconUrl").val(imageUrls);
+}
+
+
+function cleanImage(){
+	imageUrls = "";
+	refreshImage();
+}
 
 
 //获取导师信息
@@ -70,12 +89,9 @@ function getAndParse(servicePro) {
 	if (servicePro.teacher != null) {
 		servicePro = servicePro.teacher;
 	}
-	
-	//TODO
-	$("#iconUrl").val(servicePro.imageUrls);
+		
 	imageUrls=servicePro.imageUrls;
-	$("#littleIcon").attr('src',servicePro.imageUrls);
-
+	refreshImage();
 
 	$("#title").val(servicePro.title);
 	//兼容不同版本api
