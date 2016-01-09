@@ -6,6 +6,12 @@ checkLogin();
 registNotify();
 document.getElementById("admin_name").innerText = $.cookie('mname');
 
+//显示细节
+var detail = function (serviceProId) {
+	window.open(
+		"serviceProDetail.html?serviceProId=" + serviceProId, "newWindow",
+		"height=500,width=400,top=100,left=100,toolbar=yes,menubar=yes,scrollbars=yes, resizable=yes,location=yes, status=yes");
+}
 
 var changeTable = function (result) {
 	$("#infoTable").empty();
@@ -19,7 +25,7 @@ var changeTable = function (result) {
 		var row = "<tr><td>";
 		row += data.serviceProId + "</td><td>";
 		row += "<a href=\"http://120.26.83.33/StuffServicet/teacherDetail.html?tid="+data.teacherId+"\" target=\"_blank\">"+data.teacherName + "</a></td><td>";
-		row += data.state + "</td><td>";
+		row += state2zh(data.state) + "</td><td>";
 		row += data.onshow + "</td><td>";
 		row += data.title + "</td><td>";
 		row += data.summary + "</td><td>";

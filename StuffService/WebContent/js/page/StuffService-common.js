@@ -312,3 +312,107 @@ function play(c) {
 		sound.GotoFrame(1);
 	}
 }
+
+
+
+
+function tip2zh(tip,kind){
+	var ts = tip.split(",");
+	if(kind==1){
+		var str = "";
+		$.each(ts,function(index,data){
+			if(data=="1"){
+				str += "超时服务;";
+			}else if(data=="2"){
+				str += "可视频;";
+			}else if(data=="3"){
+				str += "可语音;";
+			}else if(data=="4"){
+				str += "时间灵活;";
+			}else if(data=="5"){
+				str += "支持多人;";
+			}
+		});
+		return str;
+	}else if(kind==2){
+		var str = "";
+		$.each(ts,function(index,data){
+			if(data=="1"){
+				str += "时间灵活;";
+			}else if(data=="2"){
+				str += "支持多人;";
+			}else if(data=="3"){
+				str += "轻装上阵;";
+			}else if(data=="4"){
+				str += "超时服务;";
+			}else if(data=="5"){
+				str += "接送服务;";
+			}
+		});
+		return str;
+	}else if(kind==3){
+		var str = "";
+		$.each(ts,function(index,data){
+			if(data=="1"){
+				str += "支持加急;";
+			}else if(data=="2"){
+				str += "量大优惠;";
+			}else if(data=="3"){
+				str += "5天内完成;";
+			}
+		});
+		return str;
+	}else if(kind==4){
+		var str = "";
+		$.each(ts,function(index,data){
+			if(data=="1"){
+				str += "时间灵活;";
+			}else if(data=="2"){
+				str += "支持多人;";
+			}else if(data=="3"){
+				str += "可长期服务;";
+			}else if(data=="4"){
+				str += "专业领域;";
+			}
+		});
+		return str;
+	}else if(kind==5){
+		var str = "";
+		$.each(ts,function(index,data){
+			if(data=="1"){
+				str += "超时服务;";
+			}else if(data=="2"){
+				str += "时间灵活;";
+			}else if(data=="3"){
+				str += "上门服务;";
+			}
+		});
+		return str;
+	}
+}
+
+function kind2zh(kind){
+	if(kind==1){
+		return "咨询";
+	}else if(kind==2){
+		return "体验";
+	}else if(kind==3){
+		return "批改";
+	}else if(kind==4){
+		return "技艺教授";
+	}else if(kind==5){
+		return "帮忙";
+	}
+}
+
+function state2zh(state){
+	if(state==1){
+		return "通过审核";
+	}
+	if(state==0){
+		return "等待审核";
+	}
+	if(state==2){
+		return "未通过审核";
+	}
+}
