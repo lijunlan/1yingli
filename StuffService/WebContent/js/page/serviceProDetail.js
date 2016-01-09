@@ -13,7 +13,7 @@ var changeTable = function (data) {
 
 
 	row += "<tr><th>相关图片</th><td colspan=6>";
-	var images = imageUrls.split(",");
+	var images = data.imageUrls.split(",");
 	$.each(images,function(index,im){
 		row += "<img id=\"littleIcon\" src=\"" + im + "\" class=\"am-img-thumbnail\">";
 	});
