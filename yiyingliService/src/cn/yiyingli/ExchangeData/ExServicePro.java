@@ -105,7 +105,7 @@ public class ExServicePro {
 		map.put("count", servicePro.getNumber());
 		map.put("onsale", servicePro.getOnSale());
 		map.put("numeral", servicePro.getNumeral());
-		map.put("quantifier", servicePro.getTips());
+		map.put("quantifier", servicePro.getQuantifier());
 		// map.put("freeTime", servicePro.getFreeTime());
 		map.put("kind", servicePro.getKind());
 	}
