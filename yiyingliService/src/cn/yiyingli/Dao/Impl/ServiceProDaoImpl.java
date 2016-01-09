@@ -164,19 +164,19 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 				String hql = "";
 				switch (showKind) {
 				case SHOW_KIND_NONE:
-					hql = "from ServicePro sp where sp.remove=" + false + " and sp.teacher.id=" + teacherId
+					hql = "from ServicePro sp left fetch join sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
 							+ " ORDER BY sp.rankNo ASC";
 					break;
 				case SHOW_KIND_OFF:
-					hql = "from ServicePro sp where sp.remove=" + false + " and sp.teacher.id=" + teacherId
+					hql = "from ServicePro sp left fetch join sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
 							+ " and sp.onShow=" + false + " ORDER BY sp.rankNo ASC";
 					break;
 				case SHOW_KIND_ON:
-					hql = "from ServicePro sp where sp.remove=" + false + " and sp.teacher.id=" + teacherId
+					hql = "from ServicePro sp left fetch join sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
 							+ " and sp.onShow=" + true + " ORDER BY sp.rankNo ASC";
 					break;
 				default:
-					hql = "from ServicePro sp where sp.remove=" + false + " and sp.teacher.id=" + teacherId
+					hql = "from ServicePro sp left fetch join sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
 							+ " ORDER BY sp.rankNo ASC";
 					break;
 				}

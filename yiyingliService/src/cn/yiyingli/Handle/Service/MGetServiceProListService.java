@@ -58,7 +58,7 @@ public class MGetServiceProListService extends MMsgService {
 		ExList toSend = new ExArrayList();
 		for (ServicePro servicePro : servicePros) {
 			SuperMap map = new SuperMap();
-			ExServicePro.assembleDetailServiceForManager(servicePro, map);
+			ExServicePro.assembleSimpleServiceProForManager(servicePro, map);
 			toSend.add(map.finish());
 		}
 		SuperMap send = MsgUtil.getSuccessMap().put("data", toSend);
