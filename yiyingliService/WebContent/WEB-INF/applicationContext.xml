@@ -2353,14 +2353,32 @@
 			<ref local="managerMarkService" />
 		</property>
 	</bean>
-	
-	<bean id="fGetCommentListByServiceProService" class="cn.yiyingli.Handle.Service.FGetCommentListByServiceProService"
+
+	<bean id="fGetCommentListByServiceProService"
+		class="cn.yiyingli.Handle.Service.FGetCommentListByServiceProService"
 		scope="prototype">
 		<property name="serviceProService">
 			<ref local="serviceProService" />
 		</property>
 		<property name="commentService">
 			<ref local="commentService" />
+		</property>
+	</bean>
+
+	<bean id="fGetServiceProService" class="cn.yiyingli.Handle.Service.FGetServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+	</bean>
+
+	<bean id="fGetServiceProListSerivce" class="cn.yiyingli.Handle.Service.FGetServiceProListSerivce"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
 		</property>
 	</bean>
 </beans>
