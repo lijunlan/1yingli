@@ -82,6 +82,7 @@ public class ExTeacher {
 		map.put("introduce", teacher.getIntroduce());
 		LikeNoShowUtil.setLikeNo(teacher, map);
 		LikeNoShowUtil.setFinishNo(teacher, map);
+		map.put("score", teacher.getScore());
 		map.put("address", teacher.getAddress());
 		map.put("teacherId", teacher.getId());
 		map.put("commentNo", teacher.getCommentNumber());

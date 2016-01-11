@@ -53,7 +53,6 @@ public class ExServicePro {
 
 	public static void assembleSimpleServiceProForManager(ServicePro servicePro, SuperMap map) {
 		assembelSimple(servicePro, map);
-		map.put("imageUrls", servicePro.getImageUrls());
 		map.put("state", servicePro.getState());
 		map.put("tip", servicePro.getTips());
 		map.put("finishNo", servicePro.getFinishNo());
@@ -71,7 +70,6 @@ public class ExServicePro {
 
 	public static void assembleSimpleServiceProForTeacher(ServicePro servicePro, SuperMap map) {
 		assembelSimple(servicePro, map);
-		map.put("imageUrls", servicePro.getImageUrls());
 		map.put("state", servicePro.getState());
 		map.put("finishNo", servicePro.getFinishNo());
 		map.put("score", servicePro.getScore());
@@ -96,6 +94,7 @@ public class ExServicePro {
 
 	private static void assembelSimple(ServicePro servicePro, SuperMap map) {
 		// 根据UI修改
+		map.put("imageUrls", servicePro.getImageUrls());
 		map.put("serviceProId", servicePro.getId());
 		map.put("summary", servicePro.getSummary());
 		// map.put("content", servicePro.getContent());
