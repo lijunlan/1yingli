@@ -29,6 +29,12 @@ public class Order {
 	@Column(name = "MONEY", nullable = false)
 	private Float money;
 
+	@Column(name = "ORIGINPRICE", nullable = false)
+	private Float originPrice;
+
+	@Column(name = "PRICE", nullable = false)
+	private Float price;
+
 	@Column(name = "QUANTIFIER", nullable = false)
 	private String quantifier;
 
@@ -105,6 +111,9 @@ public class Order {
 
 	@Column(name = "SERVICETITLE", nullable = false)
 	private String serviceTitle;
+
+	@Column(name = "SERVICESUMMARY", nullable = false)
+	private String serviceSummary;
 
 	// 学员选择时间
 	@Column(name = "SELECTTIME", nullable = false)
@@ -439,6 +448,30 @@ public class Order {
 
 	public void setIconUrl(String iconUrl) {
 		this.iconUrl = iconUrl;
+	}
+
+	public Float getPrice() {
+		return price;
+	}
+
+	public void setPrice(Float price) {
+		this.price = price;
+	}
+
+	public Float getOriginPrice() {
+		return originPrice;
+	}
+
+	public void setOriginPrice(Float originPrice) {
+		this.originPrice = originPrice;
+	}
+
+	public String getServiceSummary() {
+		return serviceSummary;
+	}
+
+	public void setServiceSummary(String serviceSummary) {
+		this.serviceSummary = serviceSummary;
 	}
 
 }

@@ -19,18 +19,24 @@ public class POrderUtil {
 			order.setQuantifier(servicePro.getQuantifier());
 			order.setNumeral(servicePro.getNumeral());
 			order.setServiceId(servicePro.getId());
+			order.setPrice(servicePro.getOnSale() ? servicePro.getPriceTemp() : servicePro.getPrice());
+			order.setOriginPrice(servicePro.getPrice());
 			order.setMoney(servicePro.getOnSale() ? servicePro.getPrice() * (float) count
 					: servicePro.getPriceTemp() * (float) count);
 			order.setOriginMoney(servicePro.getPrice() * (float) count);
+			order.setServiceSummary(servicePro.getSummary());
 		} else {
 			order.setOnSale(false);
 			order.setServiceTitle(teacher.getTopic());
 			order.setQuantifier("分钟");
 			order.setNumeral(20F);
 			order.setServiceId(null);
+			order.setPrice(teacher.getPrice());
+			order.setOriginPrice(teacher.getPrice());
 			float price = teacher.getPrice() * (float) count;
 			order.setMoney(price);
 			order.setOriginMoney(price);
+			order.setServiceSummary(teacher.getSimpleInfo());
 		}
 		order.setCustomerEmail(email);
 		order.setCustomerName(name);

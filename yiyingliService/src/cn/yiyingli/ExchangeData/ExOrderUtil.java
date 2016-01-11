@@ -62,9 +62,12 @@ public class ExOrderUtil {
 		map.put("onsale", o.getOnSale());
 		map.put("createTime", o.getCreateTime());
 		map.put("title", o.getServiceTitle());
-		map.put("price", o.getMoney());
+		map.put("summary", o.getServiceSummary());
+		map.put("price", o.getPrice());
+		map.put("originPrice", o.getOriginPrice());
+		map.put("money", o.getMoney());
 		map.put("serviceProId", o.getServiceId());
-		map.put("originPrice", o.getOriginMoney());
+		map.put("originMoney", o.getOriginMoney());
 		map.put("count", o.getCount());
 		map.put("quantifier", o.getQuantifier());
 		map.put("numeral", o.getNumeral());
