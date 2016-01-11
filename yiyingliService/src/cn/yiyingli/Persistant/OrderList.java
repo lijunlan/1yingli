@@ -30,7 +30,7 @@ public class OrderList {
 
 	@OneToMany(targetEntity = Order.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ORDERLIST_ID", updatable = true, insertable = true)
-	@IndexColumn(name = "ORDERS_NO")
+	@IndexColumn(name = "ORDERS_NO", base = 1)
 	private List<Order> orders = new ArrayList<Order>();
 
 	@Column(name = "CREATETIME", nullable = false)
@@ -77,7 +77,7 @@ public class OrderList {
 	@Column(name = "CUSTOMERNAME", nullable = false)
 	private String customerName;
 
-	@OneToMany(targetEntity = Voucher.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@OneToMany(targetEntity = Voucher.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ORDERLIST_ID", updatable = true)
 	private Set<Voucher> useVouchers = new HashSet<Voucher>();
 

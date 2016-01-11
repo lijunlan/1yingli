@@ -18,12 +18,14 @@ public class ExOrderListUtil {
 		map.put("payMoney", orderList.getPayMoney());
 		map.put("nowMoney", orderList.getNowMoney());
 		map.put("originMoney", orderList.getOriginMoney());
+		map.put("createTime", orderList.getCreateTime());
 		ExList toSendOrders = new ExArrayList();
 		for (Order o : orderList.getOrders()) {
 			SuperMap jsonorder = new SuperMap();
 			ExOrderUtil.assembleOrderToUser(jsonorder, o);
 			toSendOrders.add(jsonorder.finish());
 		}
+		map.put("orders", toSendOrders);
 	}
 
 	public static String getMultiTitle(OrderList orderList) {

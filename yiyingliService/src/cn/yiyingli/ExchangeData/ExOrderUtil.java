@@ -18,7 +18,7 @@ public class ExOrderUtil {
 		assembleOrderNormal(map, o);
 		map.put("teacherId", o.getTeacher().getId());
 		map.put("teacherName", o.getTeacher().getName());
-		map.put("teacherUrl", o.getTeacher().getIconUrl());
+		map.put("iconUrl", o.getIconUrl());
 		map.put("phone", o.getCustomerPhone());
 		map.put("email", o.getCustomerEmail());
 		map.put("name", o.getCustomerName());
@@ -45,7 +45,7 @@ public class ExOrderUtil {
 		map.put("distriName", o.getDistributor() != null ? o.getDistributor().getName() : "");
 		map.put("payTime", o.getPayTime());
 		map.put("teacherName", o.getTeacher().getName());
-		map.put("teacherUrl", o.getTeacher().getIconUrl());
+		map.put("iconUrl", o.getIconUrl());
 		map.put("teacherAlipayNo", o.getAlipayNo());
 		map.put("teacherPaypalNo", o.getPaypalNo());
 		map.put("customerName", o.getCustomerName());
@@ -63,6 +63,7 @@ public class ExOrderUtil {
 		map.put("createTime", o.getCreateTime());
 		map.put("title", o.getServiceTitle());
 		map.put("price", o.getMoney());
+		map.put("serviceProId", o.getServiceId());
 		map.put("originPrice", o.getOriginMoney());
 		map.put("count", o.getCount());
 		map.put("quantifier", o.getQuantifier());

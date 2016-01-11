@@ -166,7 +166,7 @@ public class Teacher {
 
 	@OneToMany(targetEntity = WorkExperience.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "TEACHER_ID", updatable = true, insertable = true)
-	@IndexColumn(name = "WORK_NO")
+	@IndexColumn(name = "WORK_NO", base = 0)
 	private List<WorkExperience> workExperiences = new ArrayList<WorkExperience>();
 
 	@OneToMany(targetEntity = StudyExperience.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)

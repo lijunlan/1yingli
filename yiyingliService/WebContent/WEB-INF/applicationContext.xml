@@ -1012,8 +1012,8 @@
 		<property name="userMarkService">
 			<ref local="userMarkService" />
 		</property>
-		<property name="orderService">
-			<ref local="orderService" />
+		<property name="orderListService">
+			<ref local="orderListService" />
 		</property>
 		<property name="teacherService">
 			<ref local="teacherService" />
@@ -1342,6 +1342,12 @@
 		</property>
 		<property name="voucherService">
 			<ref local="voucherService" />
+		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="orderListService">
+			<ref local="orderListService" />
 		</property>
 	</bean>
 

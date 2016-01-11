@@ -104,6 +104,10 @@ public class CreateOrderService extends UMsgService {
 				&& getData().containsKey("contact") || getData().containsKey("voucher");
 	}
 
+	public static final String SERVICE_KIND_TALK = "talk";
+
+	public static final String SERVICE_KIND_SERVICEPRO = "servicePro";
+
 	@Override
 	public void doit() {
 		User user = getUser();
@@ -121,13 +125,21 @@ public class CreateOrderService extends UMsgService {
 			return;
 		}
 		JSONArray jsonServiceList = getData().getJSONArray("serviceList");
-		long[] serviceProIds = new long[jsonServiceList.size()];
+		int serviceProSum = jsonServiceList.size();
+		long[] serviceProIdstoSql = new long[serviceProSum];
+		long[] serviceProIds = new long[serviceProSum];
 		for (int i = 0; i < jsonServiceList.size(); i++) {
 			JSONObject obj = jsonServiceList.getJSONObject(i);
-			serviceProIds[i] = obj.getLong(ServiceProService.TAG_ID);
+			if (obj.getString("serviceKind").equals(SERVICE_KIND_SERVICEPRO)) {
+				serviceProIdstoSql[i] = obj.getLong(ServiceProService.TAG_ID);
+				serviceProIds[i] = obj.getLong(ServiceProService.TAG_ID);
+			} else {
+				serviceProSum--;
+				serviceProIds[i] = -1L;
+			}
 		}
-		List<ServicePro> servicePros = getServiceProService().queryList(serviceProIds, teacher.getId());
-		if (servicePros.size() != jsonServiceList.size()) {
+		List<ServicePro> servicePros = getServiceProService().queryList(serviceProIdstoSql, teacher.getId());
+		if (servicePros.size() != serviceProSum) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44008"));
 			return;
 		}
@@ -160,11 +172,13 @@ public class CreateOrderService extends UMsgService {
 		for (int i = 0; i < serviceProIds.length; i++) {
 			JSONObject jsonService = jsonServiceList.getJSONObject(i);
 			ServicePro servicePro = null;
-			for (ServicePro sp : servicePros) {
-				long spId = sp.getId();
-				if (serviceProIds[i] == spId) {
-					servicePro = sp;
-					break;
+			if (serviceProIds[i] != -1L) {
+				for (ServicePro sp : servicePros) {
+					long spId = sp.getId();
+					if (serviceProIds[i] == spId) {
+						servicePro = sp;
+						break;
+					}
 				}
 			}
 			Order order = new Order();
@@ -223,7 +237,7 @@ public class CreateOrderService extends UMsgService {
 				Calendar.getInstance().getTimeInMillis() + "");
 
 		NotifyUtil.notifyUserOrder(phone, email,
-				"尊敬的学员,您好,您的订单(流水号:" + orderList.getOrderListNo() + ")已经创建,为了能及时预约到心动导师,请在48小时内完成支付哦,超时系统将自动取消订单。",
+				"尊敬的学员,您好,您的订单组(流水号:" + orderList.getOrderListNo() + ")已经创建,为了能及时预约到心动导师,请在48小时内完成支付哦,超时系统将自动取消订单。",
 				user, getNotificationService());
 
 		setResMsg(MsgUtil.getSuccessMap().put("orderNoList", orderList.getOrderListNo())

@@ -64,6 +64,9 @@ public class Order {
 	@Column(name = "USERINTRODUCE", nullable = false, length = 500)
 	private String userIntroduce;
 
+	@Column(name = "ICONURL", nullable = false)
+	private String iconUrl;
+
 	/**
 	 * 用户alipay账号
 	 */
@@ -429,4 +432,13 @@ public class Order {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+
+	public String getIconUrl() {
+		return iconUrl;
+	}
+
+	public void setIconUrl(String iconUrl) {
+		this.iconUrl = iconUrl;
+	}
+
 }

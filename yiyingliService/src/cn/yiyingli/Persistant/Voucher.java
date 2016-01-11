@@ -41,7 +41,7 @@ public class Voucher {
 	private User ownUser;
 
 	@ManyToOne(targetEntity = OrderList.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "ORDERLIST_ID", updatable = false)
+	@JoinColumn(name = "ORDERLIST_ID", updatable = true)
 	private OrderList useOrderList;
 
 	@Column(name = "NUMBER", nullable = false, unique = true)
