@@ -124,7 +124,8 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ServicePro>>() {
 			@Override
 			public List<ServicePro> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " ORDER BY sp.createTime DESC";
+				String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false
+						+ " ORDER BY sp.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -164,20 +165,22 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 				String hql = "";
 				switch (showKind) {
 				case SHOW_KIND_NONE:
-					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
-							+ " ORDER BY sp.rankNo ASC";
+					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false
+							+ " and sp.teacher.id=" + teacherId + " ORDER BY sp.createTime DESC";
 					break;
 				case SHOW_KIND_OFF:
-					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
-							+ " and sp.onShow=" + false + " ORDER BY sp.rankNo ASC";
+					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false
+							+ " and sp.teacher.id=" + teacherId + " and sp.onShow=" + false
+							+ " ORDER BY sp.createTime DESC";
 					break;
 				case SHOW_KIND_ON:
-					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
-							+ " and sp.onShow=" + true + " ORDER BY sp.rankNo ASC";
+					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false
+							+ " and sp.teacher.id=" + teacherId + " and sp.onShow=" + true
+							+ " ORDER BY sp.createTime DESC";
 					break;
 				default:
-					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
-							+ " ORDER BY sp.rankNo ASC";
+					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false
+							+ " and sp.teacher.id=" + teacherId + " ORDER BY sp.createTime DESC";
 					break;
 				}
 				Query query = session.createQuery(hql);
@@ -202,20 +205,20 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 				String hql = "";
 				switch (showKind) {
 				case SHOW_KIND_NONE:
-					hql = "from ServicePro sp where sp.remove=" + false + " and sp.teacher.id=" + teacherId
-							+ " and state=" + state + " ORDER BY sp.rankNo ASC";
+					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
+							+ " and state=" + state + " ORDER BY sp.createTime DESC";
 					break;
 				case SHOW_KIND_OFF:
-					hql = "from ServicePro sp where sp.remove=" + false + " and sp.teacher.id=" + teacherId
-							+ " and state=" + state + " and sp.onShow=" + false + " ORDER BY sp.rankNo ASC";
+					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
+							+ " and state=" + state + " and sp.onShow=" + false + " ORDER BY sp.createTime DESC";
 					break;
 				case SHOW_KIND_ON:
-					hql = "from ServicePro sp where sp.remove=" + false + " and sp.teacher.id=" + teacherId
-							+ " and state=" + state + " and sp.onShow=" + true + " ORDER BY sp.rankNo ASC";
+					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
+							+ " and state=" + state + " and sp.onShow=" + true + " ORDER BY sp.createTime DESC";
 					break;
 				default:
-					hql = "from ServicePro sp where sp.remove=" + false + " and sp.teacher.id=" + teacherId
-							+ " and state=" + state + " ORDER BY sp.rankNo ASC";
+					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
+							+ " and state=" + state + " ORDER BY sp.createTime DESC";
 					break;
 				}
 				Query query = session.createQuery(hql);

@@ -22,7 +22,7 @@ public interface ServiceProService {
 
 	public static final short STATE_FAILED = 2;
 
-	public static final int PAGE_SIZE = 12;
+	public static final int PAGE_SIZE = 3;
 
 	public static final int HOMEPAGE_PAGE_SIZE = 6;
 

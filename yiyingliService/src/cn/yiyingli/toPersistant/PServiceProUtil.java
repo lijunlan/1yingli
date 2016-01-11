@@ -163,6 +163,7 @@ public class PServiceProUtil {
 			String tip, String onshow, String onsale, String quantifier, String servicetitle, String servicecontent,
 			String imageUrls, String summary, int homeWeight, int saleWeight, ServicePro servicePro) {
 		assemble(servicecontent, imageUrls, summary, price, numeral, count, quantifier, servicetitle, servicePro);
+		servicePro.setUpdateTime(Calendar.getInstance().getTimeInMillis() + "");
 		servicePro.setHomeWeight(homeWeight);
 		servicePro.setSaleWeight(saleWeight);
 		servicePro.setOnSale(Boolean.valueOf(onsale));
@@ -176,6 +177,7 @@ public class PServiceProUtil {
 
 	public static void editPriceByTeacher(float price, float numeral, int count, String quantifier, String title,
 			boolean onsale, float pricetemp, boolean onshow, ServicePro servicePro) {
+		servicePro.setUpdateTime(Calendar.getInstance().getTimeInMillis() + "");
 		servicePro.setOnSale(onsale);
 		servicePro.setPriceTemp(pricetemp);
 		servicePro.setTitle(title);
@@ -188,6 +190,7 @@ public class PServiceProUtil {
 	}
 
 	public static void editCountByTeacher(int count, ServicePro servicePro) {
+		servicePro.setUpdateTime(Calendar.getInstance().getTimeInMillis() + "");
 		servicePro.setNumber(count);
 	}
 
