@@ -9,11 +9,8 @@ public class ExServicePro {
 		assembelDetail(servicePro, map);
 		map.put("tip", servicePro.getTips());
 		map.put("finishNo", servicePro.getFinishNo());
-		map.put("answerRatio", servicePro.getAnswerRatio());
-		map.put("answerTime", servicePro.getAnswerTime());
 		map.put("score", servicePro.getScore());
 		map.put("likeNo", servicePro.getLikeNo());
-		map.put("praiseRatio", servicePro.getPraiseRatio());
 	}
 
 	public static void assembleDetailServiceForManager(ServicePro servicePro, SuperMap map) {
@@ -27,11 +24,8 @@ public class ExServicePro {
 		map.put("showWeight5", servicePro.getShowWeight5());
 		map.put("tip", servicePro.getTips());
 		map.put("finishNo", servicePro.getFinishNo());
-		map.put("answerRatio", servicePro.getAnswerRatio());
-		map.put("answerTime", servicePro.getAnswerTime());
 		map.put("score", servicePro.getScore());
 		map.put("likeNo", servicePro.getLikeNo());
-		map.put("praiseRatio", servicePro.getPraiseRatio());
 		map.put("serviceProState", servicePro.getState());
 		map.put("saleWeight", servicePro.getSaleWeight());
 		map.put("homeWeight", servicePro.getHomeWeight());
@@ -42,11 +36,8 @@ public class ExServicePro {
 		assembelDetail(servicePro, map);
 		map.put("tip", servicePro.getTips());
 		map.put("finishNo", servicePro.getFinishNo());
-		map.put("answerRatio", servicePro.getAnswerRatio());
-		map.put("answerTime", servicePro.getAnswerTime());
 		map.put("score", servicePro.getScore());
 		map.put("likeNo", servicePro.getLikeNo());
-		map.put("praiseRatio", servicePro.getPraiseRatio());
 		map.put("onshow", servicePro.getOnShow());
 		map.put("serviceProState", servicePro.getState());
 	}
@@ -111,6 +102,9 @@ public class ExServicePro {
 
 	private static void assembelDetail(ServicePro servicePro, SuperMap map) {
 		// 根据UI修改
+		map.put("praiseRatio", servicePro.getPraiseRatio());
+		map.put("answerRatio", servicePro.getAnswerRatio());
+		map.put("answerTime", servicePro.getAnswerTime());
 		map.put("serviceProId", servicePro.getId());
 		map.put("imageUrls", servicePro.getImageUrls());
 		map.put("summary", servicePro.getSummary());

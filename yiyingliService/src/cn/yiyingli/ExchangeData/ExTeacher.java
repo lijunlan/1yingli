@@ -83,6 +83,9 @@ public class ExTeacher {
 		LikeNoShowUtil.setLikeNo(teacher, map);
 		LikeNoShowUtil.setFinishNo(teacher, map);
 		map.put("score", teacher.getScore());
+		map.put("answerRatio", teacher.getAnswerRatio());
+		map.put("praiseRatio", teacher.getPraiseRatio());
+		map.put("answerTime", teacher.getAnswerTime());
 		map.put("address", teacher.getAddress());
 		map.put("teacherId", teacher.getId());
 		map.put("commentNo", teacher.getCommentNumber());
