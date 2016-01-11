@@ -10,6 +10,25 @@ import cn.yiyingli.Persistant.OrderList;
 
 public class ExOrderListUtil {
 
+	public static void assembleOrderListToTeacher(OrderList orderList, SuperMap map) {
+		map.put("batchNo", orderList.getOrderListNo());
+		map.put("userId", orderList.getUser().getId());
+		map.put("userName", orderList.getUser().getName());
+		map.put("userUrl", orderList.getUser().getIconUrl());
+		map.put("payMoney", orderList.getPayMoney());
+		map.put("nowMoney", orderList.getNowMoney());
+		map.put("originMoney", orderList.getOriginMoney());
+		map.put("createTime", orderList.getCreateTime());
+		ExList toSendOrders = new ExArrayList();
+		for (Order o : orderList.getOrders()) {
+			SuperMap jsonorder = new SuperMap();
+			ExOrderUtil.assembleOrderToTeacher(jsonorder, o);
+			toSendOrders.add(jsonorder.finish());
+		}
+		map.put("orders", toSendOrders);
+	}
+
+	
 	public static void assembleOrderListToUser(OrderList orderList, SuperMap map) {
 		map.put("batchNo", orderList.getOrderListNo());
 		map.put("teacherId", orderList.getTeacher().getId());

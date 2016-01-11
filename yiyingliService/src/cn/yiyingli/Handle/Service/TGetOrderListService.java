@@ -47,7 +47,7 @@ public class TGetOrderListService extends TMsgService {
 			return;
 		}
 
-		List<OrderList> orderLists = getOrderListService().queryListByUser(teacher.getId(), page);
+		List<OrderList> orderLists = getOrderListService().queryListByTeacher(teacher.getId(), page);
 		if (getData().containsKey("state")) {
 			String s = (String) getData().get("state");
 			String states[] = s.split("\\|");
@@ -57,7 +57,7 @@ public class TGetOrderListService extends TMsgService {
 		ExList toSendOrderLists = new ExArrayList();
 		for (OrderList orderList : orderLists) {
 			SuperMap map = new SuperMap();
-			ExOrderListUtil.assembleOrderListToUser(orderList, map);
+			ExOrderListUtil.assembleOrderListToTeacher(orderList, map);
 			toSendOrderLists.add(map.finish());
 		}
 
