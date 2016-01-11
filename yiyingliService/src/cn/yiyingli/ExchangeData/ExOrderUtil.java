@@ -7,7 +7,7 @@ public class ExOrderUtil {
 
 	public static void assembleOrderToTeacher(SuperMap map, Order o) {
 		assembleOrderNormal(map, o);
-		map.put("iconUrl", o.getCreateUser().getIconUrl());
+		map.put("iconUrl", o.getIconUrl());
 		map.put("name", o.getCustomerName());
 		map.put("phone", o.getCustomerPhone());
 		map.put("email", o.getCustomerEmail());

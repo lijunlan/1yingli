@@ -48,6 +48,9 @@ public class TGetOrderListService extends TMsgService {
 		}
 
 		List<OrderList> orderLists = getOrderListService().queryListByTeacher(teacher.getId(), page);
+
+		ExOrderListUtil.removeUnuseOrder(orderLists);
+
 		if (getData().containsKey("state")) {
 			String s = (String) getData().get("state");
 			String states[] = s.split("\\|");

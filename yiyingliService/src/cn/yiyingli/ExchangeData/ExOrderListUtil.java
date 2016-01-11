@@ -53,6 +53,21 @@ public class ExOrderListUtil {
 		return subject;
 	}
 
+	public static void removeUnuseOrder(List<OrderList> orderLists) {
+		for (OrderList orderlist : orderLists) {
+			List<Order> toRemove = new ArrayList<Order>();
+			for (Order order : orderlist.getOrders()) {
+				String state = order.getState();
+				if (state.contains("0200,0100") || state.startsWith("0100")) {
+					toRemove.add(order);
+				}
+			}
+			for (Order order : toRemove) {
+				orderlist.getOrders().remove(order);
+			}
+		}
+	}
+	
 	public static void getMatchStateLists(List<OrderList> orderLists, String[] states) {
 		for (OrderList orderList : orderLists) {
 			List<Order> toDelete = new ArrayList<Order>();
