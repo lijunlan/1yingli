@@ -28,7 +28,6 @@ public class ExOrderListUtil {
 		map.put("orders", toSendOrders);
 	}
 
-	
 	public static void assembleOrderListToUser(OrderList orderList, SuperMap map) {
 		map.put("batchNo", orderList.getOrderListNo());
 		map.put("teacherId", orderList.getTeacher().getId());
@@ -54,6 +53,7 @@ public class ExOrderListUtil {
 	}
 
 	public static void removeUnuseOrder(List<OrderList> orderLists) {
+		List<OrderList> toRemoveOrderList = new ArrayList<OrderList>();
 		for (OrderList orderlist : orderLists) {
 			List<Order> toRemove = new ArrayList<Order>();
 			for (Order order : orderlist.getOrders()) {
@@ -65,9 +65,15 @@ public class ExOrderListUtil {
 			for (Order order : toRemove) {
 				orderlist.getOrders().remove(order);
 			}
+			if (orderlist.getOrders().size() == 0) {
+				toRemoveOrderList.add(orderlist);
+			}
+		}
+		for (OrderList orderlist : toRemoveOrderList) {
+			orderLists.remove(orderlist);
 		}
 	}
-	
+
 	public static void getMatchStateLists(List<OrderList> orderLists, String[] states) {
 		for (OrderList orderList : orderLists) {
 			List<Order> toDelete = new ArrayList<Order>();
