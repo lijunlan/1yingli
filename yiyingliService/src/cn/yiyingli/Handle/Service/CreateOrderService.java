@@ -3,6 +3,7 @@ package cn.yiyingli.Handle.Service;
 import java.util.Calendar;
 import java.util.List;
 
+import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.OrderList;
@@ -21,6 +22,7 @@ import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.SendMsgToBaiduUtil;
+import cn.yiyingli.Util.TimeTaskUtil;
 import cn.yiyingli.toPersistant.POrderUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -226,7 +228,17 @@ public class CreateOrderService extends UMsgService {
 
 		getUserService().update(user);
 
-		getOrderListService().save(orderList);
+		String r = getOrderListService().saveAndSubCount(orderList);
+		if (r.equals(OrderListService.ORDER_ERROR_COUNT_LIMITED)) {
+			setResMsg(MsgUtil.getErrorMsgByCode("44009"));
+			return;
+		}
+
+		for (Order order : orderList.getOrders()) {
+			TimeTaskUtil.sendTimeTask("change", "order",
+					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
+					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+		}
 		//
 		// if (isUseVoucher) {
 		// getVoucherService().updateWithOrderListId(voucher,

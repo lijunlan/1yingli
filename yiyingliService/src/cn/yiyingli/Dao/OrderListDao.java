@@ -18,6 +18,10 @@ public interface OrderListDao {
 
 	void updateWithTeacherNumber(OrderList orderList, long teacherId);
 
+	void updateServiceProNumber(OrderList orderList);
+
+	boolean queryCheckServiceNumber(OrderList orderList);
+
 	OrderList queryByOrderListNo(String orderListNo);
 
 	OrderList query(long id);

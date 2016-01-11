@@ -11,6 +11,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import cn.yiyingli.Dao.OrderListDao;
+import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.OrderList;
 
 public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDao {
@@ -39,6 +40,39 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 	@Override
 	public void update(OrderList orderList) {
 		getHibernateTemplate().update(orderList);
+	}
+
+	@Override
+	public void updateServiceProNumber(OrderList orderList) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = null;
+		for (Order order : orderList.getOrders()) {
+			if (order.getServiceId() != null) {
+				long serviceProId = order.getServiceId();
+				int count = order.getCount();
+				query = session.createSQLQuery("update servicepro set servicepro.number=servicepro.number-" + count
+						+ " where servicepro.SERVICEPRO_ID=" + serviceProId);
+				query.executeUpdate();
+			}
+		}
+	}
+
+	@Override
+	public boolean queryCheckServiceNumber(OrderList orderList) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = null;
+		for (Order order : orderList.getOrders()) {
+			if (order.getServiceId() != null) {
+				long serviceProId = order.getServiceId();
+				int count = order.getCount();
+				query = session.createSQLQuery("select servicepro.number>" + count
+						+ " from servicepro where servicepro.SERVICEPRO_ID=" + serviceProId + " for update");
+				boolean r = (boolean) query.uniqueResult();
+				if (!r)
+					return false;
+			}
+		}
+		return true;
 	}
 
 	@Override
@@ -114,7 +148,7 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 						+ "' and orders.STATE not like '0100%' and orders.STATE not like '%0200,0100%') where teacher.TEACHER_ID="
 						+ teacherId);
 		query.executeUpdate();
-		
+
 	}
 
 }

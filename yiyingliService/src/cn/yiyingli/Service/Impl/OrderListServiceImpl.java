@@ -3,11 +3,9 @@ package cn.yiyingli.Service.Impl;
 import java.util.Calendar;
 import java.util.List;
 import cn.yiyingli.Dao.OrderListDao;
-import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Service.OrderListService;
-import cn.yiyingli.Util.TimeTaskUtil;
 
 public class OrderListServiceImpl implements OrderListService {
 
@@ -22,7 +20,12 @@ public class OrderListServiceImpl implements OrderListService {
 	}
 
 	@Override
-	public String save(OrderList orderList) {
+	public String saveAndSubCount(OrderList orderList) {
+		boolean result = getOrderListDao().queryCheckServiceNumber(orderList);
+		if (!result) {
+			return ORDER_ERROR_COUNT_LIMITED;
+		}
+		getOrderListDao().updateServiceProNumber(orderList);
 		long id = getOrderListDao().saveAndReturnId(orderList);
 		orderList.setOrderListNo("" + Calendar.getInstance().get(Calendar.YEAR)
 				+ String.valueOf((Calendar.getInstance().get(Calendar.DAY_OF_YEAR) + 1000)).substring(1)
@@ -33,11 +36,6 @@ public class OrderListServiceImpl implements OrderListService {
 					+ (100000000L + order.getId()));
 		}
 		getOrderListDao().update(orderList);
-		for (Order order : orderList.getOrders()) {
-			TimeTaskUtil.sendTimeTask("change", "order",
-					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
-					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
-		}
 		return orderList.getOrderListNo();
 	}
 

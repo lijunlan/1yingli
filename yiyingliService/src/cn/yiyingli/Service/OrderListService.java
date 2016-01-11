@@ -28,7 +28,9 @@ public interface OrderListService {
 	 */
 	public static final String ORDER_STATE_ABNORMAL = "0400";
 
-	String save(OrderList orderList);
+	public static final String ORDER_ERROR_COUNT_LIMITED = "limited";
+
+	String saveAndSubCount(OrderList orderList);
 
 	Long saveAndReturnId(OrderList orderList);
 
