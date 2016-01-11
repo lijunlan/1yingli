@@ -43,7 +43,7 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 
 	@Override
 	public OrderList queryByOrderListNo(String orderListNo) {
-		String hql = "from OrderList ol left join fetch ol.user left join fetch ol.teacher where o.orderListNo=?";
+		String hql = "from OrderList ol left join fetch ol.user left join fetch ol.teacher where ol.orderListNo=?";
 		@SuppressWarnings("unchecked")
 		List<OrderList> list = getHibernateTemplate().find(hql, orderListNo);
 		if (list.isEmpty())
@@ -54,7 +54,7 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 
 	@Override
 	public OrderList query(long id) {
-		String hql = "from OrderList ol left join fetch ol.user left join fetch ol.teacher where o.id=?";
+		String hql = "from OrderList ol left join fetch ol.user left join fetch ol.teacher where ol.id=?";
 		@SuppressWarnings("unchecked")
 		List<OrderList> list = getHibernateTemplate().find(hql, id);
 		if (list.isEmpty())
@@ -72,7 +72,7 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 			@Override
 			public List<OrderList> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from OrderList ol left join fetch ol.user  where ol.teacher.id=" + teacherId
-						+ " and ol.showToTeacher=" + true + " ORDER BY o.createTime DESC";
+						+ " and ol.showToTeacher=" + true + " ORDER BY ol.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -92,7 +92,7 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 			@Override
 			public List<OrderList> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from OrderList ol left join fetch ol.teacher  where ol.user.id=" + userId
-						+ " ORDER BY o.createTime DESC";
+						+ " ORDER BY ol.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
