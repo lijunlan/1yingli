@@ -31,6 +31,30 @@ public class SendMailUtil {
 		// System.out.println(sendMessage("lijunlan@1yingli.cn", "fwefwe",
 		// "呵呵呵呵呵呵呵" + i));
 		// }
+		sendMessage("lijunlan@1yingli.cn", "tetete", "569684957439543");
+		// IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou",
+		// "T8Idmm00U1mAwzcn",
+		// "cZQkX1saEq1eF2g1ADbnO2kcFlJxb9");
+		// IAcsClient client = new DefaultAcsClient(profile);
+		// SingleSendMailRequest request = new SingleSendMailRequest();
+		// try {
+		// request.setAccountName("notify@1yingli.net");
+		// request.setAddressType(0);
+		// request.setTagName("123");
+		// request.setReplyToAddress(true);
+		// request.setToAddress("lijunlan@1yingli.cn");
+		// request.setSubject("邮件主题");
+		// request.setHtmlBody("邮件正文");
+		// @SuppressWarnings("unused")
+		// SingleSendMailResponse httpResponse = client.getAcsResponse(request);
+		// } catch (ServerException e) {
+		// e.printStackTrace();
+		// } catch (ClientException e) {
+		// e.printStackTrace();
+		// }
+	}
+
+	public static boolean sendMessage(String toEmail, String title, String message) {
 		IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "T8Idmm00U1mAwzcn",
 				"cZQkX1saEq1eF2g1ADbnO2kcFlJxb9");
 		IAcsClient client = new DefaultAcsClient(profile);
@@ -38,90 +62,55 @@ public class SendMailUtil {
 		try {
 			request.setAccountName("notify@1yingli.net");
 			request.setAddressType(0);
-			request.setTagName("123");
+			request.setTagName("【一英里】");
 			request.setReplyToAddress(true);
-			request.setToAddress("lijunlan@1yingli.cn");
-			request.setSubject("邮件主题");
-			request.setHtmlBody("邮件正文");
+			request.setToAddress(toEmail);
+			request.setSubject("【一英里】" + title);
+			// 邮件内容
+			StringBuffer buffer = new StringBuffer();
+			buffer.append(HTML);
+			buffer.append(message);
+			buffer.append(HTML2);
+			request.setHtmlBody(buffer.toString());
 			@SuppressWarnings("unused")
 			SingleSendMailResponse httpResponse = client.getAcsResponse(request);
+			return true;
 		} catch (ServerException e) {
 			e.printStackTrace();
 		} catch (ClientException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public static boolean sendMessage(String toEmail, String title, String message) {
-		MailSenderInfo mailInfo = new MailSenderInfo();
-		// mailInfo.setMailServerHost("email-smtp.us-west-2.amazonaws.com");
-		mailInfo.setMailServerHost("smtp.1yingli.cn");
-		mailInfo.setMailServerPort("25");
-		mailInfo.setValidate(true);
-
-		// 邮箱用户名
-		// mailInfo.setUserName("AKIAJMTNHGS3FEHBYZ6Q");
-		mailInfo.setUserName("notify@1yingli.cn");
-		// 邮箱密码
-		// mailInfo.setPassword("AvMBHttyRlsICNXNFIzyisUnsHNj+NKWjmAgdubYha4l");
-		mailInfo.setPassword("Onemile123!@#");
-		// 发件人邮箱
-		mailInfo.setFromAddress("notify@1yingli.cn");
-		// 收件人邮箱
-		mailInfo.setToAddress(toEmail);
-		// 邮件标题
-		mailInfo.setSubject("【一英里】" + title);
-		// 邮件内容
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(HTML);
-		buffer.append(message);
-		buffer.append(HTML2);
-		mailInfo.setContent(buffer.toString());
-
-		// 发送邮件
-		// SimpleMailSender sms = new SimpleMailSender();
-		// 发送文体格式
-		// sms.sendTextMail(mailInfo);
-		// 发送html格式
-		SimpleMailSender.sendHtmlMail(mailInfo);
-		return true;
-		// System.out.println("邮件发送完毕");
+		return false;
 	}
 
 	private static boolean sendCheckNo(String title, String checkNo, String toEmail) {
-		MailSenderInfo mailInfo = new MailSenderInfo();
-		// mailInfo.setMailServerHost("email-smtp.us-west-2.amazonaws.com");
-		mailInfo.setMailServerHost("smtp.1yingli.cn");
-		mailInfo.setMailServerPort("25");
-		mailInfo.setValidate(true);
-
-		// 邮箱用户名
-		// mailInfo.setUserName("AKIAJMTNHGS3FEHBYZ6Q");
-		mailInfo.setUserName("notify@1yingli.cn");
-		// 邮箱密码
-		// mailInfo.setPassword("AvMBHttyRlsICNXNFIzyisUnsHNj+NKWjmAgdubYha4l");
-		mailInfo.setPassword("Onemile123!@#");
-		// 发件人邮箱
-		mailInfo.setFromAddress("notify@1yingli.cn");
-		// 收件人邮箱
-		mailInfo.setToAddress(toEmail);
-		// 邮件标题
-		mailInfo.setSubject(title);
-		// 邮件内容
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(HTML);
-		buffer.append("				 您的验证码是<strong style=\"color:#000;font-size:60px;\">&nbsp;&nbsp;&nbsp;" + checkNo
-				+ "&nbsp;&nbsp;&nbsp;</strong><small></small>【一英里】		");
-		buffer.append(HTML2);
-		mailInfo.setContent(buffer.toString());
-
-		// 发送邮件
-		// SimpleMailSender sms = new SimpleMailSender();
-		// 发送文体格式
-		// sms.sendTextMail(mailInfo);
-		// 发送html格式
-		SimpleMailSender.sendHtmlMail(mailInfo);
-		return true;
+		IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "T8Idmm00U1mAwzcn",
+				"cZQkX1saEq1eF2g1ADbnO2kcFlJxb9");
+		IAcsClient client = new DefaultAcsClient(profile);
+		SingleSendMailRequest request = new SingleSendMailRequest();
+		try {
+			request.setAccountName("notify@1yingli.net");
+			request.setAddressType(0);
+			request.setTagName("【一英里】");
+			request.setReplyToAddress(true);
+			request.setToAddress(toEmail);
+			request.setSubject(title);
+			// 邮件内容
+			StringBuffer buffer = new StringBuffer();
+			buffer.append(HTML);
+			buffer.append("				 您的验证码是<strong style=\"color:#000;font-size:60px;\">&nbsp;&nbsp;&nbsp;"
+					+ checkNo + "&nbsp;&nbsp;&nbsp;</strong><small></small>【一英里】		");
+			buffer.append(HTML2);
+			request.setHtmlBody(buffer.toString());
+			@SuppressWarnings("unused")
+			SingleSendMailResponse httpResponse = client.getAcsResponse(request);
+			return true;
+		} catch (ServerException e) {
+			e.printStackTrace();
+		} catch (ClientException e) {
+			e.printStackTrace();
+		}
+		return false;
 		// System.out.println("邮件发送完毕");
 	}
 }
