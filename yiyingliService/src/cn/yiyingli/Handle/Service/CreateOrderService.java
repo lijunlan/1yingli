@@ -184,10 +184,10 @@ public class CreateOrderService extends UMsgService {
 				}
 			}
 			Order order = new Order();
-			String question = jsonService.getString(ServiceProService.TAG_QUESTION);
-			String resume = jsonService.getString(ServiceProService.TAG_RESUME);
-			String selectTime = jsonService.getString(ServiceProService.TAG_SELECTTIME);
-			int count = jsonService.getInt(ServiceProService.TAG_COUNT);
+			String question = jsonService.getString("question");
+			String resume = jsonService.getString("resume");
+			String selectTime = jsonService.getString("selectTime");
+			int count = jsonService.getInt("count");
 			POrderUtil.createOrder(user, teacher, phone, email, contact, name, question, resume, selectTime, count,
 					servicePro, order);
 			orderList.setOriginMoney(orderList.getOriginMoney() + order.getOriginMoney());

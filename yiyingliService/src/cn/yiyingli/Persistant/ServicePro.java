@@ -30,6 +30,12 @@ public class ServicePro {
 	@Column(name = "TIPS", nullable = false)
 	private String tips;
 
+	@Column(name = "TALKWAY", nullable = false)
+	private Short talkWay;
+
+	@Column(name = "ADDRESS", nullable = true)
+	private String address;
+
 	@Column(name = "CONTENT", nullable = false, length = 1000)
 	private String content;
 
@@ -436,6 +442,22 @@ public class ServicePro {
 
 	public void setCommentNo(Long commentNo) {
 		this.commentNo = commentNo;
+	}
+
+	public Short getTalkWay() {
+		return talkWay;
+	}
+
+	public void setTalkWay(Short talkWay) {
+		this.talkWay = talkWay;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }

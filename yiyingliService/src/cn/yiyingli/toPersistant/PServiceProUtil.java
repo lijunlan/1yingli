@@ -38,8 +38,8 @@ public class PServiceProUtil {
 	// teacher.getServicePros().add(servicePro);
 	// }
 
-	private static void assemble(String content, String imageUrls, String summary, float price, float numeral,
-			int count, String quantifier, String title, ServicePro servicePro) {
+	private static void assemble(String content, String imageUrls, String summary, String address, short talkWay,
+			float price, float numeral, int count, String quantifier, String title, ServicePro servicePro) {
 		servicePro.setImageUrls(imageUrls);
 		servicePro.setContent(content);
 		servicePro.setSummary(summary);
@@ -48,11 +48,14 @@ public class PServiceProUtil {
 		servicePro.setNumber(count);
 		servicePro.setNumeral(numeral);
 		servicePro.setQuantifier(quantifier);
+		servicePro.setAddress(address);
+		servicePro.setTalkWay(talkWay);
 	}
 
 	private static void assemble(JSONObject jsonServicePro, ServicePro servicePro) {
 		assemble(jsonServicePro.getString("content"), jsonServicePro.getString("imageUrls"),
-				jsonServicePro.getString("summary"), Float.valueOf(jsonServicePro.getString("price")),
+				jsonServicePro.getString("summary"), jsonServicePro.getString("address"),
+				Short.valueOf(jsonServicePro.getString("talkWay")), Float.valueOf(jsonServicePro.getString("price")),
 				Float.valueOf(jsonServicePro.getString("numeral")), jsonServicePro.getInt("count"),
 				jsonServicePro.getString("quantifier"), jsonServicePro.getString("title"), servicePro);
 	}
@@ -74,9 +77,10 @@ public class PServiceProUtil {
 	}
 
 	public static void assembleByTeacherEdit(int count, float price, float priceTemp, float numeral, int kind,
-			String freeTime, String tip, String onshow, String onsale, String quantifier, String servicetitle,
-			String servicecontent, String imageUrls, String summary, ServicePro servicePro) {
-		assemble(servicecontent, imageUrls, summary, price, numeral, count, quantifier, servicetitle, servicePro);
+			short talkway, String address, String freeTime, String tip, String onshow, String onsale, String quantifier,
+			String servicetitle, String servicecontent, String imageUrls, String summary, ServicePro servicePro) {
+		assemble(servicecontent, imageUrls, summary, address, talkway, price, numeral, count, quantifier, servicetitle,
+				servicePro);
 		String time = Calendar.getInstance().getTimeInMillis() + "";
 		servicePro.setOnSale(Boolean.valueOf(onsale));
 		servicePro.setPriceTemp(priceTemp);
@@ -159,10 +163,12 @@ public class PServiceProUtil {
 		servicePro.setTeacher(teacher);
 	}
 
-	public static void editrByManager(int count, float price, float priceTemp, float numeral, int kind, String freeTime,
-			String tip, String onshow, String onsale, String quantifier, String servicetitle, String servicecontent,
-			String imageUrls, String summary, int homeWeight, int saleWeight, ServicePro servicePro) {
-		assemble(servicecontent, imageUrls, summary, price, numeral, count, quantifier, servicetitle, servicePro);
+	public static void editrByManager(int count, float price, float priceTemp, float numeral, int kind, short talkWay,
+			String address, String freeTime, String tip, String onshow, String onsale, String quantifier,
+			String servicetitle, String servicecontent, String imageUrls, String summary, int homeWeight,
+			int saleWeight, ServicePro servicePro) {
+		assemble(servicecontent, imageUrls, summary, address, talkWay, price, numeral, count, quantifier, servicetitle,
+				servicePro);
 		servicePro.setUpdateTime(Calendar.getInstance().getTimeInMillis() + "");
 		servicePro.setHomeWeight(homeWeight);
 		servicePro.setSaleWeight(saleWeight);

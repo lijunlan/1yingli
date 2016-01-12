@@ -6,15 +6,11 @@ import cn.yiyingli.Persistant.ServicePro;
 
 public interface ServiceProService {
 
-	public static final String TAG_QUESTION = "question";
-
-	public static final String TAG_RESUME = "resume";
-
-	public static final String TAG_SELECTTIME = "selectTime";
-
 	public static final String TAG_ID = "serviceProId";
 
-	public static final String TAG_COUNT = "count";
+	public static final short TALK_WAY_ONLINE = 0;
+
+	public static final short TALK_WAY_OFFLINE = 1;
 
 	public static final short STATE_CHECKING = 0;
 

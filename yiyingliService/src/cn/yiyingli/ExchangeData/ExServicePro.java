@@ -8,6 +8,7 @@ public class ExServicePro {
 		// 根据UI修改
 		assembelDetail(servicePro, map);
 		map.put("tip", servicePro.getTips());
+		map.put("teacherId", servicePro.getTeacher().getId());
 		map.put("finishNo", servicePro.getFinishNo());
 		map.put("score", servicePro.getScore());
 		map.put("likeNo", servicePro.getLikeNo());
@@ -102,6 +103,8 @@ public class ExServicePro {
 
 	private static void assembelDetail(ServicePro servicePro, SuperMap map) {
 		// 根据UI修改
+		map.put("address", servicePro.getAddress());
+		map.put("talkWay", servicePro.getTalkWay());
 		map.put("praiseRatio", servicePro.getPraiseRatio());
 		map.put("answerRatio", servicePro.getAnswerRatio());
 		map.put("answerTime", servicePro.getAnswerTime());

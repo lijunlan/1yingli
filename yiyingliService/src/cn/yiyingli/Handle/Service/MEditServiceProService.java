@@ -47,8 +47,11 @@ public class MEditServiceProService extends MMsgService {
 		int kind = jsonServicePro.getInt("kind");
 		int saleWeight = jsonServicePro.getInt("saleWeight");
 		int homeWeight = jsonServicePro.getInt("homeWeight");
-		PServiceProUtil.editrByManager(count, price, priceTemp, numeral, kind, freeTime, tip, onshow, onsale,
-				quantifier, servicetitle, servicecontent, imageUrls, summary, homeWeight, saleWeight, servicePro);
+		String address = jsonServicePro.getString("address");
+		short talkWay = (short) jsonServicePro.getInt("talkWay");
+		PServiceProUtil.editrByManager(count, price, priceTemp, numeral, kind, talkWay, address, freeTime, tip, onshow,
+				onsale, quantifier, servicetitle, servicecontent, imageUrls, summary, homeWeight, saleWeight,
+				servicePro);
 		getServiceProService().update(servicePro);
 		setResMsg(MsgUtil.getSuccessMsg("edit servicePro successfully"));
 	}

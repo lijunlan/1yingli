@@ -95,7 +95,7 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 
 	@Override
 	public ServicePro queryByUser(long id) {
-		String hql = "from ServicePro sp where sp.remove=" + false + " and sp.id=" + id + " and sp.onShow=" + true
+		String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.id=? and sp.onShow=" + true
 				+ " and sp.state=" + ServiceProService.STATE_OK;
 		@SuppressWarnings("unchecked")
 		List<ServicePro> list = getHibernateTemplate().find(hql, id);
@@ -205,20 +205,24 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 				String hql = "";
 				switch (showKind) {
 				case SHOW_KIND_NONE:
-					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
-							+ " and state=" + state + " ORDER BY sp.createTime DESC";
+					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false
+							+ " and sp.teacher.id=" + teacherId + " and state=" + state
+							+ " ORDER BY sp.createTime DESC";
 					break;
 				case SHOW_KIND_OFF:
-					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
-							+ " and state=" + state + " and sp.onShow=" + false + " ORDER BY sp.createTime DESC";
+					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false
+							+ " and sp.teacher.id=" + teacherId + " and state=" + state + " and sp.onShow=" + false
+							+ " ORDER BY sp.createTime DESC";
 					break;
 				case SHOW_KIND_ON:
-					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
-							+ " and state=" + state + " and sp.onShow=" + true + " ORDER BY sp.createTime DESC";
+					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false
+							+ " and sp.teacher.id=" + teacherId + " and state=" + state + " and sp.onShow=" + true
+							+ " ORDER BY sp.createTime DESC";
 					break;
 				default:
-					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.teacher.id=" + teacherId
-							+ " and state=" + state + " ORDER BY sp.createTime DESC";
+					hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false
+							+ " and sp.teacher.id=" + teacherId + " and state=" + state
+							+ " ORDER BY sp.createTime DESC";
 					break;
 				}
 				Query query = session.createQuery(hql);

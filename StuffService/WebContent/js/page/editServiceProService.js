@@ -101,7 +101,8 @@ function getAndParse(servicePro) {
 	$("#numeral").val(servicePro.numeral);
 	$("#quantifier").val(servicePro.quantifier);
 	$("#content").val(servicePro.content);
-	
+	$("#pricetemp").val(servicePro.priceTemp);
+	$("#address").val(servicePro.address);
 
 	$("[name='radio']").uCheck('uncheck');
 	var kind = servicePro.kind;
@@ -118,7 +119,6 @@ function getAndParse(servicePro) {
 	});
 	
 	
-	$("#pricetemp").val(servicePro.priceTemp);
 	$("#freeTime").val(servicePro.freeTime);
 	
 	
@@ -130,7 +130,8 @@ function getAndParse(servicePro) {
 	$("#showWeight5").val(servicePro.showWeight5);
 	$("#homeWeight").val(servicePro.homeWeight);
 	$("#saleWeight").val(servicePro.saleWeight);
-	$('#actionDiv').bootstrapSwitch('setState', false)
+	$('#actionDiv').bootstrapSwitch('setState', false);
+	servicePro.talkWay == 0 ? $('#onlineDiv').bootstrapSwitch('setState', true) : $('#onlineDiv').bootstrapSwitch('setState', false);
 	servicePro.onshow == 'true' ? $('#onShowDiv').bootstrapSwitch('setState', true) : $('#onShowDiv').bootstrapSwitch('setState', false);
 	servicePro.onsale == 'true' ? $('#onSaleDiv').bootstrapSwitch('setState', true) : $('#onSaleDiv').bootstrapSwitch('setState', false);
 	Messenger().post("加载完成");
@@ -169,6 +170,12 @@ function submit() {
 
 	servicePro.onshow=document.getElementById('onShow').checked.toString();
 	servicePro.onsale=document.getElementById('onSale').checked.toString();
+	if(document.getElementById('online').checked){
+		servicePro.talkWay=0;
+	}else{
+		servicePro.talkWay=1;
+	}
+
 	servicePro.quantifier=$("#quantifier").val();
 	servicePro.title=$("#title").val();
 	servicePro.content=$("#content").val();
