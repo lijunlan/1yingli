@@ -175,6 +175,7 @@ function submit() {
 	}else{
 		servicePro.talkWay=1;
 	}
+	servicePro.address=$("#address").val();
 
 	servicePro.quantifier=$("#quantifier").val();
 	servicePro.title=$("#title").val();
