@@ -3,6 +3,7 @@ package cn.yiyingli.Servlet;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -17,9 +18,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.yiyingli.Alipay.AlipayNotify;
+import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Persistant.Reward;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
+import cn.yiyingli.Service.RewardService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.WarnUtil;
@@ -64,6 +68,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 
 		// 返回参数
 		String is_trade_success = req.getParameter("trade_status");
+		String extra_common_param = req.getParameter("extra_common_param");
 		// String sign_type = req.getParameter("sign_type");
 		// String sign = req.getParameter("sign");
 		String oid = req.getParameter("out_trade_no");
@@ -77,6 +82,11 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 
 		// 验证通知的MD5
 		if (AlipayNotify.verify(parms)) {
+			if (extra_common_param != null) {
+				RewardService rewardService = (RewardService) getApplicationContext().getBean("rewardService");
+				dealReward(rewardService, extra_common_param, oid);
+				return;
+			}
 			// 交易成功
 			Order order = orderService.queryByShowId(oid, false);
 			if (is_trade_success.equals("TRADE_SUCCESS")) {
@@ -203,6 +213,32 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 			OutputStream stream = resp.getOutputStream();
 			stream.write("fail".getBytes("UTF-8"));
 		}
+	}
+
+	private void dealReward(RewardService rewardService, String extra_common_param, String rewardNo) {
+		String[] params = extra_common_param.split("\\|");
+		SuperMap map = new SuperMap();
+		for (String param : params) {
+			String[] temp = param.split("\\^");
+			String key = temp[0];
+			String value = temp[1];
+			map.put(key, value);
+		}
+		Reward reward = new Reward();
+		String time = Calendar.getInstance().getTimeInMillis() + "";
+		reward.setCreateTime(time);
+		reward.setFinishPay(true);
+		reward.setFinishSalary(false);
+		reward.setMoney(Float.valueOf(map.finish().getString("money")));
+		reward.setPayTime(time);
+		reward.setRewardNo(rewardNo);
+		reward.setTeacherId(map.finish().getLong("teacherId"));
+		reward.setTeacherName(map.finish().getString("teacherName"));
+		if (map.finish().containsKey("userId") && map.finish().containsKey("userName")) {
+			reward.setUserId((map.finish().getLong("userId")));
+			reward.setUserName(map.finish().getString("userName"));
+		}
+		rewardService.save(reward);
 	}
 
 	private void finishOrder(OrderService orderService, Order order) {

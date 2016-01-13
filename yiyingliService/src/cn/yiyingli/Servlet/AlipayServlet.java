@@ -26,8 +26,12 @@ import cn.yiyingli.Util.ConfigurationXmlUtil;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
 
-@SuppressWarnings("serial")
 public class AlipayServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3089800443291248718L;
 
 	private ApplicationContext applicationContext;
 
