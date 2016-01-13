@@ -205,7 +205,7 @@ public class Teacher {
 	@Column(name = "CREATETIME", nullable = true)
 	private String createTime;
 
-	@Column(name = "LOOKNUMBER", nullable = true)
+	@Column(name = "LOOKNUMBER", nullable = false)
 	private Long lookNumber;
 
 	public Long getOrderNumber() {

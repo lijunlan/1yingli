@@ -119,7 +119,9 @@ public interface OrderService {
 
 	void remove(long id);
 
-	void update(Order order,boolean addMile);
+	void update(Order order);
+
+	void update(Order order, boolean addMile);
 
 	void updateAndSendTimeTask(Order order);
 
@@ -140,6 +142,10 @@ public interface OrderService {
 	long querySumNoByTeacherId(long teacherId);
 
 	long querySumNoBySalaryState(short salaryState);
+
+	List<Order> queryListAll(int page);
+
+	List<Order> queryListAll(int page, int pageSize);
 
 	List<Order> queryListByState(String state, int page, boolean lazy);
 

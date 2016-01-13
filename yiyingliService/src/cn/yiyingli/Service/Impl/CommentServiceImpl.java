@@ -72,6 +72,7 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public void saveWithOrderAndTeacher(Comment comment, Order order, Teacher teacher) {
 		getTeacherDao().update(teacher);
+		getTeacherDao().updateAddMile(teacher.getId(), 2L);
 		getOrderDao().update(order);
 		if (comment.getKind() == COMMENT_KIND_FROMUSER_SHORT) {
 			getCommentDao().saveWithTeacherAndUser(comment, comment.getTeacher(), comment.getUser(),

@@ -66,6 +66,22 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
+	public void updateAddMile(long teacherId, long mile) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session.createSQLQuery(
+				"update teacher set teacher.MILE=teacher.MILE+" + mile + " where teacher.TEACHER_ID=" + teacherId);
+		query.executeUpdate();
+	}
+
+	@Override
+	public void updateAddLookNumber(long teacherId, long number) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session.createSQLQuery("update teacher set teacher.LOOKNUMBER=teacher.LOOKNUMBER+" + number
+				+ " where teacher.TEACHER_ID=" + teacherId);
+		query.executeUpdate();
+	}
+
+	@Override
 	public void update(Teacher teacher) {
 		getHibernateTemplate().update(teacher);
 	}
@@ -510,7 +526,8 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	public long queryListBySaleNo() {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		long sum = (long) session.createQuery("select count(*) from Teacher t where t.onService=true and t.saleWeight!=0")
+		long sum = (long) session
+				.createQuery("select count(*) from Teacher t where t.onService=true and t.saleWeight!=0")
 				.uniqueResult();
 		return sum;
 	}

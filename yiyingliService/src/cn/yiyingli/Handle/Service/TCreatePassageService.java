@@ -36,7 +36,7 @@ public class TCreatePassageService extends TMsgService {
 		String summary = getData().getString("summary");
 
 		Passage passage = new Passage();
-		PPassageUtil.toSavePassage(teacher, title, tag, summary, content, imageUrl, passage);
+		PPassageUtil.toSavePassageByTeacher(teacher, title, tag, summary, content, imageUrl, passage);
 
 		getPassageService().save(passage);
 		setResMsg(MsgUtil.getSuccessMsg("create passage successfully"));

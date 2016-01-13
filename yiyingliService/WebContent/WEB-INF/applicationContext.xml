@@ -2143,4 +2143,109 @@
 		</property>
 	</bean>
 
+	<bean id="tRemovePassageService" class="cn.yiyingli.Handle.Service.TRemovePassageService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
+
+	<bean id="mGetAllOrderListService" class="cn.yiyingli.Handle.Service.MGetAllOrderListService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+	</bean>
+
+	<bean id="fGetRecommendPassageListService"
+		class="cn.yiyingli.Handle.Service.FGetRecommendPassageListService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
+
+	<bean id="fRecordRecommandPassageService"
+		class="cn.yiyingli.Handle.Service.FRecordRecommandPassageService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mCreatePassageService" class="cn.yiyingli.Handle.Service.MCreatePassageService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+		<property name="userService">
+			<ref local="userService" />
+		</property>
+	</bean>
+
+	<bean id="mGetPassageService" class="cn.yiyingli.Handle.Service.MGetPassageService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
+
+	<bean id="mEditPassageService" class="cn.yiyingli.Handle.Service.MEditPassageService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
+
+	<bean id="mRemovePassageService" class="cn.yiyingli.Handle.Service.MRemovePassageService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
+	
+	<bean id="mRemarkOrderService" class="cn.yiyingli.Handle.Service.MRemarkOrderService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+	</bean>
+	
+	<bean id="mReturnVisitOrderService" class="cn.yiyingli.Handle.Service.MReturnVisitOrderService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+	</bean>
+
 </beans>

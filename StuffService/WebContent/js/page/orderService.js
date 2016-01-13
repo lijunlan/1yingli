@@ -1,4 +1,4 @@
-//1:按类搜索。2:按名字，订单号搜索。
+﻿//1:按类搜索。2:按名字，订单号搜索。
 var fun = 1;
 //页数
 var page = 1;
@@ -29,7 +29,6 @@ var payTeacher = function (oid) {
 	myJson.orderId = oid.toString();
 	myAjax(myJson, get);
 	Messenger().post("支付完成");
-
 }
 
 //退款
@@ -92,8 +91,29 @@ function showDetail(index, action) {
 	$("#modalDetail").append("<b>导师支付宝：</b>" + order[index].teacherAlipayNo + "<br>");
 	$("#modalDetail").append("<b>导师Paypal：</b>" + order[index].teacherPaypalNo + "<br>");
 	$("#modalDetail").append("<b>客户问题：</b>" + order[index].question + "<br>");
-
+	$("#modalDetail").append("<b>备注：</b>" + order[index].remark + "<br>");
+	$("#modalDetail").append("<b>是否回访：</b>" + (order[index].returnVisit=="true"?"是":"否") + "<br>");
+	if(order[index].returnVisit!="true"){
+		$("#modalDetail").append("<b></b><button onclick=\"returnVisit("+order[index].orderId+")\">确认回访</button><br>");
+	}
+	$("#modalDetail").append("<b>提交备注：</b><textarea id=\"remarkTextArea\"/><br>");
+	$("#modalDetail").append("<b></b><button onclick=\"remark("+order[index].orderId+")\">提交备注</button><br>");
 	$("#modalOrderDetail").modal();
+}
+
+function remark(orderId){
+	myJson.method = "remarkOrder";
+	myJson.orderId = orderId.toString();
+	myJson.remark = $("#remarkTextArea").val();
+	myAjax(myJson, null);
+	Messenger().post("提交备注完成");
+}
+
+function returnVisit(orderId){
+	myJson.method = "returnVisitOrder";
+	myJson.orderId = orderId.toString();
+	myAjax(myJson, null);
+	Messenger().post("回访完成");
 }
 
 //根据ajax返回的数据显示页面
@@ -286,7 +306,14 @@ $(function () {
 	if (page == 1)
 		document.getElementById("lastPage").disabled = true;
 	document.getElementById("pageInput").value = page;
-})
+});
+
+function getAllOrders(){
+	fun = 3;
+	myJson.method="getAllOrderList";
+	myJson.page = page.toString();
+	myAjax(myJson, changeTable);
+}
 
 //换页
 function changePage(action) {
@@ -302,13 +329,15 @@ function changePage(action) {
 		document.getElementById("lastPage").disabled = false;
 	//fun==1说明当前是按类别浏览
 	//fun==2说明当前正在搜索
+	//fun==3说明在查看所有订单状态
 	if (fun == 1) {
 		$('button#get').trigger("click");
 	} else if (fun == 2) {
 		$('button#searchButton').trigger("click");
+	} else if (fun == 3) {
+		$('button#getAllOrderButton').trigger("click");
 	}
 }
-
 //搜索
 function search() {
 	fun = 2;
@@ -425,7 +454,7 @@ function get() {
 }
 
 var goToPay = function(oid){
-	post(URL + 'AlipayTrans',{mid:mid,oid:oid});
+	post(SERVICE_URL + 'AlipayTrans',{mid:mid,oid:oid});
 }
 
 function post(URL, PARAMS) {        
@@ -442,7 +471,4 @@ function post(URL, PARAMS) {
     document.body.appendChild(temp);        
     temp.submit();        
     return temp;        
-}  
-	
-	
-	
+}

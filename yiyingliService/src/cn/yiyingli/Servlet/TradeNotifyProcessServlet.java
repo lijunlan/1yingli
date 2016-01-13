@@ -86,7 +86,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 					returnSuccess(resp);
 					return;
 				}
-				if (!(price == order.getMoney())) {
+				if (!(price == order.getMoney().floatValue())) {
 					LogUtil.error("TRADE_SUCCESS order id:" + oid + ", price is wrong, it should be " + order.getMoney()
 							+ ", but it is " + price, this.getClass());
 					order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_ABNORMAL + "," + order.getState());

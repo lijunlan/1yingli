@@ -78,14 +78,19 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public void update(Order order) {
+		getOrderDao().update(order);
+	}
+
+	@Override
 	public void update(Order order, boolean addMile) {
 		if (addMile) {
 			if (!order.getOnSale()) {
 				Teacher teacher = order.getTeacher();
 				float time = order.getTime();
 				long m = (long) (10 * time);
-				teacher.setMile(teacher.getMile() + m);
 				getTeacherDao().update(teacher);
+				getTeacherDao().updateAddMile(teacher.getId(), m);
 			}
 			getOrderDao().updateOrderWhenOrderFinish(order);
 		} else {
@@ -170,6 +175,16 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Order queryByShowId(String id, boolean lazy) {
 		return getOrderDao().queryByShowId(id, lazy);
+	}
+
+	@Override
+	public List<Order> queryListAll(int page) {
+		return getOrderDao().queryListAll(page, PAGE_SIZE_INT);
+	}
+
+	@Override
+	public List<Order> queryListAll(int page, int pageSize) {
+		return getOrderDao().queryListAll(page, pageSize);
 	}
 
 	@Override

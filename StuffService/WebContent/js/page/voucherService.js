@@ -1,4 +1,4 @@
-var mid;
+﻿var mid;
 var page = 1;
 checkLogin();
 registNotify();
@@ -83,7 +83,7 @@ $(document).ready(function () {
 		process1 = beginDate.split(',');
 		process2 = endDate.split(',');
 		var date1 = new Date(process1[0], Number(process1[1]) - 1, process1[2], process1[3], process1[4], 0);
-		var date2 = new Date(process1[0], Number(process2[1]) - 1, process2[2], process2[3], process2[4], 0);
+		var date2 = new Date(process2[0], Number(process2[1]) - 1, process2[2], process2[3], process2[4], 0);
 		var time1 = date1.getTime();
 		var time2 = date2.getTime();
 		var money = $('#inputMoney').val();
@@ -102,6 +102,8 @@ $(document).ready(function () {
 		}
 		if (time1 >= time2 || beginDate == "" || endDate == "") {
 			alert("所填写时间不正确");
+			alert("time1:"+time1);
+			alert("time2:"+time2);
 			return;
 		}
 		myJson.method = "createVoucher";

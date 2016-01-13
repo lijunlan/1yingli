@@ -55,6 +55,7 @@
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
 	</style>
 	<style name="teacher">
+		<method name="removePassage" beanName="tRemovePassageService" />
 		<method name="getMile" beanName="tGetMileService" />
 		<method name="getPaypalNo" beanName="tGetPaypalNoService" />
 		<method name="editSimpleInfo" beanName="tEditSimpleInfoService" />
@@ -100,6 +101,13 @@
 		<method name="login" beanName="dLoginService" />
 	</style>
 	<style name="manager">
+		<method name="remarkOrder" beanName="mRemarkOrderService" />
+		<method name="returnVisitOrder" beanName="mReturnVisitOrderService" />
+		<method name="removePassage" beanName="mRemovePassageService" />
+		<method name="editPassage" beanName="mEditPassageService" />
+		<method name="getPassage" beanName="mGetPassageService" />
+		<method name="createPassage" beanName="mCreatePassageService" />
+		<method name="getAllOrderList" beanName="mGetAllOrderListService" />
 		<method name="getSuggestion" beanName="mGetSuggestionService" />
 		<method name="searchTeacher" beanName="mSearchTeacherService" />
 		<method name="editTeacherMile" beanName="mEditTeacherMileService" />
@@ -137,6 +145,8 @@
 		<method name="removeBackground" beanName="mRemoveBackgroundService" />
 	</style>
 	<style name="function">
+		<method name="recordRecommandPassage" beanName="fRecordRecommandPassageService" />
+		<method name="getRecommendPassageList" beanName="fGetRecommendPassageListService" />
 		<method name="getPassage" beanName="fGetPassageService" />
 		<method name="getPassageList" beanName="fGetPassageListService" />
 		<method name="getSaleTeacherList" beanName="fGetSaleTeacherListService" />

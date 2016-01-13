@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.dom4j.DocumentException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -98,12 +99,16 @@ public class AlipayServlet extends HttpServlet {
 		String body = order.getServiceTitle();
 
 		// 商品展示地址
-		String show_url = "http://www.1yingli.cn/#!/teacher/" + order.getTeacher().getId();
+		String show_url = "http://www.1yingli.cn/teacher/" + order.getTeacher().getId();
 		// 需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html
 
 		// 防钓鱼时间戳
-		String anti_phishing_key = "";
+		String anti_phishing_key = query_timestamp();
 		// 若要使用请调用类文件submit中的query_timestamp函数
+		if (anti_phishing_key.equals("")) {
+			returnMsg(resp, "<html>防钓鱼功能启动失败，请重试</html>");
+			return;
+		}
 
 		// 客户端的IP地址
 		String exter_invoke_ip = RemoteIPUtil.getAddr(req);
@@ -139,6 +144,29 @@ public class AlipayServlet extends HttpServlet {
 		sHtmlText = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">"
 				+ "<title>支付宝</title>" + "</head>" + sHtmlText + "<body></body></html>";
 		returnMsg(resp, sHtmlText);
+	}
+
+	public static void main(String[] args) {
+		System.out.println(query_timestamp());
+	}
+
+	public static String query_timestamp() {
+		String stamp = "";
+		boolean flag = false;
+		int count = 1;
+		while (!flag) {
+			try {
+				stamp = AlipaySubmit.query_timestamp();
+				flag = true;
+			} catch (DocumentException | IOException e) {
+				e.printStackTrace();
+				count++;
+				if (count > 10) {
+					break;
+				}
+			}
+		}
+		return stamp;
 	}
 
 	/**

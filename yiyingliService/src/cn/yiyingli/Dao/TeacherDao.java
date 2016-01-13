@@ -22,10 +22,14 @@ public interface TeacherDao {
 
 	void update(Teacher teacher);
 
+	void updateAddMile(long teacherId, long mile);
+
 	void updateFromSql(String sql);
 
+	void updateAddLookNumber(long teacherId, long number);
+
 	Teacher query(long id, boolean lazy);
-	
+
 	Teacher queryWithUser(long id, boolean lazy);
 
 	Boolean queryCheckLikeUser(long teacherId, long userId);
@@ -49,7 +53,7 @@ public interface TeacherDao {
 	List<Teacher> queryList(int page, int pageSize, boolean lazy);
 
 	List<Teacher> queryListByHomePage(int pageSize);
-	
+
 	long queryListBySaleNo();
 
 	List<Teacher> queryListBySale(int page, int pageSize);

@@ -11,6 +11,7 @@ import cn.yiyingli.Service.RecordService;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Service.UserService;
+import cn.yiyingli.Util.ConfigurationXmlUtil;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.SendMsgToBaiduUtil;
 
@@ -74,14 +75,8 @@ public class GetTeacherAllInfoService extends MsgService {
 	 * @param teacher
 	 */
 	private void saveRecord(Teacher teacher) {
-		Long no = teacher.getLookNumber();
-		if (no == null) {
-			no = 1L;
-		} else {
-			no++;
-		}
-		teacher.setLookNumber(no);
-		getTeacherService().update(teacher,false);
+
+		getTeacherService().updateAddLookNumber(teacher.getId(), 1L);
 
 		Record r = new Record();
 		r.setKind(RecordService.RECORD_KIND_SEE_TEACHER);
@@ -99,8 +94,10 @@ public class GetTeacherAllInfoService extends MsgService {
 					r.setType(RecordService.RECORD_TYPE_USER);
 					r.setData("teacherId=" + teacher.getId() + ",userId=" + user.getId());
 				}
-				SendMsgToBaiduUtil.updateUserTrainDataLike(user.getId() + "", teacher.getId() + "",
-						Calendar.getInstance().getTimeInMillis() + "");
+				if ("false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
+					SendMsgToBaiduUtil.updateUserTrainDataLike(user.getId() + "", teacher.getId() + "",
+							Calendar.getInstance().getTimeInMillis() + "");
+				}
 			} else {
 				r.setType(RecordService.RECORD_TYPE_GUEST);
 				r.setData("teacherId=" + teacher.getId());

@@ -100,8 +100,6 @@ public class CommentTeacherService extends UMsgService {
 			comment.setUser(user);
 
 			// 加积分(英里数)
-			teacher.setMile(teacher.getMile() + 2L);
-			
 			getCommentService().saveWithOrderAndTeacher(comment, order, teacher);
 
 			NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),

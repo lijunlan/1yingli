@@ -33,5 +33,6 @@ public class POrderUtil {
 		order.setDistributor(user.getDistributor());
 		order.setMoney(money);
 		order.setOriginMoney(originMoney);
+		order.setReturnVisit(false);
 	}
 }

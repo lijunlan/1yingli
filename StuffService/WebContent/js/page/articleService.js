@@ -157,7 +157,7 @@ function changeTable(result) {
 			}
 			newTab = "<div class='am-panel'><div class='am-panel-hd'>"
 			+ "<h4 class='am-panel-title' data-am-collapse=\"{parent: '#" + fun + "Accordion', target: '#" + data.passageId + "Audit'}\">"
-			+ "<font color='red'>【" + tmpState + "】</font>" + data.title + " <font color='#63B8FF'>" + data.editorName + "创作于"
+			+ "<font color ='red'>【ID:"+data.passageId+",状态:" + tmpState + "】</font>" + data.title + " <font color='#63B8FF'>" + data.editorName + "创作于"
 			+ createTime.toLocaleString() + "</font>点赞：" + data.likeNumber + " 浏览量：" + data.lookNumber
 			+ "</h4></div><div id='" + data.passageId + "Audit' class='am-panel-collapse am-collapse'>"
 			+ "<div class='am-panel-bd bootstrap'>封面图片：<br><img src='" + data.imageUrl + "' class='am-img-thumbnail'><br>正文：<br>"
@@ -175,7 +175,7 @@ function changeTable(result) {
 				newTab = "<div class='am-panel am-panel-success'><div class='am-panel-hd'>";
 			}
 			newTab += "<h4 class='am-panel-title' data-am-collapse=\"{parent: '#" + fun + "Accordion', target: '#" + data.passageId + "'}\">"
-			+ "<font color='red'>【" + tmpState + "】</font>" + data.title + " <font color='#63B8FF'>" + data.editorName + "创作于"
+			+ "<font color='red'>【ID:"+data.passageId+",状态:" + tmpState + "】</font>" + data.title + " <font color='#63B8FF'>" + data.editorName + "创作于"
 			+ createTime.toLocaleString() + "</font>点赞：" + data.likeNumber + " 浏览量：" + data.lookNumber
 			+ "</h4></div><div id='" + data.passageId + "' class='am-panel-collapse am-collapse'>" + "<div class='am-panel-bd bootstrap'>";
 			if (data.state == 1) {

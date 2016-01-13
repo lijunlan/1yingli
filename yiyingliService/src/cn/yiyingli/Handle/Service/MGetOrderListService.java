@@ -72,7 +72,6 @@ public class MGetOrderListService extends MMsgService {
 			sends.add(map.finish());
 		}
 		setResMsg(toSend.put("data", sends).finishByJson());
-
 	}
 
 }
