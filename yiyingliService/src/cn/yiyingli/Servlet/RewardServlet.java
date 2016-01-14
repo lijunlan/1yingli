@@ -30,7 +30,7 @@ public class RewardServlet extends HttpServlet {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2762029128225545740L;
+	private static final long serialVersionUID = 4931703101740670779L;
 
 	private ApplicationContext applicationContext;
 
