@@ -46,6 +46,9 @@ public class Reward {
 	@Column(name = "USER_ID", nullable = true)
 	private Long userId;
 
+	@Column(name = "PASSAGE_ID", nullable = true)
+	private Long passageId;
+
 	public Long getId() {
 		return id;
 	}
@@ -132,6 +135,14 @@ public class Reward {
 
 	public void setRewardNo(String rewardNo) {
 		this.rewardNo = rewardNo;
+	}
+
+	public Long getPassageId() {
+		return passageId;
+	}
+
+	public void setPassageId(Long passageId) {
+		this.passageId = passageId;
 	}
 
 }

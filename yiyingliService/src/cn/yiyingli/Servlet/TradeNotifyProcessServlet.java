@@ -31,7 +31,7 @@ import cn.yiyingli.Util.WarnUtil;
 /**
  * 支付宝交易通知
  * 
- * @author lp
+ * @author sdll18
  *
  */
 @SuppressWarnings("serial")
@@ -237,6 +237,9 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 		if (map.finish().containsKey("userId") && map.finish().containsKey("userName")) {
 			reward.setUserId((map.finish().getLong("userId")));
 			reward.setUserName(map.finish().getString("userName"));
+		}
+		if (map.finish().containsKey("passageId")) {
+			reward.setPassageId(map.finish().getLong("passageId"));
 		}
 		rewardService.save(reward);
 	}

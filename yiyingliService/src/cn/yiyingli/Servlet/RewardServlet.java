@@ -19,7 +19,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.yiyingli.Alipay.AlipayConfig;
 import cn.yiyingli.Alipay.AlipaySubmit;
-import cn.yiyingli.Handle.RemoteIPUtil;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.ConfigurationXmlUtil;
@@ -74,6 +73,7 @@ public class RewardServlet extends HttpServlet {
 		String teacherName = req.getParameter("teacherName");
 		String money = req.getParameter("money");
 		String uid = req.getParameter("uid");
+		String passageId = req.getParameter("passageId");
 
 		String userId = null;
 		String userName = null;
@@ -97,19 +97,20 @@ public class RewardServlet extends HttpServlet {
 		String body = "打赏-" + teacherName;
 
 		// 商品展示地址
-		String show_url = "http://www.1yingli.cn/teacher/" + req.getParameter("teacherId");
-		// 需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html
+		String show_url = passageId == null ? "http://www.1yingli.cn/teacher/" + req.getParameter("teacherId")
+				: "http://www.1yingli.cn/passage/" + passageId;
+				// 需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html
 
 		// 防钓鱼时间戳
-		String anti_phishing_key = query_timestamp();
-		// 若要使用请调用类文件submit中的query_timestamp函数
-		if (anti_phishing_key.equals("")) {
-			returnMsg(resp, "<html>防钓鱼功能启动失败，请重试</html>");
-			return;
-		}
+		// String anti_phishing_key = query_timestamp();
+		// // 若要使用请调用类文件submit中的query_timestamp函数
+		// if (anti_phishing_key.equals("")) {
+		// returnMsg(resp, "<html>防钓鱼功能启动失败，请重试</html>");
+		// return;
+		// }
 
 		// 客户端的IP地址
-		String exter_invoke_ip = RemoteIPUtil.getAddr(req);
+		// String exter_invoke_ip = RemoteIPUtil.getAddr(req);
 		// 非局域网的外网IP地址，如：221.0.0.1
 
 		parms.put("service", "create_direct_pay_by_user");
@@ -133,10 +134,12 @@ public class RewardServlet extends HttpServlet {
 		parms.put("total_fee", total_fee);
 		parms.put("body", body);
 		parms.put("show_url", show_url);
-		parms.put("anti_phishing_key", anti_phishing_key);
-		parms.put("exter_invoke_ip", exter_invoke_ip);
-		parms.put("extra_common_param", "teacherId^" + teacherId + "|" + "teacherName^" + teacherName + "|" + "money^"
-				+ money + (uid == null ? "" : "|userId^" + userId + "|" + "userName^" + userName));
+		// parms.put("anti_phishing_key", anti_phishing_key);
+		// parms.put("exter_invoke_ip", exter_invoke_ip);
+		parms.put("extra_common_param",
+				"teacherId^" + teacherId + "|" + "teacherName^" + teacherName + "|" + "money^" + money
+						+ (uid == null ? "" : "|userId^" + userId + "|" + "userName^" + userName)
+						+ (passageId == null ? "" : "|passageId^" + passageId));
 		// 过期时间 24h
 		parms.put("it_b_pay", "24h");
 
