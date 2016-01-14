@@ -2,11 +2,8 @@ package cn.yiyingli.Servlet;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +16,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.yiyingli.Alipay.AlipayConfig;
 import cn.yiyingli.Alipay.AlipaySubmit;
+import cn.yiyingli.ExchangeData.ExRewardForPay;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.ConfigurationXmlUtil;
@@ -48,11 +46,12 @@ public class RewardServlet extends HttpServlet {
 		setApplicationContext(WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext()));
 	}
 
-	public static String getRewardNo(long teacherId) {
-		return "" + Calendar.getInstance().get(Calendar.YEAR) + new Random().nextInt(10) + new Random().nextInt(10)
-				+ new Random().nextInt(10) + (100000000L + teacherId);
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.
+	 * HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
@@ -62,11 +61,11 @@ public class RewardServlet extends HttpServlet {
 
 		// uid is can be choosed
 		if (req.getParameter("teacherId") == null || req.getParameter("money") == null
-				|| req.getParameter("teacherName") == null) {
+				|| req.getParameter("teacherName") == null || req.getParameter("callback") == null) {
 			returnMsg(resp, MsgUtil.getErrorMsgByCode("00001"));
 			return;
 		}
-		LogUtil.info("receive>>>>reward--->teacherName:" + req.getParameter("teacherName") + "\t teacherId:"
+		LogUtil.info("receive>>ALIPAY>>reward--->teacherName:" + req.getParameter("teacherName") + "\t teacherId:"
 				+ req.getParameter("teacherId") + "\t money:" + req.getParameter("money"), this.getClass());
 
 		String teacherId = req.getParameter("teacherId");
@@ -74,16 +73,18 @@ public class RewardServlet extends HttpServlet {
 		String money = req.getParameter("money");
 		String uid = req.getParameter("uid");
 		String passageId = req.getParameter("passageId");
+		String callback = req.getParameter("callback");
 
 		String userId = null;
 		String userName = null;
 		if (uid != null) {
+			LogUtil.info("receive>>ALIPAY>>reward--->uid:" + uid, this.getClass());
 			User user = userMarkService.queryUser(uid);
 			userId = String.valueOf(user.getId());
 			userName = user.getName();
 		}
 		// 商户订单号
-		String oid = getRewardNo(Long.valueOf(teacherId));
+		String oid = ExRewardForPay.getRewardNo(Long.valueOf(teacherId));
 
 		// 订单名称
 		String subject = "打赏-" + teacherName;
@@ -123,12 +124,9 @@ public class RewardServlet extends HttpServlet {
 		} else {
 			parms.put("notify_url", AlipayConfig.notify_url);
 		}
-		// 判断是否使用默认的return_url
-		if (req.getParameter("callback") == null) {
-			parms.put("return_url", AlipayConfig.return_url);
-		} else {
-			parms.put("return_url", req.getParameter("callback"));
-		}
+
+		parms.put("return_url", callback);
+
 		parms.put("out_trade_no", oid);
 		parms.put("subject", "【一英里】" + subject);
 		parms.put("total_fee", total_fee);
@@ -137,9 +135,7 @@ public class RewardServlet extends HttpServlet {
 		// parms.put("anti_phishing_key", anti_phishing_key);
 		// parms.put("exter_invoke_ip", exter_invoke_ip);
 		parms.put("extra_common_param",
-				"teacherId^" + teacherId + "|" + "teacherName^" + teacherName + "|" + "money^" + money
-						+ (uid == null ? "" : "|userId^" + userId + "|" + "userName^" + userName)
-						+ (passageId == null ? "" : "|passageId^" + passageId));
+				ExRewardForPay.getExtraParams(teacherId, teacherName, money, uid, passageId, userId, userName));
 		// 过期时间 24h
 		parms.put("it_b_pay", "24h");
 

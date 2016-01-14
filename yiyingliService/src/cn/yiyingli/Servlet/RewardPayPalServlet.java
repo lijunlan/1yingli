@@ -17,10 +17,9 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import cn.yiyingli.ExchangeData.ExRewardForPay;
 import cn.yiyingli.PayPal.PayPal;
-import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.User;
-import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
@@ -32,15 +31,12 @@ public class RewardPayPalServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -2722761580200224133L;
 
-	private static String page = "http://www.1yingli.cn/myTutor";
-
 	// private static final String testPage =
 	// "http://testweb.1yingli.cn/yourTutor.html";
 
-	private static final String resultParameter = "?paymentResult=";
-
 	// 当payapl链接失败返回的网页
-	private static final String connectError = "<!DOCTYPE html><html lang=\"en\"><head>    <meta charset=\"UTF-8\">    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">    <title>你的导师</title>    <link rel=\"Shortcut Icon\" href=\"http://image.1yingli.cn/img/logo0.png\">    <link rel=\"Bookmark\" href=\"http://image.1yingli.cn/img/logo0.png\">    <style type=\"text/css\">    	#succ{    		width: 400px;height: 200px;margin: auto;position: fixed;top: 50%;left: 50%;margin-top:-150px;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; border:1px solid #D2D2D2    	}    	.succ_title{    	  width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;    	}    	.succ_title div{    	  font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;    	}    	.succ_content{    		position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;    	}    	#succ a{    		text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;    	}    </style></head><body>	<div id=\"succ\">    	<div class=\"succ_title\"><div>来自一英里的信息</div></div>    	<div class=\"succ_content\">支付连接超时，请重新支付。</div>    	<a href=\"http://www.1yingli.cn/myTutor\">确定</a>		</div></body>";
+	private static final String connectError = "<!DOCTYPE html><html lang=\"en\"><head>    <meta charset=\"UTF-8\">    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">    <title>你的导师</title>    <link rel=\"Shortcut Icon\" href=\"http://image.1yingli.cn/img/logo0.png\">    <link rel=\"Bookmark\" href=\"http://image.1yingli.cn/img/logo0.png\">    <style type=\"text/css\">    	#succ{    		width: 400px;height: 200px;margin: auto;position: fixed;top: 50%;left: 50%;margin-top:-150px;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; border:1px solid #D2D2D2    	}    	.succ_title{    	  width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;    	}    	.succ_title div{    	  font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;    	}    	.succ_content{    		position: absolute;top: 40%;left: 33%;font-size: 20px;color: #b6b6b6;    	}    	#succ a{    		text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;    	}    </style></head><body>	<div id=\"succ\">    	<div class=\"succ_title\"><div>来自一英里的信息</div></div>    	<div class=\"succ_content\">支付连接超时，请重新支付。</div>    	<a href=\"";
+	private static final String connectError2 = "\">确定</a>		</div></body>";
 
 	private ApplicationContext applicationContext;
 
@@ -58,92 +54,84 @@ public class RewardPayPalServlet extends HttpServlet {
 		setApplicationContext(WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext()));
 	}
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PayPal paypal = new PayPal();
 		// Paypal调用的returnServlet
 		String returnURL = "http://service.1yingli.cn/yiyingliService/Return?page=return";
-		// 当取消交易的时候，返回地址
-		String cancelURL = page;
+
 		Map<String, String> checkoutDetails = new HashMap<String, String>();
 		// 检查前台传来的数据
-		if (request.getParameter("oid") == null || request.getParameter("uid") == null) {
-			returnMsg(response, MsgUtil.getErrorMsgByCode("00001"));
+		if (req.getParameter("teacherId") == null || req.getParameter("money") == null
+				|| req.getParameter("teacherName") == null || req.getParameter("callback") == null) {
+			returnMsg(resp, MsgUtil.getErrorMsgByCode("00001"));
 			return;
 		}
+		LogUtil.info("receive>>PAYPAL>>reward--->teacherName:" + req.getParameter("teacherName") + "\t teacherId:"
+				+ req.getParameter("teacherId") + "\t money:" + req.getParameter("money"), this.getClass());
 		UserMarkService userMarkService = (UserMarkService) getApplicationContext().getBean("userMarkService");
-		OrderService orderService = (OrderService) getApplicationContext().getBean("orderService");
-		LogUtil.info(
-				"receive>>>>PAYPAL orderId:" + request.getParameter("oid") + "\t uid:" + request.getParameter("uid"),
-				this.getClass());
-		// 商户网站订单系统中唯一订单号，必填
-		Order order = orderService.queryByShowId(request.getParameter("oid"), false);
-		if (order == null) {
-			returnMsg(response, MsgUtil.getErrorMsgByCode("42001"));
-			return;
+
+		String teacherId = req.getParameter("teacherId");
+		String teacherName = req.getParameter("teacherName");
+		String money = req.getParameter("money");
+		String uid = req.getParameter("uid");
+		String passageId = req.getParameter("passageId");
+		String callback = req.getParameter("callback");
+
+		String userId = null;
+		String userName = null;
+		if (uid != null) {
+			User user = userMarkService.queryUser(uid);
+			userId = String.valueOf(user.getId());
+			userName = user.getName();
 		}
-		// 用户id
-		String uid = request.getParameter("uid");
-		User user = userMarkService.queryUser(uid);
-		if (user == null) {
-			returnMsg(response, MsgUtil.getErrorMsgByCode("14001"));
-			return;
-		}
-		if (order.getCreateUser().getId().longValue() != user.getId().longValue()) {
-			LogUtil.info("receive>>>>ORDER IS NOT BELONG TO YOU createOrderId:" + order.getCreateUser().getId()
-					+ ",userId:" + user.getId() + "," + (order.getCreateUser().getId() == user.getId()),
-					this.getClass());
-			returnMsg(response, MsgUtil.getErrorMsgByCode("44001"));
-			return;
-		}
-		String state = order.getState();
-		if (!OrderService.ORDER_STATE_NOT_PAID.equals(state)) {
-			returnMsg(response, MsgUtil.getErrorMsgByCode("44002"));
-			return;
-		}
+
+		// 商户订单号
+		String oid = ExRewardForPay.getRewardNo(Long.valueOf(teacherId));
+
+		// 订单名称
+		String subject = "打赏-" + teacherName;
+		// 必填
+
+		// 订单描述
+		String body = "打赏-" + teacherName;
 		// 由后台插入相关数据
-		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0", URLEncoder.encode(order.getServiceTitle(), "UTF-8"));
+		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0", URLEncoder.encode(subject, "UTF-8"));
 		// 货物id，这里填写的是订单号
-		checkoutDetails.put("L_PAYMENTREQUEST_0_NUMBER0", order.getOrderNo());
-		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0",
-				URLEncoder.encode("【一英里】[" + order.getTeacher().getName() + "]" + order.getServiceTitle(), "UTF-8"));
+		checkoutDetails.put("L_PAYMENTREQUEST_0_NUMBER0", oid);
+		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0", URLEncoder.encode("【一英里】" + body, "UTF-8"));
 		checkoutDetails.put("L_PAYMENTREQUEST_0_QTY0", "1");
 		// 商品价格
-		float price = order.getMoney();
+		float price = Float.valueOf(money);
+
 		price /= 6;
 		BigDecimal b = new BigDecimal(price);
 		price = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
 		if (price < 0.01)
-			price = (float) 0.01;
+			price = 0.01F;
 
 		checkoutDetails.put("PAYMENTREQUEST_0_ITEMAMT", price + "");
 		checkoutDetails.put("PAYMENTREQUEST_0_HANDLINGAMT", "0");
 		// 包括税款，手续费（这些我们都是零）的总金额
 		checkoutDetails.put("PAYMENTREQUEST_0_AMT", price + "");
 		// 我们的订单号,以及微信端回调页面（可选）
-		if (request.getParameter("callback") == null) {
-			checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM", request.getParameter("oid"));
-			page = "http://www.1yingli.cn/myTutor";
-		} else {
-			checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM",
-					request.getParameter("oid") + "|" + request.getParameter("callback"));
-			page = request.getParameter("callback");
-		}
+
+		checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM", oid + "|"
+				+ ExRewardForPay.getExtraParams(teacherId, teacherName, money, uid, passageId, userId, userName));
 		checkoutDetails.put("REQCONFIRMSHIPPING", "0");
 		checkoutDetails.put("NOSHIPPING", "1");
 
 		checkoutDetails.put("PAYMENTREQUEST_0_CURRENCYCODE", "USD");
 		checkoutDetails.put("PAYMENTREQUEST_0_PAYMENTACTION", "Sale");
 
-		Map<String, String> nvp = paypal.callShortcutExpressCheckout(checkoutDetails, returnURL, cancelURL);
+		Map<String, String> nvp = paypal.callShortcutExpressCheckout(checkoutDetails, returnURL, callback);
 		if (nvp == null) {
-			returnMsg(response, connectError);
+			returnMsg(resp, connectError + callback + connectError2);
 			return;
 		}
 		String strAck = nvp.get("ACK").toString().toUpperCase();
 		if (strAck != null && (strAck.equals("SUCCESS") || strAck.equals("SUCCESSWITHWARNING"))) {
 			// Redirect to paypal.com
-			paypal.redirectURL(response, nvp.get("TOKEN").toString(),
-					paypal.getUserActionFlag().equalsIgnoreCase("true"));
+			paypal.redirectURL(resp, nvp.get("TOKEN").toString(), paypal.getUserActionFlag().equalsIgnoreCase("true"));
 		} else {
 			// log error information returned by PayPal
 			String ErrorCode = nvp.get("L_ERRORCODE0").toString();
@@ -155,7 +143,7 @@ public class RewardPayPalServlet extends HttpServlet {
 					+ "Short Error Message: " + ErrorShortMsg + "Error Code: " + ErrorCode + "Error Severity Code: "
 					+ ErrorSeverityCode;
 			LogUtil.error("After SetExpressCheckoutDetails from Paypal and ERROR INFO:" + errorString, this.getClass());
-			returnToOnemile(resultParameter + "fail", response);
+			returnToOnemile(callback, resp);
 
 		}
 	}
@@ -171,9 +159,9 @@ public class RewardPayPalServlet extends HttpServlet {
 
 	}
 
-	public void returnToOnemile(String para, HttpServletResponse response) {
+	public void returnToOnemile(String url, HttpServletResponse response) {
 		try {
-			response.sendRedirect(page + para);
+			response.sendRedirect(url + "?state=fail");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import cn.yiyingli.ExchangeData.ExRewardForPay;
 import cn.yiyingli.PayPal.PayPal;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
+import cn.yiyingli.Service.RewardService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.WarnUtil;
@@ -74,21 +76,17 @@ public class ReturnServlet extends HttpServlet {
 			return;
 		}
 		// 根据之前传的callback参数修改callback
-		String tmp = "";
-		if (results.get("PAYMENTREQUEST_0_CUSTOM") != null) {
-			tmp = results.get("PAYMENTREQUEST_0_CUSTOM");
-		} else {
+		if (results.get("PAYMENTREQUEST_0_CUSTOM") == null) {
 			returnMsg(response, connectError);
 			return;
 		}
-		String oid = tmp.split("\\|")[0];
-		String callback[] = tmp.split("\\|");
-		if (callback.length != 1) {
-			page = callback[1];
-		} else {
-			page = "http://www.1yingli.cn/myTutor";
-		}
 		String strAck = results.get("ACK").toString();
+
+		String extra_common_param = results.get("PAYMENTREQUEST_0_CUSTOM");
+		String[] param = extra_common_param.split("\\|");
+
+		String oid = param[0];
+
 		if (!(("SUCCESS".equalsIgnoreCase(strAck) || "SUCCESSWITHWARNING".equalsIgnoreCase(strAck)))) {
 			// log the error information returned by PayPal
 			String errorCode = results.get("L_ERRORCODE0").toString();
@@ -141,6 +139,12 @@ public class ReturnServlet extends HttpServlet {
 				// request.setAttribute("payment_method", "");
 				String strAck2 = results2.get("ACK").toString().toUpperCase();
 				if (("Success".equalsIgnoreCase(strAck2) || "SuccessWithWarning".equalsIgnoreCase(strAck))) {
+					if (param.length > 2) {
+						RewardService rewardService = (RewardService) getApplicationContext().getBean("rewardService");
+						ExRewardForPay.dealReward(rewardService, extra_common_param, oid);
+						request.setAttribute("ack", strAck);
+						return;
+					}
 					// 检查数据库，并修改，最终完成订单
 					OrderService orderService = (OrderService) getApplicationContext().getBean("orderService");
 					NotificationService notificationService = (NotificationService) getApplicationContext()

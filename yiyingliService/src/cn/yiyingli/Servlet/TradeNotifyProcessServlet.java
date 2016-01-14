@@ -3,7 +3,6 @@ package cn.yiyingli.Servlet;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -18,9 +17,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.yiyingli.Alipay.AlipayNotify;
-import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.ExRewardForPay;
 import cn.yiyingli.Persistant.Order;
-import cn.yiyingli.Persistant.Reward;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Service.RewardService;
@@ -84,7 +82,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 		if (AlipayNotify.verify(parms)) {
 			if (extra_common_param != null) {
 				RewardService rewardService = (RewardService) getApplicationContext().getBean("rewardService");
-				dealReward(rewardService, extra_common_param, oid);
+				ExRewardForPay.dealReward(rewardService, extra_common_param, oid);
 				return;
 			}
 			// 交易成功
@@ -228,35 +226,6 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 			OutputStream stream = resp.getOutputStream();
 			stream.write("fail".getBytes("UTF-8"));
 		}
-	}
-
-	private void dealReward(RewardService rewardService, String extra_common_param, String rewardNo) {
-		String[] params = extra_common_param.split("\\|");
-		SuperMap map = new SuperMap();
-		for (String param : params) {
-			String[] temp = param.split("\\^");
-			String key = temp[0];
-			String value = temp[1];
-			map.put(key, value);
-		}
-		Reward reward = new Reward();
-		String time = Calendar.getInstance().getTimeInMillis() + "";
-		reward.setCreateTime(time);
-		reward.setFinishPay(true);
-		reward.setFinishSalary(false);
-		reward.setMoney(Float.valueOf(map.finish().getString("money")));
-		reward.setPayTime(time);
-		reward.setRewardNo(rewardNo);
-		reward.setTeacherId(map.finish().getLong("teacherId"));
-		reward.setTeacherName(map.finish().getString("teacherName"));
-		if (map.finish().containsKey("userId") && map.finish().containsKey("userName")) {
-			reward.setUserId((map.finish().getLong("userId")));
-			reward.setUserName(map.finish().getString("userName"));
-		}
-		if (map.finish().containsKey("passageId")) {
-			reward.setPassageId(map.finish().getLong("passageId"));
-		}
-		rewardService.save(reward);
 	}
 
 	private void finishOrder(OrderService orderService, Order order) {
