@@ -32,7 +32,7 @@ public class ExRewardForPay {
 			String[] temp = param.split("\\^");
 			String key = temp[0];
 			@SuppressWarnings("deprecation")
-			String value = URLDecoder.decode(temp[1]);
+			String value = URLDecoder.decode(temp.length > 1 ? temp[1] : "");
 			map.put(key, value);
 		}
 		Reward reward = new Reward();
