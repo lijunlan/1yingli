@@ -1,10 +1,13 @@
 package cn.yiyingli.ExchangeData;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Random;
 
 import cn.yiyingli.Persistant.Reward;
 import cn.yiyingli.Service.RewardService;
+import cn.yiyingli.Util.LogUtil;
 
 public class ExRewardForPay {
 
@@ -13,9 +16,10 @@ public class ExRewardForPay {
 				+ new Random().nextInt(10) + (100000000L + teacherId);
 	}
 
+	@SuppressWarnings("deprecation")
 	public static String getExtraParams(String teacherId, String teacherName, String money, String uid,
 			String passageId, String userId, String userName) {
-		return "teacherId^" + teacherId + "|" + "teacherName^" + teacherName + "|" + "money^" + money
+		return "teacherId^" + teacherId + "|" + "teacherName^" + URLEncoder.encode(teacherName) + "|" + "money^" + money
 				+ (uid == null ? "" : "|userId^" + userId + "|" + "userName^" + userName)
 				+ (passageId == null ? "" : "|passageId^" + passageId);
 	}
@@ -24,9 +28,11 @@ public class ExRewardForPay {
 		String[] params = extra_common_param.split("\\|");
 		SuperMap map = new SuperMap();
 		for (String param : params) {
+			LogUtil.info(param, ExRewardForPay.class);
 			String[] temp = param.split("\\^");
 			String key = temp[0];
-			String value = temp[1];
+			@SuppressWarnings("deprecation")
+			String value = URLDecoder.decode(temp[1]);
 			map.put(key, value);
 		}
 		Reward reward = new Reward();

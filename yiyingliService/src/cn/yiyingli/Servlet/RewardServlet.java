@@ -2,6 +2,7 @@ package cn.yiyingli.Servlet;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletConfig;
@@ -69,7 +70,8 @@ public class RewardServlet extends HttpServlet {
 				+ req.getParameter("teacherId") + "\t money:" + req.getParameter("money"), this.getClass());
 
 		String teacherId = req.getParameter("teacherId");
-		String teacherName = req.getParameter("teacherName");
+		@SuppressWarnings("deprecation")
+		String teacherName = URLDecoder.decode(req.getParameter("teacherName"));
 		String money = req.getParameter("money");
 		String uid = req.getParameter("uid");
 		String passageId = req.getParameter("passageId");
