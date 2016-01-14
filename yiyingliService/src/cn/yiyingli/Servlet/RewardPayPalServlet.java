@@ -81,8 +81,10 @@ public class RewardPayPalServlet extends HttpServlet {
 		String userName = null;
 		if (uid != null) {
 			User user = userMarkService.queryUser(uid);
-			userId = String.valueOf(user.getId());
-			userName = user.getName();
+			if (user != null) {
+				userId = String.valueOf(user.getId());
+				userName = user.getName();
+			}
 		}
 
 		// 商户订单号

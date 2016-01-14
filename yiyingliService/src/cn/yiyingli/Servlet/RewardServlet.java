@@ -80,8 +80,10 @@ public class RewardServlet extends HttpServlet {
 		if (uid != null) {
 			LogUtil.info("receive>>ALIPAY>>reward--->uid:" + uid, this.getClass());
 			User user = userMarkService.queryUser(uid);
-			userId = String.valueOf(user.getId());
-			userName = user.getName();
+			if (user != null) {
+				userId = String.valueOf(user.getId());
+				userName = user.getName();
+			}
 		}
 		// 商户订单号
 		String oid = ExRewardForPay.getRewardNo(Long.valueOf(teacherId));
