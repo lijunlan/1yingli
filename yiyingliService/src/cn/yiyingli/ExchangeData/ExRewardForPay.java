@@ -35,23 +35,27 @@ public class ExRewardForPay {
 			String value = URLDecoder.decode(temp.length > 1 ? temp[1] : "");
 			map.put(key, value);
 		}
-		Reward reward = new Reward();
-		String time = Calendar.getInstance().getTimeInMillis() + "";
-		reward.setCreateTime(time);
-		reward.setFinishPay(true);
-		reward.setFinishSalary(false);
-		reward.setMoney(Float.valueOf(map.finish().getString("money")));
-		reward.setPayTime(time);
-		reward.setRewardNo(rewardNo);
-		reward.setTeacherId(map.finish().getLong("teacherId"));
-		reward.setTeacherName(map.finish().getString("teacherName"));
-		if (map.finish().containsKey("userId") && map.finish().containsKey("userName")) {
-			reward.setUserId((map.finish().getLong("userId")));
-			reward.setUserName(map.finish().getString("userName"));
+		try {
+			Reward reward = new Reward();
+			String time = Calendar.getInstance().getTimeInMillis() + "";
+			reward.setCreateTime(time);
+			reward.setFinishPay(true);
+			reward.setFinishSalary(false);
+			reward.setMoney(Float.valueOf(map.finish().getString("money")));
+			reward.setPayTime(time);
+			reward.setRewardNo(rewardNo);
+			reward.setTeacherId(map.finish().getLong("teacherId"));
+			reward.setTeacherName(map.finish().getString("teacherName"));
+			if (map.finish().containsKey("userId") && map.finish().containsKey("userName")) {
+				reward.setUserId((map.finish().getLong("userId")));
+				reward.setUserName(map.finish().getString("userName"));
+			}
+			if (map.finish().containsKey("passageId")) {
+				reward.setPassageId(map.finish().getLong("passageId"));
+			}
+			rewardService.save(reward);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		if (map.finish().containsKey("passageId")) {
-			reward.setPassageId(map.finish().getLong("passageId"));
-		}
-		rewardService.save(reward);
 	}
 }

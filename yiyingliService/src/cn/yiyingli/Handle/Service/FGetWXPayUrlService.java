@@ -65,8 +65,8 @@ public class FGetWXPayUrlService extends MsgService {
 		String total_fee = String.valueOf((int) (order.getMoney() * 100F));
 
 		SuperMap map = new SuperMap();
-		map.put("extra_param", "");
-		map.put("content", "【一英里】[" + order.getTeacher().getName() + "]" + subject);
+		map.put("extra_param", "none");
+		map.put("content", "【一英里】(" + order.getTeacher().getName() + ")" + subject);
 		map.put("oid", order.getOrderNo());
 		map.put("ip", getData().getString("IP"));
 		map.put("money", total_fee);

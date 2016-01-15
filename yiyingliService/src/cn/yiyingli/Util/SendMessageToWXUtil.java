@@ -20,6 +20,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+
+import cn.yiyingli.ExchangeData.SuperMap;
 import net.sf.json.JSONObject;
 
 @SuppressWarnings("deprecation")
@@ -52,9 +54,18 @@ public class SendMessageToWXUtil {
 	}
 
 	public static void main(String[] args) {
-		String xml = "<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg><appid><![CDATA[wx2421b1c4370ec43b]]></appid></xml>";
-		String tt = getContent(xml, "appid");
-		System.out.println(tt);
+		// String xml =
+		// "<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg><appid><![CDATA[wx2421b1c4370ec43b]]></appid></xml>";
+		// String tt = getContent(xml, "appid");
+		// System.out.println(tt);
+		SuperMap map = new SuperMap();
+		map.put("extra_param", "none");
+		map.put("content", "【一英里】(李俊澜)带你装B");
+		map.put("oid", "2016200012633");
+		map.put("ip", "192.168.1.1");
+		map.put("money", "1288");
+		String sendMsg = json2Xml(map.finish());
+		System.out.println(sendMsg);
 	}
 
 	private static String getContent(String xml, String key) {
@@ -99,6 +110,7 @@ public class SendMessageToWXUtil {
 		originStr.append("NATIVE");
 		originStr.append("&key=");
 		originStr.append(KEY);
+		LogUtil.info(originStr.toString(), SendMessageToWXUtil.class);
 		return MD5Util.MD5(originStr.toString());
 	}
 
@@ -113,9 +125,9 @@ public class SendMessageToWXUtil {
 		xmlBuilder.append("<attach>");
 		xmlBuilder.append(json.getString("extra_param"));
 		xmlBuilder.append("</attach>");
-		xmlBuilder.append("<body>");
+		xmlBuilder.append("<body><![CDATA[");
 		xmlBuilder.append(json.getString("content"));
-		xmlBuilder.append("</body>");
+		xmlBuilder.append("]]</body>");
 		xmlBuilder.append("<mch_id>");
 		xmlBuilder.append(MCHID);
 		xmlBuilder.append("</mch_id>");
@@ -140,11 +152,14 @@ public class SendMessageToWXUtil {
 		xmlBuilder.append("<sign>");
 		xmlBuilder.append(getSign(json, nonce_str, notify_url));
 		xmlBuilder.append("</sign>");
+		xmlBuilder.append("</xml>");
+		LogUtil.info(xmlBuilder.toString(), SendMessageToWXUtil.class);
 		return xmlBuilder.toString();
 	}
 
 	@SuppressWarnings({ "resource" })
 	public static String sendData(String url, String msg) {
+		LogUtil.info(msg, SendMessageToWXUtil.class);
 		try {
 
 			HttpClient httpclient = new DefaultHttpClient();
