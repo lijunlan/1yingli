@@ -862,10 +862,16 @@
 		</property>
 	</bean>
 
-	<bean id="tGetserviceProService" class="cn.yiyingli.Handle.Service.TGetserviceProService"
+	<bean id="tGetServiceProService" class="cn.yiyingli.Handle.Service.TGetServiceProService"
 		scope="prototype">
 		<property name="teacherService">
 			<ref local="teacherService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
 		</property>
 	</bean>
 

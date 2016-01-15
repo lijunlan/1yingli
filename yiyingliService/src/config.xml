@@ -54,6 +54,7 @@
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
 	</style>
 	<style name="teacher">
+		<method name="getServicePro" beanName="tGetServiceProService" />
 		<method name="removeServicePro" beanName="tRemoveServiceProService" />
 		<method name="getServiceProList" beanName="tGetServiceProListService" />
 		<method name="createServicePro" beanName="tCreateServiceProService" />
