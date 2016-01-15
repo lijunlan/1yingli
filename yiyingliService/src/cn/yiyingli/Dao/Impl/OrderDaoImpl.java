@@ -160,7 +160,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Order>>() {
 			@Override
 			public List<Order> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Order o left join fetch o.createUser left join fetch o.teacher ORDER BY o.createTime DESC";
+				String hql = "from Order o left join fetch o.createUser left join fetch o.teacher left join fetch o.distributor ORDER BY o.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);

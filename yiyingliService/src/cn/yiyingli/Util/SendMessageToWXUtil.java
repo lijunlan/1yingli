@@ -125,9 +125,9 @@ public class SendMessageToWXUtil {
 		xmlBuilder.append("<attach>");
 		xmlBuilder.append(json.getString("extra_param"));
 		xmlBuilder.append("</attach>");
-		xmlBuilder.append("<body><![CDATA[");
+		xmlBuilder.append("<body>");
 		xmlBuilder.append(json.getString("content"));
-		xmlBuilder.append("]]</body>");
+		xmlBuilder.append("</body>");
 		xmlBuilder.append("<mch_id>");
 		xmlBuilder.append(MCHID);
 		xmlBuilder.append("</mch_id>");
