@@ -25,6 +25,7 @@ public class POrderUtil {
 					: servicePro.getPriceTemp() * (float) count);
 			order.setOriginMoney(servicePro.getPrice() * (float) count);
 			order.setServiceSummary(servicePro.getSummary());
+			order.setIconUrl(servicePro.getImageUrls().split(",")[0]);
 		} else {
 			order.setOnSale(false);
 			order.setServiceTitle(teacher.getTopic());
@@ -37,6 +38,7 @@ public class POrderUtil {
 			order.setMoney(price);
 			order.setOriginMoney(price);
 			order.setServiceSummary(teacher.getSimpleInfo());
+			order.setIconUrl(teacher.getIconUrl());
 		}
 		order.setCustomerEmail(email);
 		order.setCustomerName(name);
