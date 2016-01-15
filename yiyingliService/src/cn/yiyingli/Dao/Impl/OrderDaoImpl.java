@@ -179,7 +179,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 
 			@Override
 			public List<Order> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Order o left join fetch o.createUser  left join fetch o.teacher where o.state like '"
+				String hql = "from Order o left join fetch o.createUser left join fetch o.teacher left join fetch o.distributor where o.state like '"
 						+ state + "%' ORDER BY o.createTime DESC";
 				if (lazy) {
 					hql = "from Order o left join fetch o.useVouchers left join fetch o.createUser "
@@ -459,7 +459,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Order> queryListBySalaryState(final int page, final int pageSize, short salaryState) {
-		final String hql = "from Order o left join fetch o.createUser u left join fetch o.teacher t where o.salaryState="
+		final String hql = "from Order o left join fetch o.createUser u left join fetch o.teacher t left join fetch o.distributor where o.salaryState="
 				+ salaryState + " ORDER BY o.createTime DESC";
 		List<Order> list = new ArrayList<Order>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Order>>() {
