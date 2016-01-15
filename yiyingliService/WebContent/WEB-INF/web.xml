@@ -214,7 +214,19 @@
     <url-pattern>/Return</url-pattern>
   </servlet-mapping> 
   
-  
+  <servlet>
+    <description>微信支付返回</description>
+    <display-name>WXNotify</display-name>
+    <servlet-name>WXNotify</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.WXNotifyServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>WXNotify</servlet-name>
+    <url-pattern>/WXNotify</url-pattern>
+  </servlet-mapping> 
   
   <listener>
         <listener-class>

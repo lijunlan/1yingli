@@ -14,6 +14,8 @@ public interface OrderService {
 
 	public static final short ORDER_PAYMETHOD_PAYPAL = 1;
 
+	public static final short ORDER_PAYMETHOD_WEIXIN = 2;
+
 	/**
 	 * 客户下单，尚未支付
 	 */

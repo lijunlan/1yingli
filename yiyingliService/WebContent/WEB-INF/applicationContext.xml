@@ -2266,5 +2266,15 @@
 			<ref local="orderService" />
 		</property>
 	</bean>
+	
+	<bean id="fGetWXPayUrlService" class="cn.yiyingli.Handle.Service.FGetWXPayUrlService"
+		scope="prototype">
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
 
 </beans>
