@@ -68,7 +68,7 @@ public class FGetWXPayUrlService extends MsgService {
 		map.put("extra_param", "none");
 		map.put("content", "【一英里】(" + order.getTeacher().getName() + ")" + subject);
 		map.put("oid", order.getOrderNo());
-		map.put("ip", getData().getString("IP"));
+		map.put("ip", getData().getString("IP").split(",")[0]);
 		map.put("money", total_fee);
 		String url = SendMessageToWXUtil.unifyOrder(map.finish());
 		if (url.equals("")) {
