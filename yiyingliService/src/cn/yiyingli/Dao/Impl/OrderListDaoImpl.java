@@ -1,5 +1,6 @@
 package cn.yiyingli.Dao.Impl;
 
+import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,8 +68,8 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 				int count = order.getCount();
 				query = session.createSQLQuery("select servicepro.number>" + count
 						+ " from servicepro where servicepro.SERVICEPRO_ID=" + serviceProId + " for update");
-				boolean r = (boolean) query.uniqueResult();
-				if (!r)
+				BigInteger r = (BigInteger) query.uniqueResult();
+				if (r.intValue() != 1)
 					return false;
 			}
 		}
