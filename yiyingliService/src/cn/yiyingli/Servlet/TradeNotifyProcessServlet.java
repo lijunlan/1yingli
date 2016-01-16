@@ -19,11 +19,13 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.yiyingli.Alipay.AlipayNotify;
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.ExRewardForPay;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderListService;
 import cn.yiyingli.Service.OrderService;
+import cn.yiyingli.Service.RewardService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.TimeTaskUtil;
@@ -69,6 +71,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 
 		// 返回参数
 		String is_trade_success = req.getParameter("trade_status");
+		String extra_common_param = req.getParameter("extra_common_param");
 		// String sign_type = req.getParameter("sign_type");
 		// String sign = req.getParameter("sign");
 		String olid = req.getParameter("out_trade_no");
@@ -90,6 +93,12 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 		String state = orderList.getState().split(",")[0];
 		// 验证通知的MD5
 		if (AlipayNotify.verify(parms)) {
+			if (extra_common_param != null) {
+				RewardService rewardService = (RewardService) getApplicationContext().getBean("rewardService");
+				ExRewardForPay.dealReward(rewardService, extra_common_param, olid);
+				return;
+			}
+			// 交易成功
 			if (is_trade_success.equals("TRADE_SUCCESS")) {
 				if (!(price == orderList.getPayMoney().floatValue())) {
 					LogUtil.error("TRADE_SUCCESS orderList id:" + olid + ", price is wrong, it should be "
@@ -101,9 +110,8 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 					returnSuccess(resp);
 					return;
 				}
-				if (OrderListService.ORDER_STATE_FINISH_PAID.equals(state)) {
-					LogUtil.error("TRADE_SUCCESS orderList id:" + olid + ", has finished the payment before",
-							this.getClass());
+				if (!OrderListService.ORDER_STATE_NOT_PAID.equals(state)) {
+					LogUtil.error("TRADE_SUCCESS orderList id:" + olid + ", state error", this.getClass());
 					WarnUtil.sendWarnToCTO("TRADE_SUCCESS orderList id:" + olid + ", has finished the payment before");
 					orderList.setState(
 							cn.yiyingli.Service.OrderListService.ORDER_STATE_ABNORMAL + "," + orderList.getState());
@@ -112,7 +120,6 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 					returnSuccess(resp);
 					return;
 				}
-
 				// 完成订单
 				finishOrder(orderListService, orderList, notificationService);
 				returnSuccess(resp);
@@ -125,13 +132,16 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 					returnSuccess(resp);
 					return;
 				}
-				if (OrderListService.ORDER_STATE_FINISH_PAID.equals(state)) {
-					LogUtil.error("TRADE_FINISHED order id:" + olid + ", state is wrong", this.getClass());
-					WarnUtil.sendWarnToCTO("TRADE_FINISHED order id:" + olid + ", state is wrong");
-					returnSuccess(resp);
-					return;
-				}
-				finishOrder(orderListService, orderList, notificationService);
+				// if (OrderListService.ORDER_STATE_FINISH_PAID.equals(state)) {
+				// LogUtil.error("TRADE_FINISHED order id:" + olid + ", state is
+				// wrong", this.getClass());
+				// WarnUtil.sendWarnToCTO("TRADE_FINISHED order id:" + olid + ",
+				// state is wrong");
+				// returnSuccess(resp);
+				// return;
+				// }
+				// finishOrder(orderListService, orderList,
+				// notificationService);
 				returnSuccess(resp);
 			}
 			// 因为交易超时或者我们主动关闭而导致交易失败,退款

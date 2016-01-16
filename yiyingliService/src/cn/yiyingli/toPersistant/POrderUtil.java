@@ -1,6 +1,7 @@
 package cn.yiyingli.toPersistant;
 
 import java.util.Calendar;
+import java.util.Random;
 
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.ServicePro;
@@ -10,6 +11,11 @@ import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Util.StringUtil;
 
 public class POrderUtil {
+
+	public static String getOrderNo(long id) {
+		return "" + Calendar.getInstance().get(Calendar.YEAR) + new Random().nextInt(10) + new Random().nextInt(10)
+				+ new Random().nextInt(10) + (100000000L + id);
+	}
 
 	public static void createOrder(User user, Teacher teacher, String phone, String email, String contact, String name,
 			String question, String resume, String selectTime, int count, ServicePro servicePro, Order order) {

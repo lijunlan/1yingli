@@ -98,6 +98,7 @@
 	<error name="42003" value="orderList is not existed" />
 	<error name="43001" value="alipay error" />
 	<error name="43002" value="connect to paypal failed, please try again" />
+	<error name="43003" value="connect to weixin, please try again" />
 	<error name="44001" value="this order is not belong to you" />
 	<error name="44002" value="order state is not accurate" />
 	<error name="44003" value="deal colunm has error data" />

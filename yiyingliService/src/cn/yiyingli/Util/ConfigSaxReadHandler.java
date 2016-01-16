@@ -1,17 +1,22 @@
 package cn.yiyingli.Util;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import org.xml.sax.Attributes;
 
-public class SaxErrorReadHandler extends DefaultHandler {
+public class ConfigSaxReadHandler extends DefaultHandler {
 
+	private Map<String, Map<String, String>> data;
+	private Map<String, String> methodData;
 	private Map<String, String> settingData;
 	private String tagName;
 
-	public SaxErrorReadHandler(Map<String, String> s) {
+	public ConfigSaxReadHandler(Map<String, Map<String, String>> d,
+			Map<String, String> s) {
+		data = d;
 		settingData = s;
 	}
 
@@ -28,10 +33,14 @@ public class SaxErrorReadHandler extends DefaultHandler {
 			Attributes attributes) throws SAXException {
 		// System.out.println(localName + "\t" + qName);
 		tagName = qName;
-		if ("error".equals(tagName)) {
+		if ("style".equals(tagName)) {
 			String name = attributes.getValue("name");
-			String value = attributes.getValue("value");
-			settingData.put(name, value);
+			methodData = new HashMap<String, String>();
+			data.put(name, methodData);
+		} else if ("method".equals(tagName)) {
+			String name = attributes.getValue("name");
+			String beanName = attributes.getValue("beanName");
+			methodData.put(name, beanName);
 		} else {
 			String value = attributes.getValue("value");
 			settingData.put(tagName, value);
@@ -41,7 +50,9 @@ public class SaxErrorReadHandler extends DefaultHandler {
 	@Override
 	public void endElement(String uri, String localName, String qName)
 			throws SAXException {
-		// DO NOTHING
+		if (qName.equals("style")) {
+			methodData = null;
+		}
 	}
 
 	@Override

@@ -36,6 +36,7 @@
 				<value>cn.yiyingli.Persistant.Passage</value>
 				<value>cn.yiyingli.Persistant.UserLikePassage</value>
 				<value>cn.yiyingli.Persistant.OrderList</value>
+				<value>cn.yiyingli.Persistant.Reward</value>
 			</list>
 		</property>
 	</bean>
@@ -67,6 +68,12 @@
 
 	<!-- !!!!!Dao!!!!! -->
 	<bean id="orderListDao" class="cn.yiyingli.Dao.Impl.OrderListDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="rewardDao" class="cn.yiyingli.Dao.Impl.RewardDaoImpl">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
 		</property>
@@ -224,6 +231,12 @@
 		</property>
 	</bean>
 
+	<bean id="rewardService" parent="baseTxService">
+		<property name="target">
+			<ref local="rewardServiceImpl" />
+		</property>
+	</bean>
+
 	<bean id="passageService" parent="baseTxService">
 		<property name="target">
 			<ref local="passageServiceImpl" />
@@ -372,6 +385,12 @@
 	<bean id="orderListServiceImpl" class="cn.yiyingli.Service.Impl.OrderListServiceImpl">
 		<property name="orderListDao">
 			<ref local="orderListDao" />
+		</property>
+	</bean>
+
+	<bean id="rewardServiceImpl" class="cn.yiyingli.Service.Impl.RewardServiceImpl">
+		<property name="rewardDao">
+			<ref local="rewardDao" />
 		</property>
 	</bean>
 
@@ -2275,6 +2294,16 @@
 		</property>
 		<property name="orderService">
 			<ref local="orderService" />
+		</property>
+	</bean>
+
+	<bean id="fGetWXPayUrlService" class="cn.yiyingli.Handle.Service.FGetWXPayUrlService"
+		scope="prototype">
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
 		</property>
 	</bean>
 

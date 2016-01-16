@@ -10,6 +10,7 @@ import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.TimeTaskUtil;
+import cn.yiyingli.toPersistant.POrderUtil;
 
 public class OrderServiceImpl implements OrderService {
 
@@ -46,10 +47,12 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public String save(Order order) {
 		long id = getOrderDao().saveWithUserNumber(order, order.getCreateUser());
-		order.setOrderNo("" + Calendar.getInstance().get(Calendar.YEAR)
-				+ String.valueOf((Calendar.getInstance().get(Calendar.DAY_OF_YEAR) + 1000)).substring(1)
-				+ (100000000L + id));
-		getOrderDao().update(order);
+		order.setOrderNo(POrderUtil.getOrderNo(id));
+		if (order.getDistributor() != null) {
+			getOrderDao().updateDistriOrderNumber(order, order.getDistributor());
+		} else {
+			getOrderDao().update(order);
+		}
 		TimeTaskUtil.sendTimeTask("change", "order",
 				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
 				new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
@@ -80,11 +83,11 @@ public class OrderServiceImpl implements OrderService {
 	public void update(Order order, boolean addMile) {
 		if (addMile) {
 			if (!order.getOnSale()) {
-//				Teacher teacher = order.getTeacher();
-//				float time = order.getTime();
-//				long m = (long) (10 * time);
-//				getTeacherDao().update(teacher);
-//				getTeacherDao().updateAddMile(teacher.getId(), m);
+				// Teacher teacher = order.getTeacher();
+				// float time = order.getTime();
+				// long m = (long) (10 * time);
+				// getTeacherDao().update(teacher);
+				// getTeacherDao().updateAddMile(teacher.getId(), m);
 			}
 			getOrderDao().updateOrderWhenOrderFinish(order);
 		} else {

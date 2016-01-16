@@ -62,7 +62,7 @@ public class RecordDaoImpl extends HibernateDaoSupport implements RecordDao {
 
 			@Override
 			public List<Record> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Record r where r.createTime>" + time + " ORDER BY o.createTime DESC";
+				String hql = "from Record r where r.createTime>" + time + " ORDER BY r.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -81,7 +81,7 @@ public class RecordDaoImpl extends HibernateDaoSupport implements RecordDao {
 
 			@Override
 			public List<Record> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Record r where r.type=" + type + " ORDER BY o.createTime DESC";
+				String hql = "from Record r where r.type=" + type + " ORDER BY r.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -100,7 +100,7 @@ public class RecordDaoImpl extends HibernateDaoSupport implements RecordDao {
 
 			@Override
 			public List<Record> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Record r where r.kind=" + kind + " ORDER BY o.createTime DESC";
+				String hql = "from Record r where r.kind=" + kind + " ORDER BY r.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
