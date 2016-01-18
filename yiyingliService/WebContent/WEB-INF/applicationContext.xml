@@ -578,6 +578,9 @@
 		<property name="serviceProDao">
 			<ref local="serviceProDao" />
 		</property>
+		<property name="userDao">
+			<ref local="userDao" />
+		</property>
 	</bean>
 
 	<bean id="userServiceImpl" class="cn.yiyingli.Service.Impl.UserServiceImpl">
@@ -2429,6 +2432,36 @@
 		scope="prototype">
 		<property name="serviceProService">
 			<ref local="serviceProService" />
+		</property>
+	</bean>
+
+	<bean id="likeServiceProService" class="cn.yiyingli.Handle.Service.LikeServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="disLikeServiceProService" class="cn.yiyingli.Handle.Service.DisLikeServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="isLikeServiceProService" class="cn.yiyingli.Handle.Service.IsLikeServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
 		</property>
 	</bean>
 

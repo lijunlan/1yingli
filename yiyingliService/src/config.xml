@@ -15,6 +15,9 @@
 		value="http://api.recsys.baidu.com/s/130426/326544/rs?token=8d116fa25cfde0085776beee152741e2" />
 	<debug value="true" />
 	<style name="user">
+		<method name="isLikeServicePro" beanName="isLikeServiceProService" />
+		<method name="disLikeServicePro" beanName="disLikeServiceProService" />
+		<method name="likeServicePro" beanName="likeServiceProService" />
 		<method name="likePassage" beanName="likePassageService" />
 		<method name="getTeacherState" beanName="getTeacherStateService" />
 		<method name="getCommentCount" beanName="getCommentCountService" />

@@ -71,7 +71,7 @@ public class ServiceProServiceImpl implements ServiceProService {
 	public void updateAndPlusNumber(ServicePro servicePro, boolean remove) {
 		getServiceProDao().updateAndPlusNumber(servicePro, remove);
 	}
-	
+
 	@Override
 	public void updateUserUnlike(long serviceProId, long userId) {
 		if (!getServiceProDao().queryCheckLikeUser(serviceProId, userId)) {
@@ -108,6 +108,11 @@ public class ServiceProServiceImpl implements ServiceProService {
 	@Override
 	public ServicePro queryByTeacherIdAndServiceId(long teacherId, long serviceId) {
 		return getServiceProDao().queryByTeacherIdAndServiceId(teacherId, serviceId);
+	}
+
+	@Override
+	public Boolean queryCheckLikeUser(long serviceProId, long userId) {
+		return getServiceProDao().queryCheckLikeUser(serviceProId, userId);
 	}
 
 	@Override

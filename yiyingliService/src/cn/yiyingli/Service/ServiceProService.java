@@ -57,6 +57,8 @@ public interface ServiceProService {
 
 	List<ServicePro> queryList(int page);
 
+	Boolean queryCheckLikeUser(long serviceProId, long userId);
+
 	List<ServicePro> queryList(int page, int pageSize);
 
 	List<ServicePro> queryList(long[] ids, long teacherId);
