@@ -80,7 +80,7 @@ public class SendMessageUtil {
 
 	private static final String MESSAGE_PASSWD_VERIFY = "IQ8R1Wpy";
 
-	private static final String MESSAGE_NAME_NOTIFY = "yyl-ipxmt2";
+	private static final String MESSAGE_NAME_NOTIFY = "yylipxmt2";
 
 	private static final String MESSAGE_PASSWD_NOTIFY = "LE0TMxXd";
 
