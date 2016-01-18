@@ -19,6 +19,8 @@ public interface ServiceProService {
 	public static final short STATE_FAILED = 2;
 
 	public static final int PAGE_SIZE = 3;
+	
+	public static final int TEACHER_PAGE_SIZE = 8;
 
 	public static final int MANAGER_PAGE_SIZE = 12;
 

@@ -33,7 +33,8 @@ public class TGetServiceProListService extends TMsgService {
 	public void doit() {
 		Teacher teacher = getTeacher();
 		int page = getData().getInt("page");
-		List<ServicePro> servicePros = getServiceProService().queryListByTeacherId(teacher.getId(), page);
+		List<ServicePro> servicePros = getServiceProService().queryListByTeacherId(teacher.getId(), page,
+				ServiceProService.TEACHER_PAGE_SIZE);
 		ExList sends = new ExArrayList();
 		for (ServicePro servicePro : servicePros) {
 			SuperMap map = new SuperMap();
