@@ -38,9 +38,10 @@ $(document).ready(function () {
 			//alert('The file ' + file.name + ' uploaded successfully.');
 			var json = eval("(" + data + ")");
 			if (json.state == "success") {
+				var temp = json.url.split("@!")[0]+"@!cover";
 				$("#imagelist").fadeOut(3000);
-				$("#iconUrl").val(json.url);
-				$("#littleIcon").attr('src',json.url);
+				$("#iconUrl").val(temp);
+				$("#littleIcon").attr('src',temp);
 				Messenger().post("图片添加完成");
 			} else {
 				$(".mark").show();
