@@ -91,6 +91,9 @@ public class User {
 	@Column(name = "LIKETEACHERNUMBER", nullable = false)
 	private Long likeTeacherNumber;
 
+	@Column(name = "LIKESERVICEPRONUMBER", nullable = false)
+	private Long likeServiceProNumber;
+
 	@Column(name = "RECEIVECOMMENTNUMBER", nullable = false)
 	private Long receiveCommentNumber;
 
@@ -117,6 +120,10 @@ public class User {
 	@OneToMany(targetEntity = UserLikePassage.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private Set<UserLikePassage> userLikePassages = new HashSet<UserLikePassage>();
+
+	@OneToMany(targetEntity = UserLikeServicePro.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID", updatable = false)
+	private Set<UserLikeServicePro> userLikeServicePros = new HashSet<UserLikeServicePro>();
 
 	@OneToMany(targetEntity = Notification.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", updatable = false)
@@ -446,6 +453,22 @@ public class User {
 
 	public void setMile(Long mile) {
 		this.mile = mile;
+	}
+
+	public Set<UserLikeServicePro> getUserLikeServicePros() {
+		return userLikeServicePros;
+	}
+
+	public void setUserLikeServicePros(Set<UserLikeServicePro> userLikeServicePros) {
+		this.userLikeServicePros = userLikeServicePros;
+	}
+
+	public Long getLikeServiceProNumber() {
+		return likeServiceProNumber;
+	}
+
+	public void setLikeServiceProNumber(Long likeServiceProNumber) {
+		this.likeServiceProNumber = likeServiceProNumber;
 	}
 
 }

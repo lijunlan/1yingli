@@ -12,6 +12,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import cn.yiyingli.Dao.ServiceProDao;
 import cn.yiyingli.Persistant.ServicePro;
+import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.ServiceProService;
 
 public class ServiceProDaoImpl extends HibernateDaoSupport implements ServiceProDao {
@@ -242,7 +243,7 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ServicePro>>() {
 			@Override
 			public List<ServicePro> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from ServicePro sp left join fetch sp.teacher where sp.onShow=true and sp.homeWeight!=0 ORDER BY sp.homeWeight DESC";
+				String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=false and sp.onShow=true and sp.homeWeight!=0 ORDER BY sp.homeWeight DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult(0);
 				query.setMaxResults(pageSize);
@@ -260,7 +261,7 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ServicePro>>() {
 			@Override
 			public List<ServicePro> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from ServicePro sp left join fetch sp.teacher where sp.onShow=true and sp.saleWeight!=0 ORDER BY sp.saleWeight DESC";
+				String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=false and sp.onShow=true and sp.saleWeight!=0 ORDER BY sp.saleWeight DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -276,7 +277,8 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		long sum = (long) session
-				.createQuery("select count(*) from ServicePro sp where sp.onShow=true and sp.saleWeight!=0")
+				.createQuery(
+						"select count(*) from ServicePro sp where sp.remove=false and sp.onShow=true and sp.saleWeight!=0")
 				.uniqueResult();
 		return sum;
 	}
@@ -288,8 +290,8 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ServicePro>>() {
 			@Override
 			public List<ServicePro> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from ServicePro sp left join fetch sp.teacher where sp.onShow=true and sp.kind=" + kind
-						+ " ORDER BY sp.showWeight" + kind + " DESC";
+				String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=false and sp.onShow=true and sp.kind="
+						+ kind + " ORDER BY sp.showWeight" + kind + " DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -298,5 +300,54 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 			}
 		});
 		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ServicePro> queryLikeListByUserId(final long userid, final int page, final int pageSize) {
+		List<ServicePro> list = new ArrayList<ServicePro>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ServicePro>>() {
+
+			@Override
+			public List<ServicePro> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from ServicePro sp left join fetch sp.teacher left join fetch sp.userLikeServicePros uls where sp.remove=false and uls.user.id="
+						+ userid + " ORDER BY uls.createTime DESC";
+
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<ServicePro> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@Override
+	public void removeUserLike(long serviceProId, long userId) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session.createSQLQuery("delete from userlikeservicepro where userlikeservicepro.SERVICEPRO_ID='"
+				+ serviceProId + "' and userlikeservicepro.USER_ID='" + userId + "'");
+		query.executeUpdate();
+		session.flush();
+		query = session.createSQLQuery(
+				"update servicepro set servicepro.LIKENO=(select count(*) from userlikeservicepro where userlikeservicepro.SERVICEPRO_ID='"
+						+ serviceProId + "') where servicepro.SERVICEPRO_ID=" + serviceProId);
+		query.executeUpdate();
+		query = session.createSQLQuery(
+				"update user set user.LIKESERVICEPRONUMBER=(select count(*) from userlikeservicepro where userlikeservicepro.USER_ID='"
+						+ userId + "') where user.USER_ID=" + userId);
+		query.executeUpdate();
+	}
+
+	@Override
+	public Boolean queryCheckLikeUser(long serviceProId, long userId) {
+		String hql = "from UserLikeServicePro uls where uls.user.id=?  and uls.servicePro.id=?";
+		@SuppressWarnings("unchecked")
+		List<Teacher> list = getHibernateTemplate().find(hql, userId, serviceProId);
+		if (list.isEmpty())
+			return false;
+		else
+			return true;
 	}
 }

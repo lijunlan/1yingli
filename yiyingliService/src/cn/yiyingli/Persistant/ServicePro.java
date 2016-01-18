@@ -156,6 +156,10 @@ public class ServicePro {
 	@Column(name = "SHOWWEIGHT5", nullable = false)
 	private Integer showWeight5;
 
+	@OneToMany(targetEntity = UserLikeServicePro.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "SERVICEPRO_ID", updatable = false)
+	private Set<UserLikeServicePro> userLikeServicePros = new HashSet<UserLikeServicePro>();
+
 	public Long getId() {
 		return id;
 	}
@@ -458,6 +462,14 @@ public class ServicePro {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public Set<UserLikeServicePro> getUserLikeServicePros() {
+		return userLikeServicePros;
+	}
+
+	public void setUserLikeServicePros(Set<UserLikeServicePro> userLikeServicePros) {
+		this.userLikeServicePros = userLikeServicePros;
 	}
 
 }

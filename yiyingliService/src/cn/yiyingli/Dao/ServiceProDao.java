@@ -22,7 +22,11 @@ public interface ServiceProDao {
 
 	void remove(long id);
 
+	void removeUserLike(long serviceProId, long userId);
+
 	void update(ServicePro servicePro);
+
+	Boolean queryCheckLikeUser(long serviceProId, long userId);
 
 	void updateAndPlusNumber(ServicePro servicePro, boolean remove);
 
@@ -46,6 +50,8 @@ public interface ServiceProDao {
 	List<ServicePro> queryListBySale(int page, int pageSize);
 
 	List<ServicePro> queryListByKind(int kind, int page, int pageSize);
+
+	List<ServicePro> queryLikeListByUserId(long userid, int page, int pageSize);
 
 	long queryListBySaleNo();
 }

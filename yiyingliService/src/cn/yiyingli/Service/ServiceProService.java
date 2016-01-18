@@ -3,6 +3,7 @@ package cn.yiyingli.Service;
 import java.util.List;
 
 import cn.yiyingli.Persistant.ServicePro;
+import cn.yiyingli.Persistant.User;
 
 public interface ServiceProService {
 
@@ -19,7 +20,7 @@ public interface ServiceProService {
 	public static final short STATE_FAILED = 2;
 
 	public static final int PAGE_SIZE = 3;
-	
+
 	public static final int TEACHER_PAGE_SIZE = 8;
 
 	public static final int MANAGER_PAGE_SIZE = 12;
@@ -41,6 +42,10 @@ public interface ServiceProService {
 	void remove(long id);
 
 	void update(ServicePro servicePro);
+
+	void updateUserUnlike(long serviceProId, long userId);
+
+	boolean updateUserLike(ServicePro servicePro, User user);
 
 	void updateAndPlusNumber(ServicePro servicePro, boolean remove);
 
@@ -86,4 +91,5 @@ public interface ServiceProService {
 	List<ServicePro> queryListByKind(int kind);
 
 	long queryListBySaleNo();
+
 }

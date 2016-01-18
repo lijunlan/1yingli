@@ -5,6 +5,7 @@ import java.util.List;
 import cn.yiyingli.Persistant.Distributor;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.UserLikePassage;
+import cn.yiyingli.Persistant.UserLikeServicePro;
 import cn.yiyingli.Persistant.UserLikeTeacher;
 
 public interface UserDao {
@@ -24,8 +25,10 @@ public interface UserDao {
 	void update(User user);
 
 	void updateLikeTeacher(UserLikeTeacher userLikeTeacher);
-	
+
 	void updateLikePassage(UserLikePassage userLikePassage);
+
+	void updateLikeServicePro(UserLikeServicePro userLikeServicePro);
 
 	void updateFromSql(String sql);
 

@@ -14,6 +14,7 @@ import cn.yiyingli.Dao.UserDao;
 import cn.yiyingli.Persistant.Distributor;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.UserLikePassage;
+import cn.yiyingli.Persistant.UserLikeServicePro;
 import cn.yiyingli.Persistant.UserLikeTeacher;
 
 public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
@@ -86,6 +87,18 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 				"update passage set passage.LIKENUMBER=(select count(*) from userlikepassage where userlikepassage.PASSAGE_ID='"
 						+ userLikePassage.getPassage().getId() + "') where passage.PASSAGE_ID="
 						+ userLikePassage.getPassage().getId());
+		query.executeUpdate();
+	}
+
+	@Override
+	public void updateLikeServicePro(UserLikeServicePro userLikeServicePro) {
+		getHibernateTemplate().save(userLikeServicePro);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session.createSQLQuery(
+				"update servicepro set servicepro.LIKENO=(select count(*) from userlikeservicepro where userlikeservicepro.SERVICEPRO_ID='"
+						+ userLikeServicePro.getServicePro().getId() + "') where servicepro.SERVICEPRO_ID="
+						+ userLikeServicePro.getServicePro().getId());
 		query.executeUpdate();
 	}
 

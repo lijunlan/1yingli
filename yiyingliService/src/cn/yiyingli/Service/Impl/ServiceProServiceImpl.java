@@ -1,9 +1,13 @@
 package cn.yiyingli.Service.Impl;
 
+import java.util.Calendar;
 import java.util.List;
 
 import cn.yiyingli.Dao.ServiceProDao;
+import cn.yiyingli.Dao.UserDao;
 import cn.yiyingli.Persistant.ServicePro;
+import cn.yiyingli.Persistant.User;
+import cn.yiyingli.Persistant.UserLikeServicePro;
 import cn.yiyingli.Service.ServiceProService;
 
 public class ServiceProServiceImpl implements ServiceProService {
@@ -14,12 +18,22 @@ public class ServiceProServiceImpl implements ServiceProService {
 
 	private ServiceProDao serviceProDao;
 
+	private UserDao userDao;
+
 	public ServiceProDao getServiceProDao() {
 		return serviceProDao;
 	}
 
 	public void setServiceProDao(ServiceProDao serviceProDao) {
 		this.serviceProDao = serviceProDao;
+	}
+
+	public UserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
 	}
 
 	@Override
@@ -56,6 +70,29 @@ public class ServiceProServiceImpl implements ServiceProService {
 	@Override
 	public void updateAndPlusNumber(ServicePro servicePro, boolean remove) {
 		getServiceProDao().updateAndPlusNumber(servicePro, remove);
+	}
+	
+	@Override
+	public void updateUserUnlike(long serviceProId, long userId) {
+		if (!getServiceProDao().queryCheckLikeUser(serviceProId, userId)) {
+			return;
+		} else {
+			getServiceProDao().removeUserLike(serviceProId, userId);
+		}
+	}
+
+	@Override
+	public boolean updateUserLike(ServicePro servicePro, User user) {
+		if (getServiceProDao().queryCheckLikeUser(servicePro.getId(), user.getId())) {
+			return false;
+		} else {
+			UserLikeServicePro userLikeServicePro = new UserLikeServicePro();
+			userLikeServicePro.setServicePro(servicePro);
+			userLikeServicePro.setUser(user);
+			userLikeServicePro.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
+			getUserDao().updateLikeServicePro(userLikeServicePro);
+			return true;
+		}
 	}
 
 	@Override

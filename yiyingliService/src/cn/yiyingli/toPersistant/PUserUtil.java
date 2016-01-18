@@ -25,6 +25,7 @@ public class PUserUtil {
 	public static User assembleUser(String username, String password, String nickName, String icon, String address,
 			Distributor distributor) {
 		User user = new User();
+		user.setLikeServiceProNumber(0L);
 		user.setLikeTeacherNumber(0L);
 		user.setOrderNumber(0L);
 		user.setUsername(username);
