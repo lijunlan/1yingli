@@ -95,8 +95,8 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 
 	@Override
 	public ServicePro queryByUser(long id) {
-		String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.id=? and sp.onShow=" + true
-				+ " and sp.state=" + ServiceProService.STATE_OK;
+		String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false
+				+ " and sp.id=? and sp.onShow=" + true + " and sp.state=" + ServiceProService.STATE_OK;
 		@SuppressWarnings("unchecked")
 		List<ServicePro> list = getHibernateTemplate().find(hql, id);
 		if (list.isEmpty())
@@ -279,5 +279,24 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 				.createQuery("select count(*) from ServicePro sp where sp.onShow=true and sp.saleWeight!=0")
 				.uniqueResult();
 		return sum;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ServicePro> queryListByKind(final int kind, final int page, final int pageSize) {
+		List<ServicePro> list = new ArrayList<ServicePro>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ServicePro>>() {
+			@Override
+			public List<ServicePro> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from ServicePro sp left join fetch sp.teacher where sp.onShow=true and sp.kind=" + kind
+						+ " ORDER BY sp.showWeight" + kind + " DESC";
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<ServicePro> list = query.list();
+				return list;
+			}
+		});
+		return list;
 	}
 }

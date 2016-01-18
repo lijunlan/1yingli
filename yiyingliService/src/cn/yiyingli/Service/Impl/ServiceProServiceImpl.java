@@ -156,4 +156,14 @@ public class ServiceProServiceImpl implements ServiceProService {
 		return getServiceProDao().queryListBySaleNo();
 	}
 
+	@Override
+	public List<ServicePro> queryListByKind(int kind, int page, int pageSize) {
+		return getServiceProDao().queryListByKind(kind, page, pageSize);
+	}
+
+	@Override
+	public List<ServicePro> queryListByKind(int kind) {
+		return getServiceProDao().queryListByKind(kind, 1, KIND_PAGE_SIZE);
+	}
+
 }

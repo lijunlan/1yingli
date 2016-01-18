@@ -45,5 +45,7 @@ public interface ServiceProDao {
 
 	List<ServicePro> queryListBySale(int page, int pageSize);
 
+	List<ServicePro> queryListByKind(int kind, int page, int pageSize);
+
 	long queryListBySaleNo();
 }

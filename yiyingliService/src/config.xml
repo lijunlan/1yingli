@@ -151,6 +151,7 @@
 		<method name="removeBackground" beanName="mRemoveBackgroundService" />
 	</style>
 	<style name="function">
+		<method name="getServiceProListByKind" beanName="fGetServiceProListByKindService" />
 		<method name="getServiceProList" beanName="fGetServiceProListSerivce" />
 		<method name="getServicePro" beanName="fGetServiceProService" />
 		<method name="getCommentListByServicePro" beanName="fGetCommentListByServiceProService" />

@@ -2422,4 +2422,13 @@
 			<ref local="teacherService" />
 		</property>
 	</bean>
+
+	<bean id="fGetServiceProListByKindService"
+		class="cn.yiyingli.Handle.Service.FGetServiceProListByKindService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+	</bean>
+
 </beans>

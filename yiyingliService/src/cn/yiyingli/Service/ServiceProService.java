@@ -24,6 +24,8 @@ public interface ServiceProService {
 
 	public static final int SALEPAGE_PAGE_SIZE = 12;
 
+	public static final int KIND_PAGE_SIZE = 10;
+
 	void save(ServicePro servicePro);
 
 	void saveAndPlusNumber(ServicePro servicePro, boolean byManager);
@@ -74,6 +76,10 @@ public interface ServiceProService {
 	List<ServicePro> queryListBySale(int page, int pageSize);
 
 	List<ServicePro> queryListBySale(int page);
+
+	List<ServicePro> queryListByKind(int kind, int page, int pageSize);
+
+	List<ServicePro> queryListByKind(int kind);
 
 	long queryListBySaleNo();
 }
