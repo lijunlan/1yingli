@@ -51,9 +51,10 @@ public class MGetServiceProListService extends MMsgService {
 				setResMsg(MsgUtil.getErrorMsgByCode("14001"));
 				return;
 			}
-			servicePros = getServiceProService().queryListByTeacherId(user.getTeacher().getId(), page);
+			servicePros = getServiceProService().queryListByTeacherId(user.getTeacher().getId(), page,
+					ServiceProService.MANAGER_PAGE_SIZE);
 		} else {
-			servicePros = getServiceProService().queryList(page);
+			servicePros = getServiceProService().queryList(page,ServiceProService.MANAGER_PAGE_SIZE);
 		}
 		ExList toSend = new ExArrayList();
 		for (ServicePro servicePro : servicePros) {

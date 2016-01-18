@@ -20,6 +20,8 @@ public interface ServiceProService {
 
 	public static final int PAGE_SIZE = 3;
 
+	public static final int MANAGER_PAGE_SIZE = 12;
+
 	public static final int HOMEPAGE_PAGE_SIZE = 6;
 
 	public static final int SALEPAGE_PAGE_SIZE = 12;
