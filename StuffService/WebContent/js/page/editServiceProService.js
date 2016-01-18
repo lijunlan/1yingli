@@ -39,11 +39,12 @@ $(document).ready(function () {
 			//alert('The file ' + file.name + ' uploaded successfully.');
 			var json = eval("(" + data + ")");
 			if (json.state == "success") {
+				var url = json.url.split("@!")[0]+"@!servicestyle";
 				$("#imagelist").fadeOut(3000);
 				if(imageUrls==""){
-					imageUrls += json.url;
+					imageUrls += url;
 				}else{
-					imageUrls += ","+json.url;
+					imageUrls += ","+url;
 				}
 				refreshImage();
 				Messenger().post("图片上传完成");
