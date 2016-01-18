@@ -13,6 +13,12 @@ import cn.yiyingli.ExchangeData.SuperMap;
 
 public class SendMessageUtil {
 
+	public static final short MESSAGE_KIND_VERIFY = 0;
+
+	public static final short MESSAGE_KIND_NOTIFY = 1;
+
+	public static final short MESSAGE_KIND_MARKETING = 2;
+
 	private static SendMessageUtil singleInstance;
 
 	public static SendMessageUtil getInstance() {
@@ -29,10 +35,11 @@ public class SendMessageUtil {
 		sendQueue = new LinkedBlockingQueue<SuperMap>();
 	}
 
-	public void addSend(String phone, String msg) {
+	public void addSend(String phone, String msg, short kind) {
 		SuperMap map = new SuperMap();
 		map.put("phone", phone);
 		map.put("msg", msg);
+		map.put("kind", kind);
 		try {
 			sendQueue.put(map);
 		} catch (InterruptedException e) {
@@ -49,11 +56,12 @@ public class SendMessageUtil {
 						SuperMap map = sendQueue.take();
 						String phone = map.finish().getString("phone");
 						String msg = map.finish().getString("msg");
+						short kind = Short.valueOf(map.finish().getString("kind"));
 						LogUtil.info("send message to phone:" + phone + ";message is:" + msg, SendMessageUtil.class);
 						if (CheckUtil.checkMobileNumber(phone)) {
-							sendChinaMsg(phone, msg);
+							sendChinaMsg(phone, msg, kind);
 						} else {
-							sendGlobleMsg(phone, msg);
+							sendGlobleMsg(phone, msg, kind);
 						}
 					} catch (InterruptedException e) {
 						e.printStackTrace();
@@ -65,23 +73,16 @@ public class SendMessageUtil {
 	}
 
 	public static void main(String[] args) {
-		for (int i = 1; i <= 1; i++) {
-			final int t = i;
-			Thread thread = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					SendMessageUtil.getInstance().addSend("8615888539966", "test two " + t);
-					SendMessageUtil.getInstance().addSend("8613883305755", "test two " + t);
-					SendMessageUtil.getInstance().addSend("8615759262118", "test two " + t);
-				}
-			});
-			thread.start();
-		}
+
 	}
 
-	private static final String MESSAGE_NAME = "yyl-ipxmt";
+	private static final String MESSAGE_NAME_VERIFY = "yyl-ipxmt";
 
-	private static final String MESSAGE_PASSWD = "IQ8R1Wpy";
+	private static final String MESSAGE_PASSWD_VERIFY = "IQ8R1Wpy";
+
+	private static final String MESSAGE_NAME_NOTIFY = "yyl-ipxmt2";
+
+	private static final String MESSAGE_PASSWD_NOTIFY = "LE0TMxXd";
 
 	private static String hexString(byte[] b) {
 		StringBuffer d = new StringBuffer(b.length * 2);
@@ -95,11 +96,12 @@ public class SendMessageUtil {
 	}
 
 	public static void sendCheckNo(String phone, String checkNo) {
-		SendMessageUtil.getInstance().addSend(phone.replaceAll("-", ""), "尊敬的用户，您的短信验证码为 " + checkNo + "(3分钟内有效)");
+		SendMessageUtil.getInstance().addSend(phone.replaceAll("-", ""), "尊敬的用户，您的短信验证码为 " + checkNo + "(3分钟内有效)",
+				MESSAGE_KIND_VERIFY);
 	}
 
 	public static void sendMessage(String phone, String msg) {
-		SendMessageUtil.getInstance().addSend(phone.replaceAll("-", ""), msg);
+		SendMessageUtil.getInstance().addSend(phone.replaceAll("-", ""), msg, MESSAGE_KIND_NOTIFY);
 	}
 
 	/**
@@ -108,7 +110,7 @@ public class SendMessageUtil {
 	 * @param msg
 	 * @return
 	 */
-	private static String sendGlobleMsg(String phone, String msg) {
+	private static String sendGlobleMsg(String phone, String msg, short kind) {
 		String message = "";
 		try {
 			message = hexString(msg.getBytes("GBK"));
@@ -117,15 +119,29 @@ public class SendMessageUtil {
 			e1.printStackTrace();
 		}
 		HttpClient httpClient = HttpClients.createDefault();
-		HttpGet get = new HttpGet("http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME + "&cppwd="
-				+ MESSAGE_PASSWD + "&da=" + phone + "&dc=15&sm=" + message);
+		String url = "";
+		switch (kind) {
+		case MESSAGE_KIND_VERIFY:
+			url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_VERIFY + "&cppwd="
+					+ MESSAGE_PASSWD_VERIFY + "&da=" + phone + "&dc=15&sm=" + message;
+			break;
+		case MESSAGE_KIND_NOTIFY:
+			url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_NOTIFY + "&cppwd="
+					+ MESSAGE_PASSWD_NOTIFY + "&da=" + phone + "&dc=15&sm=" + message;
+			break;
+		default:
+			url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_NOTIFY + "&cppwd="
+					+ MESSAGE_PASSWD_NOTIFY + "&da=" + phone + "&dc=15&sm=" + message;
+			break;
+		}
+		HttpGet get = new HttpGet(url);
 		String result = null;
 		try {
 			HttpResponse response = httpClient.execute(get);
 			if (response.getStatusLine().getStatusCode() == 200) {
 				result = EntityUtils.toString(response.getEntity(), "utf-8");
 			}
-			System.out.println(result);
+			LogUtil.info("receive>>>" + result, SendMailUtil.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -138,7 +154,7 @@ public class SendMessageUtil {
 	 * @param msg
 	 * @return
 	 */
-	private static String sendChinaMsg(String phone, String msg) {
+	private static String sendChinaMsg(String phone, String msg, short kind) {
 		String message = "";
 		try {
 			message = hexString(msg.getBytes("GBK"));
@@ -147,15 +163,29 @@ public class SendMessageUtil {
 			e1.printStackTrace();
 		}
 		HttpClient httpClient = HttpClients.createDefault();
-		HttpGet get = new HttpGet("http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME + "&cppwd="
-				+ MESSAGE_PASSWD + "&da=86" + phone + "&dc=15&sm=" + message);
+		String url = "";
+		switch (kind) {
+		case MESSAGE_KIND_VERIFY:
+			url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_VERIFY + "&cppwd="
+					+ MESSAGE_PASSWD_VERIFY + "&da=86" + phone + "&dc=15&sm=" + message;
+			break;
+		case MESSAGE_KIND_NOTIFY:
+			url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_NOTIFY + "&cppwd="
+					+ MESSAGE_PASSWD_NOTIFY + "&da=86" + phone + "&dc=15&sm=" + message;
+			break;
+		default:
+			url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_NOTIFY + "&cppwd="
+					+ MESSAGE_PASSWD_NOTIFY + "&da=86" + phone + "&dc=15&sm=" + message;
+			break;
+		}
+		HttpGet get = new HttpGet(url);
 		String result = null;
 		try {
 			HttpResponse response = httpClient.execute(get);
 			if (response.getStatusLine().getStatusCode() == 200) {
 				result = EntityUtils.toString(response.getEntity(), "utf-8");
 			}
-			System.out.println(result);
+			LogUtil.info("receive>>>" + result, SendMailUtil.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
