@@ -52,8 +52,9 @@ public class FGetWXRewardUrlService extends MsgService {
 		String subject = "打赏-" + teacherName;
 		// 必填
 
+		int tempmoney = (int) (Float.valueOf(money) * 100F);
 		// 付款金额
-		String total_fee = String.valueOf((int) (Float.valueOf(money) * 100F));
+		String total_fee = String.valueOf(tempmoney >= 1 ? tempmoney : 1);
 		// 必填
 
 		SuperMap map = new SuperMap();

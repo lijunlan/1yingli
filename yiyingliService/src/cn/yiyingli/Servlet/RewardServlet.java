@@ -93,9 +93,9 @@ public class RewardServlet extends HttpServlet {
 		// 订单名称
 		String subject = "打赏-" + teacherName;
 		// 必填
-
+		float tempmoney = Float.valueOf(money);
 		// 付款金额
-		String total_fee = String.valueOf(Float.valueOf(money));
+		String total_fee = String.valueOf(tempmoney >= 0.01F ? tempmoney : 0.01F);
 		// 必填
 
 		// 订单描述
