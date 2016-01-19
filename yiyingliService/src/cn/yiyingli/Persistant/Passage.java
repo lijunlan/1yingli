@@ -48,6 +48,12 @@ public class Passage {
 	@Column(name = "TAG", nullable = false)
 	private String tag;
 
+	@Column(name = "REWARDNUMBER", nullable = false)
+	private Long rewardNumber;
+
+	@Column(name = "ONREWARD", nullable = false)
+	private Boolean onReward;
+
 	@Column(name = "IMAGEURL", nullable = false)
 	private String imageUrl;
 
@@ -197,6 +203,22 @@ public class Passage {
 
 	public void setRemove(Boolean remove) {
 		this.remove = remove;
+	}
+
+	public Long getRewardNumber() {
+		return rewardNumber;
+	}
+
+	public void setRewardNumber(Long rewardNumber) {
+		this.rewardNumber = rewardNumber;
+	}
+
+	public Boolean getOnReward() {
+		return onReward;
+	}
+
+	public void setOnReward(Boolean onReward) {
+		this.onReward = onReward;
 	}
 
 }

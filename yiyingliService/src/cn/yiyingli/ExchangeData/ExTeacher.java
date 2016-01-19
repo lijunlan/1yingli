@@ -73,6 +73,7 @@ public class ExTeacher {
 	}
 
 	private static void assembleDetailNormal(Teacher teacher, SuperMap map) {
+		map.put("rewardNumber", teacher.getRewardNumber());
 		map.put("simpleinfo", teacher.getSimpleInfo());
 		map.put("name", teacher.getName());
 		map.put("iconUrl", teacher.getIconUrl());

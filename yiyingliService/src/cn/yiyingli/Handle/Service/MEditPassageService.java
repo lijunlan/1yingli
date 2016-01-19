@@ -22,7 +22,8 @@ public class MEditPassageService extends MMsgService {
 	public boolean checkData() {
 		return super.checkData() && getData().containsKey("passageId") && getData().containsKey("title")
 				&& getData().containsKey("tag") && getData().containsKey("content") && getData().containsKey("imageUrl")
-				&& getData().containsKey("summary") && getData().containsKey("onshow");
+				&& getData().containsKey("summary") && getData().containsKey("onshow")
+				&& getData().containsKey("onReward");
 	}
 
 	@Override
@@ -39,8 +40,9 @@ public class MEditPassageService extends MMsgService {
 		String imageUrl = getData().getString("imageUrl");
 		String summary = getData().getString("summary");
 		boolean onshow = getData().getBoolean("onshow");
+		boolean onReward = getData().getBoolean("onReward");
 
-		PPassageUtil.toEditPassageByManager(title, tag, summary, content, imageUrl, passage, onshow);
+		PPassageUtil.toEditPassageByManager(title, tag, summary, content, imageUrl, passage, onshow, onReward);
 
 		getPassageService().update(passage, false, true);
 

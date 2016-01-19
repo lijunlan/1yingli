@@ -74,7 +74,7 @@ function getAndParse(data) {
 	$("#iconUrl").val(p.imageUrl);
 	$("#passageId").val(p.passageId);
 	p.onshow == 'true' ? $('#onShowDiv').bootstrapSwitch('setState', true) : $('#onShowDiv').bootstrapSwitch('setState', false);
-
+	p.onReward == 'true' ? $('#onRewardDiv').bootstrapSwitch('setState', true) : $('#onRewardDiv').bootstrapSwitch('setState', false);
 	Messenger().post("加载完成");
 }
 
@@ -91,6 +91,7 @@ function edit() {
 	send.imageUrl=$("#iconUrl").val();
 	send.summary=$("#summary").val();
 	send.onshow=document.getElementById('onShow').checked.toString();
+	send.onReward = document.getElementById('onReward').checked.toString();
 
 	myAjax(send, null)
 	Messenger().post("操作成功");
@@ -113,7 +114,7 @@ function save() {
 	send.content=$("#content").val();
 	send.imageUrl=$("#iconUrl").val();
 	send.summary=$("#summary").val();
-
+	
 	myAjax(send, null)
 	Messenger().post("操作成功");
 }

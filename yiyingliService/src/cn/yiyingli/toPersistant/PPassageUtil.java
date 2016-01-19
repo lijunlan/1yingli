@@ -18,6 +18,8 @@ public class PPassageUtil {
 
 	private static void toSavePassage(Teacher teacher, String title, String tag, String summary, String content,
 			String imageUrl, Passage passage) {
+		passage.setOnReward(false);
+		passage.setRewardNumber(0L);
 		passage.setContent(content);
 		passage.setSummary(summary);
 		passage.setEditorName(teacher.getName());
@@ -31,12 +33,14 @@ public class PPassageUtil {
 	}
 
 	public static void toEditPassageByManager(String title, String tag, String summary, String content, String imageUrl,
-			Passage passage, boolean onshow) {
+			Passage passage, boolean onshow,boolean onReward) {
 		passage.setContent(content);
 		passage.setSummary(summary);
 		passage.setImageUrl(imageUrl);
 		passage.setTag(tag);
 		passage.setTitle(title);
+		passage.setOnshow(onshow);
+		passage.setOnReward(onReward);
 	}
 
 	public static void toSavePassageByManager(Teacher teacher, String title, String tag, String summary, String content,

@@ -15,11 +15,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.ExRewardForPay;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderListService;
 import cn.yiyingli.Service.OrderService;
+import cn.yiyingli.Service.RewardService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.TimeTaskUtil;
@@ -64,34 +66,40 @@ public class WXNotifyServlet extends HttpServlet {
 		if (WXMessageUtil.checkMsg(receive)) {
 			String result = WXMessageUtil.getContent(receive, "result_code");
 			if ("SUCCESS".equals(result)) {
+				String extra_param = WXMessageUtil.getContent(receive, "attach");
 				String olid = WXMessageUtil.getContent(receive, "out_trade_no");
-				String money = WXMessageUtil.getContent(receive, "total_fee");
-				OrderListService orderListService = (OrderListService) getApplicationContext()
-						.getBean("orderListService");
-				NotificationService notificationService = (NotificationService) getApplicationContext()
-						.getBean("notificationService");
-				OrderList orderList = orderListService.queryByOrderListNo(olid);
-				if (orderList != null) {
-					if (Float.valueOf(money) / 100F == orderList.getPayMoney().floatValue()) {
-						String state = orderList.getState().split(",")[0];
-						if (state.equals(cn.yiyingli.Service.OrderService.ORDER_STATE_NOT_PAID)) {
-							orderList.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + ","
-									+ orderList.getState());
-							finishOrder(orderListService, orderList, notificationService);
+				if (!"none".equals(extra_param)) {
+					RewardService rewardService = (RewardService) getApplicationContext().getBean("rewardService");
+					ExRewardForPay.dealReward(rewardService, extra_param, olid);
+				} else {
+					String money = WXMessageUtil.getContent(receive, "total_fee");
+					OrderListService orderListService = (OrderListService) getApplicationContext()
+							.getBean("orderListService");
+					NotificationService notificationService = (NotificationService) getApplicationContext()
+							.getBean("notificationService");
+					OrderList orderList = orderListService.queryByOrderListNo(olid);
+					if (orderList != null) {
+						if (Float.valueOf(money) / 100F == orderList.getPayMoney().floatValue()) {
+							String state = orderList.getState().split(",")[0];
+							if (state.equals(cn.yiyingli.Service.OrderService.ORDER_STATE_NOT_PAID)) {
+								orderList.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + ","
+										+ orderList.getState());
+								finishOrder(orderListService, orderList, notificationService);
 
+							} else {
+								LogUtil.error("TRADE_SUCCESS orderList id:" + olid + ", state error", this.getClass());
+								WarnUtil.sendWarnToCTO(
+										"TRADE_SUCCESS orderList id:" + olid + ", has finished the payment before");
+							}
 						} else {
-							LogUtil.error("TRADE_SUCCESS orderList id:" + olid + ", state error", this.getClass());
-							WarnUtil.sendWarnToCTO(
-									"TRADE_SUCCESS orderList id:" + olid + ", has finished the payment before");
+							LogUtil.error(
+									"TRADE_SUCCESS orderList id:" + olid + ", price is wrong, it should be "
+											+ orderList.getPayMoney() + ", but it is " + Float.valueOf(money) / 100F,
+									this.getClass());
+							orderList.setState(OrderListService.ORDER_STATE_ABNORMAL + "," + orderList.getState());
+							WarnUtil.sendWarnToCTO("orderList id:" + olid + ", price is wrong, it should be "
+									+ orderList.getPayMoney() + ", but it is " + Float.valueOf(money) / 100F);
 						}
-					} else {
-						LogUtil.error(
-								"TRADE_SUCCESS orderList id:" + olid + ", price is wrong, it should be "
-										+ orderList.getPayMoney() + ", but it is " + Float.valueOf(money) / 100F,
-								this.getClass());
-						orderList.setState(OrderListService.ORDER_STATE_ABNORMAL + "," + orderList.getState());
-						WarnUtil.sendWarnToCTO("orderList id:" + olid + ", price is wrong, it should be "
-								+ orderList.getPayMoney() + ", but it is " + Float.valueOf(money) / 100F);
 					}
 				}
 			}

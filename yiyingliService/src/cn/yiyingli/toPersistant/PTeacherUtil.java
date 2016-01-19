@@ -213,6 +213,7 @@ public class PTeacherUtil {
 		teacher.setAnswerRatio(0F);
 		teacher.setPraiseRatio(0F);
 		teacher.setCommentNumber(0L);
+		teacher.setRewardNumber(0L);
 		teacher.setLevel((short) 5);
 		teacher.setOrderNumber(0L);
 		teacher.setFinishOrderNumber(0L);
