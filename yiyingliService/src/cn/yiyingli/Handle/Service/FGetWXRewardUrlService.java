@@ -33,12 +33,13 @@ public class FGetWXRewardUrlService extends MsgService {
 		String teacherId = getData().getString("teacherId");
 		String teacherName = getData().getString("teacherName");
 		String money = getData().getString("money");
-		String uid = getData().getString("uid");
 		String passageId = getData().getString("passageId");
 
+		String uid = null;
 		String userId = null;
 		String userName = null;
-		if (uid != null) {
+		if (getData().containsKey("uid")) {
+			uid = getData().getString("uid");
 			LogUtil.info("receive>>ALIPAY>>reward--->uid:" + uid, this.getClass());
 			User user = userMarkService.queryUser(uid);
 			if (user != null) {
