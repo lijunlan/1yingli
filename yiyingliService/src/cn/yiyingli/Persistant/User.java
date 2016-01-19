@@ -37,6 +37,9 @@ public class User {
 	@Column(name = "OQUESTION", nullable = true, length = 500)
 	private String oquestion;
 
+	@Column(name = "ORESUME", nullable = true, length = 500)
+	private String oresume;
+
 	@Column(name = "OTIME", nullable = true)
 	private String otime;
 
@@ -462,6 +465,14 @@ public class User {
 
 	public void setMile(Long mile) {
 		this.mile = mile;
+	}
+
+	public String getOresume() {
+		return oresume;
+	}
+
+	public void setOresume(String oresume) {
+		this.oresume = oresume;
 	}
 
 }

@@ -109,7 +109,7 @@ public class CreateOrderService extends UMsgService {
 			return;
 		}
 
-		user.setResume(resume);
+		user.setOresume(resume);
 		user.setOname(name);
 		user.setOphone(phone);
 		user.setOemail(email);
