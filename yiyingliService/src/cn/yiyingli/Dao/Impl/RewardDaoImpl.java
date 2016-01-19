@@ -27,7 +27,7 @@ public class RewardDaoImpl extends HibernateDaoSupport implements RewardDao {
 		if (reward.getPassageId() != null) {
 			query = session.createSQLQuery(
 					"update passage set passage.REWARDNUMBER=(select count(*) from reward where reward.PASSAGE_ID='"
-							+ reward.getPassageId() + "') where reward.PASSAGE_ID=" + reward.getPassageId());
+							+ reward.getPassageId() + "') where passage.PASSAGE_ID=" + reward.getPassageId());
 			query.executeUpdate();
 		}
 	}
