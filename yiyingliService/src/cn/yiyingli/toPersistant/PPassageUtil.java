@@ -18,6 +18,7 @@ public class PPassageUtil {
 
 	private static void toSavePassage(Teacher teacher, String title, String tag, String summary, String content,
 			String imageUrl, Passage passage) {
+		passage.setRewardNumber(0L);
 		passage.setContent(content);
 		passage.setSummary(summary);
 		passage.setEditorName(teacher.getName());

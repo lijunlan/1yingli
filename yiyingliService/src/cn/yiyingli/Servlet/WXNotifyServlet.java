@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import cn.yiyingli.ExchangeData.ExRewardForPay;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
+import cn.yiyingli.Service.RewardService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.WarnUtil;
@@ -59,39 +61,48 @@ public class WXNotifyServlet extends HttpServlet {
 		if (WXMessageUtil.checkMsg(receive)) {
 			String result = WXMessageUtil.getContent(receive, "result_code");
 			if ("SUCCESS".equals(result)) {
+				String extra_param = WXMessageUtil.getContent(receive, "attach");
 				String oid = WXMessageUtil.getContent(receive, "out_trade_no");
-				String money = WXMessageUtil.getContent(receive, "total_fee");
-				OrderService orderService = (OrderService) getApplicationContext().getBean("orderService");
-				NotificationService notificationService = (NotificationService) getApplicationContext()
-						.getBean("notificationService");
-				Order order = orderService.queryByOrderNo(oid);
-				if (order != null) {
-					if (Float.valueOf(money) / 100F == order.getMoney().floatValue()) {
-						String state = order.getState().split(",")[0];
-						if (state.equals(cn.yiyingli.Service.OrderService.ORDER_STATE_NOT_PAID)) {
-							order.setState(
-									cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
-							finishOrder(orderService, order);
+				if (!"none".equals(extra_param)) {
+					RewardService rewardService = (RewardService) getApplicationContext().getBean("rewardService");
+					ExRewardForPay.dealReward(rewardService, extra_param, oid);
+				} else {
+					String money = WXMessageUtil.getContent(receive, "total_fee");
+					OrderService orderService = (OrderService) getApplicationContext().getBean("orderService");
+					NotificationService notificationService = (NotificationService) getApplicationContext()
+							.getBean("notificationService");
+					Order order = orderService.queryByOrderNo(oid);
+					if (order != null) {
+						if (Float.valueOf(money) / 100F == order.getMoney().floatValue()) {
+							String state = order.getState().split(",")[0];
+							if (state.equals(cn.yiyingli.Service.OrderService.ORDER_STATE_NOT_PAID)) {
+								order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + ","
+										+ order.getState());
+								finishOrder(orderService, order);
 
-							NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-									"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经付款完成，请等待导师接受订单", order.getCreateUser(),
-									notificationService);
-							NotifyUtil.notifyTeacher(order.getTeacher().getPhone(),
-									order.getTeacher().getEmail(), "尊敬的导师，订单号为" + order.getOrderNo() + "的订单，用户("
-											+ order.getCustomerName() + ")已经付款，等待您的接受。",
-									order.getTeacher(), notificationService);
-							finishOrder(orderService, order);
+								NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
+										"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经付款完成，请等待导师接受订单",
+										order.getCreateUser(), notificationService);
+								NotifyUtil.notifyTeacher(order.getTeacher().getPhone(),
+										order.getTeacher().getEmail(), "尊敬的导师，订单号为" + order.getOrderNo() + "的订单，用户("
+												+ order.getCustomerName() + ")已经付款，等待您的接受。",
+										order.getTeacher(), notificationService);
+								finishOrder(orderService, order);
+							} else {
+								LogUtil.error("TRADE_SUCCESS order id:" + oid + ", state is wrong", this.getClass());
+								WarnUtil.sendWarnToCTO("TRADE_SUCCESS order id:" + oid + ", state is wrong");
+							}
 						} else {
-							LogUtil.error("TRADE_SUCCESS order id:" + oid + ", state is wrong", this.getClass());
-							WarnUtil.sendWarnToCTO("TRADE_SUCCESS order id:" + oid + ", state is wrong");
+							LogUtil.error(
+									"TRADE_SUCCESS order id:" + oid + ", price is wrong, it should be "
+											+ order.getMoney() + ", but it is " + Float.valueOf(money) / 100F,
+									this.getClass());
+							order.setState(
+									cn.yiyingli.Service.OrderService.ORDER_STATE_ABNORMAL + "," + order.getState());
+							WarnUtil.sendWarnToCTO("order id:" + oid + ", price is wrong, it should be "
+									+ order.getMoney() + ", but it is " + Float.valueOf(money) / 100F);
+							orderService.update(order, false);
 						}
-					} else {
-						LogUtil.error("TRADE_SUCCESS order id:" + oid + ", price is wrong, it should be "
-								+ order.getMoney() + ", but it is " + Float.valueOf(money) / 100F, this.getClass());
-						order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_ABNORMAL + "," + order.getState());
-						WarnUtil.sendWarnToCTO("order id:" + oid + ", price is wrong, it should be " + order.getMoney()
-								+ ", but it is " + Float.valueOf(money) / 100F);
-						orderService.update(order, false);
 					}
 				}
 			}

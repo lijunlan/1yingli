@@ -18,6 +18,18 @@ public class RewardDaoImpl extends HibernateDaoSupport implements RewardDao {
 	@Override
 	public void save(Reward reward) {
 		getHibernateTemplate().save(reward);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session.createSQLQuery(
+				"update teacher set teacher.REWARDNUMBER=(select count(*) from reward where reward.TEACHER_ID='"
+						+ reward.getTeacherId() + "') where teacher.TEACHER_ID=" + reward.getTeacherId());
+		query.executeUpdate();
+		if (reward.getPassageId() != null) {
+			query = session.createSQLQuery(
+					"update passage set passage.REWARDNUMBER=(select count(*) from reward where reward.PASSAGE_ID='"
+							+ reward.getPassageId() + "') where reward.PASSAGE_ID=" + reward.getPassageId());
+			query.executeUpdate();
+		}
 	}
 
 	@Override

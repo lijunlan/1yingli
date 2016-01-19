@@ -2276,5 +2276,12 @@
 			<ref local="userMarkService" />
 		</property>
 	</bean>
+		
+	<bean id="fGetWXRewardUrlService" class="cn.yiyingli.Handle.Service.FGetWXRewardUrlService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
 
 </beans>
