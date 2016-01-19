@@ -42,7 +42,7 @@ public class ErrorTransformUtil {
 		SAXParser saxParser = saxPF.newSAXParser();
 		InputStream is = new FileInputStream(new File(getClass().getResource(XML_PATH).getPath()));
 		settingData = new HashMap<String, String>();
-		saxParser.parse(is, new SaxErrorReadHandler(settingData));
+		saxParser.parse(is, new ErrorSaxReadHandler(settingData));
 	}
 
 	public static void main(String args[]) {

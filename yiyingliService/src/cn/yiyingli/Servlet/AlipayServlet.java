@@ -25,8 +25,12 @@ import cn.yiyingli.Util.ConfigurationXmlUtil;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
 
-@SuppressWarnings("serial")
 public class AlipayServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3089800443291248718L;
 
 	private ApplicationContext applicationContext;
 
@@ -103,7 +107,7 @@ public class AlipayServlet extends HttpServlet {
 
 		// 防钓鱼时间戳
 		// String anti_phishing_key = query_timestamp();
-		// // 若要使用请调用类文件submit中的query_timestamp函数
+		// 若要使用请调用类文件submit中的query_timestamp函数
 		// if (anti_phishing_key.equals("")) {
 		// returnMsg(resp, "<html>防钓鱼功能启动失败，请重试</html>");
 		// return;
@@ -111,6 +115,7 @@ public class AlipayServlet extends HttpServlet {
 
 		// 客户端的IP地址
 		// String exter_invoke_ip = RemoteIPUtil.getAddr(req);
+
 		// 非局域网的外网IP地址，如：221.0.0.1
 
 		parms.put("service", "create_direct_pay_by_user");
@@ -134,8 +139,10 @@ public class AlipayServlet extends HttpServlet {
 		parms.put("total_fee", total_fee);
 		parms.put("body", body);
 		parms.put("show_url", show_url);
+
 		// parms.put("anti_phishing_key", anti_phishing_key);
 		// parms.put("exter_invoke_ip", exter_invoke_ip);
+
 		// 过期时间 24h
 		parms.put("it_b_pay", "24h");
 

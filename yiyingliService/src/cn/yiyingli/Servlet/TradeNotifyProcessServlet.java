@@ -17,9 +17,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.yiyingli.Alipay.AlipayNotify;
+import cn.yiyingli.ExchangeData.ExRewardForPay;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
+import cn.yiyingli.Service.RewardService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.WarnUtil;
@@ -27,7 +29,7 @@ import cn.yiyingli.Util.WarnUtil;
 /**
  * 支付宝交易通知
  * 
- * @author lp
+ * @author sdll18
  *
  */
 @SuppressWarnings("serial")
@@ -64,6 +66,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 
 		// 返回参数
 		String is_trade_success = req.getParameter("trade_status");
+		String extra_common_param = req.getParameter("extra_common_param");
 		// String sign_type = req.getParameter("sign_type");
 		// String sign = req.getParameter("sign");
 		String oid = req.getParameter("out_trade_no");
@@ -77,6 +80,11 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 
 		// 验证通知的MD5
 		if (AlipayNotify.verify(parms)) {
+			if (extra_common_param != null) {
+				RewardService rewardService = (RewardService) getApplicationContext().getBean("rewardService");
+				ExRewardForPay.dealReward(rewardService, extra_common_param, oid);
+				return;
+			}
 			// 交易成功
 			Order order = orderService.queryByShowId(oid, false);
 			if (is_trade_success.equals("TRADE_SUCCESS")) {
@@ -119,38 +127,53 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 			} else if (is_trade_success.equals("TRADE_FINISHED")) {
 				if (order == null) {
 					LogUtil.info("order id " + oid + " is not existed", this.getClass());
+					WarnUtil.sendWarnToCTO("order id " + oid + " is not existed");
 					returnSuccess(resp);
 					return;
 				}
-				if (!(price == order.getMoney())) {
-					LogUtil.error("TRADE_FINISHED order id:" + oid + ", price is wrong, it should be "
-							+ order.getMoney() + ", but it is " + price, this.getClass());
-					order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_ABNORMAL + "," + order.getState());
-					WarnUtil.sendWarnToCTO("TRADE_FINISHED order id:" + oid + ", price is wrong, it should be "
-							+ order.getMoney() + ", but it is " + price);
-					orderService.update(order, false);
-					returnSuccess(resp);
-					return;
-				}
-				String state = order.getState().split(",")[0];
-				if (!state.equals(cn.yiyingli.Service.OrderService.ORDER_STATE_NOT_PAID)) {
-					LogUtil.error("TRADE_FINISHED order id:" + oid + ", state is wrong", this.getClass());
-					WarnUtil.sendWarnToCTO("TRADE_FINISHED order id:" + oid + ", state is wrong");
-					// order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_ABNORMAL
-					// + "," + order.getState());
-					// orderService.update(order);
-					returnSuccess(resp);
-					return;
-				}
-				order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
-				finishOrder(orderService, order);
-
-				NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-						"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经付款完成，请等待导师接受订单", order.getCreateUser(),
-						notificationService);
-				NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
-						"尊敬的导师，订单号为" + order.getOrderNo() + "的订单，用户(" + order.getCustomerName() + ")已经付款，等待您的接受。",
-						order.getTeacher(), notificationService);
+				// if (!(price == order.getMoney())) {
+				// LogUtil.error("TRADE_FINISHED order id:" + oid + ", price is
+				// wrong, it should be "
+				// + order.getMoney() + ", but it is " + price,
+				// this.getClass());
+				// order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_ABNORMAL
+				// + "," + order.getState());
+				// WarnUtil.sendWarnToCTO("TRADE_FINISHED order id:" + oid + ",
+				// price is wrong, it should be "
+				// + order.getMoney() + ", but it is " + price);
+				// orderService.update(order, false);
+				// returnSuccess(resp);
+				// return;
+				// }
+				// String state = order.getState().split(",")[0];
+				// if
+				// (!state.equals(cn.yiyingli.Service.OrderService.ORDER_STATE_NOT_PAID))
+				// {
+				// LogUtil.error("TRADE_FINISHED order id:" + oid + ", state is
+				// wrong", this.getClass());
+				// WarnUtil.sendWarnToCTO("TRADE_FINISHED order id:" + oid + ",
+				// state is wrong");
+				// //
+				// order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_ABNORMAL
+				// // + "," + order.getState());
+				// // orderService.update(order);
+				// returnSuccess(resp);
+				// return;
+				// }
+				// order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID
+				// + "," + order.getState());
+				// finishOrder(orderService, order);
+				//
+				// NotifyUtil.notifyUserOrder(order.getCustomerPhone(),
+				// order.getCustomerEmail(),
+				// "尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经付款完成，请等待导师接受订单",
+				// order.getCreateUser(),
+				// notificationService);
+				// NotifyUtil.notifyTeacher(order.getTeacher().getPhone(),
+				// order.getTeacher().getEmail(),
+				// "尊敬的导师，订单号为" + order.getOrderNo() + "的订单，用户(" +
+				// order.getCustomerName() + ")已经付款，等待您的接受。",
+				// order.getTeacher(), notificationService);
 				returnSuccess(resp);
 			}
 			// 因为交易超时或者我们主动关闭而导致交易失败,退款

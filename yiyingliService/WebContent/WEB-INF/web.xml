@@ -141,6 +141,20 @@
     <url-pattern>/AlipayTrans</url-pattern>
   </servlet-mapping>  
   
+    
+  <servlet>
+    <description>打赏交易请求</description>
+    <display-name>Reward</display-name>
+    <servlet-name>Reward</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.RewardServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>Reward</servlet-name>
+    <url-pattern>/Reward</url-pattern>
+  </servlet-mapping>
   
   <servlet>
     <description>支付宝交易请求</description>
@@ -200,7 +214,19 @@
     <url-pattern>/Return</url-pattern>
   </servlet-mapping> 
   
-  
+  <servlet>
+    <description>微信支付返回</description>
+    <display-name>WXNotify</display-name>
+    <servlet-name>WXNotify</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.WXNotifyServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>WXNotify</servlet-name>
+    <url-pattern>/WXNotify</url-pattern>
+  </servlet-mapping> 
   
   <listener>
         <listener-class>

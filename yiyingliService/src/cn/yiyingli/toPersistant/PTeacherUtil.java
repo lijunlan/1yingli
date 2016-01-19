@@ -204,6 +204,7 @@ public class PTeacherUtil {
 				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, showWeight1, showWeight2,
 				showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, 0L, teacher, tipService);
 		teacher.setCommentNumber(0L);
+		teacher.setRewardNumber(0L);
 		teacher.setLevel((short) 5);
 		teacher.setOrderNumber(0L);
 		teacher.setFinishOrderNumber(0L);

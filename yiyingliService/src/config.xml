@@ -145,6 +145,8 @@
 		<method name="removeBackground" beanName="mRemoveBackgroundService" />
 	</style>
 	<style name="function">
+		<method name="getWXRewardUrl" beanName="fGetWXRewardUrlService" />
+		<method name="getWXPayUrl" beanName="fGetWXPayUrlService" />
 		<method name="recordRecommandPassage" beanName="fRecordRecommandPassageService" />
 		<method name="getRecommendPassageList" beanName="fGetRecommendPassageListService" />
 		<method name="getPassage" beanName="fGetPassageService" />

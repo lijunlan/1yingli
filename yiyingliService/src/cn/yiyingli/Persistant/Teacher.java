@@ -46,6 +46,9 @@ public class Teacher {
 	@Column(name = "LIKENUMBER", nullable = false)
 	private Long likeNumber;
 
+	@Column(name = "REWARDNUMBER", nullable = false)
+	private Long rewardNumber;
+
 	@Column(name = "PASSAGENUMBER", nullable = false)
 	private Long passageNumber;
 
@@ -622,6 +625,14 @@ public class Teacher {
 
 	public void setPaypal(String paypal) {
 		this.paypal = paypal;
+	}
+
+	public Long getRewardNumber() {
+		return rewardNumber;
+	}
+
+	public void setRewardNumber(Long rewardNumber) {
+		this.rewardNumber = rewardNumber;
 	}
 
 }

@@ -2,8 +2,6 @@ package cn.yiyingli.Service.Impl;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
-
 import cn.yiyingli.Dao.OrderDao;
 import cn.yiyingli.Dao.TeacherDao;
 import cn.yiyingli.Dao.UserDao;
@@ -13,6 +11,7 @@ import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.TimeTaskUtil;
+import cn.yiyingli.toPersistant.POrderUtil;
 
 public class OrderServiceImpl implements OrderService {
 
@@ -49,8 +48,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public String save(Order order) {
 		long id = getOrderDao().saveWithUserNumber(order, order.getCreateUser());
-		order.setOrderNo("" + Calendar.getInstance().get(Calendar.YEAR) + new Random().nextInt(10)
-				+ new Random().nextInt(10) + new Random().nextInt(10) + (100000000L + id));
+		order.setOrderNo(POrderUtil.getOrderNo(id));
 		if (order.getDistributor() != null) {
 			getOrderDao().updateDistriOrderNumber(order, order.getDistributor());
 		} else {

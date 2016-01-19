@@ -53,7 +53,7 @@ public class ConfigurationXmlUtil {
 				XML_PATH).getPath()));
 		configData = new HashMap<String, Map<String, String>>();
 		settingData = new HashMap<String, String>();
-		saxParser.parse(is, new SaxReadHandler(configData, settingData));
+		saxParser.parse(is, new ConfigSaxReadHandler(configData, settingData));
 	}
 
 	public static void main(String args[]) {

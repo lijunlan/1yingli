@@ -36,6 +36,7 @@
 				<value>cn.yiyingli.Persistant.TeacherDemand</value>
 				<value>cn.yiyingli.Persistant.Passage</value>
 				<value>cn.yiyingli.Persistant.UserLikePassage</value>
+				<value>cn.yiyingli.Persistant.Reward</value>
 			</list>
 		</property>
 	</bean>
@@ -66,6 +67,12 @@
 
 
 	<!-- !!!!!Dao!!!!! -->
+	<bean id="rewardDao" class="cn.yiyingli.Dao.Impl.RewardDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
 	<bean id="passageDao" class="cn.yiyingli.Dao.Impl.PassageDaoImpl">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
@@ -218,6 +225,12 @@
 	</bean>
 
 	<!-- !!!!!Data Transaction Service !!!! -->
+	<bean id="rewardService" parent="baseTxService">
+		<property name="target">
+			<ref local="rewardServiceImpl" />
+		</property>
+	</bean>
+
 	<bean id="passageService" parent="baseTxService">
 		<property name="target">
 			<ref local="passageServiceImpl" />
@@ -369,6 +382,12 @@
 	</bean>
 
 	<!--!!!!Data Service Impl!!!!! -->
+	<bean id="rewardServiceImpl" class="cn.yiyingli.Service.Impl.RewardServiceImpl">
+		<property name="rewardDao">
+			<ref local="rewardDao" />
+		</property>
+	</bean>
+
 	<bean id="passageServiceImpl" class="cn.yiyingli.Service.Impl.PassageServiceImpl">
 		<property name="passageDao">
 			<ref local="passageDao" />
@@ -2227,7 +2246,7 @@
 			<ref local="passageService" />
 		</property>
 	</bean>
-	
+
 	<bean id="mRemarkOrderService" class="cn.yiyingli.Handle.Service.MRemarkOrderService"
 		scope="prototype">
 		<property name="managerMarkService">
@@ -2237,7 +2256,7 @@
 			<ref local="orderService" />
 		</property>
 	</bean>
-	
+
 	<bean id="mReturnVisitOrderService" class="cn.yiyingli.Handle.Service.MReturnVisitOrderService"
 		scope="prototype">
 		<property name="managerMarkService">
@@ -2245,6 +2264,23 @@
 		</property>
 		<property name="orderService">
 			<ref local="orderService" />
+		</property>
+	</bean>
+	
+	<bean id="fGetWXPayUrlService" class="cn.yiyingli.Handle.Service.FGetWXPayUrlService"
+		scope="prototype">
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+		
+	<bean id="fGetWXRewardUrlService" class="cn.yiyingli.Handle.Service.FGetWXRewardUrlService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
 		</property>
 	</bean>
 

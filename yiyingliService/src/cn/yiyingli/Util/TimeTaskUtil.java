@@ -46,7 +46,6 @@ public class TimeTaskUtil {
 
 	public void start() {
 		Thread sendThread = new Thread(new Runnable() {
-
 			@Override
 			public void run() {
 				while (true) {

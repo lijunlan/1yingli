@@ -19,6 +19,8 @@ public class ExPassage {
 		map.put("summary", passage.getSummary());
 		map.put("lookno", passage.getLookNumber());
 		map.put("simpleinfo", passage.getOwnTeacher().getSimpleInfo());
+		map.put("rewardNumber", passage.getRewardNumber());
+		map.put("onReward", passage.getOnReward());
 	}
 
 	public static void assembleSimple(Passage p, SuperMap map) {
@@ -47,6 +49,8 @@ public class ExPassage {
 		map.put("state", p.getState());
 		map.put("tag", p.getTag());
 		map.put("title", p.getTitle());
+		map.put("rewardNumber", p.getRewardNumber());
+		map.put("onReward", p.getOnReward());
 	}
 
 }

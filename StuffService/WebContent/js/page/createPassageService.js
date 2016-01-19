@@ -38,9 +38,10 @@ $(document).ready(function () {
 			//alert('The file ' + file.name + ' uploaded successfully.');
 			var json = eval("(" + data + ")");
 			if (json.state == "success") {
+				var temp = json.url.split("@!")[0]+"@!cover";
 				$("#imagelist").fadeOut(3000);
-				$("#iconUrl").val(json.url);
-				$("#littleIcon").attr('src',json.url);
+				$("#iconUrl").val(temp);
+				$("#littleIcon").attr('src',temp);
 				Messenger().post("图片添加完成");
 			} else {
 				$(".mark").show();
@@ -73,7 +74,7 @@ function getAndParse(data) {
 	$("#iconUrl").val(p.imageUrl);
 	$("#passageId").val(p.passageId);
 	p.onshow == 'true' ? $('#onShowDiv').bootstrapSwitch('setState', true) : $('#onShowDiv').bootstrapSwitch('setState', false);
-
+	p.onReward == 'true' ? $('#onRewardDiv').bootstrapSwitch('setState', true) : $('#onRewardDiv').bootstrapSwitch('setState', false);
 	Messenger().post("加载完成");
 }
 
@@ -90,6 +91,7 @@ function edit() {
 	send.imageUrl=$("#iconUrl").val();
 	send.summary=$("#summary").val();
 	send.onshow=document.getElementById('onShow').checked.toString();
+	send.onReward = document.getElementById('onReward').checked.toString();
 
 	myAjax(send, null)
 	Messenger().post("操作成功");
@@ -112,7 +114,7 @@ function save() {
 	send.content=$("#content").val();
 	send.imageUrl=$("#iconUrl").val();
 	send.summary=$("#summary").val();
-
+	
 	myAjax(send, null)
 	Messenger().post("操作成功");
 }
