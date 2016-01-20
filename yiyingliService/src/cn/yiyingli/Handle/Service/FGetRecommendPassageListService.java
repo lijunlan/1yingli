@@ -44,10 +44,8 @@ public class FGetRecommendPassageListService extends MsgService {
 
 	@Override
 	public void doit() {
-
 		String passageId = (String) getData().get("passageId");
 		String result = SendMsgToBaiduUtil.getRecommendPassageListAbout(passageId);
-
 		getTeacherInfo(result);
 	}
 
@@ -68,6 +66,9 @@ public class FGetRecommendPassageListService extends MsgService {
 		List<Passage> passages = null;
 		if (ids.size() > 0) {
 			passages = getPassageService().queryListByIds(ids);
+			if (passages.size() == 0) {
+				passages = getPassageService().queryListByRecommand(0, PassageDao.PASSAGE_STATE_OK, true);
+			}
 		} else {
 			passages = getPassageService().queryListByRecommand(0, PassageDao.PASSAGE_STATE_OK, true);
 		}
