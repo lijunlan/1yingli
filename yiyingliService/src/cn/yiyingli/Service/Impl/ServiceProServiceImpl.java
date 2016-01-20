@@ -208,4 +208,14 @@ public class ServiceProServiceImpl implements ServiceProService {
 		return getServiceProDao().queryListByKind(kind, 1, KIND_PAGE_SIZE);
 	}
 
+	@Override
+	public List<ServicePro> queryLikeListByUserId(long userId, int page, int pageSize) {
+		return getServiceProDao().queryLikeListByUserId(userId, page, pageSize);
+	}
+
+	@Override
+	public List<ServicePro> queryLikeListByUserId(long userId, int page) {
+		return getServiceProDao().queryLikeListByUserId(userId, page, USER_PAGE_SIZE);
+	}
+
 }

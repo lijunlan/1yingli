@@ -2310,7 +2310,7 @@
 			<ref local="userMarkService" />
 		</property>
 	</bean>
-		
+
 	<bean id="fGetWXRewardUrlService" class="cn.yiyingli.Handle.Service.FGetWXRewardUrlService"
 		scope="prototype">
 		<property name="userMarkService">
@@ -2463,6 +2463,16 @@
 	</bean>
 
 	<bean id="isLikeServiceProService" class="cn.yiyingli.Handle.Service.IsLikeServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="uGetLikeServiceProService" class="cn.yiyingli.Handle.Service.UGetLikeServiceProService"
 		scope="prototype">
 		<property name="serviceProService">
 			<ref local="serviceProService" />

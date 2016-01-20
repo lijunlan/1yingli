@@ -96,6 +96,11 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		Session session = getSessionFactory().getCurrentSession();
 		session.flush();
 		Query query = session.createSQLQuery(
+				"update user set user.LIKESERVICEPRONUMBER=(select count(*) from userlikeservicepro where userlikeservicepro.USER_ID='"
+						+ userLikeServicePro.getUser().getId() + "') where user.USER_ID="
+						+ userLikeServicePro.getUser().getId());
+		query.executeUpdate();
+		query = session.createSQLQuery(
 				"update servicepro set servicepro.LIKENO=(select count(*) from userlikeservicepro where userlikeservicepro.SERVICEPRO_ID='"
 						+ userLikeServicePro.getServicePro().getId() + "') where servicepro.SERVICEPRO_ID="
 						+ userLikeServicePro.getServicePro().getId());

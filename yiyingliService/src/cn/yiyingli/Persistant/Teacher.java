@@ -139,6 +139,9 @@ public class Teacher {
 	@Column(name = "ORDERNUMBER", nullable = false)
 	private Long orderNumber;
 
+	@Column(name = "ORDERALLNUMBER", nullable = false)
+	private Long orderAllNumber;
+
 	@Column(name = "FINISHORDERNUMBER", nullable = false)
 	private Long finishOrderNumber;
 
@@ -692,6 +695,14 @@ public class Teacher {
 
 	public void setRewardNumber(Long rewardNumber) {
 		this.rewardNumber = rewardNumber;
+	}
+
+	public Long getOrderAllNumber() {
+		return orderAllNumber;
+	}
+
+	public void setOrderAllNumber(Long orderAllNumber) {
+		this.orderAllNumber = orderAllNumber;
 	}
 
 }

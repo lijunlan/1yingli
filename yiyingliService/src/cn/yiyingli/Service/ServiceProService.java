@@ -23,6 +23,8 @@ public interface ServiceProService {
 
 	public static final int TEACHER_PAGE_SIZE = 8;
 
+	public static final int USER_PAGE_SIZE = 12;
+
 	public static final int MANAGER_PAGE_SIZE = 12;
 
 	public static final int HOMEPAGE_PAGE_SIZE = 6;
@@ -91,6 +93,10 @@ public interface ServiceProService {
 	List<ServicePro> queryListByKind(int kind, int page, int pageSize);
 
 	List<ServicePro> queryListByKind(int kind);
+
+	List<ServicePro> queryLikeListByUserId(long userId, int page, int pageSize);
+
+	List<ServicePro> queryLikeListByUserId(long userId, int page);
 
 	long queryListBySaleNo();
 

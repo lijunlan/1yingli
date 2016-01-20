@@ -81,6 +81,9 @@ public class ServicePro {
 	@Column(name = "FINISHNO", nullable = false)
 	private Long finishNo;
 
+	@Column(name = "ORDERALLNO", nullable = false)
+	private Long orderAllNo;
+
 	@OneToMany(targetEntity = Comment.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "SERVICEPRO_ID", updatable = true)
 	private Set<Comment> comments = new HashSet<Comment>();
@@ -470,6 +473,14 @@ public class ServicePro {
 
 	public void setUserLikeServicePros(Set<UserLikeServicePro> userLikeServicePros) {
 		this.userLikeServicePros = userLikeServicePros;
+	}
+
+	public Long getOrderAllNo() {
+		return orderAllNo;
+	}
+
+	public void setOrderAllNo(Long orderAllNo) {
+		this.orderAllNo = orderAllNo;
 	}
 
 }
