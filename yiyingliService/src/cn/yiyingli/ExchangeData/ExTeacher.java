@@ -7,6 +7,7 @@ import java.util.Set;
 
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
+import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.StudyExperience;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.Tip;
@@ -20,10 +21,16 @@ public class ExTeacher {
 
 	public static void assembleSimpleForUserLike(Teacher teacher, SuperMap map) {
 		assembleSimpleNormal(teacher, map);
+		ExList serviceProList = new ExArrayList();
+		for (ServicePro servicePro : teacher.getServicePros()) {
+			SuperMap m = new SuperMap();
+			ExServicePro.assembleSimpleServiceProForUser(servicePro, m);
+			serviceProList.add(m.finish());
+		}
+		map.put("servicePros", serviceProList);
 		// map.put("price", teacher.gettService().getPriceTotal());
 		// map.put("time", teacher.gettService().getTime());
 		// map.put("title", teacher.gettService().getTitle());
-
 	}
 
 	public static void assembleSimpleForUser(Teacher teacher, SuperMap map) {
