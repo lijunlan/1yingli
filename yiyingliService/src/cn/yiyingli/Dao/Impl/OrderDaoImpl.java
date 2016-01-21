@@ -87,6 +87,9 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 		query.executeUpdate();
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.yiyingli.Dao.OrderDao#updateOrderWhenOrderFinish(cn.yiyingli.Persistant.Order)
+	 */
 	@Override
 	public void updateOrderWhenOrderFinish(Order order) {
 		getHibernateTemplate().update(order);
@@ -97,7 +100,13 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 						+ order.getTeacher().getId() + " and orders.STATE like '%1000%') where teacher.TEACHER_ID="
 						+ order.getTeacher().getId());
 		query.executeUpdate();
-		session.flush();
+		if (order.getServiceId() != null) {
+			query = session.createSQLQuery(
+					"update servicepro set servicepro.FINISHNO=(select count(*) from orders where orders.SERVICEID="
+							+ order.getServiceId() + " and orders.STATE like '%1000%') where servicepro.SERVICEPRO_ID="
+							+ order.getServiceId());
+			query.executeUpdate();
+		}
 		query = session.createSQLQuery(
 				"update distributor set distributor.DEALNUMBER=(select count(*) from orders where orders.DISTRIBUTOR_ID=(select orders.DISTRIBUTOR_ID from orders where orders.ORDER_ID='"
 						+ order.getId()
