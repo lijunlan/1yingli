@@ -2266,7 +2266,7 @@
 			<ref local="orderService" />
 		</property>
 	</bean>
-	
+
 	<bean id="fGetWXPayUrlService" class="cn.yiyingli.Handle.Service.FGetWXPayUrlService"
 		scope="prototype">
 		<property name="orderService">
@@ -2276,11 +2276,21 @@
 			<ref local="userMarkService" />
 		</property>
 	</bean>
-		
+
 	<bean id="fGetWXRewardUrlService" class="cn.yiyingli.Handle.Service.FGetWXRewardUrlService"
 		scope="prototype">
 		<property name="userMarkService">
 			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="loginByWeixinPlatformService" class="cn.yiyingli.Handle.Service.LoginByWeixinPlatformService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="userService">
+			<ref local="userService" />
 		</property>
 	</bean>
 

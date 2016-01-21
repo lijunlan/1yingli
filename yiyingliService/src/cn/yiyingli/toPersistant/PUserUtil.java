@@ -8,6 +8,13 @@ import cn.yiyingli.Service.UserService;
 
 public class PUserUtil {
 
+	public static User assembleUserFromWXPlatform(String username, String password, String nickName, String icon,
+			String address) {
+		User user = assembleUser(username, password, nickName, icon, address, null);
+		user.setWechatPlatformNo(username);
+		return user;
+	}
+
 	public static User assembleUserFromWX(String username, String password, String nickName, String icon,
 			String address) {
 		User user = assembleUser(username, password, nickName, icon, address, null);

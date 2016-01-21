@@ -82,6 +82,9 @@ public class User {
 	@Column(name = "WECHATNO", nullable = true, unique = true)
 	private String wechatNo;
 
+	@Column(name = "WECHATPLATFORMNO", nullable = true, unique = true)
+	private String wechatPlatformNo;
+
 	@Column(name = "WEIBONO", nullable = true, unique = true)
 	private String weiboNo;
 
@@ -473,6 +476,14 @@ public class User {
 
 	public void setOresume(String oresume) {
 		this.oresume = oresume;
+	}
+
+	public String getWechatPlatformNo() {
+		return wechatPlatformNo;
+	}
+
+	public void setWechatPlatformNo(String wechatPlatformNo) {
+		this.wechatPlatformNo = wechatPlatformNo;
 	}
 
 }

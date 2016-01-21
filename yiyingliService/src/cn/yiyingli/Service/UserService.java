@@ -40,6 +40,8 @@ public interface UserService {
 
 	User queryWithWeixin(String weixinNo, boolean lazy);
 
+	User queryWithWeixinPlatform(String weixinNo);
+
 	User queryWithTeacher(String username, boolean lazy);
 
 	List<User> queryList(int page, int pageSize, boolean lazy);
