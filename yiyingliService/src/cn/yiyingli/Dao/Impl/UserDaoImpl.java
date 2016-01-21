@@ -220,6 +220,17 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	}
 
 	@Override
+	public User queryWithWeixinPlatform(String weixinNo) {
+		String hql = "from User u where u.wechatPlatformNo=?";
+		@SuppressWarnings("unchecked")
+		List<User> list = getHibernateTemplate().find(hql, weixinNo);
+		if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
+
+	@Override
 	public User queryWithTeacher(String username, boolean lazy) {
 		String hql = "from User u left join fetch u.teacher where u.username=?";
 		if (lazy) {

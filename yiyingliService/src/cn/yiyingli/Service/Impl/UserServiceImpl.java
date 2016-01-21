@@ -184,6 +184,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User queryWithWeixinPlatform(String weixinNo) {
+		return getUserDao().queryWithWeixinPlatform(weixinNo);
+	}
+
+	@Override
 	public User queryWithTeacher(String username, boolean lazy) {
 		User user = getUserDao().queryWithTeacher(username, lazy);
 		if (!CheckUtil.checkEmail(username) && user == null) {

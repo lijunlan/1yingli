@@ -42,6 +42,8 @@ public interface UserDao {
 
 	User query(String username, boolean lazy);
 
+	User queryWithWeixinPlatform(String weixinNo);
+
 	User queryWithWeibo(String weiboNo, boolean lazy);
 
 	User queryWithWeixin(String weixinNo, boolean lazy);

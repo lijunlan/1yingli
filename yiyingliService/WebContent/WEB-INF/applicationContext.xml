@@ -2482,4 +2482,14 @@
 		</property>
 	</bean>
 
+	<bean id="loginByWeixinPlatformService" class="cn.yiyingli.Handle.Service.LoginByWeixinPlatformService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="userService">
+			<ref local="userService" />
+		</property>
+	</bean>
+
 </beans>

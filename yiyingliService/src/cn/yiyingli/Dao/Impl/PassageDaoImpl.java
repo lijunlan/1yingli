@@ -172,12 +172,13 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 	public List<Passage> queryListByIds(long[] ids) {
 		if (ids.length <= 0)
 			return new ArrayList<Passage>();
-		String hql = "from Passage p where p.id=" + ids[0];
+		String hql = "from Passage p where (p.id=" + ids[0];
 		if (ids.length > 1) {
 			for (int i = 1; i < ids.length; i++) {
 				hql = hql + " or p.id=" + ids[i];
 			}
 		}
+		hql = hql + ") and p.remove=false";
 		@SuppressWarnings("unchecked")
 		List<Passage> list = getHibernateTemplate().find(hql);
 		return list;

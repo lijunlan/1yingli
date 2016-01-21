@@ -14,7 +14,6 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 
 	@Override
 	protected boolean checkData() {
-		// getData().containsKey("kind")
 		return getData().containsKey("weixin_code");
 	}
 
@@ -51,10 +50,10 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 		String icon = (String) userInfo.get("headimgurl");
 		String address = co + " " + p + " " + ci;
 
-		User u = getUserService().queryWithWeixin(weixinNo, false);
+		User u = getUserService().queryWithWeixinPlatform(weixinNo);
 		if (u == null) {
 			password = MD5Util.MD5(password);
-			User user = PUserUtil.assembleUserFromWX(weixinNo, password, nickName, icon, address);
+			User user = PUserUtil.assembleUserFromWXPlatform(weixinNo, password, nickName, icon, address);
 			try {
 				getUserService().save(user);
 			} catch (Exception e) {
@@ -71,5 +70,4 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 		}
 
 	}
-
 }

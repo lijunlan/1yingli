@@ -33,11 +33,11 @@ public class FGetWXRewardUrlService extends MsgService {
 		String teacherId = getData().getString("teacherId");
 		String teacherName = getData().getString("teacherName");
 		String money = getData().getString("money");
-		String passageId = getData().getString("passageId");
 
 		String uid = null;
 		String userId = null;
 		String userName = null;
+		String passageId = null;
 		if (getData().containsKey("uid")) {
 			uid = getData().getString("uid");
 			LogUtil.info("receive>>ALIPAY>>reward--->uid:" + uid, this.getClass());
@@ -46,6 +46,10 @@ public class FGetWXRewardUrlService extends MsgService {
 				userId = String.valueOf(user.getId());
 				userName = user.getName();
 			}
+		}
+
+		if (getData().containsKey("passageId")) {
+			passageId = getData().getString("passageId");
 		}
 
 		String oid = ExRewardForPay.getRewardNo(Long.valueOf(teacherId));

@@ -26,6 +26,7 @@
 		<method name="changePhone" beanName="changePhoneService" />
 		<method name="changeEmail" beanName="changeEmailService" />
 		<method name="login" beanName="loginService" />
+		<method name="loginByWeixinPlatform" beanName="loginByWeixinPlatformService" />
 		<method name="loginByWeibo" beanName="loginByWeiboService" />
 		<method name="loginByWeixin" beanName="loginByWeixinService" />
 		<method name="iosLogin" beanName="iosLoginService" />
