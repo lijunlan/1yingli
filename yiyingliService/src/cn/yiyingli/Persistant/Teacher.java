@@ -77,7 +77,7 @@ public class Teacher {
 	private Short sex;
 
 	@Column(name = "SCORE", nullable = false)
-	private Integer score;
+	private Float score;
 
 	@Column(name = "ANSWERTIME", nullable = false)
 	private Long answerTime;
@@ -641,11 +641,11 @@ public class Teacher {
 		this.receiveOrderLists = receiveOrderLists;
 	}
 
-	public Integer getScore() {
+	public Float getScore() {
 		return score;
 	}
 
-	public void setScore(Integer score) {
+	public void setScore(Float score) {
 		this.score = score;
 	}
 

@@ -208,7 +208,7 @@ public class PTeacherUtil {
 		refreshTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone, address, mail, iconUrl,
 				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, showWeight1, showWeight2,
 				showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, 0L, topic, price, teacher, tipService);
-		teacher.setScore(0);
+		teacher.setScore(0F);
 		teacher.setAnswerTime(0L);
 		teacher.setAnswerRatio(0F);
 		teacher.setPraiseRatio(0F);
