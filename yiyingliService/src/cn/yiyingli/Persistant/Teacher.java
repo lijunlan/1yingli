@@ -145,6 +145,9 @@ public class Teacher {
 	@Column(name = "FINISHORDERNUMBER", nullable = false)
 	private Long finishOrderNumber;
 
+	@Column(name = "ACCEPTORDERNUMBER", nullable = false)
+	private Long acceptOrderNumber;
+
 	@Column(name = "MILE", nullable = false)
 	private Long mile;
 
@@ -703,6 +706,14 @@ public class Teacher {
 
 	public void setOrderAllNumber(Long orderAllNumber) {
 		this.orderAllNumber = orderAllNumber;
+	}
+
+	public Long getAcceptOrderNumber() {
+		return acceptOrderNumber;
+	}
+
+	public void setAcceptOrderNumber(Long acceptOrderNumber) {
+		this.acceptOrderNumber = acceptOrderNumber;
 	}
 
 }

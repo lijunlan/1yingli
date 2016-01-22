@@ -209,6 +209,7 @@ public class PTeacherUtil {
 				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, showWeight1, showWeight2,
 				showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, 0L, topic, price, teacher, tipService);
 		teacher.setScore(0F);
+		teacher.setAcceptOrderNumber(0L);
 		teacher.setAnswerTime(0L);
 		teacher.setAnswerRatio(0F);
 		teacher.setPraiseRatio(0F);
