@@ -22,6 +22,7 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import cn.yiyingli.Util.LogUtil;
 import net.sf.json.JSONObject;
 
 @SuppressWarnings("deprecation")
@@ -31,7 +32,7 @@ public class GetSingleUserWeixinInfoPlatformUtil {
 	public static final String SECRET_WEB_PLATFORM = "f8f53de1babacb830f084e0fe22c1a4c";
 
 	public static void main(String[] args) {
-		JSONObject accessToken = getAccessToken("001de48c660abfcd47ccc5f672ea8bbp");
+		JSONObject accessToken = getAccessToken("0319720045076498cfcd51f182cca65B");
 		if (accessToken == null || accessToken.containsKey("errcode")) {
 			return;
 		}
@@ -79,15 +80,17 @@ public class GetSingleUserWeixinInfoPlatformUtil {
 			// register https protocol in httpclient's scheme registry
 			SchemeRegistry sr = ccm.getSchemeRegistry();
 			sr.register(new Scheme("https", 443, ssf));
-
-			HttpGet httpget = new HttpGet("https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token
-					+ "&openid=" + openid + "&lang=zh_CN");
+			String url = "https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token + "&openid=" + openid
+					+ "&lang=zh_CN";
+			LogUtil.info("send to weixin>>>" + url, GetSingleUserWeixinInfoPlatformUtil.class);
+			HttpGet httpget = new HttpGet(url);
 
 			HttpResponse response = httpclient.execute(httpget);
 			String result = "{}";
 			if (response.getStatusLine().getStatusCode() == 200) {
 				result = EntityUtils.toString(response.getEntity(), "utf-8");
 			}
+			LogUtil.info("receive from weixin>>>" + result, GetSingleUserWeixinInfoPlatformUtil.class);
 			JSONObject data = JSONObject.fromObject(result);
 			return data;
 		} catch (NoSuchAlgorithmException e) {
@@ -134,10 +137,12 @@ public class GetSingleUserWeixinInfoPlatformUtil {
 
 			String urls = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + APPID_WEB_PLATFORM + "&secret="
 					+ SECRET_WEB_PLATFORM + "&code=" + code + "&grant_type=authorization_code";
+			LogUtil.info("send to weixin>>>" + urls, GetSingleUserWeixinInfoPlatformUtil.class);
 			HttpGet httpget = new HttpGet(urls);
 
 			ResponseHandler responseHandler = new BasicResponseHandler();
 			String responseBody = httpclient.execute(httpget, responseHandler);
+			LogUtil.info("receive from weixin>>>" + responseBody, GetSingleUserWeixinInfoPlatformUtil.class);
 			JSONObject data = JSONObject.fromObject(responseBody);
 			return data;
 		} catch (NoSuchAlgorithmException e) {
