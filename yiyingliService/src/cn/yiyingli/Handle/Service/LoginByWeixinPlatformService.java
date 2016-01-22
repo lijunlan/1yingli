@@ -41,6 +41,7 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 		String ci = (String) userInfo.get("city");
 		String co = (String) userInfo.get("country");
 
+		String weixinNoU = "wx" + userInfo.getString("unionid");
 		String weixinNo = "wx" + userInfo.get("openid");
 		String password = (String) userInfo.get("openid");
 		String nickName = (String) userInfo.get("nickname");
@@ -50,10 +51,17 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 		String icon = (String) userInfo.get("headimgurl");
 		String address = co + " " + p + " " + ci;
 
-		User u = getUserService().queryWithWeixinPlatform(weixinNo);
+		User u = getUserService().queryWithWeixin(weixinNoU, false);
+		if (u == null) {
+			u = getUserService().queryWithWeixinPlatform(weixinNo);
+		}else{
+			if(u.getWechatPlatformNo()==null){
+				u.setWechatPlatformNo(weixinNo);
+			}
+		}
 		if (u == null) {
 			password = MD5Util.MD5(password);
-			User user = PUserUtil.assembleUserFromWXPlatform(weixinNo, password, nickName, icon, address);
+			User user = PUserUtil.assembleUserFromWXPlatform(weixinNoU, weixinNo, password, nickName, icon, address);
 			try {
 				getUserService().save(user);
 			} catch (Exception e) {
