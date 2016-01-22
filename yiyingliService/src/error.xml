@@ -91,6 +91,7 @@
 	<error name="40001" value="server error" />
 	<error name="41001" value="input data is wrong" />
 	<error name="42001" value="order is not existed" />
+	<error name="42002" value="reward is not existed" />
 	<error name="43001" value="alipay error" />
 	<error name="43002" value="connect to paypal failed, please try again" />
 	<error name="43003" value="connect to weixin, please try again" />

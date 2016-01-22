@@ -5,6 +5,8 @@ import java.util.List;
 import cn.yiyingli.Persistant.Reward;
 
 public interface RewardService {
+	
+	public static final int PAGE_SIZE = 12;
 
 	void save(Reward reward);
 
@@ -13,8 +15,10 @@ public interface RewardService {
 	void update(Reward reward);
 
 	Reward query(long id);
-	
+
 	Reward query(String rewardNo);
+
+	Long queryRewardNoByTeacher(long teacherId);
 
 	Float queryMoneyByTeacherShouldPay(long teacherId);
 

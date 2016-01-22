@@ -2294,4 +2294,47 @@
 		</property>
 	</bean>
 
+	<bean id="tGetRewardService" class="cn.yiyingli.Handle.Service.TGetRewardService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="rewardService">
+			<ref local="rewardService" />
+		</property>
+	</bean>
+
+	<bean id="mGetRewardListService" class="cn.yiyingli.Handle.Service.MGetRewardListService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="rewardService">
+			<ref local="rewardService" />
+		</property>
+	</bean>
+	
+	<bean id="mGetRewardByTeacherService" class="cn.yiyingli.Handle.Service.MGetRewardByTeacherService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="rewardService">
+			<ref local="rewardService" />
+		</property>
+	</bean>
+	
+	<bean id="mFinishPayRewardService" class="cn.yiyingli.Handle.Service.MFinishPayRewardService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="rewardService">
+			<ref local="rewardService" />
+		</property>
+	</bean>
+
 </beans>

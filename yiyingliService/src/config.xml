@@ -56,6 +56,7 @@
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
 	</style>
 	<style name="teacher">
+		<method name="getReward" beanName="tGetRewardService" />
 		<method name="removePassage" beanName="tRemovePassageService" />
 		<method name="getMile" beanName="tGetMileService" />
 		<method name="getPaypalNo" beanName="tGetPaypalNoService" />
@@ -102,6 +103,9 @@
 		<method name="login" beanName="dLoginService" />
 	</style>
 	<style name="manager">
+		<method name="finishPayReward" beanName="mFinishPayRewardService" />
+		<method name="getRewardByTeacher" beanName="mGetRewardByTeacherService" />
+		<method name="getRewardList" beanName="mGetRewardListService" />
 		<method name="remarkOrder" beanName="mRemarkOrderService" />
 		<method name="returnVisitOrder" beanName="mReturnVisitOrderService" />
 		<method name="removePassage" beanName="mRemovePassageService" />

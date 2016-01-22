@@ -1,5 +1,7 @@
 package cn.yiyingli.Dao.Impl;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +45,15 @@ public class RewardDaoImpl extends HibernateDaoSupport implements RewardDao {
 	}
 
 	@Override
+	public Long queryRewardNoByTeacher(long teacherId) {
+		String hql = "select count(*) from Reward where r.teacherId=" + teacherId;
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session.createQuery(hql);
+		BigInteger peopleNo = (BigInteger) query.uniqueResult();
+		return peopleNo.longValue();
+	}
+
+	@Override
 	public Reward query(long id) {
 		String hql = "from Reward r where r.id=?";
 		@SuppressWarnings("unchecked")
@@ -75,8 +86,8 @@ public class RewardDaoImpl extends HibernateDaoSupport implements RewardDao {
 		}
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = session.createQuery(hql);
-		float moneySum = (float) query.uniqueResult();
-		return moneySum;
+		BigDecimal moneySum = (BigDecimal) query.uniqueResult();
+		return moneySum.floatValue();
 	}
 
 	@SuppressWarnings("unchecked")
