@@ -75,7 +75,7 @@
 		<method name="getAllInfo" beanName="tGetAllInfoService" />
 		<method name="changeTitlePrice" beanName="tChangeTitlePriceService" />
 		<method name="changeSimpleInfo" beanName="tChangeSimpleInfoService" />
-		<method name="getCommentCount" beanName="tGetCommentCountService" />
+		<method name="getCommentList" beanName="tGetCommentListService" />
 		<method name="getTeacherCheckInfo" beanName="tGetTeacherCheckInfoService" />
 		<method name="changeTip" beanName="tChangeTipsService" />
 		<method name="commentUser" beanName="tCommentUserService" />

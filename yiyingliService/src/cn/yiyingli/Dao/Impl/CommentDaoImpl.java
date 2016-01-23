@@ -169,7 +169,7 @@ public class CommentDaoImpl extends HibernateDaoSupport implements CommentDao {
 				String hql = "from Comment c where c.teacher.id=" + teacherId + " and c.kind=" + kind
 						+ " ORDER BY c.createTime DESC";
 				if (lazy) {
-					hql = "from Comment c left join fetch c.teacher left join fetch c.user where c.teacher.id="
+					hql = "from Comment c left join fetch c.teacher left join fetch c.user left join fetch c.servicePro where c.teacher.id="
 							+ teacherId + " and c.kind=" + kind + " ORDER BY c.createTime DESC";
 				}
 				Query query = session.createQuery(hql);

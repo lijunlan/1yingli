@@ -1680,13 +1680,6 @@
 		</property>
 	</bean>
 
-	<bean id="tGetCommentCountService" class="cn.yiyingli.Handle.Service.TGetCommentCountService"
-		scope="prototype">
-		<property name="teacherService">
-			<ref local="teacherService" />
-		</property>
-	</bean>
-
 	<bean id="getCommentCountService" class="cn.yiyingli.Handle.Service.GetCommentCountService"
 		scope="prototype">
 		<property name="userMarkService">
@@ -2489,6 +2482,16 @@
 		</property>
 		<property name="userService">
 			<ref local="userService" />
+		</property>
+	</bean>
+
+	<bean id="tGetCommentListService" class="cn.yiyingli.Handle.Service.TGetCommentListService"
+		scope="prototype">
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="commentService">
+			<ref local="commentService" />
 		</property>
 	</bean>
 
