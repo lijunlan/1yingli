@@ -44,7 +44,7 @@ public class FGetWXRewardUrlService extends MsgService {
 			User user = userMarkService.queryUser(uid);
 			if (user != null) {
 				userId = String.valueOf(user.getId());
-				userName = user.getName();
+				userName = user.getNickName();
 			}
 		}
 
