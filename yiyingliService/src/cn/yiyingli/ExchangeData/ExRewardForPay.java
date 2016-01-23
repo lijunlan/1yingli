@@ -10,7 +10,7 @@ import cn.yiyingli.Util.LogUtil;
 public class ExRewardForPay {
 
 	public static String getRewardNo(long rewardId) {
-		return "" + Calendar.getInstance().get(Calendar.YEAR) + Calendar.getInstance().getTimeInMillis() % 1000
+		return "" + Calendar.getInstance().get(Calendar.YEAR) + +(5000 + Calendar.getInstance().getTimeInMillis() % 100)
 				+ (100000000L + rewardId);
 	}
 
@@ -62,7 +62,7 @@ public class ExRewardForPay {
 		reward.setFinishPay(true);
 		reward.setRewardNo(rewardNo);
 		reward.setPayTime(time);
-		
+
 		rewardService.update(reward);
 	}
 }

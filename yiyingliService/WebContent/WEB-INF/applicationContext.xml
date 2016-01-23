@@ -2282,6 +2282,9 @@
 		<property name="userMarkService">
 			<ref local="userMarkService" />
 		</property>
+		<property name="rewardService">
+			<ref local="rewardService" />
+		</property>
 	</bean>
 
 	<bean id="loginByWeixinPlatformService" class="cn.yiyingli.Handle.Service.LoginByWeixinPlatformService"
