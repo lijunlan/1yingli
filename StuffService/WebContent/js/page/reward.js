@@ -30,7 +30,7 @@ var changeTable = function (result) {
 		row += data.passageId + "</td><td>";
 		row += d.toLocaleString() + "</td><td>";
 		row += data.money + "</td><td>";
-		if(data.finishSalary!=true){
+		if(data.finishSalary!="true"){
 			row += "<button onclick=\"deal("+data.rewardId+")\">完成打款</button></td>";
 		}else{
 			row += "</td>";
@@ -73,5 +73,6 @@ $(function () {
 		document.getElementById("lastPage").disabled = true;
 	}
 	document.getElementById("pageInput").value = page;
+	get();
 });
 
