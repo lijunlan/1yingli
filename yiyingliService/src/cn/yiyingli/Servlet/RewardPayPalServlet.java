@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +20,9 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.yiyingli.ExchangeData.ExRewardForPay;
 import cn.yiyingli.PayPal.PayPal;
+import cn.yiyingli.Persistant.Reward;
 import cn.yiyingli.Persistant.User;
+import cn.yiyingli.Service.RewardService;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
@@ -69,6 +72,7 @@ public class RewardPayPalServlet extends HttpServlet {
 		LogUtil.info("receive>>PAYPAL>>reward--->teacherName:" + req.getParameter("teacherName") + "\t teacherId:"
 				+ req.getParameter("teacherId") + "\t money:" + req.getParameter("money"), this.getClass());
 		UserMarkService userMarkService = (UserMarkService) getApplicationContext().getBean("userMarkService");
+		RewardService rewardService = (RewardService) getApplicationContext().getBean("rewardService");
 
 		String teacherId = req.getParameter("teacherId");
 		String teacherName = req.getParameter("teacherName");
@@ -77,18 +81,15 @@ public class RewardPayPalServlet extends HttpServlet {
 		String passageId = req.getParameter("passageId");
 		String callback = req.getParameter("callback");
 
-		String userId = null;
+		Long userId = null;
 		String userName = null;
 		if (uid != null) {
 			User user = userMarkService.queryUser(uid);
 			if (user != null) {
-				userId = String.valueOf(user.getId());
+				userId = user.getId();
 				userName = user.getName();
 			}
 		}
-
-		// 商户订单号
-		String oid = ExRewardForPay.getRewardNo(Long.valueOf(teacherId));
 
 		// 订单名称
 		String subject = "打赏-" + teacherName;
@@ -96,6 +97,23 @@ public class RewardPayPalServlet extends HttpServlet {
 
 		// 订单描述
 		String body = "打赏-" + teacherName;
+
+		Reward reward = new Reward();
+		String time = Calendar.getInstance().getTimeInMillis() + "";
+		reward.setCreateTime(time);
+		reward.setFinishPay(false);
+		reward.setFinishSalary(false);
+		reward.setMoney(Float.valueOf(money));
+		reward.setTeacherId(Long.valueOf(teacherId));
+		reward.setTeacherName(teacherName);
+		reward.setUserId(userId);
+		reward.setUserName(userName);
+
+		reward.setPassageId(passageId == null ? null : Long.valueOf(passageId));
+
+		rewardService.save(reward);
+
+		String oid = ExRewardForPay.getRewardNo(reward.getId());
 		// 由后台插入相关数据
 		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0", URLEncoder.encode(subject, "UTF-8"));
 		// 货物id，这里填写的是订单号
@@ -117,8 +135,9 @@ public class RewardPayPalServlet extends HttpServlet {
 		checkoutDetails.put("PAYMENTREQUEST_0_AMT", price + "");
 		// 我们的订单号,以及微信端回调页面（可选）
 
-		checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM", oid + "|"
-				+ ExRewardForPay.getExtraParams(teacherId, teacherName, money, uid, passageId, userId, userName));
+		checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM",
+				oid + "|" + ExRewardForPay.getExtraParams(reward.getId(), Long.valueOf(teacherId), teacherName, money,
+						uid, passageId == null ? null : Long.valueOf(passageId), userId, userName));
 		checkoutDetails.put("REQCONFIRMSHIPPING", "0");
 		checkoutDetails.put("NOSHIPPING", "1");
 

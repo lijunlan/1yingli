@@ -64,6 +64,7 @@
 		<method name="getServiceProList" beanName="tGetServiceProListService" />
 		<method name="createServicePro" beanName="tCreateServiceProService" />
 		<method name="editServicePro" beanName="tEditServiceProService" />
+		<method name="getReward" beanName="tGetRewardService" />
 		<method name="removePassage" beanName="tRemovePassageService" />
 		<method name="getMile" beanName="tGetMileService" />
 		<method name="getPaypalNo" beanName="tGetPaypalNoService" />
@@ -112,6 +113,9 @@
 		<method name="createServicePro" beanName="mCreateServiceProService" />
 		<method name="getServicePro" beanName="mGetServiceProService" />
 		<method name="editServicePro" beanName="mEditServiceProService" />
+		<method name="finishPayReward" beanName="mFinishPayRewardService" />
+		<method name="getRewardByTeacher" beanName="mGetRewardByTeacherService" />
+		<method name="getRewardList" beanName="mGetRewardListService" />
 		<method name="remarkOrder" beanName="mRemarkOrderService" />
 		<method name="returnVisitOrder" beanName="mReturnVisitOrderService" />
 		<method name="removePassage" beanName="mRemovePassageService" />

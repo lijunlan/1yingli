@@ -3,23 +3,22 @@ package cn.yiyingli.ExchangeData;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Calendar;
-import java.util.Random;
-
 import cn.yiyingli.Persistant.Reward;
 import cn.yiyingli.Service.RewardService;
 import cn.yiyingli.Util.LogUtil;
 
 public class ExRewardForPay {
 
-	public static String getRewardNo(long teacherId) {
-		return "" + Calendar.getInstance().get(Calendar.YEAR) + new Random().nextInt(10) + new Random().nextInt(10)
-				+ new Random().nextInt(10) + (100000000L + teacherId);
+	public static String getRewardNo(long rewardId) {
+		return "" + Calendar.getInstance().get(Calendar.YEAR) + +(5000 + Calendar.getInstance().getTimeInMillis() % 100)
+				+ (100000000L + rewardId);
 	}
 
 	@SuppressWarnings("deprecation")
-	public static String getExtraParams(String teacherId, String teacherName, String money, String uid,
-			String passageId, String userId, String userName) {
-		return "teacherId^" + teacherId + "|" + "teacherName^" + URLEncoder.encode(teacherName) + "|" + "money^" + money
+	public static String getExtraParams(Long rewardId, Long teacherId, String teacherName, String money, String uid,
+			Long passageId, Long userId, String userName) {
+		return "rid^" + rewardId + "|" + "teacherId^" + teacherId + "|" + "teacherName^"
+				+ URLEncoder.encode(teacherName) + "|" + "money^" + money
 				+ (uid == null ? "" : "|userId^" + userId + "|" + "userName^" + userName)
 				+ (passageId == null ? "" : "|passageId^" + passageId);
 	}
@@ -35,27 +34,35 @@ public class ExRewardForPay {
 			String value = URLDecoder.decode(temp.length > 1 ? temp[1] : "");
 			map.put(key, value);
 		}
-		try {
-			Reward reward = new Reward();
-			String time = Calendar.getInstance().getTimeInMillis() + "";
-			reward.setCreateTime(time);
-			reward.setFinishPay(true);
-			reward.setFinishSalary(false);
-			reward.setMoney(Float.valueOf(map.finish().getString("money")));
-			reward.setPayTime(time);
-			reward.setRewardNo(rewardNo);
-			reward.setTeacherId(map.finish().getLong("teacherId"));
-			reward.setTeacherName(map.finish().getString("teacherName"));
-			if (map.finish().containsKey("userId") && map.finish().containsKey("userName")) {
-				reward.setUserId((map.finish().getLong("userId")));
-				reward.setUserName(map.finish().getString("userName"));
-			}
-			if (map.finish().containsKey("passageId")) {
-				reward.setPassageId(map.finish().getLong("passageId"));
-			}
-			rewardService.save(reward);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// try {
+		// Reward reward = new Reward();
+		// String time = Calendar.getInstance().getTimeInMillis() + "";
+		// reward.setCreateTime(time);
+		// reward.setFinishPay(true);
+		// reward.setFinishSalary(false);
+		// reward.setMoney(Float.valueOf(map.finish().getString("money")));
+		// reward.setPayTime(time);
+		// reward.setRewardNo(rewardNo);
+		// reward.setTeacherId(map.finish().getLong("teacherId"));
+		// reward.setTeacherName(map.finish().getString("teacherName"));
+		// if (map.finish().containsKey("userId") &&
+		// map.finish().containsKey("userName")) {
+		// reward.setUserId((map.finish().getLong("userId")));
+		// reward.setUserName(map.finish().getString("userName"));
+		// }
+		// if (map.finish().containsKey("passageId")) {
+		// reward.setPassageId(map.finish().getLong("passageId"));
+		// }
+		// rewardService.save(reward);
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		String time = Calendar.getInstance().getTimeInMillis() + "";
+		Reward reward = rewardService.query(map.finish().getLong("rid"));
+		reward.setFinishPay(true);
+		reward.setRewardNo(rewardNo);
+		reward.setPayTime(time);
+
+		rewardService.update(reward);
 	}
 }

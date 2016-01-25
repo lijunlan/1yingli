@@ -13,6 +13,7 @@ import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 
+import cn.yiyingli.AliyunUtil.AliyunConfiguration;
 import cn.yiyingli.ExchangeData.SuperMap;
 
 public class SendMailUtil {
@@ -102,8 +103,8 @@ public class SendMailUtil {
 	}
 
 	private boolean sendData(String toEmail, String title, String data) {
-		IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "T8Idmm00U1mAwzcn",
-				"cZQkX1saEq1eF2g1ADbnO2kcFlJxb9");
+		IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", AliyunConfiguration.ACCESS_ID,
+				AliyunConfiguration.ACCESS_KEY);
 		IAcsClient client = new DefaultAcsClient(profile);
 		SingleSendMailRequest request = new SingleSendMailRequest();
 		try {
