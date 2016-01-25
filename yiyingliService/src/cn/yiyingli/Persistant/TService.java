@@ -36,6 +36,9 @@ public class TService {
 	@Column(name = "TIME", nullable = false)
 	private Float time;
 
+	@Column(name = "ONLINE", nullable = true)
+	private Boolean online;
+
 	@Column(name = "UPDATETIME", nullable = true)
 	private String updateTime;
 
@@ -187,6 +190,14 @@ public class TService {
 
 	public void setOnSale(Boolean onSale) {
 		this.onSale = onSale;
+	}
+
+	public Boolean getOnline() {
+		return online;
+	}
+
+	public void setOnline(Boolean online) {
+		this.online = online;
 	}
 
 }

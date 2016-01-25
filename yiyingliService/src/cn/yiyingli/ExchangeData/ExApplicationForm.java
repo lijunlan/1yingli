@@ -56,6 +56,16 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 
 	private String serviceAdvantage;
 
+	private Boolean online;
+
+	public Boolean getOnline() {
+		return online;
+	}
+
+	public void setOnline(Boolean online) {
+		this.online = online;
+	}
+
 	public String getUserId() {
 		return userId;
 	}
@@ -275,6 +285,7 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 		map.put("serviceContent", serviceContent);
 		map.put("servicePrice", servicePrice);
 		map.put("serviceTime", serviceTime);
+		map.put("serviceOnline", online);
 		if ("".equals(endTime) || endTime == null) {
 			map.put("endTime", endTime);
 		} else {
@@ -310,6 +321,7 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 		TService tService = teacher.gettService();
 		setServiceAdvantage(tService.getAdvantage());
 		setServiceContent(tService.getContent());
+		setOnline(tService.getOnline());
 		setServiceReason(tService.getReason());
 		setServicePrice(String.valueOf(tService.getPriceTotal()));
 		setServiceTime(String.valueOf(tService.getTime()));

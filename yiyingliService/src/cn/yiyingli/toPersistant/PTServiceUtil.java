@@ -5,9 +5,10 @@ import cn.yiyingli.Persistant.Teacher;
 
 public class PTServiceUtil {
 
-	public static void assembleWithTeacherByApplication(Teacher teacher,boolean online, String advantage, String content, float price,
-			String reason, float time, String title, TService tService) {
+	public static void assembleWithTeacherByApplication(Teacher teacher, boolean online, String advantage,
+			String content, float price, String reason, float time, String title, TService tService) {
 		assemble(advantage, content, price, reason, time, title, tService);
+		tService.setOnline(online);
 		tService.setOnSale(false);
 		tService.setPriceTemp(0F);
 		tService.setTeacher(teacher);
