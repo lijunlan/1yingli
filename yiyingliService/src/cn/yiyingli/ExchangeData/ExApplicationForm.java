@@ -55,6 +55,16 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 
 	private String serviceAdvantage;
 
+	private Boolean online;
+
+	public Boolean getOnline() {
+		return online;
+	}
+
+	public void setOnline(Boolean online) {
+		this.online = online;
+	}
+
 	public String getUserId() {
 		return userId;
 	}
@@ -244,6 +254,7 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 		map.put("serviceContent", serviceContent);
 		map.put("servicePrice", servicePrice);
 		map.put("serviceTime", serviceTime);
+		map.put("serviceOnline", online);
 		if ("".equals(endTime) || endTime == null) {
 			map.put("endTime", endTime);
 		} else {
@@ -274,6 +285,7 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 		map.put("serviceContent", serviceContent);
 		map.put("servicePrice", servicePrice);
 		map.put("serviceTime", serviceTime);
+		map.put("serviceOnline", online);
 		if ("".equals(endTime) || endTime == null) {
 			map.put("endTime", endTime);
 		} else {
@@ -306,7 +318,6 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 		setAddress(teacher.getAddress());
 		setUserId(String.valueOf(persistant.getUser().getId()));
 		setAfId(String.valueOf(persistant.getId()));
-
 		workExperience = new ExArrayList();
 		studyExperience = new ExArrayList();
 		tips = new ExArrayList();
