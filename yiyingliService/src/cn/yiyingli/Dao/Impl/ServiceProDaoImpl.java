@@ -156,6 +156,26 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public List<ServicePro> queryListOtherByTeacher(final long serviceProId, final long teacherId, final int page,
+			final int pageSize) {
+		List<ServicePro> list = new ArrayList<ServicePro>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ServicePro>>() {
+			@Override
+			public List<ServicePro> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=false and sp.onShow=true and sp.id!="
+						+ serviceProId + " and sp.teacher.id=" + teacherId + " ORDER BY sp.createTime DESC";
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<ServicePro> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<ServicePro> queryListByTeacherIdAndShow(final long teacherId, final short showKind, final int page,
 			final int pageSize) {
 		List<ServicePro> list = new ArrayList<ServicePro>();

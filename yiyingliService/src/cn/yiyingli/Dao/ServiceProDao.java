@@ -53,5 +53,8 @@ public interface ServiceProDao {
 
 	List<ServicePro> queryLikeListByUserId(long userid, int page, int pageSize);
 
+	List<ServicePro> queryListOtherByTeacher(long serviceProId, long teacherId, int page, int pageSize);
+
 	long queryListBySaleNo();
+
 }

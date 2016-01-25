@@ -94,10 +94,15 @@ public interface ServiceProService {
 
 	List<ServicePro> queryListByKind(int kind);
 
+	List<ServicePro> queryListOtherByTeacher(long serviceProId, long teacherId, int page, int pageSize);
+
+	List<ServicePro> queryListOtherByTeacher(long serviceProId, long teacherId, int page);
+
 	List<ServicePro> queryLikeListByUserId(long userId, int page, int pageSize);
 
 	List<ServicePro> queryLikeListByUserId(long userId, int page);
 
 	long queryListBySaleNo();
+
 
 }

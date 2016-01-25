@@ -2520,7 +2520,7 @@
 			<ref local="rewardService" />
 		</property>
 	</bean>
-	
+
 	<bean id="mGetRewardByTeacherService" class="cn.yiyingli.Handle.Service.MGetRewardByTeacherService"
 		scope="prototype">
 		<property name="managerMarkService">
@@ -2530,7 +2530,7 @@
 			<ref local="rewardService" />
 		</property>
 	</bean>
-	
+
 	<bean id="mFinishPayRewardService" class="cn.yiyingli.Handle.Service.MFinishPayRewardService"
 		scope="prototype">
 		<property name="managerMarkService">
@@ -2538,6 +2538,13 @@
 		</property>
 		<property name="rewardService">
 			<ref local="rewardService" />
+		</property>
+	</bean>
+
+	<bean id="fGetMoreServiceProService" class="cn.yiyingli.Handle.Service.FGetMoreServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
 		</property>
 	</bean>
 
