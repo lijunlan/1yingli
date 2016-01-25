@@ -72,6 +72,7 @@ public class CreateApplicationFormService extends UMsgService {
 
 		String advantage = (String) service.get("advantage");
 		String content = (String) service.get("content");
+		String contact = (String) service.get("contact");
 		float price = service.get("price") == null ? 0.0F : Float.valueOf((String) service.get("price"));
 		String reason = (String) service.get("reason");
 		float time = service.get("time") == null ? 0.0F : Float.valueOf((String) service.get("time"));
@@ -84,6 +85,7 @@ public class CreateApplicationFormService extends UMsgService {
 				advantage, content, price, reason, time, title, tService);
 
 		ApplicationForm applicationForm = new ApplicationForm();
+		applicationForm.setContact(contact);
 		applicationForm.setTeacher(teacher);
 		applicationForm.setState(ApplicationFormService.APPLICATION_STATE_CHECKING_SHORT);
 		applicationForm.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
