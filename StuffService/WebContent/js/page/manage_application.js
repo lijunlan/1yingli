@@ -34,6 +34,7 @@ function get(json) {
 			var serviceReason = data.serviceReason;
 			var serviceTitle = data.serviceTitle;
 			var serviceAdvantage = data.serviceAdvantage;
+			var serviceOnline = data.serviceOnline;
 			var serviceContent = data.serviceContent;
 			var servicePrice = data.servicePrice;
 			var serviceTime = data.serviceTime;
@@ -96,6 +97,9 @@ function get(json) {
 			+ serviceContent
 			+ "</br>优势:"
 			+ serviceAdvantage
+			+ "</br>"
+			+ "</br>是否接受线上服务:"
+			+ serviceOnline
 			+ "</br>"
 			+ "	</td>"
 			+ "	<td>"
