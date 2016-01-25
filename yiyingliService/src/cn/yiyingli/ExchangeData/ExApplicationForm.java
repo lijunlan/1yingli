@@ -255,6 +255,7 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 		map.put("serviceContent", serviceContent);
 		map.put("servicePrice", servicePrice);
 		map.put("serviceTime", serviceTime);
+		map.put("serviceOnline", online);
 		if ("".equals(endTime) || endTime == null) {
 			map.put("endTime", endTime);
 		} else {
