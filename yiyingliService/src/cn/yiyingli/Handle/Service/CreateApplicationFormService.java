@@ -79,8 +79,9 @@ public class CreateApplicationFormService extends UMsgService {
 		String title = (String) service.get("title");
 
 		TService tService = new TService();
-		PTServiceUtil.assembleWithTeacherByApplication(teacher, advantage, content, price, reason, time, title,
-				tService);
+		PTServiceUtil.assembleWithTeacherByApplication(teacher,
+				application.containsKey("online") ? Boolean.valueOf((String) application.get("online")) : false,
+				advantage, content, price, reason, time, title, tService);
 
 		ApplicationForm applicationForm = new ApplicationForm();
 		applicationForm.setTeacher(teacher);
