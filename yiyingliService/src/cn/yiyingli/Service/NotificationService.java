@@ -20,7 +20,11 @@ public interface NotificationService {
 
 	void update(Notification notification);
 
+	void updateReadByIds(long[] ids);
+
 	long querySumNo();
+
+	long queryUnreadSumNo(long userId);
 
 	long querySumNo(long userId);
 

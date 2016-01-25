@@ -97,6 +97,11 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
+	public void updateReadByIds(long[] ids) {
+		getNotificationDao().updateReadByIds(ids);
+	}
+
+	@Override
 	public Notification query(long id, boolean lazy) {
 		return getNotificationDao().query(id, lazy);
 	}
@@ -104,6 +109,11 @@ public class NotificationServiceImpl implements NotificationService {
 	@Override
 	public long querySumNo() {
 		return getNotificationDao().querySumNo();
+	}
+
+	@Override
+	public long queryUnreadSumNo(long userId) {
+		return getNotificationDao().queryUnreadSumNo(userId);
 	}
 
 	@Override

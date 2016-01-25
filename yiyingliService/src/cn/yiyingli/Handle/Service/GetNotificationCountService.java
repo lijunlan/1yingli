@@ -20,15 +20,8 @@ public class GetNotificationCountService extends UMsgService {
 	@Override
 	public void doit() {
 		User user = getUser();
-		int page = 0;
-		long count = getNotificationService().querySumNo(user.getId());
-		if (count % NotificationService.PAGE_SIZE_INT > 0)
-			page = (int) (count / NotificationService.PAGE_SIZE_INT) + 1;
-		else
-			page = (int) (count / NotificationService.PAGE_SIZE_INT);
-		if (page == 0)
-			page = 1;
-		setResMsg(MsgUtil.getSuccessMap().put("noti_count", count).put("page", page).finishByJson());
+		long count = getNotificationService().queryUnreadSumNo(user.getId());
+		setResMsg(MsgUtil.getSuccessMap().put("noti_count", count).finishByJson());
 	}
 
 }
