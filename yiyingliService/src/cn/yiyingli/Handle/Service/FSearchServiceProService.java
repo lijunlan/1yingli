@@ -76,9 +76,11 @@ public class FSearchServiceProService extends MsgService {
 					}
 				} else if (sort.startsWith("price")) {
 					if (sort.endsWith("+")) {
-						search.addSort("serviceprice", "+");
+						search.setFormulaName("pricerankasc");
+						//search.addSort("serviceprice", "+");
 					} else {
-						search.addSort("serviceprice", "-");
+						search.setFormulaName("pricerankdesc");
+						//search.addSort("serviceprice", "-");
 					}
 				} else if (sort.startsWith("finishno")) {
 					if (sort.endsWith("+")) {

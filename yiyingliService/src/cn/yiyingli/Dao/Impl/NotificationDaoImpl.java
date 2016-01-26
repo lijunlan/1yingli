@@ -111,6 +111,9 @@ public class NotificationDaoImpl extends HibernateDaoSupport implements Notifica
 
 	@Override
 	public void updateReadByIds(long[] ids) {
+		if (ids.length <= 0) {
+			return;
+		}
 		String hql = "update Notification n set n.read=true where n.id=" + ids[0];
 		if (ids.length > 1) {
 			for (int i = 1; i < ids.length; i++) {
