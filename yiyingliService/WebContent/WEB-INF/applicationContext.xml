@@ -2551,4 +2551,8 @@
 		</property>
 	</bean>
 
+	<bean id="fSearchServiceProService" class="cn.yiyingli.Handle.Service.FSearchServiceProService"
+		scope="prototype">
+	</bean>
+
 </beans>
