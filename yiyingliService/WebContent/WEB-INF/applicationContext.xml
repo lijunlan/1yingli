@@ -1622,6 +1622,9 @@
 
 	<bean id="fSearchService" class="cn.yiyingli.Handle.Service.FSearchService"
 		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
 	</bean>
 
 	<bean id="changePhoneService" class="cn.yiyingli.Handle.Service.ChangePhoneService"

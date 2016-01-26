@@ -3,6 +3,7 @@ package cn.yiyingli.Handle.Service;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.http.client.ClientProtocolException;
@@ -12,7 +13,12 @@ import com.aliyun.opensearch.CloudsearchSearch;
 import com.aliyun.opensearch.object.KeyTypeEnum;
 
 import cn.yiyingli.AliyunUtil.AliyunConfiguration;
+import cn.yiyingli.ExchangeData.SuperMap;
+import cn.yiyingli.ExchangeData.Util.ExArrayList;
+import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Persistant.ServicePro;
+import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Util.ConfigurationXmlUtil;
 import cn.yiyingli.Util.LogUtil;
@@ -21,6 +27,16 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class FSearchService extends MsgService {
+
+	private ServiceProService serviceProService;
+
+	public ServiceProService getServiceProService() {
+		return serviceProService;
+	}
+
+	public void setServiceProService(ServiceProService serviceProService) {
+		this.serviceProService = serviceProService;
+	}
 
 	@Override
 	protected boolean checkData() {
@@ -41,36 +57,17 @@ public class FSearchService extends MsgService {
 			CloudsearchClient client = new CloudsearchClient(accessKeyId, accessKeySecret, host, opts,
 					KeyTypeEnum.ALIYUN);
 			CloudsearchSearch search = new CloudsearchSearch(client);
-			search.addIndex("yiyingli2test");
+			search.addIndex("yiyingli_21");
 			search.setStartHit((p - 1) * TeacherService.PAGE_SIZE_INT);
 			search.setHits(TeacherService.PAGE_SIZE_INT);
-			search.addFilter("onservice=1");
+			// search.addFilter("onservice=1");
 			String query = "";
 			if (getData().containsKey("word")) {
 				String wd = (String) getData().get("word");
 				wd = URLDecoder.decode(wd, "utf-8");
 				if (!"".equals(wd)) {
-					// String[] qss = wd.split(",");
 					query = "n:'" + wd + "' OR sw:'" + wd + "'^70 OR i:'" + wd + "'^40 OR mw:'" + wd + "' OR mw2:'" + wd
 							+ "'^70";
-					// for (int i = 0; i < qss.length; i++) {
-					// String qs = qss[i];
-					// if (i == 0) {// default:'" + qs + "' OR
-					// query = query + "(si:'" + qs + "' OR n:'" + qs + "' OR
-					// cn:'" + qs + "'^70 OR sn:'" + qs
-					// + "'^70 OR sc:'" + qs + "'^75 OR i:'" + qs + "'^40 OR
-					// t:'" + qs + "' OR ta:'" + qs
-					// + "' OR p:'" + qs + "'^70 OR d:'" + qs + "'^70 OR m:'" +
-					// qs + "'^70)";
-					// } else {
-					// query = query + "AND(si:'" + qs + "' OR n:'" + qs + "' OR
-					// cn:'" + qs + "'^70 OR sn:'" + qs
-					// + "'^70 OR sc:'" + qs + "'^75 OR i:'" + qs + "'^40 OR
-					// t:'" + qs + "' OR ta:'" + qs
-					// + "' OR p:'" + qs + "'^70 OR d:'" + qs + "'^70 OR m:'" +
-					// qs + "'^70)";
-					// }
-					// }
 				}
 			}
 			search.setQueryString(query);
@@ -79,13 +76,7 @@ public class FSearchService extends MsgService {
 				String tips = (String) getData().get("tips");
 				tips = URLDecoder.decode(tips, "utf-8");
 				String[] ts = tips.split(",");
-				if (ts.length > 1) {
-					// StringBuffer sb = new StringBuffer("tc:'" + ts[0] + "'");
-					// for (int i = 1; i < ts.length; i++) {
-					// sb.append(" OR tc:'" + ts[i] + "'");
-					// }
-					// search.setQueryString("");
-				} else {
+				if (ts.length == 1) {
 					search.addFilter("tipcontent=\"" + ts[0] + "\"");
 				}
 			}
@@ -98,12 +89,6 @@ public class FSearchService extends MsgService {
 						search.addSort("likeno", "+");
 					} else {
 						search.addSort("likeno", "-");
-					}
-				} else if (filter.startsWith("price")) {
-					if (filter.endsWith("+")) {
-						search.addSort("serviceprice", "+");
-					} else {
-						search.addSort("serviceprice", "-");
 					}
 				} else if (filter.startsWith("finishno")) {
 					if (filter.endsWith("+")) {
@@ -123,11 +108,30 @@ public class FSearchService extends MsgService {
 			String status = jsonReceive.getString("status");
 
 			if ("OK".equals(status)) {
-				JSONObject result = (JSONObject) jsonReceive.get("result");
+				JSONObject result = jsonReceive.getJSONObject("result");
 				int viewtotal = result.getInt("viewtotal");
-				JSONArray items = (JSONArray) result.get("items");
-				setResMsg(MsgUtil.getSuccessMap().put("result", items.toString()).put("viewtotal", viewtotal)
-						.finishByJson());
+				JSONArray items = result.getJSONArray("items");
+				for (int i = 0; i < items.size(); i++) {
+					JSONObject teacherJson = items.getJSONObject(i);
+					List<ServicePro> servicePros = getServiceProService()
+							.queryListByTeacherIdForUser(teacherJson.getLong("id"), 1, 3);
+					ExList toSend = new ExArrayList();
+					for (ServicePro servicePro : servicePros) {
+						SuperMap map = new SuperMap();
+						map.put("serviceProId", servicePro.getId());
+						map.put("title", servicePro.getTitle());
+						map.put("kind", servicePro.getKind());
+						map.put("onsale", servicePro.getOnSale());
+						map.put("price", servicePro.getPrice());
+						map.put("priceTemp", servicePro.getPriceTemp());
+						map.put("numeral", servicePro.getNumeral());
+						map.put("quantifier", servicePro.getQuantifier());
+						toSend.add(map.finish());
+					}
+					teacherJson.put("serviceProList", toSend);
+				}
+
+				setResMsg(MsgUtil.getSuccessMap().put("result", items).put("viewtotal", viewtotal).finishByJson());
 			} else {
 				setResMsg(MsgUtil.getErrorMsgByCode("53005"));
 			}
