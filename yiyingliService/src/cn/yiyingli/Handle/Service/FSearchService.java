@@ -41,7 +41,7 @@ public class FSearchService extends MsgService {
 	@Override
 	protected boolean checkData() {
 		return getData().containsKey("page") && (getData().containsKey("word") || getData().containsKey("tips"))
-				|| getData().containsKey("filter");
+				|| getData().containsKey("sort");
 	}
 
 	@Override
@@ -82,16 +82,16 @@ public class FSearchService extends MsgService {
 			}
 			search.setFormat("json");
 
-			if (getData().containsKey("filter")) {
-				String filter = (String) getData().get("filter");
-				if (filter.startsWith("likeno")) {
-					if (filter.endsWith("+")) {
+			if (getData().containsKey("sort")) {
+				String sort = (String) getData().get("sort");
+				if (sort.startsWith("likeno")) {
+					if (sort.endsWith("+")) {
 						search.addSort("likeno", "+");
 					} else {
 						search.addSort("likeno", "-");
 					}
-				} else if (filter.startsWith("finishno")) {
-					if (filter.endsWith("+")) {
+				} else if (sort.startsWith("finishno")) {
+					if (sort.endsWith("+")) {
 						search.addSort("finishno", "+");
 					} else {
 						search.addSort("finishno", "-");

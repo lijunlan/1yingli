@@ -25,7 +25,7 @@ public class FSearchServiceProService extends MsgService {
 	@Override
 	protected boolean checkData() {
 		return getData().containsKey("page") && (getData().containsKey("word") || getData().containsKey("tips"))
-				|| getData().containsKey("filter");
+				|| getData().containsKey("sort");
 	}
 
 	@Override
@@ -66,22 +66,22 @@ public class FSearchServiceProService extends MsgService {
 			}
 			search.setFormat("json");
 
-			if (getData().containsKey("filter")) {
-				String filter = (String) getData().get("filter");
-				if (filter.startsWith("likeno")) {
-					if (filter.endsWith("+")) {
+			if (getData().containsKey("sort")) {
+				String sort = (String) getData().get("sort");
+				if (sort.startsWith("likeno")) {
+					if (sort.endsWith("+")) {
 						search.addSort("servicelikeno", "+");
 					} else {
 						search.addSort("servicelikeno", "-");
 					}
-				} else if (filter.startsWith("price")) {
-					if (filter.endsWith("+")) {
+				} else if (sort.startsWith("price")) {
+					if (sort.endsWith("+")) {
 						search.addSort("serviceprice", "+");
 					} else {
 						search.addSort("serviceprice", "-");
 					}
-				} else if (filter.startsWith("finishno")) {
-					if (filter.endsWith("+")) {
+				} else if (sort.startsWith("finishno")) {
+					if (sort.endsWith("+")) {
 						search.addSort("servicefinishno", "+");
 					} else {
 						search.addSort("servicefinishno", "-");
