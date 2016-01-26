@@ -35,6 +35,9 @@ public class ExOrderUtil {
 			case OrderService.ORDER_PAYMETHOD_PAYPAL:
 				map.put("payMethod", "paypal");
 				break;
+			case OrderService.ORDER_PAYMETHOD_WEIXIN:
+				map.put("payMethod", "wechat");
+				break;
 			default:
 				map.put("payMethod", o.getPayMethod() + "");
 				break;

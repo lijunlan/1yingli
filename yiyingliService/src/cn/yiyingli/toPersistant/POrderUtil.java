@@ -27,8 +27,8 @@ public class POrderUtil {
 			order.setServiceId(servicePro.getId());
 			order.setPrice(servicePro.getOnSale() ? servicePro.getPriceTemp() : servicePro.getPrice());
 			order.setOriginPrice(servicePro.getPrice());
-			order.setMoney(servicePro.getOnSale() ? servicePro.getPrice() * (float) count
-					: servicePro.getPriceTemp() * (float) count);
+			order.setMoney(servicePro.getOnSale() ? servicePro.getPriceTemp() * (float) count
+					: servicePro.getPrice() * (float) count);
 			order.setOriginMoney(servicePro.getPrice() * (float) count);
 			order.setServiceSummary(servicePro.getSummary());
 			order.setIconUrl(servicePro.getImageUrls().split(",")[0]);
