@@ -60,7 +60,7 @@ public class FSearchServiceProService extends MsgService {
 				tips = URLDecoder.decode(tips, "utf-8");
 				String[] ts = tips.split(",");
 				if (ts.length == 1) {
-					search.addFilter("tip=" + Integer.valueOf(ts[0]));
+					search.addFilter("kind=" + Integer.valueOf(ts[0]));
 				}
 			}
 			search.setFormat("json");
