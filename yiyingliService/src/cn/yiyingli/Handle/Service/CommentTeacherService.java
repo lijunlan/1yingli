@@ -108,6 +108,7 @@ public class CommentTeacherService extends UMsgService {
 			comment.setScore(Short.valueOf((String) getData().get("score")));
 			comment.setServiceTitle(order.getServiceTitle());
 			comment.setTeacher(teacher);
+			comment.setOrder(order);
 			comment.setUser(user);
 
 			if (order.getServiceId() != null) {
