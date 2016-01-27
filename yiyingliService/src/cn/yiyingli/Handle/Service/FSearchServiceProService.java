@@ -50,7 +50,7 @@ public class FSearchServiceProService extends MsgService {
 				String wd = (String) getData().get("word");
 				wd = URLDecoder.decode(wd, "utf-8");
 				if (!"".equals(wd)) {
-					query = "n:'" + wd + "'^80 OR co:'" + wd + "'^70 OR i:'" + wd + "'^40 OR mw:'" + wd + "' OR st:'" + wd
+					query = "n:'" + wd + "'^80 OR co:'" + wd + "'^70 OR mw:'" + wd + "' OR st:'" + wd
 							+ "'";
 				}
 			}
