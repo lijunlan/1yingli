@@ -37,6 +37,7 @@ public class ExOrderListUtil {
 		map.put("nowMoney", orderList.getNowMoney());
 		map.put("originMoney", orderList.getOriginMoney());
 		map.put("createTime", orderList.getCreateTime());
+		map.put("state", orderList.getState());
 		ExList toSendOrders = new ExArrayList();
 		for (Order o : orderList.getOrders()) {
 			SuperMap jsonorder = new SuperMap();

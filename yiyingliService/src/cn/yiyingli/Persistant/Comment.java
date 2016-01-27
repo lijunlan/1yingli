@@ -41,6 +41,9 @@ public class Comment {
 	@ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private User user;
+	
+	
+	private Order order;
 
 	@ManyToOne(targetEntity = ServicePro.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "SERVICEPRO_ID", updatable = true)
