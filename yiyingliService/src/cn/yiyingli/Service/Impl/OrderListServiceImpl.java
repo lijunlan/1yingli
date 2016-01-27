@@ -53,7 +53,7 @@ public class OrderListServiceImpl implements OrderListService {
 	public void remove(long id) {
 		getOrderListDao().remove(id);
 	}
-
+	
 	@Override
 	public void update(OrderList orderList) {
 		getOrderListDao().update(orderList);

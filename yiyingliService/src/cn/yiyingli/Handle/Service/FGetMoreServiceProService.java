@@ -30,8 +30,8 @@ public class FGetMoreServiceProService extends MsgService {
 
 	@Override
 	public void doit() {
-		List<ServicePro> servicePros = getServiceProService().queryListOtherByTeacher(getData().getLong("teacherId"),
-				getData().getLong("serviceProId"), 1);
+		List<ServicePro> servicePros = getServiceProService().queryListOtherByTeacher(getData().getLong("serviceProId"),
+				getData().getLong("teacherId"), 1);
 		ExList toSend = new ExArrayList();
 		for (ServicePro sp : servicePros) {
 			SuperMap map = new SuperMap();

@@ -1,6 +1,7 @@
 package cn.yiyingli.Handle.Service;
 
 import cn.yiyingli.Handle.UMsgService;
+import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.NotificationService;
@@ -65,28 +66,27 @@ public class CancelOrderService extends UMsgService {
 			return;
 		}
 
-		orderList.setState(OrderListService.ORDER_STATE_CANCEL_PAID + "," + orderList.getState());
-
 		try {
-			if (AlipayCancelUtil.cancelOrder("", olid)) {
-				orderList.setState(OrderService.ORDER_STATE_END_FAILED + "," + orderList.getState());
-				getOrderListService().update(orderList);
-				NotifyUtil.notifyUserOrder(orderList, "尊敬的学员，您的订单已经取消。订单号" + orderList.getOrderListNo(), user,
-						getNotificationService());
-				setResMsg(MsgUtil.getSuccessMsg("cancel orderList successfully"));
-				return;
-			} else {
-				getOrderListService().update(orderList);
-				NotifyUtil.notifyUserOrder(orderList, "尊敬的学员，您的订单已经取消。订单号" + orderList.getOrderListNo(), user,
-						getNotificationService());
-				setResMsg(MsgUtil.getSuccessMsg("cancel orderList successfully"));
-				return;
-			}
+			AlipayCancelUtil.cancelOrder("", olid);
 		} catch (Exception e) {
 			e.printStackTrace();
+			setResMsg(MsgUtil.getErrorMsgByCode("43001"));
 		}
+		cancelOrderList(orderList);
 
-		setResMsg(MsgUtil.getErrorMsgByCode("43001"));
+		NotifyUtil.notifyUserOrder(orderList, "尊敬的学员，您的订单已经取消。订单号" + orderList.getOrderListNo(), user,
+				getNotificationService());
+		setResMsg(MsgUtil.getSuccessMsg("cancel orderList successfully"));
+
+	}
+
+	private void cancelOrderList(OrderList orderList) {
+		orderList.setState(OrderService.ORDER_STATE_END_FAILED + "," + OrderListService.ORDER_STATE_CANCEL_PAID + ","
+				+ orderList.getState());
+		for (Order order : orderList.getOrders()) {
+			order.setState(orderList.getState());
+		}
+		getOrderListService().update(orderList);
 	}
 
 }
