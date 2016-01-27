@@ -101,6 +101,7 @@ public class TCommentUserService extends TMsgService {
 			comment.setServiceTitle(order.getServiceTitle());
 			comment.setTeacher(teacher);
 			comment.setUser(order.getCreateUser());
+			comment.setOrder(order);
 			getCommentService().saveWithOrder(comment, order);
 
 			// NotifyUtil.notifyUserOrder(order.getCustomerPhone(),
