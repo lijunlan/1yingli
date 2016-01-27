@@ -66,7 +66,7 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 			if (order.getServiceId() != null) {
 				long serviceProId = order.getServiceId();
 				int count = order.getCount();
-				query = session.createSQLQuery("select servicepro.number>" + count
+				query = session.createSQLQuery("select servicepro.number>=" + count
 						+ " from servicepro where servicepro.SERVICEPRO_ID=" + serviceProId + " for update");
 				BigInteger r = (BigInteger) query.uniqueResult();
 				if (r.intValue() != 1)
