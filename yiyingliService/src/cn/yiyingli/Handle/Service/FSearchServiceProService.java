@@ -50,8 +50,7 @@ public class FSearchServiceProService extends MsgService {
 				String wd = (String) getData().get("word");
 				wd = URLDecoder.decode(wd, "utf-8");
 				if (!"".equals(wd)) {
-					query = "n:'" + wd + "'^80 OR co:'" + wd + "'^70 OR mw:'" + wd + "' OR st:'" + wd
-							+ "'";
+					query = "n:'" + wd + "'^80 OR co:'" + wd + "'^70 OR mw:'" + wd + "' OR st:'" + wd + "'";
 				}
 			}
 			search.setQueryString(query);
@@ -61,7 +60,7 @@ public class FSearchServiceProService extends MsgService {
 				tips = URLDecoder.decode(tips, "utf-8");
 				String[] ts = tips.split(",");
 				if (ts.length == 1) {
-					search.addFilter("tipcontent=\"" + ts[0] + "\"");
+					search.addFilter("tip=\"" + ts[0] + "\"");
 				}
 			}
 			search.setFormat("json");
@@ -77,10 +76,10 @@ public class FSearchServiceProService extends MsgService {
 				} else if (sort.startsWith("price")) {
 					if (sort.endsWith("+")) {
 						search.setFormulaName("pricerankasc");
-						//search.addSort("serviceprice", "+");
+						// search.addSort("serviceprice", "+");
 					} else {
 						search.setFormulaName("pricerankdesc");
-						//search.addSort("serviceprice", "-");
+						// search.addSort("serviceprice", "-");
 					}
 				} else if (sort.startsWith("finishno")) {
 					if (sort.endsWith("+")) {
