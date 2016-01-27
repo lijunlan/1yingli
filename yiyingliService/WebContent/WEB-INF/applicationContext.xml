@@ -1242,8 +1242,8 @@
 		<property name="userMarkService">
 			<ref local="userMarkService" />
 		</property>
-		<property name="orderService">
-			<ref local="orderService" />
+		<property name="orderListService">
+			<ref local="orderListService" />
 		</property>
 		<property name="notificationService">
 			<ref local="notificationService" />
