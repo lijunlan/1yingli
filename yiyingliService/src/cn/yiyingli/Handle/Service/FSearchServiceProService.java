@@ -55,12 +55,12 @@ public class FSearchServiceProService extends MsgService {
 			}
 			search.setQueryString(query);
 
-			if (getData().containsKey("tips")) {
+			if (getData().containsKey("tips") && !getData().getString("tips").equals("")) {
 				String tips = (String) getData().get("tips");
 				tips = URLDecoder.decode(tips, "utf-8");
 				String[] ts = tips.split(",");
 				if (ts.length == 1) {
-					search.addFilter("tip=\"" + ts[0] + "\"");
+					search.addFilter("tip=" + Integer.valueOf(ts[0]));
 				}
 			}
 			search.setFormat("json");
@@ -106,6 +106,9 @@ public class FSearchServiceProService extends MsgService {
 			} else {
 				setResMsg(MsgUtil.getErrorMsgByCode("53005"));
 			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			setResMsg(MsgUtil.getErrorMsgByCode("51001"));
 		} catch (ClassCastException e) {
 			e.printStackTrace();
 			setResMsg(MsgUtil.getErrorMsgByCode("51001"));
