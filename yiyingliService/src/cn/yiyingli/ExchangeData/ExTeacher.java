@@ -12,6 +12,7 @@ import cn.yiyingli.Persistant.StudyExperience;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.Tip;
 import cn.yiyingli.Persistant.WorkExperience;
+import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Service.TeacherService;
 
 //TODO 搜索出来的导师的元素要改变
@@ -23,9 +24,15 @@ public class ExTeacher {
 		assembleSimpleNormal(teacher, map);
 		ExList serviceProList = new ExArrayList();
 		for (ServicePro servicePro : teacher.getServicePros()) {
-			SuperMap m = new SuperMap();
-			ExServicePro.assembleSimpleServiceProForUser(servicePro, m);
-			serviceProList.add(m.finish());
+			if (servicePro.getOnShow() && (!servicePro.getRemove())
+					&& servicePro.getState() == ServiceProService.STATE_OK) {
+				SuperMap m = new SuperMap();
+				ExServicePro.assembleSimpleServiceProForUser(servicePro, m);
+				serviceProList.add(m.finish());
+				if (serviceProList.size() >= ServiceProService.PAGE_SIZE) {
+					break;
+				}
+			}
 		}
 		map.put("servicePros", serviceProList);
 		// map.put("price", teacher.gettService().getPriceTotal());
