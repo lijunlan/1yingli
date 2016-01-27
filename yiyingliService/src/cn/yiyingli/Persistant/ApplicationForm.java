@@ -29,6 +29,9 @@ public class ApplicationForm {
 	@JoinColumn(name = "MANAGER_ID", updatable = false)
 	private Manager endManager;
 
+	@Column(name = "CONTACT", nullable = true)
+	private String contact;
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Teacher teacher;
 
@@ -106,6 +109,14 @@ public class ApplicationForm {
 
 	public void setEndManager(Manager endManager) {
 		this.endManager = endManager;
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
 
 }

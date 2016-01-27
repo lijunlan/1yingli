@@ -23,6 +23,8 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 
 	private String state;
 
+	private String contact;
+
 	private String endTime;
 
 	private String phone;
@@ -56,6 +58,14 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 	private String serviceAdvantage;
 
 	private Boolean online;
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
 
 	public Boolean getOnline() {
 		return online;
@@ -255,6 +265,7 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 		map.put("servicePrice", servicePrice);
 		map.put("serviceTime", serviceTime);
 		map.put("serviceOnline", online);
+		map.put("contact", contact);
 		if ("".equals(endTime) || endTime == null) {
 			map.put("endTime", endTime);
 		} else {
@@ -286,6 +297,7 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 		map.put("servicePrice", servicePrice);
 		map.put("serviceTime", serviceTime);
 		map.put("serviceOnline", online);
+		map.put("contact", contact);
 		if ("".equals(endTime) || endTime == null) {
 			map.put("endTime", endTime);
 		} else {
@@ -315,6 +327,7 @@ public class ExApplicationForm implements ExDataToShow<ApplicationForm> {
 		setEmail(teacher.getEmail());
 		setName(teacher.getName());
 		setPhone(teacher.getPhone());
+		setContact(persistant.getContact());
 		setAddress(teacher.getAddress());
 		setUserId(String.valueOf(persistant.getUser().getId()));
 		setAfId(String.valueOf(persistant.getId()));

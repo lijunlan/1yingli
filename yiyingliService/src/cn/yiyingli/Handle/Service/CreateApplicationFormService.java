@@ -55,6 +55,7 @@ public class CreateApplicationFormService extends UMsgService {
 		}
 		JSONObject application = getData().getJSONObject("application");
 		String name = application.getString("name");
+		String contact = application.getString("contact");
 		String phone = application.getString("phone");
 		String address = application.getString("address");
 		String mail = application.getString("mail");
@@ -69,6 +70,7 @@ public class CreateApplicationFormService extends UMsgService {
 				"-1", "-1", "-1", "-1", "-1", "0", "0", "", 0F, getTipService());
 
 		ApplicationForm applicationForm = new ApplicationForm();
+		applicationForm.setContact(contact);
 		applicationForm.setTeacher(teacher);
 		applicationForm.setState(ApplicationFormService.APPLICATION_STATE_CHECKING_SHORT);
 		applicationForm.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
