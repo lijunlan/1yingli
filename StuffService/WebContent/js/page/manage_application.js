@@ -28,6 +28,7 @@ function get(json) {
 			var name = data.name;
 			var email = data.email;
 			var address = data.address;
+			var contact = data.contact;
 			var checkInfo = data.checkInfo;
 			if (checkInfo == "undefined")
 				checkInfo = "";
@@ -50,6 +51,7 @@ function get(json) {
 			+ "/</br>" + endTime + "	</td>" + "	<td>" + state
 			+ "	</td>" + "	<td>" + phone + "	</td>" + "	<td>"
 			+ address + "	</td>" + "	<td>" + email + "	</td>"
+			+ "<td>"+contact+"</td>"
 			+ "	<td>";
 			if (typeof workExperience == 'string') {
 				workExperience = JSON.parse(workExperience)
