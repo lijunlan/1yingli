@@ -61,6 +61,7 @@ public class CreateApplicationFormService extends UMsgService {
 		String phone = (String) application.get("phone");
 		String address = (String) application.get("address");
 		String mail = (String) application.get("mail");
+		String contact = (String) application.get("contact");
 
 		List<Object> workExperiences = (List<Object>) application.get("workExperience");
 		List<Object> studyExperiences = (List<Object>) application.get("studyExperience");
@@ -72,7 +73,6 @@ public class CreateApplicationFormService extends UMsgService {
 
 		String advantage = (String) service.get("advantage");
 		String content = (String) service.get("content");
-		String contact = (String) service.get("contact");
 		float price = service.get("price") == null ? 0.0F : Float.valueOf((String) service.get("price"));
 		String reason = (String) service.get("reason");
 		float time = service.get("time") == null ? 0.0F : Float.valueOf((String) service.get("time"));
