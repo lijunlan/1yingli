@@ -42,6 +42,8 @@ public interface OrderListService {
 
 	void updateAndPlusNumber(OrderList orderList);
 
+	void updateAndAddCount(OrderList orderList);
+
 	OrderList queryByOrderListNo(String orderListNo);
 
 	OrderList query(long id);
@@ -53,4 +55,5 @@ public interface OrderListService {
 	List<OrderList> queryListByTeacher(long teacherId, int page);
 
 	List<OrderList> queryListByUser(long userId, int page);
+
 }

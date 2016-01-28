@@ -233,12 +233,18 @@ public class CreateOrderService extends UMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("44009"));
 			return;
 		}
-
-		for (Order order : orderList.getOrders()) {
-			TimeTaskUtil.sendTimeTask("change", "order",
-					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
-					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
-		}
+		//
+		// for (Order order : orderList.getOrders()) {
+		// TimeTaskUtil.sendTimeTask("change", "order",
+		// (Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) +
+		// "",
+		// new SuperMap().put("state", order.getState()).put("orderId",
+		// order.getOrderNo()).finishByJson());
+		// }
+		TimeTaskUtil.sendTimeTask("change", "orderList",
+				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
+				new SuperMap().put("state", orderList.getState()).put("orderListId", orderList.getOrderListNo())
+						.finishByJson());
 		//
 		// if (isUseVoucher) {
 		// getVoucherService().updateWithOrderListId(voucher,

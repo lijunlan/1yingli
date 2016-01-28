@@ -125,6 +125,14 @@ public class NotificationDaoImpl extends HibernateDaoSupport implements Notifica
 		session.createQuery(hql).executeUpdate();
 	}
 
+	@Override
+	public void updateReadAll(long userId) {
+		String hql = "update Notification n set n.read=true where n.toUser.id=" + userId;
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.createQuery(hql).executeUpdate();
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Notification> queryListByUserId(final long userId, final int page, final int pageSize,

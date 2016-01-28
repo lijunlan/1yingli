@@ -18,6 +18,8 @@ public interface NotificationDao {
 
 	void updateFromSql(String sql);
 
+	void updateReadAll(long userId);
+
 	void updateReadByIds(long[] ids);
 	
 	long querySumNo();
@@ -31,6 +33,7 @@ public interface NotificationDao {
 	List<Notification> queryList(int page, int pageSize, boolean lazy);
 
 	List<Notification> queryListByUserId(long userId, int page, int pageSize, boolean lazy);
+
 
 
 

@@ -40,6 +40,11 @@ public class OrderListServiceImpl implements OrderListService {
 	}
 
 	@Override
+	public void updateAndAddCount(OrderList orderList) {
+		getOrderListDao().updateAndAddCount(orderList);
+	}
+
+	@Override
 	public Long saveAndReturnId(OrderList orderList) {
 		return getOrderListDao().saveAndReturnId(orderList);
 	}
@@ -53,7 +58,7 @@ public class OrderListServiceImpl implements OrderListService {
 	public void remove(long id) {
 		getOrderListDao().remove(id);
 	}
-	
+
 	@Override
 	public void update(OrderList orderList) {
 		getOrderListDao().update(orderList);

@@ -59,6 +59,22 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 	}
 
 	@Override
+	public void updateAndAddCount(OrderList orderList) {
+		getHibernateTemplate().update(orderList);
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = null;
+		for (Order order : orderList.getOrders()) {
+			if (order.getServiceId() != null) {
+				long serviceProId = order.getServiceId();
+				int count = order.getCount();
+				query = session.createSQLQuery("update servicepro set servicepro.number=servicepro.number+" + count
+						+ " where servicepro.SERVICEPRO_ID=" + serviceProId);
+				query.executeUpdate();
+			}
+		}
+	}
+
+	@Override
 	public boolean queryCheckServiceNumber(OrderList orderList) {
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = null;

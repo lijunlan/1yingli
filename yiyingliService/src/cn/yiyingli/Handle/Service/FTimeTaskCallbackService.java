@@ -2,7 +2,9 @@ package cn.yiyingli.Handle.Service;
 
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Service.NotificationService;
+import cn.yiyingli.Service.OrderListService;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.MsgUtil;
@@ -12,6 +14,8 @@ import net.sf.json.JSONObject;
 public class FTimeTaskCallbackService extends MsgService {
 
 	private OrderService orderService;
+
+	private OrderListService orderListService;
 
 	private UserMarkService userMarkService;
 
@@ -23,6 +27,14 @@ public class FTimeTaskCallbackService extends MsgService {
 
 	public void setOrderService(OrderService orderService) {
 		this.orderService = orderService;
+	}
+
+	public OrderListService getOrderListService() {
+		return orderListService;
+	}
+
+	public void setOrderListService(OrderListService orderListService) {
+		this.orderListService = orderListService;
 	}
 
 	public UserMarkService getUserMarkService() {
@@ -158,10 +170,50 @@ public class FTimeTaskCallbackService extends MsgService {
 				setResMsg(MsgUtil.getSuccessMsg("time task done"));
 				return;
 			}
+		} else if ("orderList".equals(kind)) {
+			if ("change".equals(action)) {
+				String data = (String) getData().get("data");
+				JSONObject oMap = JSONObject.fromObject(data);
+				OrderList orderList = getOrderListService().queryByOrderListNo(oMap.getString("orderListId"));
+				if (orderList == null) {
+					setResMsg(MsgUtil.getSuccessMsg("time task done"));
+					return;
+				}
+				String state = orderList.getState();
+				String instate = oMap.getString("state");
+				if (!state.equals(instate)) {
+					setResMsg(MsgUtil.getSuccessMsg("time task done"));
+					return;
+				}
+				switch (state.split(",")[0]) {
+				case OrderListService.ORDER_STATE_NOT_PAID:
+					orderList.setState(OrderService.ORDER_STATE_CANCEL_PAID + "," + orderList.getState());
+					cancelOrderList(orderList);
+					NotifyUtil.notifyUserOrder(orderList,
+							"尊敬的学员,您好,由于您超时未支付订单(流水号：" + orderList.getOrderListNo() + "),系统已自动关闭,如若需要,请重新创建订单",
+							orderList.getUser(), getNotificationService());
+					break;
+				default:
+
+					break;
+				}
+			} else {
+				// TODO
+				setResMsg(MsgUtil.getSuccessMsg("time task done"));
+			}
 		} else {
 			setResMsg(MsgUtil.getSuccessMsg("time task done"));
 			return;
 		}
+	}
+
+	private void cancelOrderList(OrderList orderList) {
+		orderList.setState(OrderService.ORDER_STATE_END_FAILED + "," + OrderListService.ORDER_STATE_CANCEL_PAID + ","
+				+ orderList.getState());
+		for (Order order : orderList.getOrders()) {
+			order.setState(orderList.getState());
+		}
+		getOrderListService().updateAndAddCount(orderList);
 	}
 
 }

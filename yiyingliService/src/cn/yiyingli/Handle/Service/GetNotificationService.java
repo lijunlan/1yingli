@@ -69,7 +69,7 @@ public class GetNotificationService extends UMsgService {
 				map.put("time", n.getCreateTime());
 				sends.add(map.finish());
 			}
-			getNotificationService().updateReadByIds(ids);
+			getNotificationService().updateReadAll(user.getId());
 			setResMsg(toSend.put("data", sends).finishByJson());
 		} else {
 			String notiId = (String) getData().get("notiId");

@@ -117,6 +117,11 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
+	public void updateReadAll(long userId) {
+		getNotificationDao().updateReadAll(userId);
+	}
+
+	@Override
 	public long querySumNo(long userId) {
 		return getNotificationDao().querySumNo(userId);
 	}

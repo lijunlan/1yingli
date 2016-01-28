@@ -20,6 +20,8 @@ public interface OrderListDao {
 
 	void updateServiceProNumber(OrderList orderList);
 
+	void updateAndAddCount(OrderList orderList);
+
 	boolean queryCheckServiceNumber(OrderList orderList);
 
 	OrderList queryByOrderListNo(String orderListNo);
@@ -29,5 +31,6 @@ public interface OrderListDao {
 	List<OrderList> queryListByTeacher(long teacherId, int page, int pageSize);
 
 	List<OrderList> queryListByUser(long userId, int page, int pageSize);
+
 
 }
