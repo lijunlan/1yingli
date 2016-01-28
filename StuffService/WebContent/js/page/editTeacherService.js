@@ -213,7 +213,7 @@ function submit() {
 		}
 	}
 
-	service.tips = tips;
+	teacher.tips = tips;
 
 	teacher.checkEmail = $("#checkEmail").prop("checked") ? "true" : "false";
 	teacher.checkPhone = $("#checkPhone").prop("checked") ? "true" : "false";
