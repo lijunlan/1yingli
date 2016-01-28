@@ -159,9 +159,9 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 
 	@Override
 	public Teacher queryWithTips(long id, boolean lazy) {
-		String hql = "from Teacher t left join fetch t.tService left join fetch t.tips where t.id=?  and t.onService=true";
+		String hql = "from Teacher t left join fetch t.tService left join fetch t.tips where t.id=?";
 		if (lazy) {
-			hql = "from Teacher t left join fetch t.tService left join fetch t.tips where t.id=?  and t.onService=true";
+			hql = "from Teacher t left join fetch t.tService left join fetch t.tips where t.id=?";
 		}
 		@SuppressWarnings("unchecked")
 		List<Teacher> list = getHibernateTemplate().find(hql, id);
