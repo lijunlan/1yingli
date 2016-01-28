@@ -2555,4 +2555,17 @@
 		scope="prototype">
 	</bean>
 
+	<bean id="tEditSimpleServiceProService" class="cn.yiyingli.Handle.Service.TEditSimpleServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
 </beans>

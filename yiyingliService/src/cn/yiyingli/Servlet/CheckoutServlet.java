@@ -68,7 +68,7 @@ public class CheckoutServlet extends HttpServlet {
 		String cancelURL = page;
 		Map<String, String> checkoutDetails = new HashMap<String, String>();
 		// 检查前台传来的数据
-		if (request.getParameter("oid") == null || request.getParameter("uid") == null) {
+		if (request.getParameter("olid") == null || request.getParameter("uid") == null) {
 			returnMsg(response, MsgUtil.getErrorMsgByCode("00001"));
 			return;
 		}

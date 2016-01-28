@@ -183,16 +183,14 @@ public class PServiceProUtil {
 		servicePro.setTips(tip);
 	}
 
-	public static void editPriceByTeacher(float price, float numeral, int count, String quantifier, String title,
-			boolean onsale, float pricetemp, boolean onshow, ServicePro servicePro) {
+	public static void editPriceByTeacher(float price, float numeral, int count, String quantifier, boolean onsale,
+			float pricetemp, boolean onshow, ServicePro servicePro) {
 		servicePro.setUpdateTime(Calendar.getInstance().getTimeInMillis() + "");
 		servicePro.setOnSale(onsale);
 		servicePro.setPriceTemp(pricetemp);
-		servicePro.setTitle(title);
 		servicePro.setNumeral(numeral);
 		servicePro.setNumber(count);
 		servicePro.setQuantifier(quantifier);
-		servicePro.setTitle(title);
 		servicePro.setPrice(price);
 		servicePro.setOnShow(onshow);
 	}
