@@ -86,7 +86,7 @@ public class CancelOrderService extends UMsgService {
 		for (Order order : orderList.getOrders()) {
 			order.setState(orderList.getState());
 		}
-		getOrderListService().update(orderList);
+		getOrderListService().updateAndAddCount(orderList);
 	}
 
 }
