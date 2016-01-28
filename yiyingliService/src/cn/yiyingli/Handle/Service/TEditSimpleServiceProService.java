@@ -22,8 +22,9 @@ public class TEditSimpleServiceProService extends TMsgService {
 	public boolean checkData() {
 		return super.checkData() && getData().containsKey("serviceProId") && getData().containsKey("price")
 				&& getData().containsKey("numeral") && getData().containsKey("count")
-				&& getData().containsKey("quantifier") && getData().containsKey("onsale")
-				&& getData().containsKey("pricetemp") && getData().containsKey("onshow");
+				&& getData().containsKey("freetime") && getData().containsKey("quantifier")
+				&& getData().containsKey("onsale") && getData().containsKey("pricetemp")
+				&& getData().containsKey("onshow");
 
 	}
 
@@ -33,7 +34,8 @@ public class TEditSimpleServiceProService extends TMsgService {
 		PServiceProUtil.editPriceByTeacher(Float.valueOf(getData().getString("price")),
 				Float.valueOf(getData().getString("numeral")), getData().getInt("count"),
 				getData().getString("quantifier"), getData().getBoolean("onsale"),
-				Float.valueOf(getData().getString("pricetemp")), getData().getBoolean("onshow"), servicePro);
+				Float.valueOf(getData().getString("pricetemp")), getData().getBoolean("onshow"),
+				getData().getString("freetime"), servicePro);
 		getServiceProService().update(servicePro);
 		setResMsg(MsgUtil.getSuccessMsg("edit simple servicePro successfully"));
 	}

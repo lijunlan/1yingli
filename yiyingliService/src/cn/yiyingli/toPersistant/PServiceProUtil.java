@@ -184,11 +184,12 @@ public class PServiceProUtil {
 	}
 
 	public static void editPriceByTeacher(float price, float numeral, int count, String quantifier, boolean onsale,
-			float pricetemp, boolean onshow, ServicePro servicePro) {
+			float pricetemp, boolean onshow, String freeTime, ServicePro servicePro) {
 		servicePro.setUpdateTime(Calendar.getInstance().getTimeInMillis() + "");
 		servicePro.setOnSale(onsale);
 		servicePro.setPriceTemp(pricetemp);
 		servicePro.setNumeral(numeral);
+		servicePro.setFreeTime(freeTime);
 		servicePro.setNumber(count);
 		servicePro.setQuantifier(quantifier);
 		servicePro.setPrice(price);
