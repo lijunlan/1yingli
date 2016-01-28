@@ -230,7 +230,7 @@ public class ServiceProServiceImpl implements ServiceProService {
 
 	@Override
 	public List<ServicePro> queryListOtherByTeacher(long serviceProId, long teacherId, int page) {
-		return getServiceProDao().queryListOtherByTeacher(serviceProId, teacherId, page, PAGE_SIZE);
+		return getServiceProDao().queryListOtherByTeacher(serviceProId, teacherId, page, ABOUT_PAGE_SIZE);
 	}
 
 }

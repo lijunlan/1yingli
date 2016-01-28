@@ -162,7 +162,7 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ServicePro>>() {
 			@Override
 			public List<ServicePro> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=false and sp.onShow=true and sp.id!="
+				String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=false and sp.onShow=true and sp.state=1 sp.id!="
 						+ serviceProId + " and sp.teacher.id=" + teacherId + " ORDER BY sp.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
