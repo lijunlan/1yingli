@@ -36,7 +36,11 @@ public interface TeacherDao {
 
 	Teacher queryAll(long id);
 
-	Teacher queryWithTips(long id, boolean lazy);
+	// Teacher queryWithTips(long id, boolean lazy);
+
+	Teacher queryForUser(long id, boolean lazy);
+
+	Teacher queryForTeacher(long id, boolean lazy);
 
 	Teacher queryWithLikeUser(long teacherId, boolean lazy);
 
@@ -75,5 +79,6 @@ public interface TeacherDao {
 	List<Teacher> queryListByLevel(short level, int page, int pageSize, boolean lazy);
 
 	List<Teacher> queryListByTipAndLevel(int page, int pageSize, long tipMark, short level, boolean lazy);
+
 
 }

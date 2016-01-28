@@ -26,7 +26,7 @@ public class TGetAllInfoService extends MsgService {
 
 	@Override
 	public void doit() {
-		Teacher teacher = getTeacherService().queryWithTips(Long.valueOf((String) getData().get("teacherId")), false);
+		Teacher teacher = getTeacherService().queryForTeacher(Long.valueOf((String) getData().get("teacherId")), false);
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
