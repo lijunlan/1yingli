@@ -46,7 +46,7 @@ public class RewardDaoImpl extends HibernateDaoSupport implements RewardDao {
 
 	@Override
 	public Long queryRewardNoByTeacher(long teacherId) {
-		String hql = "select count(*) from Reward where r.teacherId=" + teacherId+" and r.finishPay=true";
+		String hql = "select count(*) from Reward r where r.teacherId=" + teacherId+" and r.finishPay=true";
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = session.createQuery(hql);
 		BigInteger peopleNo = (BigInteger) query.uniqueResult();
@@ -77,7 +77,7 @@ public class RewardDaoImpl extends HibernateDaoSupport implements RewardDao {
 
 	@Override
 	public Float queryMoneyByTeacher(long teacherId, Boolean finishPay, Boolean finishSalary) {
-		String hql = "select sum(r.money) from Reward where r.teacherId=" + teacherId;
+		String hql = "select sum(r.money) from Reward r where r.teacherId=" + teacherId;
 		if (finishPay != null) {
 			hql = hql + " and r.finishPay=" + finishPay;
 		}
