@@ -38,7 +38,7 @@ public class TEnsureTimeService extends TMsgService {
 	@Override
 	public void doit() {
 		Teacher teacher = getTeacher();
-		String oid = (String) getData().get("orderId");
+		String oid = getData().getString("orderId");
 		Order order = getOrderService().queryByShowId(oid, false);
 		if (order == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("42001"));
