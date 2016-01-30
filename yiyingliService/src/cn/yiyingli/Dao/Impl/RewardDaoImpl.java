@@ -1,6 +1,5 @@
 package cn.yiyingli.Dao.Impl;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,12 +82,12 @@ public class RewardDaoImpl extends HibernateDaoSupport implements RewardDao {
 			hql = hql + " and r.finishPay=" + finishPay;
 		}
 		if (finishSalary != null) {
-			hql = hql + "and r.finishSalary=" + finishSalary;
+			hql = hql + " and r.finishSalary=" + finishSalary;
 		}
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = session.createQuery(hql);
-		BigDecimal moneySum = (BigDecimal) query.uniqueResult();
-		return moneySum.floatValue();
+		Float moneySum = (Float) query.uniqueResult();
+		return moneySum == null ? 0F : moneySum;
 	}
 
 	@SuppressWarnings("unchecked")
