@@ -85,8 +85,8 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public void saveWithDetailInfo(Teacher teacher) {
-		getUserDao().update(teacher.getUser());
 		getTeacherDao().save(teacher);
+		getUserDao().update(teacher.getUser());
 		if (teacher.getOnService()) {
 			SendMsgToBaiduUtil.updateTeacherData(teacher);
 		}

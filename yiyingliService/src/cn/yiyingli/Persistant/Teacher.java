@@ -31,7 +31,7 @@ public class Teacher {
 	private Long id;
 
 	@OneToOne
-	@JoinColumn(name = "USER_ID", insertable = false, unique = true, updatable = true)
+	@JoinColumn(name = "USER_ID", insertable = true, unique = true, updatable = false)
 	private User user;
 
 	@Column(name = "USERNAME", nullable = false, unique = true)
