@@ -54,8 +54,11 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 		User u = getUserService().queryWithWeixin(weixinNoU, false);
 		if (u == null) {
 			u = getUserService().queryWithWeixinPlatform(weixinNo);
-		}else{
-			if(u.getWechatPlatformNo()==null){
+			if (u != null && u.getWechatNo() == null) {
+				u.setWechatNo(weixinNoU);
+			}
+		} else {
+			if (u.getWechatPlatformNo() == null) {
 				u.setWechatPlatformNo(weixinNo);
 			}
 		}
@@ -71,6 +74,9 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 			}
 			returnUser(user);
 		} else {
+			if (u.getWechatPlatformNo() == null) {
+				u.setWechatPlatformNo(weixinNo);
+			}
 			if (!u.getIconUrl().equals(icon)) {
 				u.setIconUrl(icon);
 			}
