@@ -159,7 +159,7 @@ function submit() {
 	$.each($("[name='checkbox"+servicePro.kind+"']"),function(index,data){
 		var cb = $(data);
 		if(cb.is(':checked')){
-			if(index!=0){
+			if(tip!=""){
 				tip = tip+","+cb.val();
 			}else{
 				tip = cb.val();
