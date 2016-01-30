@@ -263,7 +263,7 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ServicePro>>() {
 			@Override
 			public List<ServicePro> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=false and sp.onShow=true and sp.homeWeight!=0 ORDER BY sp.homeWeight DESC";
+				String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=false and sp.onShow=true and sp.state=1 and sp.homeWeight!=0 ORDER BY sp.homeWeight DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult(0);
 				query.setMaxResults(pageSize);
@@ -281,7 +281,7 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ServicePro>>() {
 			@Override
 			public List<ServicePro> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=false and sp.onShow=true and sp.saleWeight!=0 ORDER BY sp.saleWeight DESC";
+				String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=false and sp.onShow=true and sp.state=1 and sp.saleWeight!=0 ORDER BY sp.saleWeight DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);

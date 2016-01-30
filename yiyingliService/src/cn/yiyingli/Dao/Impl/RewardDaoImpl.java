@@ -49,8 +49,8 @@ public class RewardDaoImpl extends HibernateDaoSupport implements RewardDao {
 		String hql = "select count(*) from Reward r where r.teacherId=" + teacherId + " and r.finishPay=true";
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = session.createQuery(hql);
-		long peopleNo = (long) query.uniqueResult();
-		return peopleNo;
+		Number peopleNo = (Number) query.uniqueResult();
+		return peopleNo.longValue();
 	}
 
 	@Override
@@ -86,8 +86,8 @@ public class RewardDaoImpl extends HibernateDaoSupport implements RewardDao {
 		}
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = session.createQuery(hql);
-		Float moneySum = (Float) query.uniqueResult();
-		return moneySum == null ? 0F : moneySum;
+		Number moneySum = (Number) query.uniqueResult();
+		return moneySum == null ? 0F : moneySum.floatValue();
 	}
 
 	@SuppressWarnings("unchecked")
