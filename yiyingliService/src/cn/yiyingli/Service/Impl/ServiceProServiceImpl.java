@@ -142,7 +142,8 @@ public class ServiceProServiceImpl implements ServiceProService {
 
 	@Override
 	public List<ServicePro> queryListByTeacherIdForUser(long teacherId, int page, int pageSize) {
-		return getServiceProDao().queryListByTeacherIdAndShow(teacherId, ServiceProDao.SHOW_KIND_ON, page, pageSize);
+		return getServiceProDao().queryListByTeacherIdAndShowAndState(teacherId, ServiceProDao.SHOW_KIND_ON,
+				ServiceProService.STATE_OK, page, pageSize);
 	}
 
 	@Override
