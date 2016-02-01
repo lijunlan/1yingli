@@ -59,7 +59,7 @@ public class ExOrderListUtil {
 			List<Order> toRemove = new ArrayList<Order>();
 			for (Order order : orderlist.getOrders()) {
 				String state = order.getState();
-				if (state.contains("0200,0100") || state.startsWith("0100")) {
+				if (state.startsWith("0200,0100") || state.startsWith("0100")) {
 					toRemove.add(order);
 				}
 			}

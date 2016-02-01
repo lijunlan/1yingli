@@ -208,8 +208,8 @@ public class FTimeTaskCallbackService extends MsgService {
 	}
 
 	private void cancelOrderList(OrderList orderList) {
-		orderList.setState(OrderService.ORDER_STATE_END_FAILED + "," + OrderListService.ORDER_STATE_CANCEL_PAID + ","
-				+ orderList.getState());
+//		orderList.setState(OrderService.ORDER_STATE_END_FAILED + "," + OrderListService.ORDER_STATE_CANCEL_PAID + ","
+//				+ orderList.getState());
 		for (Order order : orderList.getOrders()) {
 			order.setState(orderList.getState());
 		}
