@@ -77,9 +77,9 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 			if (u.getWechatPlatformNo() == null) {
 				u.setWechatPlatformNo(weixinNo);
 			}
-			if (!u.getIconUrl().equals(icon)) {
-				u.setIconUrl(icon);
-			}
+//			if (!u.getIconUrl().equals(icon)) {
+//				u.setIconUrl(icon);
+//			}
 			returnUser(u);
 		}
 
