@@ -70,9 +70,9 @@ public class LoginByWeixinService extends ULoginMsgService {
 			}
 			returnUser(user);
 		} else {
-//			if (!u.getIconUrl().equals(icon)) {
-//				u.setIconUrl(icon);
-//			}
+			if (!u.getIconUrl().equals(icon)) {
+				u.setIconUrl(icon);
+			}
 			returnUser(u);
 		}
 
