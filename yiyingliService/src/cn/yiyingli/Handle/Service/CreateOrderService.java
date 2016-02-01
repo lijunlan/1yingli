@@ -164,7 +164,6 @@ public class CreateOrderService extends UMsgService {
 		orderList.setOriginMoney(0F);
 		orderList.setNowMoney(0F);
 		orderList.setPayMoney(0F);
-		orderList.setShowToTeacher(false);
 		orderList.setTeacher(teacher);
 		orderList.setUser(user);
 		orderList.setCustomerName(name);

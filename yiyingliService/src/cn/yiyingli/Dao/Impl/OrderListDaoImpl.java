@@ -123,7 +123,7 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 			@Override
 			public List<OrderList> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from OrderList ol left join fetch ol.user  where ol.teacher.id=" + teacherId
-						+ " and ol.showToTeacher=" + true + " ORDER BY ol.createTime DESC";
+						+ " and ol.state not like '0100%' and ol.state not like '%0200,0100%' ORDER BY ol.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);

@@ -50,9 +50,6 @@ public class OrderList {
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private User user;
 
-	@Column(name = "SHOWTOTEACHER", nullable = false)
-	private Boolean showToTeacher;
-
 	@Column(name = "STATE", nullable = false)
 	private String state;
 
@@ -127,14 +124,6 @@ public class OrderList {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public Boolean getShowToTeacher() {
-		return showToTeacher;
-	}
-
-	public void setShowToTeacher(Boolean showToTeacher) {
-		this.showToTeacher = showToTeacher;
 	}
 
 	public String getState() {

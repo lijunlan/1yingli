@@ -71,7 +71,7 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		session.flush();
 		Query query = session.createSQLQuery(
 				"update teacher set teacher.SERVICEPRONUMBERFORUSER=(select count(*) from servicepro where servicepro.REMOVE=false and servicepro.STATE="
-						+ ServiceProService.STATE_OK + " and servicepro.TEACHER_ID='" + servicePro.getTeacher().getId()
+						+ ServiceProService.STATE_OK + " and servicepro.ONSHOW=true and servicepro.TEACHER_ID='" + servicePro.getTeacher().getId()
 						+ "') where teacher.TEACHER_ID=" + servicePro.getTeacher().getId());
 		query.executeUpdate();
 		if (remove) {
