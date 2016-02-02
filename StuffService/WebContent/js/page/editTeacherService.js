@@ -259,13 +259,10 @@ function submit() {
 }
 
 function changeUsername(){
-	var toSend = new Object();
-	toSend.oldusername= $("#oldusername").val();
-	toSend.newusername= $("#newusername").val();
-	toSend.style= "manager";
-	toSend.method="changeUserName";
-
-	myAjax(toSend,null);
+	myJson.method = "changeUserName";
+	myJson.oldusername = $("#oldusername").val();
+	myJson.newusername = $("#newusername").val();
+	myAjax(myJson,null);
 	Messenger().post("修改用户名成功");
 }
 

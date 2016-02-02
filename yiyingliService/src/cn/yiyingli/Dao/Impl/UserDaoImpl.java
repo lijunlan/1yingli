@@ -64,10 +64,10 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	public void updateUsername(User user) {
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = session.createSQLQuery(
-				"update user set user.USERNAME=" + user.getUsername() + " where user.USER_ID=" + user.getId());
+				"update user set user.USERNAME='" + user.getUsername() + "' where user.USER_ID=" + user.getId());
 		query.executeUpdate();
 		query = session.createSQLQuery(
-				"update teacher set teacher.USERNAME=" + user.getUsername() + " where teacher.USER_ID=" + user.getId());
+				"update teacher set teacher.USERNAME='" + user.getUsername() + "' where teacher.USER_ID=" + user.getId());
 		query.executeUpdate();
 	}
 

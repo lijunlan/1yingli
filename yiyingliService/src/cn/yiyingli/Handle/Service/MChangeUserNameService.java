@@ -29,7 +29,7 @@ public class MChangeUserNameService extends MMsgService {
 		String newusername = getData().getString("newusername");
 		User user = getUserService().query(oldusername, false);
 		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsgByCode(""));
+			setResMsg(MsgUtil.getErrorMsgByCode("12015"));
 			return;
 		}
 		user.setUsername(newusername);
