@@ -103,6 +103,7 @@
 		<method name="login" beanName="dLoginService" />
 	</style>
 	<style name="manager">
+		<method name="changeUserName" beanName="mChangeUserNameService" />
 		<method name="finishPayReward" beanName="mFinishPayRewardService" />
 		<method name="getRewardByTeacher" beanName="mGetRewardByTeacherService" />
 		<method name="getRewardList" beanName="mGetRewardListService" />
