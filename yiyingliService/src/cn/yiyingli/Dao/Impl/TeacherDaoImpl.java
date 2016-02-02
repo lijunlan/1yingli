@@ -161,11 +161,8 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
-	public Teacher queryForUser(long id, boolean lazy) {
-		String hql = "from Teacher t left join fetch t.tService where t.id=? and t.onService=true";
-		if (lazy) {
-			hql = "from Teacher t left join fetch t.tService left where t.id=? and t.onService=true";
-		}
+	public Teacher queryForUser(long id) {
+		String hql = "from Teacher t where t.id=? and t.onService=true";
 		@SuppressWarnings("unchecked")
 		List<Teacher> list = getHibernateTemplate().find(hql, id);
 		if (list.isEmpty())
@@ -175,12 +172,9 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
-	public Teacher queryForTeacher(long id, boolean lazy) {
-		String hql = "from Teacher t left join fetch t.tService where t.id=?";
-		if (lazy) {
-			hql = "from Teacher t left join fetch t.tService left where t.id=?";
-		}
-		@SuppressWarnings("unchecked")
+	public Teacher queryForTeacher(long id) {
+		String hql = "from Teacher t where t.id=?";
+			@SuppressWarnings("unchecked")
 		List<Teacher> list = getHibernateTemplate().find(hql, id);
 		if (list.isEmpty())
 			return null;

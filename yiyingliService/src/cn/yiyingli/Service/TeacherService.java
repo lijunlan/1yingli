@@ -57,9 +57,9 @@ public interface TeacherService {
 
 	Teacher queryWithServiceProList(long id);
 
-	Teacher queryForUser(long id, boolean lazy);
+	Teacher queryForUser(long id);
 
-	Teacher queryForTeacher(long id, boolean lazy);
+	Teacher queryForTeacher(long id);
 
 	Teacher queryWithLikeUser(long teacherId);
 
