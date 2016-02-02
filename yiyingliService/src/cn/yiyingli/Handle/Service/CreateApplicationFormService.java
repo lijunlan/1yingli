@@ -53,14 +53,13 @@ public class CreateApplicationFormService extends UMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("15002"));
 			return;
 		}
+		
 		JSONObject application = getData().getJSONObject("application");
 		String name = application.getString("name");
 		String contact = application.getString("contact");
 		String phone = application.getString("phone");
 		String address = application.getString("address");
 		String mail = application.getString("mail");
-		// String topic = application.getString("topic");
-		// float price =Float.valueOf(application.getString("price"));
 
 		JSONArray workExperiences = application.getJSONArray("workExperience");
 		JSONArray studyExperiences = application.getJSONArray("studyExperience");

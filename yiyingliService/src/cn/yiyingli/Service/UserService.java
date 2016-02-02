@@ -24,6 +24,8 @@ public interface UserService {
 
 	void update(User user);
 
+	void updateUsername(User user);
+
 	void updateWithTeacher(User user);
 
 	void changePassword(long userId, String oldpwd, String newpwd) throws Exception;
@@ -63,5 +65,6 @@ public interface UserService {
 	List<User> queryListByLevel(int page, short level, boolean lazy);
 
 	List<User> queryListByTeacher(int page, short teacherState, boolean lazy);
+
 
 }

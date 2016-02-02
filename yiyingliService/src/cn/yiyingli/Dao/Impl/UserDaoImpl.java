@@ -62,6 +62,17 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	}
 
 	@Override
+	public void updateUsername(User user) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session.createSQLQuery(
+				"update user set user.USERNAME='" + user.getUsername() + "' where user.USER_ID=" + user.getId());
+		query.executeUpdate();
+		query = session.createSQLQuery(
+				"update teacher set teacher.USERNAME='" + user.getUsername() + "' where teacher.USER_ID=" + user.getId());
+		query.executeUpdate();
+	}
+
+	@Override
 	public void updateLikeTeacher(UserLikeTeacher userLikeTeacher) {
 		getHibernateTemplate().save(userLikeTeacher);
 		Session session = getSessionFactory().getCurrentSession();

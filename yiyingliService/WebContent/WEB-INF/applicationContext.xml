@@ -2568,4 +2568,14 @@
 		</property>
 	</bean>
 
+	<bean id="mChangeUserNameService" class="cn.yiyingli.Handle.Service.MChangeUserNameService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="userService">
+			<ref local="userService" />
+		</property>
+	</bean>
+
 </beans>

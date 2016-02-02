@@ -108,12 +108,14 @@
 		<method name="getInfo" beanName="dGetInfoService" />
 		<method name="login" beanName="dLoginService" />
 	</style>
+	
 	<style name="manager">
 		<method name="validateServicePro" beanName="mValidateServiceProService" />
 		<method name="getServiceProList" beanName="mGetServiceProListService" />
 		<method name="createServicePro" beanName="mCreateServiceProService" />
 		<method name="getServicePro" beanName="mGetServiceProService" />
 		<method name="editServicePro" beanName="mEditServiceProService" />
+		<method name="changeUserName" beanName="mChangeUserNameService" />
 		<method name="finishPayReward" beanName="mFinishPayRewardService" />
 		<method name="getRewardByTeacher" beanName="mGetRewardByTeacherService" />
 		<method name="getRewardList" beanName="mGetRewardListService" />

@@ -30,7 +30,9 @@ public class MessageHandle {
 			mHandle.doit();
 		} catch (Exception e) {
 			e.printStackTrace();
-			LogUtil.error(RemoteIPUtil.getAddr(rq) + "=>" + mHandle.getData().toString(), MessageHandle.class);
+			LogUtil.error(
+					RemoteIPUtil.getAddr(rq) + "=>" + mHandle.getData() == null ? "null" : mHandle.getData().toString(),
+					MessageHandle.class);
 			mHandle.returnError(MsgUtil.getErrorMsgByCode("00000"));
 		}
 	}

@@ -19,7 +19,7 @@ public class ExRewardForPay {
 			Long passageId, Long userId, String userName) {
 		return "rid^" + rewardId + "|" + "teacherId^" + teacherId + "|" + "teacherName^"
 				+ URLEncoder.encode(teacherName) + "|" + "money^" + money
-				+ (uid == null ? "" : "|userId^" + userId + "|" + "userName^" + userName)
+				+ (uid == null ? "" : "|userId^" + userId + "|" + "userName^" +  URLEncoder.encode(userName))
 				+ (passageId == null ? "" : "|passageId^" + passageId);
 	}
 

@@ -187,6 +187,11 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
+	public Teacher queryForTeacher(long id, boolean lazy) {
+		return getTeacherDao().queryForTeacher(id, lazy);
+	}
+
+	@Override
 	public Teacher queryWithLikeUser(long teacherId) {
 		return getTeacherDao().queryWithLikeUser(teacherId);
 	}
@@ -327,6 +332,11 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public Teacher queryAll(long id) {
 		return getTeacherDao().queryAll(id);
+	}
+
+	@Override
+	public Teacher queryForUser(long id, boolean lazy) {
+		return getTeacherDao().queryForUser(id, lazy);
 	}
 
 	@Override

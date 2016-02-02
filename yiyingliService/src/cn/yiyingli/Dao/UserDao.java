@@ -24,6 +24,8 @@ public interface UserDao {
 
 	void update(User user);
 
+	void updateUsername(User user);
+
 	void updateLikeTeacher(UserLikeTeacher userLikeTeacher);
 
 	void updateLikePassage(UserLikePassage userLikePassage);

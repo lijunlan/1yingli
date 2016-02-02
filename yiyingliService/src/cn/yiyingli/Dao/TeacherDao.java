@@ -37,6 +37,11 @@ public interface TeacherDao {
 	Teacher queryAll(long id);
 
 	Teacher queryWithServiceProList(long id);
+	// Teacher queryWithTips(long id, boolean lazy);
+
+	Teacher queryForUser(long id, boolean lazy);
+
+	Teacher queryForTeacher(long id, boolean lazy);
 
 	Teacher queryWithLikeUser(long teacherId);
 
