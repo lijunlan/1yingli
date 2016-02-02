@@ -254,8 +254,19 @@ function submit() {
 	send.mid = mid;
 	send.username = $("#username").val();
 
-	myAjax(send, null)
+	myAjax(send, null);
 	Messenger().post("操作成功");
+}
+
+function changeUsername(){
+	var toSend = new Object();
+	toSend.oldusername= $("#oldusername").val();
+	toSend.newusername= $("#newusername").val();
+	toSend.style= "manager";
+	toSend.method="changeUserName";
+
+	myAjax(toSend,null);
+	Messenger().post("修改用户名成功");
 }
 
 function clean() {
