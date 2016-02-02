@@ -3,9 +3,11 @@ package cn.yiyingli.Service.Impl;
 import java.util.Calendar;
 import java.util.List;
 import cn.yiyingli.Dao.OrderListDao;
+import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Service.OrderListService;
+import cn.yiyingli.Util.TimeTaskUtil;
 
 public class OrderListServiceImpl implements OrderListService {
 
@@ -36,6 +38,10 @@ public class OrderListServiceImpl implements OrderListService {
 					+ (100000000L + order.getId()));
 		}
 		getOrderListDao().update(orderList);
+		TimeTaskUtil.sendTimeTask("change", "orderList",
+				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
+				new SuperMap().put("state", orderList.getState()).put("orderListId", orderList.getOrderListNo())
+						.finishByJson());
 		return orderList.getOrderListNo();
 	}
 

@@ -53,9 +53,9 @@ public class OrderServiceImpl implements OrderService {
 		} else {
 			getOrderDao().update(order);
 		}
-		TimeTaskUtil.sendTimeTask("change", "order",
-				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
-				new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+//		TimeTaskUtil.sendTimeTask("change", "order",
+//				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
+//				new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
 		return order.getOrderNo();
 	}
 
