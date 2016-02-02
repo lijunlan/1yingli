@@ -70,7 +70,7 @@ public class CancelOrderService extends UMsgService {
 			AlipayCancelUtil.cancelOrder("", olid);
 		} catch (Exception e) {
 			e.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsgByCode("43001"));
+			// setResMsg(MsgUtil.getErrorMsgByCode("43001"));
 		}
 		cancelOrderList(orderList);
 
@@ -81,10 +81,9 @@ public class CancelOrderService extends UMsgService {
 	}
 
 	private void cancelOrderList(OrderList orderList) {
-//		orderList.setState(OrderService.ORDER_STATE_END_FAILED + "," + OrderListService.ORDER_STATE_CANCEL_PAID + ","
-//				+ orderList.getState());
+		orderList.setState(OrderListService.ORDER_STATE_CANCEL_PAID + "," + orderList.getState());
 		for (Order order : orderList.getOrders()) {
-			order.setState(orderList.getState());
+			order.setState(OrderService.ORDER_STATE_END_FAILED + "," + order.getState());
 		}
 		getOrderListService().updateAndAddCount(orderList);
 	}
