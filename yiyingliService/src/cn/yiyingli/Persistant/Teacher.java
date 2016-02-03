@@ -30,6 +30,9 @@ public class Teacher {
 	@Column(name = "TEACHER_ID")
 	private Long id;
 
+	@Column(name = "MASKNUMBER", nullable = true)
+	private Long maskNumber;
+
 	@OneToOne
 	@JoinColumn(name = "USER_ID", insertable = true, unique = true, updatable = false)
 	private User user;
@@ -714,6 +717,14 @@ public class Teacher {
 
 	public void setAcceptOrderNumber(Long acceptOrderNumber) {
 		this.acceptOrderNumber = acceptOrderNumber;
+	}
+
+	public Long getMaskNumber() {
+		return maskNumber;
+	}
+
+	public void setMaskNumber(Long maskNumber) {
+		this.maskNumber = maskNumber;
 	}
 
 }

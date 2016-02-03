@@ -23,7 +23,7 @@ public class ExTeacher {
 		assembleSimpleNormal(teacher, map);
 		map.put("score", teacher.getScore());
 		map.put("likeno", teacher.getLikeNumber());
-		map.put("finishno", teacher.getFinishOrderNumber());
+		LikeNoShowUtil.setFinishNo(teacher, map);
 		ExList serviceProList = new ExArrayList();
 		for (ServicePro servicePro : teacher.getServicePros()) {
 			if (servicePro.getOnShow() && (!servicePro.getRemove())
