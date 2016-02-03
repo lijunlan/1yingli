@@ -34,7 +34,7 @@ public class Teacher {
 	@JoinColumn(name = "USER_ID", insertable = true, unique = true, updatable = true)
 	private User user;
 
-	@Column(name = "MASKNUMBER", nullable = true)
+	@Column(name = "MASKNUMBER", nullable = false)
 	private Long maskNumber;
 
 	@Column(name = "MASKFINISHNUMBER", nullable = false)
