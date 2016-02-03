@@ -34,6 +34,9 @@ public class Teacher {
 	@JoinColumn(name = "USER_ID", insertable = true, unique = true, updatable = true)
 	private User user;
 
+	@Column(name = "MASKNUMBER", nullable = true)
+	private Long maskNumber;
+
 	@Column(name = "USERNAME", nullable = false, unique = true)
 	private String username;
 
@@ -633,6 +636,14 @@ public class Teacher {
 
 	public void setRewardNumber(Long rewardNumber) {
 		this.rewardNumber = rewardNumber;
+	}
+
+	public Long getMaskNumber() {
+		return maskNumber;
+	}
+
+	public void setMaskNumber(Long maskNumber) {
+		this.maskNumber = maskNumber;
 	}
 
 }
