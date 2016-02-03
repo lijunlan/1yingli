@@ -80,5 +80,4 @@ public interface TeacherDao {
 
 	List<Teacher> queryListByTipAndLevel(int page, int pageSize, long tipMark, short level, boolean lazy);
 
-
 }
