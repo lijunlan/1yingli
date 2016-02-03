@@ -17,14 +17,13 @@ public class LikeNoShowUtil {
 	}
 
 	public static void setFinishNo(Teacher teacher, SuperMap map) {
-		Long finishNo = teacher.getMaskNumber() == null ? teacher.getFinishOrderNumber()
-				: teacher.getFinishOrderNumber() + teacher.getMaskNumber();
+		Long finishNo = teacher.getMaskFinishNumber();
 		map.put("finishNo", NoShowUtil.getStrNumber(finishNo));
 		map.put("finishno", NoShowUtil.getStrNumber(finishNo));
 	}
 
 	public static void setFinishNo(Teacher teacher, JSONObject map) {
-		Long finishNo = teacher.getFinishOrderNumber();
+		Long finishNo = teacher.getMaskFinishNumber();
 		map.put("finishNo", NoShowUtil.getStrNumber(finishNo));
 		map.put("finishnumber", NoShowUtil.getStrNumber(finishNo));
 	}

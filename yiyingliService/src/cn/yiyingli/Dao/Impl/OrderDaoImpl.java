@@ -100,7 +100,8 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 		session.flush();
 		Query query = session.createSQLQuery(
 				"update teacher set teacher.FINISHORDERNUMBER=(select count(*) from orders where orders.TEACHER_ID="
-						+ order.getTeacher().getId() + " and orders.STATE like '%1000%') where teacher.TEACHER_ID="
+						+ order.getTeacher().getId()
+						+ " and orders.STATE like '%1000%'),teacher.`MASKFINISHNUMBER`=teacher.`FINISHORDERNUMBER`+teacher.`MASKNUMBER` where teacher.TEACHER_ID="
 						+ order.getTeacher().getId());
 		query.executeUpdate();
 		if (order.getServiceId() != null) {
