@@ -205,11 +205,13 @@ public class PTeacherUtil {
 				showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, 0L, teacher, tipService);
 		teacher.setCommentNumber(0L);
 		teacher.setRewardNumber(0L);
+		teacher.setMaskNumber(0L);
+		teacher.setMaskFinishNumber(0L);
 		teacher.setLevel((short) 5);
 		teacher.setOrderNumber(0L);
 		teacher.setFinishOrderNumber(0L);
 		teacher.setLikeNumber(0L);
-		teacher.setLookNumber(0L);
+		teacher.setLookNumber(0L); 
 		teacher.setPassageNumber(0L);
 		teacher.setCheckPassageNumber(0L);
 		teacher.setRefusePassageNumber(0L);

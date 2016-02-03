@@ -37,6 +37,9 @@ public class Teacher {
 	@Column(name = "MASKNUMBER", nullable = true)
 	private Long maskNumber;
 
+	@Column(name = "MASKFINISHNUMBER", nullable = false)
+	private Long maskFinishNumber;
+
 	@Column(name = "USERNAME", nullable = false, unique = true)
 	private String username;
 
@@ -644,6 +647,14 @@ public class Teacher {
 
 	public void setMaskNumber(Long maskNumber) {
 		this.maskNumber = maskNumber;
+	}
+
+	public Long getMaskFinishNumber() {
+		return maskFinishNumber;
+	}
+
+	public void setMaskFinishNumber(Long maskFinishNumber) {
+		this.maskFinishNumber = maskFinishNumber;
 	}
 
 }
