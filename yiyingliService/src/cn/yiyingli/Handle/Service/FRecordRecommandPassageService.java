@@ -57,10 +57,12 @@ public class FRecordRecommandPassageService extends MsgService {
 		send.add(toBaidu);
 		String r = SendMsgToBaiduUtil.updataUserClickData(send.toString(),
 				"http://ds.recsys.baidu.com/s/136349/264830?token=68cff3a47d0eeedf083c16d5aabe1628");
-		JSONObject ro = JSONObject.fromObject(r);
-		if (ro.getInt("Code") != 100) {
-			setResMsg(MsgUtil.getErrorMsgByCode("53004"));
-			return;
+		if (!(r == null || r.equals(""))) {
+			JSONObject ro = JSONObject.fromObject(r);
+			if (ro.getInt("Code") != 100) {
+				setResMsg(MsgUtil.getErrorMsgByCode("53004"));
+				return;
+			}
 		}
 		setResMsg(MsgUtil.getSuccessMsg("Submit data to recommendation engine successfully"));
 	}

@@ -38,7 +38,7 @@ var changeTable = function (result) {
 	$("#infoTable").empty();
 	$("#infoTable").append(
 		"<tr><th>ID</th><th>姓名</th><th>上架</th><th>地址</th>"
-		+ "<th>邮箱</th><th>级别</th><th>英里数</th><th>详细信息</th></tr>");
+		+ "<th>用户名</th><th>邮箱</th><th>级别</th><th>英里数</th><th>详细信息</th></tr>");
 	var list = result.data;
 	$.each(list, function (index, data) {
 		var tmp = parseInt(data.createTime, 10);
@@ -48,6 +48,7 @@ var changeTable = function (result) {
 		row += data.name + "</td><td>";
 		row += data.onService + "</td><td>";
 		row += data.address + "</td><td>";
+		row += data.username + "</td><td>";
 		row += data.email + "</td><td>";
 		row += data.level + "</td><td>";
 		row += "<div><input id='input" + data.tid + "' type='text' value='" + data.mile + "'><button  type='button' onclick='editMile("
