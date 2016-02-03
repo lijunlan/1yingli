@@ -17,8 +17,12 @@ public class LikeNoShowUtil {
 	}
 
 	public static void setFinishNo(Teacher teacher, SuperMap map) {
-		Long finishNo = teacher.getMaskNumber() == null ? teacher.getFinishOrderNumber()
-				: teacher.getFinishOrderNumber() + teacher.getMaskNumber();
+		Long finishNo = 0L;
+		if (teacher.getMaskNumber() == null) {
+			finishNo = teacher.getFinishOrderNumber();
+		} else {
+			finishNo = teacher.getFinishOrderNumber() + teacher.getMaskNumber();
+		}
 		map.put("finishNo", NoShowUtil.getStrNumber(finishNo));
 		map.put("finishno", NoShowUtil.getStrNumber(finishNo));
 	}
