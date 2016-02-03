@@ -25,7 +25,7 @@ public class MGetTeacherListService extends MMsgService {
 
 	@Override
 	protected boolean checkData() {
-		return super.checkData() && getData().containsKey("page") || getData().containsKey("name");
+		return super.checkData() && getData().containsKey("page");
 	}
 
 	@Override
@@ -35,12 +35,8 @@ public class MGetTeacherListService extends MMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("32009"));
 			return;
 		}
-		List<Teacher> teachers = null;
-		if (getData().containsKey("name")) {
-			teachers = getTeacherService().queryByNameOrUsername(getData().getString("name"));
-		} else {
-			teachers = getTeacherService().queryList(Integer.valueOf(page), false);
-		}
+		List<Teacher> teachers = getTeacherService().queryList(Integer.valueOf(page), false);
+
 		ExList exTeachers = new ExArrayList();
 		for (Teacher teacher : teachers) {
 			SuperMap map = new SuperMap();

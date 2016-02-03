@@ -63,6 +63,7 @@ public class ExTeacher {
 		map.put("name", teacher.getName());
 		map.put("phone", teacher.getPhone());
 		map.put("tid", teacher.getId());
+		map.put("username", teacher.getUsername());
 		// map.put(key, value)
 		map.put("onService", teacher.getOnService());
 	}
