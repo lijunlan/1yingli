@@ -28,12 +28,12 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 	@Override
 	public Long saveWithUserNumber(Order order, User user) {
 		getHibernateTemplate().save(order);
-		Session session = getSessionFactory().getCurrentSession();
-		session.flush();
-		Query query = session
-				.createSQLQuery("update user set user.ORDERNUMBER=(select count(*) from orders where orders.USER_ID='"
-						+ user.getId() + "') where user.USER_ID=" + user.getId());
-		query.executeUpdate();
+//		Session session = getSessionFactory().getCurrentSession();
+//		session.flush();
+//		Query query = session
+//				.createSQLQuery("update user set user.ORDERNUMBER=(select count(*) from orders where orders.USER_ID='"
+//						+ user.getId() + "') where user.USER_ID=" + user.getId());
+//		query.executeUpdate();
 		return order.getId();
 	}
 

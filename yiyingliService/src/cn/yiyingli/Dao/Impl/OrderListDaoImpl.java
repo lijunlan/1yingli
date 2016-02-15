@@ -25,6 +25,12 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 	@Override
 	public Long saveAndReturnId(OrderList orderList) {
 		getHibernateTemplate().save(orderList);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session
+				.createSQLQuery("update user set user.ORDERNUMBER=(select count(*) from orders where orderlist.USER_ID='"
+						+ orderList.getUser().getId() + "') where user.USER_ID=" +  orderList.getUser().getId() );
+		query.executeUpdate();
 		return orderList.getId();
 	}
 
