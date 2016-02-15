@@ -209,9 +209,9 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 
 	@Override
 	public Teacher queryByUserId(long userid, boolean lazy) {
-		String hql = "from Teacher t where t.user.id=?  and t.onService=true";
+		String hql = "from Teacher t where t.user.id=?";
 		if (lazy) {
-			hql = "from Teacher t where t.user.id=?  and t.onService=true";
+			hql = "from Teacher t where t.user.id=?";
 		}
 		@SuppressWarnings("unchecked")
 		List<Teacher> list = getHibernateTemplate().find(hql, userid);
