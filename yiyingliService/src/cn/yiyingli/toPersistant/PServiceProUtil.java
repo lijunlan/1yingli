@@ -140,8 +140,8 @@ public class PServiceProUtil {
 		servicePro.setShowWeight3(jsonServicePro.getInt("showWeight3"));
 		servicePro.setShowWeight4(jsonServicePro.getInt("showWeight4"));
 		servicePro.setShowWeight5(jsonServicePro.getInt("showWeight5"));
-		servicePro.setHomeWeight(jsonServicePro.getInt("saleWeight"));
-		servicePro.setSaleWeight(jsonServicePro.getInt("homeWeight"));
+		servicePro.setHomeWeight(jsonServicePro.getInt("homeWeight"));
+		servicePro.setSaleWeight(jsonServicePro.getInt("saleWeight"));
 
 		servicePro.setCommentNo(0L);
 		servicePro.setOrderAllNo(0L);

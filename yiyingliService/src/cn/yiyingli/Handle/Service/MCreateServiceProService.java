@@ -42,7 +42,7 @@ public class MCreateServiceProService extends MMsgService {
 		String username = (String) getData().get("username");
 		User user = getUserService().queryWithTeacher(username, false);
 		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsgByCode("14001"));
+			setResMsg(MsgUtil.getErrorMsgByCode("32011"));
 			return;
 		}
 		Teacher teacher = user.getTeacher();
