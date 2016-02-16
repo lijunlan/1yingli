@@ -24,7 +24,7 @@ var changeTable = function (result) {
 		var d = new Date(tmp);
 		var row = "<tr><td>";
 		row += data.serviceProId ;
-		row += "<button onclick='remove("
+		row += "<button onclick='removeServicePro("
 			+ data.serviceProId + ")'>删除</button></td><td>";
 		row += "<a href=\"http://120.26.83.33/StuffServicet/teacherDetail.html?tid="+data.teacherId+"\" target=\"_blank\">"+data.teacherName + "</a></td><td>";
 		row += state2zh(data.state) + "</td><td>";
@@ -43,7 +43,7 @@ var changeTable = function (result) {
 	});
 };
 
-function remove(serviceProId){
+function removeServicePro(serviceProId){
 	myJson.method = "removeServicePro";
 	myJson.serviceProId = serviceProId.toString();
 	myAjax(myJson,get);
