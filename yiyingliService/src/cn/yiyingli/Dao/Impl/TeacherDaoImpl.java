@@ -174,7 +174,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	@Override
 	public Teacher queryForTeacher(long id) {
 		String hql = "from Teacher t where t.id=?";
-			@SuppressWarnings("unchecked")
+		@SuppressWarnings("unchecked")
 		List<Teacher> list = getHibernateTemplate().find(hql, id);
 		if (list.isEmpty())
 			return null;
@@ -203,7 +203,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 
 	@Override
 	public Teacher queryByUserId(long userid) {
-		String hql = "from Teacher t where t.user.id=?  and t.onService=true";
+		String hql = "from Teacher t where t.user.id=?";
 		@SuppressWarnings("unchecked")
 		List<Teacher> list = getHibernateTemplate().find(hql, userid);
 		if (list.isEmpty())
