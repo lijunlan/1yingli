@@ -108,8 +108,9 @@
 		<method name="getInfo" beanName="dGetInfoService" />
 		<method name="login" beanName="dLoginService" />
 	</style>
-	
+
 	<style name="manager">
+		<method name="removeServicePro" beanName="mRemoveServiceProService" />
 		<method name="validateServicePro" beanName="mValidateServiceProService" />
 		<method name="getServiceProList" beanName="mGetServiceProListService" />
 		<method name="createServicePro" beanName="mCreateServiceProService" />

@@ -23,7 +23,9 @@ var changeTable = function (result) {
 		var tmp = parseInt(data.createTime, 10);
 		var d = new Date(tmp);
 		var row = "<tr><td>";
-		row += data.serviceProId + "</td><td>";
+		row += data.serviceProId ;
+		row += "<button onclick='remove("
+			+ data.serviceProId + ")'>删除</button></td><td>";
 		row += "<a href=\"http://120.26.83.33/StuffServicet/teacherDetail.html?tid="+data.teacherId+"\" target=\"_blank\">"+data.teacherName + "</a></td><td>";
 		row += state2zh(data.state) + "</td><td>";
 		row += data.onshow + "</td><td>";
@@ -40,6 +42,12 @@ var changeTable = function (result) {
 		$("#infoTable").append(row);
 	});
 };
+
+function remove(serviceProId){
+	myJson.method = "removeServicePro";
+	myJson.serviceProId = serviceProId.toString();
+	myAjax(myJson,get);
+}
 
 function accept(serviceProId){
 	myJson.method = "validateServicePro";
