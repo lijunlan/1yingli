@@ -2577,7 +2577,7 @@
 			<ref local="userService" />
 		</property>
 	</bean>
-	
+
 	<bean id="mRemoveServiceProService" class="cn.yiyingli.Handle.Service.MRemoveServiceProService"
 		scope="prototype">
 		<property name="managerMarkService">
@@ -2586,6 +2586,11 @@
 		<property name="serviceProService">
 			<ref local="serviceProService" />
 		</property>
+	</bean>
+
+	<bean id="fGetSearchServiceProHintService"
+		class="cn.yiyingli.Handle.Service.FGetSearchServiceProHintService"
+		scope="prototype">
 	</bean>
 
 </beans>

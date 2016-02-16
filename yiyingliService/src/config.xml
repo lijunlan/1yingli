@@ -183,6 +183,7 @@
 		<method name="teacherDemand" beanName="fTeacherDemandService"></method>
 		<method name="getCheckNo" beanName="fGetCheckNoService"></method>
 		<method name="getTips" beanName="getTipsService"></method>
+		<method name="getSearchServiceProHint" beanName="fGetSearchServiceProHintService"></method>
 		<method name="getSearchHint" beanName="fGetSearchHintService"></method>
 		<method name="createApplication" beanName="createApplicationFormService"></method>
 		<method name="searchServicePro" beanName="fSearchServiceProService" />

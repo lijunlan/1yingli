@@ -37,8 +37,8 @@ public class FGetSearchHintService extends MsgService {
 			CloudsearchClient client = new CloudsearchClient(accessKeyId, accessKeySecret, host, opts,
 					KeyTypeEnum.ALIYUN);
 
-			String indexName = "yiyinglihint";
-			String suggestName = "hinttest";
+			String indexName = "yiyingli_21";
+			String suggestName = "yiyingli2_1hint";
 			CloudsearchSuggest suggest = new CloudsearchSuggest(indexName, suggestName, client);
 
 			suggest.setHit(10);
