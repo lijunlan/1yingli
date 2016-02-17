@@ -58,18 +58,18 @@ public class TCommentUserService extends TMsgService {
 	@Override
 	protected boolean checkData() {
 		return super.checkData() && getData().containsKey("orderId") && getData().containsKey("score")
-				&& getData().containsKey("serviceProId") && getData().containsKey("content");
+				&& getData().containsKey("content") || getData().containsKey("serviceProId");
 	}
 
 	@Override
 	public void doit() {
 		Teacher teacher = getTeacher();
-		long serviceProId = getData().getLong("serviceProId");
-		ServicePro servicePro = getServiceProService().query(serviceProId);
-		if (servicePro == null) {
-			setResMsg(MsgUtil.getErrorMsgByCode("42002"));
-			return;
+		ServicePro servicePro = null;
+		if (getData().containsKey("serviceProId")) {
+			long serviceProId = getData().getLong("serviceProId");
+			servicePro = getServiceProService().query(serviceProId);
 		}
+
 		try {
 			String oid = (String) getData().get("orderId");
 			Order order = getOrderService().queryByShowId(oid, false);
@@ -81,7 +81,7 @@ public class TCommentUserService extends TMsgService {
 				setResMsg(MsgUtil.getErrorMsgByCode("44001"));
 				return;
 			}
-			if (order.getServiceId().longValue() != servicePro.getId().longValue()) {
+			if (servicePro != null && order.getServiceId().longValue() != servicePro.getId().longValue()) {
 				setResMsg(MsgUtil.getErrorMsgByCode("44007"));
 				return;
 			}
