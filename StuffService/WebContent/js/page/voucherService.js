@@ -27,7 +27,7 @@ var changeTable = function (result) {
 		row += startTime.toLocaleString() + "</td><td>";
 		row += endTime.toLocaleString() + "</td><td>";
 		row += data.origin + "</td><td>";
-		row += data.orderId + "</td><td>";
+		row += data.orderListId + "</td><td>";
 		row += data.used + "</td>";
 		$("#voucherTable").append(row);
 	})

@@ -74,7 +74,7 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 	public Voucher query(String vno, boolean lazy) {
 		String hql = "from Voucher v where v.number=?";
 		if (lazy) {
-			hql = "from Voucher v left join fetch v.useOrder left join fetch v.ownUser where v.number=?";
+			hql = "from Voucher v left join fetch v.useOrderList left join fetch v.ownUser where v.number=?";
 		}
 		@SuppressWarnings("unchecked")
 		List<Voucher> list = getHibernateTemplate().find(hql, vno);
@@ -92,9 +92,9 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 
 			@Override
 			public List<Voucher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Voucher v left join fetch v.useOrder ORDER BY v.createTime DESC";
+				String hql = "from Voucher v left join fetch v.useOrderList ORDER BY v.createTime DESC";
 				if (lazy) {
-					hql = "from Voucher v left join fetch v.useOrder left join fetch v.ownUser ORDER BY v.createTime DESC";
+					hql = "from Voucher v left join fetch v.useOrderList left join fetch v.ownUser ORDER BY v.createTime DESC";
 				}
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
@@ -116,7 +116,7 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 			public List<Voucher> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from Voucher v where v.ownUser.id=" + userId + " ORDER BY v.createTime DESC";
 				if (lazy) {
-					hql = "from Voucher v left join fetch v.useOrder left join fetch v.ownUser where v.ownUser.id="
+					hql = "from Voucher v left join fetch v.useOrderList left join fetch v.ownUser where v.ownUser.id="
 							+ userId + " ORDER BY v.createTime DESC";
 				}
 				Query query = session.createQuery(hql);
