@@ -22,8 +22,6 @@ public class ExTeacherForBaidu {
 
 	public static JSONObject assembleTeacher(Teacher teacher) {
 		try {
-			// String title = teacher.gettService().getTitle();
-			// String content = teacher.gettService().getContent();
 			JSONArray jsonLabels = new JSONArray();
 			List<WorkExperience> workExperiences = teacher.getWorkExperiences();
 			for (WorkExperience w : workExperiences) {

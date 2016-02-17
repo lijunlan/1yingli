@@ -202,11 +202,6 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> queryListByTServiceId(long tServiceId, String state, int page, int pageSize, boolean lazy) {
-		return getOrderDao().queryListByTServiceId(tServiceId, state, page, pageSize, lazy);
-	}
-
-	@Override
 	public List<Order> queryListByTeacherId(long teacherId, String state, int page, boolean lazy) {
 		return queryListByTeacherId(teacherId, state, page, PAGE_SIZE_INT, lazy);
 	}
@@ -214,11 +209,6 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<Order> queryListByUserId(long userId, String state, int page, boolean lazy) {
 		return queryListByUserId(userId, state, page, PAGE_SIZE_INT, lazy);
-	}
-
-	@Override
-	public List<Order> queryListByTServiceId(long tServiceId, String state, int page, boolean lazy) {
-		return queryListByTServiceId(tServiceId, state, page, PAGE_SIZE_INT, lazy);
 	}
 
 	@Override

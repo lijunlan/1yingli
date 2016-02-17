@@ -179,10 +179,6 @@ public interface OrderService {
 
 	List<Order> queryListByUserId(long userId, String state, int page, boolean lazy);
 
-	List<Order> queryListByTServiceId(long tServiceId, String state, int page, int pageSize, boolean lazy);
-
-	List<Order> queryListByTServiceId(long tServiceId, String state, int page, boolean lazy);
-
 	List<Order> queryListByName(String name, final int page);
 
 	List<Order> queryListBySalaryState(short salaryState, final int page);

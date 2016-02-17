@@ -42,7 +42,7 @@ public class ApplicationFormDaoImpl extends HibernateDaoSupport implements Appli
 
 	@Override
 	public ApplicationForm query(long id) {
-		String hql = "from ApplicationForm af left join fetch af.user left join fetch af.teacher left join fetch af.teacher.tService where af.id=?";
+		String hql = "from ApplicationForm af left join fetch af.user left join fetch af.teacher where af.id=?";
 		@SuppressWarnings("unchecked")
 		List<ApplicationForm> list = getHibernateTemplate().find(hql, id);
 		if (list.isEmpty())
@@ -53,7 +53,7 @@ public class ApplicationFormDaoImpl extends HibernateDaoSupport implements Appli
 
 	@Override
 	public ApplicationForm query(String userId) {
-		String hql = "from ApplicationForm af left join fetch af.user left join fetch af.teacher left join fetch af.teacher.tService where af.user.id=?";
+		String hql = "from ApplicationForm af left join fetch af.user left join fetch af.teacher where af.user.id=?";
 		@SuppressWarnings("unchecked")
 		List<ApplicationForm> list = getHibernateTemplate().find(hql, userId);
 		if (list.isEmpty())
@@ -64,7 +64,7 @@ public class ApplicationFormDaoImpl extends HibernateDaoSupport implements Appli
 
 	@Override
 	public List<ApplicationForm> queryList() {
-		String hql = "from ApplicationForm af left join fetch af.user left join fetch af.teacher left join fetch af.teacher.tService ORDER BY af.createTime DESC";
+		String hql = "from ApplicationForm af left join fetch af.user left join fetch af.teacher ORDER BY af.createTime DESC";
 		@SuppressWarnings("unchecked")
 		List<ApplicationForm> list = getHibernateTemplate().find(hql);
 		return list;

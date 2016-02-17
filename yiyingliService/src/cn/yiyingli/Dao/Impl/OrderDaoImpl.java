@@ -129,7 +129,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 		String hql = "from Order o left join fetch o.createUser left join fetch o.teacher  where o.id=?";
 		if (lazy) {
 			hql = "from Order o left join fetch o.createUser left join fetch o.useVouchers "
-					+ "left join fetch o.teacher left join fetch o.tService where o.id=?";
+					+ "left join fetch o.teacher where o.id=?";
 		}
 		@SuppressWarnings("unchecked")
 		List<Order> list = getHibernateTemplate().find(hql, id);
@@ -155,7 +155,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 		String hql = "from Order o left join fetch o.createUser left join fetch o.teacher  where o.orderNo=?";
 		if (lazy) {
 			hql = "from Order o left join fetch o.createUser left join fetch o.useVouchers "
-					+ "left join fetch o.teacher left join fetch o.tService where o.orderNo=?";
+					+ "left join fetch o.teacher where o.orderNo=?";
 		}
 		@SuppressWarnings("unchecked")
 		List<Order> list = getHibernateTemplate().find(hql, id);
@@ -195,7 +195,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 						+ state + "%' ORDER BY o.createTime DESC";
 				if (lazy) {
 					hql = "from Order o left join fetch o.useVouchers left join fetch o.createUser "
-							+ "left join fetch o.tService where o.state like '" + state
+							+ " where o.state like '" + state
 							+ "%' ORDER BY o.createTime DESC";
 				}
 				Query query = session.createQuery(hql);
@@ -221,7 +221,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 						+ " and o.state not like '0100%' and o.state not like '%0200,0100%' ORDER BY o.createTime DESC";
 				if (lazy) {
 					hql = "from Order o left join fetch o.useVouchers left join fetch o.createUser "
-							+ "left join fetch o.tService where o.teacher.id=" + teacherId
+							+ " where o.teacher.id=" + teacherId
 							+ " and o.state not like '0100%' and o.state not like '%0200,0100%' ORDER BY o.createTime DESC";
 				}
 				Query query = session.createQuery(hql);
@@ -248,7 +248,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 						+ "%' and o.state not like '0100%' and o.state not like '%0200,0100%' ORDER BY o.createTime DESC";
 				if (lazy) {
 					hql = "from Order o left join fetch o.useVouchers left join fetch o.createUser "
-							+ "left join fetch o.tService where o.teacher.id=" + teacherId + "and o.state like '"
+							+ " where o.teacher.id=" + teacherId + "and o.state like '"
 							+ state
 							+ "%' and o.state not like '0100%' and o.state not like '%0200,0100%' ORDER BY o.createTime DESC";
 				}
@@ -304,7 +304,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 						+ " ORDER BY o.createTime DESC";
 				if (lazy) {
 					hql = "from Order o left join fetch o.useVouchers left join fetch o.teacher "
-							+ "left join fetch o.tService where o.createUser.id=" + userId
+							+ " where o.createUser.id=" + userId
 							+ " ORDER BY o.createTime DESC";
 				}
 				Query query = session.createQuery(hql);
@@ -360,33 +360,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 						+ "and o.state like '" + state + "%' ORDER BY o.createTime DESC";
 				if (lazy) {
 					hql = "from Order o left join fetch o.useVouchers left join fetch o.teacher "
-							+ "left join fetch o.tService where o.createUser.id=" + userId + "and o.state like '"
-							+ state + "%' ORDER BY o.createTime DESC";
-				}
-				Query query = session.createQuery(hql);
-				query.setFirstResult((page - 1) * pageSize);
-				query.setMaxResults(pageSize);
-				List<Order> list = query.list();
-				return list;
-			}
-		});
-		return list;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Order> queryListByTServiceId(final long tServiceId, final String state, final int page,
-			final int pageSize, final boolean lazy) {
-		List<Order> list = new ArrayList<Order>();
-		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Order>>() {
-
-			@Override
-			public List<Order> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Order o where o.tService.id=" + tServiceId + "and o.state like '" + state
-						+ "%' ORDER BY o.createTime DESC";
-				if (lazy) {
-					hql = "from Order o left join fetch o.useVouchers left join fetch o.teacher "
-							+ "left join fetch o.createUser where o.tService.id=" + tServiceId + "and o.state like '"
+							+ " where o.createUser.id=" + userId + "and o.state like '"
 							+ state + "%' ORDER BY o.createTime DESC";
 				}
 				Query query = session.createQuery(hql);
@@ -518,7 +492,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 						+ state + "%' ORDER BY od.name " + ("DESC".equals(rank) ? "DESC" : "ASC");
 				if (lazy) {
 					hql = "from Order o left join fetch o.useVouchers left join fetch o.createUser "
-							+ "left join fetch o.tService where o.state like '" + state
+							+ " where o.state like '" + state
 							+ "%' ORDER BY o.createTime DESC" + ("DESC".equals(rank) ? "DESC" : "ASC");
 				}
 				Query query = session.createQuery(hql);

@@ -18,8 +18,6 @@ public class ExSearchTeacher implements ExDataToShow<Teacher> {
 
 	private String name;
 
-	private String tServiceId;
-
 	private String title;
 
 	private String firstIdentity;
@@ -76,14 +74,6 @@ public class ExSearchTeacher implements ExDataToShow<Teacher> {
 		this.name = name;
 	}
 
-	public String gettServiceId() {
-		return tServiceId;
-	}
-
-	public void settServiceId(String tServiceId) {
-		this.tServiceId = tServiceId;
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -116,7 +106,6 @@ public class ExSearchTeacher implements ExDataToShow<Teacher> {
 		map.put("price", price);
 		map.put("introduce", introduce);
 		map.put("name", name);
-		map.put("tServiceId", tServiceId);
 		map.put("number", number);
 		map.put("title", title);
 		map.put("firstIdentity", firstIdentity);
@@ -148,7 +137,6 @@ public class ExSearchTeacher implements ExDataToShow<Teacher> {
 		map.put("price", price);
 		map.put("introduce", introduce);
 		map.put("name", name);
-		map.put("tServiceId", tServiceId);
 		map.put("number", number);
 		map.put("title", title);
 		map.put("firstIdentity", firstIdentity);
