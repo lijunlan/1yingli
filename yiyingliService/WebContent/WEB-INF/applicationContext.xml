@@ -1541,6 +1541,9 @@
 		<property name="notificationService">
 			<ref local="notificationService" />
 		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
 	</bean>
 
 	<bean id="mCreateTeacherService" class="cn.yiyingli.Handle.Service.MCreateTeacherService"
