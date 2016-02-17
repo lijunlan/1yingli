@@ -24,7 +24,6 @@ import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Service.RewardService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.NotifyUtil;
-import cn.yiyingli.Util.TimeTaskUtil;
 import cn.yiyingli.Util.WarnUtil;
 import cn.yiyingli.Weixin.Util.WXMessageUtil;
 
@@ -82,8 +81,6 @@ public class WXNotifyServlet extends HttpServlet {
 						if (Float.valueOf(money) / 100F == orderList.getPayMoney().floatValue()) {
 							String state = orderList.getState().split(",")[0];
 							if (state.equals(cn.yiyingli.Service.OrderService.ORDER_STATE_NOT_PAID)) {
-								orderList.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + ","
-										+ orderList.getState());
 								finishOrder(orderListService, orderList, notificationService);
 
 							} else {
@@ -125,9 +122,11 @@ public class WXNotifyServlet extends HttpServlet {
 			order.setPayTime(time);
 			order.setPayMethod(OrderService.ORDER_PAYMETHOD_WEIXIN);
 			NotifyUtil.notifyManager(new SuperMap().put("type", "waitConfirm").finishByJson());
-			TimeTaskUtil.sendTimeTask("change", "order",
-					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
-					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+			// TimeTaskUtil.sendTimeTask("change", "order",
+			// (Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24)
+			// + "",
+			// new SuperMap().put("state", order.getState()).put("orderId",
+			// order.getOrderNo()).finishByJson());
 		}
 		orderList.setState(OrderListService.ORDER_STATE_FINISH_PAID + "," + orderList.getState());
 		orderListService.updateAndPlusNumber(orderList);

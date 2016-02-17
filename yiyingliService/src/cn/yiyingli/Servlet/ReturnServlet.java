@@ -25,7 +25,6 @@ import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Service.RewardService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.NotifyUtil;
-import cn.yiyingli.Util.TimeTaskUtil;
 import cn.yiyingli.Util.WarnUtil;
 
 public class ReturnServlet extends HttpServlet {
@@ -271,9 +270,9 @@ public class ReturnServlet extends HttpServlet {
 			order.setPayTime(time);
 			order.setPayMethod(OrderService.ORDER_PAYMETHOD_PAYPAL);
 			NotifyUtil.notifyManager(new SuperMap().put("type", "waitConfirm").finishByJson());
-			TimeTaskUtil.sendTimeTask("change", "order",
-					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
-					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+//			TimeTaskUtil.sendTimeTask("change", "order",
+//					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
+//					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
 		}
 		orderList.setState(OrderListService.ORDER_STATE_FINISH_PAID + "," + orderList.getState());
 		orderListService.updateAndPlusNumber(orderList);
