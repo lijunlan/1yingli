@@ -13,7 +13,7 @@ public class ExOrderListUtil {
 	public static void assembleOrderListToTeacher(OrderList orderList, SuperMap map) {
 		map.put("batchNo", orderList.getOrderListNo());
 		map.put("userId", orderList.getUser().getId());
-		map.put("userName", orderList.getUser().getName());
+		map.put("userName", orderList.getCustomerName());
 		map.put("userUrl", orderList.getUser().getIconUrl());
 		map.put("payMoney", orderList.getPayMoney());
 		map.put("nowMoney", orderList.getNowMoney());
