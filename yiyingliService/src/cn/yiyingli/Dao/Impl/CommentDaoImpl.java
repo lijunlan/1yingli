@@ -215,7 +215,7 @@ public class CommentDaoImpl extends HibernateDaoSupport implements CommentDao {
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Comment>>() {
 			@Override
 			public List<Comment> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Comment c where c.servicePro.id=" + serviceProId + " and c.kind=" + kind
+				String hql = "from Comment c left join fetch c.user where c.servicePro.id=" + serviceProId + " and c.kind=" + kind
 						+ " ORDER BY c.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
