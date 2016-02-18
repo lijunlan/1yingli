@@ -36,7 +36,7 @@ public class POrderUtil {
 			order.setOnSale(false);
 			order.setServiceTitle(teacher.getTopic());
 			order.setQuantifier("分钟");
-			order.setNumeral(20F);
+			order.setNumeral(10F);
 			order.setServiceId(null);
 			order.setPrice(teacher.getPrice());
 			order.setOriginPrice(teacher.getPrice());
