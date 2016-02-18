@@ -154,10 +154,10 @@ public class Order {
 	@JoinColumn(name = "USER_ID", updatable = true)
 	private User createUser;
 
-	@ManyToOne(targetEntity = OrderList.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne(targetEntity = OrderList.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "ORDERLIST_ID", updatable = false)
 	private OrderList orderList;
-
+	
 	@ManyToOne(targetEntity = Distributor.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "DISTRIBUTOR_ID", updatable = true)
 	private Distributor distributor;

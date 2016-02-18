@@ -49,6 +49,7 @@ public class ExOrderUtil {
 		map.put("payTime", o.getPayTime());
 		map.put("teacherName", o.getTeacher().getName());
 		map.put("iconUrl", o.getIconUrl());
+		map.put("orderListId", o.getOrderList().getOrderListNo());
 		map.put("teacherAlipayNo", o.getAlipayNo());
 		map.put("teacherPaypalNo", o.getPaypalNo());
 		map.put("customerName", o.getCustomerName());
