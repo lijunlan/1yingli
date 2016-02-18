@@ -79,8 +79,8 @@ function showDetail(index, action) {
 	$("#modalDetail").append("<b>支付时间：</b>" + payTime.toLocaleString() + "<br>");
 	$("#modalDetail").append("<b>支付方式：</b>" + order[index].payMethod + "<br>");
 	$("#modalDetail").append("<b>导师确认时间：</b>" + order[index].okTime + "<br>");
-	$("#modalDetail").append("<b>交易金额：</b>" + order[index].price + "<br>");
-	$("#modalDetail").append("<b>原始价格：</b>" + order[index].originPrice + "<br>");
+	$("#modalDetail").append("<b>交易金额：</b>" + order[index].money + "<br>");
+	$("#modalDetail").append("<b>原始价格：</b>" + order[index].originMoney + "<br>");
 	$("#modalDetail").append("<b>分销人姓名：</b>" + order[index].distriName + "<br>");
 	$("#modalDetail").append("<b>客户姓名：</b>" + order[index].customerName + "<br>");
 	$("#modalDetail").append("<b>客户手机：</b>" + order[index].customerPhone + "<br>");
@@ -168,8 +168,8 @@ var changeTable = function (result) {
 		} else {
 			row += paytime.toLocaleString() + "</td><td>";
 		}
-		row += data.price + "</td><td>";
-		row += data.originPrice + "</td><td>";
+		row += data.money + "</td><td>";
+		row += data.originMoney + "</td><td>";
 		row += data.customerName + "</td><td>";
 		row += data.customerPhone + "</td><td>";
 		row += data.weixin + "</td><td>";
