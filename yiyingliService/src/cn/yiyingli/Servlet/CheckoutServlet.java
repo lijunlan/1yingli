@@ -75,7 +75,7 @@ public class CheckoutServlet extends HttpServlet {
 		UserMarkService userMarkService = (UserMarkService) getApplicationContext().getBean("userMarkService");
 		OrderListService orderListService = (OrderListService) getApplicationContext().getBean("orderListService");
 		LogUtil.info(
-				"receive>>>>PAYPAL orderId:" + request.getParameter("oid") + "\t uid:" + request.getParameter("uid"),
+				"receive>>>>PAYPAL orderId:" + request.getParameter("olid") + "\t uid:" + request.getParameter("uid"),
 				this.getClass());
 		// 商户网站订单系统中唯一订单号，必填
 		OrderList orderList = orderListService.queryByOrderListNo(request.getParameter("olid"));
@@ -128,11 +128,11 @@ public class CheckoutServlet extends HttpServlet {
 		checkoutDetails.put("PAYMENTREQUEST_0_AMT", price + "");
 		// 我们的订单号,以及微信端回调页面（可选）
 		if (request.getParameter("callback") == null) {
-			checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM", request.getParameter("oid"));
+			checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM", request.getParameter("olid"));
 			page = "http://www.1yingli.cn/myTutor";
 		} else {
 			checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM",
-					request.getParameter("oid") + "|" + request.getParameter("callback"));
+					request.getParameter("olid") + "|" + request.getParameter("callback"));
 			page = request.getParameter("callback");
 		}
 		checkoutDetails.put("REQCONFIRMSHIPPING", "0");
