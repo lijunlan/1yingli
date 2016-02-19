@@ -77,7 +77,7 @@ public class AlipayTransServlet extends HttpServlet {
 		// 服务器异步通知页面路径
 		String notify_url = "";
 		if (!"false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
-			notify_url = AlipayConfig.notify_url_debug;
+			notify_url = AlipayConfig.trans_notify_url_debug;
 		} else {
 			notify_url = AlipayConfig.trans_notify_url;
 		}
