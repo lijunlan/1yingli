@@ -93,8 +93,7 @@ public class FGetWXRewardUrlService extends MsgService {
 		String oid = ExRewardForPay.getRewardNo(reward.getId());
 
 		SuperMap map = new SuperMap();
-		map.put("extra_param", ExRewardForPay.getExtraParams(reward.getId(), teacherId, teacherName, money, uid,
-				passageId, userId, userName));
+		map.put("extra_param", ExRewardForPay.getExtraParams(reward.getId()));
 		map.put("content", "【一英里】" + subject);
 		map.put("oid", oid);
 		map.put("ip", getData().getString("IP").split(",")[0]);

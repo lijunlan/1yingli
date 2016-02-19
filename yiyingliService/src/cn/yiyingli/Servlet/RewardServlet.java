@@ -157,8 +157,7 @@ public class RewardServlet extends HttpServlet {
 		parms.put("show_url", show_url);
 		// parms.put("anti_phishing_key", anti_phishing_key);
 		// parms.put("exter_invoke_ip", exter_invoke_ip);
-		parms.put("extra_common_param", ExRewardForPay.getExtraParams(reward.getId(), Long.valueOf(teacherId),
-				teacherName, money, uid, passageId == null ? null : Long.valueOf(passageId), userId, userName));
+		parms.put("extra_common_param", ExRewardForPay.getExtraParams(reward.getId()));
 		// 过期时间 24h
 		parms.put("it_b_pay", "24h");
 

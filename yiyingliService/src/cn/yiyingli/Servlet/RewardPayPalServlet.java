@@ -135,9 +135,7 @@ public class RewardPayPalServlet extends HttpServlet {
 		checkoutDetails.put("PAYMENTREQUEST_0_AMT", price + "");
 		// 我们的订单号,以及微信端回调页面（可选）
 
-		checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM",
-				oid + "|" + ExRewardForPay.getExtraParams(reward.getId(), Long.valueOf(teacherId), teacherName, money,
-						uid, passageId == null ? null : Long.valueOf(passageId), userId, userName));
+		checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM", oid + "|" + ExRewardForPay.getExtraParams(reward.getId()));
 		checkoutDetails.put("REQCONFIRMSHIPPING", "0");
 		checkoutDetails.put("NOSHIPPING", "1");
 

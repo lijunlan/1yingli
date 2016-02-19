@@ -1,7 +1,6 @@
 package cn.yiyingli.ExchangeData;
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.Calendar;
 import cn.yiyingli.Persistant.Reward;
 import cn.yiyingli.Service.RewardService;
@@ -14,13 +13,8 @@ public class ExRewardForPay {
 				+ (100000000L + rewardId);
 	}
 
-	@SuppressWarnings("deprecation")
-	public static String getExtraParams(Long rewardId, Long teacherId, String teacherName, String money, String uid,
-			Long passageId, Long userId, String userName) {
-		return "rid^" + rewardId + "|" + "teacherId^" + teacherId + "|" + "teacherName^"
-				+ URLEncoder.encode(teacherName) + "|" + "money^" + money
-				+ (uid == null ? "" : "|userId^" + userId + "|" + "userName^" +  URLEncoder.encode(userName))
-				+ (passageId == null ? "" : "|passageId^" + passageId);
+	public static String getExtraParams(Long rewardId) {
+		return "rid^" + rewardId;
 	}
 
 	public static void dealReward(RewardService rewardService, String extra_common_param, String rewardNo) {
