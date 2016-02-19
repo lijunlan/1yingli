@@ -47,6 +47,9 @@ public class Order {
 	@Column(name = "SALARYSTATE", nullable = false)
 	private Short salaryState;
 
+	@Column(name = "TRANSTIME", nullable = true)
+	private String transTime;
+
 	@Column(name = "CUSTOMERNAME", nullable = false)
 	private String customerName;
 
@@ -157,7 +160,7 @@ public class Order {
 	@ManyToOne(targetEntity = OrderList.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "ORDERLIST_ID", updatable = false)
 	private OrderList orderList;
-	
+
 	@ManyToOne(targetEntity = Distributor.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "DISTRIBUTOR_ID", updatable = true)
 	private Distributor distributor;
@@ -472,6 +475,14 @@ public class Order {
 
 	public void setServiceSummary(String serviceSummary) {
 		this.serviceSummary = serviceSummary;
+	}
+
+	public String getTransTime() {
+		return transTime;
+	}
+
+	public void setTransTime(String transTime) {
+		this.transTime = transTime;
 	}
 
 }

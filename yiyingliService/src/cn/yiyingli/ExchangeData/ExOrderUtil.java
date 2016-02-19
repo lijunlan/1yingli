@@ -45,6 +45,7 @@ public class ExOrderUtil {
 		} else {
 			map.put("payMethod", "none");
 		}
+		map.put("transTime", o.getTransTime());
 		map.put("distriName", o.getDistributor() != null ? o.getDistributor().getName() : "");
 		map.put("payTime", o.getPayTime());
 		map.put("teacherName", o.getTeacher().getName());
