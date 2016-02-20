@@ -161,7 +161,7 @@ var changeTable = function (result) {
 		var paytime = new Date(pt);
 		var createtime = new Date(ct);
 		var row = "<tr><td>";
-		row += data.orderListId + "</td><td>";
+		row += data.orderListId+"<br>流水需支付："+data.orderListPayMoney + "</td><td>";
 		row += data.orderId + "</td><td>";
 		//按照学员是否支付来决定要显示的事“支付时间”或“下单时间”
 		if (state == "0100" || state == "0200") {
