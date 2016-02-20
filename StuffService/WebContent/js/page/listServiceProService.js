@@ -2,6 +2,8 @@ var page = 1;
 var url = window.location.href;
 var mid;
 
+var fun = 1;
+
 checkLogin();
 registNotify();
 document.getElementById("admin_name").innerText = $.cookie('mname');
@@ -46,21 +48,21 @@ var changeTable = function (result) {
 function removeServicePro(serviceProId){
 	myJson.method = "removeServicePro";
 	myJson.serviceProId = serviceProId.toString();
-	myAjax(myJson,get);
+	myAjax(myJson,getAll);
 }
 
 function accept(serviceProId){
 	myJson.method = "validateServicePro";
 	myJson.serviceProId = serviceProId.toString();
 	myJson.deal = true;
-	myAjax(myJson,get);
+	myAjax(myJson,getAll);
 }
 
 function refuse(serviceProId){
 	myJson.method = "validateServicePro";
 	myJson.serviceProId = serviceProId.toString();
 	myJson.deal = false;
-	myAjax(myJson,get);
+	myAjax(myJson,getAll);
 }
 
 $(function(){
@@ -84,13 +86,30 @@ function changePage(action) {
 	else
 		document.getElementById("lastPage").disabled = false;
 	myJson.method = "getServiceProList";
+	if(fun==2){
+		myJson.username=$("#inputSearchUsernameID").val();
+	}else{
+		delete myJson.username;
+	}
 	myJson.page = page.toString();
 	myAjax(myJson, changeTable);
 }
 
-function get() {
+function get(){
+	fun = 2;
+	page = document.getElementById("pageInput").value;
+	myJson.username=$("#inputSearchUsernameID").val();
+	myJson.method = "getServiceProList";
+	myJson.page = page.toString();
+	myAjax(myJson, changeTable);
+	if (document.getElementById("pageInput").value > 1)
+		document.getElementById("lastPage").disabled = false;
+}
+
+function getAll() {
 	fun = 1;
 	page = document.getElementById("pageInput").value;
+	delete myJson.username;
 	myJson.method = "getServiceProList";
 	myJson.page = page.toString();
 	myAjax(myJson, changeTable);

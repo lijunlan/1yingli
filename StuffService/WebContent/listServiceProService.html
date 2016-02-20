@@ -68,14 +68,11 @@
 						<li><a href="suggestionService.html"><span
 								class="am-icon-envelope-o"></span> 用户建议</a></li>
 						<li><a href="createPassageService.html"><span
-								class ="am-icon-leanpub"></span> 编辑文章</a>
-						</li>
+								class="am-icon-leanpub"></span> 编辑文章</a></li>
 						<li><a href="editServiceProService.html"><span
-								class ="am-icon-server"></span> 编辑服务</a>
-						</li>
+								class="am-icon-server"></span> 编辑服务</a></li>
 						<li><a href="editServiceProService.html"><span
-								class ="am-icon-list"></span> 查看服务</a>
-						</li>
+								class="am-icon-list"></span> 查看服务</a></li>
 					</ul></li>
 
 				<li><a onclick="logout()"><span class="am-icon-sign-out"></span>
@@ -87,9 +84,18 @@
 						<span class="am-icon-gears"></span> 功能
 					</p>
 					<div>
-						<button id="lastPage" onclick="changePage('last')" class="am-btn am-btn-default am-round">上一页</button>
+						<input id="inputSearchUsernameID" placeholder="导师用户名"
+							class="am-form-field am-round"></input> <br>
+						<button id="get" class="am-btn am-btn-secondary am-btn-block"
+							onclick="get()">获取导师的所有服务</button>
+						<br>
+						<button id="getAll" class="am-btn am-btn-secondary am-btn-block"
+							onclick="getAll()">获取所有服务</button>
+						<button id="lastPage" onclick="changePage('last')"
+							class="am-btn am-btn-default am-round">上一页</button>
 						<input id="pageInput" style="width: 20px"></input>
-						<button id="nextPage" onclick="changePage('next')" class="am-btn am-btn-default am-round">下一页</button>
+						<button id="nextPage" onclick="changePage('next')"
+							class="am-btn am-btn-default am-round">下一页</button>
 					</div>
 				</div>
 			</div>
@@ -100,10 +106,12 @@
 	<div class="admin-content">
 		<div class="am-cf am-padding">
 			<div class="am-fl am-cf">
-				<strong class="am-text-primary am-text-lg">首页</strong> / <small>功能模块</small> / <small>查看服务</small>
+				<strong class="am-text-primary am-text-lg">首页</strong> / <small>功能模块</small>
+				/ <small>查看服务</small>
 			</div>
 		</div>
-		<table class="am-table am-table-bordered am-table-centered" id="infoTable">
+		<table class="am-table am-table-bordered am-table-centered"
+			id="infoTable">
 		</table>
 	</div>
 	<br>
