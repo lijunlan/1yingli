@@ -138,7 +138,7 @@ public class Order {
 	private Boolean onSale;
 
 	@Column(name = "SERVICEKIND", nullable = true)
-	private int serviceKind;
+	private Integer serviceKind;
 
 	@Column(name = "ENDTIME", nullable = true)
 	private String endTime;
@@ -488,11 +488,11 @@ public class Order {
 		this.transTime = transTime;
 	}
 
-	public int getServiceKind() {
+	public Integer getServiceKind() {
 		return serviceKind;
 	}
 
-	public void setServiceKind(int serviceKind) {
+	public void setServiceKind(Integer serviceKind) {
 		this.serviceKind = serviceKind;
 	}
 
