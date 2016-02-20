@@ -20,6 +20,7 @@ public class POrderUtil {
 	public static void createOrder(User user, Teacher teacher, String phone, String email, String contact, String name,
 			String question, String resume, String selectTime, int count, ServicePro servicePro, Order order) {
 		if (servicePro != null) {
+			order.setServiceKind(servicePro.getKind());
 			order.setOnSale(servicePro.getOnSale());
 			order.setServiceTitle(StringUtil.replaceBlank(servicePro.getTitle().trim()));
 			order.setQuantifier(servicePro.getQuantifier());

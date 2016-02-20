@@ -63,6 +63,7 @@ public class ExOrderUtil {
 	}
 
 	private static void assembleOrderNormal(SuperMap map, Order o) {
+		map.put("kind",o.getServiceKind());
 		map.put("orderId", o.getOrderNo());
 		map.put("onsale", o.getOnSale());
 		map.put("createTime", o.getCreateTime());

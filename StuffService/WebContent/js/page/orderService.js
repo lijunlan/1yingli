@@ -58,7 +58,8 @@ function showDetail(index, action) {
 	var createTime = new Date(ct);
 	var payTime = new Date(pt);
 	$("#modalDetail").text("");
-	$("#modalDetail").append("<b>订单ID：</b>" + order[index].orderId + "<br>");
+	$("#modalDetail").append("<b>流水ID：</b>" + order[index].orderId + "<br>");
+	$("#modalDetail").append("<b>订单ID：</b>" + order[index].orderListId + "<br>");
 	$("#modalDetail").append("<b>课程名称：</b>" + order[index].title + "<br>");
 	//当订单是搜索出来的，应显示订单的所有状态，此时action=
 	if (action == 1) {
@@ -122,7 +123,7 @@ var changeTable = function (result) {
 	//当搜索的时候
 	if (fun == 2) {
 		$("#infoTable").append(
-			"<tr><th>订单号</th> <th>下单或支付时间</th> <th>交易金额</th> <th>原始价格</th>" +
+			"<tr><th>流水号</th><th>订单号</th> <th>下单或支付时间</th> <th>交易金额</th> <th>原始价格</th>" +
 			"<th>客户姓名</th> <th>电话</th> <th>微信</th> <th>邮箱</th> <th>导师</th><th>是否评价</th>" +
 			"<th>操作</th> <th>点击显示详情</th></tr>");
 	}
@@ -131,7 +132,7 @@ var changeTable = function (result) {
 		//当订单状态为尚未支付的时候，显示下单时间
 		if ((state == "0100" || state == "0200") && salaryState == 0) {
 			$("#infoTable").append(
-				"<tr><th>订单号</th> <th>下单时间</th> <th>交易金额</th> <th>原始价格</th>" +
+				"<tr><th>流水号</th><th>订单号</th> <th>下单时间</th> <th>交易金额</th> <th>原始价格</th>" +
 				"<th>客户姓名</th> <th>电话</th> <th>微信</th> <th>邮箱</th> <th>导师</th>" +
 				"<th>操作</th> <th>点击显示详情</th></tr>");
 		}
@@ -139,14 +140,14 @@ var changeTable = function (result) {
 		//此时学员已经支付，因此显示支付时间 
 		else if (salaryState == 1 || salaryState == 2) {
 			$("#infoTable").append(
-				"<tr><th>订单号</th> <th>支付时间</th> <th>交易金额</th> <th>原始价格</th>" +
+				"<tr><th>流水号</th><th>订单号</th> <th>支付时间</th> <th>交易金额</th> <th>原始价格</th>" +
 				"<th>客户姓名</th> <th>电话</th> <th>微信</th> <th>邮箱</th> <th>导师</th>" +
 				"<th>是否评价</th><th>操作</th> <th>点击显示详情</th></tr>");
 		} 
 		//订单已经支付，但是还没有到应该支付给导师那一步，变化仅仅是显示支付时间而不是下单时间
 		else {
 			$("#infoTable").append(
-				"<tr><th>订单号</th> <th>支付时间</th> <th>交易金额</th> <th>原始价格</th>" +
+				"<tr><th>流水号</th><th>订单号</th> <th>支付时间</th> <th>交易金额</th> <th>原始价格</th>" +
 				"<th>客户姓名</th> <th>电话</th> <th>微信</th> <th>邮箱</th> <th>导师</th>" +
 				"<th>操作</th> <th>点击显示详情</th></tr>");
 		}
@@ -160,7 +161,7 @@ var changeTable = function (result) {
 		var paytime = new Date(pt);
 		var createtime = new Date(ct);
 		var row = "<tr><td>";
-
+		row += data.orderListId + "</td><td>";
 		row += data.orderId + "</td><td>";
 		//按照学员是否支付来决定要显示的事“支付时间”或“下单时间”
 		if (state == "0100" || state == "0200") {
