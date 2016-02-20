@@ -50,6 +50,7 @@ public class ExOrderUtil {
 		map.put("payTime", o.getPayTime());
 		map.put("teacherName", o.getTeacher().getName());
 		map.put("iconUrl", o.getIconUrl());
+		map.put("orderListPayMoney", o.getOrderList().getPayMoney());
 		map.put("orderListId", o.getOrderList().getOrderListNo());
 		map.put("teacherAlipayNo", o.getAlipayNo());
 		map.put("teacherPaypalNo", o.getPaypalNo());
@@ -63,7 +64,7 @@ public class ExOrderUtil {
 	}
 
 	private static void assembleOrderNormal(SuperMap map, Order o) {
-		map.put("kind",o.getServiceKind());
+		map.put("kind", o.getServiceKind());
 		map.put("orderId", o.getOrderNo());
 		map.put("onsale", o.getOnSale());
 		map.put("createTime", o.getCreateTime());
