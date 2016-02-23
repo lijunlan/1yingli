@@ -72,6 +72,10 @@ public interface ServiceProService {
 	List<ServicePro> queryListByTeacherIdAndShow(long teacherId, boolean show, int page);
 
 	List<ServicePro> queryListByTeacherId(long teacherId, int page, int pageSize);
+	
+	List<ServicePro> queryListByState(short state, int page);
+	
+	List<ServicePro> queryListByState(short state, int page, int pageSize);
 
 	List<ServicePro> queryListByTeacherId(long teacherId, int page);
 

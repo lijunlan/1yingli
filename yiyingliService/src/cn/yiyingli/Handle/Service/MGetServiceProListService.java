@@ -37,7 +37,8 @@ public class MGetServiceProListService extends MMsgService {
 
 	@Override
 	public boolean checkData() {
-		return super.checkData() && getData().containsKey("page") || getData().containsKey("username");
+		return super.checkData() && getData().containsKey("page") || getData().containsKey("state")
+				|| getData().containsKey("username");
 	}
 
 	@Override
@@ -53,8 +54,11 @@ public class MGetServiceProListService extends MMsgService {
 			}
 			servicePros = getServiceProService().queryListByTeacherId(user.getTeacher().getId(), page,
 					ServiceProService.MANAGER_PAGE_SIZE);
+		} else if (getData().containsKey("state")) {
+			short state = Short.parseShort(getData().getString("state"));
+			servicePros = getServiceProService().queryListByState(state, page);
 		} else {
-			servicePros = getServiceProService().queryList(page,ServiceProService.MANAGER_PAGE_SIZE);
+			servicePros = getServiceProService().queryList(page, ServiceProService.MANAGER_PAGE_SIZE);
 		}
 		ExList toSend = new ExArrayList();
 		for (ServicePro servicePro : servicePros) {

@@ -66,6 +66,16 @@ function refuse(serviceProId){
 }
 
 $(function(){
+	var url = window.location.href;
+	var attri = url.split("#")[1];
+	if(attri!=null){
+		var key = attri.split("=")[0];
+		var value = attri.split("=")[1];
+		if(key=="state"&&value=="0"){
+			myJson.state=0;
+			fun=3;
+		}
+	}
 	myJson.method = "getServiceProList";
 	myJson.page = page.toString();
 	myAjax(myJson, changeTable);
@@ -88,8 +98,13 @@ function changePage(action) {
 	myJson.method = "getServiceProList";
 	if(fun==2){
 		myJson.username=$("#inputSearchUsernameID").val();
+		delete myJson.state;
+	}else if (fun==3){
+		myJson.state = 0;
+		delete myJson.username;
 	}else{
 		delete myJson.username;
+		delete myJson.state;
 	}
 	myJson.page = page.toString();
 	myAjax(myJson, changeTable);
@@ -98,6 +113,7 @@ function changePage(action) {
 function get(){
 	fun = 2;
 	page = document.getElementById("pageInput").value;
+	delete myJson.state;
 	myJson.username=$("#inputSearchUsernameID").val();
 	myJson.method = "getServiceProList";
 	myJson.page = page.toString();
@@ -110,6 +126,19 @@ function getAll() {
 	fun = 1;
 	page = document.getElementById("pageInput").value;
 	delete myJson.username;
+	delete myJson.state;
+	myJson.method = "getServiceProList";
+	myJson.page = page.toString();
+	myAjax(myJson, changeTable);
+	if (document.getElementById("pageInput").value > 1)
+		document.getElementById("lastPage").disabled = false;
+}
+
+function getByState() {
+	fun = 3;
+	page = document.getElementById("pageInput").value;
+	delete myJson.username;
+	myJson.state = 0;
 	myJson.method = "getServiceProList";
 	myJson.page = page.toString();
 	myAjax(myJson, changeTable);

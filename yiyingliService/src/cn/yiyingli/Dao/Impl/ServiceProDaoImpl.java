@@ -71,8 +71,9 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		session.flush();
 		Query query = session.createSQLQuery(
 				"update teacher set teacher.SERVICEPRONUMBERFORUSER=(select count(*) from servicepro where servicepro.REMOVE=false and servicepro.STATE="
-						+ ServiceProService.STATE_OK + " and servicepro.ONSHOW=true and servicepro.TEACHER_ID='" + servicePro.getTeacher().getId()
-						+ "') where teacher.TEACHER_ID=" + servicePro.getTeacher().getId());
+						+ ServiceProService.STATE_OK + " and servicepro.ONSHOW=true and servicepro.TEACHER_ID='"
+						+ servicePro.getTeacher().getId() + "') where teacher.TEACHER_ID="
+						+ servicePro.getTeacher().getId());
 		query.executeUpdate();
 		if (remove) {
 			query = session.createSQLQuery(
@@ -116,6 +117,25 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 			return null;
 		else
 			return list.get(0);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ServicePro> queryListByState(final short state, final int page, final int pageSize) {
+		List<ServicePro> list = new ArrayList<ServicePro>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ServicePro>>() {
+			@Override
+			public List<ServicePro> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.state="
+						+ state + " ORDER BY sp.createTime DESC";
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<ServicePro> list = query.list();
+				return list;
+			}
+		});
+		return list;
 	}
 
 	@SuppressWarnings("unchecked")

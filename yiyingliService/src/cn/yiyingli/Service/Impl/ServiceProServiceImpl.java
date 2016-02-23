@@ -131,6 +131,16 @@ public class ServiceProServiceImpl implements ServiceProService {
 	}
 
 	@Override
+	public List<ServicePro> queryListByState(short state, int page) {
+		return getServiceProDao().queryListByState(state, page, MANAGER_PAGE_SIZE);
+	}
+
+	@Override
+	public List<ServicePro> queryListByState(short state, int page, int pageSize) {
+		return getServiceProDao().queryListByState(state, page, pageSize);
+	}
+
+	@Override
 	public List<ServicePro> queryListByTeacherIdAndShow(long teacherId, boolean show, int page, int pageSize) {
 		return getServiceProDao().queryListByTeacherIdAndShow(teacherId, B2S(show), page, pageSize);
 	}
