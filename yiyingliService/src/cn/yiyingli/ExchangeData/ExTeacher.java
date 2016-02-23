@@ -86,6 +86,7 @@ public class ExTeacher {
 		map.put("simpleinfo", teacher.getSimpleInfo());
 		map.put("name", teacher.getName());
 		map.put("iconUrl", teacher.getIconUrl());
+		map.put("bgUrl", teacher.getBgUrl());
 		map.put("phone", teacher.getPhone());
 		map.put("mile", teacher.getMile());
 		map.put("email", teacher.getEmail());
@@ -155,12 +156,10 @@ public class ExTeacher {
 
 	public static void assembleDetailForUser(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
-		map.put("bgUrl", teacher.getBgUrl());
 	}
 
 	public static void assembleDetailForTeacher(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
-		map.put("bgUrl", teacher.getBgUrl());
 	}
 
 	public static void assembleDetailForManager(Teacher teacher, SuperMap map) {

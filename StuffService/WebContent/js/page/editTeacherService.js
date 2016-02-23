@@ -52,6 +52,7 @@ $(document).ready(function () {
 			}
 		}
 	});
+	getBgList();
 	var url = window.location.href;
 	var attri = url.split("?")[1];
 	if(attri!=null){
@@ -63,6 +64,27 @@ $(document).ready(function () {
 		}
 	}
 });
+
+function getBgList(){
+	myJson.method = "getBackgroundList";
+	myJson.page = 1;
+	myAjax(myJson,listBg);
+}
+
+function listBg(bg){
+	var bglist = bg.data;
+	var container = $("#container");
+	container.empty();
+	$.each(bglist,function(index,content){
+		var html  =  "<a href=\"javascript:selectPic(\""+content.url+"\");\"><img style=\"width:400px;\" src=\""+content.url+"\"/></a>";
+		container.append(html);
+	});
+}
+
+function selectPic(bgUrl){
+	$("#bgUrl").val(bgUrl);
+	$("#modalBgList").modal('close');
+}
 
 //注册导师
 function regist() {
@@ -97,6 +119,7 @@ function getAndParse(t) {
 	$("#address").val(t.address);
 	$("#email").val(t.email);
 	$("#iconUrl").val(t.iconUrl);
+	$("#bgUrl").val(t.bgUrl);
 	$("#littleIcon").attr('src',t.iconUrl);
 	$("#serviceTitle").val(t.topic);
 	$("#mileValue").val(t.mile);
@@ -203,6 +226,7 @@ function submit() {
 	teacher.address = $("#address").val();
 	teacher.email = $("#email").val();
 	teacher.iconUrl = $("#iconUrl").val();
+	teacher.bgUrl = $("#bgUrl").val();
 	teacher.email = $("#email").val();
 	teacher.introduce = $("#introduce").val();
 	teacher.workExperience = WorkExpList;
