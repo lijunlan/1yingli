@@ -52,7 +52,6 @@ $(document).ready(function () {
 			}
 		}
 	});
-	getBgList();
 	var url = window.location.href;
 	var attri = url.split("?")[1];
 	if(attri!=null){
@@ -63,6 +62,7 @@ $(document).ready(function () {
 			get();
 		}
 	}
+	getBgList();
 });
 
 function getBgList(){
