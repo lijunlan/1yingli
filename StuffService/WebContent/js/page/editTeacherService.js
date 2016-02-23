@@ -76,7 +76,7 @@ function listBg(bg){
 	var container = $("#container");
 	container.empty();
 	$.each(bglist,function(index,content){
-		var html  =  "<a href=\"javascript:selectPic('"+content.url+"');\"><img style=\"width:400px;\" src=\""+content.url+"\"/></a><br>";
+		var html  =  "<div><a href=\"javascript:selectPic('"+content.url+"');\"><img style=\"width:400px;\" src=\""+content.url+"\"/></a></div><br>";
 		container.append(html);
 	});
 }
