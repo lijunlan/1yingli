@@ -293,7 +293,7 @@ function onData(event) {
 		} else if (result.type == "waitConfirm") {
 			notifyMe("您有新的订单变化", "已有用户支付订单", "orderService.html?state=0300");
 		} else if (result.type == "checkServicePro") {
-			notifyMe("有新的服务需要审核", "有新的服务需要审核", "listServiceProService.html#state=0");
+			notifyMe("有新的服务需要审核", "有新的服务需要审核", "listServiceProService.html?state=0");
 		} 
 	}
 }

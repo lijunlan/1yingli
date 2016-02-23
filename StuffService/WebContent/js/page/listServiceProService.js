@@ -67,7 +67,7 @@ function refuse(serviceProId){
 
 $(function(){
 	var url = window.location.href;
-	var attri = url.split("#")[1];
+	var attri = url.split("?")[1];
 	if(attri!=null){
 		var key = attri.split("=")[0];
 		var value = attri.split("=")[1];
