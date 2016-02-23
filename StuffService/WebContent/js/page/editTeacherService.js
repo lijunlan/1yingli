@@ -67,7 +67,7 @@ $(document).ready(function () {
 
 function getBgList(){
 	myJson.method = "getBackgroundList";
-	myJson.page = 1;
+	delete myJson.page;
 	myAjax(myJson,listBg);
 }
 
@@ -76,9 +76,13 @@ function listBg(bg){
 	var container = $("#container");
 	container.empty();
 	$.each(bglist,function(index,content){
-		var html  =  "<a href=\"javascript:selectPic(\""+content.url+"\");\"><img style=\"width:400px;\" src=\""+content.url+"\"/></a>";
+		var html  =  "<a href=\"javascript:selectPic('"+content.url+"');\"><img style=\"width:400px;\" src=\""+content.url+"\"/></a><br>";
 		container.append(html);
 	});
+}
+
+function selectBg(){
+	$("#modalBgList").modal();
 }
 
 function selectPic(bgUrl){
