@@ -302,7 +302,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 
 			@Override
 			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.servicePros ORDER BY t.createTime DESC";
+				String hql = "from Teacher t ORDER BY t.createTime DESC";
 				if (lazy) {
 					hql = "from Teacher t left join fetch t.servicePros ORDER BY t.createTime DESC";
 				}

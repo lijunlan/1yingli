@@ -52,6 +52,16 @@ $(document).ready(function () {
 			}
 		}
 	});
+	var url = window.location.href;
+	var attri = url.split("?")[1];
+	if(attri!=null){
+		var key = attri.split("=")[0];
+		var value = attri.split("=")[1];
+		if(key=="username"&&value!=null){
+			$("#inputSearchUsername").val(value);
+			get();
+		}
+	}
 });
 
 //注册导师

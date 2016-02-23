@@ -44,8 +44,8 @@ var changeTable = function (result) {
 		var tmp = parseInt(data.createTime, 10);
 		var d = new Date(tmp);
 		var row = "<tr><td>";
-		row += data.tid + "</td><td>";
-		row += data.name + "</td><td>";
+		row += data.tid + "</td><td><a href=\"editTeacherService.html?username="+data.username+"\">";
+		row += data.name + "</a></td><td>";
 		row += data.onService + "</td><td>";
 		row += data.address + "</td><td>";
 		row += data.username + "</td><td>";
