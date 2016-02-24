@@ -25,7 +25,7 @@ var changeTable = function (result) {
 		var d = new Date(tmp);
 		var row = "<tr><td>";
 		row += data.rewardId + "</td><td>";
-		row += "<a href=\"http://120.26.83.33/StuffServicet/teacherDetail.html?tid="+data.teacherId+"\" target=\"_blank\">"+data.teacherName + "</a></td><td>";
+		row += "<a href=\"http://120.26.83.33/StuffService/teacherDetail.html?tid="+data.teacherId+"\" target=\"_blank\">"+data.teacherName + "</a></td><td>";
 		row += data.userName + "</td><td>";
 		row += data.passageId + "</td><td>";
 		row += d.toLocaleString() + "</td><td>";

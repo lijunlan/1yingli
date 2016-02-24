@@ -28,7 +28,7 @@ var changeTable = function (result) {
 		row += data.serviceProId ;
 		row += "<button onclick='removeServicePro("
 			+ data.serviceProId + ")'>删除</button></td><td>";
-		row += "<a href=\"http://120.26.83.33/StuffServicet/teacherDetail.html?tid="+data.teacherId+"\" target=\"_blank\">"+data.teacherName + "</a></td><td>";
+		row += "<a href=\"http://120.26.83.33/StuffService/teacherDetail.html?tid="+data.teacherId+"\" target=\"_blank\">"+data.teacherName + "</a></td><td>";
 		row += state2zh(data.state) + "</td><td>";
 		row += data.onshow + "</td><td>";
 		row += data.title + "</td><td>";
