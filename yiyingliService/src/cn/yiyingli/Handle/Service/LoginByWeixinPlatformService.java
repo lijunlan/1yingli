@@ -72,7 +72,7 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 				setResMsg(MsgUtil.getErrorMsgByCode("15003"));
 				return;
 			}
-			returnUser(user);
+			returnUser(user, true);
 		} else {
 			if (u.getWechatPlatformNo() == null) {
 				u.setWechatPlatformNo(weixinNo);
@@ -80,7 +80,7 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 			if (!u.getIconUrl().equals(icon)) {
 				u.setIconUrl(icon);
 			}
-			returnUser(u);
+			returnUser(u, false);
 		}
 
 	}

@@ -3,9 +3,11 @@ package cn.yiyingli.Handle;
 import java.util.Calendar;
 import java.util.UUID;
 
+import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Service.UserService;
+import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.TimeTaskUtil;
 
 public abstract class ULoginMsgService extends MsgService {
@@ -30,19 +32,21 @@ public abstract class ULoginMsgService extends MsgService {
 		this.userMarkService = userMarkService;
 	}
 
-	protected void returnUser(User user) {
+	protected void returnUser(User user, boolean register) {
 		String _UUID = UUID.randomUUID().toString();
 		getUserMarkService().save(String.valueOf(user.getId()), _UUID);
 		user.setLastLoginTime("" + Calendar.getInstance().getTimeInMillis());
 		getUserService().update(user);
+		SuperMap toSend = MsgUtil.getSuccessMap();
+		toSend.put("uid", _UUID);
+		toSend.put("nickName", user.getNickName());
+		toSend.put("iconUrl", user.getIconUrl());
+		toSend.put("username", user.getUsername());
+		toSend.put("register", register);
 		if (user.getTeacherState() == UserService.TEACHER_STATE_ON_SHORT) {
-			setResMsg("{\"uid\":\"" + _UUID + "\",\"nickName\":\"" + user.getNickName() + "\",\"iconUrl\":\""
-					+ (user.getIconUrl() != null ? user.getIconUrl() : "") + "\",\"state\":\"success\",\"teacherId\":\""
-					+ user.getTeacher().getId() + "\"}");
-		} else {
-			setResMsg("{\"uid\":\"" + _UUID + "\",\"nickName\":\"" + user.getNickName() + "\",\"iconUrl\":\""
-					+ (user.getIconUrl() != null ? user.getIconUrl() : "") + "\",\"state\":\"success\"}");
+			toSend.put("teacherId", user.getTeacher().getId());
 		}
+		setResMsg(toSend.finishByJson());
 		TimeTaskUtil.sendTimeTask("remove", "userMark",
 				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 7) + "", _UUID);
 	}

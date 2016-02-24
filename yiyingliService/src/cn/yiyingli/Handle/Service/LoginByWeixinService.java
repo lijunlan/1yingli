@@ -68,12 +68,12 @@ public class LoginByWeixinService extends ULoginMsgService {
 				setResMsg(MsgUtil.getErrorMsgByCode("15003"));
 				return;
 			}
-			returnUser(user);
+			returnUser(user,true);
 		} else {
 			if (!u.getIconUrl().equals(icon)) {
 				u.setIconUrl(icon);
 			}
-			returnUser(u);
+			returnUser(u,false);
 		}
 
 	}
