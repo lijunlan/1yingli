@@ -87,7 +87,7 @@ public class TAcceptOrderService extends TMsgService {
 		if (needEnsureTime) {
 			order.setState(OrderService.ORDER_STATE_WAIT_ENSURETIME + "," + order.getState());
 			message2Teacher = "尊敬的导师,您好,您已接受订单(" + order.getOrderNo()
-					+ "),请及时与用户确认时间,并在1天内到一英里平台登记服务时间,超时系统将自动取消订单哦。(用户姓名:" + order.getCustomerName() + ",电话:"
+					+ "),请及时与用户确认时间,并到一英里平台登记服务时间,超时系统将自动取消订单哦。(用户姓名:" + order.getCustomerName() + ",电话:"
 					+ order.getCustomerPhone() + ",邮箱:" + order.getCustomerEmail() + ",微信:" + order.getCustomerContact()
 					+ ")";
 			message2User = "尊敬的用户,您好,您的订单(" + order.getOrderNo() + ")已被导师(" + getTeacher().getName()

@@ -1,5 +1,7 @@
 package cn.yiyingli.Service.Impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import cn.yiyingli.Dao.OrderDao;
@@ -115,8 +117,18 @@ public class OrderServiceImpl implements OrderService {
 			// new SuperMap().put("state", order.getState()).put("orderId",
 			// order.getOrderNo()).finishByJson());
 		} else if (order.getState().startsWith(ORDER_STATE_WAIT_SERVICE)) {
-			TimeTaskUtil.sendTimeTask("change", "order",
-					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 14) + "",
+			long time = Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 14;
+			if (order.getOkTime() != null) {
+				SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+				String okTime = order.getOkTime();
+				try {
+					java.util.Date date = sdf1.parse(okTime);
+					time = date.getTime() + 1000 * 60 * 60 * 24 * 14;
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+			TimeTaskUtil.sendTimeTask("change", "order", time + "",
 					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
 		} else if (order.getState().startsWith(ORDER_STATE_USER_DISLIKE)) {
 			TimeTaskUtil.sendTimeTask("change", "order",

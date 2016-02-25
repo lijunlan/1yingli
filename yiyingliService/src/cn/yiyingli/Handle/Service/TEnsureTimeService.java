@@ -64,7 +64,7 @@ public class TEnsureTimeService extends TMsgService {
 		NotifyUtil.notifyTeacher(order,
 				"尊敬的导师,您好,您与用户(" + order.getCustomerName() + ",电话:" + order.getCustomerPhone() + ",邮箱:"
 						+ order.getCustomerEmail() + ",微信:" + order.getCustomerContact() + ")约定好时间,请在" + okTime
-						+ "进行服务.系统会在2周后自动确认服务完毕.",
+						+ "进行服务.系统会在"+okTime+"的2周后自动确认服务完毕.",
 				getNotificationService());
 		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
 				+ order.getTeacher().getName() + "，导师已经与用户约定好时间。" + okTime);
