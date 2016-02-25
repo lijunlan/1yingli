@@ -219,10 +219,10 @@ var getStateName = function (s) {
 			stateName = "客户完成支付，等待导师确认";
 			break;
 		case "0400":
-			stateName = "导师已经确认，等待确认时间";
+			stateName = "导师已经确认";
 			break;
 		case "0500":
-			stateName = "已经约定好时间，等待服务";
+			stateName = "等待服务";
 			break;
 		case "0620":
 			stateName = "服务完毕，用户不满";
@@ -232,6 +232,9 @@ var getStateName = function (s) {
 			break;
 		case "0800":
 			stateName = "退款成功";
+			break;
+		case "0900":
+			stateName = "服务完毕,等待用户确认";
 			break;
 		case "1000":
 			stateName = "等待双方评价";
@@ -276,7 +279,7 @@ $(function () {
 		myJson.page = page.toString();
 		//状态码0900现在并不存在
 		//状态码改过，之前0900是要支付导师，后来被单独了出来，因为对这个网页而言用起来方便，因此没有更改
-		if (state == "0900") {
+		if (state == "2000") {
 			salaryState = 1;
 			myJson.salaryState = salaryState.toString();
 			delete myJson.state;

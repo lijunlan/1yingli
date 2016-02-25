@@ -9,6 +9,7 @@ import cn.yiyingli.Dao.TeacherDao;
 import cn.yiyingli.Dao.UserDao;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.TimeTaskUtil;
@@ -87,11 +88,11 @@ public class OrderServiceImpl implements OrderService {
 	public void update(Order order, boolean addMile) {
 		if (addMile) {
 			if (!order.getOnSale()) {
-				// Teacher teacher = order.getTeacher();
+				Teacher teacher = order.getTeacher();
 				// float time = order.getTime();
 				// long m = (long) (10 * time);
 				// getTeacherDao().update(teacher);
-				// getTeacherDao().updateAddMile(teacher.getId(), m);
+				getTeacherDao().updateAddMile(teacher.getId(), 10);
 			}
 			getOrderDao().updateOrderWhenOrderFinish(order);
 		} else {
