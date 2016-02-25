@@ -51,7 +51,7 @@ public class SatisfyOrderService extends UMsgService {
 			return;
 		}
 		String state = order.getState().split(",")[0];
-		if (!OrderService.ORDER_STATE_WAIT_SERVICE.equals(state)) {
+		if (!OrderService.ORDER_STATE_SERVICE_FINISH.equals(state)) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
@@ -62,13 +62,13 @@ public class SatisfyOrderService extends UMsgService {
 		getOrderService().update(order, true);
 
 		NotifyUtil.notifyUserOrder(order,
-				"尊敬的学员,您好,您已经确认本次咨询(订单号:" + order.getOrderNo() + "),相信您与导师交流得很愉快,请在一英里平台对本次咨询进行评价哦,谢谢。", user,
+				"尊敬的用户,您好,您已经确认本次服务(订单号:" + order.getOrderNo() + "),相信您与导师合作得很愉快,请在一英里平台对本次服务进行评价哦,谢谢。", user,
 				getNotificationService());
 		NotifyUtil.notifyTeacher(order,
-				"尊敬的导师,您好,学员对本次咨询(订单号:" + order.getOrderNo() + ")很满意,感谢您的付出,您的酬劳将在24小时内到账,请注意查收。",
+				"尊敬的导师,您好,(订单号:" + order.getOrderNo() + ")用户已经确认服务,感谢您的付出,您的酬劳将在24小时内到账,请注意查收。",
 				getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + "，学员对本次咨询很满意。");
+		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
+				+ order.getTeacher().getName() + "，用户已经确认服务。");
 
 		setResMsg(MsgUtil.getSuccessMsg("satisfy order successfully"));
 	}

@@ -39,6 +39,7 @@ public class POrderUtil {
 			order.setQuantifier("分钟");
 			order.setNumeral(10F);
 			order.setServiceId(null);
+			order.setServiceKind(null);
 			order.setPrice(teacher.getPrice());
 			order.setOriginPrice(teacher.getPrice());
 			float price = teacher.getPrice() * (float) count;

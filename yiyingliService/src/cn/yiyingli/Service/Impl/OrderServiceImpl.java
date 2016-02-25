@@ -53,9 +53,11 @@ public class OrderServiceImpl implements OrderService {
 		} else {
 			getOrderDao().update(order);
 		}
-//		TimeTaskUtil.sendTimeTask("change", "order",
-//				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
-//				new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+		// TimeTaskUtil.sendTimeTask("change", "order",
+		// (Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) +
+		// "",
+		// new SuperMap().put("state", order.getState()).put("orderId",
+		// order.getOrderNo()).finishByJson());
 		return order.getOrderNo();
 	}
 
@@ -106,10 +108,12 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void updateAndSendTimeTask(Order order) {
 		getOrderDao().update(order);
-		if (order.getState().startsWith(ORDER_STATE_TEACHER_ACCEPT)) {
-//			TimeTaskUtil.sendTimeTask("change", "order",
-//					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
-//					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+		if (order.getState().startsWith(ORDER_STATE_WAIT_ENSURETIME)) {
+			// TimeTaskUtil.sendTimeTask("change", "order",
+			// (Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24)
+			// + "",
+			// new SuperMap().put("state", order.getState()).put("orderId",
+			// order.getOrderNo()).finishByJson());
 		} else if (order.getState().startsWith(ORDER_STATE_WAIT_SERVICE)) {
 			TimeTaskUtil.sendTimeTask("change", "order",
 					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 14) + "",
@@ -121,6 +125,10 @@ public class OrderServiceImpl implements OrderService {
 		} else if (order.getState().startsWith(ORDER_STATE_USER_REGRET)) {
 			TimeTaskUtil.sendTimeTask("change", "order",
 					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 5) + "",
+					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+		} else if (order.getState().startsWith(ORDER_STATE_SERVICE_FINISH)) {
+			TimeTaskUtil.sendTimeTask("change", "order",
+					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 7) + "",
 					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
 		}
 		// else if (order.getState().startsWith(ORDER_STATE_FINISH_PAID)) {
@@ -141,9 +149,11 @@ public class OrderServiceImpl implements OrderService {
 		if (order.getState().startsWith(ORDER_STATE_FINISH_PAID)) {
 			NotifyUtil.notifyManager(new SuperMap().put("type", "waitConfirm").finishByJson());
 		}
-//		TimeTaskUtil.sendTimeTask("change", "order",
-//				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
-//				new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+		// TimeTaskUtil.sendTimeTask("change", "order",
+		// (Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) +
+		// "",
+		// new SuperMap().put("state", order.getState()).put("orderId",
+		// order.getOrderNo()).finishByJson());
 	}
 
 	@Override

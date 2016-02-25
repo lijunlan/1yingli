@@ -2602,4 +2602,36 @@
 		scope="prototype">
 	</bean>
 
+	<bean id="tAbandonOrderService" class="cn.yiyingli.Handle.Service.TAbandonOrderService"
+		scope="prototype">
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+		<property name="notificationService">
+			<ref local="notificationService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+	
+	<bean id="tFinishOrderService" class="cn.yiyingli.Handle.Service.TFinishOrderService"
+		scope="prototype">
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+		<property name="notificationService">
+			<ref local="notificationService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
 </beans>

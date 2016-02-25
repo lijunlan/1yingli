@@ -121,11 +121,11 @@ public class CommentTeacherService extends UMsgService {
 			getCommentService().saveWithOrderAndTeacher(comment, order, teacher);
 
 			NotifyUtil.notifyTeacher(
-					order, "尊敬的导师，您好,学员(" + order.getCustomerName() + ")已经对本次咨询(订单号:" + order.getOrderNo()
-							+ "),进行了评价,评价分数:" + comment.getScore() + "分。评价内容:" + comment.getContent() + ".",
+					order, "尊敬的导师，您好,用户(" + order.getCustomerName() + ")已经对本次服务(订单号:" + order.getOrderNo()
+							+ ")进行了评价,评价分数:" + comment.getScore() + "分。评价内容:" + comment.getContent() + ".",
 					getNotificationService());
-			NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
-					+ order.getTeacher().getName() + ",学员已经对咨询进行了评价(评价分数:" + comment.getScore() + "分。评价内容:"
+			NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
+					+ order.getTeacher().getName() + ",用户已经对服务进行了评价(评价分数:" + comment.getScore() + "分。评价内容:"
 					+ comment.getContent() + ")");
 			setResMsg(MsgUtil.getSuccessMsg("comment successfully"));
 		} catch (NumberFormatException e) {

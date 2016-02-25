@@ -57,12 +57,12 @@ public class CancelOrderAfterEnsureTimeService extends UMsgService {
 		getOrderService().updateAndSendTimeTask(order);
 
 		NotifyUtil.notifyUserOrder(order,
-				"尊敬的学员，您已申请取消订单:" + order.getTeacher().getName() + ",订单号" + order.getOrderNo() + "，请等待导师同意", user,
+				"尊敬的用户，您已申请取消订单:" + order.getTeacher().getName() + ",订单号" + order.getOrderNo() + "，请等待导师同意", user,
 				getNotificationService());
-		NotifyUtil.notifyTeacher(order, "尊敬的导师，您好,学员(" + user.getName() + ")因故取消订单(订单号：" + order.getOrderNo()
+		NotifyUtil.notifyTeacher(order, "尊敬的导师，您好,用户(" + user.getName() + ")因故取消订单(订单号：" + order.getOrderNo()
 				+ ")，等待您的确认，请在5天内到一英里平台同意或拒绝，超时系统将会默认自动同意退款。", getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + ",学员申请取消并退款，等待导师的确认，");
+		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
+				+ order.getTeacher().getName() + ",用户申请取消并退款，等待导师的确认，");
 		setResMsg(MsgUtil.getSuccessMsg("cancel order after ensure time successfully"));
 	}
 

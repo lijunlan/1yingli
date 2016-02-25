@@ -8,7 +8,7 @@ import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
 
-public class TRefuseOrderService extends TMsgService {
+public class TAbandonOrderService extends TMsgService {
 
 	private OrderService orderService;
 
@@ -32,7 +32,7 @@ public class TRefuseOrderService extends TMsgService {
 
 	@Override
 	protected boolean checkData() {
-		return super.checkData() && getData().containsKey("orderId") && getData().containsKey("refuseReason");
+		return super.checkData() && getData().containsKey("orderId");
 	}
 
 	@Override
@@ -49,24 +49,18 @@ public class TRefuseOrderService extends TMsgService {
 			return;
 		}
 		String state = order.getState().split(",")[0];
-		if (!OrderService.ORDER_STATE_FINISH_PAID.equals(state)) {
+		if (!OrderService.ORDER_STATE_WAIT_SERVICE.equals(state)) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
-		String refuseReason = (String) getData().get("refuseReason");
-		order.setRefuseReason(refuseReason);
 		order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
 		getOrderService().update(order, false);
 
-		NotifyUtil.notifyUserOrder(
-				order, "尊敬的用户,抱歉的通知您,您的订单(" + order.getOrderNo() + ")已被导师(" + teacher.getName() + ")拒绝,拒绝理由:"
-						+ refuseReason + ",您可预约其他优秀的导师哦,预付款将在24小时内退还到您的账户。",
+		NotifyUtil.notifyUserOrder(order,
+				"尊敬的学员,您好,您的订单(" + order.getOrderNo() + "),导师(" + getTeacher().getName() + ")已经取消服务,本次预付款将在24小时内为您退款。",
 				order.getCreateUser(), getNotificationService());
-		NotifyUtil.notifyTeacher(order, "尊敬的导师，您已经拒绝订单号为" + order.getOrderNo() + "的订单。用户姓名：" + order.getCustomerName()
-				+ ",拒绝理由:" + refuseReason, getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + "，导师已经拒绝订单.拒绝理由：" + refuseReason);
-		setResMsg(MsgUtil.getSuccessMsg("refuse order successfully"));
+		setResMsg(MsgUtil.getSuccessMsg("finish order successfully"));
+
 	}
 
 }

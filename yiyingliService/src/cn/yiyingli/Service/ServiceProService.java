@@ -19,8 +19,18 @@ public interface ServiceProService {
 
 	public static final short STATE_FAILED = 2;
 
+	public static final int KIND_CONSULTATION = 1;
+
+	public static final int KIND_EXPERIENCE = 2;
+
+	public static final int KIND_MODIFY = 3;
+
+	public static final int KIND_TEACH = 4;
+
+	public static final int KIND_CUSTOMIZE = 5;
+
 	public static final int PAGE_SIZE = 3;
-	
+
 	public static final int ABOUT_PAGE_SIZE = 2;
 
 	public static final int TEACHER_PAGE_SIZE = 8;
@@ -72,9 +82,9 @@ public interface ServiceProService {
 	List<ServicePro> queryListByTeacherIdAndShow(long teacherId, boolean show, int page);
 
 	List<ServicePro> queryListByTeacherId(long teacherId, int page, int pageSize);
-	
+
 	List<ServicePro> queryListByState(short state, int page);
-	
+
 	List<ServicePro> queryListByState(short state, int page, int pageSize);
 
 	List<ServicePro> queryListByTeacherId(long teacherId, int page);

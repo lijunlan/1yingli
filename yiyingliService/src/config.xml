@@ -59,6 +59,8 @@
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
 	</style>
 	<style name="teacher">
+		<method name="abandonOrder" beanName="tAbandonOrderService" />
+		<method name="finishOrder" beanName="tFinishOrderService" />
 		<method name="editSimpleServicePro" beanName="tEditSimpleServiceProService" />
 		<method name="getServicePro" beanName="tGetServiceProService" />
 		<method name="removeServicePro" beanName="tRemoveServiceProService" />

@@ -5,11 +5,12 @@ import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
+import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
 
 /**
- * 导师接受学员订单
+ * 导师接受用户订单
  * 
  * @author sdll18
  *
@@ -59,22 +60,52 @@ public class TAcceptOrderService extends TMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
-		order.setState(OrderService.ORDER_STATE_TEACHER_ACCEPT + "," + order.getState());
+		if (order.getServiceId() != null && order.getServiceKind() != null) {
+			switch (order.getServiceKind().intValue()) {
+			case ServiceProService.KIND_CONSULTATION:
+			case ServiceProService.KIND_EXPERIENCE:
+			case ServiceProService.KIND_TEACH:
+				dealOrder(order, true);
+				break;
+			case ServiceProService.KIND_MODIFY:
+			case ServiceProService.KIND_CUSTOMIZE:
+				dealOrder(order, false);
+				break;
+			default:
+				dealOrder(order, true);
+				break;
+			}
+		} else {
+			dealOrder(order, true);
+		}
+		setResMsg(MsgUtil.getSuccessMsg("accept order successfully"));
+	}
+
+	public void dealOrder(Order order, boolean needEnsureTime) {
+		String message2Teacher = null;
+		String message2User = null;
+		if (needEnsureTime) {
+			order.setState(OrderService.ORDER_STATE_WAIT_ENSURETIME + "," + order.getState());
+			message2Teacher = "尊敬的导师,您好,您已接受订单(" + order.getOrderNo()
+					+ "),请及时与用户确认时间,并在1天内到一英里平台登记服务时间,超时系统将自动取消订单哦。(用户姓名:" + order.getCustomerName() + ",电话:"
+					+ order.getCustomerPhone() + ",邮箱:" + order.getCustomerEmail() + ",微信:" + order.getCustomerContact()
+					+ ")";
+			message2User = "尊敬的用户,您好,您的订单(" + order.getOrderNo() + ")已被导师(" + getTeacher().getName()
+					+ ")接受,导师将通过您提供的联系方式与您联系,请及时与导师确认服务时间哦。";
+		} else {
+			order.setState(OrderService.ORDER_STATE_WAIT_SERVICE + "," + order.getState());
+			message2Teacher = "尊敬的导师,您好,您已经接受用户(" + order.getCustomerName() + ",电话:" + order.getCustomerPhone() + ",邮箱:"
+					+ order.getCustomerEmail() + ",微信:" + order.getCustomerContact() + ")的订单(" + order.getOrderNo()
+					+ "),系统会在2周后自动确认服务完毕.";
+			message2User = "尊敬的用户,您好,您的订单(" + order.getOrderNo() + ")已被导师(" + getTeacher().getName()
+					+ ")接受,导师将通过您提供的联系方式与您联系,请等待服务。";
+		}
 		getOrderService().updateAndSendTimeTask(order);
 
-		NotifyUtil
-				.notifyUserOrder(order,
-						"尊敬的学员,您好,您的订单(" + order.getOrderNo() + ")已被导师(" + teacher.getName()
-								+ ")接受,导师将通过您提供的联系方式与您联系,请及时与导师确认咨询时间哦。",
-						order.getCreateUser(), getNotificationService());
-		NotifyUtil.notifyTeacher(order,
-				"尊敬的导师,您好,您已接受订单(" + order.getOrderNo() + "),请及时与学员确认时间,并在1天内到一英里平台登记咨询时间,超时系统将自动取消订单哦。(学员姓名:"
-						+ order.getCustomerName() + ",电话:" + order.getCustomerPhone() + ",邮箱:"
-						+ order.getCustomerEmail() + ",微信:" + order.getCustomerContact() + ")",
-				getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
+		NotifyUtil.notifyUserOrder(order, message2User, order.getCreateUser(), getNotificationService());
+		NotifyUtil.notifyTeacher(order, message2Teacher, getNotificationService());
+		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
 				+ order.getTeacher().getName() + "，导师已经接受订单。");
-		setResMsg(MsgUtil.getSuccessMsg("accept order successfully"));
 	}
 
 }

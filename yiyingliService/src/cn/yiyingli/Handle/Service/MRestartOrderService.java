@@ -55,11 +55,11 @@ public class MRestartOrderService extends MMsgService {
 		}
 		order.setState(ss[1] + "," + order.getState());
 		getOrderService().updateAndSendTimeTask(order);
-		NotifyUtil.notifyUserOrder(order, "尊敬的学员,您好,订单(" + order.getOrderNo() + ")状态已经被管理员恢复,您可以继续流程.",
+		NotifyUtil.notifyUserOrder(order, "尊敬的用户,您好,订单(" + order.getOrderNo() + ")状态已经被管理员恢复,您可以继续流程.",
 				order.getCreateUser(), getNotificationService());
 		NotifyUtil.notifyTeacher(order, "尊敬的导师,您好,订单(" + order.getOrderNo() + ")状态已经被管理员恢复,您可以继续流程.",
 				getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
+		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
 				+ order.getTeacher().getName() + ",订单状态已经被管理员(" + manager.getName() + ")恢复");
 		setResMsg(MsgUtil.getSuccessMsg("restart successfully"));
 	}
