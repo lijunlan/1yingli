@@ -14,7 +14,7 @@ import cn.yiyingli.Util.SendMsgToBaiduUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-public class FGetRecommandServiceProListService extends MsgService {
+public class FGetRecommendServiceProListService extends MsgService {
 
 	private UserMarkService userMarkService;
 

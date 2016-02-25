@@ -2602,8 +2602,8 @@
 		scope="prototype">
 	</bean>
 
-	<bean id="fGetRecommandServiceProListService"
-		class="cn.yiyingli.Handle.Service.FGetRecommandServiceProListService"
+	<bean id="fGetRecommendServiceProListService"
+		class="cn.yiyingli.Handle.Service.FGetRecommendServiceProListService"
 		scope="prototype">
 		<property name="serviceProService">
 			<ref local="serviceProService" />
