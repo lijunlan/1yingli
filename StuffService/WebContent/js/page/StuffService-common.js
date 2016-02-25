@@ -289,7 +289,7 @@ function onData(event) {
 		} else if (result.type == "managerIn") {
 			notifyMe("您有新的订单变化", "有订单需要客服介入", "orderService.html?state=1300");
 		} else if (result.type == "salary") {
-			notifyMe("您有新的订单变化", "有订单需要平台打款", "orderService.html?state=0900");
+			notifyMe("您有新的订单变化", "有订单需要平台打款", "orderService.html?state=2000");
 		} else if (result.type == "waitConfirm") {
 			notifyMe("您有新的订单变化", "已有用户支付订单", "orderService.html?state=0300");
 		} else if (result.type == "checkServicePro") {

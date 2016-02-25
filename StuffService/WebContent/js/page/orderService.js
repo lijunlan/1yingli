@@ -295,9 +295,11 @@ $(function () {
 			$('#orderState').find('option').eq(12).attr('selected', true);
 		} else if (state == "0900") {
 			// 暂时沿用之前的标识
-			$('#orderState').find('option').eq(15).attr('selected', true);
+			$('#orderState').find('option').eq(17).attr('selected', true);
 		} else if (state == "0300") {
 			$('#orderState').find('option').eq(2).attr('selected', true);
+		}else if (state == "2000") {
+			$('#orderState').find('option').eq(15).attr('selected', true);
 		}
 	} else {
 		//页面是管理员自己打开的，而不是点击提示框进来的
@@ -428,6 +430,9 @@ function get() {
 			break;
 		case "18":
 			salaryState = 2;
+			break;
+		case "19":
+			state = "0900";
 			break;
 		default:
 			state = "0100";
