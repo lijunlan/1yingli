@@ -56,7 +56,7 @@ public class MCreatePassageService extends MMsgService {
 		Passage passage = new Passage();
 		PPassageUtil.toSavePassageByManager(teacher, title, tag, summary, content, imageUrl, passage);
 
-		getPassageService().save(passage);
+		getPassageService().save(passage,true);
 		setResMsg(MsgUtil.getSuccessMsg("create passage successfully"));
 	}
 

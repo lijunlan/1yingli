@@ -46,8 +46,11 @@ public class PassageServiceImpl implements PassageService {
 	}
 
 	@Override
-	public void save(Passage passage) {
+	public void save(Passage passage, boolean updateToBaidu) {
 		getPassageDao().saveAndCount(passage, passage.getOwnTeacher());
+		if (updateToBaidu) {
+			SendMsgToBaiduUtil.updatePassageData(passage);
+		}
 	}
 
 	@Override

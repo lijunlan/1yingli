@@ -30,7 +30,7 @@ public class MRemoveServiceProService extends MMsgService {
 			return;
 		}
 		servicePro.setRemove(true);
-		getServiceProService().updateAndPlusNumber(servicePro, true);
+		getServiceProService().updateAndPlusNumber(servicePro, true, true);
 		setResMsg(MsgUtil.getSuccessMsg("remove servicePro successfully"));
 	}
 

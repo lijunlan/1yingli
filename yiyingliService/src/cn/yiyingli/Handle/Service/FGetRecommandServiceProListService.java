@@ -3,23 +3,22 @@ package cn.yiyingli.Handle.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.yiyingli.Dao.PassageDao;
-import cn.yiyingli.ExchangeData.ExPassage;
+import cn.yiyingli.ExchangeData.ExServicePro;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
-import cn.yiyingli.Persistant.Passage;
-import cn.yiyingli.Service.PassageService;
+import cn.yiyingli.Persistant.ServicePro;
+import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.SendMsgToBaiduUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-public class FGetRecommendPassageListService extends MsgService {
+public class FGetRecommandServiceProListService extends MsgService {
 
 	private UserMarkService userMarkService;
 
-	private PassageService passageService;
+	private ServiceProService serviceProService;
 
 	public UserMarkService getUserMarkService() {
 		return userMarkService;
@@ -29,27 +28,27 @@ public class FGetRecommendPassageListService extends MsgService {
 		this.userMarkService = userMarkService;
 	}
 
-	public PassageService getPassageService() {
-		return passageService;
+	public ServiceProService getServiceProService() {
+		return serviceProService;
 	}
 
-	public void setPassageService(PassageService passageService) {
-		this.passageService = passageService;
+	public void setServiceProService(ServiceProService serviceProService) {
+		this.serviceProService = serviceProService;
 	}
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("passageId");
+		return getData().containsKey("serviceProId");
 	}
 
 	@Override
 	public void doit() {
-		String passageId = (String) getData().get("passageId");
-		String result = SendMsgToBaiduUtil.getRecommendPassageListAbout(passageId);
-		getPassageInfo(result);
+		String serviceProId = getData().getString("serviceProId");
+		String result = SendMsgToBaiduUtil.getRecommendServiceProListAbout(serviceProId);
+		getServiceProInfo(result);
 	}
 
-	private void getPassageInfo(String result) {
+	private void getServiceProInfo(String result) {
 		JSONObject r = JSONObject.fromObject(result);
 		if (r.getInt("Code") != 300 && r.getInt("Code") != 301 && r.getInt("Code") != 302 && r.getInt("Code") != 303
 				&& r.getInt("Code") != 304) {
@@ -63,23 +62,23 @@ public class FGetRecommendPassageListService extends MsgService {
 			String pid = jobj.getString("ItemId");
 			ids.add(Long.valueOf(pid));
 		}
-		List<Passage> passages = null;
+		List<ServicePro> servicePros = null;
 		if (ids.size() > 0) {
-			passages = getPassageService().queryListByIds(ids);
-			if (passages.size() == 0) {
-				passages = getPassageService().queryListByRecommand(0, PassageDao.PASSAGE_STATE_OK, true);
+			servicePros = getServiceProService().queryListByIds(ids);
+			if (servicePros.size() == 0) {
+				servicePros = getServiceProService().queryListByRecommand(0, ServiceProService.STATE_OK, true);
 			}
 		} else {
-			passages = getPassageService().queryListByRecommand(0, PassageDao.PASSAGE_STATE_OK, true);
+			servicePros = getServiceProService().queryListByRecommand(0, ServiceProService.STATE_OK, true);
 		}
 		SuperMap map = MsgUtil.getSuccessMap();
-		JSONArray jsonPassages = new JSONArray();
-		for (Passage passage : passages) {
+		JSONArray jsonServicePros = new JSONArray();
+		for (ServicePro servicePro : servicePros) {
 			SuperMap m = new SuperMap();
-			ExPassage.assembleSimple(passage, m);
-			jsonPassages.add(m.finish());
+			ExServicePro.assembleSimpleServiceProForUser(servicePro, m);
+			jsonServicePros.add(m.finish());
 		}
-		map.put("data", jsonPassages.toString());
+		map.put("data", jsonServicePros.toString());
 		setResMsg(map.finishByJson());
 	}
 }

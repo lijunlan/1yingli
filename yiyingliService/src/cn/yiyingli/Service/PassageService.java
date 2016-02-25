@@ -13,7 +13,7 @@ public interface PassageService {
 
 	public static final int PAGE_SIZE_TEACHER = 10;
 
-	void save(Passage passage);
+	void save(Passage passage, boolean updateToBaidu);
 
 	Long saveAndReturnId(Passage passage);
 

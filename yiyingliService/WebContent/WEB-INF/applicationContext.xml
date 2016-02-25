@@ -2602,4 +2602,23 @@
 		scope="prototype">
 	</bean>
 
+	<bean id="fGetRecommandServiceProListService"
+		class="cn.yiyingli.Handle.Service.FGetRecommandServiceProListService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="fRecordRecommandServiceProService"
+		class="cn.yiyingli.Handle.Service.FRecordRecommandServiceProService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
 </beans>
