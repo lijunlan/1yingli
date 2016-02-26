@@ -25,7 +25,7 @@ public class MEditServiceProService extends MMsgService {
 
 	@Override
 	public void doit() {
-		ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"));
+		ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"), false);
 		if (servicePro == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("42002"));
 			return;

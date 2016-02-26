@@ -26,8 +26,8 @@ public class ExServiceProForBaidu {
 		indexed.put("Content", StringUtil.subStringHTML(servicePro.getContent(), 0xffffff, ""));
 		JSONArray labels = new JSONArray();
 		JSONObject l = new JSONObject();
-		// l.put("Label", servicePro.getKind() + "");
-		// l.put("Weight", 5);
+		l.put("Label", servicePro.getTeacher().getId() + "");
+		l.put("Weight", 1);
 		labels.add(l);
 
 		indexed.put("Labels", labels);

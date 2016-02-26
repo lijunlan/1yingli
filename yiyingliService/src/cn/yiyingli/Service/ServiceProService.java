@@ -55,7 +55,7 @@ public interface ServiceProService {
 
 	void updateAndPlusNumber(ServicePro servicePro, boolean remove, boolean updateToBaidu);
 
-	ServicePro query(long id);
+	ServicePro query(long id, boolean withTeacher);
 
 	ServicePro queryByUser(long id);
 

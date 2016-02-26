@@ -32,6 +32,8 @@ public interface ServiceProDao {
 
 	ServicePro querySimple(long id);
 
+	ServicePro queryDetail(long id);
+
 	ServicePro queryByUser(long id);
 
 	ServicePro queryByTeacherIdAndServiceId(long teacherId, long serviceId);
@@ -62,5 +64,6 @@ public interface ServiceProDao {
 	List<ServicePro> queryListOtherByTeacher(long serviceProId, long teacherId, int page, int pageSize);
 
 	long queryListBySaleNo();
+
 
 }

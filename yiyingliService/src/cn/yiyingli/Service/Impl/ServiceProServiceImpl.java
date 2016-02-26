@@ -101,8 +101,12 @@ public class ServiceProServiceImpl implements ServiceProService {
 	}
 
 	@Override
-	public ServicePro query(long id) {
-		return getServiceProDao().querySimple(id);
+	public ServicePro query(long id, boolean withTeacher) {
+		if (!withTeacher) {
+			return getServiceProDao().querySimple(id);
+		} else {
+			return getServiceProDao().queryDetail(id);
+		}
 	}
 
 	@Override

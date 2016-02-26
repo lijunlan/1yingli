@@ -41,7 +41,7 @@ public class FGetCommentListByServiceProService extends MsgService {
 
 	@Override
 	public void doit() {
-		ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"));
+		ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"),false);
 		if (servicePro == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22008"));
 			return;

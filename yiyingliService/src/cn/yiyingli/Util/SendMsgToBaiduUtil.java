@@ -20,30 +20,30 @@ import cn.yiyingli.ExchangeData.ExTeacherForBaidu;
 import cn.yiyingli.Persistant.Passage;
 import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.Teacher;
-import cn.yiyingli.Service.ServiceProService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class SendMsgToBaiduUtil {
 
 	public static void main(String[] args) {
-		for (int i = 1; i <= 360; i++) {
+		for (int i = 360; i <= 362; i++) {
 			String r = sendPost("http://service.1yingli.cn/yiyingliService/manage",
 					"{\"serviceProId\":\"" + i + "\",\"style\":\"function\",\"method\":\"getServicePro\"}");
 			JSONObject rjson = JSONObject.fromObject(r);
+			System.out.println(rjson.toString());
 			if (rjson.getString("state").equals("success")) {
 				JSONObject toBaidu = new JSONObject();
 				toBaidu.put("Version", 1.0);
 				toBaidu.put("ItemId", i + "");
 				toBaidu.put("DisplaySwitch", "On");
-				toBaidu.put("Url", "http://www.1yingli.cn/service/" +i);
+				toBaidu.put("Url", "http://www.1yingli.cn/service/" + i);
 				JSONObject indexed = new JSONObject();
-				indexed.put("Title", servicePro.getTitle());
-				indexed.put("Content", StringUtil.subStringHTML(servicePro.getContent(), 0xffffff, ""));
+				indexed.put("Title", rjson.getString("title"));
+				indexed.put("Content", StringUtil.subStringHTML(rjson.getString("content"), 0xffffff, ""));
 				JSONArray labels = new JSONArray();
 				JSONObject l = new JSONObject();
-				// l.put("Label", servicePro.getKind() + "");
-				// l.put("Weight", 5);
+				l.put("Label", rjson.getString("teacherId"));
+				l.put("Weight", 1);
 				labels.add(l);
 
 				indexed.put("Labels", labels);
@@ -52,7 +52,7 @@ public class SendMsgToBaiduUtil {
 				JSONObject properties = new JSONObject();
 				properties.put("Quality", 1);
 				JSONArray category = new JSONArray();
-				category.add(servicePro.getKind());
+				category.add(rjson.getInt("kind"));
 				properties.put("Category", category);
 				DateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
 				properties.put("CreateTime", formatter.format(new Date()));

@@ -94,6 +94,17 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		else
 			return list.get(0);
 	}
+	
+	@Override
+	public ServicePro queryDetail(long id) {
+		String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.id=?";
+		@SuppressWarnings("unchecked")
+		List<ServicePro> list = getHibernateTemplate().find(hql, id);
+		if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
 
 	@Override
 	public ServicePro queryByUser(long id) {

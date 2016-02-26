@@ -24,7 +24,7 @@ public class MValidateServiceProService extends MMsgService {
 
 	@Override
 	public void doit() {
-		ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"));
+		ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"), true);
 		boolean deal = getData().getBoolean("deal");
 		boolean toBaidu = false;
 		if (deal) {
