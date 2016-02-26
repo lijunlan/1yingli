@@ -33,7 +33,7 @@ public class TCreateServiceProService extends TMsgService {
 		ServicePro servicePro = new ServicePro();
 		Teacher teacher = getTeacher();
 		PServiceProUtil.assembleWithTeacherByTeacherCreate(teacher, jsonServicePro, servicePro);
-		getServiceProService().saveAndPlusNumber(servicePro, false);
+		getServiceProService().saveAndPlusNumber(servicePro, false,false);
 		NotifyUtil.notifyManager(new SuperMap().put("type", "checkServicePro").finishByJson());
 		setResMsg(MsgUtil.getSuccessMsg("create servicePro successfully"));
 	}

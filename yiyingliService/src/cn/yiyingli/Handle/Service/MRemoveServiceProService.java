@@ -24,13 +24,13 @@ public class MRemoveServiceProService extends MMsgService {
 
 	@Override
 	public void doit() {
-		ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"));
+		ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"), true);
 		if (servicePro == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("42002"));
 			return;
 		}
 		servicePro.setRemove(true);
-		getServiceProService().updateAndPlusNumber(servicePro, true);
+		getServiceProService().updateAndPlusNumber(servicePro, true, true);
 		setResMsg(MsgUtil.getSuccessMsg("remove servicePro successfully"));
 	}
 

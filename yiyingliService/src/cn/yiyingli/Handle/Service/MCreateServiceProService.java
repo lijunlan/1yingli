@@ -49,7 +49,7 @@ public class MCreateServiceProService extends MMsgService {
 		ServicePro servicePro = new ServicePro();
 		JSONObject jsonServicePro = getData().getJSONObject("servicePro");
 		PServiceProUtil.assembleWithTeacherByManager(teacher, jsonServicePro, servicePro);
-		getServiceProService().saveAndPlusNumber(servicePro, true);
+		getServiceProService().saveAndPlusNumber(servicePro, true, true);
 		setResMsg(MsgUtil.getSuccessMsg("create ServicePro successfully"));
 	}
 

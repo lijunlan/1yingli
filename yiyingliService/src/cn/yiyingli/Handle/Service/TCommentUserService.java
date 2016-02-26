@@ -67,7 +67,7 @@ public class TCommentUserService extends TMsgService {
 		ServicePro servicePro = null;
 		if (getData().containsKey("serviceProId")) {
 			long serviceProId = getData().getLong("serviceProId");
-			servicePro = getServiceProService().query(serviceProId);
+			servicePro = getServiceProService().query(serviceProId,false);
 		}
 
 		try {

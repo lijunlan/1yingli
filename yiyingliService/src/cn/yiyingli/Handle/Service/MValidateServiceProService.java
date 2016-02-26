@@ -24,15 +24,18 @@ public class MValidateServiceProService extends MMsgService {
 
 	@Override
 	public void doit() {
-		ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"));
+		ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"), true);
 		boolean deal = getData().getBoolean("deal");
+		boolean toBaidu = false;
 		if (deal) {
 			servicePro.setState(ServiceProService.STATE_OK);
 			servicePro.setOnShow(true);
+			toBaidu = true;
 		} else {
 			servicePro.setState(ServiceProService.STATE_FAILED);
+			toBaidu = false;
 		}
-		getServiceProService().updateAndPlusNumber(servicePro, false);
+		getServiceProService().updateAndPlusNumber(servicePro, false, toBaidu);
 		setResMsg(MsgUtil.getSuccessMsg("validate servicePro successfully"));
 	}
 

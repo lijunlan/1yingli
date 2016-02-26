@@ -30,7 +30,7 @@ public class TEditSimpleServiceProService extends TMsgService {
 
 	@Override
 	public void doit() {
-		ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"));
+		ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"),false);
 		PServiceProUtil.editPriceByTeacher(Float.valueOf(getData().getString("price")),
 				Float.valueOf(getData().getString("numeral")), getData().getInt("count"),
 				getData().getString("quantifier"), getData().getBoolean("onsale"),

@@ -39,6 +39,8 @@ public interface ServiceProService {
 
 	public static final int MANAGER_PAGE_SIZE = 12;
 
+	public static final int PAGE_SIZE_RECOMMAND = 5;
+
 	public static final int HOMEPAGE_PAGE_SIZE = 12;
 
 	public static final int SALEPAGE_PAGE_SIZE = 12;
@@ -47,7 +49,7 @@ public interface ServiceProService {
 
 	void save(ServicePro servicePro);
 
-	void saveAndPlusNumber(ServicePro servicePro, boolean byManager);
+	void saveAndPlusNumber(ServicePro servicePro, boolean byManager, boolean updateToBaidu);
 
 	Long saveAndReturnId(ServicePro servicePro);
 
@@ -61,9 +63,9 @@ public interface ServiceProService {
 
 	boolean updateUserLike(ServicePro servicePro, User user);
 
-	void updateAndPlusNumber(ServicePro servicePro, boolean remove);
+	void updateAndPlusNumber(ServicePro servicePro, boolean remove, boolean updateToBaidu);
 
-	ServicePro query(long id);
+	ServicePro query(long id, boolean withTeacher);
 
 	ServicePro queryByUser(long id);
 
@@ -76,6 +78,12 @@ public interface ServiceProService {
 	List<ServicePro> queryList(int page, int pageSize);
 
 	List<ServicePro> queryList(long[] ids, long teacherId);
+
+	List<ServicePro> queryListByIds(List<Long> ids);
+
+	List<ServicePro> queryListByRecommand(int page, short state, boolean onshow);
+
+	List<ServicePro> queryListByRecommand(int page, int pageSize, short state, boolean onshow);
 
 	List<ServicePro> queryListByTeacherIdAndShow(long teacherId, boolean show, int page, int pageSize);
 

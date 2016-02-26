@@ -32,14 +32,20 @@ public interface ServiceProDao {
 
 	ServicePro querySimple(long id);
 
+	ServicePro queryDetail(long id);
+
 	ServicePro queryByUser(long id);
 
 	ServicePro queryByTeacherIdAndServiceId(long teacherId, long serviceId);
 
 	List<ServicePro> queryList(int page, int pageSize);
 
+	List<ServicePro> queryListByIds(long[] idarray);
+
+	List<ServicePro> queryListByStateAndShow(int page, int pageSize, short state, boolean show);
+
 	List<ServicePro> queryList(long[] ids, long teacherId);
-	
+
 	List<ServicePro> queryListByState(short state, int page, int pageSize);
 
 	List<ServicePro> queryListByTeacherIdAndShow(long teacherId, short showKind, int page, int pageSize);
@@ -58,5 +64,6 @@ public interface ServiceProDao {
 	List<ServicePro> queryListOtherByTeacher(long serviceProId, long teacherId, int page, int pageSize);
 
 	long queryListBySaleNo();
+
 
 }

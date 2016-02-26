@@ -10,7 +10,7 @@ public class TRemoveServiceProService extends TSMsgService {
 	public void doit() {
 		ServicePro servicePro = getServicePro();
 		servicePro.setRemove(true);
-		getServiceProService().updateAndPlusNumber(servicePro,true);
+		getServiceProService().updateAndPlusNumber(servicePro,true,true);
 		setResMsg(MsgUtil.getSuccessMsg("remove servicePro successfully"));
 	}
 

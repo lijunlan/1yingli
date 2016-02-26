@@ -94,6 +94,17 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		else
 			return list.get(0);
 	}
+	
+	@Override
+	public ServicePro queryDetail(long id) {
+		String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.id=?";
+		@SuppressWarnings("unchecked")
+		List<ServicePro> list = getHibernateTemplate().find(hql, id);
+		if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
 
 	@Override
 	public ServicePro queryByUser(long id) {
@@ -171,6 +182,43 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		hql = hql + ")";
 		@SuppressWarnings("unchecked")
 		List<ServicePro> list = getHibernateTemplate().find(hql);
+		return list;
+	}
+
+	@Override
+	public List<ServicePro> queryListByIds(long[] idarray) {
+		if (idarray.length <= 0)
+			return new ArrayList<ServicePro>();
+		String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false
+				+ " and sp.onShow=true and (sp.id=" + idarray[0];
+		if (idarray.length > 1) {
+			for (int i = 1; i < idarray.length; i++) {
+				hql = hql + " or sp.id=" + idarray[i];
+			}
+		}
+		hql = hql + ")";
+		@SuppressWarnings("unchecked")
+		List<ServicePro> list = getHibernateTemplate().find(hql);
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ServicePro> queryListByStateAndShow(final int page, final int pageSize, final short state,
+			final boolean show) {
+		List<ServicePro> list = new ArrayList<ServicePro>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ServicePro>>() {
+			@Override
+			public List<ServicePro> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from ServicePro sp left join fetch sp.teacher where sp.remove=" + false + " and sp.state="
+						+ state + " and sp.onShow=" + show + " ORDER BY sp.createTime DESC";
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<ServicePro> list = query.list();
+				return list;
+			}
+		});
 		return list;
 	}
 
@@ -390,4 +438,5 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		else
 			return true;
 	}
+
 }

@@ -2617,7 +2617,7 @@
 			<ref local="teacherService" />
 		</property>
 	</bean>
-	
+
 	<bean id="tFinishOrderService" class="cn.yiyingli.Handle.Service.TFinishOrderService"
 		scope="prototype">
 		<property name="orderService">
@@ -2631,6 +2631,25 @@
 		</property>
 		<property name="teacherService">
 			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="fGetRecommendServiceProListService"
+		class="cn.yiyingli.Handle.Service.FGetRecommendServiceProListService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="fRecordRecommandServiceProService"
+		class="cn.yiyingli.Handle.Service.FRecordRecommandServiceProService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
 		</property>
 	</bean>
 

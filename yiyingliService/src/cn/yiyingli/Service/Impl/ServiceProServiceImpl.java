@@ -1,5 +1,6 @@
 package cn.yiyingli.Service.Impl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.UserLikeServicePro;
 import cn.yiyingli.Service.ServiceProService;
+import cn.yiyingli.Util.SendMsgToBaiduUtil;
 
 public class ServiceProServiceImpl implements ServiceProService {
 
@@ -48,7 +50,7 @@ public class ServiceProServiceImpl implements ServiceProService {
 	}
 
 	@Override
-	public void saveAndPlusNumber(ServicePro servicePro, boolean byManager) {
+	public void saveAndPlusNumber(ServicePro servicePro, boolean byManager, boolean updateToBaidu) {
 		getServiceProDao().saveAndPlusNumber(servicePro, byManager);
 	}
 
@@ -68,8 +70,11 @@ public class ServiceProServiceImpl implements ServiceProService {
 	}
 
 	@Override
-	public void updateAndPlusNumber(ServicePro servicePro, boolean remove) {
+	public void updateAndPlusNumber(ServicePro servicePro, boolean remove, boolean updateToBaidu) {
 		getServiceProDao().updateAndPlusNumber(servicePro, remove);
+		if (updateToBaidu) {
+			SendMsgToBaiduUtil.updateServiceProData(servicePro);
+		}
 	}
 
 	@Override
@@ -96,8 +101,12 @@ public class ServiceProServiceImpl implements ServiceProService {
 	}
 
 	@Override
-	public ServicePro query(long id) {
-		return getServiceProDao().querySimple(id);
+	public ServicePro query(long id, boolean withTeacher) {
+		if (!withTeacher) {
+			return getServiceProDao().querySimple(id);
+		} else {
+			return getServiceProDao().queryDetail(id);
+		}
 	}
 
 	@Override
@@ -128,6 +137,35 @@ public class ServiceProServiceImpl implements ServiceProService {
 	@Override
 	public List<ServicePro> queryList(long[] ids, long teacherId) {
 		return getServiceProDao().queryList(ids, teacherId);
+	}
+
+	@Override
+	public List<ServicePro> queryListByIds(List<Long> ids) {
+		long[] idarray = new long[ids.size()];
+		for (int i = 0; i < ids.size(); i++) {
+			idarray[i] = ids.get(i);
+		}
+		List<ServicePro> servicePros = getServiceProDao().queryListByIds(idarray);
+		List<ServicePro> results = new ArrayList<ServicePro>();
+		for (int i = 0; i < ids.size(); i++) {
+			for (int j = 0; j < servicePros.size(); j++) {
+				if (servicePros.get(j).getId().longValue() == ids.get(i).longValue()) {
+					results.add(servicePros.get(j));
+					break;
+				}
+			}
+		}
+		return results;
+	}
+
+	@Override
+	public List<ServicePro> queryListByRecommand(int page, short state, boolean show) {
+		return getServiceProDao().queryListByStateAndShow(page, PAGE_SIZE_RECOMMAND, state, show);
+	}
+
+	@Override
+	public List<ServicePro> queryListByRecommand(int page, int pageSize, short state, boolean show) {
+		return getServiceProDao().queryListByStateAndShow(page, pageSize, state, show);
 	}
 
 	@Override

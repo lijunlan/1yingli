@@ -12,7 +12,7 @@ import cn.yiyingli.Util.SendMsgToBaiduUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-public class FRecordRecommandPassageService extends MsgService {
+public class FRecordRecommandServiceProService extends MsgService {
 
 	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
@@ -28,7 +28,7 @@ public class FRecordRecommandPassageService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("uid") && getData().containsKey("now_pid") && getData().containsKey("to_pid")
+		return getData().containsKey("uid") && getData().containsKey("now_sid") && getData().containsKey("to_sid")
 				&& getData().containsKey("recommend_list");
 	}
 
@@ -40,23 +40,23 @@ public class FRecordRecommandPassageService extends MsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("14001"));
 			return;
 		}
-		String now_pid = getData().getString("now_pid");
-		String to_pid = getData().getString("to_pid");
+		String now_sid = getData().getString("now_sid");
+		String to_sid = getData().getString("to_sid");
 		JSONObject toBaidu = new JSONObject();
 		toBaidu.put("UserId", user.getId() + "");
-		toBaidu.put("ClickItemId", to_pid);
-		toBaidu.put("ShowItemId", now_pid);
+		toBaidu.put("ClickItemId", to_sid);
+		toBaidu.put("ShowItemId", now_sid);
 		toBaidu.put("Action", "recommend");
 		JSONObject jsonContext = new JSONObject();
 		jsonContext.put("RecommendList", getData().get("recommend_list"));
-		jsonContext.put("LogId", uid + to_pid + now_pid);
+		jsonContext.put("LogId", uid + to_sid + now_sid);
 		toBaidu.put("Context", jsonContext);
 		DateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
 		toBaidu.put("Timestamp", formatter.format(new Date()));
 		JSONArray send = new JSONArray();
 		send.add(toBaidu);
 		String r = SendMsgToBaiduUtil.updataUserClickData(send.toString(),
-				"http://ds.recsys.baidu.com/s/136349/264830?token=68cff3a47d0eeedf083c16d5aabe1628");
+				"http://ds.recsys.baidu.com/s/142407/276909?token=a4c5f22d60e79cf2779e4d4cff18e5e3");
 		if (!(r == null || r.equals(""))) {
 			JSONObject ro = JSONObject.fromObject(r);
 			if (ro.getInt("Code") != 100) {

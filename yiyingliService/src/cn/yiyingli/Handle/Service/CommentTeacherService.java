@@ -113,7 +113,7 @@ public class CommentTeacherService extends UMsgService {
 
 			if (order.getServiceId() != null) {
 				long serviceProId = order.getServiceId();
-				ServicePro servicePro = getServiceProService().query(serviceProId);
+				ServicePro servicePro = getServiceProService().query(serviceProId, false);
 				comment.setServicePro(servicePro);
 			}
 
