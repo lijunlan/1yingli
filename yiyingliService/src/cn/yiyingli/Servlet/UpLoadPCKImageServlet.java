@@ -64,13 +64,14 @@ public class UpLoadPCKImageServlet extends HttpServlet {
 					ObjectMetadata objectMeta = new ObjectMetadata();
 					objectMeta.setContentLength(item.getSize());
 					objectMeta.setContentType("image/*");
-					String key = "passage/" + getImageKey() + "." + endName;
+					String filename = getImageKey() + "." + endName;
+					String key = "passage/" + filename;
 					client.putObject(AliyunConfiguration.BUCKET_NAME, key, item.getInputStream(), objectMeta);
 					// item.write(saveFile);
 					returnMsg(resp,
 							new SuperMap().put("uploaded", "1").put("url",
 									ConfigurationXmlUtil.getInstance().getSettingData().get("imagePath") + "/" + key)
-							.put("fileName", key).finishByJson());
+							.put("fileName", filename).finishByJson());
 				} else {
 					map.put(item.getName(), item.getString());
 				}
