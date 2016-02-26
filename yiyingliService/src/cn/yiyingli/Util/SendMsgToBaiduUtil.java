@@ -20,14 +20,52 @@ import cn.yiyingli.ExchangeData.ExTeacherForBaidu;
 import cn.yiyingli.Persistant.Passage;
 import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.Teacher;
+import cn.yiyingli.Service.ServiceProService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class SendMsgToBaiduUtil {
 
 	public static void main(String[] args) {
-		LogUtil.info(sendGet("http://api2.santo.cc/submit?command=USER_BALANCE&uid=yyl-ipxmt&pwd=IQ8R1Wpy"),
-				SendMsgToBaiduUtil.class);
+		for (int i = 1; i <= 360; i++) {
+			String r = sendPost("http://service.1yingli.cn/yiyingliService/manage",
+					"{\"serviceProId\":\"" + i + "\",\"style\":\"function\",\"method\":\"getServicePro\"}");
+			JSONObject rjson = JSONObject.fromObject(r);
+			if (rjson.getString("state").equals("success")) {
+				JSONObject toBaidu = new JSONObject();
+				toBaidu.put("Version", 1.0);
+				toBaidu.put("ItemId", i + "");
+				toBaidu.put("DisplaySwitch", "On");
+				toBaidu.put("Url", "http://www.1yingli.cn/service/" +i);
+				JSONObject indexed = new JSONObject();
+				indexed.put("Title", servicePro.getTitle());
+				indexed.put("Content", StringUtil.subStringHTML(servicePro.getContent(), 0xffffff, ""));
+				JSONArray labels = new JSONArray();
+				JSONObject l = new JSONObject();
+				// l.put("Label", servicePro.getKind() + "");
+				// l.put("Weight", 5);
+				labels.add(l);
+
+				indexed.put("Labels", labels);
+				toBaidu.put("Indexed", indexed);
+
+				JSONObject properties = new JSONObject();
+				properties.put("Quality", 1);
+				JSONArray category = new JSONArray();
+				category.add(servicePro.getKind());
+				properties.put("Category", category);
+				DateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+				properties.put("CreateTime", formatter.format(new Date()));
+				toBaidu.put("Properties", properties);
+				toBaidu.put("Auxiliary", "");
+				JSONArray jarray = new JSONArray();
+				if (toBaidu != null) {
+					jarray.add(toBaidu);
+					sendPost("http://ds.recsys.baidu.com/s/142407/276908?token=a4c5f22d60e79cf2779e4d4cff18e5e3",
+							jarray.toString());
+				}
+			}
+		}
 	}
 
 	public static String updataUserClickData(String json) {
