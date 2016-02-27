@@ -6,6 +6,8 @@ var URL = "http://120.26.83.33/yiyingliManagerService/";
 //var SERVICE_URL= "http://service.1yingli.cn/yiyingliService/"
 var SERVICE_URL= "http://service.1yingli.cn/yiyingliService/"
 myJson.style = "manager";
+
+var _Notification = Notification;
 //RSA key
 var publickey = "8959d2ced61bee338accd16794538ec0a49da0655ddca8fa2461d4cf419dafaf4d7c47813f6ac8c6e5646a2beb08cccf4184a831e683a631e3c528b908deecc57235d03935d0650fbe53d44f717da7f5d1622e7405a3b4f06377eb506880dae21e5065c878c03d85113e068ac82af6b29037d57163d9a311807bee654927d349";
 //错误代码
@@ -238,7 +240,7 @@ function notifyMe(title, content, url) {
 	// ie和某些未知的浏览器并不支持基于浏览器的弹窗，因此使用基于网页的弹窗
 	try {
 		//某些未知的浏览器
-		if (!Notification) {
+		if (!_Notification) {
 			messenger(content, url);
 			return;
 		}
@@ -247,14 +249,14 @@ function notifyMe(title, content, url) {
 		messenger(content, url);
 	}
 	//对于支持的浏览器请求弹窗的权限失败
-	if (Notification.permission !== "granted") {
-		Notification.requestPermission();
+	if (_Notification.permission !== "granted") {
+		_Notification.requestPermission();
 		messenger(content, url);
 		return;
 	} else {
 		//播放提示音
 		play('media/notify.mp3');
-		var notification = new Notification(title, {
+		var notification = new _Notification(title, {
 			icon: 'icon/notify.jpg',
 			body: content,
 		});

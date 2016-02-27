@@ -2,6 +2,7 @@
 var mid;
 checkLogin();
 registNotify();
+var editor = CKEDITOR.replace( 'content' );
 
 //图片上传
 $(document).ready(function () {
@@ -68,7 +69,8 @@ function get() {
 function getAndParse(data) {
 	var p = data.passage;
 	$("#title").val(p.title);
-	$("#content").val(p.content);
+	//$("#content").html(p.content);
+	editor.setData(p.content);
 	$("#summary").val(p.summary);
 	$("#tag").val(p.tag);	
 	$("#iconUrl").val(p.imageUrl);
@@ -87,7 +89,8 @@ function edit() {
 	send.passageId=$("#passageId").val();
 	send.title=$("#title").val();
 	send.tag=$("#tag").val();
-	send.content=$("#content").val();
+	send.content=CKEDITOR.instances.content.getData();
+	//$("#content").val();
 	send.imageUrl=$("#iconUrl").val();
 	send.summary=$("#summary").val();
 	send.onshow=document.getElementById('onShow').checked.toString();
@@ -111,7 +114,8 @@ function save() {
 	send.username=$("#username").val();
 	send.title=$("#title").val();
 	send.tag=$("#tag").val();
-	send.content=$("#content").val();
+	send.content=CKEDITOR.instances.content.getData();
+	//$("#content").val();
 	send.imageUrl=$("#iconUrl").val();
 	send.summary=$("#summary").val();
 	
