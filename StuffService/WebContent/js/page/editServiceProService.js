@@ -3,6 +3,7 @@ var mid;
 var imageUrls="";
 checkLogin();
 registNotify();
+var editor = CKEDITOR.replace( 'content' );
 
 //图片上传
 $(document).ready(function () {
@@ -101,7 +102,8 @@ function getAndParse(servicePro) {
 	$("#count").val(servicePro.count);
 	$("#numeral").val(servicePro.numeral);
 	$("#quantifier").val(servicePro.quantifier);
-	$("#content").val(servicePro.content);
+	// $("#content").val(servicePro.content);
+	editor.setData(servicePro.content);
 	$("#pricetemp").val(servicePro.priceTemp);
 	$("#address").val(servicePro.address);
 
@@ -180,7 +182,7 @@ function submit() {
 
 	servicePro.quantifier=$("#quantifier").val();
 	servicePro.title=$("#title").val();
-	servicePro.content=$("#content").val();
+	servicePro.content=CKEDITOR.instances.content.getData();
 	servicePro.summary=$("#summary").val();
 	servicePro.imageUrls=imageUrls;
 

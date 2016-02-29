@@ -4,6 +4,7 @@ var WorkExpList = new Array();
 var StudyExpList = new Array();
 checkLogin();
 registNotify();
+var editor = CKEDITOR.replace( 'introduce' );
 
 //图片上传
 $(document).ready(function () {
@@ -130,7 +131,8 @@ function getAndParse(t) {
 	//兼容不同版本api
 	t.price == null ? $("#servicePrice").val(t.servicePrice) : $("#servicePrice").val(t.price);
 	//
-	$("#introduce").val(t.introduce);
+	//$("#introduce").val(t.introduce);
+	editor.setData(t.introduce);
 	WorkExpList = t.workExperience;
 	$("#showWorkExp").val($.toJSON(WorkExpList));
 	StudyExpList = t.studyExperience;
@@ -232,7 +234,7 @@ function submit() {
 	teacher.iconUrl = $("#iconUrl").val();
 	teacher.bgUrl = $("#bgUrl").val();
 	teacher.email = $("#email").val();
-	teacher.introduce = $("#introduce").val();
+	teacher.introduce = CKEDITOR.instances.introduce.getData();
 	teacher.workExperience = WorkExpList;
 	teacher.studyExperience = StudyExpList;
 

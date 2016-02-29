@@ -27,6 +27,8 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.width = 700;
 
+	config.height = 800;
+
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
 	config.removeButtons = 'Subscript,Superscript';
@@ -39,11 +41,11 @@ CKEDITOR.editorConfig = function( config ) {
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
-	config.extraPlugins = 'image2,toolbar,notification,notificationaggregator,widget,uploadwidget,filetools,lineutils,uploadimage,panel,floatpanel,panelbutton,colorbutton,colordialog,lineheight,richcombo,listblock,font';
+	config.extraPlugins = 'image2,toolbar,notification,notificationaggregator,widget,uploadwidget,filetools,lineutils,uploadimage,panel,floatpanel,panelbutton,colorbutton,colordialog,lineheight,richcombo,listblock,font,justify';
 
 	config.uploadUrl = 'http://service.1yingli.cn/yiyingliService/uppassageckimage'
 
-	config.skin = 'moonocolor';
+	config.skin = 'moono';
 
 	config.allowedContent = true;
 
