@@ -44,7 +44,7 @@ public class FGetRecommendPassageListService extends MsgService {
 
 	@Override
 	public void doit() {
-		String passageId = (String) getData().get("passageId");
+		String passageId =  getData().getString("passageId");
 		String result = SendMsgToBaiduUtil.getRecommendPassageListAbout(passageId);
 		getPassageInfo(result);
 	}
@@ -75,6 +75,9 @@ public class FGetRecommendPassageListService extends MsgService {
 		SuperMap map = MsgUtil.getSuccessMap();
 		JSONArray jsonPassages = new JSONArray();
 		for (Passage passage : passages) {
+			if (passage.getId().longValue() == getData().getLong("passageId")) {
+				continue;
+			}
 			SuperMap m = new SuperMap();
 			ExPassage.assembleSimple(passage, m);
 			jsonPassages.add(m.finish());

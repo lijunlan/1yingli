@@ -74,6 +74,9 @@ public class FGetRecommendServiceProListService extends MsgService {
 		SuperMap map = MsgUtil.getSuccessMap();
 		JSONArray jsonServicePros = new JSONArray();
 		for (ServicePro servicePro : servicePros) {
+			if (servicePro.getId().longValue() == getData().getLong("serviceProId")) {
+				continue;
+			}
 			SuperMap m = new SuperMap();
 			ExServicePro.assembleSimpleServiceProForUser(servicePro, m);
 			jsonServicePros.add(m.finish());

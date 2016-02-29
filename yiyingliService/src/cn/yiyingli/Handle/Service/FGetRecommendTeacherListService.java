@@ -87,6 +87,9 @@ public class FGetRecommendTeacherListService extends MsgService {
 		SuperMap map = MsgUtil.getSuccessMap();
 		JSONArray jsonTeachers = new JSONArray();
 		for (Teacher teacher : teachers) {
+			if (teacher.getId().longValue() == getData().getLong("teacherId")) {
+				continue;
+			}
 			JSONObject jsonTeacher = new JSONObject();
 			jsonTeacher.put("teacherId", teacher.getId() + "");
 			jsonTeacher.put("name", teacher.getName());
