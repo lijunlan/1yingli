@@ -20,7 +20,8 @@ CKEDITOR.editorConfig = function( config ) {
 		'/',
 		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
 		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-		{ name: 'styles' }
+		{ name: 'styles' },
+		{ name : 'colors'}
 	];
 
 	config.width = 700;
@@ -37,7 +38,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
-	config.extraPlugins = 'image2,toolbar,notification,notificationaggregator,widget,uploadwidget,filetools,lineutils,uploadimage,panel,floatpanel,panelbutton,colorbutton,colordialog,lineheight,richcombo,listblock,font,justify';
+	config.extraPlugins = 'image2,toolbar,notification,notificationaggregator,widget,uploadwidget,filetools,lineutils,uploadimage,panel,floatpanel,panelbutton,colorbutton,colordialog,lineheight,richcombo,listblock,font';
 
 	config.uploadUrl = 'http://service.1yingli.cn/yiyingliService/uppassageckimage'
 
