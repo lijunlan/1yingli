@@ -25,7 +25,7 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name : 'colors'}
 	];
 
-	config.width = 700;
+	config.width = 761;
 
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
@@ -41,7 +41,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.extraPlugins = 'image2,toolbar,notification,notificationaggregator,widget,uploadwidget,filetools,lineutils,uploadimage,panel,floatpanel,panelbutton,colorbutton,colordialog,lineheight,richcombo,listblock,font';
 
-	config.uploadUrl = 'http://service.1yingli.cn/yiyingliService/uppassageckimage'
+	config.uploadUrl = 'http://service.1yingli.cn/yiyingliService/upintroduceckimage'
 
 	config.skin = 'moonocolor';
 

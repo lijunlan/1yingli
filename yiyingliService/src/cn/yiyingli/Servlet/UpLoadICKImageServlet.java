@@ -28,12 +28,12 @@ import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Util.ConfigurationXmlUtil;
 import cn.yiyingli.Util.MD5Util;
 
-public class UpLoadPCKImageServlet extends HttpServlet {
+public class UpLoadICKImageServlet extends HttpServlet {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8797351254044044992L;
+	private static final long serialVersionUID = -8943789488468902145L;
 
 	private static String getImageKey() {
 		return MD5Util.MD5(Calendar.getInstance().getTimeInMillis() + "" + (new Random().nextInt(99999) + 100000));
@@ -69,7 +69,7 @@ public class UpLoadPCKImageServlet extends HttpServlet {
 					objectMeta.setContentLength(item.getSize());
 					objectMeta.setContentType("image/*");
 					String filename = getImageKey() + "." + endName;
-					String key = "passage/" + filename;
+					String key = "introduce/" + filename;
 					client.putObject(AliyunConfiguration.BUCKET_NAME, key, item.getInputStream(), objectMeta);
 					// item.write(saveFile);
 					returnMsg(resp,

@@ -86,6 +86,20 @@
   </servlet-mapping>
   
   <servlet>
+    <description>上传介绍CK图片</description>
+    <display-name>UploadICKImage</display-name>
+    <servlet-name>UploadICKImage</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.UpLoadICKImageServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>UploadICKImage</servlet-name>
+    <url-pattern>/upintroduceckimage</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <description>上传背景</description>
     <display-name>UploadBackground</display-name>
     <servlet-name>UploadBackground</servlet-name>
