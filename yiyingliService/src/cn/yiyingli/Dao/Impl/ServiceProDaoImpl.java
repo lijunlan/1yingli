@@ -65,6 +65,14 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 	}
 
 	@Override
+	public void updateAddLookNumber(long serviceProId, long number) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session.createSQLQuery("update servicepro set servicepro.LOOKNUMBER=servicepro.LOOKNUMBER+" + number
+				+ " where servicepro.SERVICEPRO_ID=" + serviceProId);
+		query.executeUpdate();
+	}
+
+	@Override
 	public void updateAndPlusNumber(ServicePro servicePro, boolean remove) {
 		getHibernateTemplate().update(servicePro);
 		Session session = getSessionFactory().getCurrentSession();

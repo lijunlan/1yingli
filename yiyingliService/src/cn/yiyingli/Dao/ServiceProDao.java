@@ -26,6 +26,8 @@ public interface ServiceProDao {
 
 	void update(ServicePro servicePro);
 
+	void updateAddLookNumber(long serviceProId, long number);
+
 	Boolean queryCheckLikeUser(long serviceProId, long userId);
 
 	void updateAndPlusNumber(ServicePro servicePro, boolean remove);
@@ -64,6 +66,5 @@ public interface ServiceProDao {
 	List<ServicePro> queryListOtherByTeacher(long serviceProId, long teacherId, int page, int pageSize);
 
 	long queryListBySaleNo();
-
 
 }

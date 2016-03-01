@@ -72,7 +72,7 @@ public class FGetPassageService extends MsgService {
 	/**
 	 * 为浏览添加记录
 	 * 
-	 * @param teacher
+	 * @param passage
 	 */
 	private void saveRecord(Passage passage) {
 		getPassageService().updateAddLookNumber(passage.getId(), 1L);

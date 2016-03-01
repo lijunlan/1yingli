@@ -70,6 +70,11 @@ public class ServiceProServiceImpl implements ServiceProService {
 	}
 
 	@Override
+	public void updateAddLookNumber(long serviceProId, long number) {
+		getServiceProDao().updateAddLookNumber(serviceProId, number);
+	}
+
+	@Override
 	public void updateAndPlusNumber(ServicePro servicePro, boolean remove, boolean updateToBaidu) {
 		getServiceProDao().updateAndPlusNumber(servicePro, remove);
 		if (updateToBaidu) {
@@ -281,5 +286,4 @@ public class ServiceProServiceImpl implements ServiceProService {
 	public List<ServicePro> queryListOtherByTeacher(long serviceProId, long teacherId, int page) {
 		return getServiceProDao().queryListOtherByTeacher(serviceProId, teacherId, page, ABOUT_PAGE_SIZE);
 	}
-
 }

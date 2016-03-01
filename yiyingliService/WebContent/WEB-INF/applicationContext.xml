@@ -2430,6 +2430,12 @@
 		<property name="serviceProService">
 			<ref local="serviceProService" />
 		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="recordService">
+			<ref local="recordService" />
+		</property>
 	</bean>
 
 	<bean id="fGetServiceProListSerivce" class="cn.yiyingli.Handle.Service.FGetServiceProListSerivce"

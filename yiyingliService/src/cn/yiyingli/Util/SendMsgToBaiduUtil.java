@@ -26,7 +26,7 @@ import net.sf.json.JSONObject;
 public class SendMsgToBaiduUtil {
 
 	public static void main(String[] args) {
-		for (int i = 1; i <= 363; i++) {
+		for (int i = 1; i <= 385; i++) {
 			String r = sendPost("http://service.1yingli.cn/yiyingliService/manage",
 					"{\"serviceProId\":\"" + i + "\",\"style\":\"function\",\"method\":\"getServicePro\"}");
 			JSONObject rjson = JSONObject.fromObject(r);

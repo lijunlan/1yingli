@@ -58,6 +58,8 @@ public interface ServiceProService {
 	void remove(long id);
 
 	void update(ServicePro servicePro);
+	
+	void updateAddLookNumber(long serviceProId,long number);
 
 	void updateUserUnlike(long serviceProId, long userId);
 
