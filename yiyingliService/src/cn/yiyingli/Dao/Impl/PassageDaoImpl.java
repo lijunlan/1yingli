@@ -24,7 +24,12 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 		Query query = session.createSQLQuery(
 				"update teacher set teacher.CHECKPASSAGENUMBER=(select count(*) from passage where passage.remove="
 						+ false + " and passage.TEACHER_ID='" + teacher.getId() + "' and passage.state="
-						+ PassageDao.PASSAGE_STATE_CHECKING + ") where teacher.TEACHER_ID=" + teacher.getId());
+						+ PassageDao.PASSAGE_STATE_CHECKING + ") and passage.onshow=true where teacher.TEACHER_ID=" + teacher.getId());
+		query.executeUpdate();
+		query = session.createSQLQuery(
+				"update teacher set teacher.PASSAGENUMBER=(select count(*) from passage where passage.remove=" + false
+						+ " and passage.TEACHER_ID='" + teacher.getId() + "' and passage.state=" + PassageDao.PASSAGE_STATE_OK
+						+ ") and passage.onshow=true where teacher.TEACHER_ID=" + teacher.getId());
 		query.executeUpdate();
 	}
 
@@ -49,17 +54,17 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 		query = session.createSQLQuery(
 				"update teacher set teacher.PASSAGENUMBER=(select count(*) from passage where passage.remove=" + false
 						+ " and passage.TEACHER_ID='" + teacherId + "' and passage.state=" + PassageDao.PASSAGE_STATE_OK
-						+ ") where teacher.TEACHER_ID=" + teacherId);
+						+ ") and passage.onshow=true where teacher.TEACHER_ID=" + teacherId);
 		query.executeUpdate();
 		query = session.createSQLQuery(
 				"update teacher set teacher.CHECKPASSAGENUMBER=(select count(*) from passage where passage.remove="
 						+ false + " and passage.TEACHER_ID='" + teacherId + "' and passage.state="
-						+ PassageDao.PASSAGE_STATE_CHECKING + ") where teacher.TEACHER_ID=" + teacherId);
+						+ PassageDao.PASSAGE_STATE_CHECKING + ") and passage.onshow=true where teacher.TEACHER_ID=" + teacherId);
 		query.executeUpdate();
 		query = session.createSQLQuery(
 				"update teacher set teacher.REFUSEPASSAGENUMBER=(select count(*) from passage where passage.remove="
 						+ false + " and passage.TEACHER_ID='" + teacherId + "' and passage.state="
-						+ PassageDao.PASSAGE_STATE_REFUSE + ") where teacher.TEACHER_ID=" + teacherId);
+						+ PassageDao.PASSAGE_STATE_REFUSE + ") and passage.onshow=true where teacher.TEACHER_ID=" + teacherId);
 		query.executeUpdate();
 	}
 
@@ -84,17 +89,17 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 		Query query = session.createSQLQuery(
 				"update teacher set teacher.PASSAGENUMBER=(select count(*) from passage where passage.remove=" + false
 						+ " and passage.TEACHER_ID='" + teacher.getId() + "' and passage.state="
-						+ PassageDao.PASSAGE_STATE_OK + ") where teacher.TEACHER_ID=" + teacher.getId());
+						+ PassageDao.PASSAGE_STATE_OK + ") and passage.onshow=true where teacher.TEACHER_ID=" + teacher.getId());
 		query.executeUpdate();
 		query = session.createSQLQuery(
 				"update teacher set teacher.CHECKPASSAGENUMBER=(select count(*) from passage where passage.remove="
 						+ false + " and passage.TEACHER_ID='" + teacher.getId() + "' and passage.state="
-						+ PassageDao.PASSAGE_STATE_CHECKING + ") where teacher.TEACHER_ID=" + teacher.getId());
+						+ PassageDao.PASSAGE_STATE_CHECKING + ") and passage.onshow=true where teacher.TEACHER_ID=" + teacher.getId());
 		query.executeUpdate();
 		query = session.createSQLQuery(
 				"update teacher set teacher.REFUSEPASSAGENUMBER=(select count(*) from passage where passage.remove="
 						+ false + " and passage.TEACHER_ID='" + teacher.getId() + "' and passage.state="
-						+ PassageDao.PASSAGE_STATE_REFUSE + ") where teacher.TEACHER_ID=" + teacher.getId());
+						+ PassageDao.PASSAGE_STATE_REFUSE + ") and passage.onshow=true where teacher.TEACHER_ID=" + teacher.getId());
 		query.executeUpdate();
 	}
 
