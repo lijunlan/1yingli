@@ -54,8 +54,8 @@
 
 				onUploaded: function( upload ) {
 					// Set width and height to prevent blinking.
-					this.replaceWith( '<img src="' + upload.url + "@!servicepro"+'" ' +
-						'style="width:100%;" ' + '>' );
+					this.replaceWith( '<img src="' + upload.url + "@!passage"+'" ' +
+						'width="100%" ' + '>' );
 				}
 			} );
 

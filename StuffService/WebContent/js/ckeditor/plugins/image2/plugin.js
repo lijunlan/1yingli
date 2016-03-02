@@ -766,18 +766,18 @@
 		getNatural: function( image ) {
 			var dimensions;
 
-			if ( image.$.naturalWidth ) {
+			if ( image.$.width ) {
 				dimensions = {
-					width: image.$.naturalWidth,
-					height: image.$.naturalHeight
+					width: image.$.width,
+					height: ''
 				};
 			} else {
 				var img = new Image();
 				img.src = image.getAttribute( 'src' );
-
+				img.width="100%";
 				dimensions = {
 					width: img.width,
-					height: img.height
+					height: ''
 				};
 			}
 
@@ -942,9 +942,8 @@
 			// Now just remove dimension attributes expressed with %.
 			for ( var d in dimensions ) {
 				var dimension = image.attributes[ d ];
-
-				if ( dimension && dimension.match( regexPercent ) )
-					delete image.attributes[ d ];
+				// if ( dimension && dimension.match( regexPercent ) )
+				// 	delete image.attributes[ d ];
 			}
 
 			return el;
@@ -1521,7 +1520,7 @@
 					match: centerWrapperChecker( editor )
 				},
 				img: {
-					attributes: '!src,alt,width,height'
+					attributes: '!src,alt,width,height,style'
 				},
 				figure: {
 					classes: '!' + editor.config.image2_captionedClass
