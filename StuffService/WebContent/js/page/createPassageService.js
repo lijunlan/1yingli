@@ -75,6 +75,7 @@ function getAndParse(data) {
 	$("#tag").val(p.tag);	
 	$("#iconUrl").val(p.imageUrl);
 	$("#passageId").val(p.passageId);
+	$("#activityWeight").val(p.activityWeight);
 	p.onshow == 'true' ? $('#onShowDiv').bootstrapSwitch('setState', true) : $('#onShowDiv').bootstrapSwitch('setState', false);
 	p.onReward == 'true' ? $('#onRewardDiv').bootstrapSwitch('setState', true) : $('#onRewardDiv').bootstrapSwitch('setState', false);
 	Messenger().post("加载完成");
@@ -90,6 +91,7 @@ function edit() {
 	send.title=$("#title").val();
 	send.tag=$("#tag").val();
 	send.content=CKEDITOR.instances.content.getData();
+	send.activityWeight=$("#activityWeight").val();
 	//$("#content").val();
 	send.imageUrl=$("#iconUrl").val();
 	send.summary=$("#summary").val();
@@ -116,6 +118,7 @@ function save() {
 	send.tag=$("#tag").val();
 	send.content=CKEDITOR.instances.content.getData();
 	//$("#content").val();
+	send.activityWeight=$("#activityWeight").val();
 	send.imageUrl=$("#iconUrl").val();
 	send.summary=$("#summary").val();
 	
