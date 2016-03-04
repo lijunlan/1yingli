@@ -158,6 +158,7 @@ function getAndParse(t) {
 	$("#saleWeight").val(t.saleWeight);
 	$('#actionDiv').bootstrapSwitch('setState', false)
 	t.onService == 'true' ? $('#onServiceDiv').bootstrapSwitch('setState', true) : $('#onServiceDiv').bootstrapSwitch('setState', false);
+	t.onChat == 'true' ? $('#onChatDiv').bootstrapSwitch('setState', true) : $('#onChatDiv').bootstrapSwitch('setState', false);
 	Messenger().post("加载完成");
 }
 
@@ -269,6 +270,7 @@ function submit() {
 	teacher.saleWeight = $("#saleWeight").val();
 	teacher.mile = $('#mileValue').val();
 	teacher.onService = document.getElementById('onService').checked.toString();
+	teacher.onChat = document.getElementById('onChat').checked.toString();
 	
 	send.teacher = teacher;
 	send.style = "manager";
