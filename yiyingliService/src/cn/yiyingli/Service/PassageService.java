@@ -13,6 +13,8 @@ public interface PassageService {
 
 	public static final int PAGE_SIZE_TEACHER = 10;
 
+	public static final int MAX_SALE_COUNT = 10;
+
 	void save(Passage passage, boolean updateToBaidu);
 
 	Long saveAndReturnId(Passage passage);
@@ -36,6 +38,8 @@ public interface PassageService {
 	Passage queryByUserWithTeacher(long id);
 
 	List<Passage> queryList(int page, int pageSize);
+
+	List<Passage> queryListBySale();
 
 	List<Passage> queryListByState(int page, int pageSize, short state);
 

@@ -69,6 +69,9 @@ public class Passage {
 	@Column(name = "REMOVE", nullable = false)
 	private Boolean remove;
 
+	@Column(name = "ACTIVITYWEIGHT", nullable = true)
+	private Long activityWeight;
+
 	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Teacher ownTeacher;
@@ -219,6 +222,14 @@ public class Passage {
 
 	public void setOnReward(Boolean onReward) {
 		this.onReward = onReward;
+	}
+
+	public Long getActivityWeight() {
+		return activityWeight;
+	}
+
+	public void setActivityWeight(Long activityWeight) {
+		this.activityWeight = activityWeight;
 	}
 
 }

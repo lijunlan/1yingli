@@ -33,7 +33,8 @@ public class PPassageUtil {
 	}
 
 	public static void toEditPassageByManager(String title, String tag, String summary, String content, String imageUrl,
-			Passage passage, boolean onshow,boolean onReward) {
+			boolean onshow, boolean onReward, Long activityWeight, Passage passage) {
+		passage.setActivityWeight(activityWeight);
 		passage.setContent(content);
 		passage.setSummary(summary);
 		passage.setImageUrl(imageUrl);
@@ -44,8 +45,9 @@ public class PPassageUtil {
 	}
 
 	public static void toSavePassageByManager(Teacher teacher, String title, String tag, String summary, String content,
-			String imageUrl, Passage passage) {
+			String imageUrl, Long activityWeight, Passage passage) {
 		toSavePassage(teacher, title, tag, summary, content, imageUrl, passage);
+		passage.setActivityWeight(activityWeight);
 		passage.setOnshow(true);
 		passage.setRemove(false);
 		passage.setState(PassageDao.PASSAGE_STATE_OK);

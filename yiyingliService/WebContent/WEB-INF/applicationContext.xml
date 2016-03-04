@@ -2658,5 +2658,13 @@
 			<ref local="userMarkService" />
 		</property>
 	</bean>
+	
+	<bean id="fGetSalePassageListService"
+		class="cn.yiyingli.Handle.Service.FGetSalePassageListService"
+		scope="prototype">
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
 
 </beans>

@@ -40,6 +40,8 @@ public interface PassageDao {
 	Boolean queryCheckLikeUser(long passageId, long userId);
 
 	List<Passage> queryList(int page, int pageSize);
+	
+	List<Passage> queryListBySale(int maxCount); 
 
 	List<Passage> queryListByStateAndShow(int page, int pageSize, short state, boolean show);
 

@@ -174,6 +174,7 @@ public class ExTeacher {
 
 	public static void assembleDetailForManager(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
+		map.put("activityDes", teacher.getActivityDes());
 		map.put("mile", teacher.getMile());
 		map.put("alipayNo", teacher.getAlipay());
 		map.put("paypalNo", teacher.getPaypal());

@@ -126,6 +126,11 @@ public class PassageServiceImpl implements PassageService {
 	}
 
 	@Override
+	public List<Passage> queryListBySale() {
+		return getPassageDao().queryListBySale(MAX_SALE_COUNT);
+	}
+
+	@Override
 	public List<Passage> queryList(int page) {
 		return getPassageDao().queryList(page, PAGE_SIZE_MANAGER);
 	}

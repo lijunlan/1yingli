@@ -127,6 +127,7 @@ function getAndParse(t) {
 	$("#bgUrl").val(t.bgUrl);
 	$("#littleIcon").attr('src',t.iconUrl);
 	$("#serviceTitle").val(t.topic);
+	$("#activityDes").val(t.activityDes);
 	$("#mileValue").val(t.mile);
 	//兼容不同版本api
 	t.price == null ? $("#servicePrice").val(t.servicePrice) : $("#servicePrice").val(t.price);
@@ -241,6 +242,7 @@ function submit() {
 
 	teacher.topic = $("#serviceTitle").val();
 	teacher.price = $("#servicePrice").val();
+	teacher.activityDes = $("#activityDes").val();
 
 	var tmpId = 1 / 2;
 	var i;

@@ -164,6 +164,7 @@
 		<method name="removeBackground" beanName="mRemoveBackgroundService" />
 	</style>
 	<style name="function">
+		<method name="getSalePassageList" beanName="fGetSalePassageListService" />
 		<method name="getRecommendServiceProList" beanName="fGetRecommendServiceProListService" />
 		<method name="recordRecommandServicePro" beanName="fRecordRecommandServiceProService" />
 		<method name="getMoreServicePro" beanName="fGetMoreServiceProService" />
