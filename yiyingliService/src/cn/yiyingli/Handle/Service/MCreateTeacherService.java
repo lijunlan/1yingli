@@ -87,10 +87,12 @@ public class MCreateTeacherService extends MMsgService {
 		String homeWeight = tdata.getString("homeWeight");
 		String saleWeight = tdata.getString("saleWeight");
 		String bgUrl = tdata.getString("bgUrl");
+		String onChat = tdata.getString("onChat");
+		
 		Teacher teacher = PTeacherUtil.assembleTeacherByManager(user, workExperiences, studyExperiences, tips,
 				simpleinfo, name, phone, address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail,
 				checkWork, checkStudy, showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight,
-				saleWeight, topic, price, bgUrl, getTipService());
+				saleWeight, topic, price, bgUrl, (onChat == null ? true : Boolean.valueOf(onChat)), getTipService());
 
 		// String serviceTitle = service.getString("title");
 		// float numeral = Float.valueOf(service.getString("numeral"));

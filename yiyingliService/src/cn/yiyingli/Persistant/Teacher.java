@@ -85,6 +85,9 @@ public class Teacher {
 	@Column(name = "SCORE", nullable = false)
 	private Float score;
 
+	@Column(name = "ONCHAT", nullable = false)
+	private Boolean onChat;
+
 	@Column(name = "ANSWERTIME", nullable = false)
 	private Long answerTime;
 
@@ -736,6 +739,14 @@ public class Teacher {
 
 	public void setMaskFinishNumber(Long maskFinishNumber) {
 		this.maskFinishNumber = maskFinishNumber;
+	}
+
+	public Boolean getOnChat() {
+		return onChat;
+	}
+
+	public void setOnChat(Boolean onChat) {
+		this.onChat = onChat;
 	}
 
 }
