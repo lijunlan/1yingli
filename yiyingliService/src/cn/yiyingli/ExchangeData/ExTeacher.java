@@ -47,6 +47,15 @@ public class ExTeacher {
 		LikeNoShowUtil.setFinishNo(teacher, map);
 	}
 
+	public static void assembleSimpleForUserActivity(Teacher teacher, SuperMap map) {
+		assembleSimpleNormal(teacher, map);
+		map.put("level", teacher.getLevel());
+		map.put("introduce", teacher.getIntroduce());
+		map.put("activityDes", teacher.getActivityDes());
+		LikeNoShowUtil.setLikeNo(teacher, map);
+		LikeNoShowUtil.setFinishNo(teacher, map);
+	}
+
 	private static void assembleSimpleNormal(Teacher teacher, SuperMap map) {
 		map.put("name", teacher.getName());
 		map.put("teacherId", teacher.getId());

@@ -89,6 +89,7 @@ public class MEditTeacherService extends MMsgService {
 		String onService = tdata.getString("onService");
 		String bgUrl = tdata.getString("bgUrl");
 		String onChat = tdata.getString("onChat");
+		String activityDes = tdata.getString("activityDes");
 
 		Teacher teacher = user.getTeacher();
 		PTeacherUtil.editTeacherByManagerDetail(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
@@ -97,7 +98,8 @@ public class MEditTeacherService extends MMsgService {
 				onService == null ? String.valueOf(teacher.getOnService()) : onService,
 				mile == null ? teacher.getMile() : Long.valueOf(mile), topic, price,
 				(bgUrl == null || bgUrl.equals("")) ? teacher.getBgUrl() : bgUrl,
-				(onChat == null ? true : Boolean.valueOf(onChat)), teacher, getTipService());
+				(onChat == null ? true : Boolean.valueOf(onChat)),
+				(activityDes == null ? teacher.getActivityDes() : activityDes), teacher, getTipService());
 
 		// ServicePro servicePro = teacher.getServicePros().get(0);
 		// String serviceTitle = (String) service.get("title");

@@ -73,11 +73,14 @@ public class Teacher {
 	@Column(name = "TIPMARK", nullable = false)
 	private Long tipMark;
 
-	@Column(name = "EMAIL", nullable = false)
+	@Column(name = "EMAIL", nullable = true)
 	private String email;
 
-	@Column(name = "PHONE", unique = false)
+	@Column(name = "PHONE", nullable = true)
 	private String phone;
+	
+	@Column(name = "ACTIVITYDES", nullable = true)
+	private String activityDes;
 
 	@Column(name = "SEX", nullable = true)
 	private Short sex;
@@ -747,6 +750,14 @@ public class Teacher {
 
 	public void setOnChat(Boolean onChat) {
 		this.onChat = onChat;
+	}
+
+	public String getActivityDes() {
+		return activityDes;
+	}
+
+	public void setActivityDes(String activityDes) {
+		this.activityDes = activityDes;
 	}
 
 }
