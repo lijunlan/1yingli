@@ -131,6 +131,12 @@ function fail(id) {
 	myAjax(myJson, get);
 }
 
+function removePassage(passageId){
+	myJson.passageId = passageId;
+	myJson.method = "removePassage";
+	myAjax(myJson, get);
+}
+
 //根据ajax返回的数据，改变页面
 function changeTable(result) {
 	$("#" + fun + "Accordion").empty();
@@ -156,7 +162,7 @@ function changeTable(result) {
 				return true;
 			}
 			newTab = "<div class='am-panel'><div class='am-panel-hd'>"
-			+ "<h4 class='am-panel-title' data-am-collapse=\"{parent: '#" + fun + "Accordion', target: '#" + data.passageId + "Audit'}\">"
+			+ "<h4 class='am-panel-title' data-am-collapse=\"{parent: '#" + fun + "Accordion', target: '#" + data.passageId + "Audit'}\"><button onclick=\"removePassage("+data.passageId+")\">删除</button>"
 			+ "<font color ='red'>【ID:"+data.passageId+",状态:" + tmpState + "】</font>" + data.title + " <font color='#63B8FF'>" + data.editorName + "创作于"
 			+ createTime.toLocaleString() + "</font>点赞：" + data.likeNumber + " 浏览量：" + data.lookNumber
 			+ "</h4></div><div id='" + data.passageId + "Audit' class='am-panel-collapse am-collapse'>"
@@ -174,7 +180,7 @@ function changeTable(result) {
 			} else {
 				newTab = "<div class='am-panel am-panel-success'><div class='am-panel-hd'>";
 			}
-			newTab += "<h4 class='am-panel-title' data-am-collapse=\"{parent: '#" + fun + "Accordion', target: '#" + data.passageId + "'}\">"
+			newTab += "<h4 class='am-panel-title' data-am-collapse=\"{parent: '#" + fun + "Accordion', target: '#" + data.passageId + "'}\"><button onclick=\"removePassage("+data.passageId+")\">删除</button>"
 			+ "<font color='red'>【ID:"+data.passageId+",状态:" + tmpState + "】</font>" + data.title + " <font color='#63B8FF'>" + data.editorName + "创作于"
 			+ createTime.toLocaleString() + "</font>点赞：" + data.likeNumber + " 浏览量：" + data.lookNumber
 			+ "</h4></div><div id='" + data.passageId + "' class='am-panel-collapse am-collapse'>" + "<div class='am-panel-bd bootstrap'>";
