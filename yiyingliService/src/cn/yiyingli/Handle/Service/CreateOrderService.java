@@ -140,6 +140,10 @@ public class CreateOrderService extends UMsgService {
 				serviceProIds[i] = -1L;
 			}
 		}
+		if (serviceProSum != jsonServiceList.size() && !teacher.getOnChat()) {
+			setResMsg(MsgUtil.getErrorMsgByCode("44010"));
+			return;
+		}
 		List<ServicePro> servicePros = getServiceProService().queryList(serviceProIdstoSql, teacher.getId());
 		if (servicePros.size() != serviceProSum) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44008"));

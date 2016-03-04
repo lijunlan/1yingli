@@ -111,6 +111,7 @@
 	<error name="44008"
 		value="some servicePros are not existed or are not belong to the teacher" />
 	<error name="44009" value="some servicePros are in short supply" />
+	<error name="44010" value="the chat owned by this teacher has been closed" />
 	<error name="45001" value="voucher is not existed" />
 	<error name="45002" value="voucher is overdue" />
 	<error name="45003" value="voucher has been used" />
