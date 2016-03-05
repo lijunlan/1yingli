@@ -1,5 +1,8 @@
 package cn.yiyingli.Persistant;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -40,9 +44,12 @@ public class Voucher {
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private User ownUser;
 
-	@ManyToOne(targetEntity = OrderList.class, fetch = FetchType.LAZY)
+	@Column(name = "SERVICEPROID", nullable = true)
+	private Long serviceProId;
+
+	@OneToMany(targetEntity = OrderList.class)
 	@JoinColumn(name = "ORDERLIST_ID", updatable = true)
-	private OrderList useOrderList;
+	private Set<OrderList> orderLists = new HashSet<OrderList>();
 
 	@Column(name = "NUMBER", nullable = false, unique = true)
 	private String number;
@@ -103,14 +110,6 @@ public class Voucher {
 		this.ownUser = ownUser;
 	}
 
-	public OrderList getUseOrderList() {
-		return useOrderList;
-	}
-
-	public void setUseOrderList(OrderList useOrderList) {
-		this.useOrderList = useOrderList;
-	}
-
 	public String getNumber() {
 		return number;
 	}
@@ -125,6 +124,22 @@ public class Voucher {
 
 	public void setOrigin(String origin) {
 		this.origin = origin;
+	}
+
+	public Long getServiceProId() {
+		return serviceProId;
+	}
+
+	public void setServiceProId(Long serviceProId) {
+		this.serviceProId = serviceProId;
+	}
+
+	public Set<OrderList> getOrderLists() {
+		return orderLists;
+	}
+
+	public void setOrderLists(Set<OrderList> orderLists) {
+		this.orderLists = orderLists;
 	}
 
 }

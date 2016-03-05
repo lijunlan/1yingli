@@ -117,6 +117,8 @@
 	<error name="45003" value="voucher has been used" />
 	<error name="45004" value="order do not match the payment" />
 	<error name="45005" value="the state has changed automaticly" />
+	<error name="45006"
+		value="voucher can not be used by this orderList,because the ordelist contain some servicePro(s) not belong to the voucher" />
 
 	<!-- function 5 -->
 	<!-- <error name="53001" value="recommendation engine error" /> -->

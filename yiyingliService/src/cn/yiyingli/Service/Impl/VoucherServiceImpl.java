@@ -59,8 +59,8 @@ public class VoucherServiceImpl implements VoucherService {
 	}
 
 	@Override
-	public List<Voucher> queryList(int page, int pageSize, boolean lazy) {
-		return getVoucherDao().queryList(page, pageSize, lazy);
+	public List<Voucher> queryList(int page, int pageSize) {
+		return getVoucherDao().queryList(page, pageSize);
 	}
 
 	@Override
@@ -69,8 +69,8 @@ public class VoucherServiceImpl implements VoucherService {
 	}
 
 	@Override
-	public List<Voucher> queryList(int page, boolean lazy) {
-		return queryList(page, PAGE_SIZE_INT, lazy);
+	public List<Voucher> queryList(int page) {
+		return queryList(page, PAGE_SIZE_INT);
 	}
 
 	@Override

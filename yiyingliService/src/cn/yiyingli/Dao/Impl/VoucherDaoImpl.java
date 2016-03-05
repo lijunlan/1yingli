@@ -86,16 +86,13 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Voucher> queryList(final int page, final int pageSize, final boolean lazy) {
+	public List<Voucher> queryList(final int page, final int pageSize) {
 		List<Voucher> list = new ArrayList<Voucher>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Voucher>>() {
 
 			@Override
 			public List<Voucher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Voucher v left join fetch v.useOrderList ORDER BY v.createTime DESC";
-				if (lazy) {
-					hql = "from Voucher v left join fetch v.useOrderList left join fetch v.ownUser ORDER BY v.createTime DESC";
-				}
+				String hql = "from Voucher v left join fetch v.orderLists ORDER BY v.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);

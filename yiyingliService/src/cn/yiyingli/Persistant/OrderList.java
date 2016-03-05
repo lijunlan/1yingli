@@ -1,10 +1,7 @@
 package cn.yiyingli.Persistant;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -74,9 +71,9 @@ public class OrderList {
 	@Column(name = "CUSTOMERNAME", nullable = false)
 	private String customerName;
 
-	@OneToMany(targetEntity = Voucher.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "ORDERLIST_ID", updatable = true)
-	private Set<Voucher> useVouchers = new HashSet<Voucher>();
+	@ManyToOne(targetEntity = Voucher.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "VOUCHER_ID", updatable = true, insertable = true)
+	private Voucher voucher;
 
 	public Long getId() {
 		return id;
@@ -146,12 +143,12 @@ public class OrderList {
 		this.payMoney = payMoney;
 	}
 
-	public Set<Voucher> getUseVouchers() {
-		return useVouchers;
+	public Voucher getVoucher() {
+		return voucher;
 	}
 
-	public void setUseVouchers(Set<Voucher> useVouchers) {
-		this.useVouchers = useVouchers;
+	public void setVoucher(Voucher voucher) {
+		this.voucher = voucher;
 	}
 
 	public Float getOriginMoney() {

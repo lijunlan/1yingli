@@ -2666,5 +2666,14 @@
 			<ref local="passageService" />
 		</property>
 	</bean>
+	
+	<bean id="mCloseVoucherService"
+		class="cn.yiyingli.Handle.Service.MCloseVoucherService"
+		scope="prototype">
+		<property name="voucherService">
+			<ref local="voucherService" />
+		</property>
+	</bean>
+	
 
 </beans>

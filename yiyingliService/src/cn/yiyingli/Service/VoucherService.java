@@ -24,9 +24,9 @@ public interface VoucherService {
 
 	Voucher query(String vno, boolean lazy);
 
-	List<Voucher> queryList(int page, boolean lazy);
+	List<Voucher> queryList(int page);
 
-	List<Voucher> queryList(int page, int pageSize, boolean lazy);
+	List<Voucher> queryList(int page, int pageSize);
 
 	List<Voucher> queryListByUserId(long userId, int page, boolean lazy);
 

@@ -24,7 +24,8 @@ public class MCreateVoucherService extends MMsgService {
 	@Override
 	protected boolean checkData() {
 		return super.checkData() && getData().containsKey("count") && getData().containsKey("endTime")
-				&& getData().containsKey("startTime") && getData().containsKey("money");
+				&& getData().containsKey("startTime") && getData().containsKey("money")
+				|| getData().containsKey("serviceProId");
 	}
 
 	@Override
@@ -44,6 +45,10 @@ public class MCreateVoucherService extends MMsgService {
 			voucher.setStartTime(startTime);
 			voucher.setOrigin("Manager:" + manager.getId() + "," + manager.getName());
 			voucher.setUsed(false);
+			if (getData().containsKey("serviceProId")) {
+				Long serviceProId = getData().getLong("serviceProId");
+				voucher.setServiceProId(serviceProId);
+			}
 			try {
 				getVoucherService().save(voucher);
 			} catch (Exception e) {

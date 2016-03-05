@@ -24,7 +24,7 @@ public interface VoucherDao {
 
 	Voucher query(String vno, boolean lazy);
 
-	List<Voucher> queryList(int page, int pageSize, boolean lazy);
+	List<Voucher> queryList(int page, int pageSize);
 
 	List<Voucher> queryListByUserId(long userId, int page, int pageSize, boolean lazy);
 

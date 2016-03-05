@@ -213,10 +213,20 @@ public class CreateOrderService extends UMsgService {
 			} else if (voucher.getUsed()) {
 				setResMsg(MsgUtil.getErrorMsgByCode("45003"));
 				return;
+			} else if (voucher.getServiceProId() != null) {
+				if (orderList.getOrders().size() == 1 && orderList.getOrders().get(0).getServiceId() != null
+						&& orderList.getOrders().get(0).getServiceId().longValue() == voucher.getServiceProId()
+								.longValue()) {
+					money = money - voucher.getMoney();
+					orderList.setVoucher(voucher);
+				} else {
+					setResMsg(MsgUtil.getErrorMsgByCode("45006"));
+					return;
+				}
 			} else {
 				money = money - voucher.getMoney();
 				voucher.setUsed(true);
-				orderList.getUseVouchers().add(voucher);
+				orderList.setVoucher(voucher);
 			}
 		}
 		if (money < 0.01) {
