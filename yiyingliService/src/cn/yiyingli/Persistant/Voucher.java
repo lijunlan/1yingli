@@ -48,8 +48,11 @@ public class Voucher {
 	private Long serviceProId;
 
 	@OneToMany(targetEntity = OrderList.class)
-	@JoinColumn(name = "ORDERLIST_ID", updatable = true)
+	@JoinColumn(name = "VOUCHER_ID", updatable = true)
 	private Set<OrderList> orderLists = new HashSet<OrderList>();
+
+	@Column(name = "USECOUNT", nullable = true)
+	private Long useCount;
 
 	@Column(name = "NUMBER", nullable = false, unique = true)
 	private String number;
@@ -140,6 +143,14 @@ public class Voucher {
 
 	public void setOrderLists(Set<OrderList> orderLists) {
 		this.orderLists = orderLists;
+	}
+
+	public Long getUseCount() {
+		return useCount;
+	}
+
+	public void setUseCount(Long useCount) {
+		this.useCount = useCount;
 	}
 
 }

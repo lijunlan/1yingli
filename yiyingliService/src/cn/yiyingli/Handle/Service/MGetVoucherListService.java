@@ -52,7 +52,8 @@ public class MGetVoucherListService extends MMsgService {
 			map.put("id", v.getId());
 			map.put("money", v.getMoney());
 			map.put("origin", v.getOrigin());
-			map.put("orderListCount", v.getOrderLists() == null ? 0 : v.getOrderLists().size());
+			map.put("serviceProId", v.getServiceProId());
+			map.put("orderListCount", v.getUseCount());
 			toSend.add(map.finish());
 		}
 		setResMsg(MsgUtil.getSuccessMap().put("data", toSend).finishByJson());

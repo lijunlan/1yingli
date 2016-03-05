@@ -57,6 +57,15 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 	}
 
 	@Override
+	public Long queryOrderListNumber(long id) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		long sum = (long) session.createQuery("select count(*) from OrderList ol where ol.voucher.id=" + id)
+				.uniqueResult();
+		return sum;
+	}
+
+	@Override
 	public Voucher query(long id, boolean lazy) {
 		String hql = "from Voucher v where v.id=?";
 		if (lazy) {
@@ -92,7 +101,7 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 
 			@Override
 			public List<Voucher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Voucher v left join fetch v.orderLists ORDER BY v.createTime DESC";
+				String hql = "from Voucher v ORDER BY v.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);

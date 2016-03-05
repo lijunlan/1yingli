@@ -2658,22 +2658,23 @@
 			<ref local="userMarkService" />
 		</property>
 	</bean>
-	
-	<bean id="fGetSalePassageListService"
-		class="cn.yiyingli.Handle.Service.FGetSalePassageListService"
+
+	<bean id="fGetSalePassageListService" class="cn.yiyingli.Handle.Service.FGetSalePassageListService"
 		scope="prototype">
 		<property name="passageService">
 			<ref local="passageService" />
 		</property>
 	</bean>
-	
-	<bean id="mCloseVoucherService"
-		class="cn.yiyingli.Handle.Service.MCloseVoucherService"
+
+	<bean id="mCloseVoucherService" class="cn.yiyingli.Handle.Service.MCloseVoucherService"
 		scope="prototype">
 		<property name="voucherService">
 			<ref local="voucherService" />
 		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
 	</bean>
-	
+
 
 </beans>

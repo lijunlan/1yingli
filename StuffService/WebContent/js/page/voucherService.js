@@ -115,6 +115,12 @@ $(document).ready(function () {
 			alert("time2:"+time2);
 			return;
 		}
+		var serviceProId = $("#serviceProId").val();
+		if(serviceProId!=null&&serviceProId!=""){
+			myJson.serviceProId = serviceProId;
+		}else{
+			delete myJson.serviceProId ;
+		}
 		myJson.method = "createVoucher";
 		myJson.money = money.toString();
 		myJson.count = count.toString();

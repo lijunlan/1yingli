@@ -49,6 +49,11 @@ public class VoucherServiceImpl implements VoucherService {
 	}
 
 	@Override
+	public Long queryOrderListNumber(long id) {
+		return getVoucherDao().queryOrderListNumber(id);
+	}
+
+	@Override
 	public Voucher query(long id, boolean lazy) {
 		return getVoucherDao().query(id, lazy);
 	}

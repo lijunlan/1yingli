@@ -20,6 +20,8 @@ public interface VoucherDao {
 
 	void updateFromSql(String sql);
 
+	Long queryOrderListNumber(long id);
+
 	Voucher query(long id, boolean lazy);
 
 	Voucher query(String vno, boolean lazy);

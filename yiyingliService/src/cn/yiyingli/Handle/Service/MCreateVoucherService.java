@@ -45,6 +45,7 @@ public class MCreateVoucherService extends MMsgService {
 			voucher.setStartTime(startTime);
 			voucher.setOrigin("Manager:" + manager.getId() + "," + manager.getName());
 			voucher.setUsed(false);
+			voucher.setUseCount(0L);
 			if (getData().containsKey("serviceProId")) {
 				Long serviceProId = getData().getLong("serviceProId");
 				voucher.setServiceProId(serviceProId);
