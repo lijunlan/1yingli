@@ -9,7 +9,7 @@ var changeTable = function (result) {
 	$("#voucherTable").empty();
 	$("#voucherTable").append(
 		"<thead><tr><th>ID</th><th>创建时间</th><th>优惠金额</th><th>优惠券验证码</th>" +
-		"<th>开始时间</th><th>结束时间</th><th>创建人</th><th>使用订单数</th>" +
+		"<th>开始时间</th><th>结束时间</th><th>创建人</th><th>适用订单</th><th>使用订单数</th>" +
 		"<th>是否使用</th><th>操作</th></tr></thead><tbody>");
 	var list = result.data;
 	$.each(list, function (index, data) {
@@ -27,6 +27,7 @@ var changeTable = function (result) {
 		row += startTime.toLocaleString() + "</td><td>";
 		row += endTime.toLocaleString() + "</td><td>";
 		row += data.origin + "</td><td>";
+		row += data.serviceProId + "</td><td>";
 		row += data.orderListCount + "</td><td>";
 		row += data.used + "</td>";
 		if(data.used=="false"){
