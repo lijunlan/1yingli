@@ -4,7 +4,7 @@ var WorkExpList = new Array();
 var StudyExpList = new Array();
 checkLogin();
 registNotify();
-var editor = CKEDITOR.replace( 'introduce' );
+var editor;
 
 //图片上传
 $(document).ready(function () {
@@ -53,6 +53,7 @@ $(document).ready(function () {
 			}
 		}
 	});
+	editor = CKEDITOR.replace( 'introduce' );
 	var url = window.location.href;
 	var attri = url.split("?")[1];
 	if(attri!=null){

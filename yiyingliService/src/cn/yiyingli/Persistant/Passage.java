@@ -69,9 +69,6 @@ public class Passage {
 	@Column(name = "REMOVE", nullable = false)
 	private Boolean remove;
 
-	@Column(name = "ACTIVITYWEIGHT", nullable = true)
-	private Long activityWeight;
-
 	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Teacher ownTeacher;
@@ -79,6 +76,10 @@ public class Passage {
 	@OneToMany(targetEntity = UserLikePassage.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "PASSAGE_ID", updatable = false)
 	private Set<UserLikePassage> userLikePassages = new HashSet<UserLikePassage>();
+
+	@OneToMany(targetEntity = ContentAndPage.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "PASSAGE_ID", updatable = false)
+	private Set<ContentAndPage> contentAndPages = new HashSet<ContentAndPage>();
 
 	public Long getId() {
 		return id;
@@ -224,12 +225,12 @@ public class Passage {
 		this.onReward = onReward;
 	}
 
-	public Long getActivityWeight() {
-		return activityWeight;
+	public Set<ContentAndPage> getContentAndPages() {
+		return contentAndPages;
 	}
 
-	public void setActivityWeight(Long activityWeight) {
-		this.activityWeight = activityWeight;
+	public void setContentAndPages(Set<ContentAndPage> contentAndPages) {
+		this.contentAndPages = contentAndPages;
 	}
 
 }

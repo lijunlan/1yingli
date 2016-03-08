@@ -78,9 +78,6 @@ public class Teacher {
 
 	@Column(name = "PHONE", nullable = true)
 	private String phone;
-	
-	@Column(name = "ACTIVITYDES", nullable = true)
-	private String activityDes;
 
 	@Column(name = "SEX", nullable = true)
 	private Short sex;
@@ -99,28 +96,7 @@ public class Teacher {
 
 	@Column(name = "PRAISERATIO", nullable = false)
 	private Float praiseRatio;
-
-	@Column(name = "SHOWWEIGHT1", nullable = true)
-	private Integer showWeight1;
-
-	@Column(name = "SHOWWEIGHT2", nullable = true)
-	private Integer showWeight2;
-
-	@Column(name = "SHOWWEIGHT4", nullable = true)
-	private Integer showWeight4;
-
-	@Column(name = "SHOWWEIGHT8", nullable = true)
-	private Integer showWeight8;
-
-	@Column(name = "SHOWWEIGHT16", nullable = true)
-	private Integer showWeight16;
-
-	@Column(name = "HOMEWEIGHT", nullable = true)
-	private Integer homeWeight;
-
-	@Column(name = "SALEWEIGHT", nullable = true)
-	private Integer saleWeight;
-
+	
 	@Column(name = "LEVEL", nullable = false)
 	private Short level;
 
@@ -177,6 +153,10 @@ public class Teacher {
 
 	@Column(name = "ONSERVICE", nullable = false)
 	private Boolean onService;
+	
+	@OneToMany(targetEntity = ContentAndPage.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "TEACHER_ID", updatable = false)
+	private Set<ContentAndPage> contentAndPages = new HashSet<ContentAndPage>();
 
 	@OneToMany(targetEntity = ServicePro.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = true, insertable = true)
@@ -512,45 +492,6 @@ public class Teacher {
 		this.lookNumber = lookNumber;
 	}
 
-	public Integer getShowWeight1() {
-		return showWeight1;
-	}
-
-	public Integer getShowWeight2() {
-		return showWeight2;
-	}
-
-	public Integer getShowWeight4() {
-		return showWeight4;
-	}
-
-	public Integer getShowWeight8() {
-		return showWeight8;
-	}
-
-	public Integer getShowWeight16() {
-		return showWeight16;
-	}
-
-	public void setShowWeight1(Integer showWeight1) {
-		this.showWeight1 = showWeight1;
-	}
-
-	public void setShowWeight2(Integer showWeight2) {
-		this.showWeight2 = showWeight2;
-	}
-
-	public void setShowWeight4(Integer showWeight4) {
-		this.showWeight4 = showWeight4;
-	}
-
-	public void setShowWeight8(Integer showWeight8) {
-		this.showWeight8 = showWeight8;
-	}
-
-	public void setShowWeight16(Integer showWeight16) {
-		this.showWeight16 = showWeight16;
-	}
 
 	public String getUsername() {
 		return username;
@@ -560,21 +501,6 @@ public class Teacher {
 		this.username = username;
 	}
 
-	public Integer getHomeWeight() {
-		return homeWeight;
-	}
-
-	public void setHomeWeight(Integer homeWeight) {
-		this.homeWeight = homeWeight;
-	}
-
-	public Integer getSaleWeight() {
-		return saleWeight;
-	}
-
-	public void setSaleWeight(Integer saleWeight) {
-		this.saleWeight = saleWeight;
-	}
 
 	public Long getPassageNumber() {
 		return passageNumber;
@@ -752,12 +678,12 @@ public class Teacher {
 		this.onChat = onChat;
 	}
 
-	public String getActivityDes() {
-		return activityDes;
+	public Set<ContentAndPage> getContentAndPages() {
+		return contentAndPages;
 	}
 
-	public void setActivityDes(String activityDes) {
-		this.activityDes = activityDes;
+	public void setContentAndPages(Set<ContentAndPage> contentAndPages) {
+		this.contentAndPages = contentAndPages;
 	}
 
 }

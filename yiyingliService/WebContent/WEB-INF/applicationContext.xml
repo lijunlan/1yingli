@@ -38,6 +38,8 @@
 				<value>cn.yiyingli.Persistant.UserLikeServicePro</value>
 				<value>cn.yiyingli.Persistant.OrderList</value>
 				<value>cn.yiyingli.Persistant.Reward</value>
+				<value>cn.yiyingli.Persistant.Pages</value>
+				<value>cn.yiyingli.Persistant.ContentAndPage</value>
 			</list>
 		</property>
 	</bean>
