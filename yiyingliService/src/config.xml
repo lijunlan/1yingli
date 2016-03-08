@@ -5,15 +5,13 @@
 	<imagePath value="http://image.1yingli.cn" />
 	<httpPath value="http://service.1yingli.cn" />
 	<searchUrl value="http://intranet.opensearch-cn-hangzhou.aliyuncs.com" />
-	<!-- <searchUrl value="http://opensearch-cn-hangzhou.aliyuncs.com" /> -->
 	<searchHintUrl value="http://intranet.opensearch-cn-hangzhou.aliyuncs.com" />
-	<!-- <searchHintUrl value="http://opensearch-cn-hangzhou.aliyuncs.com" /> -->
 	<rsaPath value="/RSAKey/" />
 	<baiduAboutUrl
 		value="http://api.recsys.baidu.com/s/130426/326542/rs?token=8d116fa25cfde0085776beee152741e2" />
 	<baiduPersonalUrl
 		value="http://api.recsys.baidu.com/s/130426/326544/rs?token=8d116fa25cfde0085776beee152741e2" />
-	<debug value="false" />
+	<debug value="true" />
 	<style name="user">
 		<method name="getLikeServicePro" beanName="uGetLikeServiceProService" />
 		<method name="isLikeServicePro" beanName="isLikeServiceProService" />
@@ -110,6 +108,12 @@
 	</style>
 
 	<style name="manager">
+		<method name="createActivity" beanName="mCreateActivityService" />
+		<method name="createActivityContent" beanName="mCreateActivityContentService" />
+		<method name="removeActivityContent" beanName="mRemoveActivityContentService" />
+		<method name="getActivity" beanName="mGetActivityService" />
+		<method name="removeActivity" beanName="mRemoveActivityService" />
+		<method name="getActivityList" beanName="mGetActivityListService" />
 		<method name="closeVoucher" beanName="mCloseVoucherService" />
 		<method name="removeServicePro" beanName="mRemoveServiceProService" />
 		<method name="validateServicePro" beanName="mValidateServiceProService" />

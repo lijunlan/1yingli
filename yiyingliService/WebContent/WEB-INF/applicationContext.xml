@@ -2720,4 +2720,78 @@
 		</property>
 	</bean>
 
+	<bean id="mGetActivityListService" class="cn.yiyingli.Handle.Service.MGetActivityListService"
+		scope="prototype">
+		<property name="pagesService">
+			<ref local="pagesService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mRemoveActivityService" class="cn.yiyingli.Handle.Service.MRemoveActivityService"
+		scope="prototype">
+		<property name="pagesService">
+			<ref local="pagesService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mGetActivityService" class="cn.yiyingli.Handle.Service.MGetActivityService"
+		scope="prototype">
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mRemoveActivityContentService"
+		class="cn.yiyingli.Handle.Service.MRemoveActivityContentService"
+		scope="prototype">
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mCreateActivityService" class="cn.yiyingli.Handle.Service.MCreateActivityService"
+		scope="prototype">
+		<property name="pagesService">
+			<ref local="pagesService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mCreateActivityContentService"
+		class="cn.yiyingli.Handle.Service.MCreateActivityContentService"
+		scope="prototype">
+		<property name="pagesService">
+			<ref local="pagesService" />
+		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
 </beans>

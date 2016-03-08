@@ -34,6 +34,9 @@ public class ContentAndPage {
 	@Column(name = "ACTIVITYDES", nullable = true)
 	private String activityDes;
 
+	@Column(name = "STYLE", nullable = false)
+	private Integer style;
+
 	@ManyToOne(targetEntity = Passage.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "PASSAGE_ID", updatable = false)
 	private Passage passage;
@@ -106,6 +109,14 @@ public class ContentAndPage {
 
 	public void setWeight(Integer weight) {
 		this.weight = weight;
+	}
+
+	public Integer getStyle() {
+		return style;
+	}
+
+	public void setStyle(Integer style) {
+		this.style = style;
 	}
 
 }

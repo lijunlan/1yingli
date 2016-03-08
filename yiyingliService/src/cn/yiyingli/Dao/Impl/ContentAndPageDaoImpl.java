@@ -32,9 +32,9 @@ public class ContentAndPageDaoImpl extends HibernateDaoSupport implements Conten
 
 	@Override
 	public List<ContentAndPage> queryListByPages(long pagesId) {
-		String hql = "from ContentAndPage cap left join fetch cap.pages cp left join fetch cap.teacher on cap.TEACHER_ID is not null"
-				+ " left join fetch cap.passage on cap.PASSAGE_ID is not null"
-				+ "left join fetch cap.servicePro on cap.SERVICEPRO_ID is not null" + " where cp.id=" + pagesId
+		String hql = "from ContentAndPage cap left join fetch cap.pages cp left join fetch cap.teacher on cap.style="
+				+ STYLE_TEACHER + " left join fetch cap.passage on cap.style=" + STYLE_PASSAGE
+				+ "left join fetch cap.servicePro on cap.style=" + STYLE_SERVICEPRO + " where cp.id=" + pagesId
 				+ " ORDER BY cap.createTime DESC";
 		@SuppressWarnings("unchecked")
 		List<ContentAndPage> list = getHibernateTemplate().find(hql);

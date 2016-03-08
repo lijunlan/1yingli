@@ -2,25 +2,24 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="UTF-8">
+<title>活动详情</title>
 <link rel="stylesheet" href="css/messenger.css">
-<link rel="stylesheet" href="css/fix.css">
 <link rel="stylesheet" href="css/messenger-theme-future.css">
+<link rel="stylesheet" href="css/uploadifive.css">
+<link rel="stylesheet" href="css/bootstrapSwitch.css">
 <link rel="stylesheet" href="assets/css/amazeui.min.css">
 <link rel="stylesheet" href="assets/css/admin.css">
-<title>功能选择</title>
 </head>
 
 <body>
 
-	<!-------------------------------------------- 头部 ---------------------------------------------------------------->
+	<!--------------------------------------------- 头部 ---------------------------------------------------------------->
 	<header class="am-topbar admin-header">
 		<div class="am-topbar-brand">
 			<a href="index.html"><strong>One Mile</strong> <small>一英里后台管理系统</small></a>
 		</div>
-
 		<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
-
 			<ul
 				class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
 
@@ -34,7 +33,6 @@
 			</ul>
 		</div>
 	</header>
-
 	<!--------------------------------------------- 侧边 ---------------------------------------------------------------->
 	<div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
 		<div class="am-offcanvas-bar admin-offcanvas-bar">
@@ -68,34 +66,41 @@
 						<li><a href="articleService.html"><span
 								class="am-icon-leanpub"></span> 文章管理</a></li>
 						<li><a href="suggestionService.html"><span
-								class ="am-icon-envelope-o"></span> 用户建议</a>
-						</li>
+								class="am-icon-envelope-o"></span> 用户建议</a></li>
 						<li><a href="createPassageService.html"><span
-								class ="am-icon-leanpub"></span> 编辑文章</a>
-						</li>
+								class="am-icon-leanpub"></span> 编辑文章</a></li>
 						<li><a href="editServiceProService.html"><span
-								class ="am-icon-server"></span> 编辑服务</a>
-						</li>
+								class="am-icon-server"></span> 编辑服务</a></li>
 						<li><a href="listServiceProService.html"><span
-								class ="am-icon-list"></span> 查看服务</a>
-						</li>
-						<li><a href="reward.html"><span
-								class ="am-icon-list"></span> 查看打赏</a>
-						</li>
+								class="am-icon-list"></span> 查看服务</a></li>
+						<li><a href="reward.html"><span class="am-icon-list"></span>
+								查看打赏</a></li>
 						<li><a href="listActivityService.html"><span
-								class ="am-icon-list"></span> 查看活动</a>
-						</li>
-					</ul>
-				</li>
+								class="am-icon-list"></span> 查看活动</a></li>
+					</ul></li>
 				<li><a onclick="logout()"><span class="am-icon-sign-out"></span>
 						注销</a></li>
 			</ul>
 			<div class="am-panel am-panel-default admin-sidebar-panel">
 				<div class="am-panel-bd">
 					<p>
-						<span class="am-icon-bookmark"></span> 公告
+						<span class="am-icon-gears"></span> 功能
 					</p>
-					<p>每个人都可以成为别人的大雁，不一定能指明一个好的方向，但至少能告诉别人一个地方的温凉。</p>
+					<div>
+						<input id="inputDes" placeholder="条目标题"
+							class="am-form-field am-round"></input> <br> 
+						<input id="inputWeight" placeholder="条目权重"
+							class="am-form-field am-round"></input> <br>
+						<div class="am-u-sm-4 am-u-md-2 am-text-right">条目类型(0:文章;1:导师;2:服务)</div>
+						<input id="inputStyle" placeholder="条目类型"
+							class="am-form-field am-round"></input> <br>
+						<input id="inputID" placeholder="条目ID(文章/导师/服务ID)"
+							class="am-form-field am-round"></input> <br>	
+						<button class="am-btn am-btn-secondary am-btn-block"
+							onclick="createContent()">创建活动条目</button>
+						<br>
+
+					</div>
 				</div>
 			</div>
 		</div>
@@ -106,75 +111,47 @@
 		<div class="am-cf am-padding">
 			<div class="am-fl am-cf">
 				<strong class="am-text-primary am-text-lg">首页</strong> / <small>功能模块</small>
+				/ <small>查看活动详情</small>
 			</div>
 		</div>
-
-		<ul
-			class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
-			<li><a href="orderService.html" class="am-text-success"><span
-					class="am-icon-btn am-icon-file-text"></span><br> <br>订单查询</a></li>
-			<li><a href="teacherService.html" class="am-text-warning"><span
-					class="am-icon-btn am-icon-mortar-board"></span><br> <br>导师查询</a></li>
-			<li><a href="customerService.html" class="am-text-danger"><span
-					class="am-icon-btn am-icon-user"></span><br> <br>客户查询</a></li>
-			<li><a href="manage_application.html" class="am-text-secondary"><span
-					class="am-icon-btn am-icon-plus-square"></span><br> <br>导师申请处理</a></li>
-		</ul>
-		<ul
-			class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
-			<li><a href="voucherService.html" class="am-text-success"><span
-					class="am-icon-btn am-icon-usd"></span><br> <br>生成优惠券</a></li>
-			<li><a href="uploadBackgroundService.html"
-				class="am-text-warning"><span
-					class="am-icon-btn am-icon-file-picture-o"></span><br> <br>背景图片管理</a></li>
-			<li><a href="distributionService.html" class="am-text-danger"><span
-					class="am-icon-btn am-icon-sitemap"></span><br> <br>分销管理</a></li>
-			<li><a href="teacherDemandService.html"
-				class="am-text-secondary"><span
-					class="am-icon-btn am-icon-inbox"></span><br> <br>导师要求</a></li>
-		</ul>
-		<ul
-			class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
-			<li><a href="editTeacherService.html" class="am-text-success"><span
-					class="am-icon-btn am-icon-pencil"></span><br> <br>编辑导师信息</a></li>
-			<li><a href="articleService.html" class="am-text-warning"><span
-					class="am-icon-btn am-icon-leanpub"></span><br> <br>文章管理</a></li>
-			<li><a href="suggestionService.html" class="am-text-danger"><span
-					class="am-icon-btn am-icon-envelope-o"></span><br> <br>用户建议</a></li>
-			<li><a href="createPassageService.html" class="am-text-secondary"><span
-					class="am-icon-btn am-icon-leanpub"></span><br> <br>编辑文章</a></li>	
-		</ul>
-		<ul
-			class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
-			<li><a href="editServiceProService.html" class="am-text-success"><span
-					class="am-icon-btn am-icon-server"></span><br> <br>编辑服务</a></li>
-			<li><a href="listServiceProService.html" class="am-text-warning"><span
-					class="am-icon-btn am-icon-list"></span><br> <br>查看服务</a></li>
-			<li><a href="reward.html" class="am-text-danger"><span
-					class="am-icon-btn am-icon-envelope"></span><br> <br>查看打赏</a></li>	
-					<li><a href="listActivityService.html" class="am-text-secondary"><span
-					class="am-icon-btn am-icon-envelope"></span><br> <br>查看活动</a></li>	
-		</ul>		
+		<table class="am-table am-table-bordered am-table-centered"
+			id="activity">
+		</table>
 	</div>
-	<!--------------------------------------------- 声音 ---------------------------------------------------------------->
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<!---------------------------------------------声音和警告框------------------------------------------------>
 	<div id="sound"></div>
+	<div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">出错</div>
+			<div class="am-modal-bd">
+				<p id="modalMsg"></p>
+			</div>
+			<div class="am-modal-footer">
+				<span id='confirmSpan' class="am-modal-btn" data-am-modal-confirm>关闭</span>
+			</div>
+		</div>
+	</div>
 
 	<script type="text/javascript" src="js/libs/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="js/libs/ajax-pushlet-client.js"></script>
 	<script type="text/javascript" src="js/libs/jquery.cookie.js"></script>
 	<script type="text/javascript" src="js/libs/swfobject.js"></script>
 	<script type="text/javascript" src="js/libs/messenger.min.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.json-2.4.min.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.uploadifive.min.js"></script>
+	<script type="text/javascript" src="js/libs/bootstrapSwitch.js"></script>
+	<script type="text/javascript" src="js/libs/RSA.js"></script>
+	<script type="text/javascript" src="js/libs/BigInt.js"></script>
+	<script type="text/javascript" src="js/libs/Barrett.js"></script>
+	<script type="text/javascript" src="js/libs/RSAencrypt.js"></script>
 	<script type="text/javascript" src="assets/js/amazeui.min.js"></script>
 	<script type="text/javascript" src="js/page/StuffService-common.js"></script>
-	<script type="text/javascript">
-		var mid;
-		checkLogin()
-		registNotify()
-		//在上边栏显示管理员名字
-		$(document).ready(function() {
-			document.getElementById("admin_name").innerText = $.cookie('mname')
-		})
-	</script>
+	<script type="text/javascript" src='js/page/listServiceProService.js'></script>
 </body>
 
 </html>

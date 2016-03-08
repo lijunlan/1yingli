@@ -22,7 +22,7 @@
 		<property name="hibernate.connection.autocommit">true</property>
 		<property name="hbm2ddl.auto">validate</property>
 		<property name="hibernate.show_sql">false</property>
-		<property name="connection.url">jdbc:mysql://rdsc8n6n8p62394x6u08.mysql.rds.aliyuncs.com:3306/yiyingli2_1use?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8</property> 
+		<property name="connection.url">jdbc:mysql://rdsc8n6n8p62394x6u08.mysql.rds.aliyuncs.com:3306/yiyingli222?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8</property> 
 		<property name="connection.username">sdll18</property>
 		<property name="connection.password">ll1992917</property>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>

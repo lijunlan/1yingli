@@ -6,6 +6,12 @@ import cn.yiyingli.Persistant.ContentAndPage;
 
 public interface ContentAndPageDao {
 
+	public static final int STYLE_PASSAGE = 0;
+
+	public static final int STYLE_TEACHER = 1;
+
+	public static final int STYLE_SERVICEPRO = 2;
+
 	void save(ContentAndPage contentAndPage);
 
 	void remove(long contentAndPageId);
