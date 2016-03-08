@@ -97,17 +97,8 @@ public class PServiceProUtil {
 
 	public static void assembleWithTeacherByTeacherCreate(Teacher teacher, JSONObject jsonServicePro,
 			ServicePro servicePro) {
-		// TODO
 		assemble(jsonServicePro, servicePro);
 		String time = Calendar.getInstance().getTimeInMillis() + "";
-
-		servicePro.setShowWeight1(0);
-		servicePro.setShowWeight2(0);
-		servicePro.setShowWeight3(0);
-		servicePro.setShowWeight4(0);
-		servicePro.setShowWeight5(0);
-		servicePro.setHomeWeight(0);
-		servicePro.setSaleWeight(0);
 
 		servicePro.setOrderAllNo(0L);
 		servicePro.setCommentNo(0L);
@@ -135,14 +126,6 @@ public class PServiceProUtil {
 		assemble(jsonServicePro, servicePro);
 		String time = Calendar.getInstance().getTimeInMillis() + "";
 
-		servicePro.setShowWeight1(jsonServicePro.getInt("showWeight1"));
-		servicePro.setShowWeight2(jsonServicePro.getInt("showWeight2"));
-		servicePro.setShowWeight3(jsonServicePro.getInt("showWeight3"));
-		servicePro.setShowWeight4(jsonServicePro.getInt("showWeight4"));
-		servicePro.setShowWeight5(jsonServicePro.getInt("showWeight5"));
-		servicePro.setHomeWeight(jsonServicePro.getInt("homeWeight"));
-		servicePro.setSaleWeight(jsonServicePro.getInt("saleWeight"));
-
 		servicePro.setCommentNo(0L);
 		servicePro.setOrderAllNo(0L);
 		servicePro.setRemove(false);
@@ -167,13 +150,10 @@ public class PServiceProUtil {
 
 	public static void editrByManager(int count, float price, float priceTemp, float numeral, int kind, short talkWay,
 			String address, String freeTime, String tip, String onshow, String onsale, String quantifier,
-			String servicetitle, String servicecontent, String imageUrls, String summary, int homeWeight,
-			int saleWeight, ServicePro servicePro) {
+			String servicetitle, String servicecontent, String imageUrls, String summary, ServicePro servicePro) {
 		assemble(servicecontent, imageUrls, summary, address, talkWay, price, numeral, count, quantifier, servicetitle,
 				servicePro);
 		servicePro.setUpdateTime(Calendar.getInstance().getTimeInMillis() + "");
-		servicePro.setHomeWeight(homeWeight);
-		servicePro.setSaleWeight(saleWeight);
 		servicePro.setOnSale(Boolean.valueOf(onsale));
 		servicePro.setPriceTemp(priceTemp);
 		servicePro.setFreeTime(freeTime);

@@ -7,20 +7,32 @@ import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MsgService;
-import cn.yiyingli.Persistant.Teacher;
+import cn.yiyingli.Persistant.ContentAndPage;
+import cn.yiyingli.Service.ContentAndPageService;
+import cn.yiyingli.Service.PagesService;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Util.MsgUtil;
 
 public class FGetSaleTeacherListService extends MsgService {
 
-	private TeacherService teacherService;
+	private PagesService pagesService;
 
-	public TeacherService getTeacherService() {
-		return teacherService;
+	private ContentAndPageService contentAndPageService;
+
+	public PagesService getPagesService() {
+		return pagesService;
 	}
 
-	public void setTeacherService(TeacherService teacherService) {
-		this.teacherService = teacherService;
+	public void setPagesService(PagesService pagesService) {
+		this.pagesService = pagesService;
+	}
+
+	public ContentAndPageService getContentAndPageService() {
+		return contentAndPageService;
+	}
+
+	public void setContentAndPageService(ContentAndPageService contentAndPageService) {
+		this.contentAndPageService = contentAndPageService;
 	}
 
 	@Override
@@ -40,13 +52,15 @@ public class FGetSaleTeacherListService extends MsgService {
 			return;
 		}
 		SuperMap toSend = MsgUtil.getSuccessMap();
-		List<Teacher> teachers = getTeacherService().queryListBySale(p);
-		long sum = getTeacherService().queryListBySaleNo();
+		List<ContentAndPage> contentAndPages = getContentAndPageService()
+				.queryListWithTeacherByKey(PagesService.KEY_SALE_TEACHER, p, TeacherService.SALE_PAGE_SIZE);
+		long sum = getPagesService().queryByKey(PagesService.KEY_SALE_TEACHER).getTeacherCount();
 		toSend.put("count", sum);
 		ExList exTeachers = new ExArrayList();
-		for (Teacher teacher : teachers) {
+		for (ContentAndPage contentAndPage : contentAndPages) {
 			SuperMap map = new SuperMap();
-			ExTeacher.assembleSimpleForUserActivity(teacher, map);
+			ExTeacher.assembleSimpleForUserActivity(contentAndPage.getTeacher(), map);
+			map.put("activityDes", contentAndPage.getActivityDes());
 			exTeachers.add(map.finish());
 		}
 		if (exTeachers.size() == TeacherService.SALE_PAGE_SIZE) {

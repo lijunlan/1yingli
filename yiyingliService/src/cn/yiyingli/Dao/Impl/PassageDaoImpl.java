@@ -198,16 +198,16 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Passage> queryListBySale(final int maxCount) {
+	public List<Passage> queryListByActivity(final String activityKey, final int page, final int pageSize) {
 		List<Passage> list = new ArrayList<Passage>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Passage>>() {
 			@Override
 			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Passage p left join fetch p.ownTeacher where p.remove=" + false
-						+ " and p.activityWeight is not null and p.activityWeight>0  ORDER BY p.activityWeight DESC";
+				String hql = "from Passage p left join fetch p.ownTeacher left join fetch p.contentAndPages pcap where pcap.pages.key='"
+						+ activityKey + "' and p.remove=" + false + " ORDER BY pcap.weight DESC";
 				Query query = session.createQuery(hql);
-				query.setFirstResult(0);
-				query.setMaxResults(maxCount);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
 				List<Passage> list = query.list();
 				return list;
 			}

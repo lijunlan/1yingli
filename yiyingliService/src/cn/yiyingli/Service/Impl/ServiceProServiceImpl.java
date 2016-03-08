@@ -233,41 +233,6 @@ public class ServiceProServiceImpl implements ServiceProService {
 	}
 
 	@Override
-	public List<ServicePro> queryListByHomePage(int pageSize) {
-		return getServiceProDao().queryListByHomePage(pageSize);
-	}
-
-	@Override
-	public List<ServicePro> queryListByHomePage() {
-		return getServiceProDao().queryListByHomePage(HOMEPAGE_PAGE_SIZE);
-	}
-
-	@Override
-	public List<ServicePro> queryListBySale(int page, int pageSize) {
-		return getServiceProDao().queryListBySale(page, pageSize);
-	}
-
-	@Override
-	public List<ServicePro> queryListBySale(int page) {
-		return getServiceProDao().queryListBySale(page, SALEPAGE_PAGE_SIZE);
-	}
-
-	@Override
-	public long queryListBySaleNo() {
-		return getServiceProDao().queryListBySaleNo();
-	}
-
-	@Override
-	public List<ServicePro> queryListByKind(int kind, int page, int pageSize) {
-		return getServiceProDao().queryListByKind(kind, page, pageSize);
-	}
-
-	@Override
-	public List<ServicePro> queryListByKind(int kind) {
-		return getServiceProDao().queryListByKind(kind, 1, KIND_PAGE_SIZE);
-	}
-
-	@Override
 	public List<ServicePro> queryLikeListByUserId(long userId, int page, int pageSize) {
 		return getServiceProDao().queryLikeListByUserId(userId, page, pageSize);
 	}
@@ -285,5 +250,10 @@ public class ServiceProServiceImpl implements ServiceProService {
 	@Override
 	public List<ServicePro> queryListOtherByTeacher(long serviceProId, long teacherId, int page) {
 		return getServiceProDao().queryListOtherByTeacher(serviceProId, teacherId, page, ABOUT_PAGE_SIZE);
+	}
+
+	@Override
+	public List<ServicePro> queryListByActivity(String activityKey, int page, int pageSize) {
+		return getServiceProDao().queryListByActivity(activityKey, page, pageSize);
 	}
 }

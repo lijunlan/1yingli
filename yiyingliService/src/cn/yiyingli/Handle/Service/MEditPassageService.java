@@ -41,10 +41,8 @@ public class MEditPassageService extends MMsgService {
 		String summary = getData().getString("summary");
 		boolean onshow = getData().getBoolean("onshow");
 		boolean onReward = getData().getBoolean("onReward");
-		String activityWeight = getData().getString("activityWeight");
 
-		PPassageUtil.toEditPassageByManager(title, tag, summary, content, imageUrl, onshow, onReward,
-				(activityWeight == null ? passage.getActivityWeight() : Long.valueOf(activityWeight)), passage);
+		PPassageUtil.toEditPassageByManager(title, tag, summary, content, imageUrl, onshow, onReward, passage);
 
 		getPassageService().update(passage, false, true);
 

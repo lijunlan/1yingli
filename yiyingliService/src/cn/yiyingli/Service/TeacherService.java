@@ -19,6 +19,8 @@ public interface TeacherService {
 
 	public static final int SALE_PAGE_SIZE = 12;
 
+	public static final int SHOW_PAGE_SIZE = 10;
+
 	void save(Teacher teacher);
 
 	void saveWithDetailInfo(Teacher teacher);
@@ -77,20 +79,6 @@ public interface TeacherService {
 
 	List<Teacher> queryList(int page, boolean lazy);
 
-	List<Teacher> queryListByHomePage(int pageSize);
-
-	List<Teacher> queryListBySale(int page, int pageSize);
-
-	List<Teacher> queryListByHomePage();
-
-	long queryListBySaleNo();
-
-	List<Teacher> queryListBySale(int page);
-
-	List<Teacher> queryByTipOrderByShow(int size, long tipMark, boolean lazy);
-
-	List<Teacher> queryByTipOrderByShow(long tipMark, boolean lazy);
-
 	List<Teacher> queryLikeListByUserId(long userid, int page, boolean lazy);
 
 	List<Teacher> queryLikeListByUserId(long userid, int page, int pageSize, boolean lazy);
@@ -99,24 +87,6 @@ public interface TeacherService {
 
 	List<Teacher> queryListByKeyWord(String keyword, int page, boolean lazy);
 
-	List<Teacher> queryListByTip(int page, int pageSize, long tipMark, boolean lazy);
-
-	List<Teacher> queryListByTip(int page, long tipMark, boolean lazy);
-
-	List<Teacher> queryListByTipAndLastId(long lastId, int size, long tipMark, boolean lazy);
-
-	List<Teacher> queryListByTipAndLastId(long lastId, long tipMark, boolean lazy);
-
-	List<Teacher> queryListByTipAndFirstId(long firstId, int size, long tipMark, boolean lazy);
-
-	List<Teacher> queryListByTipAndFirstId(long firstId, long tipMark, boolean lazy);
-
-	List<Teacher> queryListByLevel(short level, int page, int pageSize, boolean lazy);
-
-	List<Teacher> queryListByLevel(short level, int page, boolean lazy);
-
-	List<Teacher> queryListByTipAndLevel(int page, int pageSize, long tipMark, short level, boolean lazy);
-
-	List<Teacher> queryListByTipAndLevel(int page, long tipMark, short level, boolean lazy);
+	List<Teacher> queryListByActivity(String activityKey, int page, int pageSize);
 
 }

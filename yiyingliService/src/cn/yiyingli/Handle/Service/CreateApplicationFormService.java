@@ -63,10 +63,10 @@ public class CreateApplicationFormService extends UMsgService {
 
 		JSONArray workExperiences = application.getJSONArray("workExperience");
 		JSONArray studyExperiences = application.getJSONArray("studyExperience");
-		// JSONArray tips = application.getJSONArray("tips");
+		
 		Teacher teacher = PTeacherUtil.assembleTeacherByApplication(user, workExperiences, studyExperiences,
 				new JSONArray(), "", name, phone, address, mail, "", "", "false", "false", "false", "false", "false",
-				"-1", "-1", "-1", "-1", "-1", "0", "0", "", 0F, getTipService());
+				 "", 0F, getTipService());
 
 		ApplicationForm applicationForm = new ApplicationForm();
 		applicationForm.setContact(contact);

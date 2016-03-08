@@ -39,7 +39,7 @@ public interface PassageService {
 
 	List<Passage> queryList(int page, int pageSize);
 
-	List<Passage> queryListBySale();
+	List<Passage> queryListByActivity(String activityKey, int page, int pageSize);
 
 	List<Passage> queryListByState(int page, int pageSize, short state);
 

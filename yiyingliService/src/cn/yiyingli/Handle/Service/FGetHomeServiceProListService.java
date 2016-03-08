@@ -8,6 +8,7 @@ import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.ServicePro;
+import cn.yiyingli.Service.PagesService;
 import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Util.MsgUtil;
 
@@ -30,7 +31,8 @@ public class FGetHomeServiceProListService extends MsgService {
 
 	@Override
 	public void doit() {
-		List<ServicePro> servicePros = getServiceProService().queryListByHomePage();
+		List<ServicePro> servicePros = getServiceProService().queryListByActivity(PagesService.KEY_HOME_SERVICEPRO, 0,
+				ServiceProService.HOMEPAGE_PAGE_SIZE);
 		ExList exservicePros = new ExArrayList();
 		for (ServicePro servicePro : servicePros) {
 			SuperMap map = new SuperMap();

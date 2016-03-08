@@ -18,18 +18,11 @@ public class ExServicePro {
 		// 根据UI修改
 		assembelDetail(servicePro, map);
 		map.put("onshow", servicePro.getOnShow());
-		map.put("showWeight1", servicePro.getShowWeight1());
-		map.put("showWeight2", servicePro.getShowWeight2());
-		map.put("showWeight3", servicePro.getShowWeight3());
-		map.put("showWeight4", servicePro.getShowWeight4());
-		map.put("showWeight5", servicePro.getShowWeight5());
 		map.put("tip", servicePro.getTips());
 		map.put("finishNo", servicePro.getFinishNo());
 		map.put("score", servicePro.getScore());
 		map.put("likeNo", servicePro.getLikeNo());
 		map.put("serviceProState", servicePro.getState());
-		map.put("saleWeight", servicePro.getSaleWeight());
-		map.put("homeWeight", servicePro.getHomeWeight());
 	}
 
 	public static void assembleDetailServiceForTeacher(ServicePro servicePro, SuperMap map) {

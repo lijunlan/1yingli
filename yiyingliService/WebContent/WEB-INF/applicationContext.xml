@@ -70,6 +70,18 @@
 
 
 	<!-- !!!!!Dao!!!!! -->
+	<bean id="pagesDao" class="cn.yiyingli.Dao.Impl.PagesDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="contentAndPageDao" class="cn.yiyingli.Dao.Impl.ContentAndPageDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
 	<bean id="orderListDao" class="cn.yiyingli.Dao.Impl.OrderListDaoImpl">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
@@ -228,6 +240,18 @@
 	</bean>
 
 	<!-- !!!!!Data Transaction Service !!!! -->
+	<bean id="contentAndPageService" parent="baseTxService">
+		<property name="target">
+			<ref local="contentAndPageServiceImpl" />
+		</property>
+	</bean>
+
+	<bean id="pagesService" parent="baseTxService">
+		<property name="target">
+			<ref local="pagesServiceImpl" />
+		</property>
+	</bean>
+
 	<bean id="orderListService" parent="baseTxService">
 		<property name="target">
 			<ref local="orderListServiceImpl" />
@@ -385,6 +409,18 @@
 	</bean>
 
 	<!--!!!!Data Service Impl!!!!! -->
+	<bean id="contentAndPageServiceImpl" class="cn.yiyingli.Service.Impl.ContentAndPageServiceImpl">
+		<property name="contentAndPageDao">
+			<ref local="contentAndPageDao" />
+		</property>
+	</bean>
+
+	<bean id="pagesServiceImpl" class="cn.yiyingli.Service.Impl.PagesServiceImpl">
+		<property name="pagesDao">
+			<ref local="pagesDao" />
+		</property>
+	</bean>
+
 	<bean id="orderListServiceImpl" class="cn.yiyingli.Service.Impl.OrderListServiceImpl">
 		<property name="orderListDao">
 			<ref local="orderListDao" />
@@ -1982,8 +2018,11 @@
 
 	<bean id="fGetSaleTeacherListService" class="cn.yiyingli.Handle.Service.FGetSaleTeacherListService"
 		scope="prototype">
-		<property name="teacherService">
-			<ref local="teacherService" />
+		<property name="pagesService">
+			<ref local="pagesService" />
+		</property>
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService" />
 		</property>
 	</bean>
 
@@ -2194,6 +2233,9 @@
 		scope="prototype">
 		<property name="serviceProService">
 			<ref local="serviceProService" />
+		</property>
+		<property name="pagesService">
+			<ref local="pagesService" />
 		</property>
 	</bean>
 
@@ -2677,6 +2719,5 @@
 			<ref local="managerMarkService" />
 		</property>
 	</bean>
-
 
 </beans>

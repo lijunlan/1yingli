@@ -79,22 +79,13 @@ public class MCreateTeacherService extends MMsgService {
 		String checkEmail = tdata.getString("checkEmail");
 		String checkWork = tdata.getString("checkWork");
 		String checkStudy = tdata.getString("checkStudy");
-		String showWeight1 = tdata.getString("showWeight1");
-		String showWeight2 = tdata.getString("showWeight2");
-		String showWeight4 = tdata.getString("showWeight4");
-		String showWeight8 = tdata.getString("showWeight8");
-		String showWeight16 = tdata.getString("showWeight16");
-		String homeWeight = tdata.getString("homeWeight");
-		String saleWeight = tdata.getString("saleWeight");
 		String bgUrl = tdata.getString("bgUrl");
 		String onChat = tdata.getString("onChat");
-		String activityDes = tdata.getString("activityDes");
 
 		Teacher teacher = PTeacherUtil.assembleTeacherByManager(user, workExperiences, studyExperiences, tips,
 				simpleinfo, name, phone, address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail,
-				checkWork, checkStudy, showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight,
-				saleWeight, topic, price, bgUrl, (onChat == null ? true : Boolean.valueOf(onChat)),
-				(activityDes == null ? "" : activityDes), getTipService());
+				checkWork, checkStudy, topic, price, bgUrl, (onChat == null ? true : Boolean.valueOf(onChat)),
+				getTipService());
 
 		// String serviceTitle = service.getString("title");
 		// float numeral = Float.valueOf(service.getString("numeral"));

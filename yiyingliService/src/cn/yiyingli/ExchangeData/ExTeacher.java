@@ -50,8 +50,7 @@ public class ExTeacher {
 	public static void assembleSimpleForUserActivity(Teacher teacher, SuperMap map) {
 		assembleSimpleNormal(teacher, map);
 		map.put("level", teacher.getLevel());
-		map.put("introduce", teacher.getIntroduce());
-		map.put("activityDes", teacher.getActivityDes());
+		map.put("introduce", teacher.getIntroduce());		
 		LikeNoShowUtil.setLikeNo(teacher, map);
 		LikeNoShowUtil.setFinishNo(teacher, map);
 	}
@@ -174,17 +173,9 @@ public class ExTeacher {
 
 	public static void assembleDetailForManager(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
-		map.put("activityDes", teacher.getActivityDes());
 		map.put("mile", teacher.getMile());
 		map.put("alipayNo", teacher.getAlipay());
 		map.put("paypalNo", teacher.getPaypal());
-		map.put("showWeight1", teacher.getShowWeight1());
-		map.put("showWeight2", teacher.getShowWeight2());
-		map.put("showWeight4", teacher.getShowWeight4());
-		map.put("showWeight8", teacher.getShowWeight8());
-		map.put("showWeight16", teacher.getShowWeight16());
-		map.put("homeWeight", teacher.getHomeWeight());
-		map.put("saleWeight", teacher.getSaleWeight());
 		map.put("checkPassageNumber", teacher.getCheckPassageNumber());
 		map.put("passageNumber", teacher.getPassageNumber());
 		map.put("refusePassageNumber", teacher.getRefusePassageNumber());

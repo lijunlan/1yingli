@@ -38,16 +38,10 @@ public class ContentAndPage {
 	@JoinColumn(name = "PASSAGE_ID", updatable = false)
 	private Passage passage;
 
-	@Column(name = "SERVICEPROWEIGHT", nullable = false)
-	private Integer serviceProWeight;
+	@Column(name = "WEIGHT", nullable = false)
+	private Integer weight;
 
-	@Column(name = "PASSAGEWEIGHT", nullable = false)
-	private Integer passageWeight;
-
-	@Column(name = "TEACHERWEIGHT", nullable = false)
-	private Integer teacherWeight;
-
-	@Column(name = "CREATETIME", nullable = false)
+	@Column(name = "CREATETIME", nullable = false, updatable = false)
 	private String createTime;
 
 	public Long getId() {
@@ -106,28 +100,12 @@ public class ContentAndPage {
 		this.activityDes = activityDes;
 	}
 
-	public Integer getServiceProWeight() {
-		return serviceProWeight;
+	public Integer getWeight() {
+		return weight;
 	}
 
-	public void setServiceProWeight(Integer serviceProWeight) {
-		this.serviceProWeight = serviceProWeight;
-	}
-
-	public Integer getPassageWeight() {
-		return passageWeight;
-	}
-
-	public void setPassageWeight(Integer passageWeight) {
-		this.passageWeight = passageWeight;
-	}
-
-	public Integer getTeacherWeight() {
-		return teacherWeight;
-	}
-
-	public void setTeacherWeight(Integer teacherWeight) {
-		this.teacherWeight = teacherWeight;
+	public void setWeight(Integer weight) {
+		this.weight = weight;
 	}
 
 }

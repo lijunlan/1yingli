@@ -35,7 +35,6 @@ public class ExPassage {
 	}
 
 	public static void assembleForManager(Passage p, SuperMap map) {
-		map.put("activityWeight", p.getActivityWeight());
 		map.put("content", p.getContent());
 		map.put("summary", p.getSummary());
 		map.put("createTime", p.getCreateTime());

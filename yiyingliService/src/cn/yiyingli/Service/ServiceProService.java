@@ -58,8 +58,8 @@ public interface ServiceProService {
 	void remove(long id);
 
 	void update(ServicePro servicePro);
-	
-	void updateAddLookNumber(long serviceProId,long number);
+
+	void updateAddLookNumber(long serviceProId, long number);
 
 	void updateUserUnlike(long serviceProId, long userId);
 
@@ -108,18 +108,6 @@ public interface ServiceProService {
 
 	List<ServicePro> queryListByTeacherIdAndState(long teacherId, short state, int page);
 
-	List<ServicePro> queryListByHomePage(int pageSize);
-
-	List<ServicePro> queryListByHomePage();
-
-	List<ServicePro> queryListBySale(int page, int pageSize);
-
-	List<ServicePro> queryListBySale(int page);
-
-	List<ServicePro> queryListByKind(int kind, int page, int pageSize);
-
-	List<ServicePro> queryListByKind(int kind);
-
 	List<ServicePro> queryListByTeacherIdForUser(long teacherId, int page, int pageSize);
 
 	List<ServicePro> queryListOtherByTeacher(long serviceProId, long teacherId, int page, int pageSize);
@@ -130,6 +118,6 @@ public interface ServiceProService {
 
 	List<ServicePro> queryLikeListByUserId(long userId, int page);
 
-	long queryListBySaleNo();
+	List<ServicePro> queryListByActivity(String activityKey, int page, int pageSize);
 
 }

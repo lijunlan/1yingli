@@ -126,8 +126,8 @@ public class PassageServiceImpl implements PassageService {
 	}
 
 	@Override
-	public List<Passage> queryListBySale() {
-		return getPassageDao().queryListBySale(MAX_SALE_COUNT);
+	public List<Passage> queryListByActivity(String activityKey, int page, int pageSize) {
+		return getPassageDao().queryListByActivity(activityKey, page, pageSize);
 	}
 
 	@Override

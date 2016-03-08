@@ -52,11 +52,9 @@ public class MCreatePassageService extends MMsgService {
 		String content = (String) getData().get("content");
 		String imageUrl = (String) getData().get("imageUrl");
 		String summary = getData().getString("summary");
-		String activityWeight = getData().getString("activityWeight");
 
 		Passage passage = new Passage();
-		PPassageUtil.toSavePassageByManager(teacher, title, tag, summary, content, imageUrl,
-				(activityWeight == null ? passage.getActivityWeight() : Long.valueOf(activityWeight)), passage);
+		PPassageUtil.toSavePassageByManager(teacher, title, tag, summary, content, imageUrl, passage);
 
 		getPassageService().save(passage, true);
 		setResMsg(MsgUtil.getSuccessMsg("create passage successfully"));

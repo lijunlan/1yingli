@@ -57,28 +57,10 @@ public interface TeacherDao {
 
 	List<Teacher> queryList(int page, int pageSize, boolean lazy);
 
-	List<Teacher> queryListByHomePage(int pageSize);
-
-	long queryListBySaleNo();
-
-	List<Teacher> queryListBySale(int page, int pageSize);
-
 	List<Teacher> queryListOnservice(int page, int pageSize, boolean lazy);
-
-	List<Teacher> queryByTipOrderByShow(int size, long tipMark, boolean lazy);
 
 	List<Teacher> queryListByKeyWord(String keyword, int page, int pageSize, boolean lazy);
 
-	List<Teacher> queryListByTip(int page, int pageSize, long tipMark, boolean lazy);
-
-	List<Teacher> queryListByTipOrderByLikeNo(int page, int pageSize, long tipMark, boolean lazy);
-
-	List<Teacher> queryListByTipAndLastId(long lastId, int size, long tipMark, boolean lazy);
-
-	List<Teacher> queryListByTipAndFirstId(long firstId, int size, long tipMark, boolean lazy);
-
-	List<Teacher> queryListByLevel(short level, int page, int pageSize, boolean lazy);
-
-	List<Teacher> queryListByTipAndLevel(int page, int pageSize, long tipMark, short level, boolean lazy);
+	List<Teacher> queryListByActivity(String activityKey, int page, int pageSize);
 
 }

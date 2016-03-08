@@ -8,6 +8,7 @@ import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Passage;
+import cn.yiyingli.Service.PagesService;
 import cn.yiyingli.Service.PassageService;
 import cn.yiyingli.Util.MsgUtil;
 
@@ -31,7 +32,8 @@ public class FGetSalePassageListService extends MsgService {
 	@Override
 	public void doit() {
 		SuperMap toSend = MsgUtil.getSuccessMap();
-		List<Passage> passages = getPassageService().queryListBySale();
+		List<Passage> passages = getPassageService().queryListByActivity(PagesService.KEY_SALE_PASSAGE, 0,
+				PassageService.MAX_SALE_COUNT);
 		ExList exPassages = new ExArrayList();
 		for (Passage passage : passages) {
 			SuperMap map = new SuperMap();

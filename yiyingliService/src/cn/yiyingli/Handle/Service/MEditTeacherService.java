@@ -78,47 +78,18 @@ public class MEditTeacherService extends MMsgService {
 		String checkEmail = tdata.getString("checkEmail");
 		String checkWork = tdata.getString("checkWork");
 		String checkStudy = tdata.getString("checkStudy");
-		String showWeight1 = tdata.getString("showWeight1");
-		String showWeight2 = tdata.getString("showWeight2");
-		String showWeight4 = tdata.getString("showWeight4");
-		String showWeight8 = tdata.getString("showWeight8");
-		String showWeight16 = tdata.getString("showWeight16");
-		String homeWeight = tdata.getString("homeWeight");
-		String saleWeight = tdata.getString("saleWeight");
 		String mile = tdata.getString("mile");
 		String onService = tdata.getString("onService");
 		String bgUrl = tdata.getString("bgUrl");
 		String onChat = tdata.getString("onChat");
-		String activityDes = tdata.getString("activityDes");
 
 		Teacher teacher = user.getTeacher();
 		PTeacherUtil.editTeacherByManagerDetail(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
 				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
-				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight,
 				onService == null ? String.valueOf(teacher.getOnService()) : onService,
 				mile == null ? teacher.getMile() : Long.valueOf(mile), topic, price,
 				(bgUrl == null || bgUrl.equals("")) ? teacher.getBgUrl() : bgUrl,
-				(onChat == null ? true : Boolean.valueOf(onChat)),
-				(activityDes == null ? teacher.getActivityDes() : activityDes), teacher, getTipService());
-
-		// ServicePro servicePro = teacher.getServicePros().get(0);
-		// String serviceTitle = (String) service.get("title");
-		// float price = Float.valueOf(service.getString("price"));
-		// float priceTemp = Float.valueOf(service.getString("priceTemp"));
-		// float numeral = Float.valueOf(service.getString("numeral"));
-		// String quantifier = service.getString("quantifier");
-		// int kind = service.getInt("kind");
-		// String freeTime = service.getString("freeTime");
-		// String tip = service.getString("tip");
-		// String onshow = service.getString("onshow");
-		// String onsale = service.getString("onsale");
-		// int count = service.getInt("count");
-		// String serviceContent = (String) service.get("content");
-		//
-		// PServiceProUtil.editWithTeacherByManager(ServiceProService.STYLE_TALK,
-		// count, price, priceTemp, numeral, kind,
-		// freeTime, tip, onshow, onsale, quantifier, serviceTitle,
-		// serviceContent, servicePro);
+				(onChat == null ? true : Boolean.valueOf(onChat)), teacher, getTipService());
 
 		getTeacherService().updateWithDetailInfo(teacher, true);
 		setResMsg(MsgUtil.getSuccessMsg("edit teacher successfully"));

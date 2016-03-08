@@ -8,6 +8,7 @@ import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.ServicePro;
+import cn.yiyingli.Service.PagesService;
 import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Util.MsgUtil;
 
@@ -15,12 +16,22 @@ public class FGetSaleServiceProListService extends MsgService {
 
 	private ServiceProService serviceProService;
 
+	private PagesService pagesService;
+
 	public ServiceProService getServiceProService() {
 		return serviceProService;
 	}
 
 	public void setServiceProService(ServiceProService serviceProService) {
 		this.serviceProService = serviceProService;
+	}
+
+	public PagesService getPagesService() {
+		return pagesService;
+	}
+
+	public void setPagesService(PagesService pagesService) {
+		this.pagesService = pagesService;
 	}
 
 	@Override
@@ -40,8 +51,9 @@ public class FGetSaleServiceProListService extends MsgService {
 			return;
 		}
 		SuperMap toSend = MsgUtil.getSuccessMap();
-		List<ServicePro> servicePros = getServiceProService().queryListBySale(p);
-		long sum = getServiceProService().queryListBySaleNo();
+		List<ServicePro> servicePros = getServiceProService().queryListByActivity(PagesService.KEY_SALE_SERVICEPRO, p,
+				ServiceProService.SALEPAGE_PAGE_SIZE);
+		long sum = getPagesService().queryByKey(PagesService.KEY_SALE_SERVICEPRO).getServiceProCount();
 		toSend.put("count", sum);
 		ExList exservicePros = new ExArrayList();
 		for (ServicePro servicePro : servicePros) {

@@ -23,6 +23,9 @@ public class Pages {
 	@Column(name = "PAGES_ID")
 	private Long id;
 
+	@Column(name = "KEY", nullable = false, unique = true)
+	private String key;
+
 	@Column(name = "CREATETIME", nullable = false)
 	private String description;
 
@@ -35,6 +38,18 @@ public class Pages {
 	@Column(name = "CREATETIME", nullable = false)
 	private String createTime;
 
+	@Column(name = "PASSAGECOUNT", nullable = false)
+	private Integer passageCount;
+
+	@Column(name = "SERVICEPROCOUNT", nullable = false)
+	private Integer serviceProCount;
+
+	@Column(name = "TEACHERCOUNT", nullable = false)
+	private Integer teacherCount;
+
+	@Column(name = "REMOVE", nullable = false)
+	private Boolean remove;
+
 	@OneToMany(targetEntity = ContentAndPage.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "PAGES_ID", updatable = false)
 	private Set<ContentAndPage> contentAndPages = new HashSet<ContentAndPage>();
@@ -45,6 +60,14 @@ public class Pages {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 	public String getDescription() {
@@ -85,6 +108,38 @@ public class Pages {
 
 	public void setContentAndPages(Set<ContentAndPage> contentAndPages) {
 		this.contentAndPages = contentAndPages;
+	}
+
+	public Integer getPassageCount() {
+		return passageCount;
+	}
+
+	public void setPassageCount(Integer passageCount) {
+		this.passageCount = passageCount;
+	}
+
+	public Integer getServiceProCount() {
+		return serviceProCount;
+	}
+
+	public void setServiceProCount(Integer serviceProCount) {
+		this.serviceProCount = serviceProCount;
+	}
+
+	public Integer getTeacherCount() {
+		return teacherCount;
+	}
+
+	public void setTeacherCount(Integer teacherCount) {
+		this.teacherCount = teacherCount;
+	}
+
+	public Boolean getRemove() {
+		return remove;
+	}
+
+	public void setRemove(Boolean remove) {
+		this.remove = remove;
 	}
 
 }

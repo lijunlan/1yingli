@@ -55,16 +55,10 @@ public interface ServiceProDao {
 	List<ServicePro> queryListByTeacherIdAndShowAndState(long teacherId, short showKind, short state, int page,
 			int pageSize);
 
-	List<ServicePro> queryListByHomePage(int pageSize);
-
-	List<ServicePro> queryListBySale(int page, int pageSize);
-
-	List<ServicePro> queryListByKind(int kind, int page, int pageSize);
-
 	List<ServicePro> queryLikeListByUserId(long userid, int page, int pageSize);
 
 	List<ServicePro> queryListOtherByTeacher(long serviceProId, long teacherId, int page, int pageSize);
 
-	long queryListBySaleNo();
+	List<ServicePro> queryListByActivity(String activityKey, int page, int pageSize);
 
 }
