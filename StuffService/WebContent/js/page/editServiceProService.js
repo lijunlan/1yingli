@@ -125,15 +125,6 @@ function getAndParse(servicePro) {
 	
 	$("#freeTime").val(servicePro.freeTime);
 	
-	
-	
-	$("#showWeight1").val(servicePro.showWeight1);
-	$("#showWeight2").val(servicePro.showWeight2);
-	$("#showWeight3").val(servicePro.showWeight3);
-	$("#showWeight4").val(servicePro.showWeight4);
-	$("#showWeight5").val(servicePro.showWeight5);
-	$("#homeWeight").val(servicePro.homeWeight);
-	$("#saleWeight").val(servicePro.saleWeight);
 	$('#actionDiv').bootstrapSwitch('setState', false);
 	servicePro.talkWay == 0 ? $('#onlineDiv').bootstrapSwitch('setState', true) : $('#onlineDiv').bootstrapSwitch('setState', false);
 	servicePro.onshow == 'true' ? $('#onShowDiv').bootstrapSwitch('setState', true) : $('#onShowDiv').bootstrapSwitch('setState', false);
@@ -187,15 +178,7 @@ function submit() {
 	servicePro.summary=$("#summary").val();
 	servicePro.imageUrls=imageUrls;
 
-	servicePro.saleWeight=$("#saleWeight").val();
-	servicePro.homeWeight=$("#homeWeight").val();
 	servicePro.freeTime=$("#freeTime").val();
-
-	servicePro.showWeight1 = $("#showWeight1").val();
-	servicePro.showWeight2 = $("#showWeight2").val();
-	servicePro.showWeight3 = $("#showWeight3").val();
-	servicePro.showWeight4 = $("#showWeight4").val();
-	servicePro.showWeight5 = $("#showWeight5").val();
 		
 	send.style = "manager";
 	send.servicePro= servicePro;

@@ -128,7 +128,6 @@ function getAndParse(t) {
 	$("#bgUrl").val(t.bgUrl);
 	$("#littleIcon").attr('src',t.iconUrl);
 	$("#serviceTitle").val(t.topic);
-	$("#activityDes").val(t.activityDes);
 	$("#mileValue").val(t.mile);
 	//兼容不同版本api
 	t.price == null ? $("#servicePrice").val(t.servicePrice) : $("#servicePrice").val(t.price);
@@ -151,13 +150,6 @@ function getAndParse(t) {
 	t.checkDegree == null ? checkEducation = t.checkStudy : checkEducation = t.checkDegree;
 	checkEducation == 'true' ? $("#checkEducation").uCheck('check') : $("#checkEducation").uCheck('uncheck');
 
-	$("#showWeight1").val(t.showWeight1);
-	$("#showWeight2").val(t.showWeight2);
-	$("#showWeight4").val(t.showWeight4);
-	$("#showWeight8").val(t.showWeight8);
-	$("#showWeight16").val(t.showWeight16);
-	$("#homeWeight").val(t.homeWeight);
-	$("#saleWeight").val(t.saleWeight);
 	$('#actionDiv').bootstrapSwitch('setState', false)
 	t.onService == 'true' ? $('#onServiceDiv').bootstrapSwitch('setState', true) : $('#onServiceDiv').bootstrapSwitch('setState', false);
 	t.onChat == 'true' ? $('#onChatDiv').bootstrapSwitch('setState', true) : $('#onChatDiv').bootstrapSwitch('setState', false);
@@ -243,7 +235,6 @@ function submit() {
 
 	teacher.topic = $("#serviceTitle").val();
 	teacher.price = $("#servicePrice").val();
-	teacher.activityDes = $("#activityDes").val();
 
 	var tmpId = 1 / 2;
 	var i;
@@ -264,13 +255,7 @@ function submit() {
 	teacher.checkWork = $("#checkJob").prop("checked") ? "true" : "false";
 	teacher.checkStudy = $("#checkEducation").prop("checked") ? "true" : "false";
 	teacher.checkIDCard = $("#checkId").prop("checked") ? "true" : "false";
-	teacher.showWeight1 = $("#showWeight1").val();
-	teacher.showWeight2 = $("#showWeight2").val();
-	teacher.showWeight4 = $("#showWeight4").val();
-	teacher.showWeight8 = $("#showWeight8").val();
-	teacher.showWeight16 = $("#showWeight16").val();
-	teacher.homeWeight = $("#homeWeight").val();
-	teacher.saleWeight = $("#saleWeight").val();
+
 	teacher.mile = $('#mileValue').val();
 	teacher.onService = document.getElementById('onService').checked.toString();
 	teacher.onChat = document.getElementById('onChat').checked.toString();
