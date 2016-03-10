@@ -108,20 +108,21 @@ public class MCreateActivityContentService extends MMsgService {
 			contentAndPage.setPassage(passage);
 		} else if (style == ContentAndPageDao.STYLE_SERVICEPRO) {
 			ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"), false);
-			if(servicePro==null){
+			if (servicePro == null) {
 				setResMsg(MsgUtil.getErrorMsgByCode("22008"));
 				return;
 			}
 			contentAndPage.setServicePro(servicePro);
 		} else if (style == ContentAndPageDao.STYLE_TEACHER) {
 			Teacher teacher = getTeacherService().query(getData().getLong("teacherId"));
-			if(teacher==null){
+			if (teacher == null) {
 				setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 				return;
 			}
 			contentAndPage.setTeacher(teacher);
 		}
 		getContentAndPageService().save(contentAndPage);
+		setResMsg(MsgUtil.getSuccessMsg("create activity content successfully"));
 	}
 
 }

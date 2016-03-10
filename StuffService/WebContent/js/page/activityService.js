@@ -83,8 +83,8 @@ var createContent = function(){
 
 
 var changeTable = function (result) {
-	$("#activityList").empty();
-	$("#activityList").append(
+	$("#activity").empty();
+	$("#activity").append(
 		"<tr><th>ID</th><th>活动标题</th><th>权重</th><th>类型</th>"
 		+ "<th>ID</th><th>名字</th><th>操作</th></tr>");
 	var list = result.data;
@@ -102,7 +102,7 @@ var changeTable = function (result) {
 		row += showName + "</td><td>";
 	 	row += "<button onclick='removeContent("
 			+ data.contentId + ")'>详情</button></td>";
-		$("#activityList").append(row);
+		$("#activity").append(row);
 	});
 };
 
