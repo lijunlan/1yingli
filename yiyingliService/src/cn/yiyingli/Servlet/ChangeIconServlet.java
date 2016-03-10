@@ -4,11 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
+import java.util.Random;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -32,6 +31,7 @@ import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.ConfigurationXmlUtil;
+import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 
 @SuppressWarnings("serial")
@@ -54,7 +54,7 @@ public class ChangeIconServlet extends HttpServlet {
 	}
 
 	private static String getImageKey() {
-		return Calendar.getInstance().getTimeInMillis() + UUID.randomUUID().toString();
+		return MD5Util.MD5(Calendar.getInstance().getTimeInMillis() + "" + (new Random().nextInt(99999) + 100000));
 	}
 	
 	@Override 
@@ -65,7 +65,7 @@ public class ChangeIconServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		DiskFileItemFactory factory = new DiskFileItemFactory(10 * 1024 * 1024, new File("/TEMP/SYSTEM"));
+		DiskFileItemFactory factory = new DiskFileItemFactory(10 * 1024 * 1024, new File(ConfigurationXmlUtil.getInstance().getSettingData().get("cachePath") +"/SYSTEM"));
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		try {
 			List<FileItem> items = upload.parseRequest(req);
@@ -90,20 +90,13 @@ public class ChangeIconServlet extends HttpServlet {
 			for (FileItem item : items) {
 				if (!item.isFormField()) {
 					String endName = item.getName().substring(item.getName().lastIndexOf(".") + 1);
-					String name = new Date().getTime() + "." + endName;
-					File saveFile = new File(
-							ConfigurationXmlUtil.getInstance().getSettingData().get("cachePath") + "/Document/" + name);
-					if (!saveFile.getParentFile().exists()) {
-						saveFile.getParentFile().mkdirs();
-					}
 					OSSClient client = new OSSClient(OSSConstants.DEFAULT_OSS_ENDPOINT, AliyunConfiguration.ACCESS_ID,
 							AliyunConfiguration.ACCESS_KEY);
 					ObjectMetadata objectMeta = new ObjectMetadata();
 					objectMeta.setContentLength(item.getSize());
 					objectMeta.setContentType("image/*");
-					String key = getImageKey() + "." + endName;
+					String key = "icon/" + getImageKey() + "." + endName;
 					client.putObject(AliyunConfiguration.BUCKET_NAME, key, item.getInputStream(), objectMeta);
-					// item.write(saveFile);
 					String url = ConfigurationXmlUtil.getInstance().getSettingData().get("imagePath")
 							+ "/" + key + "@!icon";
 					user.setIconUrl(url);

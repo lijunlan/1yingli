@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +43,7 @@ public class UpLoadPImageServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setHeader("Access-Control-Allow-Origin", "*");
-		DiskFileItemFactory factory = new DiskFileItemFactory(10 * 1024 * 1024, new File("/TEMP/SYSTEM"));
+		DiskFileItemFactory factory = new DiskFileItemFactory(10 * 1024 * 1024, new File(ConfigurationXmlUtil.getInstance().getSettingData().get("cachePath") +"/SYSTEM"));
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		try {
 			List<FileItem> items = upload.parseRequest(req);
@@ -52,12 +51,6 @@ public class UpLoadPImageServlet extends HttpServlet {
 			for (FileItem item : items) {
 				if (!item.isFormField()) {
 					String endName = item.getName().substring(item.getName().lastIndexOf(".") + 1);
-					String name = new Date().getTime() + "." + endName;
-					File saveFile = new File(
-							ConfigurationXmlUtil.getInstance().getSettingData().get("cachePath") + "/Document/" + name);
-					if (!saveFile.getParentFile().exists()) {
-						saveFile.getParentFile().mkdirs();
-					}
 					OSSClient client = new OSSClient(OSSConstants.DEFAULT_OSS_ENDPOINT, AliyunConfiguration.ACCESS_ID,
 							AliyunConfiguration.ACCESS_KEY);
 					ObjectMetadata objectMeta = new ObjectMetadata();
@@ -65,7 +58,6 @@ public class UpLoadPImageServlet extends HttpServlet {
 					objectMeta.setContentType("image/*");
 					String key = "passage/" + getImageKey() + "." + endName;
 					client.putObject(AliyunConfiguration.BUCKET_NAME, key, item.getInputStream(), objectMeta);
-					// item.write(saveFile);
 					returnMsg(resp,
 							new SuperMap().put("state", "success").put("url",
 									ConfigurationXmlUtil.getInstance().getSettingData().get("imagePath") + "/" + key)
