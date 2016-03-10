@@ -1,4 +1,4 @@
-var page = 1;
+//var page = 1;
 var url = window.location.href;
 var mid;
 
@@ -114,35 +114,35 @@ function removeContent(contentId){
 
 $(function(){
 	myJson.method = "getActivity";
-	myJson.page = page.toString();
+	myJson.pagesId = pagesId.toString();
 	myAjax(myJson, changeTable);
-	if (page == 1)
-		document.getElementById("lastPage").disabled = true;
-	document.getElementById("pageInput").value = page;
+	// if (page == 1)
+	// 	document.getElementById("lastPage").disabled = true;
+	// document.getElementById("pageInput").value = page;
 });
 
-function changePage(action) {
-	if (action == "last") {
-		page--;
-	} else if (action == "next") {
-		page++;
-	}
-	document.getElementById("pageInput").value = page;
-	if (page <= 1)
-		document.getElementById("lastPage").disabled = true;
-	else
-		document.getElementById("lastPage").disabled = false;
-	myJson.method = "getActivity";
-	myJson.page = page.toString();
-	myAjax(myJson, changeTable);
-}
+// function changePage(action) {
+// 	if (action == "last") {
+// 		page--;
+// 	} else if (action == "next") {
+// 		page++;
+// 	}
+// 	document.getElementById("pageInput").value = page;
+// 	if (page <= 1)
+// 		document.getElementById("lastPage").disabled = true;
+// 	else
+// 		document.getElementById("lastPage").disabled = false;
+// 	myJson.method = "getActivity";
+// 	myJson.page = page.toString();
+// 	myAjax(myJson, changeTable);
+// }
 
 
 function getAll() {
-	page = document.getElementById("pageInput").value;
+	//page = document.getElementById("pageInput").value;
 	myJson.method = "getActivity";
-	myJson.page = page.toString();
+	myJson.pagesId = pagesId.toString();
 	myAjax(myJson, changeTable);
-	if (document.getElementById("pageInput").value > 1)
-		document.getElementById("lastPage").disabled = false;
+	// if (document.getElementById("pageInput").value > 1)
+	// 	document.getElementById("lastPage").disabled = false;
 }

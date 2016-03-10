@@ -23,7 +23,7 @@ public class Pages {
 	@Column(name = "PAGES_ID")
 	private Long id;
 
-	@Column(name = "KEY", nullable = false, unique = true)
+	@Column(name = "PAGESKEY", nullable = false, unique = true)
 	private String key;
 
 	@Column(name = "DESCRIPTION", nullable = false)

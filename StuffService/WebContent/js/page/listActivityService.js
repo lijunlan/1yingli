@@ -37,6 +37,7 @@ var changeTable = function (result) {
 		row += "<button onclick='removeActivity("
 			+ data.pagesId + ")'>删除</button></td><td>";
 		row += data.key + "</td><td>";
+		row += data.description + "</td><td>";
 		row += d.toLocaleString() + "</td><td>";
 		row += data.teacherCount + "</td><td>";
 		row += data.passageCount + "</td><td>";
