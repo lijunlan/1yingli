@@ -4,8 +4,9 @@ var WorkExpList = new Array();
 var StudyExpList = new Array();
 checkLogin();
 registNotify();
-var editor = CKEDITOR.replace( 'introduce',{
-    instanceReady:function(evt,editor){
+var editor = CKEDITOR.replace( 'introduce');
+
+editor.on( 'instanceReady', function(evt,editor){
 		    		var url = window.location.href;
 					var attri = url.split("?")[1];
 					if(attri!=null){
@@ -16,7 +17,6 @@ var editor = CKEDITOR.replace( 'introduce',{
 							get();
 						}	
 					}
-    			}
 });
 
 //图片上传
