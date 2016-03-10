@@ -29,6 +29,9 @@ public class MCreateActivityService extends MMsgService {
 		pages.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		pages.setDescription(getData().getString("description"));
 		pages.setKey(getData().getString("key"));
+		pages.setPassageCount(0);
+		pages.setServiceProCount(0);
+		pages.setTeacherCount(0);
 		pages.setRemove(false);
 		getPagesService().save(pages);
 		setResMsg(MsgUtil.getSuccessMsg("create activity successfully"));

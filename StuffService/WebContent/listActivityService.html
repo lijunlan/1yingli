@@ -95,8 +95,12 @@
 						<button class="am-btn am-btn-secondary am-btn-block"
 							onclick="createActivity()">创建活动</button>
 						<br>
+						<button id="lastPage" onclick="changePage('last')"
+							class="am-btn am-btn-default am-round">上一页</button>
+						<input id="pageInput" style="width: 20px"></input>
+						<button id="nextPage" onclick="changePage('next')"
+							class="am-btn am-btn-default am-round">下一页</button>
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -147,7 +151,7 @@
 	<script type="text/javascript" src="js/libs/RSAencrypt.js"></script>
 	<script type="text/javascript" src="assets/js/amazeui.min.js"></script>
 	<script type="text/javascript" src="js/page/StuffService-common.js"></script>
-	<script type="text/javascript" src='js/page/listServiceProService.js'></script>
+	<script type="text/javascript" src='js/page/listActivityService.js'></script>
 </body>
 
 </html>
