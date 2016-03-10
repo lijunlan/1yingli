@@ -70,7 +70,7 @@ public class MCreateActivityContentService extends MMsgService {
 
 	@Override
 	public boolean checkData() {
-		boolean check = super.checkData() && getData().containsKey("weight") && getData().containsKey("style")
+		boolean check = super.checkData() && getData().containsKey("weight") && getData().containsKey("contentStyle")
 				&& getData().containsKey("activityDes") && getData().containsKey("pagesId");
 		int style = getData().getInt("style");
 		switch (style) {
@@ -87,7 +87,7 @@ public class MCreateActivityContentService extends MMsgService {
 
 	@Override
 	public void doit() {
-		int style = getData().getInt("style");
+		int style = getData().getInt("contentStyle");
 		ContentAndPage contentAndPage = new ContentAndPage();
 		contentAndPage.setActivityDes(getData().getString("activityDes"));
 		contentAndPage.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");

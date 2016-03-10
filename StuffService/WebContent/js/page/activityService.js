@@ -95,9 +95,9 @@ var changeTable = function (result) {
 		row += data.contentId +"</td><td>";
 		row += data.activityDes + "</td><td>";
 		row += data.weight + "</td><td>";
-		row += activityStyle2String(data.style) + "</td><td>";
-		var showId = getId(style,data);
-		var showName = getName(style,data);
+		row += activityStyle2String(data.contentStyle) + "</td><td>";
+		var showId = getId(data.contentStyle,data);
+		var showName = getName(data.contentStyle,data);
 		row += showId + "</td><td>";
 		row += showName + "</td><td>";
 	 	row += "<button onclick='removeContent("
