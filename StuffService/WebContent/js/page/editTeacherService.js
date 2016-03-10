@@ -4,7 +4,20 @@ var WorkExpList = new Array();
 var StudyExpList = new Array();
 checkLogin();
 registNotify();
-var editor = CKEDITOR.replace( 'introduce' );
+var editor = CKEDITOR.replace( 'introduce',{
+    instanceReady:function(evt,editor){
+		    		var url = window.location.href;
+					var attri = url.split("?")[1];
+					if(attri!=null){
+						var key = attri.split("=")[0];
+						var value = attri.split("=")[1];
+						if(key=="username"&&value!=null){
+							$("#inputSearchUsername").val(value);
+							get();
+						}	
+					}
+    			}
+});
 
 //图片上传
 $(document).ready(function () {
@@ -53,16 +66,6 @@ $(document).ready(function () {
 			}
 		}
 	});
-	var url = window.location.href;
-	var attri = url.split("?")[1];
-	if(attri!=null){
-		var key = attri.split("=")[0];
-		var value = attri.split("=")[1];
-		if(key=="username"&&value!=null){
-			$("#inputSearchUsername").val(value);
-			get();
-		}
-	}
 	getBgList();
 });
 

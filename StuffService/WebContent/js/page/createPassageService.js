@@ -2,7 +2,7 @@
 var mid;
 checkLogin();
 registNotify();
-var editor = CKEDITOR.replace( 'content' );
+var editor = CKEDITOR.replace( 'content');
 
 //图片上传
 $(document).ready(function () {
