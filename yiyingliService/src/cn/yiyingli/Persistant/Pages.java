@@ -26,13 +26,13 @@ public class Pages {
 	@Column(name = "KEY", nullable = false, unique = true)
 	private String key;
 
-	@Column(name = "CREATETIME", nullable = false)
+	@Column(name = "DESCRIPTION", nullable = false)
 	private String description;
 
-	@Column(name = "CREATETIME", nullable = true)
+	@Column(name = "STARTTIME", nullable = true)
 	private String startTime;
 
-	@Column(name = "CREATETIME", nullable = true)
+	@Column(name = "ENDTIME", nullable = true)
 	private String endTime;
 
 	@Column(name = "CREATETIME", nullable = false)

@@ -19,8 +19,8 @@ public class ContentAndPage {
 	@Column(name = "CONTENTANDPAGE_ID")
 	private Long id;
 
-	@ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_ID", updatable = false)
+	@ManyToOne(targetEntity = Pages.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "PAGES_ID", updatable = false)
 	private Pages pages;
 
 	@ManyToOne(targetEntity = ServicePro.class, fetch = FetchType.LAZY)
@@ -31,16 +31,16 @@ public class ContentAndPage {
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Teacher teacher;
 
+	@ManyToOne(targetEntity = Passage.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "PASSAGE_ID", updatable = false)
+	private Passage passage;
+
 	@Column(name = "ACTIVITYDES", nullable = true)
 	private String activityDes;
 
 	@Column(name = "STYLE", nullable = false)
 	private Integer style;
-
-	@ManyToOne(targetEntity = Passage.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "PASSAGE_ID", updatable = false)
-	private Passage passage;
-
+	
 	@Column(name = "WEIGHT", nullable = false)
 	private Integer weight;
 
