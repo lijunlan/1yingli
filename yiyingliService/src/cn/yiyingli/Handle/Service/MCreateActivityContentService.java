@@ -72,7 +72,7 @@ public class MCreateActivityContentService extends MMsgService {
 	public boolean checkData() {
 		boolean check = super.checkData() && getData().containsKey("weight") && getData().containsKey("contentStyle")
 				&& getData().containsKey("activityDes") && getData().containsKey("pagesId");
-		int style = getData().getInt("style");
+		int style = getData().getInt("contentStyle");
 		switch (style) {
 		case ContentAndPageDao.STYLE_PASSAGE:
 			return check && getData().containsKey("passageId");
