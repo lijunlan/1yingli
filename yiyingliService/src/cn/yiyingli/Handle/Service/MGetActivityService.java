@@ -38,7 +38,7 @@ public class MGetActivityService extends MMsgService {
 			map.put("contentId", contentAndPage.getId());
 			map.put("activityDes", contentAndPage.getActivityDes());
 			map.put("weight", contentAndPage.getWeight());
-			map.put("style", contentAndPage.getStyle());
+			map.put("contentStyle", contentAndPage.getStyle());
 			switch (contentAndPage.getStyle()) {
 			case ContentAndPageDao.STYLE_PASSAGE:
 				map.put("passageId", contentAndPage.getPassage().getId());

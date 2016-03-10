@@ -65,14 +65,14 @@ function getName(style,data){
 var createContent = function(){
 	myJson.method="createActivityContent";
 	myJson.weight=$("#inputWeight").val();
-	myJson.style=$("#inputStyle").val();
+	myJson.contentStyle=$("#inputStyle").val();
 	myJson.activityDes = $("#inputDes").val();
 	myJson.pagesId = pagesId;
-	if(myJson.style==0){
+	if(myJson.contentStyle==0){
 		myJson.passageId = $("#inputID").val();
-	}else if(myJson.style==1){
+	}else if(myJson.contentStyle==1){
 		myJson.teacherId = $("#inputID").val();
-	}else if(myJson.style==2){
+	}else if(myJson.contentStyle==2){
  		myJson.serviceProId = $("#inputID").val();
 	}else{
 		return;
