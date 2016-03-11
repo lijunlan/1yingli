@@ -59,7 +59,7 @@ public class FGetSaleTeacherListService extends MsgService {
 		ExList exTeachers = new ExArrayList();
 		for (ContentAndPage contentAndPage : contentAndPages) {
 			SuperMap map = new SuperMap();
-			ExTeacher.assembleSimpleForUserActivity(contentAndPage.getTeacher(), map);
+			ExTeacher.assembleSimpleForUser(contentAndPage.getTeacher(), map);
 			map.put("activityDes", contentAndPage.getActivityDes());
 			exTeachers.add(map.finish());
 		}

@@ -2797,4 +2797,19 @@
 		</property>
 	</bean>
 
+	<bean id="fGetActivityService" class="cn.yiyingli.Handle.Service.FGetActivityService"
+		scope="prototype">
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService" />
+		</property>
+		<property name="pagesService">
+			<ref local="pagesService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+
+
 </beans>

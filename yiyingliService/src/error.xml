@@ -131,6 +131,7 @@
 	<error name="53003" value="error when search" />
 	<error name="53004" value="Submit data to recommendation engine failed" />
 	<error name="53005" value="search engine error" />
+	<error name="53006" value="contentStyle is not accurate" />
 	<error name="55001" value="you can not get now" />
 
 	<!-- distributor 6 -->

@@ -2,7 +2,7 @@ package cn.yiyingli.Handle.Service;
 
 import java.util.List;
 
-import cn.yiyingli.Dao.ContentAndPageDao;
+import cn.yiyingli.ExchangeData.ExContentAndPage;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
@@ -35,26 +35,7 @@ public class MGetActivityService extends MMsgService {
 		ExList jsonContentAndPage = new ExArrayList();
 		for (ContentAndPage contentAndPage : contentAndPages) {
 			SuperMap map = new SuperMap();
-			map.put("contentId", contentAndPage.getId());
-			map.put("activityDes", contentAndPage.getActivityDes());
-			map.put("weight", contentAndPage.getWeight());
-			map.put("contentStyle", contentAndPage.getStyle());
-			switch (contentAndPage.getStyle()) {
-			case ContentAndPageDao.STYLE_PASSAGE:
-				map.put("passageId", contentAndPage.getPassage().getId());
-				map.put("passageTitle", contentAndPage.getPassage().getTitle());
-				break;
-			case ContentAndPageDao.STYLE_SERVICEPRO:
-				map.put("serviceProId", contentAndPage.getServicePro().getId());
-				map.put("serviceProTitle", contentAndPage.getServicePro().getTitle());
-				break;
-			case ContentAndPageDao.STYLE_TEACHER:
-				map.put("teacherId", contentAndPage.getTeacher().getId());
-				map.put("teacherName", contentAndPage.getTeacher().getName());
-				break;
-			default:
-				break;
-			}
+			ExContentAndPage.assembleForManager(contentAndPage, map);
 			jsonContentAndPage.add(map.finish());
 		}
 		setResMsg(MsgUtil.getSuccessMap().put("data", jsonContentAndPage).finishByJson());
