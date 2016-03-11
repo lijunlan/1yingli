@@ -34,7 +34,7 @@ public class ContentAndPageDaoImpl extends HibernateDaoSupport implements Conten
 	public List<ContentAndPage> queryListByPages(long pagesId) {
 		String hql = "from ContentAndPage cap left join fetch cap.pages cp left join fetch cap.teacher"
 				+ " left join fetch cap.passage left join fetch cap.servicePro where cp.id=" + pagesId
-				+ " ORDER BY cap.createTime DESC";
+				+ " ORDER BY cap.weight DESC";
 		@SuppressWarnings("unchecked")
 		List<ContentAndPage> list = getHibernateTemplate().find(hql);
 		return list;
@@ -49,8 +49,8 @@ public class ContentAndPageDaoImpl extends HibernateDaoSupport implements Conten
 			@Override
 			public List<ContentAndPage> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from ContentAndPage cap left join fetch cap.pages capp left join fetch cap.passage"
-						+ " where capp.key=" + activityKey + " and cap.style=" + STYLE_PASSAGE
-						+ " ORDER BY cap.createTime DESC";
+						+ " where capp.pagesKey='" + activityKey + "' and cap.style=" + STYLE_PASSAGE
+						+ " ORDER BY cap.weight DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -70,8 +70,8 @@ public class ContentAndPageDaoImpl extends HibernateDaoSupport implements Conten
 			@Override
 			public List<ContentAndPage> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from ContentAndPage cap left join fetch cap.pages capp left join fetch cap.teacher"
-						+ " where capp.key=" + activityKey + " and cap.style=" + STYLE_TEACHER
-						+ " ORDER BY cap.createTime DESC";
+						+ " where capp.pagesKey='" + activityKey + "' and cap.style=" + STYLE_TEACHER
+						+ " ORDER BY cap.weight DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -91,8 +91,8 @@ public class ContentAndPageDaoImpl extends HibernateDaoSupport implements Conten
 			@Override
 			public List<ContentAndPage> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from ContentAndPage cap left join fetch cap.pages capp left join fetch cap.servicePro"
-						+ " where capp.key=" + activityKey + " and cap.style=" + STYLE_SERVICEPRO
-						+ " ORDER BY cap.createTime DESC";
+						+ " where capp.pagesKey='" + activityKey + "' and cap.style=" + STYLE_SERVICEPRO
+						+ " ORDER BY cap.weight DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);

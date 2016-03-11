@@ -203,7 +203,7 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Passage>>() {
 			@Override
 			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Passage p left join fetch p.ownTeacher left join fetch p.contentAndPages pcap where pcap.pages.key='"
+				String hql = "from Passage p left join fetch p.ownTeacher left join fetch p.contentAndPages pcap where pcap.pages.pagesKey='"
 						+ activityKey + "' and p.remove=" + false + " ORDER BY pcap.weight DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);

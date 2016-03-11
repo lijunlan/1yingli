@@ -43,7 +43,7 @@ public class PagesDaoImpl extends HibernateDaoSupport implements PagesDao {
 
 	@Override
 	public Pages queryByKey(String activityKey) {
-		String hql = "from Pages p where p.remove=" + false + " and p.key=?";
+		String hql = "from Pages p where p.remove=" + false + " and p.pagesKey=?";
 		@SuppressWarnings("unchecked")
 		List<Pages> list = getHibernateTemplate().find(hql, activityKey);
 		if (list.isEmpty())
