@@ -31,7 +31,7 @@ public class FGetHomeTeacherListService extends MsgService {
 
 	@Override
 	public void doit() {
-		List<Teacher> teachers = getTeacherService().queryListByActivity(PagesService.KEY_HOME_TEACHER, 0,
+		List<Teacher> teachers = getTeacherService().queryListByActivity(PagesService.KEY_HOME_TEACHER, 1,
 				TeacherService.HOME_PAGE_SIZE);
 		ExList exTeachers = new ExArrayList();
 		for (Teacher teacher : teachers) {

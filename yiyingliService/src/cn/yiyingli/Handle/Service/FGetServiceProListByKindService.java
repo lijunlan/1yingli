@@ -57,7 +57,7 @@ public class FGetServiceProListByKindService extends MsgService {
 	@Override
 	public void doit() {
 		int kind = getData().getInt("kind");
-		List<ServicePro> servicePros = getServiceProService().queryListByActivity("serviceProShow" + kind, 0,
+		List<ServicePro> servicePros = getServiceProService().queryListByActivity("serviceProShow" + kind, 1,
 				ServiceProService.KIND_PAGE_SIZE);
 		ExList toSend = new ExArrayList();
 		for (ServicePro servicePro : servicePros) {

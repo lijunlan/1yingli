@@ -31,7 +31,7 @@ public class FGetHomeServiceProListService extends MsgService {
 
 	@Override
 	public void doit() {
-		List<ServicePro> servicePros = getServiceProService().queryListByActivity(PagesService.KEY_HOME_SERVICEPRO, 0,
+		List<ServicePro> servicePros = getServiceProService().queryListByActivity(PagesService.KEY_HOME_SERVICEPRO, 1,
 				ServiceProService.HOMEPAGE_PAGE_SIZE);
 		ExList exservicePros = new ExArrayList();
 		for (ServicePro servicePro : servicePros) {

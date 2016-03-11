@@ -28,7 +28,7 @@ public class MCreateActivityService extends MMsgService {
 		Pages pages = new Pages();
 		pages.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		pages.setDescription(getData().getString("description"));
-		pages.setKey(getData().getString("key"));
+		pages.setPagesKey(getData().getString("key"));
 		pages.setPassageCount(0);
 		pages.setServiceProCount(0);
 		pages.setTeacherCount(0);

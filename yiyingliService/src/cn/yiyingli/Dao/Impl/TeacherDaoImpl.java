@@ -324,8 +324,8 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
 			@Override
 			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.contentAndPages tcap where tcap.Pages.key='"
-						+ activityKey + "' t.onService=true ORDER BY tcap.weight DESC";
+				String hql = "from Teacher t left join fetch t.contentAndPages tcap where tcap.pages.pagesKey='"
+						+ activityKey + "'and t.onService=true ORDER BY tcap.weight DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);

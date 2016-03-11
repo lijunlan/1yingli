@@ -101,7 +101,7 @@ var changeTable = function (result) {
 		row += showId + "</td><td>";
 		row += showName + "</td><td>";
 	 	row += "<button onclick='removeContent("
-			+ data.contentId + ")'>详情</button></td>";
+			+ data.contentId + ")'>删除</button></td>";
 		$("#activity").append(row);
 	});
 };

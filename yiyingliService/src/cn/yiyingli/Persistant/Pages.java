@@ -24,7 +24,7 @@ public class Pages {
 	private Long id;
 
 	@Column(name = "PAGESKEY", nullable = false, unique = true)
-	private String key;
+	private String pagesKey;
 
 	@Column(name = "DESCRIPTION", nullable = false)
 	private String description;
@@ -62,12 +62,12 @@ public class Pages {
 		this.id = id;
 	}
 
-	public String getKey() {
-		return key;
+	public String getPagesKey() {
+		return pagesKey;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
+	public void setPagesKey(String pagesKey) {
+		this.pagesKey = pagesKey;
 	}
 
 	public String getDescription() {

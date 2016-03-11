@@ -32,7 +32,7 @@ public class FGetSalePassageListService extends MsgService {
 	@Override
 	public void doit() {
 		SuperMap toSend = MsgUtil.getSuccessMap();
-		List<Passage> passages = getPassageService().queryListByActivity(PagesService.KEY_SALE_PASSAGE, 0,
+		List<Passage> passages = getPassageService().queryListByActivity(PagesService.KEY_SALE_PASSAGE, 1,
 				PassageService.MAX_SALE_COUNT);
 		ExList exPassages = new ExArrayList();
 		for (Passage passage : passages) {

@@ -39,7 +39,7 @@ public class MGetActivityListService extends MMsgService {
 			map.put("serviceProCount", page.getServiceProCount());
 			map.put("teacherCount", page.getTeacherCount());
 			map.put("description", page.getDescription());
-			map.put("key", page.getKey());
+			map.put("key", page.getPagesKey());
 			jsonPages.add(map.finish());
 		}
 		setResMsg(MsgUtil.getSuccessMap().put("data", jsonPages).finishByJson());
