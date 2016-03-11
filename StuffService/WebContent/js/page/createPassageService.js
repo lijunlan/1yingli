@@ -2,7 +2,7 @@
 var mid;
 checkLogin();
 registNotify();
-var editor; 
+var editor = CKEDITOR.replace( 'content');
 
 //图片上传
 $(document).ready(function () {
@@ -52,7 +52,6 @@ $(document).ready(function () {
 			}
 		}
 	});
-	editor = CKEDITOR.replace( 'content' );
 });
 
 

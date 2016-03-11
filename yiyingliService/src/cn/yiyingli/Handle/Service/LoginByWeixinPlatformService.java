@@ -64,7 +64,8 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 		}
 		if (u == null) {
 			password = MD5Util.MD5(password);
-			User user = PUserUtil.assembleUserFromWXPlatform(weixinNoU, weixinNo, password, nickName, icon, address);
+			String nowIcon = updataIcon(icon,weixinNo);
+			User user = PUserUtil.assembleUserFromWXPlatform(weixinNoU, weixinNo, password, nickName, nowIcon, address);
 			try {
 				getUserService().save(user);
 			} catch (Exception e) {
@@ -77,8 +78,9 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 			if (u.getWechatPlatformNo() == null) {
 				u.setWechatPlatformNo(weixinNo);
 			}
-			if (!u.getIconUrl().equals(icon)) {
-				u.setIconUrl(icon);
+			if(!u.getIconUrl().startsWith("http://image.1yingli.cn")){
+				String nowIcon = updataIcon(u.getIconUrl(),weixinNo);
+				u.setIconUrl(nowIcon);
 			}
 			returnUser(u, false);
 		}

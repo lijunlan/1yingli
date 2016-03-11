@@ -123,6 +123,7 @@ public class SendMailUtil {
 			e.printStackTrace();
 		} catch (ClientException e) {
 			e.printStackTrace();
+			return true;
 		}
 		return false;
 	}

@@ -6,6 +6,7 @@ import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderListService;
 import cn.yiyingli.Service.OrderService;
+import cn.yiyingli.Service.PassageService;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
@@ -20,6 +21,8 @@ public class FTimeTaskCallbackService extends MsgService {
 	private UserMarkService userMarkService;
 
 	private NotificationService notificationService;
+
+	private PassageService passageService;
 
 	public OrderService getOrderService() {
 		return orderService;
@@ -51,6 +54,14 @@ public class FTimeTaskCallbackService extends MsgService {
 
 	public void setNotificationService(NotificationService notificationService) {
 		this.notificationService = notificationService;
+	}
+
+	public PassageService getPassageService() {
+		return passageService;
+	}
+
+	public void setPassageService(PassageService passageService) {
+		this.passageService = passageService;
 	}
 
 	@Override
@@ -129,8 +140,7 @@ public class FTimeTaskCallbackService extends MsgService {
 					NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
 							"尊敬的用户,您好,您的订单(" + order.getOrderNo() + ")系统已经自动代替导师确认服务完毕.请到一英里平台确认本次服务.",
 							order.getCreateUser(), getNotificationService());
-					NotifyUtil.notifyTeacher(order,
-							"尊敬的导师,您的订单(" + order.getOrderNo() + ")已自动确认服务完毕,请等待用户确认本次服务.",
+					NotifyUtil.notifyTeacher(order, "尊敬的导师,您的订单(" + order.getOrderNo() + ")已自动确认服务完毕,请等待用户确认本次服务.",
 							getNotificationService());
 					break;
 				case OrderService.ORDER_STATE_USER_DISLIKE:
@@ -215,9 +225,19 @@ public class FTimeTaskCallbackService extends MsgService {
 							orderList.getUser(), getNotificationService());
 					break;
 				default:
-
 					break;
 				}
+				setResMsg(MsgUtil.getSuccessMsg("time task done"));
+			} else {
+				// TODO
+				setResMsg(MsgUtil.getSuccessMsg("time task done"));
+			}
+		} else if ("passage".equals(kind)) {
+			if ("add".equals(action)) {
+				String data = getData().getString("data");
+				JSONObject oMap = JSONObject.fromObject(data);
+				getPassageService().updateAddLookNumber(oMap.getLong("passageId"), oMap.getLong("number"));
+				setResMsg(MsgUtil.getSuccessMsg("time task done"));
 			} else {
 				// TODO
 				setResMsg(MsgUtil.getSuccessMsg("time task done"));
@@ -226,6 +246,7 @@ public class FTimeTaskCallbackService extends MsgService {
 			setResMsg(MsgUtil.getSuccessMsg("time task done"));
 			return;
 		}
+		setResMsg(MsgUtil.getSuccessMsg("time task done"));
 	}
 
 	private void cancelOrderList(OrderList orderList) {
