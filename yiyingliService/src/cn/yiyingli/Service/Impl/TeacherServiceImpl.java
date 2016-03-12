@@ -294,4 +294,13 @@ public class TeacherServiceImpl implements TeacherService {
 		return getTeacherDao().queryListByActivity(activityKey, page, pageSize);
 	}
 
+	@Override
+	public boolean updateAddSubMile(long teacherId, long subMile) {
+		if (getTeacherDao().queryCheckMile(teacherId, subMile)) {
+			getTeacherDao().updateAddSubMile(teacherId, subMile);
+			return true;
+		}
+		return false;
+	}
+
 }

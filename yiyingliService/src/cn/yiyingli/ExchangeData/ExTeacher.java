@@ -59,6 +59,7 @@ public class ExTeacher {
 	public static void assembleSimpleForManager(Teacher teacher, SuperMap map) {
 		map.put("address", teacher.getAddress());
 		map.put("mile", teacher.getMile());
+		map.put("subMile", teacher.getSubMile());
 		map.put("price", teacher.getPrice());
 		map.put("topic", teacher.getTopic());
 		map.put("checkDegree",

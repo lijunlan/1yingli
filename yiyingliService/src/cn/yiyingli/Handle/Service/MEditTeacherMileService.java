@@ -31,9 +31,12 @@ public class MEditTeacherMileService extends MMsgService {
 			return;
 		}
 		long mile = Long.valueOf((String) getData().get("mile"));
-		teacher.setMile(mile);
-		getTeacherService().update(teacher,false);
-		setResMsg(MsgUtil.getSuccessMsg("change teacher's mile successfully"));
+		boolean result = getTeacherService().updateAddSubMile(teacherId, mile);
+		if (result) {
+			setResMsg(MsgUtil.getSuccessMsg("sub teacher's mile successfully"));
+		} else {
+			setResMsg(MsgUtil.getErrorMsgByCode("22009"));
+		}
 
 	}
 

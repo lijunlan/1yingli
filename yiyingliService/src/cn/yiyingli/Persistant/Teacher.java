@@ -96,7 +96,7 @@ public class Teacher {
 
 	@Column(name = "PRAISERATIO", nullable = false)
 	private Float praiseRatio;
-	
+
 	@Column(name = "LEVEL", nullable = false)
 	private Short level;
 
@@ -139,6 +139,9 @@ public class Teacher {
 	@Column(name = "MILE", nullable = false)
 	private Long mile;
 
+	@Column(name = "SUBMILE", nullable = false)
+	private Long subMile;
+
 	@Column(name = "CHECKIDCARDSTATE", nullable = false)
 	private Short checkIDCardState;
 
@@ -153,7 +156,7 @@ public class Teacher {
 
 	@Column(name = "ONSERVICE", nullable = false)
 	private Boolean onService;
-	
+
 	@OneToMany(targetEntity = ContentAndPage.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Set<ContentAndPage> contentAndPages = new HashSet<ContentAndPage>();
@@ -492,7 +495,6 @@ public class Teacher {
 		this.lookNumber = lookNumber;
 	}
 
-
 	public String getUsername() {
 		return username;
 	}
@@ -500,7 +502,6 @@ public class Teacher {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 
 	public Long getPassageNumber() {
 		return passageNumber;
@@ -684,6 +685,14 @@ public class Teacher {
 
 	public void setContentAndPages(Set<ContentAndPage> contentAndPages) {
 		this.contentAndPages = contentAndPages;
+	}
+
+	public Long getSubMile() {
+		return subMile;
+	}
+
+	public void setSubMile(Long subMile) {
+		this.subMile = subMile;
 	}
 
 }

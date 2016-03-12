@@ -27,9 +27,9 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 		getHibernateTemplate().save(orderList);
 		Session session = getSessionFactory().getCurrentSession();
 		session.flush();
-		Query query = session
-				.createSQLQuery("update user set user.ORDERNUMBER=(select count(*) from orderlist where orderlist.USER_ID='"
-						+ orderList.getUser().getId() + "') where user.USER_ID=" +  orderList.getUser().getId() );
+		Query query = session.createSQLQuery(
+				"update user set user.ORDERNUMBER=(select count(*) from orderlist where orderlist.USER_ID='"
+						+ orderList.getUser().getId() + "') where user.USER_ID=" + orderList.getUser().getId());
 		query.executeUpdate();
 		return orderList.getId();
 	}
@@ -91,8 +91,9 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 				query = session.createSQLQuery("select servicepro.number>=" + count
 						+ " from servicepro where servicepro.SERVICEPRO_ID=" + serviceProId + " for update");
 				BigInteger r = (BigInteger) query.uniqueResult();
-				if (r.intValue() != 1)
+				if (r.intValue() != 1) {
 					return false;
+				}
 			}
 		}
 		return true;

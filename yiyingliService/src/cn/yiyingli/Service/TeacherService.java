@@ -37,6 +37,8 @@ public interface TeacherService {
 
 	void update(Teacher teacher, boolean refreshRecommend);
 
+	boolean updateAddSubMile(long teacherId, long subMile);
+
 	void updateWithDetailInfo(Teacher teacher, boolean refreshRecommend);
 
 	void updateWithUser(Teacher teacher, long userId, boolean refreshRecommend);

@@ -1,5 +1,6 @@
 package cn.yiyingli.Dao.Impl;
 
+import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,14 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
+	public void updateAddSubMile(long teacherId, long subMile) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session.createSQLQuery("update teacher set teacher.SUBMILE=teacher.SUBMILE+" + subMile
+				+ " where teacher.TEACHER_ID=" + teacherId);
+		query.executeUpdate();
+	}
+
+	@Override
 	public void updateAddLookNumber(long teacherId, long number) {
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = session.createSQLQuery("update teacher set teacher.LOOKNUMBER=teacher.LOOKNUMBER+" + number
@@ -89,6 +98,18 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	@Override
 	public void updateFromSql(String sql) {
 		getHibernateTemplate().bulkUpdate(sql);
+	}
+
+	@Override
+	public Boolean queryCheckMile(long teacherId, long subMile) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session.createSQLQuery("select teacher.MILE>=(teacher.SUBMile+" + subMile
+				+ ") from teacher where teacher.TEACHER_ID=" + teacherId + " for update");
+		BigInteger r = (BigInteger) query.uniqueResult();
+		if (r.intValue() != 1) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

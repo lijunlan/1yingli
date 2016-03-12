@@ -81,7 +81,6 @@ var createContent = function(){
 }
 
 
-
 var changeTable = function (result) {
 	$("#activity").empty();
 	$("#activity").append(

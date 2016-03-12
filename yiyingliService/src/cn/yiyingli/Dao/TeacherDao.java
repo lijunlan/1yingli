@@ -24,6 +24,8 @@ public interface TeacherDao {
 
 	void updateAddMile(long teacherId, long mile);
 
+	void updateAddSubMile(long teacherId, long subMile);
+
 	void updateFromSql(String sql);
 
 	Teacher query(long id);
@@ -34,10 +36,11 @@ public interface TeacherDao {
 
 	Boolean queryCheckLikeUser(long teacherId, long userId);
 
+	Boolean queryCheckMile(long teacherId, long subMile);
+
 	Teacher queryAll(long id);
 
 	Teacher queryWithServiceProList(long id);
-	// Teacher queryWithTips(long id, boolean lazy);
 
 	Teacher queryForUser(long id);
 
