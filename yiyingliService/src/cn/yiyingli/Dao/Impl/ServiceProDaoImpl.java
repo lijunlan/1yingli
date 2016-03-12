@@ -46,7 +46,6 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 							+ servicePro.getTeacher().getId());
 			query.executeUpdate();
 		}
-
 	}
 
 	@Override
