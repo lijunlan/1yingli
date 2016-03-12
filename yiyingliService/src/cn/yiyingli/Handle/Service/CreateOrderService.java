@@ -264,6 +264,8 @@ public class CreateOrderService extends UMsgService {
 		// orderList.getId());
 		// }
 
+		getTeacherService().updateUserLike(teacher, user);
+
 		SendMsgToBaiduUtil.updateUserTrainDataOrder(user.getId() + "", teacher.getId() + "",
 				Calendar.getInstance().getTimeInMillis() + "");
 
