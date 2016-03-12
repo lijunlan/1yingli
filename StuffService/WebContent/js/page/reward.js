@@ -10,7 +10,7 @@ document.getElementById("admin_name").innerText = $.cookie('mname');
 function deal (rewardId) {
 	myJson.method = "finishPayReward";
 	myJson.rewardId = rewardId;
-	myAjax(myJson,null);
+	myAjax(myJson,get);
 	Messenger().post("成功完成打款");
 }
 
@@ -31,7 +31,7 @@ var changeTable = function (result) {
 		row += d.toLocaleString() + "</td><td>";
 		row += data.money + "</td><td>";
 		if(data.finishSalary!="true"){
-			row += "<button onclick=\"deal("+data.rewardId+")\">完成打款</button></td>";
+			row += "<button onclick=\"deal('"+data.rewardId+"')\">完成打款</button></td>";
 		}else{
 			row += "</td>";
 		}
