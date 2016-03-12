@@ -51,8 +51,9 @@ var changeTable = function (result) {
 		row += data.username + "</td><td>";
 		row += data.email + "</td><td>";
 		row += data.level + "</td><td>";
-		row += "<div><input id='input" + data.tid + "' type='text' value='" + data.mile + "'><button  type='button' onclick='editMile("
-		+ data.tid + ")'>修改</button></div></td><td>";
+		row += "<div>总计:"+data.mile+";现有:"+(data.mile-data.subMile)+"&nbsp<input id='inputAdd" + data.tid + "' type='text' value='0'><button  type='button' onclick='addMile("
+		+ data.tid + ")'>增加</button><input id='inputSub" + data.tid + "' type='text' value='0'><button  type='button' onclick='subMile("
+		+ data.tid + ")'>减少</button></div></td><td>";
 		if (data.onService == 'true') {
 			row += "<button onclick='detail("
 			+ data.tid + ")'>详情</button></td>";
@@ -63,10 +64,23 @@ var changeTable = function (result) {
 	})
 };
 
-function editMile(tid) {
+function addMile(tid) {
 	myJson.method = 'editTeacherMile';
 	myJson.teacherId = tid.toString();
-	myJson.mile = $('#input' + tid).val().toString();
+	myJson.kind = "add";
+	myJson.mile = $('#inputAdd' + tid).val().toString();
+	if(fun == 1){
+		myAjax(myJson, get);
+	}else if(fun == 2){
+		myAjax(myJson, search);
+	}
+}	
+
+function subMile(tid) {
+	myJson.method = 'editTeacherMile';
+	myJson.teacherId = tid.toString();
+	myJson.kind = "sub";
+	myJson.mile = $('#inputSub' + tid).val().toString();
 	if(fun == 1){
 		myAjax(myJson, get);
 	}else if(fun == 2){
