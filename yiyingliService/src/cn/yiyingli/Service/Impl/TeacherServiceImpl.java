@@ -121,6 +121,20 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
+	public void updateAddMile(long teacherId, long mile) {
+		getTeacherDao().updateAddMile(teacherId, mile);
+	}
+
+	@Override
+	public boolean updateAddSubMile(long teacherId, long subMile) {
+		if (getTeacherDao().queryCheckMile(teacherId, subMile)) {
+			getTeacherDao().updateAddSubMile(teacherId, subMile);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public void updateWithUser(Teacher teacher, long userId, boolean refreshRecommend) {
 		User user = getUserDao().query(userId, false);
 		user.setEmail(teacher.getEmail());
@@ -293,14 +307,4 @@ public class TeacherServiceImpl implements TeacherService {
 	public List<Teacher> queryListByActivity(String activityKey, int page, int pageSize) {
 		return getTeacherDao().queryListByActivity(activityKey, page, pageSize);
 	}
-
-	@Override
-	public boolean updateAddSubMile(long teacherId, long subMile) {
-		if (getTeacherDao().queryCheckMile(teacherId, subMile)) {
-			getTeacherDao().updateAddSubMile(teacherId, subMile);
-			return true;
-		}
-		return false;
-	}
-
 }

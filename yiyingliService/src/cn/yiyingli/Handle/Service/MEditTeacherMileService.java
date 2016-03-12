@@ -19,7 +19,9 @@ public class MEditTeacherMileService extends MMsgService {
 
 	@Override
 	public boolean checkData() {
-		return super.checkData() && getData().containsKey("teacherId") && getData().containsKey("mile");
+		return super.checkData() && getData().containsKey("teacherId") && getData().containsKey("mile")
+				&& getData().containsKey("kind")
+				&& ("add".equals(getData().getString("kind")) || "sub".equals(getData().getString("kind")));
 	}
 
 	@Override
@@ -31,11 +33,17 @@ public class MEditTeacherMileService extends MMsgService {
 			return;
 		}
 		long mile = Long.valueOf((String) getData().get("mile"));
-		boolean result = getTeacherService().updateAddSubMile(teacherId, mile);
-		if (result) {
-			setResMsg(MsgUtil.getSuccessMsg("sub teacher's mile successfully"));
+		String kind = getData().getString("kind");
+		if ("add".equals(kind)) {
+			getTeacherService().updateAddMile(teacherId, mile);
+			setResMsg(MsgUtil.getSuccessMsg("add teacher's mile successfully"));
 		} else {
-			setResMsg(MsgUtil.getErrorMsgByCode("22009"));
+			boolean result = getTeacherService().updateAddSubMile(teacherId, mile);
+			if (result) {
+				setResMsg(MsgUtil.getSuccessMsg("sub teacher's mile successfully"));
+			} else {
+				setResMsg(MsgUtil.getErrorMsgByCode("22009"));
+			}
 		}
 
 	}
