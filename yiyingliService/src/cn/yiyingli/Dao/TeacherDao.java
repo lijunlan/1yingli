@@ -52,6 +52,8 @@ public interface TeacherDao {
 
 	Teacher queryByUserIdWithServicePro(long userid);
 
+	Teacher queryByInvitationCode(String invitationCode);
+
 	List<Teacher> queryByIds(long[] ids);
 
 	List<Teacher> queryByNameOrUsername(String word);

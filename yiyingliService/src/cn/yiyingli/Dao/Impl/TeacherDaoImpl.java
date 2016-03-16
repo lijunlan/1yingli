@@ -244,6 +244,18 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 			return list.get(0);
 	}
 
+	@Override
+	public Teacher queryByInvitationCode(String invitationCode) {
+		String hql = "from Teacher t where t.invitationCode = ?";
+		@SuppressWarnings("unchecked")
+		List<Teacher> list = getHibernateTemplate().find(hql,invitationCode);
+		if (list.isEmpty()) {
+			return  null;
+		} else {
+			return list.get(0);
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Teacher> queryLikeListByUserId(final long userid, final int page, final int pageSize,
