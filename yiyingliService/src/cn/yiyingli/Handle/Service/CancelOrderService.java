@@ -8,7 +8,6 @@ import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderListService;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Util.MsgUtil;
-import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.AlipayCancelUtil;
 import cn.yiyingli.Util.LogUtil;
 
@@ -74,8 +73,9 @@ public class CancelOrderService extends UMsgService {
 		}
 		cancelOrderList(orderList);
 
-		NotifyUtil.notifyUserOrder(orderList, "尊敬的学员，您的订单已经取消。订单号" + orderList.getOrderListNo(), user,
-				getNotificationService());
+//		NotifyUtil.notifyUserOrder(orderList, "尊敬的学员，您的订单已经取消。订单号" + orderList.getOrderListNo(), user,
+		// getNotificationService());
+
 		setResMsg(MsgUtil.getSuccessMsg("cancel orderList successfully"));
 
 	}

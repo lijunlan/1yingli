@@ -20,7 +20,6 @@ import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Service.VoucherService;
 import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.MsgUtil;
-import cn.yiyingli.Util.NotifyUtil;
 import cn.yiyingli.Util.SendMsgToBaiduUtil;
 import cn.yiyingli.Util.TimeTaskUtil;
 import cn.yiyingli.toPersistant.POrderUtil;
@@ -269,9 +268,10 @@ public class CreateOrderService extends UMsgService {
 		SendMsgToBaiduUtil.updateUserTrainDataOrder(user.getId() + "", teacher.getId() + "",
 				Calendar.getInstance().getTimeInMillis() + "");
 
-		NotifyUtil.notifyUserOrder(phone, email,
-				"尊敬的学员,您好,您的订单组(流水号:" + orderList.getOrderListNo() + ")已经创建,为了能及时预约到心动导师,请在48小时内完成支付哦,超时系统将自动取消订单。",
-				user, getNotificationService());
+		// NotifyUtil.notifyUserOrder(phone, email,
+		// "尊敬的学员,您好,您的订单组(流水号:" + orderList.getOrderListNo() +
+		// ")已经创建,为了能及时预约到心动导师,请在48小时内完成支付哦,超时系统将自动取消订单。",
+		// user, getNotificationService());
 
 		setResMsg(MsgUtil.getSuccessMap().put("orderNoList", orderList.getOrderListNo())
 				.put("msg", "create order successfully").finishByJson());
