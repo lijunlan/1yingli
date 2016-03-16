@@ -70,7 +70,7 @@ public class ApplicationFormDaoImpl extends HibernateDaoSupport implements Appli
 
 	@Override
 	public ApplicationForm queryByTeacherName(String name) {
-		String hql = "from ApplicationForm af left join fetch af.user left join fetch af.teacher aft where aft.name like '%?%'";
+		String hql = "from ApplicationForm af left join fetch af.user left join fetch af.teacher aft where aft.name=?";
 		@SuppressWarnings("unchecked")
 		List<ApplicationForm> list = getHibernateTemplate().find(hql, name);
 		if (list.isEmpty())
