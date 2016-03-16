@@ -740,6 +740,9 @@
 		<property name="applicationFormService">
 			<ref local="applicationFormService" />
 		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
 	</bean>
 
 	<bean id="likeTeacherService" class="cn.yiyingli.Handle.Service.LikeTeacherService"
@@ -980,15 +983,15 @@
 		</property>
 	</bean>
 
-	<bean id="tGetTServiceInfoService" class="cn.yiyingli.Handle.Service.TGetTServiceInfoService"
-		scope="prototype">
-		<property name="teacherService">
-			<ref local="teacherService" />
-		</property>
-		<property name="userMarkService">
-			<ref local="userMarkService" />
-		</property>
-	</bean>
+	<!--<bean id="tGetTServiceInfoService" class="cn.yiyingli.Handle.Service.TGetTServiceInfoService"-->
+		<!--scope="prototype">-->
+		<!--<property name="teacherService">-->
+			<!--<ref local="teacherService" />-->
+		<!--</property>-->
+		<!--<property name="userMarkService">-->
+			<!--<ref local="userMarkService" />-->
+		<!--</property>-->
+	<!--</bean>-->
 
 	<bean id="tGetBackgroundsService" class="cn.yiyingli.Handle.Service.TGetBackgroundsService"
 		scope="prototype">
@@ -1166,18 +1169,18 @@
 		/> </property> <property name="serviceProService"> <ref local="serviceProService" 
 		/> </property> </bean> -->
 
-	<bean id="tChangeTitlePriceService" class="cn.yiyingli.Handle.Service.TChangeTitlePriceService"
-		scope="prototype">
-		<property name="userMarkService">
-			<ref local="userMarkService" />
-		</property>
-		<property name="teacherService">
-			<ref local="teacherService" />
-		</property>
-		<property name="serviceProService">
-			<ref local="serviceProService" />
-		</property>
-	</bean>
+	<!--<bean id="tChangeTitlePriceService" class="cn.yiyingli.Handle.Service.TChangeTitlePriceService"-->
+		<!--scope="prototype">-->
+		<!--<property name="userMarkService">-->
+			<!--<ref local="userMarkService" />-->
+		<!--</property>-->
+		<!--<property name="teacherService">-->
+			<!--<ref local="teacherService" />-->
+		<!--</property>-->
+		<!--<property name="serviceProService">-->
+			<!--<ref local="serviceProService" />-->
+		<!--</property>-->
+	<!--</bean>-->
 
 	<bean id="changeIconService" class="cn.yiyingli.Handle.Service.ChangeIconService"
 		scope="prototype">
@@ -1354,15 +1357,15 @@
 		</property>
 	</bean>
 
-	<bean id="payOrderService" class="cn.yiyingli.Handle.Service.PayOrderService"
-		scope="prototype">
-		<property name="userMarkService">
-			<ref local="userMarkService" />
-		</property>
-		<property name="orderService">
-			<ref local="orderService" />
-		</property>
-	</bean>
+	<!--<bean id="payOrderService" class="cn.yiyingli.Handle.Service.PayOrderService"-->
+		<!--scope="prototype">-->
+		<!--<property name="userMarkService">-->
+			<!--<ref local="userMarkService" />-->
+		<!--</property>-->
+		<!--<property name="orderService">-->
+			<!--<ref local="orderService" />-->
+		<!--</property>-->
+	<!--</bean>-->
 
 	<bean id="dissatisfyOrderService" class="cn.yiyingli.Handle.Service.DissatisfyOrderService"
 		scope="prototype">
@@ -1619,18 +1622,18 @@
 		</property>
 	</bean>
 
-	<bean id="tEditserviceProService" class="cn.yiyingli.Handle.Service.TEditserviceProService"
-		scope="prototype">
-		<property name="userMarkService">
-			<ref local="userMarkService" />
-		</property>
-		<property name="teacherService">
-			<ref local="teacherService" />
-		</property>
-		<property name="serviceProService">
-			<ref local="serviceProService" />
-		</property>
-	</bean>
+	<!--<bean id="tEditserviceProService" class="cn.yiyingli.Handle.Service.TEditserviceProService"-->
+		<!--scope="prototype">-->
+		<!--<property name="userMarkService">-->
+			<!--<ref local="userMarkService" />-->
+		<!--</property>-->
+		<!--<property name="teacherService">-->
+			<!--<ref local="teacherService" />-->
+		<!--</property>-->
+		<!--<property name="serviceProService">-->
+			<!--<ref local="serviceProService" />-->
+		<!--</property>-->
+	<!--</bean>-->
 
 
 	<bean id="mGetTeacherInfoService" class="cn.yiyingli.Handle.Service.MGetTeacherInfoService"

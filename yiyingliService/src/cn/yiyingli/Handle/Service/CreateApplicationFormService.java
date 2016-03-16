@@ -24,6 +24,15 @@ public class CreateApplicationFormService extends UMsgService {
 
 	private TeacherService teacherService;
 
+
+	public TeacherService getTeacherService() {
+		return teacherService;
+	}
+
+	public void setTeacherService(TeacherService teacherService) {
+		this.teacherService = teacherService;
+	}
+
 	public ApplicationFormService getApplicationFormService() {
 		return applicationFormService;
 	}
@@ -74,7 +83,7 @@ public class CreateApplicationFormService extends UMsgService {
 
 		String invitationCode = application.getString("invitationCode");
 		if (invitationCode != "") {
-			Teacher inviter = teacherService.queryByInvitationCode(invitationCode);
+			Teacher inviter = getTeacherService().queryByInvitationCode(invitationCode);
 			teacher.setInviter(inviter);
 		}
 
