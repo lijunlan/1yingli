@@ -3,7 +3,7 @@ package cn.yiyingli.Handle.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.yiyingli.ExchangeData.LikeNoShowUtil;
+import cn.yiyingli.ExchangeData.LikeAndFinishNoShowUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Teacher;
@@ -96,8 +96,8 @@ public class FGetRecommendTeacherListService extends MsgService {
 			jsonTeacher.put("url", teacher.getIconUrl());
 			jsonTeacher.put("topic", teacher.getTopic());
 			jsonTeacher.put("simpleInfo", teacher.getSimpleInfo());
-			LikeNoShowUtil.setFinishNo(teacher, jsonTeacher);
-			LikeNoShowUtil.setLikeNo(teacher, jsonTeacher);
+			LikeAndFinishNoShowUtil.setFinishNo(teacher, jsonTeacher);
+			LikeAndFinishNoShowUtil.setLikeNo(teacher, jsonTeacher);
 			jsonTeachers.add(jsonTeacher);
 		}
 		map.put("data", jsonTeachers.toString());

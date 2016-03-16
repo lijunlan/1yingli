@@ -2811,9 +2811,6 @@
 		<property name="pagesService">
 			<ref local="pagesService" />
 		</property>
-		<property name="managerMarkService">
-			<ref local="managerMarkService" />
-		</property>
 	</bean>
 
 

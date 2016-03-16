@@ -110,8 +110,11 @@ public class PServiceProUtil {
 		servicePro.setCreateTime(time);
 		servicePro.setAcceptNo(0L);
 		servicePro.setFinishNo(0L);
+		servicePro.setMaskFinishNo(0L);
+		servicePro.setMaskNo(0L);
 		servicePro.setFreeTime(jsonServicePro.getString("freeTime"));
 		servicePro.setLikeNo(0L);
+		servicePro.setLookNumber(0L);
 		servicePro.setKind(jsonServicePro.getInt("kind"));
 		servicePro.setOnShow(false);
 		servicePro.setPraiseRatio(0F);
@@ -125,7 +128,7 @@ public class PServiceProUtil {
 	public static void assembleWithTeacherByManager(Teacher teacher, JSONObject jsonServicePro, ServicePro servicePro) {
 		assemble(jsonServicePro, servicePro);
 		String time = Calendar.getInstance().getTimeInMillis() + "";
-
+		
 		servicePro.setCommentNo(0L);
 		servicePro.setOrderAllNo(0L);
 		servicePro.setRemove(false);
@@ -136,8 +139,11 @@ public class PServiceProUtil {
 		servicePro.setCreateTime(time);
 		servicePro.setAcceptNo(0L);
 		servicePro.setFinishNo(0L);
+		servicePro.setMaskFinishNo(0L);
+		servicePro.setMaskNo(0L);
 		servicePro.setFreeTime(jsonServicePro.getString("freeTime"));
 		servicePro.setLikeNo(0L);
+		servicePro.setLookNumber(0L);
 		servicePro.setKind(jsonServicePro.getInt("kind"));
 		servicePro.setOnShow(true);
 		servicePro.setPraiseRatio(0F);
