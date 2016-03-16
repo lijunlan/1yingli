@@ -2017,8 +2017,8 @@
 
 	<bean id="fGetHomeTeacherListService" class="cn.yiyingli.Handle.Service.FGetHomeTeacherListService"
 		scope="prototype">
-		<property name="teacherService">
-			<ref local="teacherService" />
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService" />
 		</property>
 	</bean>
 
@@ -2813,9 +2813,6 @@
 		</property>
 		<property name="pagesService">
 			<ref local="pagesService" />
-		</property>
-		<property name="managerMarkService">
-			<ref local="managerMarkService" />
 		</property>
 	</bean>
 

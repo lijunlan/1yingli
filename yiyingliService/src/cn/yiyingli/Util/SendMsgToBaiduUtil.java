@@ -77,7 +77,7 @@ public class SendMsgToBaiduUtil {
 	}
 
 	public static String getRecommendPassageListAbout(String pid) {
-		return sendGet("http://api.recsys.baidu.com/s/136349/332496/rs?token=68cff3a47d0eeedf083c16d5aabe1628"
+		return sendGet("http://api.recsys.baidu.com/s/136349/340926/rs?token=68cff3a47d0eeedf083c16d5aabe1628"
 				+ "&num=3&iid=" + pid);
 	}
 

@@ -71,8 +71,8 @@ public class OrderList {
 	@Column(name = "CUSTOMERNAME", nullable = false)
 	private String customerName;
 
-	@ManyToOne(targetEntity = Voucher.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "VOUCHER_ID", updatable = true, insertable = true)
+	@ManyToOne(targetEntity = Voucher.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "VOUCHER_ID", insertable = true)
 	private Voucher voucher;
 
 	public Long getId() {
