@@ -81,15 +81,16 @@ public class MEditTeacherService extends MMsgService {
 		String mile = tdata.getString("mile");
 		String onService = tdata.getString("onService");
 		String bgUrl = tdata.getString("bgUrl");
-		String onChat = tdata.getString("onChat");
+		Boolean onChat = tdata.getBoolean("onChat");
+		Boolean showNotify = tdata.getBoolean("showNotify");
 
 		Teacher teacher = user.getTeacher();
 		PTeacherUtil.editTeacherByManagerDetail(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
 				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
 				onService == null ? String.valueOf(teacher.getOnService()) : onService,
 				mile == null ? teacher.getMile() : Long.valueOf(mile), topic, price,
-				(bgUrl == null || bgUrl.equals("")) ? teacher.getBgUrl() : bgUrl,
-				(onChat == null ? true : Boolean.valueOf(onChat)), teacher, getTipService());
+				(bgUrl == null || bgUrl.equals("")) ? teacher.getBgUrl() : bgUrl, onChat, showNotify, teacher,
+				getTipService());
 
 		getTeacherService().updateWithDetailInfo(teacher, true);
 		setResMsg(MsgUtil.getSuccessMsg("edit teacher successfully"));

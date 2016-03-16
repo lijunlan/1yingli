@@ -80,26 +80,12 @@ public class MCreateTeacherService extends MMsgService {
 		String checkWork = tdata.getString("checkWork");
 		String checkStudy = tdata.getString("checkStudy");
 		String bgUrl = tdata.getString("bgUrl");
-		String onChat = tdata.getString("onChat");
+		Boolean onChat = tdata.getBoolean("onChat");
+		Boolean showNotify = tdata.getBoolean("showNotify");
 
 		Teacher teacher = PTeacherUtil.assembleTeacherByManager(user, workExperiences, studyExperiences, tips,
 				simpleinfo, name, phone, address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail,
-				checkWork, checkStudy, topic, price, bgUrl, (onChat == null ? true : Boolean.valueOf(onChat)),
-				getTipService());
-
-		// String serviceTitle = service.getString("title");
-		// float numeral = Float.valueOf(service.getString("numeral"));
-		// float price = Float.valueOf(service.getString("price"));
-		// int count = service.getInt("count");
-		// String quantifier = service.getString("quantifier");
-		// String serviceContent = service.getString("content");
-		// String tip = service.getString("tip");
-		// String freeTime = service.getString("freeTime");
-		//
-		// ServicePro servicePro = new ServicePro();
-		// PServiceProUtil.assembleWithTeacherByManager(teacher, serviceContent,
-		// price, numeral, count, quantifier,
-		// serviceTitle, tip, freeTime, servicePro);
+				checkWork, checkStudy, topic, price, bgUrl, onChat, showNotify, getTipService());
 
 		getTeacherService().saveWithDetailInfo(teacher);
 		setResMsg(MsgUtil.getSuccessMsg("insert teacher successfully"));
