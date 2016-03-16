@@ -118,7 +118,7 @@ public class PServiceProUtil {
 		servicePro.setKind(jsonServicePro.getInt("kind"));
 		servicePro.setOnShow(false);
 		servicePro.setPraiseRatio(0F);
-		servicePro.setScore(0);
+		servicePro.setScore(0F);
 		servicePro.setState(ServiceProService.STATE_CHECKING);
 		servicePro.setTips(jsonServicePro.getString("tip"));
 		servicePro.setUpdateTime(time);
@@ -147,7 +147,7 @@ public class PServiceProUtil {
 		servicePro.setKind(jsonServicePro.getInt("kind"));
 		servicePro.setOnShow(true);
 		servicePro.setPraiseRatio(0F);
-		servicePro.setScore(0);
+		servicePro.setScore(0F);
 		servicePro.setState(ServiceProService.STATE_OK);
 		servicePro.setTips(jsonServicePro.getString("tip"));
 		servicePro.setUpdateTime(time);

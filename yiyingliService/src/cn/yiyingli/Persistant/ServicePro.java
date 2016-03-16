@@ -95,7 +95,7 @@ public class ServicePro {
 	private Set<Comment> comments = new HashSet<Comment>();
 
 	@Column(name = "SCORE", nullable = false)
-	private Integer score;
+	private Float score;
 
 	@Column(name = "ANSWERTIME", nullable = false)
 	private Long answerTime;
@@ -248,11 +248,11 @@ public class ServicePro {
 		this.comments = comments;
 	}
 
-	public Integer getScore() {
+	public Float getScore() {
 		return score;
 	}
 
-	public void setScore(Integer score) {
+	public void setScore(Float score) {
 		this.score = score;
 	}
 
