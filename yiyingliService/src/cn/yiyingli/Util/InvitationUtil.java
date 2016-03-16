@@ -13,7 +13,7 @@ public class InvitationUtil {
 		try {
 			byte[] tempString = (userName + (new Date().toString())).getBytes("UTF-8");
 			byte[] result = MessageDigest.getInstance("MD5").digest(tempString);
-			return new String(result, "UTF-8");
+			return (new String(result, "UTF-8")).substring(10);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
