@@ -387,10 +387,46 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 	}
 
 	@Override
+	public long querySumNoByUserIdAndStates(long userId, String[] states) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		String hql = "select count(*) from Order o where o.createUser.id=" + userId + "and (o.state like '"
+				+ states[0] + "%'";
+		if (states.length > 1) {
+			for (int i = 1; i < states.length; i++) {
+				hql = hql + " or o.state like '" + states[i] + "%'";
+			}
+		}
+		final String _hql = hql + ")";
+		long sum = (long) session.createQuery(_hql)
+				.uniqueResult();
+		ts.commit();
+		return sum;
+	}
+
+	@Override
 	public long querySumNoByTeacherId(long teacherId) {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Transaction ts = session.beginTransaction();
 		long sum = (long) session.createQuery("select count(*) from Order o where o.teacher.id=" + teacherId)
+				.uniqueResult();
+		ts.commit();
+		return sum;
+	}
+
+	@Override
+	public long querySumNoByTeacherIdAndStates(long teacherId, String[] states) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		String hql = "select count(*) from Order o where o.teacher.id=" + teacherId + "and (o.state like '"
+				+ states[0] + "%'";
+		if (states.length > 1) {
+			for (int i = 1; i < states.length; i++) {
+				hql = hql + " or o.state like '" + states[i] + "%'";
+			}
+		}
+		final String _hql = hql + ")";
+		long sum = (long) session.createQuery(_hql)
 				.uniqueResult();
 		ts.commit();
 		return sum;

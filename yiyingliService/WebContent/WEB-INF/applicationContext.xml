@@ -1029,6 +1029,9 @@
 		<property name="orderListService">
 			<ref local="orderListService" />
 		</property>
+		<property name="orderService">
+			<ref local="orderService"/>
+		</property>
 	</bean>
 
 	<bean id="getOrderInfoService" class="cn.yiyingli.Handle.Service.GetOrderInfoService"
@@ -1084,6 +1087,9 @@
 		</property>
 		<property name="teacherService">
 			<ref local="teacherService" />
+		</property>
+		<property name="orderService">
+			<ref local="orderService"/>
 		</property>
 	</bean>
 
@@ -1160,10 +1166,10 @@
 		</property>
 	</bean>
 
-	<!-- <bean id="tChangeserviceProService" class="cn.yiyingli.Handle.Service.TChangeserviceProService" 
-		scope="prototype"> <property name="userMarkService"> <ref local="userMarkService" 
-		/> </property> <property name="teacherService"> <ref local="teacherService" 
-		/> </property> <property name="serviceProService"> <ref local="serviceProService" 
+	<!-- <bean id="tChangeserviceProService" class="cn.yiyingli.Handle.Service.TChangeserviceProService"
+		scope="prototype"> <property name="userMarkService"> <ref local="userMarkService"
+		/> </property> <property name="teacherService"> <ref local="teacherService"
+		/> </property> <property name="serviceProService"> <ref local="serviceProService"
 		/> </property> </bean> -->
 
 	<bean id="tChangeTitlePriceService" class="cn.yiyingli.Handle.Service.TChangeTitlePriceService"
@@ -1329,13 +1335,13 @@
 		</property>
 	</bean>
 
-	<!-- <bean id="fMoneyReturnedService" class="cn.yiyingli.Handle.Service.FMoneyReturnedService" 
-		scope="prototype"> <property name="userMarkService"> <ref local="userMarkService" 
-		/> </property> <property name="orderService"> <ref local="orderService" /> 
+	<!-- <bean id="fMoneyReturnedService" class="cn.yiyingli.Handle.Service.FMoneyReturnedService"
+		scope="prototype"> <property name="userMarkService"> <ref local="userMarkService"
+		/> </property> <property name="orderService"> <ref local="orderService" />
 		</property> </bean> -->
-	<!-- <bean id="cancelPayService" class="cn.yiyingli.Handle.Service.CancelPayService" 
-		scope="prototype"> <property name="userMarkService"> <ref local="userMarkService" 
-		/> </property> <property name="orderService"> <ref local="orderService" /> 
+	<!-- <bean id="cancelPayService" class="cn.yiyingli.Handle.Service.CancelPayService"
+		scope="prototype"> <property name="userMarkService"> <ref local="userMarkService"
+		/> </property> <property name="orderService"> <ref local="orderService" />
 		</property> </bean> -->
 
 	<bean id="tSelectNoTimeService" class="cn.yiyingli.Handle.Service.TSelectNoTimeService"
