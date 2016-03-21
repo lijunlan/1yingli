@@ -4,11 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import cn.yiyingli.Dao.ServiceProDao;
-import cn.yiyingli.Dao.StudyExperienceDao;
-import cn.yiyingli.Dao.TeacherDao;
-import cn.yiyingli.Dao.UserDao;
-import cn.yiyingli.Dao.WorkExperienceDao;
+import cn.yiyingli.Dao.*;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.UserLikeTeacher;
@@ -26,6 +22,8 @@ public class TeacherServiceImpl implements TeacherService {
 	private StudyExperienceDao studyExperienceDao;
 
 	private WorkExperienceDao workExperienceDao;
+
+	private UserLikeTeacherDao userLikeTeacherDao;
 
 	public TeacherDao getTeacherDao() {
 		return teacherDao;
@@ -65,6 +63,14 @@ public class TeacherServiceImpl implements TeacherService {
 
 	public void setServiceProDao(ServiceProDao serviceProDao) {
 		this.serviceProDao = serviceProDao;
+	}
+
+	public UserLikeTeacherDao getUserLikeTeacherDao() {
+		return userLikeTeacherDao;
+	}
+
+	public void setUserLikeTeacherDao(UserLikeTeacherDao userLikeTeacherDao) {
+		this.userLikeTeacherDao = userLikeTeacherDao;
 	}
 
 	@Override
@@ -294,6 +300,11 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
+	public long querySumNoByLikedTeacherId(long likedTeacherId) {
+		return getUserLikeTeacherDao().querySumNoByLikedTeacherId(likedTeacherId);
+	}
+
+	@Override
 	public Teacher queryAll(long id) {
 		return getTeacherDao().queryAll(id);
 	}
@@ -306,5 +317,15 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public List<Teacher> queryListByActivity(String activityKey, int page, int pageSize) {
 		return getTeacherDao().queryListByActivity(activityKey, page, pageSize);
+	}
+
+	@Override
+	public List<Teacher> queryListByLikedTeacherId(long likedTeacherId, int page) {
+		return queryListByLikedTeacherId(likedTeacherId, page, PAGE_SIZE_INT);
+	}
+
+	@Override
+	public List<Teacher> queryListByLikedTeacherId(long likedTeacherId, int page, int pageSize) {
+		return getUserLikeTeacherDao().queryTeacherListByLikedTeacherId(likedTeacherId, page, pageSize);
 	}
 }

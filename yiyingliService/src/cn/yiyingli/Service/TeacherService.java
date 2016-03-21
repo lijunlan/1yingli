@@ -53,6 +53,8 @@ public interface TeacherService {
 
 	void updateWorkExp(Teacher teacher, boolean refreshRecommend);
 
+	long querySumNoByLikedTeacherId(long likedTeacherId);
+
 	Teacher query(long id);
 
 	Teacher queryWithUser(long id);
@@ -92,5 +94,9 @@ public interface TeacherService {
 	List<Teacher> queryListByKeyWord(String keyword, int page, boolean lazy);
 
 	List<Teacher> queryListByActivity(String activityKey, int page, int pageSize);
+
+	List<Teacher> queryListByLikedTeacherId(long likedTeacherId,int page);
+
+	List<Teacher> queryListByLikedTeacherId(long likedTeacherId,int page, int pageSize);
 
 }
