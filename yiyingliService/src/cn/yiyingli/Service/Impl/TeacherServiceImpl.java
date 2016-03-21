@@ -226,6 +226,16 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
+	public List<Teacher> queryListByInviterId(Long inviterId, int page) {
+		return queryListByInviterId(inviterId, page, PAGE_SIZE_INT);
+	}
+
+	@Override
+	public List<Teacher> queryListByInviterId(Long inviterId, int page, int pageSize) {
+		return getTeacherDao().queryListByInviterId(inviterId, page, pageSize);
+	}
+
+	@Override
 	public List<Teacher> queryListOnservice(int page, int pageSize, boolean lazy) {
 		return getTeacherDao().queryListOnservice(page, pageSize, lazy);
 	}
@@ -296,6 +306,11 @@ public class TeacherServiceImpl implements TeacherService {
 		if (refreshRecommend && teacher.getOnService()) {
 			getTeacherDao().update(teacher);
 		}
+	}
+
+	@Override
+	public long querySumNoByInviterId(long inviterId) {
+		return getTeacherDao().querySumNoByInviterId(inviterId);
 	}
 
 	@Override

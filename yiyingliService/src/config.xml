@@ -101,6 +101,7 @@
 		<method name="editTService" beanName="tEditTServiceService" />
 		<method name="editAlipayNo" beanName="tEditAlipayNoService" />
 		<method name="getAlipayNo" beanName="tGetAlipayNoService" />
+		<method name="getInvitation" beanName="tGetInvitationCode"/>
 	</style>
 	<style name="distributor">
 		<method name="getInfo" beanName="dGetInfoService" />

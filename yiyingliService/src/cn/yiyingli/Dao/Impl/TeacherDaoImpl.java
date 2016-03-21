@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -158,6 +159,16 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 			return false;
 		else
 			return true;
+	}
+
+	@Override
+	public long querySumNoByInviterId(long inviterId) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		long sum = (long) session.createQuery("select count(*) from Teacher t where t.inviter.id = " + inviterId)
+				.uniqueResult();
+		ts.commit();
+		return sum;
 	}
 
 	public Teacher queryAll(long id) {
@@ -343,6 +354,24 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
+				List<Teacher> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Teacher> queryListByInviterId(final Long inviterId, final int page, final int pageSize) {
+		List<Teacher> list = new ArrayList<>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
+			@Override
+			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from Teacher t where t.inviter.id = " + inviterId +
+						" and t.onService=true ORDER BY t.createTime DESC";
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page-1) * pageSize);
 				List<Teacher> list = query.list();
 				return list;
 			}

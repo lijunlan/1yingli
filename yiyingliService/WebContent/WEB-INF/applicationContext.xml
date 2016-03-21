@@ -2816,6 +2816,13 @@
 		</property>
 	</bean>
 
-
+	<bean id="tGetInvitation" class="cn.yiyingli.Handle.Service.TGetInvitationService" scope="prototype">
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService"/>
+		</property>
+	</bean>
 
 </beans>
