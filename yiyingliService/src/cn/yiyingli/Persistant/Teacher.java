@@ -40,6 +40,9 @@ public class Teacher {
 	@Column(name = "MASKFINISHNUMBER", nullable = false)
 	private Long maskFinishNumber;
 
+	@Column(name = "SHOWNOTIFY", nullable = false)
+	private Boolean showNotify;
+
 	@Column(name = "USERNAME", nullable = false, unique = true)
 	private String username;
 
@@ -693,6 +696,14 @@ public class Teacher {
 
 	public void setSubMile(Long subMile) {
 		this.subMile = subMile;
+	}
+
+	public Boolean getShowNotify() {
+		return showNotify;
+	}
+
+	public void setShowNotify(Boolean showNotify) {
+		this.showNotify = showNotify;
 	}
 
 }

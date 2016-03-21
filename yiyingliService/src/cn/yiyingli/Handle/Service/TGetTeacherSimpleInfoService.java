@@ -1,6 +1,6 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.ExchangeData.LikeNoShowUtil;
+import cn.yiyingli.ExchangeData.LikeAndFinishNoShowUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.TMsgService;
 import cn.yiyingli.Persistant.Teacher;
@@ -15,7 +15,7 @@ public class TGetTeacherSimpleInfoService extends TMsgService {
 		map.put("iconUrl", teacher.getIconUrl());
 		map.put("name", teacher.getName());
 		map.put("simpleinfo", teacher.getSimpleInfo());
-		LikeNoShowUtil.setLikeNo(teacher, map);
+		LikeAndFinishNoShowUtil.setLikeNo(teacher, map);
 		setResMsg(map.finishByJson());
 	}
 

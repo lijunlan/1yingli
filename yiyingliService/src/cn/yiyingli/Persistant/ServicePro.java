@@ -81,6 +81,12 @@ public class ServicePro {
 	@Column(name = "FINISHNO", nullable = false)
 	private Long finishNo;
 
+	@Column(name = "MASKNO", nullable = false)
+	private Long maskNo;
+
+	@Column(name = "MASKFINISHNO", nullable = false)
+	private Long maskFinishNo;
+
 	@Column(name = "ORDERALLNO", nullable = false)
 	private Long orderAllNo;
 
@@ -89,7 +95,7 @@ public class ServicePro {
 	private Set<Comment> comments = new HashSet<Comment>();
 
 	@Column(name = "SCORE", nullable = false)
-	private Integer score;
+	private Float score;
 
 	@Column(name = "ANSWERTIME", nullable = false)
 	private Long answerTime;
@@ -108,6 +114,9 @@ public class ServicePro {
 
 	@Column(name = "ONSHOW", nullable = false)
 	private Boolean onShow;
+
+	@Column(name = "LOOKNUMBER", nullable = false)
+	private Long lookNumber;
 
 	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = true)
@@ -239,11 +248,11 @@ public class ServicePro {
 		this.comments = comments;
 	}
 
-	public Integer getScore() {
+	public Float getScore() {
 		return score;
 	}
 
-	public void setScore(Integer score) {
+	public void setScore(Float score) {
 		this.score = score;
 	}
 
@@ -350,7 +359,7 @@ public class ServicePro {
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
-	
+
 	public Long getCommentNo() {
 		return commentNo;
 	}
@@ -397,6 +406,30 @@ public class ServicePro {
 
 	public void setContentAndPages(Set<ContentAndPage> contentAndPages) {
 		this.contentAndPages = contentAndPages;
+	}
+
+	public Long getMaskNo() {
+		return maskNo;
+	}
+
+	public void setMaskNo(Long maskNo) {
+		this.maskNo = maskNo;
+	}
+
+	public Long getMaskFinishNo() {
+		return maskFinishNo;
+	}
+
+	public void setMaskFinishNo(Long maskFinishNo) {
+		this.maskFinishNo = maskFinishNo;
+	}
+
+	public Long getLookNumber() {
+		return lookNumber;
+	}
+
+	public void setLookNumber(Long lookNumber) {
+		this.lookNumber = lookNumber;
 	}
 
 }

@@ -22,8 +22,8 @@ public class ExTeacher {
 	public static void assembleSimpleForUserLike(Teacher teacher, SuperMap map) {
 		assembleSimpleNormal(teacher, map);
 		map.put("score", teacher.getScore());
-		map.put("likeno", teacher.getLikeNumber());
-		LikeNoShowUtil.setFinishNo(teacher, map);
+		LikeAndFinishNoShowUtil.setLikeNo(teacher, map);
+		LikeAndFinishNoShowUtil.setFinishNo(teacher, map);
 		ExList serviceProList = new ExArrayList();
 		for (ServicePro servicePro : teacher.getServicePros()) {
 			if (servicePro.getOnShow() && (!servicePro.getRemove())
@@ -43,8 +43,8 @@ public class ExTeacher {
 		assembleSimpleNormal(teacher, map);
 		map.put("level", teacher.getLevel());
 		map.put("introduce", teacher.getIntroduce());
-		LikeNoShowUtil.setLikeNo(teacher, map);
-		LikeNoShowUtil.setFinishNo(teacher, map);
+		LikeAndFinishNoShowUtil.setLikeNo(teacher, map);
+		LikeAndFinishNoShowUtil.setFinishNo(teacher, map);
 	}
 
 	private static void assembleSimpleNormal(Teacher teacher, SuperMap map) {
@@ -93,8 +93,8 @@ public class ExTeacher {
 		map.put("mile", teacher.getMile());
 		map.put("email", teacher.getEmail());
 		map.put("introduce", teacher.getIntroduce());
-		LikeNoShowUtil.setLikeNo(teacher, map);
-		LikeNoShowUtil.setFinishNo(teacher, map);
+		LikeAndFinishNoShowUtil.setLikeNo(teacher, map);
+		LikeAndFinishNoShowUtil.setFinishNo(teacher, map);
 		map.put("score", teacher.getScore());
 		map.put("answerRatio", teacher.getAnswerRatio());
 		map.put("praiseRatio", teacher.getPraiseRatio());
@@ -162,10 +162,12 @@ public class ExTeacher {
 
 	public static void assembleDetailForTeacher(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
+		map.put("showNotify", teacher.getShowNotify());
 	}
 
 	public static void assembleDetailForManager(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
+		map.put("showNotify", teacher.getShowNotify());
 		map.put("mile", teacher.getMile());
 		map.put("alipayNo", teacher.getAlipay());
 		map.put("paypalNo", teacher.getPaypal());
