@@ -22,6 +22,12 @@ public class PTeacherUtil {
 		String simpleinfo = map.getString("simpleinfo");
 		String address = map.getString("address");
 		String topic = map.getString("topic");
+		if (map.containsKey("showNotify")) {
+			Boolean showNotify = map.getBoolean("showNotify");
+			teacher.setShowNotify(showNotify);
+		} else {
+			teacher.setShowNotify(teacher.getShowNotify());
+		}
 		teacher.setSimpleInfo(simpleinfo);
 		teacher.setAddress(address);
 		teacher.setTopic(topic);
@@ -32,10 +38,10 @@ public class PTeacherUtil {
 			JSONArray tips, String simpleinfo, String name, String phone, String address, String mail, String iconUrl,
 			String introduce, String checkPhone, String checkIDCard, String checkEmail, String checkWork,
 			String checkStudy, String onService, long mile, String topic, float price, String bgUrl, boolean onChat,
-			Teacher teacher, TipService tipService) {
+			boolean showNotify, Teacher teacher, TipService tipService) {
 		refreshTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone, address, mail, iconUrl,
 				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, mile, topic, price, bgUrl,
-				onChat, teacher, tipService);
+				onChat, showNotify, teacher, tipService);
 		teacher.setOnService(Boolean.valueOf(onService));
 	}
 
@@ -97,7 +103,8 @@ public class PTeacherUtil {
 	public static void refreshTeacher(User user, JSONArray workExperiences, JSONArray studyExperiences, JSONArray tips,
 			String simpleinfo, String name, String phone, String address, String mail, String iconUrl, String introduce,
 			String checkPhone, String checkIDCard, String checkEmail, String checkWork, String checkStudy, long mile,
-			String topic, float price, String bgUrl, boolean onChat, Teacher teacher, TipService tipService) {
+			String topic, float price, String bgUrl, boolean onChat, boolean showNotify, Teacher teacher,
+			TipService tipService) {
 		if (Boolean.valueOf(checkPhone)) {
 			teacher.setCheckPhone(true);
 		} else {
@@ -136,6 +143,7 @@ public class PTeacherUtil {
 		user.setTeacher(teacher);
 		teacher.setUser(user);
 
+		teacher.setShowNotify(showNotify);
 		teacher.setOnChat(onChat);
 		teacher.setBgUrl(bgUrl);
 		teacher.setTopic(topic);
@@ -192,11 +200,12 @@ public class PTeacherUtil {
 	public static Teacher assembleNewTeacher(User user, JSONArray workExperiences, JSONArray studyExperiences,
 			JSONArray tips, String simpleinfo, String name, String phone, String address, String mail, String iconUrl,
 			String introduce, String checkPhone, String checkIDCard, String checkEmail, String checkWork,
-			String checkStudy, String topic, float price, String bgUrl, boolean onChat, TipService tipService) {
+			String checkStudy, String topic, float price, String bgUrl, boolean onChat, boolean showNotify,
+			TipService tipService) {
 		Teacher teacher = new Teacher();
 		refreshTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone, address, mail, iconUrl,
 				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, 0L, topic, price, bgUrl, onChat,
-				teacher, tipService);
+				showNotify, teacher, tipService);
 		teacher.setSubMile(0L);
 		teacher.setScore(0F);
 		teacher.setOrderAllNumber(0L);
@@ -227,7 +236,7 @@ public class PTeacherUtil {
 			String checkStudy, String topic, float price, TipService tipService) {
 		Teacher teacher = assembleNewTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
 				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, topic,
-				price, "", true, tipService);
+				price, "", true, true, tipService);
 		user.setTeacherState(UserService.TEACHER_STATE_CHECKING_SHORT);
 		teacher.setOnService(false);
 		return teacher;
@@ -236,10 +245,11 @@ public class PTeacherUtil {
 	public static Teacher assembleTeacherByManager(User user, JSONArray workExperiences, JSONArray studyExperiences,
 			JSONArray tips, String simpleinfo, String name, String phone, String address, String mail, String iconUrl,
 			String introduce, String checkPhone, String checkIDCard, String checkEmail, String checkWork,
-			String checkStudy, String topic, float price, String bgUrl, boolean onChat, TipService tipService) {
+			String checkStudy, String topic, float price, String bgUrl, boolean onChat, boolean showNotify,
+			TipService tipService) {
 		Teacher teacher = assembleNewTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
 				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, topic,
-				price, bgUrl, onChat, tipService);
+				price, bgUrl, onChat, showNotify, tipService);
 		teacher.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		user.setTeacherState(UserService.TEACHER_STATE_ON_SHORT);
 		teacher.setOnService(true);

@@ -162,10 +162,12 @@ public class ExTeacher {
 
 	public static void assembleDetailForTeacher(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
+		map.put("showNotify", teacher.getShowNotify());
 	}
 
 	public static void assembleDetailForManager(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
+		map.put("showNotify", teacher.getShowNotify());
 		map.put("mile", teacher.getMile());
 		map.put("alipayNo", teacher.getAlipay());
 		map.put("paypalNo", teacher.getPaypal());

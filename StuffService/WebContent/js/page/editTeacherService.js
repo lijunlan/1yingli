@@ -155,6 +155,7 @@ function getAndParse(t) {
 	$('#actionDiv').bootstrapSwitch('setState', false)
 	t.onService == 'true' ? $('#onServiceDiv').bootstrapSwitch('setState', true) : $('#onServiceDiv').bootstrapSwitch('setState', false);
 	t.onChat == 'true' ? $('#onChatDiv').bootstrapSwitch('setState', true) : $('#onChatDiv').bootstrapSwitch('setState', false);
+	t.showNotify == 'true' ? $('#onNotifyDiv').bootstrapSwitch('setState', true) : $('#onNotifyDiv').bootstrapSwitch('setState', false);
 	Messenger().post("加载完成");
 }
 
@@ -261,6 +262,7 @@ function submit() {
 	teacher.mile = $('#mileValue').val();
 	teacher.onService = document.getElementById('onService').checked.toString();
 	teacher.onChat = document.getElementById('onChat').checked.toString();
+	teacher.showNotify = document.getElementById('onNotify').checked.toString();
 	
 	send.teacher = teacher;
 	send.style = "manager";

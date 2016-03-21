@@ -184,4 +184,14 @@ public class ApplicationFormServiceImpl implements ApplicationFormService {
 		return getApplicationFormDao().queryList();
 	}
 
+	@Override
+	public ApplicationForm queryByTeacherName(String name) {
+		return getApplicationFormDao().queryByTeacherName(name);
+	}
+
+	@Override
+	public List<ApplicationForm> queryList(int page, int pageSize) {
+		return getApplicationFormDao().queryList(page, pageSize);
+	}
+
 }

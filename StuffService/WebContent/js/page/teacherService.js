@@ -96,7 +96,7 @@ $(function () {
 	if (page == 1)
 		document.getElementById("lastPage").disabled = true;
 	document.getElementById("pageInput").value = page;
-})
+});
 
 function changePage(action) {
 	if (action == "last") {
