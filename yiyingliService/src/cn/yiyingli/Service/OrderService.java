@@ -36,12 +36,12 @@ public interface OrderService {
 	/**
 	 * 需议价订单,客户下单,等到导师接单
 	 */
-	public static final String ORDER_NOT_NEGOTIATE = "0010";
+	public static final String ORDER_NOT_BARGAINED = "0010";
 
 	/**
 	 * 需议价订单,导师接单,议价中
 	 */
-	public static final String ORDER_NEGOTIATING = "0020";
+	public static final String ORDER_BARGAINING = "0020";
 
 	/**
 	 * 客户下单，尚未支付
@@ -51,7 +51,7 @@ public interface OrderService {
 	/**
 	 * 需议价订单,导师确定价格,等待客户支付
 	 */
-	public static final String ORDER_NEGOTIATED_NOT_PAID = "0110";
+	public static final String ORDER_BARGAINED_NOT_PAID = "0110";
 
 	/**
 	 * 客户放弃支付，包括：客户取消订单，客户超时未支付
