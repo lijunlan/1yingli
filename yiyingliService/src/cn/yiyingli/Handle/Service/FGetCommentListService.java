@@ -46,7 +46,7 @@ public class FGetCommentListService extends MsgService {
 	@Override
 	public void doit() {
 		String teacherId = (String) getData().get("teacherId");
-		Teacher teacher = getTeacherService().query(Long.valueOf(teacherId));
+		Teacher teacher = getTeacherService().queryWithOutStatue(Long.valueOf(teacherId));
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
