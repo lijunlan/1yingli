@@ -136,6 +136,17 @@ public class ServicePro {
 	@JoinColumn(name = "SERVICEPRO_ID", updatable = false)
 	private Set<UserLikeServicePro> userLikeServicePros = new HashSet<UserLikeServicePro>();
 
+	@Column(name = "TYPE", nullable = false)
+	private short type;
+
+	public short getType() {
+		return type;
+	}
+
+	public void setType(short type) {
+		this.type = type;
+	}
+
 	public Long getId() {
 		return id;
 	}
