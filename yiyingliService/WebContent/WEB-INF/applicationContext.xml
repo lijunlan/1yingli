@@ -1508,6 +1508,22 @@
 		</property>
 	</bean>
 
+	<bean id="tBargainOrderService" class="cn.yiyingli.Handle.Service.TBargainOrderService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+		<property name="notificationService">
+			<ref local="notificationService" />
+		</property>
+	</bean>
+
 	<bean id="tEnsureTimeService" class="cn.yiyingli.Handle.Service.TEnsureTimeService"
 		scope="prototype">
 		<property name="userMarkService">

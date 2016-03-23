@@ -6,7 +6,6 @@ import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
-import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
 
@@ -54,6 +53,8 @@ public class TRefuseOrderService extends TMsgService {
 		if (!((OrderService.ORDER_STATE_FINISH_PAID.equals(state) &&
 				order.getServiceType().equals(ServicePro.SERVICE_TYPE_NORMAL))
 				|| (OrderService.ORDER_BARGAINED_NOT_PAID.equals(state) &&
+				order.getServiceType().equals(ServicePro.SERVICE_TYPE_BARGAIN))
+				||(OrderService.ORDER_BARGAINING.equals(state) &&
 				order.getServiceType().equals(ServicePro.SERVICE_TYPE_BARGAIN)))) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
