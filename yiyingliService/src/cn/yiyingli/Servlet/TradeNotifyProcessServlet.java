@@ -82,14 +82,6 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 		NotificationService notificationService = (NotificationService) getApplicationContext()
 				.getBean("notificationService");
 
-		// 交易成功
-		OrderList orderList = orderListService.queryByOrderListNo(olid);
-		if (orderList == null) {
-			LogUtil.info("orderList id " + olid + " is not existed", this.getClass());
-			returnSuccess(resp);
-			return;
-		}
-		String state = orderList.getState().split(",")[0];
 		// 验证通知的MD5
 		if (AlipayNotify.verify(parms)) {
 			if (extra_common_param != null) {
@@ -97,6 +89,14 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 				ExRewardForPay.dealReward(rewardService, extra_common_param, olid);
 				return;
 			}
+			// 交易成功
+			OrderList orderList = orderListService.queryByOrderListNo(olid);
+			if (orderList == null) {
+				LogUtil.info("orderList id " + olid + " is not existed", this.getClass());
+				returnSuccess(resp);
+				return;
+			}
+			String state = orderList.getState().split(",")[0];
 			// 交易成功
 			if (is_trade_success.equals("TRADE_SUCCESS")) {
 				if (!(price == orderList.getPayMoney().floatValue())) {
