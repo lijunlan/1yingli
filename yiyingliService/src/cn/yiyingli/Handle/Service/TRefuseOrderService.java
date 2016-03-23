@@ -10,15 +10,11 @@ import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
 
-import javax.xml.ws.Service;
-
 public class TRefuseOrderService extends TMsgService {
 
 	private OrderService orderService;
 
 	private NotificationService notificationService;
-
-	private ServiceProService serviceProService;
 
 	public OrderService getOrderService() {
 		return orderService;
@@ -34,14 +30,6 @@ public class TRefuseOrderService extends TMsgService {
 
 	public void setNotificationService(NotificationService notificationService) {
 		this.notificationService = notificationService;
-	}
-
-	public ServiceProService getServiceProService() {
-		return serviceProService;
-	}
-
-	public void setServiceProService(ServiceProService serviceProService) {
-		this.serviceProService = serviceProService;
 	}
 
 	@Override
@@ -70,8 +58,7 @@ public class TRefuseOrderService extends TMsgService {
 		}
 		String refuseReason = (String) getData().get("refuseReason");
 		order.setRefuseReason(refuseReason);
-		boolean needBargain = (ServicePro.SERVICE_TYPE_BARGAIN == getServiceProService().
-				query(order.getServiceId(), false).getType());
+		boolean needBargain = (ServicePro.SERVICE_TYPE_BARGAIN == order.getServiceType());
 		if (needBargain) {
 			order.setState(OrderService.ORDER_STATE_END_FAILED + "," +
 					OrderService.ORDER_STATE_CANCEL_PAID + "," + order.getState());

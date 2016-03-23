@@ -21,7 +21,6 @@ public class TAcceptOrderService extends TMsgService {
 
 	private NotificationService notificationService;
 
-	private ServiceProService serviceProService;
 
 	public OrderService getOrderService() {
 		return orderService;
@@ -37,14 +36,6 @@ public class TAcceptOrderService extends TMsgService {
 
 	public void setNotificationService(NotificationService notificationService) {
 		this.notificationService = notificationService;
-	}
-
-	public ServiceProService getServiceProService() {
-		return serviceProService;
-	}
-
-	public void setServiceProService(ServiceProService serviceProService) {
-		this.serviceProService = serviceProService;
 	}
 
 	@Override
@@ -72,8 +63,7 @@ public class TAcceptOrderService extends TMsgService {
 			return;
 		}
 		if (order.getServiceId() != null && order.getServiceKind() != null) {
-			boolean needBargain = (ServicePro.SERVICE_TYPE_BARGAIN == getServiceProService().
-					query(order.getServiceId(), false).getType());
+			boolean needBargain = (ServicePro.SERVICE_TYPE_BARGAIN == order.getServiceType());
 			switch (order.getServiceKind()) {
 				case ServiceProService.KIND_CONSULTATION:
 				case ServiceProService.KIND_EXPERIENCE:

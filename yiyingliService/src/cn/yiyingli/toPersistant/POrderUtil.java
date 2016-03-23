@@ -21,6 +21,7 @@ public class POrderUtil {
 			String question, String resume, String selectTime, int count, ServicePro servicePro, Order order) {
 		if (servicePro != null) {
 			order.setServiceKind(servicePro.getKind());
+			order.setServiceType(servicePro.getType());
 			order.setOnSale(servicePro.getOnSale());
 			order.setServiceTitle(StringUtil.replaceBlank(servicePro.getTitle().trim()));
 			order.setQuantifier(servicePro.getQuantifier());
@@ -45,6 +46,7 @@ public class POrderUtil {
 			order.setNumeral(10F);
 			order.setServiceId(null);
 			order.setServiceKind(null);
+			order.setServiceType(null);
 			order.setPrice(teacher.getPrice());
 			order.setOriginPrice(teacher.getPrice());
 			float price = teacher.getPrice() * (float) count;

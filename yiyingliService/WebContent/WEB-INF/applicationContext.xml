@@ -1458,9 +1458,6 @@
 		<property name="notificationService">
 			<ref local="notificationService" />
 		</property>
-		<property name="serviceProService">
-			<ref local="serviceProService"/>
-		</property>
 	</bean>
 
 	<bean id="tAgreeOrderService" class="cn.yiyingli.Handle.Service.TAgreeOrderService"
@@ -1508,9 +1505,6 @@
 		</property>
 		<property name="notificationService">
 			<ref local="notificationService" />
-		</property>
-		<property name="serviceProService">
-			<ref local="serviceProService"/>
 		</property>
 	</bean>
 
