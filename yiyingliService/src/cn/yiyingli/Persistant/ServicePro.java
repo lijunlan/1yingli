@@ -19,6 +19,9 @@ import javax.persistence.Table;
 @Table(name = "SERVICEPRO")
 public class ServicePro {
 
+	public static short SERVICE_TYPE_NORMAL = 0;
+	public static short SERVICE_TYPE_BARGAIN = 1;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "SERVICEPRO_ID")

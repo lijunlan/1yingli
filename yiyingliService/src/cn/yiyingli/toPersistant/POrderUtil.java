@@ -33,6 +33,11 @@ public class POrderUtil {
 			order.setOriginMoney(servicePro.getPrice() * (float) count);
 			order.setServiceSummary(servicePro.getSummary());
 			order.setIconUrl(servicePro.getImageUrls().split(",")[0]);
+			if(servicePro.getType() == ServicePro.SERVICE_TYPE_BARGAIN) {
+				order.setState(OrderService.ORDER_BARGAINED_NOT_PAID);
+			} else {
+				order.setState(OrderService.ORDER_STATE_NOT_PAID);
+			}
 		} else {
 			order.setOnSale(false);
 			order.setServiceTitle(teacher.getTopic());
@@ -47,6 +52,7 @@ public class POrderUtil {
 			order.setOriginMoney(price);
 			order.setServiceSummary(teacher.getSimpleInfo());
 			order.setIconUrl(teacher.getIconUrl());
+			order.setState(OrderService.ORDER_STATE_NOT_PAID);
 		}
 		order.setCustomerEmail(email);
 		order.setCustomerName(name);
@@ -56,7 +62,6 @@ public class POrderUtil {
 		order.setQuestion(question);
 		order.setSelectTime(selectTime);
 		order.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
-		order.setState(OrderService.ORDER_STATE_NOT_PAID);
 		order.setTeacher(teacher);
 		order.setPaypalNo(teacher.getPaypal());
 		order.setAlipayNo(teacher.getAlipay());
