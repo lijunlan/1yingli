@@ -44,7 +44,7 @@ public class FGetServiceProListSerivce extends MsgService {
 	public void doit() {
 		long teacherId = getData().getLong("teacherId");
 		long tid = Long.valueOf((String) getData().get("teacherId"));
-		Teacher teacher = getTeacherService().query(tid);
+		Teacher teacher = getTeacherService().queryWithOutStatue(tid);
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
