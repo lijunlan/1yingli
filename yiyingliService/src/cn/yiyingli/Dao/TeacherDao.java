@@ -30,6 +30,8 @@ public interface TeacherDao {
 
 	Teacher query(long id);
 
+	Teacher queryWithOutStatue(long id);
+
 	Teacher queryWithUser(long id);
 
 	void updateAddLookNumber(long teacherId, long number);
