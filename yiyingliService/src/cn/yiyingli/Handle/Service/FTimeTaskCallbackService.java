@@ -98,6 +98,23 @@ public class FTimeTaskCallbackService extends MsgService {
 					// "),系统已自动关闭,如若需要,请重新创建订单",
 					// order.getCreateUser(), getNotificationService());
 					break;
+				case OrderService.ORDER_BARGAINING:
+//					order.setState(OrderService.ORDER_STATE_END_FAILED + ","
+//							+ OrderService.ORDER_STATE_CANCEL_PAID + "," + order.getState());
+//					 getOrderService().update(order, false);
+//					 NotifyUtil.notifyUserOrder(order,
+//					 "尊敬的用户,您好,您的订单(" + order.getOrderNo() + ")由于导师("
+//					 + order.getTeacher().getName()
+//					 + ")未与您约定好咨询价格,系统已自动关闭订单",
+//					 order.getCreateUser(), getNotificationService());
+//					 NotifyUtil.notifyTeacher(order,
+//					 "尊敬的导师,您好,您的订单(" + order.getOrderNo() +
+//					 ")由于未及时与用户约定好咨询价格,系统已自动关闭订单.",
+//					 getNotificationService());
+//					 NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户："
+//					 + order.getCustomerName() + ",导师："
+//					 + order.getTeacher().getName() +
+//					 ",由于导师未及时与用户约定好咨询价格，已经自动进入关闭订单");
 				case OrderService.ORDER_STATE_FINISH_PAID:
 					// order.setState(OrderService.ORDER_STATE_WAIT_RETURN + ","
 					// + order.getState());

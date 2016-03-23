@@ -143,6 +143,10 @@ public class OrderServiceImpl implements OrderService {
 			TimeTaskUtil.sendTimeTask("change", "order",
 					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 7) + "",
 					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+		} else if (order.getState().startsWith(ORDER_BARGAINING)) {
+//			TimeTaskUtil.sendTimeTask("change", "order",
+//					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 7) + "",
+//					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
 		}
 		// else if (order.getState().startsWith(ORDER_STATE_FINISH_PAID)) {
 		// TimeTaskUtil.sendTimeTask("change", "order",
