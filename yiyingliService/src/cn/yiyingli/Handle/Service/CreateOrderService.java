@@ -207,6 +207,8 @@ public class CreateOrderService extends UMsgService {
 							order.getOrderNo()).finishByJson());
 			Teacher teacher = order.getTeacher();
 			getTeacherService().updateUserLike(teacher, user);
+			SendMsgToBaiduUtil.updateUserTrainDataOrder(user.getId() + "", teacher.getId() + "",
+				Calendar.getInstance().getTimeInMillis() + "");
 			SuperMap map = new SuperMap();
 			map.put("orderId", order.getOrderNo());
 			toSend.add(map.finish());
