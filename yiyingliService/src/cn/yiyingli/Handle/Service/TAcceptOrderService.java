@@ -57,8 +57,10 @@ public class TAcceptOrderService extends TMsgService {
 			return;
 		}
 		String state = order.getState().split(",")[0];
-		if (!(OrderService.ORDER_STATE_FINISH_PAID.equals(state)
-				|| OrderService.ORDER_BARGAINED_NOT_PAID.equals(state))) {
+		if (!((OrderService.ORDER_STATE_FINISH_PAID.equals(state)
+				&& order.getServiceType().equals(ServicePro.SERVICE_TYPE_NORMAL))
+				|| (OrderService.ORDER_BARGAINED_NOT_PAID.equals(state)
+				&& order.getServiceType().equals(ServicePro.SERVICE_TYPE_BARGAIN)))) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
@@ -87,7 +89,7 @@ public class TAcceptOrderService extends TMsgService {
 	public void dealOrder(Order order, boolean needEnsureTime, boolean needBargain) {
 		String message2Teacher = null;
 		String message2User = null;
-		if(needBargain) {
+		if (needBargain) {
 			order.setState(OrderService.ORDER_BARGAINING + "," + order.getState());
 			message2Teacher = "尊敬的导师,您好,您已接受订单(" + order.getOrderNo()
 					+ "),请及时与用户联系,并到一英里平台登记价格,超时系统将自动取消订单哦。(用户姓名:" + order.getCustomerName() + ",电话:"

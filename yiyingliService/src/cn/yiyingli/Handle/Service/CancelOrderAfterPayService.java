@@ -2,6 +2,7 @@ package cn.yiyingli.Handle.Service;
 
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
@@ -49,15 +50,28 @@ public class CancelOrderAfterPayService extends UMsgService {
 			return;
 		}
 		String state = order.getState().split(",")[0];
-		if (!OrderService.ORDER_STATE_FINISH_PAID.equals(state)) {
+		if (!((OrderService.ORDER_STATE_FINISH_PAID.equals(state)
+				&& order.getServiceType().equals(ServicePro.SERVICE_TYPE_NORMAL))
+				|| (OrderService.ORDER_BARGAINED_NOT_PAID.equals(state)
+				&& order.getServiceType().equals(ServicePro.SERVICE_TYPE_BARGAIN)))) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
-		order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
+		if(order.getServiceType().equals(ServicePro.SERVICE_TYPE_BARGAIN)) {
+			order.setState(OrderService.ORDER_STATE_END_FAILED + "," +
+					OrderService.ORDER_STATE_CANCEL_PAID + "," + order.getState());
+		} else {
+			order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
+		}
 		getOrderService().update(order, false);
 
-		NotifyUtil.notifyUserOrder(order, "尊敬的用户，您的订单(" + order.getOrderNo() + ")已经取消，我们将竭尽全力在24小时内为您全额退款", user,
-				getNotificationService());
+		if(order.getServiceType().equals(ServicePro.SERVICE_TYPE_BARGAIN)){
+			NotifyUtil.notifyUserOrder(order, "尊敬的用户，您的订单(" + order.getOrderNo() + ")已经取消", user,
+					getNotificationService());
+		} else {
+			NotifyUtil.notifyUserOrder(order, "尊敬的用户，您的订单(" + order.getOrderNo() + ")已经取消，我们将竭尽全力在24小时内为您全额退款", user,
+					getNotificationService());
+		}
 		NotifyUtil.notifyTeacher(order, "尊敬的导师，您的订单(" + order.getOrderNo() + ")已经被用户取消。", getNotificationService());
 		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
 				+ order.getTeacher().getName() + ",订单已经被用户取消，");

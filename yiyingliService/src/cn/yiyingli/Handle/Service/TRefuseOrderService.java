@@ -51,8 +51,10 @@ public class TRefuseOrderService extends TMsgService {
 			return;
 		}
 		String state = order.getState().split(",")[0];
-		if (!(OrderService.ORDER_STATE_FINISH_PAID.equals(state)
-				|| OrderService.ORDER_BARGAINED_NOT_PAID.equals(state))) {
+		if (!((OrderService.ORDER_STATE_FINISH_PAID.equals(state) &&
+				order.getServiceType().equals(ServicePro.SERVICE_TYPE_NORMAL))
+				|| (OrderService.ORDER_BARGAINED_NOT_PAID.equals(state) &&
+				order.getServiceType().equals(ServicePro.SERVICE_TYPE_BARGAIN)))) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
@@ -66,7 +68,7 @@ public class TRefuseOrderService extends TMsgService {
 			order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
 		}
 		getOrderService().update(order, false);
-		if(needBargain) {
+		if (needBargain) {
 			NotifyUtil.notifyUserOrder(
 					order, "尊敬的用户,抱歉的通知您,您的订单(" + order.getOrderNo() + ")已被导师(" + teacher.getName() + ")拒绝,拒绝理由:"
 							+ refuseReason + ",您可预约其他优秀的导师哦。",
