@@ -2,14 +2,12 @@ package cn.yiyingli.Handle.Service;
 
 import java.util.List;
 
-import cn.yiyingli.ExchangeData.ExOrderListUtil;
 import cn.yiyingli.ExchangeData.ExOrderUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.TMsgService;
 import cn.yiyingli.Persistant.Order;
-import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.OrderListService;
 import cn.yiyingli.Service.OrderService;
@@ -61,7 +59,7 @@ public class TGetOrderListService extends TMsgService {
 
 		int type = 0;
 		if (getData().containsKey("type")) {
-			type = (int) getData().get("type");
+			type = Integer.parseInt((String) getData().get("type"));
 		}
 		List<Order> orders;
 

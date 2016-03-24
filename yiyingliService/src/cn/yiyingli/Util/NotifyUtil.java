@@ -17,7 +17,7 @@ public class NotifyUtil {
 	 * @param phone
 	 * @param email
 	 * @param message
-	 * @param uid
+	 * @param user
 	 *            用户标识 UUID
 	 */
 	public static boolean notifyUserOrder(String phone, String email, String message, User user,
@@ -27,7 +27,9 @@ public class NotifyUtil {
 
 	public static boolean notifyUserOrder(OrderList orderList, String message, User user,
 			NotificationService notificationService) {
-		return notifyUserOrder(orderList.getCustomerPhone(), orderList.getCustomerEmail(), message, user,
+		//Todo 根据手机号来发送短信
+		return notifyUserOrder(orderList.getOrders().get(0).getCustomerPhone(),
+				orderList.getOrders().get(0).getCustomerEmail(), message, user,
 				notificationService);
 	}
 
@@ -70,10 +72,10 @@ public class NotifyUtil {
 		return true;
 	}
 
-	public static boolean notifyTeacher(OrderList orderList, String message, NotificationService notificationService) {
-		return notifyTeacher(orderList.getTeacher().getPhone(), orderList.getTeacher().getEmail(), message,
-				orderList.getTeacher().getId(), orderList.getTeacher().getUsername(), notificationService);
-	}
+//	public static boolean notifyTeacher(OrderList orderList, String message, NotificationService notificationService) {
+//		return notifyTeacher(orderList.getTeacher().getPhone(), orderList.getTeacher().getEmail(), message,
+//				orderList.getTeacher().getId(), orderList.getTeacher().getUsername(), notificationService);
+//	}
 
 	public static boolean notifyTeacher(Order order, String message, NotificationService notificationService) {
 		return notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(), message,

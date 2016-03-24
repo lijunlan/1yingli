@@ -103,7 +103,7 @@ public class AlipayServlet extends HttpServlet {
 		String body = ExOrderListUtil.getMultiTitle(orderList);
 
 		// 商品展示地址
-		String show_url = "http://www.1yingli.cn/teacher/" + orderList.getTeacher().getId();
+		String show_url = "http://www.1yingli.cn/teacher/" + orderList.getOrders().get(0).getTeacher().getId();
 
 		// 需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html
 
@@ -136,7 +136,7 @@ public class AlipayServlet extends HttpServlet {
 			parms.put("return_url", req.getParameter("callback"));
 		}
 		parms.put("out_trade_no", olid);
-		parms.put("subject", "【一英里】[" + orderList.getTeacher().getName() + "]" + subject);
+		parms.put("subject", "【一英里】[" + orderList.getOrderListNo() + "]" + subject);
 		parms.put("total_fee", total_fee);
 		parms.put("body", body);
 		parms.put("show_url", show_url);

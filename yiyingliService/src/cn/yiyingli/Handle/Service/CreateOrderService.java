@@ -199,10 +199,11 @@ public class CreateOrderService extends UMsgService {
 		}
 		ExList toSend = new ExArrayList();
 		for (Order order : orders) {
+			getOrderService().save(order);
 			order.setOrderNo("" + Calendar.getInstance().get(Calendar.YEAR)
 					+ String.valueOf((Calendar.getInstance().get(Calendar.DAY_OF_YEAR) + 1000)).substring(1)
 					+ (100000000L + order.getId()));
-			getOrderService().save(order);
+			getOrderService().update(order);
 			TimeTaskUtil.sendTimeTask("change", "order",
 					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) +
 							"",

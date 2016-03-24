@@ -404,8 +404,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 	@Override
 	public long querySumNoByUserIdAndStates(long userId, String[] states) {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-		Transaction ts = session.beginTransaction();
-		String hql = "select count(*) from Order o where o.createUser.id=" + userId + "and (o.state like '"
+		String hql = "select count(*) from Order o where o.createUser.id=" + userId + " and (o.state like '"
 				+ states[0] + "%'";
 		if (states.length > 1) {
 			for (int i = 1; i < states.length; i++) {
@@ -413,9 +412,9 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 			}
 		}
 		final String _hql = hql + ")";
-		long sum = (long) session.createQuery(_hql)
-				.uniqueResult();
-		ts.commit();
+		Query query = session.createQuery(_hql);
+		System.out.println(query.getQueryString());
+		long sum = (long) query.uniqueResult();
 		return sum;
 	}
 
@@ -432,8 +431,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 	@Override
 	public long querySumNoByTeacherIdAndStates(long teacherId, String[] states) {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-		Transaction ts = session.beginTransaction();
-		String hql = "select count(*) from Order o where o.teacher.id=" + teacherId + "and (o.state like '"
+		String hql = "select count(*) from Order o where o.teacher.id=" + teacherId + " and (o.state like '"
 				+ states[0] + "%'";
 		if (states.length > 1) {
 			for (int i = 1; i < states.length; i++) {
@@ -443,7 +441,6 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 		final String _hql = hql + ")";
 		long sum = (long) session.createQuery(_hql)
 				.uniqueResult();
-		ts.commit();
 		return sum;
 	}
 

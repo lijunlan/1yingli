@@ -36,9 +36,9 @@ public class OrderList {
 	@Column(name = "PAYTIME", nullable = true)
 	private String payTime;
 
-	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "TEACHER_ID", updatable = false)
-	private Teacher teacher;
+//	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
+//	@JoinColumn(name = "TEACHER_ID", updatable = false)
+//	private Teacher teacher;
 
 	@Column(name = "ORDERLISTNO", nullable = true, unique = true)
 	private String orderListNo;
@@ -87,13 +87,13 @@ public class OrderList {
 		this.createTime = createTime;
 	}
 
-	public Teacher getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
+//	public Teacher getTeacher() {
+//		return teacher;
+//	}
+//
+//	public void setTeacher(Teacher teacher) {
+//		this.teacher = teacher;
+//	}
 
 	public String getOrderListNo() {
 		return orderListNo;

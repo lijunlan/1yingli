@@ -130,10 +130,11 @@ public class WXNotifyServlet extends HttpServlet {
 		}
 		orderList.setState(OrderListService.ORDER_STATE_FINISH_PAID + "," + orderList.getState());
 		orderListService.updateAndPlusNumber(orderList);
+		//todo 支付列表通知
 		NotifyUtil.notifyUserOrder(orderList, "尊敬的用户，流水号为" + orderList.getOrderListNo() + "的订单组已经付款完成，请等待导师接受订单",
 				orderList.getUser(), notificationService);
-		NotifyUtil.notifyTeacher(orderList,
-				"尊敬的导师，流水号为" + orderList.getOrderListNo() + "的订单组，用户(" + orderList.getCustomerName() + ")已经付款，等待您的接受。",
-				notificationService);
+//		NotifyUtil.notifyTeacher(orderList,
+//				"尊敬的导师，流水号为" + orderList.getOrderListNo() + "的订单组，用户已经付款，等待您的接受。",
+//				notificationService);
 	}
 }

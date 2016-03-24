@@ -256,10 +256,10 @@ public class FTimeTaskCallbackService extends MsgService {
 				}
 				switch (state.split(",")[0]) {
 					case OrderListService.ORDER_STATE_NOT_PAID:
-						cancelOrderList(orderList);
-						NotifyUtil.notifyUserOrder(orderList,
-								"尊敬的用户,您好,由于您超时未支付订单(流水号：" + orderList.getOrderListNo() + "),系统已自动关闭,如若需要,请重新创建订单",
-								orderList.getUser(), getNotificationService());
+//						cancelOrderList(orderList);
+//						NotifyUtil.notifyUserOrder(orderList,
+//								"尊敬的用户,您好,由于您超时未支付订单(流水号：" + orderList.getOrderListNo() + "),系统已自动关闭,如若需要,请重新创建订单",
+//								orderList.getUser(), getNotificationService());
 						break;
 					default:
 						break;

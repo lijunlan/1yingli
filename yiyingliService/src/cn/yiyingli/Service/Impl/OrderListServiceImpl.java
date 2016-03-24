@@ -67,7 +67,9 @@ public class OrderListServiceImpl implements OrderListService {
 
 	@Override
 	public void updateAndPlusNumber(OrderList orderList) {
-		getOrderListDao().updateWithTeacherNumber(orderList, orderList.getTeacher().getId());
+		//todo PLusOrderNumer
+		getOrderListDao().update(orderList);
+//		getOrderListDao().updateWithTeacherNumber(orderList, orderList.getTeacher().getId());
 	}
 
 	@Override

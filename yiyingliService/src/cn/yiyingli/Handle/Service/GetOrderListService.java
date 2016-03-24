@@ -54,7 +54,7 @@ public class GetOrderListService extends UMsgService {
 		int page = 0;
 		int type = 0;
 		if (getData().containsKey("type")) {
-			type = (int) getData().get("type");
+			type = Integer.parseInt((String) getData().get("type"));
 		}
 		String s = OrderService.USER_ORDER_TYPE_STATES[type];
 		String[] states = s.split("\\|");

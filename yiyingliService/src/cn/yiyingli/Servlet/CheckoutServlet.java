@@ -105,13 +105,13 @@ public class CheckoutServlet extends HttpServlet {
 		}
 		// 由后台插入相关数据
 		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0", URLEncoder.encode(
-				"【一英里】[" + orderList.getTeacher().getName() + "]" + ExOrderListUtil.getMultiTitle(orderList), "UTF-8"));
+				"【一英里】[" + orderList.getOrderListNo() + "]" + ExOrderListUtil.getMultiTitle(orderList), "UTF-8"));
 		// 货物id，这里填写的是订单号
 		checkoutDetails.put("L_PAYMENTREQUEST_0_NUMBER0", orderList.getOrderListNo());
 
 		// 订单名称
 		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0", URLEncoder.encode(
-				"【一英里】[" + orderList.getTeacher().getName() + "]" + ExOrderListUtil.getMultiTitle(orderList), "UTF-8"));
+				"【一英里】[" + orderList.getOrderListNo() + "]" + ExOrderListUtil.getMultiTitle(orderList), "UTF-8"));
 		checkoutDetails.put("L_PAYMENTREQUEST_0_QTY0", "1");
 
 		// 商品价格
