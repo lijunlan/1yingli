@@ -104,9 +104,9 @@ public class CreateOrderService extends UMsgService {
 
 	@Override
 	protected boolean checkData() {
-		return super.checkData() && getData().containsKey("teacherId") && getData().containsKey("serviceList")
+		return super.checkData() && getData().containsKey("serviceList")
 				&& getData().containsKey("name") && getData().containsKey("phone") && getData().containsKey("email")
-				&& getData().containsKey("contact") || getData().containsKey("voucher");
+				&& getData().containsKey("contact"); //|| getData().containsKey("voucher");
 	}
 
 	public static final String SERVICE_KIND_TALK = "talk";
@@ -199,6 +199,9 @@ public class CreateOrderService extends UMsgService {
 		}
 		ExList toSend = new ExArrayList();
 		for (Order order : orders) {
+			order.setOrderNo("" + Calendar.getInstance().get(Calendar.YEAR)
+					+ String.valueOf((Calendar.getInstance().get(Calendar.DAY_OF_YEAR) + 1000)).substring(1)
+					+ (100000000L + order.getId()));
 			getOrderService().save(order);
 			TimeTaskUtil.sendTimeTask("change", "order",
 					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) +
@@ -208,7 +211,7 @@ public class CreateOrderService extends UMsgService {
 			Teacher teacher = order.getTeacher();
 			getTeacherService().updateUserLike(teacher, user);
 			SendMsgToBaiduUtil.updateUserTrainDataOrder(user.getId() + "", teacher.getId() + "",
-				Calendar.getInstance().getTimeInMillis() + "");
+					Calendar.getInstance().getTimeInMillis() + "");
 			SuperMap map = new SuperMap();
 			map.put("orderId", order.getOrderNo());
 			toSend.add(map.finish());

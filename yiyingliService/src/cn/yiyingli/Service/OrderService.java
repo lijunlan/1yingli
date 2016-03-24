@@ -185,6 +185,8 @@ public interface OrderService {
 
 	List<Order> queryListAll(int page, int pageSize);
 
+	List<Order> queryListByIds(long[] ids);
+
 	List<Order> queryListByState(String state, int page, boolean lazy);
 
 	List<Order> queryListByState(String state, int page, boolean lazy, String rank);

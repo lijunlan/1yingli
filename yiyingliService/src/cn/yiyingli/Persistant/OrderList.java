@@ -59,18 +59,6 @@ public class OrderList {
 	@Column(name = "PAYMONEY", nullable = false)
 	private Float payMoney;
 
-	@Column(name = "CUSTOMERPHONE", nullable = true)
-	private String customerPhone;
-
-	@Column(name = "CUSTOMEREMAIL", nullable = true)
-	private String customerEmail;
-
-	@Column(name = "CUSTOMERWX", nullable = true)
-	private String customerWX;
-
-	@Column(name = "CUSTOMERNAME", nullable = false)
-	private String customerName;
-
 	@ManyToOne(targetEntity = Voucher.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "VOUCHER_ID", insertable = true)
 	private Voucher voucher;
@@ -169,38 +157,6 @@ public class OrderList {
 
 	public void setNowMoney(Float nowMoney) {
 		this.nowMoney = nowMoney;
-	}
-
-	public String getCustomerPhone() {
-		return customerPhone;
-	}
-
-	public void setCustomerPhone(String customerPhone) {
-		this.customerPhone = customerPhone;
-	}
-
-	public String getCustomerEmail() {
-		return customerEmail;
-	}
-
-	public void setCustomerEmail(String customerEmail) {
-		this.customerEmail = customerEmail;
-	}
-
-	public String getCustomerWX() {
-		return customerWX;
-	}
-
-	public void setCustomerWX(String customerWX) {
-		this.customerWX = customerWX;
-	}
-
-	public String getCustomerName() {
-		return customerName;
-	}
-
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
 	}
 
 }

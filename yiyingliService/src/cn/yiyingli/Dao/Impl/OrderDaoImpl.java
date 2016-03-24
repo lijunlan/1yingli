@@ -178,6 +178,23 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 		return list;
 	}
 
+	@Override
+	public List<Order> queryListByIds(long[] ids) {
+		if(ids.length <= 0) {
+			return new ArrayList<Order>();
+		}
+		String hql = "from Order o where o.id =" + ids[0];
+		if (ids.length>1) {
+			for (int i=1;i<ids.length;i++) {
+				hql = hql + "or o.id=" + ids[i];
+			}
+		}
+		hql = hql + ")";
+		@SuppressWarnings("unchecked")
+		List<Order> list = getHibernateTemplate().find(hql);
+		return list;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Order> queryListByState(final String state, final int page, final int pageSize, final boolean lazy) {
