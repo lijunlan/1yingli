@@ -69,10 +69,8 @@ public class PayPalMobileConfirm {
 			System.out.println(payment.getTransactions().get(0).getAmount().getCurrency());
 			System.out.println(payment.getTransactions().get(0).getRelatedResources().get(0).getSale().getState());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (PayPalRESTException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -28,14 +28,11 @@ public class _MGetNotificationService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void doit() {
-		// TODO Auto-generated method stub
-
 	}
 
 }

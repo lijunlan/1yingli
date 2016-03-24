@@ -21,9 +21,6 @@ public class _MGetRecordNoService extends MMsgService {
 	}
 
 	@Override
-	public void doit() {
-		// TODO Auto-generated method stub
-
-	}
+	public void doit() {}
 
 }

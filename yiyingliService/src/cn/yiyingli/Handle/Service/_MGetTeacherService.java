@@ -17,13 +17,11 @@ public class _MGetTeacherService extends MMsgService {
 
 	@Override
 	protected boolean checkData() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void doit() {
-		// TODO Auto-generated method stub
 
 	}
 
