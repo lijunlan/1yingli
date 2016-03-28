@@ -39,7 +39,7 @@ public class ChangeEmailService extends UMsgService {
 
 	@Override
 	public void doit() {
-		User user = getUser();
+		User user = getUserService().queryWithTeacher(getUser().getId(),false);
 		String email = (String) getData().get("email");
 		String checkNo = (String) getData().get("checkNo");
 		CheckNo no = getCheckNoService().query(email);
@@ -55,6 +55,7 @@ public class ChangeEmailService extends UMsgService {
 			getCheckNoService().remove(no);
 		}
 		if (CheckUtil.checkEmail(email)) {
+			getUserService().mergeUserWithEmail(user, email);
 			user.setEmail(email);
 			getUserService().updateWithTeacher(user);
 			setResMsg(MsgUtil.getSuccessMsg("email has been changed"));

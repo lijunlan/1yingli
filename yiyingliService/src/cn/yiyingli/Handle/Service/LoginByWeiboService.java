@@ -50,7 +50,7 @@ public class LoginByWeiboService extends ULoginMsgService {
 		User u = getUserService().queryWithWeibo(weiboNo, false);
 		if (u == null) {
 			password = MD5Util.MD5(password);
-			String nowIcon = updataIcon(icon,weiboNo);
+			String nowIcon = updateIcon(icon,weiboNo);
 			User user = PUserUtil.assembleUserFromWB(weiboNo, password, nickName, nowIcon, address);
 			try {
 				getUserService().save(user);
@@ -62,7 +62,7 @@ public class LoginByWeiboService extends ULoginMsgService {
 			returnUser(user, true);
 		} else {
 			if(!u.getIconUrl().startsWith("http://image.1yingli.cn")){
-				String nowIcon = updataIcon(u.getIconUrl(),weiboNo);
+				String nowIcon = updateIcon(u.getIconUrl(),weiboNo);
 				u.setIconUrl(nowIcon);
 			}
 			returnUser(u, false);

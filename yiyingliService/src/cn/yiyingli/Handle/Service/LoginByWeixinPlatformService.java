@@ -64,7 +64,7 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 		}
 		if (u == null) {
 			password = MD5Util.MD5(password);
-			String nowIcon = updataIcon(icon,weixinNo);
+			String nowIcon = updateIcon(icon,weixinNo);
 			User user = PUserUtil.assembleUserFromWXPlatform(weixinNoU, weixinNo, password, nickName, nowIcon, address);
 			try {
 				getUserService().save(user);
@@ -79,7 +79,7 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 				u.setWechatPlatformNo(weixinNo);
 			}
 			if(!u.getIconUrl().startsWith("http://image.1yingli.cn")){
-				String nowIcon = updataIcon(u.getIconUrl(),weixinNo);
+				String nowIcon = updateIcon(u.getIconUrl(),weixinNo);
 				u.setIconUrl(nowIcon);
 			}
 			returnUser(u, false);

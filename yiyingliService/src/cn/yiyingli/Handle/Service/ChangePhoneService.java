@@ -39,7 +39,7 @@ public class ChangePhoneService extends UMsgService {
 
 	@Override
 	public void doit() {
-		User user = getUser();
+		User user = getUserService().queryWithTeacher(getUser().getId(),false);
 		String phone = (String) getData().get("phone");
 		String checkNo = (String) getData().get("checkNo");
 		CheckNo no = getCheckNoService().query(phone);
@@ -55,6 +55,7 @@ public class ChangePhoneService extends UMsgService {
 			getCheckNoService().remove(no);
 		}
 		if (CheckUtil.checkMobileNumber(phone) || CheckUtil.checkGlobleMobileNumber(phone)) {
+			getUserService().mergeUserWithPhone(user,phone);
 			user.setPhone(phone);
 			getUserService().updateWithTeacher(user);
 			setResMsg(MsgUtil.getSuccessMsg("phone number has been changed"));
