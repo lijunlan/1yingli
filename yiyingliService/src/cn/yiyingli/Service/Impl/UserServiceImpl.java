@@ -156,6 +156,18 @@ public class UserServiceImpl implements UserService {
 					user.setTeacher(teacher);
 					getUserDao().updateWithRawSql("update teacher" + changeUserSql);
 				}
+				if(subUser.getWechatNo() != null && user.getWechatNo()==null) {
+					user.setWechatNo(subUser.getWechatNo());
+					subUser.setWechatNo(null);
+				}
+				if(subUser.getWechatPlatformNo() != null && user.getWechatPlatformNo() == null) {
+					user.setWechatPlatformNo(subUser.getWechatPlatformNo());
+					subUser.setWechatPlatformNo(null);
+				}
+				if(subUser.getWeiboNo() != null && user.getWeiboNo() ==null) {
+					user.setWeiboNo(subUser.getWeiboNo());
+					subUser.setWeiboNo(null);
+				}
 				subUser.setState(USER_STATE_SUB_SHORT);
 				getUserDao().merge(subUser);
 			}
