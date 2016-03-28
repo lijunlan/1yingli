@@ -115,7 +115,7 @@ public class User {
 	@Column(name = "MILE", nullable = false)
 	private Long mile;
 
-	@Column(name = "STATE")
+	@Column(name = "STATE", nullable = false)
 	private Short state;
 
 	@OneToMany(targetEntity = ApplicationForm.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
