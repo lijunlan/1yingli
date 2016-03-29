@@ -39,7 +39,25 @@ public abstract class MMsgService extends MsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("34001"));
 			return false;
 		}
+		if (!checkRoot()) {
+			setResMsg(MsgUtil.getErrorMsgByCode("34002"));
+			return false;
+		}
 		setManager(manager);
 		return true;
+	}
+
+	public boolean checkRoot() {
+		String method = getData().getString("method");
+		if (method.contains("Order") || method.contains("order") || method.contains("voucher")
+				|| method.contains("Voucher")) {
+			if (manager.getRoot().shortValue() > 700) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return true;
+		}
 	}
 }
