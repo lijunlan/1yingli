@@ -213,6 +213,7 @@
 		<method name="finishOrder" beanName="tFinishOrderService"/>
 		<method name="createOrder" beanName="createOrderService"/>
 		<method name="createAdditionalPay" beanName="createAdditionalPayService"/>
+		<method name="createPay" beanName="createPayService"/>
 		<method name="getListByTeacher" beanName="tGetOrderListService"/>
 		<method name="getByTeacher" beanName="tGetOrderInfoService"/>
 		<method name="getListByUser" beanName="getOrderListService"/>
@@ -220,6 +221,7 @@
 		<method name="refuseOrder" beanName="tRefuseOrderService"/>
 		<method name="ensureTime" beanName="tEnsureTimeService"/>
 		<method name="disagreeOrder" beanName="tDisagreeOrderService"/>
+		<method name="bargainOrder" beanName="tBargainOrderService"/>
 		<method name="agreeOrder" beanName="tAgreeOrderService"/>
 		<method name="acceptOrder" beanName="tAcceptOrderService"/>
 		<method name="satisfyOrder" beanName="satisfyOrderService"/>

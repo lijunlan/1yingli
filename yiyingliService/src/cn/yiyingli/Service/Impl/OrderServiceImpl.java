@@ -2,6 +2,7 @@ package cn.yiyingli.Service.Impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import cn.yiyingli.Dao.OrderDao;
@@ -143,6 +144,10 @@ public class OrderServiceImpl implements OrderService {
 			TimeTaskUtil.sendTimeTask("change", "order",
 					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 7) + "",
 					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+		} else if (order.getState().startsWith(ORDER_BARGAINING)) {
+//			TimeTaskUtil.sendTimeTask("change", "order",
+//					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 7) + "",
+//					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
 		}
 		// else if (order.getState().startsWith(ORDER_STATE_FINISH_PAID)) {
 		// TimeTaskUtil.sendTimeTask("change", "order",
@@ -265,13 +270,28 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public long querySumNoByUserIdAndStates(long userId, String[] states) {
+		return getOrderDao().querySumNoByUserIdAndStates(userId,states);
+	}
+
+	@Override
 	public long querySumNoByTeacherId(long teacherId) {
 		return getOrderDao().querySumNoByTeacherId(teacherId);
 	}
 
 	@Override
+	public long querySumNoByTeacherIdAndStates(long teacherId, String[] states) {
+		return getOrderDao().querySumNoByTeacherIdAndStates(teacherId,states);
+	}
+
+	@Override
 	public long querySumNoByState(String state) {
 		return getOrderDao().querySumNoByState(state);
+	}
+
+	@Override
+	public List<Order> queryListByIds(long[] ids) {
+		return getOrderDao().queryListByIds(ids);
 	}
 
 	@Override

@@ -24,7 +24,6 @@ public class GetSingleUserWeiboInfoUtil {
 			User user = um.showUserById(accessToken.getUid());
 			return user;
 		} catch (WeiboException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -36,7 +35,6 @@ public class GetSingleUserWeiboInfoUtil {
 			User user = um.showUserById(uid);
 			return user;
 		} catch (WeiboException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

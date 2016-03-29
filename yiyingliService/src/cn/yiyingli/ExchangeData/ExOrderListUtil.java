@@ -13,7 +13,7 @@ public class ExOrderListUtil {
 	public static void assembleOrderListToTeacher(OrderList orderList, SuperMap map) {
 		map.put("batchNo", orderList.getOrderListNo());
 		map.put("userId", orderList.getUser().getId());
-		map.put("userName", orderList.getCustomerName());
+//		map.put("userName", orderList.getCustomerName());
 		map.put("userUrl", orderList.getUser().getIconUrl());
 		map.put("payMoney", orderList.getPayMoney());
 		map.put("nowMoney", orderList.getNowMoney());
@@ -30,9 +30,9 @@ public class ExOrderListUtil {
 
 	public static void assembleOrderListToUser(OrderList orderList, SuperMap map) {
 		map.put("batchNo", orderList.getOrderListNo());
-		map.put("teacherId", orderList.getTeacher().getId());
-		map.put("teacherName", orderList.getTeacher().getName());
-		map.put("teacherUrl", orderList.getTeacher().getIconUrl());
+//		map.put("teacherId", orderList.getTeacher().getId());
+//		map.put("teacherName", orderList.getTeacher().getName());
+//		map.put("teacherUrl", orderList.getTeacher().getIconUrl());
 		map.put("payMoney", orderList.getPayMoney());
 		map.put("nowMoney", orderList.getNowMoney());
 		map.put("originMoney", orderList.getOriginMoney());

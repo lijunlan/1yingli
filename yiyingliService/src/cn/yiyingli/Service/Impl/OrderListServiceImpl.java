@@ -32,16 +32,11 @@ public class OrderListServiceImpl implements OrderListService {
 		orderList.setOrderListNo("" + Calendar.getInstance().get(Calendar.YEAR)
 				+ String.valueOf((Calendar.getInstance().get(Calendar.DAY_OF_YEAR) + 1000)).substring(1)
 				+ (600000000L + id));
-		for (Order order : orderList.getOrders()) {
-			order.setOrderNo("" + Calendar.getInstance().get(Calendar.YEAR)
-					+ String.valueOf((Calendar.getInstance().get(Calendar.DAY_OF_YEAR) + 1000)).substring(1)
-					+ (100000000L + order.getId()));
-		}
 		getOrderListDao().update(orderList);
-		TimeTaskUtil.sendTimeTask("change", "orderList",
-				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
-				new SuperMap().put("state", orderList.getState()).put("orderListId", orderList.getOrderListNo())
-						.finishByJson());
+//		TimeTaskUtil.sendTimeTask("change", "orderList",
+//				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
+//				new SuperMap().put("state", orderList.getState()).put("orderListId", orderList.getOrderListNo())
+//						.finishByJson());
 		return orderList.getOrderListNo();
 	}
 
@@ -72,7 +67,9 @@ public class OrderListServiceImpl implements OrderListService {
 
 	@Override
 	public void updateAndPlusNumber(OrderList orderList) {
-		getOrderListDao().updateWithTeacherNumber(orderList, orderList.getTeacher().getId());
+		//todo PLusOrderNumer
+		getOrderListDao().update(orderList);
+//		getOrderListDao().updateWithTeacherNumber(orderList, orderList.getTeacher().getId());
 	}
 
 	@Override

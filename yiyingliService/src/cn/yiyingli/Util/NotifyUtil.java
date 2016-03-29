@@ -2,6 +2,8 @@ package cn.yiyingli.Util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import cn.yiyingli.BaichuanTaobaoUtil.CloudPushUtil;
 import cn.yiyingli.Dao.NotificationDao;
@@ -13,26 +15,102 @@ import cn.yiyingli.Service.NotificationService;
 
 public class NotifyUtil {
 
+
+	private final static String TOTEACHER = "(<a href=\"http://www.1yingli.cn/myStudent\">查看订单</a>)";
+	private final static String TOUSER = "(<a href=\"http://www.1yingli.cn/myTutor\">查看订单</a>)";
+
 	/**
 	 * @param phone
 	 * @param email
 	 * @param message
-	 * @param uid
-	 *            用户标识 UUID
+	 * @param user    用户标识 UUID
 	 */
 	public static boolean notifyUserOrder(String phone, String email, String message, User user,
-			NotificationService notificationService) {
+										  NotificationService notificationService) {
 		return notifyUserNormal(phone, email, "订单状态改变通知", message, user, notificationService);
 	}
 
-	public static boolean notifyUserOrder(OrderList orderList, String message, User user,
-			NotificationService notificationService) {
-		return notifyUserOrder(orderList.getCustomerPhone(), orderList.getCustomerEmail(), message, user,
-				notificationService);
+//	public static boolean notifyUserOrder(OrderList orderList, String message, User user,
+//										  NotificationService notificationService) {
+//		//Todo 根据手机号来发送短信
+//		return notifyUserOrder(orderList.getOrders().get(0).getCustomerPhone(),
+//				orderList.getOrders().get(0).getCustomerEmail(), message, user,
+//				notificationService);
+//	}
+
+
+	public static boolean notifyPayUser(OrderList orderList, NotificationService notificationService) {
+		Map<String, String> phoneMap = new HashMap<>();
+		Map<String, String> emailMap = new HashMap<>();
+		for (Order order : orderList.getOrders()) {
+			String customerPhone = order.getCustomerPhone();
+			String customerEmail = order.getCustomerEmail();
+			String orderNo = order.getOrderNo();
+			if (phoneMap.containsKey(customerPhone)) {
+				phoneMap.put(customerPhone, orderNo + "," + phoneMap.get(customerPhone));
+			} else {
+				phoneMap.put(customerPhone, orderNo);
+			}
+			if (emailMap.containsKey(customerEmail)) {
+				emailMap.put(customerEmail, orderNo + "," + emailMap.get(customerEmail));
+			} else {
+				emailMap.put(customerEmail, orderNo);
+			}
+		}
+		for (String phoneNum : phoneMap.keySet()) {
+			String message = "尊敬的用户，订单号为" + phoneMap.get(phoneNum) + "的订单组已经付款完成，请等待导师接受订单"
+					+ "(http://www.1yingli.cn/myTutor)";
+			if (CheckUtil.checkMobileNumber(phoneNum) || CheckUtil.checkGlobleMobileNumber(phoneNum)) {
+				SendMessageUtil.sendMessage(phoneNum, message);
+			}
+		}
+		for (String email : emailMap.keySet()) {
+			String message = "尊敬的用户，订单号为" + emailMap.get(email) + "的订单组已经付款完成，请等待导师接受订单"
+					+ "(<a href=\"http://www.1yingli.cn/myTutor\">查看订单</a>)";
+			if (CheckUtil.checkEmail(email)) {
+				SendMailUtil.sendMessage(email, "订单状态改变通知", message);
+			}
+		}
+		return true;
+	}
+
+	public static boolean notifyPayTeacher(OrderList orderList, NotificationService notificationService) {
+		Map<String, String> phoneMap = new HashMap<>();
+		Map<String, String> emailMap = new HashMap<>();
+		for (Order order: orderList.getOrders()) {
+			String teacherPhone = order.getTeacher().getPhone();
+			String teacherEmail = order.getTeacher().getEmail();
+			String orderNo = order.getOrderNo();
+			if (phoneMap.containsKey(teacherPhone)) {
+				phoneMap.put(teacherPhone, orderNo + "," + phoneMap.get(teacherPhone));
+			} else {
+				phoneMap.put(teacherPhone, orderNo);
+			}
+			if (emailMap.containsKey(teacherEmail)) {
+				emailMap.put(teacherEmail, orderNo + "," + emailMap.get(teacherEmail));
+			} else {
+				emailMap.put(teacherEmail, orderNo);
+			}
+		}
+		for (String phoneNum : phoneMap.keySet()) {
+			String message = "尊敬的导师，订单号为" + phoneMap.get(phoneNum) + "的订单组已经付款完成，等待您的接受"
+					+ "(http://www.1yingli.cn/myStudent)";
+			if (CheckUtil.checkMobileNumber(phoneNum) || CheckUtil.checkGlobleMobileNumber(phoneNum)) {
+				SendMessageUtil.sendMessage(phoneNum, message);
+			}
+		}
+		for (String email : emailMap.keySet()) {
+			String message = "尊敬的导师，订单号为" + emailMap.get(email) + "的订单组已经付款完成，等待您的接受"
+					+ "(<a href=\"http://www.1yingli.cn/myStudent\">查看订单</a>)";
+			if (CheckUtil.checkEmail(email)) {
+				SendMailUtil.sendMessage(email, "订单状态改变通知", message);
+			}
+		}
+		return true;
 	}
 
 	public static boolean notifyUserOrder(Order order, String message, User user,
-			NotificationService notificationService) {
+										  NotificationService notificationService) {
 		return notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(), message, user, notificationService);
 	}
 
@@ -59,7 +137,7 @@ public class NotifyUtil {
 		// web
 		sendNotification(user, notificationService, message);
 		// mobile
-		String[] usernames = { user.getUsername() };
+		String[] usernames = {user.getUsername()};
 		CloudPushUtil.IOSpushMessageToAccount(usernames, message);
 		CloudPushUtil.IOSpushNoticeToAccount(usernames, message);
 		return true;
@@ -70,10 +148,10 @@ public class NotifyUtil {
 		return true;
 	}
 
-	public static boolean notifyTeacher(OrderList orderList, String message, NotificationService notificationService) {
-		return notifyTeacher(orderList.getTeacher().getPhone(), orderList.getTeacher().getEmail(), message,
-				orderList.getTeacher().getId(), orderList.getTeacher().getUsername(), notificationService);
-	}
+//	public static boolean notifyTeacher(OrderList orderList, String message, NotificationService notificationService) {
+//		return notifyTeacher(orderList.getTeacher().getPhone(), orderList.getTeacher().getEmail(), message,
+//				orderList.getTeacher().getId(), orderList.getTeacher().getUsername(), notificationService);
+//	}
 
 	public static boolean notifyTeacher(Order order, String message, NotificationService notificationService) {
 		return notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(), message,
@@ -93,7 +171,7 @@ public class NotifyUtil {
 		// web
 		sendNotification(teacherId, notificationService, m1);
 		// mobile
-		String[] usernames = { teacherUserName };
+		String[] usernames = {teacherUserName};
 		CloudPushUtil.IOSpushMessageToAccount(usernames, message);
 		CloudPushUtil.IOSpushNoticeToAccount(usernames, message);
 		return true;

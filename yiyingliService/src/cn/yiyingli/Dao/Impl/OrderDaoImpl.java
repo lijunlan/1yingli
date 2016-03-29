@@ -178,6 +178,23 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 		return list;
 	}
 
+	@Override
+	public List<Order> queryListByIds(long[] ids) {
+		if(ids.length <= 0) {
+			return new ArrayList<Order>();
+		}
+		String hql = "from Order o where o.id =" + ids[0];
+		if (ids.length>1) {
+			for (int i=1;i<ids.length;i++) {
+				hql = hql + "or o.id=" + ids[i];
+			}
+		}
+		hql = hql + ")";
+		@SuppressWarnings("unchecked")
+		List<Order> list = getHibernateTemplate().find(hql);
+		return list;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Order> queryListByState(final String state, final int page, final int pageSize, final boolean lazy) {
@@ -385,12 +402,45 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 	}
 
 	@Override
+	public long querySumNoByUserIdAndStates(long userId, String[] states) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		String hql = "select count(*) from Order o where o.createUser.id=" + userId + " and (o.state like '"
+				+ states[0] + "%'";
+		if (states.length > 1) {
+			for (int i = 1; i < states.length; i++) {
+				hql = hql + " or o.state like '" + states[i] + "%'";
+			}
+		}
+		final String _hql = hql + ")";
+		Query query = session.createQuery(_hql);
+		System.out.println(query.getQueryString());
+		long sum = (long) query.uniqueResult();
+		return sum;
+	}
+
+	@Override
 	public long querySumNoByTeacherId(long teacherId) {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Transaction ts = session.beginTransaction();
 		long sum = (long) session.createQuery("select count(*) from Order o where o.teacher.id=" + teacherId)
 				.uniqueResult();
 		ts.commit();
+		return sum;
+	}
+
+	@Override
+	public long querySumNoByTeacherIdAndStates(long teacherId, String[] states) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		String hql = "select count(*) from Order o where o.teacher.id=" + teacherId + " and (o.state like '"
+				+ states[0] + "%'";
+		if (states.length > 1) {
+			for (int i = 1; i < states.length; i++) {
+				hql = hql + " or o.state like '" + states[i] + "%'";
+			}
+		}
+		final String _hql = hql + ")";
+		long sum = (long) session.createQuery(_hql)
+				.uniqueResult();
 		return sum;
 	}
 

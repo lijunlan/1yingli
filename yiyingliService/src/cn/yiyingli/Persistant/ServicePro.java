@@ -19,6 +19,9 @@ import javax.persistence.Table;
 @Table(name = "SERVICEPRO")
 public class ServicePro {
 
+	public static short SERVICE_TYPE_NORMAL = 0;
+	public static short SERVICE_TYPE_BARGAIN = 1;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "SERVICEPRO_ID")
@@ -135,6 +138,17 @@ public class ServicePro {
 	@OneToMany(targetEntity = UserLikeServicePro.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "SERVICEPRO_ID", updatable = false)
 	private Set<UserLikeServicePro> userLikeServicePros = new HashSet<UserLikeServicePro>();
+
+	@Column(name = "TYPE", nullable = false)
+	private short type;
+
+	public short getType() {
+		return type;
+	}
+
+	public void setType(short type) {
+		this.type = type;
+	}
 
 	public Long getId() {
 		return id;

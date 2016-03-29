@@ -3,10 +3,12 @@ package cn.yiyingli.Handle.Service;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.ExOrderListUtil;
+import cn.yiyingli.ExchangeData.ExOrderUtil;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.UMsgService;
+import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.OrderListService;
@@ -17,6 +19,8 @@ public class GetOrderListService extends UMsgService {
 
 	private OrderListService orderListService;
 
+	private OrderService orderService;
+
 	public OrderListService getOrderListService() {
 		return orderListService;
 	}
@@ -25,10 +29,19 @@ public class GetOrderListService extends UMsgService {
 		this.orderListService = orderListService;
 	}
 
+	public OrderService getOrderService() {
+		return orderService;
+	}
+
+	public void setOrderService(OrderService orderService) {
+		this.orderService = orderService;
+	}
+
 	@Override
 	protected boolean checkData() {
-		return super.checkData() && getData().containsKey("page") || getData().containsKey("state");
+		return super.checkData() && getData().containsKey("page");// || getData().containsKey("state");
 	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -39,7 +52,14 @@ public class GetOrderListService extends UMsgService {
 	public void doit() {
 		User user = getUser();
 		int page = 0;
-		long count = user.getOrderNumber();
+		int type = 0;
+		if (getData().containsKey("type")) {
+			type = Integer.parseInt((String) getData().get("type"));
+		}
+		String s = OrderService.USER_ORDER_TYPE_STATES[type];
+		String[] states = s.split("\\|");
+
+		Long count = getOrderService().querySumNoByUserIdAndStates(user.getId(), states);
 		SuperMap toSend = MsgUtil.getSuccessMap();
 		toSend.put("count", count);
 		if (getData().get("page").equals("max")) {
@@ -62,21 +82,39 @@ public class GetOrderListService extends UMsgService {
 				return;
 			}
 		}
-		List<OrderList> orderLists = getOrderListService().queryListByUser(user.getId(), page);
-		if (getData().containsKey("state")) {
-			String s = (String) getData().get("state");
-			String states[] = s.split("\\|");
-			ExOrderListUtil.getMatchStateLists(orderLists, states);
-		}
 
-		ExList toSendOrderLists = new ExArrayList();
-		for (OrderList orderList : orderLists) {
+
+		List<Order> orders = getOrderService().queryListByUserId(user.getId(), states, page, false);
+
+		ExList toSendOrders = new ExArrayList();
+		for (Order order : orders) {
 			SuperMap map = new SuperMap();
-			ExOrderListUtil.assembleOrderListToUser(orderList, map);
-			toSendOrderLists.add(map.finish());
+			ExOrderUtil.assembleOrderToUser(map, order);
+			toSendOrders.add(map.finish());
 		}
+		setResMsg(toSend.put("data", toSendOrders).finishByJson());
 
-		setResMsg(toSend.put("data", toSendOrderLists).finishByJson());
+//		List<OrderList> orderLists = getOrderListService().queryListByUser(user.getId(), page);
+//		if (getData().containsKey("state")) {
+//			String s = (String) getData().get("state");
+//			String states[] = s.split("\\|");
+//			ExOrderListUtil.getMatchStateLists(orderLists, states);
+//		}
+//
+//		if (getData().containsKey("type")) {
+//			String s = OrderService.USER_ORDER_TYPE_STATES[(int) getData().get("type")];
+//			String states[] = s.split("\\|");
+//			ExOrderListUtil.getMatchStateLists(orderLists, states);
+//		}
+//
+//		ExList toSendOrderLists = new ExArrayList();
+//		for (OrderList orderList : orderLists) {
+//			SuperMap map = new SuperMap();
+//			ExOrderListUtil.assembleOrderListToUser(orderList, map);
+//			toSendOrderLists.add(map.finish());
+//		}
+//
+//		setResMsg(toSend.put("data", toSendOrderLists).finishByJson());
 
 	}
 

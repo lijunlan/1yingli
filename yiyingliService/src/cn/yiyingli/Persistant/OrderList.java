@@ -41,9 +41,9 @@ public class OrderList {
 	@Column(name = "PAYTIME", nullable = true)
 	private String payTime;
 
-	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "TEACHER_ID", updatable = false)
-	private Teacher teacher;
+//	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
+//	@JoinColumn(name = "TEACHER_ID", updatable = false)
+//	private Teacher teacher;
 
 	@Column(name = "ORDERLISTNO", nullable = true, unique = true)
 	private String orderListNo;
@@ -63,18 +63,6 @@ public class OrderList {
 
 	@Column(name = "PAYMONEY", nullable = false)
 	private Float payMoney;
-
-	@Column(name = "CUSTOMERPHONE", nullable = true)
-	private String customerPhone;
-
-	@Column(name = "CUSTOMEREMAIL", nullable = true)
-	private String customerEmail;
-
-	@Column(name = "CUSTOMERWX", nullable = true)
-	private String customerWX;
-
-	@Column(name = "CUSTOMERNAME", nullable = false)
-	private String customerName;
 
 	@ManyToOne(targetEntity = Voucher.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "VOUCHER_ID", insertable = true)
@@ -104,13 +92,13 @@ public class OrderList {
 		this.createTime = createTime;
 	}
 
-	public Teacher getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
+//	public Teacher getTeacher() {
+//		return teacher;
+//	}
+//
+//	public void setTeacher(Teacher teacher) {
+//		this.teacher = teacher;
+//	}
 
 	public String getOrderListNo() {
 		return orderListNo;
@@ -174,38 +162,6 @@ public class OrderList {
 
 	public void setNowMoney(Float nowMoney) {
 		this.nowMoney = nowMoney;
-	}
-
-	public String getCustomerPhone() {
-		return customerPhone;
-	}
-
-	public void setCustomerPhone(String customerPhone) {
-		this.customerPhone = customerPhone;
-	}
-
-	public String getCustomerEmail() {
-		return customerEmail;
-	}
-
-	public void setCustomerEmail(String customerEmail) {
-		this.customerEmail = customerEmail;
-	}
-
-	public String getCustomerWX() {
-		return customerWX;
-	}
-
-	public void setCustomerWX(String customerWX) {
-		this.customerWX = customerWX;
-	}
-
-	public String getCustomerName() {
-		return customerName;
-	}
-
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
 	}
 
 	public List<AdditionalPay> getAdditionalPays() {

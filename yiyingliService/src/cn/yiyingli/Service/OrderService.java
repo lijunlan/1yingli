@@ -16,10 +16,42 @@ public interface OrderService {
 
 	public static final short ORDER_PAYMETHOD_WEIXIN = 2;
 
+	public static final String[] TEACHER_ORDER_TYPE_STATES = {
+			"0010|0020|0110|0300|0400|0500|0620|0700|0800|0900|1000|1010|1100|1200|1300|1400|1500",
+			"0010|0300",
+			"0020|0400",
+			"0500",
+			"0900|1000",
+			"0620|1500",
+	};
+
+	public static final String[] USER_ORDER_TYPE_STATES = {
+			"0010|0020|0100|0110|0200|0300|0400|0500|0620|0700|0800|0900|1000|1010|1100|1200|1300|1400|1500",
+			"0100|0110",
+			"0010|0300",
+			"0020|0400|0500",
+			"0900|1000",
+			"0620|0700|1500",
+	};
+	/**
+	 * 需议价订单,客户下单,等到导师接单
+	 */
+	public static final String ORDER_NOT_BARGAINED = "0010";
+
+	/**
+	 * 需议价订单,导师接单,议价中
+	 */
+	public static final String ORDER_BARGAINING = "0020";
+
 	/**
 	 * 客户下单，尚未支付
 	 */
 	public static final String ORDER_STATE_NOT_PAID = "0100";
+
+	/**
+	 * 需议价订单,导师确定价格,等待客户支付
+	 */
+	public static final String ORDER_BARGAINED_NOT_PAID = "0110";
 
 	/**
 	 * 客户放弃支付，包括：客户取消订单，客户超时未支付
@@ -141,13 +173,19 @@ public interface OrderService {
 
 	long querySumNoByUserId(long userId);
 
+	long querySumNoByUserIdAndStates(long userId, String[] states);
+
 	long querySumNoByTeacherId(long teacherId);
+
+	long querySumNoByTeacherIdAndStates(long teacherId,String[] states);
 
 	long querySumNoBySalaryState(short salaryState);
 
 	List<Order> queryListAll(int page);
 
 	List<Order> queryListAll(int page, int pageSize);
+
+	List<Order> queryListByIds(long[] ids);
 
 	List<Order> queryListByState(String state, int page, boolean lazy);
 

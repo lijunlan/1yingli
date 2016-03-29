@@ -45,11 +45,17 @@ public interface OrderDao {
 
 	long querySumNoByUserId(long userId);
 
+	long querySumNoByUserIdAndStates(long userId, String[] states);
+
 	long querySumNoByTeacherId(long teacherId);
+
+	long querySumNoByTeacherIdAndStates(long teacherId,String[] states);
 
 	long querySumNoBySalaryState(short salaryState);
 
 	List<Order> queryListAll(int page, int pageSize);
+
+	List<Order> queryListByIds(long[] ids);
 
 	List<Order> queryListByState(String state, int page, int pageSize, boolean lazy);
 

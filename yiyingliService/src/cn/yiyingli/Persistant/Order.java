@@ -140,6 +140,9 @@ public class Order {
 	@Column(name = "SERVICEKIND", nullable = true)
 	private Integer serviceKind;
 
+	@Column(name = "SERVICETYPE", nullable = true)
+	private Short serviceType;
+
 	@Column(name = "ENDTIME", nullable = true)
 	private String endTime;
 
@@ -496,4 +499,11 @@ public class Order {
 		this.serviceKind = serviceKind;
 	}
 
+	public Short getServiceType() {
+		return serviceType;
+	}
+
+	public void setServiceType(Short serviceType) {
+		this.serviceType = serviceType;
+	}
 }
