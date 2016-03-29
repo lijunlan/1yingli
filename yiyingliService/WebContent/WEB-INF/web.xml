@@ -132,8 +132,8 @@
     <display-name>TradeNotifyProcess</display-name>
     <servlet-name>TradeNotifyProcess</servlet-name>
     <servlet-class>
-          cn.yiyingli.Servlet.TradeNotifyProcessServlet
-       </servlet-class>
+        cn.yiyingli.Servlet.AlipayTradeNotifyProcessServlet
+    </servlet-class>
   </servlet>
 		
    <servlet-mapping>

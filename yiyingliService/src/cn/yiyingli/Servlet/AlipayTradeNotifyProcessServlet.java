@@ -37,7 +37,7 @@ import cn.yiyingli.Util.WarnUtil;
  *
  */
 @SuppressWarnings("serial")
-public class TradeNotifyProcessServlet extends HttpServlet {
+public class AlipayTradeNotifyProcessServlet extends HttpServlet {
 
 	private ApplicationContext applicationContext;
 
