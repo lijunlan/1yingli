@@ -55,6 +55,8 @@ public interface TeacherService {
 
 	Teacher query(long id);
 
+	Teacher queryWithOutStatue(long id);
+
 	Teacher queryWithUser(long id);
 
 	Boolean queryCheckLikeUser(long teacherId, long userId);

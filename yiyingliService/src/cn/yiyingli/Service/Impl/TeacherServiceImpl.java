@@ -162,6 +162,11 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
+	public Teacher queryWithOutStatue(long id) {
+		return getTeacherDao().queryWithOutStatue(id);
+	}
+
+	@Override
 	public Teacher queryWithUser(long id) {
 		return getTeacherDao().queryWithUser(id);
 	}

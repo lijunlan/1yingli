@@ -124,6 +124,17 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
+	public Teacher queryWithOutStatue(long id) {
+		String hql = "from Teacher t where t.id=?";
+		@SuppressWarnings("unchecked")
+		List<Teacher> list = getHibernateTemplate().find(hql, id);
+		if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
+
+	@Override
 	public Teacher queryWithUser(long id) {
 		String hql = "from Teacher t left join fetch t.servicePros left join fetch t.user where t.id=?  and t.onService=true";
 		@SuppressWarnings("unchecked")
