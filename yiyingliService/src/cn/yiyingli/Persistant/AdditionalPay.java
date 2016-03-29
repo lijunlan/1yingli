@@ -9,12 +9,15 @@ import java.util.Date;
 @Table(name = "ADDITIONALPAY")
 public class AdditionalPay {
 
+	public static final short ADDITIONALPAY_STATE_NOT_PAID =  0;
+	public static final short ADDITIONALPAY_STATE_PAID =  1;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ADDITIONALPAY_ID")
 	private Long id;
 
-	@ManyToOne(targetEntity = Order.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = Order.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ORDER_ID", updatable = false)
 	private Order order;
 
@@ -31,6 +34,13 @@ public class AdditionalPay {
 
 	@Column(name = "CREATETIME", nullable = false)
 	private String createTime;
+
+
+	@Column(name = "PAYTIME")
+	private String payTime;
+
+	@Column(name = "STATE",nullable = false)
+	private Short state;
 
 	@Column(name = "SALARYSTATE")
 	private Short salaryState;
@@ -111,5 +121,21 @@ public class AdditionalPay {
 
 	public void setMoney(Float money) {
 		this.money = money;
+	}
+
+	public Short getState() {
+		return state;
+	}
+
+	public void setState(Short state) {
+		this.state = state;
+	}
+
+	public String getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(String payTime) {
+		this.payTime = payTime;
 	}
 }

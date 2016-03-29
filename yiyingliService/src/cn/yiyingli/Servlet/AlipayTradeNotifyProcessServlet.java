@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.yiyingli.Persistant.AdditionalPay;
 import cn.yiyingli.Persistant.ServicePro;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -222,6 +223,17 @@ public class AlipayTradeNotifyProcessServlet extends HttpServlet {
 //			TimeTaskUtil.sendTimeTask("change", "order",
 //					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
 //					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+		}
+		for (AdditionalPay additionalPay: orderList.getAdditionalPays()) {
+			Order order = additionalPay.getOrder();
+			if(order.getSalaryState().equals(OrderService.ORDER_SALARY_STATE_OFF)) {
+				additionalPay.setSalaryState(OrderService.ORDER_SALARY_STATE_OFF);
+			} else {
+				additionalPay.setSalaryState(OrderService.ORDER_SALARY_STATE_NEED);
+			}
+			additionalPay.setPayMethod(OrderService.ORDER_PAYMETHOD_ALIPAY);
+			additionalPay.setState(AdditionalPay.ADDITIONALPAY_STATE_PAID);
+			additionalPay.setPayTime(time);
 		}
 		orderList.setState(OrderListService.ORDER_STATE_FINISH_PAID + "," + orderList.getState());
 		orderListService.updateAndPlusNumber(orderList);

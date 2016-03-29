@@ -7,10 +7,7 @@ import java.util.Map;
 
 import cn.yiyingli.BaichuanTaobaoUtil.CloudPushUtil;
 import cn.yiyingli.Dao.NotificationDao;
-import cn.yiyingli.Persistant.Notification;
-import cn.yiyingli.Persistant.Order;
-import cn.yiyingli.Persistant.OrderList;
-import cn.yiyingli.Persistant.User;
+import cn.yiyingli.Persistant.*;
 import cn.yiyingli.Service.NotificationService;
 
 public class NotifyUtil {
@@ -71,13 +68,29 @@ public class NotifyUtil {
 				SendMailUtil.sendMessage(email, "订单状态改变通知", message);
 			}
 		}
+		for (AdditionalPay additionalPay : orderList.getAdditionalPays()) {
+			Order order = additionalPay.getOrder();
+			String customerPhone = order.getCustomerPhone();
+			String customerEmail = order.getCustomerEmail();
+			String orderNo = order.getOrderNo();
+			String message = "尊敬的用户，订单号为" + orderNo + "的订单已经追加付款"
+					+ additionalPay.getMoney() + "(http://www.1yingli.cn/myTutor)";
+			if (CheckUtil.checkMobileNumber(customerPhone) || CheckUtil.checkGlobleMobileNumber(customerPhone)) {
+				SendMessageUtil.sendMessage(customerPhone, message);
+			}
+			message = "尊敬的用户，订单号为" + orderNo + "的订单已经追加付款"
+					+ additionalPay.getMoney() + "(<a href=\"http://www.1yingli.cn/myTutor\">查看订单</a>)";
+			if (CheckUtil.checkEmail(customerEmail)) {
+				SendMailUtil.sendMessage(customerEmail, "订单状态改变通知", message);
+			}
+		}
 		return true;
 	}
 
 	public static boolean notifyPayTeacher(OrderList orderList, NotificationService notificationService) {
 		Map<String, String> phoneMap = new HashMap<>();
 		Map<String, String> emailMap = new HashMap<>();
-		for (Order order: orderList.getOrders()) {
+		for (Order order : orderList.getOrders()) {
 			String teacherPhone = order.getTeacher().getPhone();
 			String teacherEmail = order.getTeacher().getEmail();
 			String orderNo = order.getOrderNo();
@@ -106,6 +119,22 @@ public class NotifyUtil {
 				SendMailUtil.sendMessage(email, "订单状态改变通知", message);
 			}
 		}
+		for (AdditionalPay additionalPay : orderList.getAdditionalPays()) {
+			Order order = additionalPay.getOrder();
+			String teacherPhone = order.getTeacher().getPhone();
+			String teacherEmail = order.getTeacher().getEmail();
+			String orderNo = order.getOrderNo();
+			String message = "尊敬的导师，订单号为" + orderNo + "的订单已经追加付款"
+					+ additionalPay.getMoney() + "(http://www.1yingli.cn/myTutor)";
+			if (CheckUtil.checkMobileNumber(teacherPhone) || CheckUtil.checkGlobleMobileNumber(teacherPhone)) {
+				SendMessageUtil.sendMessage(teacherPhone, message);
+			}
+			message = "尊敬的导师，订单号为" + orderNo + "的订单已经追加付款"
+					+ additionalPay.getMoney() + "(<a href=\"http://www.1yingli.cn/myTutor\">查看订单</a>)";
+			if (CheckUtil.checkEmail(teacherEmail)) {
+				SendMailUtil.sendMessage(teacherEmail, "订单状态改变通知", message);
+			}
+		}
 		return true;
 	}
 
@@ -125,7 +154,7 @@ public class NotifyUtil {
 	}
 
 	public static boolean notifyUserNormal(String phone, String email, String title, String message, User user,
-			NotificationService notificationService) {
+										   NotificationService notificationService) {
 		String m1 = message + "(<a href=\"http://www.1yingli.cn/myTutor\">查看订单</a>)";
 		String m2 = message + "(http://www.1yingli.cn/myTutor)";
 		if (CheckUtil.checkMobileNumber(phone) || CheckUtil.checkGlobleMobileNumber(phone)) {
@@ -159,7 +188,7 @@ public class NotifyUtil {
 	}
 
 	private static boolean notifyTeacher(String phone, String email, String message, long teacherId,
-			String teacherUserName, NotificationService notificationService) {
+										 String teacherUserName, NotificationService notificationService) {
 		String m1 = message + "(<a href=\"http://www.1yingli.cn/myStudent\">管理订单</a>)";
 		String m2 = message + "(http://www.1yingli.cn/myStudent)";
 		if (CheckUtil.checkMobileNumber(phone) || CheckUtil.checkGlobleMobileNumber(phone)) {

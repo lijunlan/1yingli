@@ -1440,6 +1440,19 @@
 		</property>
 	</bean>
 
+	<bean name="createAdditionalPayService" class="cn.yiyingli.Handle.Service.CreateAdditionalPayService"
+		  scope="prototype">
+		<property name="orderListService">
+			<ref local="orderListService"/>
+		</property>
+		<property name="orderService">
+			<ref local="orderService"/>
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService"/>
+		</property>
+	</bean>
+
 	<bean id="tGetAlipayNoService" class="cn.yiyingli.Handle.Service.TGetAlipayNoService"
 		scope="prototype">
 		<property name="userMarkService">

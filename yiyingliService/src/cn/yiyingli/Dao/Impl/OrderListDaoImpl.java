@@ -112,7 +112,7 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 
 	@Override
 	public OrderList query(long id) {
-		String hql = "from OrderList ol left join fetch ol.user left join fetch ol.teacher where ol.id=?";
+		String hql = "from OrderList ol left join fetch ol.user where ol.id=?";
 		@SuppressWarnings("unchecked")
 		List<OrderList> list = getHibernateTemplate().find(hql, id);
 		if (list.isEmpty())
@@ -149,7 +149,7 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 
 			@Override
 			public List<OrderList> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from OrderList ol left join fetch ol.teacher  where ol.user.id=" + userId
+				String hql = "from OrderList ol  where ol.user.id=" + userId
 						+ " ORDER BY ol.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
