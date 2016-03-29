@@ -6,12 +6,12 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "ADDTIONALPAY")
-public class AddtionalPay {
+@Table(name = "ADDITIONALPAY")
+public class AdditionalPay {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ADDTIONALPAY_ID")
+	@Column(name = "ADDITIONALPAY_ID")
 	private Long id;
 
 	@ManyToOne(targetEntity = Order.class, fetch = FetchType.LAZY)
@@ -22,7 +22,7 @@ public class AddtionalPay {
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private User user;
 
-	@ManyToOne(targetEntity = OrderList.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = OrderList.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "ORDERLIST_ID", updatable = false)
 	private OrderList orderList;
 

@@ -30,6 +30,11 @@ public class OrderList {
 	@IndexColumn(name = "ORDERS_NO", base = 1)
 	private List<Order> orders = new ArrayList<Order>();
 
+	@OneToMany(targetEntity = AdditionalPay.class, cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinColumn(name = "ORDERLIST_ID",  updatable = true, insertable = true)
+	@IndexColumn(name = "ADDITIONALPAYS_NO", base = 1)
+	private List<AdditionalPay> additionalPays = new ArrayList<AdditionalPay>();
+
 	@Column(name = "CREATETIME", nullable = false)
 	private String createTime;
 
@@ -203,4 +208,11 @@ public class OrderList {
 		this.customerName = customerName;
 	}
 
+	public List<AdditionalPay> getAdditionalPays() {
+		return additionalPays;
+	}
+
+	public void setAdditionalPays(List<AdditionalPay> additionalPays) {
+		this.additionalPays = additionalPays;
+	}
 }

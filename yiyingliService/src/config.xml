@@ -212,6 +212,7 @@
 		<method name="abandonOrder" beanName="tAbandonOrderService"/>
 		<method name="finishOrder" beanName="tFinishOrderService"/>
 		<method name="createOrder" beanName="createOrderService"/>
+		<method name="createAdditionalPay" beanName="createAdditionalPayService"/>
 		<method name="getListByTeacher" beanName="tGetOrderListService"/>
 		<method name="getByTeacher" beanName="tGetOrderInfoService"/>
 		<method name="getListByUser" beanName="getOrderListService"/>
