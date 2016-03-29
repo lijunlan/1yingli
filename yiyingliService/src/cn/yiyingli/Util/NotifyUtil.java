@@ -29,7 +29,6 @@ public class NotifyUtil {
 
 //	public static boolean notifyUserOrder(OrderList orderList, String message, User user,
 //										  NotificationService notificationService) {
-//		//Todo 根据手机号来发送短信
 //		return notifyUserOrder(orderList.getOrders().get(0).getCustomerPhone(),
 //				orderList.getOrders().get(0).getCustomerEmail(), message, user,
 //				notificationService);
