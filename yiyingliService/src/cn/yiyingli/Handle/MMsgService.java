@@ -52,7 +52,7 @@ public abstract class MMsgService extends MsgService {
 		if (method.contains("Order") || method.contains("order") || method.contains("voucher")
 				|| method.contains("Voucher") || method.contains("Passage") || method.contains("passage")
 				|| method.contains("Activity") || method.contains("activity") || method.contains("Distributor")
-				|| method.contains("distributor")) {
+				|| method.contains("distributor") || method.contains("reward") || method.contains("Reward")) {
 			if (manager.getRoot().shortValue() > 700) {
 				return true;
 			} else {
