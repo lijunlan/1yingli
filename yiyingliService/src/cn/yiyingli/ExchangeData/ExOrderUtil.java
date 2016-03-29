@@ -75,6 +75,7 @@ public class ExOrderUtil {
 		map.put("money", o.getMoney());
 		map.put("serviceProId", o.getServiceId());
 		map.put("originMoney", o.getOriginMoney());
+		map.put("additionalMoney", o.getAdditionalMoney());
 		map.put("count", o.getCount());
 		map.put("quantifier", o.getQuantifier());
 		map.put("numeral", o.getNumeral());

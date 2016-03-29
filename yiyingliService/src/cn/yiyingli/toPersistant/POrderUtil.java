@@ -31,6 +31,7 @@ public class POrderUtil {
 			order.setOriginPrice(servicePro.getPrice());
 			order.setMoney(servicePro.getOnSale() ? servicePro.getPriceTemp() * (float) count
 					: servicePro.getPrice() * (float) count);
+			order.setAdditionalMoney(0F);
 			order.setOriginMoney(servicePro.getPrice() * (float) count);
 			order.setServiceSummary(servicePro.getSummary());
 			order.setIconUrl(servicePro.getImageUrls().split(",")[0]);
@@ -51,6 +52,7 @@ public class POrderUtil {
 			order.setOriginPrice(teacher.getPrice());
 			float price = teacher.getPrice() * (float) count;
 			order.setMoney(price);
+			order.setAdditionalMoney(0F);
 			order.setOriginMoney(price);
 			order.setServiceSummary(teacher.getSimpleInfo());
 			order.setIconUrl(teacher.getIconUrl());

@@ -224,16 +224,15 @@ public class AlipayTradeNotifyProcessServlet extends HttpServlet {
 //					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
 //					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
 		}
+		OrderService orderService = (OrderService) getApplicationContext()
+				.getBean("orderService");
 		for (AdditionalPay additionalPay: orderList.getAdditionalPays()) {
 			Order order = additionalPay.getOrder();
-			if(order.getSalaryState().equals(OrderService.ORDER_SALARY_STATE_OFF)) {
-				additionalPay.setSalaryState(OrderService.ORDER_SALARY_STATE_OFF);
-			} else {
-				additionalPay.setSalaryState(OrderService.ORDER_SALARY_STATE_NEED);
-			}
 			additionalPay.setPayMethod(OrderService.ORDER_PAYMETHOD_ALIPAY);
 			additionalPay.setState(AdditionalPay.ADDITIONALPAY_STATE_PAID);
 			additionalPay.setPayTime(time);
+			order.setAdditionalMoney(order.getAdditionalMoney() + additionalPay.getMoney());
+			orderService.save(order);
 		}
 		orderList.setState(OrderListService.ORDER_STATE_FINISH_PAID + "," + orderList.getState());
 		orderListService.updateAndPlusNumber(orderList);

@@ -29,6 +29,9 @@ public class Order {
 	@Column(name = "MONEY", nullable = false)
 	private Float money;
 
+	@Column(name = "ADDITIONALMONEY", nullable = false)
+	private Float additionalMoney;
+
 	@Column(name = "ORIGINPRICE", nullable = false)
 	private Float originPrice;
 
@@ -505,5 +508,13 @@ public class Order {
 
 	public void setServiceType(Short serviceType) {
 		this.serviceType = serviceType;
+	}
+
+	public Float getAdditionalMoney() {
+		return additionalMoney;
+	}
+
+	public void setAdditionalMoney(Float additionalMoney) {
+		this.additionalMoney = additionalMoney;
 	}
 }

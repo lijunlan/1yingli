@@ -42,9 +42,6 @@ public class AdditionalPay {
 	@Column(name = "STATE",nullable = false)
 	private Short state;
 
-	@Column(name = "SALARYSTATE")
-	private Short salaryState;
-
 	@Column(name = "PAYMETHOD")
 	private Short payMethod;
 
@@ -97,14 +94,6 @@ public class AdditionalPay {
 
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
-	}
-
-	public Short getSalaryState() {
-		return salaryState;
-	}
-
-	public void setSalaryState(Short salaryState) {
-		this.salaryState = salaryState;
 	}
 
 	public Short getPayMethod() {

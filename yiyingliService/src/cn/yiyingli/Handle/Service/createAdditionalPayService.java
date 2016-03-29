@@ -58,7 +58,6 @@ public class CreateAdditionalPayService extends UMsgService {
 		additionalPay.setReason(reason);
 		additionalPay.setOrder(order);
 		additionalPay.setState(AdditionalPay.ADDITIONALPAY_STATE_NOT_PAID);
-		additionalPay.setSalaryState(OrderService.ORDER_SALARY_STATE_OFF);
 		additionalPay.setUser(user);
 
 		OrderList orderList = new OrderList();
