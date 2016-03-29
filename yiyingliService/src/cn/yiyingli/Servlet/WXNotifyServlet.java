@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.yiyingli.Persistant.ServicePro;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -118,7 +119,11 @@ public class WXNotifyServlet extends HttpServlet {
 			NotificationService notificationService) {
 		String time = Calendar.getInstance().getTimeInMillis() + "";
 		for (Order order : orderList.getOrders()) {
-			order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
+			if(order.getServiceType().equals(ServicePro.SERVICE_TYPE_BARGAIN)) {
+				order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_WAIT_SERVICE + "," + order.getState());
+			} else {
+				order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
+			}
 			order.setPayTime(time);
 			order.setPayMethod(OrderService.ORDER_PAYMETHOD_WEIXIN);
 			NotifyUtil.notifyManager(new SuperMap().put("type", "waitConfirm").finishByJson());
