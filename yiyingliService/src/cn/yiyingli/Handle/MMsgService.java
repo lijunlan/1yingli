@@ -51,9 +51,8 @@ public abstract class MMsgService extends MsgService {
 		String method = getData().getString("method");
 		if (method.contains("Order") || method.contains("order") || method.contains("voucher")
 				|| method.contains("Voucher") || method.contains("Passage") || method.contains("passage")
-				|| method.contains("Activity") || method.contains("activity") || method.contains("Application")
-				|| method.contains("application") || method.contains("Background") || method.contains("background")
-				|| method.contains("Distributor") || method.contains("distributor")) {
+				|| method.contains("Activity") || method.contains("activity") || method.contains("Distributor")
+				|| method.contains("distributor")) {
 			if (manager.getRoot().shortValue() > 700) {
 				return true;
 			} else {
