@@ -39,11 +39,11 @@ public abstract class MMsgService extends MsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("34001"));
 			return false;
 		}
+		setManager(manager);
 		if (!checkRoot()) {
 			setResMsg(MsgUtil.getErrorMsgByCode("34002"));
 			return false;
 		}
-		setManager(manager);
 		return true;
 	}
 
