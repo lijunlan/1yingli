@@ -93,6 +93,7 @@
 		<method name="getCheckFromState" beanName="tGetCheckFormStateService"/>
 		<method name="getIntroduce" beanName="tGetIntroduceService"/>
 		<method name="getStudyExp" beanName="tGetStudyExperienceService"/>
+		<method name="getLikeTeacherList" beanName="tGetLikeTeacherList"/>
 		<method name="getTeacherSInfo" beanName="tGetTeacherSimpleInfoService"/>
 		<method name="getTServiceInfo" beanName="tGetTServiceInfoService"/>
 		<method name="getTService" beanName="tGetTServiceService"/>

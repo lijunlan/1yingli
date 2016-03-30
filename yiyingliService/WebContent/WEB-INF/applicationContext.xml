@@ -215,6 +215,12 @@
 		</property>
 	</bean>
 
+	<bean id="userLikeTeacherDao" class="cn.yiyingli.Dao.Impl.UserLikeTeacherDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory"/>
+		</property>
+	</bean>
+
 	<bean id="voucherDao" class="cn.yiyingli.Dao.Impl.VoucherDaoImpl">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
@@ -603,6 +609,9 @@
 		</property>
 		<property name="serviceProDao">
 			<ref local="serviceProDao" />
+		</property>
+		<property name="userLikeTeacherDao">
+			<ref local="userLikeTeacherDao"/>
 		</property>
 	</bean>
 
