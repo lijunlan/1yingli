@@ -35,7 +35,7 @@ public class LoginService extends ULoginMsgService {
 			return;
 		}
 		if (password.equals(user.getPassword())) {
-			returnUser(user);
+			returnUser(user, false);
 		} else {
 			setResMsg(MsgUtil.getErrorMsgByCode("12016"));
 		}

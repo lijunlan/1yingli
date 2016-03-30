@@ -90,14 +90,16 @@ public class AlipayTransNotifyServlet extends HttpServlet {
 					// String name = item[2];
 					String money = item[3];
 					Order order = orderService.queryByOrderNo(orderNo);
+
 					if (!((alipayNo.equals(order.getAlipayNo()) || alipayNo.equals(order.getTeacher().getAlipay()))
-							&& (Float.valueOf(money).floatValue() == Float
-									.valueOf(order.getOriginMoney().floatValue())))) {
+							&& (Float.valueOf(money).floatValue() == Float.valueOf(order.getOriginMoney())
+									.floatValue()))) {
+
 						WarnUtil.sendWarnToCTO("支付订单出错,信息不符合：" + record);
 						LogUtil.error("支付订单出错,信息不符合：" + record, getClass());
 						continue;
 					}
-					if (order.getSalaryState() == OrderService.ORDER_SALARY_STATE_NEED) {
+					if (order.getSalaryState().shortValue() == OrderService.ORDER_SALARY_STATE_NEED) {
 						order.setSalaryState(OrderService.ORDER_SALARY_STATE_DONE);
 						orderService.update(order, false);
 					} else {

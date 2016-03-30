@@ -44,6 +44,11 @@ public class RewardServiceImpl implements RewardService {
 	}
 
 	@Override
+	public Long queryRewardNoByTeacher(long teacherId) {
+		return getRewardDao().queryRewardNoByTeacher(teacherId);
+	}
+
+	@Override
 	public Float queryMoneyByTeacherShouldPay(long teacherId) {
 		return getRewardDao().queryMoneyByTeacher(teacherId, true, false);
 	}
@@ -60,14 +65,12 @@ public class RewardServiceImpl implements RewardService {
 
 	@Override
 	public List<Reward> queryList(int page, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+		return getRewardDao().queryList(page, pageSize);
 	}
 
 	@Override
 	public List<Reward> queryListByTeacher(long teacherId, int page, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+		return getRewardDao().queryListByTeacher(teacherId, page, pageSize);
 	}
 
 }

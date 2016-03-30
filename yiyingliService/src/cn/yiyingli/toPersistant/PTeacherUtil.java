@@ -21,21 +21,27 @@ public class PTeacherUtil {
 	public static void editTeacherByTeacherSimple(JSONObject map, Teacher teacher) {
 		String simpleinfo = map.getString("simpleinfo");
 		String address = map.getString("address");
-		String talkWay = map.getString("talkWay");
+		String topic = map.getString("topic");
+		if (map.containsKey("showNotify")) {
+			Boolean showNotify = map.getBoolean("showNotify");
+			teacher.setShowNotify(showNotify);
+		} else {
+			teacher.setShowNotify(teacher.getShowNotify());
+		}
 		teacher.setSimpleInfo(simpleinfo);
 		teacher.setAddress(address);
-		teacher.setTalkWay(talkWay);
+		teacher.setTopic(topic);
+		teacher.setPrice(Float.valueOf(map.getString("price")));
 	}
 
-	public static void editTeacherByManagerDetail(User user, List<Object> workExperiences,
-			List<Object> studyExperiences, List<Object> tips, String simpleinfo, String name, String phone,
-			String address, String mail, String iconUrl, String introduce, String checkPhone, String checkIDCard,
-			String checkEmail, String checkWork, String checkStudy, String showWeight1, String showWeight2,
-			String showWeight4, String showWeight8, String showWeight16, String homeWeight, String saleWeight,
-			String onService, long mile, Teacher teacher, TipService tipService) {
+	public static void editTeacherByManagerDetail(User user, JSONArray workExperiences, JSONArray studyExperiences,
+			JSONArray tips, String simpleinfo, String name, String phone, String address, String mail, String iconUrl,
+			String introduce, String checkPhone, String checkIDCard, String checkEmail, String checkWork,
+			String checkStudy, String onService, long mile, String topic, float price, String bgUrl, boolean onChat,
+			boolean showNotify, Teacher teacher, TipService tipService) {
 		refreshTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone, address, mail, iconUrl,
-				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, showWeight1, showWeight2,
-				showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, mile, teacher, tipService);
+				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, mile, topic, price, bgUrl,
+				onChat, showNotify, teacher, tipService);
 		teacher.setOnService(Boolean.valueOf(onService));
 	}
 
@@ -94,11 +100,10 @@ public class PTeacherUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void refreshTeacher(User user, List<Object> workExperiences, List<Object> studyExperiences,
-			List<Object> tips, String simpleinfo, String name, String phone, String address, String mail,
-			String iconUrl, String introduce, String checkPhone, String checkIDCard, String checkEmail,
-			String checkWork, String checkStudy, String showWeight1, String showWeight2, String showWeight4,
-			String showWeight8, String showWeight16, String homeWeight, String saleWeight, long mile, Teacher teacher,
+	public static void refreshTeacher(User user, JSONArray workExperiences, JSONArray studyExperiences, JSONArray tips,
+			String simpleinfo, String name, String phone, String address, String mail, String iconUrl, String introduce,
+			String checkPhone, String checkIDCard, String checkEmail, String checkWork, String checkStudy, long mile,
+			String topic, float price, String bgUrl, boolean onChat, boolean showNotify, Teacher teacher,
 			TipService tipService) {
 		if (Boolean.valueOf(checkPhone)) {
 			teacher.setCheckPhone(true);
@@ -138,6 +143,11 @@ public class PTeacherUtil {
 		user.setTeacher(teacher);
 		teacher.setUser(user);
 
+		teacher.setShowNotify(showNotify);
+		teacher.setOnChat(onChat);
+		teacher.setBgUrl(bgUrl);
+		teacher.setTopic(topic);
+		teacher.setPrice(price);
 		teacher.setMile(mile);
 		teacher.setAddress(address);
 		teacher.setUsername(user.getUsername());
@@ -147,13 +157,6 @@ public class PTeacherUtil {
 		teacher.setIconUrl(iconUrl);
 		teacher.setIntroduce(introduce);
 		teacher.setSimpleInfo(simpleinfo);
-		teacher.setShowWeight1(Integer.valueOf(showWeight1.equals("") ? "" : showWeight1));
-		teacher.setShowWeight2(Integer.valueOf(showWeight2.equals("") ? "" : showWeight2));
-		teacher.setShowWeight4(Integer.valueOf(showWeight4.equals("") ? "" : showWeight4));
-		teacher.setShowWeight8(Integer.valueOf(showWeight8.equals("") ? "" : showWeight8));
-		teacher.setShowWeight16(Integer.valueOf(showWeight16.equals("") ? "" : showWeight16));
-		teacher.setHomeWeight(Integer.valueOf(homeWeight.equals("") ? "" : homeWeight));
-		teacher.setSaleWeight(Integer.valueOf(saleWeight.equals("") ? "" : saleWeight));
 
 		List<WorkExperience> wes = new ArrayList<WorkExperience>();
 		for (Object we : workExperiences) {
@@ -185,7 +188,7 @@ public class PTeacherUtil {
 		long tipMark = 0;
 		if (tips != null) {
 			for (Object t : tips) {
-				Long tid = Long.valueOf((String) ((Map<String, Object>) t).get("id"));
+				Long tid = ((JSONObject) t).getLong("id");
 				tipMark = tipMark | tid;
 				Tip mT = tipService.query(tid);
 				teacher.getTips().add(mT);
@@ -194,17 +197,26 @@ public class PTeacherUtil {
 		teacher.setTipMark(tipMark);
 	}
 
-	public static Teacher assembleNewTeacher(User user, List<Object> workExperiences, List<Object> studyExperiences,
-			List<Object> tips, String simpleinfo, String name, String phone, String address, String mail,
-			String iconUrl, String introduce, String checkPhone, String checkIDCard, String checkEmail,
-			String checkWork, String checkStudy, String showWeight1, String showWeight2, String showWeight4,
-			String showWeight8, String showWeight16, String homeWeight, String saleWeight, TipService tipService) {
+	public static Teacher assembleNewTeacher(User user, JSONArray workExperiences, JSONArray studyExperiences,
+			JSONArray tips, String simpleinfo, String name, String phone, String address, String mail, String iconUrl,
+			String introduce, String checkPhone, String checkIDCard, String checkEmail, String checkWork,
+			String checkStudy, String topic, float price, String bgUrl, boolean onChat, boolean showNotify,
+			TipService tipService) {
 		Teacher teacher = new Teacher();
 		refreshTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone, address, mail, iconUrl,
-				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, showWeight1, showWeight2,
-				showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, 0L, teacher, tipService);
+				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, 0L, topic, price, bgUrl, onChat,
+				showNotify, teacher, tipService);
+		teacher.setSubMile(0L);
+		teacher.setScore(0F);
+		teacher.setOrderAllNumber(0L);
+		teacher.setAcceptOrderNumber(0L);
+		teacher.setAnswerTime(0L);
+		teacher.setAnswerRatio(0F);
+		teacher.setPraiseRatio(0F);
 		teacher.setCommentNumber(0L);
 		teacher.setRewardNumber(0L);
+		teacher.setMaskNumber(0L);
+		teacher.setMaskFinishNumber(0L);
 		teacher.setLevel((short) 5);
 		teacher.setOrderNumber(0L);
 		teacher.setFinishOrderNumber(0L);
@@ -213,32 +225,31 @@ public class PTeacherUtil {
 		teacher.setPassageNumber(0L);
 		teacher.setCheckPassageNumber(0L);
 		teacher.setRefusePassageNumber(0L);
+		teacher.setServiceProNumberForUser(0);
+		teacher.setServiceProNumberForTeacher(0);
 		return teacher;
 	}
 
-	public static Teacher assembleTeacherByApplication(User user, List<Object> workExperiences,
-			List<Object> studyExperiences, List<Object> tips, String simpleinfo, String name, String phone,
-			String address, String mail, String iconUrl, String introduce, String checkPhone, String checkIDCard,
-			String checkEmail, String checkWork, String checkStudy, String showWeight1, String showWeight2,
-			String showWeight4, String showWeight8, String showWeight16, String homeWeight, String saleWeight,
-			TipService tipService) {
+	public static Teacher assembleTeacherByApplication(User user, JSONArray workExperiences, JSONArray studyExperiences,
+			JSONArray tips, String simpleinfo, String name, String phone, String address, String mail, String iconUrl,
+			String introduce, String checkPhone, String checkIDCard, String checkEmail, String checkWork,
+			String checkStudy, String topic, float price, TipService tipService) {
 		Teacher teacher = assembleNewTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
-				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
-				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, tipService);
+				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, topic,
+				price, "", true, true, tipService);
 		user.setTeacherState(UserService.TEACHER_STATE_CHECKING_SHORT);
 		teacher.setOnService(false);
 		return teacher;
 	}
 
-	public static Teacher assembleTeacherByManager(User user, List<Object> workExperiences,
-			List<Object> studyExperiences, List<Object> tips, String simpleinfo, String name, String phone,
-			String address, String mail, String iconUrl, String introduce, String checkPhone, String checkIDCard,
-			String checkEmail, String checkWork, String checkStudy, String showWeight1, String showWeight2,
-			String showWeight4, String showWeight8, String showWeight16, String homeWeight, String saleWeight,
+	public static Teacher assembleTeacherByManager(User user, JSONArray workExperiences, JSONArray studyExperiences,
+			JSONArray tips, String simpleinfo, String name, String phone, String address, String mail, String iconUrl,
+			String introduce, String checkPhone, String checkIDCard, String checkEmail, String checkWork,
+			String checkStudy, String topic, float price, String bgUrl, boolean onChat, boolean showNotify,
 			TipService tipService) {
 		Teacher teacher = assembleNewTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
-				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
-				showWeight1, showWeight2, showWeight4, showWeight8, showWeight16, homeWeight, saleWeight, tipService);
+				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, topic,
+				price, bgUrl, onChat, showNotify, tipService);
 		teacher.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		user.setTeacherState(UserService.TEACHER_STATE_ON_SHORT);
 		teacher.setOnService(true);

@@ -17,24 +17,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import cn.yiyingli.ExchangeData.ExOrderListUtil;
 import cn.yiyingli.PayPal.PayPal;
-import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Persistant.User;
+import cn.yiyingli.Service.OrderListService;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
-
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+@SuppressWarnings("serial")
 public class CheckoutServlet extends HttpServlet {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2722761580200224133L;
 
 	private static String page = "http://www.1yingli.cn/myTutor";
 
@@ -70,18 +68,18 @@ public class CheckoutServlet extends HttpServlet {
 		String cancelURL = page;
 		Map<String, String> checkoutDetails = new HashMap<String, String>();
 		// 检查前台传来的数据
-		if (request.getParameter("oid") == null || request.getParameter("uid") == null) {
+		if (request.getParameter("olid") == null || request.getParameter("uid") == null) {
 			returnMsg(response, MsgUtil.getErrorMsgByCode("00001"));
 			return;
 		}
 		UserMarkService userMarkService = (UserMarkService) getApplicationContext().getBean("userMarkService");
-		OrderService orderService = (OrderService) getApplicationContext().getBean("orderService");
+		OrderListService orderListService = (OrderListService) getApplicationContext().getBean("orderListService");
 		LogUtil.info(
-				"receive>>>>PAYPAL orderId:" + request.getParameter("oid") + "\t uid:" + request.getParameter("uid"),
+				"receive>>>>PAYPAL orderId:" + request.getParameter("olid") + "\t uid:" + request.getParameter("uid"),
 				this.getClass());
 		// 商户网站订单系统中唯一订单号，必填
-		Order order = orderService.queryByShowId(request.getParameter("oid"), false);
-		if (order == null) {
+		OrderList orderList = orderListService.queryByOrderListNo(request.getParameter("olid"));
+		if (orderList == null) {
 			returnMsg(response, MsgUtil.getErrorMsgByCode("42001"));
 			return;
 		}
@@ -92,32 +90,37 @@ public class CheckoutServlet extends HttpServlet {
 			returnMsg(response, MsgUtil.getErrorMsgByCode("14001"));
 			return;
 		}
-		if (order.getCreateUser().getId().longValue() != user.getId().longValue()) {
-			LogUtil.info("receive>>>>ORDER IS NOT BELONG TO YOU createOrderId:" + order.getCreateUser().getId()
-					+ ",userId:" + user.getId() + "," + (order.getCreateUser().getId() == user.getId()),
+		if (orderList.getUser().getId().longValue() != user.getId().longValue()) {
+			LogUtil.info(
+					"receive>>>>ORDERLIST IS NOT BELONG TO YOU create userId:" + orderList.getUser().getId()
+							+ ",userId:" + user.getId() + "," + (orderList.getUser().getId() == user.getId()),
 					this.getClass());
 			returnMsg(response, MsgUtil.getErrorMsgByCode("44001"));
 			return;
 		}
-		String state = order.getState();
+		String state = orderList.getState().split(",")[0];
 		if (!OrderService.ORDER_STATE_NOT_PAID.equals(state)) {
 			returnMsg(response, MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
 		// 由后台插入相关数据
-		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0", URLEncoder.encode(order.getServiceTitle(), "UTF-8"));
+		checkoutDetails.put("L_PAYMENTREQUEST_0_NAME0", URLEncoder.encode(
+				"【一英里】[" + orderList.getTeacher().getName() + "]" + ExOrderListUtil.getMultiTitle(orderList), "UTF-8"));
 		// 货物id，这里填写的是订单号
-		checkoutDetails.put("L_PAYMENTREQUEST_0_NUMBER0", order.getOrderNo());
-		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0",
-				URLEncoder.encode("【一英里】[" + order.getTeacher().getName() + "]" + order.getServiceTitle(), "UTF-8"));
+		checkoutDetails.put("L_PAYMENTREQUEST_0_NUMBER0", orderList.getOrderListNo());
+
+		// 订单名称
+		checkoutDetails.put("L_PAYMENTREQUEST_0_DESC0", URLEncoder.encode(
+				"【一英里】[" + orderList.getTeacher().getName() + "]" + ExOrderListUtil.getMultiTitle(orderList), "UTF-8"));
 		checkoutDetails.put("L_PAYMENTREQUEST_0_QTY0", "1");
+
 		// 商品价格
-		float price = order.getMoney();
+		float price = orderList.getPayMoney();
 		price /= 6;
 		BigDecimal b = new BigDecimal(price);
 		price = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
 		if (price < 0.01)
-			price = (float) 0.01;
+			price = 0.01F;
 
 		checkoutDetails.put("PAYMENTREQUEST_0_ITEMAMT", price + "");
 		checkoutDetails.put("PAYMENTREQUEST_0_HANDLINGAMT", "0");
@@ -125,11 +128,11 @@ public class CheckoutServlet extends HttpServlet {
 		checkoutDetails.put("PAYMENTREQUEST_0_AMT", price + "");
 		// 我们的订单号,以及微信端回调页面（可选）
 		if (request.getParameter("callback") == null) {
-			checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM", request.getParameter("oid"));
+			checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM", request.getParameter("olid"));
 			page = "http://www.1yingli.cn/myTutor";
 		} else {
 			checkoutDetails.put("PAYMENTREQUEST_0_CUSTOM",
-					request.getParameter("oid") + "|" + request.getParameter("callback"));
+					request.getParameter("olid") + "|" + request.getParameter("callback"));
 			page = request.getParameter("callback");
 		}
 		checkoutDetails.put("REQCONFIRMSHIPPING", "0");

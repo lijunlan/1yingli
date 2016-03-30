@@ -58,7 +58,10 @@ public class GetNotificationService extends UMsgService {
 			}
 			List<Notification> notifications = getNotificationService().queryListByUserId(user.getId(), page, 9, false);
 			ExList sends = new ExArrayList();
-			for (Notification n : notifications) {
+			long ids[] = new long[notifications.size()];
+			for (int i = 0; i < notifications.size(); i++) {
+				Notification n = notifications.get(i);
+				ids[i] = n.getId();
 				SuperMap map = new SuperMap();
 				map.put("title", n.getTitle());
 				map.put("notiId", n.getId());
@@ -66,6 +69,7 @@ public class GetNotificationService extends UMsgService {
 				map.put("time", n.getCreateTime());
 				sends.add(map.finish());
 			}
+			getNotificationService().updateReadAll(user.getId());
 			setResMsg(toSend.put("data", sends).finishByJson());
 		} else {
 			String notiId = (String) getData().get("notiId");
@@ -86,6 +90,7 @@ public class GetNotificationService extends UMsgService {
 			map.put("content", notification.getContent());
 			map.put("createTime", notification.getCreateTime());
 			map.put("notiId", notification.getId());
+			getNotificationService().updateReadByIds(new long[] { notification.getId() });
 			setResMsg(MsgUtil.getSuccessMsg(map.finishByJson()));
 		}
 

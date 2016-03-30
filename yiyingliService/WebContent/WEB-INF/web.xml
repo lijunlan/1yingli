@@ -57,7 +57,7 @@
     <url-pattern>/upimage</url-pattern>
   </servlet-mapping>
   
-     <servlet>
+  <servlet>
     <description>上传文章图片</description>
     <display-name>UploadPImage</display-name>
     <servlet-name>UploadPImage</servlet-name>
@@ -69,6 +69,34 @@
    <servlet-mapping>
     <servlet-name>UploadPImage</servlet-name>
     <url-pattern>/uppassageimage</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <description>上传文章CK图片</description>
+    <display-name>UploadPCKImage</display-name>
+    <servlet-name>UploadPCKImage</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.UpLoadPCKImageServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>UploadPCKImage</servlet-name>
+    <url-pattern>/uppassageckimage</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>上传介绍CK图片</description>
+    <display-name>UploadICKImage</display-name>
+    <servlet-name>UploadICKImage</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.UpLoadICKImageServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>UploadICKImage</servlet-name>
+    <url-pattern>/upintroduceckimage</url-pattern>
   </servlet-mapping>
   
   <servlet>

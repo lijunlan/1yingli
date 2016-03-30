@@ -48,12 +48,11 @@ public class MOrderSalaryDoneService extends MMsgService {
 			return;
 		}
 		order.setSalaryState(OrderService.ORDER_SALARY_STATE_DONE);
-		getOrderService().update(order,false);
+		getOrderService().update(order, false);
 
-		NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getPhone(),
-				"尊敬的导师,您好,您的订单(" + order.getOrderNo() + ")酬劳已成功转出，请注意查收.如有疑问请咨询客服.",
-				order.getTeacher(), getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
+		NotifyUtil.notifyTeacher(order, "尊敬的导师,您好,您的订单(" + order.getOrderNo() + ")酬劳已成功转出，请注意查收.如有疑问请咨询客服.",
+				getNotificationService());
+		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
 				+ order.getTeacher().getName() + "，酬劳已经成功转出。");
 		setResMsg(MsgUtil.getSuccessMsg("update order state successfully"));
 	}

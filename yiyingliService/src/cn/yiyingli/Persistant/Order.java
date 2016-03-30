@@ -15,10 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- * @author Administrator
- *
- */
 @Entity
 @Table(name = "ORDERS")
 public class Order {
@@ -33,12 +29,26 @@ public class Order {
 	@Column(name = "MONEY", nullable = false)
 	private Float money;
 
-	// 课程时长
-	@Column(name = "TIME", nullable = false)
-	private Float time;
+	@Column(name = "ORIGINPRICE", nullable = false)
+	private Float originPrice;
+
+	@Column(name = "PRICE", nullable = false)
+	private Float price;
+
+	@Column(name = "QUANTIFIER", nullable = false)
+	private String quantifier;
+
+	@Column(name = "NUMERAL", nullable = false)
+	private Float numeral;
+
+	@Column(name = "COUNT", nullable = false)
+	private Integer count;
 
 	@Column(name = "SALARYSTATE", nullable = false)
 	private Short salaryState;
+
+	@Column(name = "TRANSTIME", nullable = true)
+	private String transTime;
 
 	@Column(name = "CUSTOMERNAME", nullable = false)
 	private String customerName;
@@ -62,6 +72,9 @@ public class Order {
 
 	@Column(name = "USERINTRODUCE", nullable = false, length = 500)
 	private String userIntroduce;
+
+	@Column(name = "ICONURL", nullable = false)
+	private String iconUrl;
 
 	/**
 	 * 用户alipay账号
@@ -96,8 +109,14 @@ public class Order {
 	@Column(name = "REFUSEREASON", nullable = true)
 	private String refuseReason;
 
+	@Column(name = "SERVICEID", nullable = true)
+	private Long serviceId;
+
 	@Column(name = "SERVICETITLE", nullable = false)
 	private String serviceTitle;
+
+	@Column(name = "SERVICESUMMARY", nullable = false)
+	private String serviceSummary;
 
 	// 学员选择时间
 	@Column(name = "SELECTTIME", nullable = false)
@@ -118,6 +137,9 @@ public class Order {
 	@Column(name = "ONSALE", nullable = false)
 	private Boolean onSale;
 
+	@Column(name = "SERVICEKIND", nullable = true)
+	private Integer serviceKind;
+
 	@Column(name = "ENDTIME", nullable = true)
 	private String endTime;
 
@@ -127,27 +149,23 @@ public class Order {
 	@Column(name = "PAYMETHOD", nullable = true)
 	private Short payMethod;
 
-	@ManyToOne(targetEntity = TService.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "TSERVICE_ID", updatable = false)
-	private TService tService;
-
 	@Column(name = "STATE", nullable = false)
 	private String state;
 
-	@OneToMany(targetEntity = Voucher.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	@JoinColumn(name = "ORDER_ID", updatable = false)
-	private Set<Voucher> useVouchers = new HashSet<Voucher>();
-
 	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "TEACHER_ID", updatable = false)
+	@JoinColumn(name = "TEACHER_ID", updatable = true)
 	private Teacher teacher;
 
 	@ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_ID", updatable = false)
+	@JoinColumn(name = "USER_ID", updatable = true)
 	private User createUser;
 
+	@ManyToOne(targetEntity = OrderList.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "ORDERLIST_ID", updatable = false)
+	private OrderList orderList;
+
 	@ManyToOne(targetEntity = Distributor.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "DISTRIBUTOR_ID", updatable = false)
+	@JoinColumn(name = "DISTRIBUTOR_ID", updatable = true)
 	private Distributor distributor;
 
 	public Long getId() {
@@ -206,28 +224,12 @@ public class Order {
 		this.endTime = endTime;
 	}
 
-	public TService gettService() {
-		return tService;
-	}
-
-	public void settService(TService tService) {
-		this.tService = tService;
-	}
-
 	public String getState() {
 		return state;
 	}
 
 	public void setState(String state) {
 		this.state = state;
-	}
-
-	public Set<Voucher> getUseVouchers() {
-		return useVouchers;
-	}
-
-	public void setUseVouchers(Set<Voucher> useVouchers) {
-		this.useVouchers = useVouchers;
 	}
 
 	public Teacher getTeacher() {
@@ -278,12 +280,20 @@ public class Order {
 		this.serviceTitle = serviceTitle;
 	}
 
-	public Float getTime() {
-		return time;
+	public String getQuantifier() {
+		return quantifier;
 	}
 
-	public void setTime(Float time) {
-		this.time = time;
+	public void setQuantifier(String quantifier) {
+		this.quantifier = quantifier;
+	}
+
+	public Float getNumeral() {
+		return numeral;
+	}
+
+	public void setNumeral(Float numeral) {
+		this.numeral = numeral;
 	}
 
 	public String getAlipayNo() {
@@ -398,6 +408,30 @@ public class Order {
 		this.paypalNo = paypalNo;
 	}
 
+	public Long getServiceId() {
+		return serviceId;
+	}
+
+	public void setServiceId(Long serviceId) {
+		this.serviceId = serviceId;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
+	public OrderList getOrderList() {
+		return orderList;
+	}
+
+	public void setOrderList(OrderList orderList) {
+		this.orderList = orderList;
+	}
+
 	public Boolean getReturnVisit() {
 		return returnVisit;
 	}
@@ -412,6 +446,54 @@ public class Order {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public String getIconUrl() {
+		return iconUrl;
+	}
+
+	public void setIconUrl(String iconUrl) {
+		this.iconUrl = iconUrl;
+	}
+
+	public Float getPrice() {
+		return price;
+	}
+
+	public void setPrice(Float price) {
+		this.price = price;
+	}
+
+	public Float getOriginPrice() {
+		return originPrice;
+	}
+
+	public void setOriginPrice(Float originPrice) {
+		this.originPrice = originPrice;
+	}
+
+	public String getServiceSummary() {
+		return serviceSummary;
+	}
+
+	public void setServiceSummary(String serviceSummary) {
+		this.serviceSummary = serviceSummary;
+	}
+
+	public String getTransTime() {
+		return transTime;
+	}
+
+	public void setTransTime(String transTime) {
+		this.transTime = transTime;
+	}
+
+	public Integer getServiceKind() {
+		return serviceKind;
+	}
+
+	public void setServiceKind(Integer serviceKind) {
+		this.serviceKind = serviceKind;
 	}
 
 }

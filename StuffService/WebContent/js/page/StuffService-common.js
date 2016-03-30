@@ -3,9 +3,11 @@
  */
 var myJson = new Object();
 var URL = "http://120.26.83.33/yiyingliManagerService/";
+//var SERVICE_URL= "http://service.1yingli.cn/yiyingliService/"
 var SERVICE_URL= "http://service.1yingli.cn/yiyingliService/"
-//var URL = "http://test.1yingli.cn/yiyingliService/";
 myJson.style = "manager";
+
+var _Notification = Notification;
 //RSA key
 var publickey = "8959d2ced61bee338accd16794538ec0a49da0655ddca8fa2461d4cf419dafaf4d7c47813f6ac8c6e5646a2beb08cccf4184a831e683a631e3c528b908deecc57235d03935d0650fbe53d44f717da7f5d1622e7405a3b4f06377eb506880dae21e5065c878c03d85113e068ac82af6b29037d57163d9a311807bee654927d349";
 //错误代码
@@ -39,7 +41,7 @@ var errorType = {
 	"12019": "你的微信代码是错误的",
 	"12020": "文章不存在",
 	"12021": "您已经赞过了",
-	"14001": "您的登陆已失效",
+	"14001": "USERNAME不存在",
 	"15001": "已申请",
 	"15002": "已成为导师",
 	"15003": "用户已注册",
@@ -238,7 +240,7 @@ function notifyMe(title, content, url) {
 	// ie和某些未知的浏览器并不支持基于浏览器的弹窗，因此使用基于网页的弹窗
 	try {
 		//某些未知的浏览器
-		if (!Notification) {
+		if (!_Notification) {
 			messenger(content, url);
 			return;
 		}
@@ -247,14 +249,14 @@ function notifyMe(title, content, url) {
 		messenger(content, url);
 	}
 	//对于支持的浏览器请求弹窗的权限失败
-	if (Notification.permission !== "granted") {
-		Notification.requestPermission();
+	if (_Notification.permission !== "granted") {
+		_Notification.requestPermission();
 		messenger(content, url);
 		return;
 	} else {
 		//播放提示音
 		play('media/notify.mp3');
-		var notification = new Notification(title, {
+		var notification = new _Notification(title, {
 			icon: 'icon/notify.jpg',
 			body: content,
 		});
@@ -289,10 +291,12 @@ function onData(event) {
 		} else if (result.type == "managerIn") {
 			notifyMe("您有新的订单变化", "有订单需要客服介入", "orderService.html?state=1300");
 		} else if (result.type == "salary") {
-			notifyMe("您有新的订单变化", "有订单需要平台打款", "orderService.html?state=0900");
+			notifyMe("您有新的订单变化", "有订单需要平台打款", "orderService.html?state=2000");
 		} else if (result.type == "waitConfirm") {
 			notifyMe("您有新的订单变化", "已有用户支付订单", "orderService.html?state=0300");
-		}
+		} else if (result.type == "checkServicePro") {
+			notifyMe("有新的服务需要审核", "有新的服务需要审核", "listServiceProService.html?state=0");
+		} 
 	}
 }
 
@@ -310,5 +314,109 @@ function play(c) {
 	if (sound) {
 		sound.SetVariable("f", c);
 		sound.GotoFrame(1);
+	}
+}
+
+
+
+
+function tip2zh(tip,kind){
+	var ts = tip.split(",");
+	if(kind==1){
+		var str = "";
+		$.each(ts,function(index,data){
+			if(data=="1"){
+				str += "超时服务;";
+			}else if(data=="2"){
+				str += "可视频;";
+			}else if(data=="3"){
+				str += "可语音;";
+			}else if(data=="4"){
+				str += "时间灵活;";
+			}else if(data=="5"){
+				str += "支持多人;";
+			}
+		});
+		return str;
+	}else if(kind==2){
+		var str = "";
+		$.each(ts,function(index,data){
+			if(data=="1"){
+				str += "时间灵活;";
+			}else if(data=="2"){
+				str += "支持多人;";
+			}else if(data=="3"){
+				str += "轻装上阵;";
+			}else if(data=="4"){
+				str += "超时服务;";
+			}else if(data=="5"){
+				str += "接送服务;";
+			}
+		});
+		return str;
+	}else if(kind==3){
+		var str = "";
+		$.each(ts,function(index,data){
+			if(data=="1"){
+				str += "支持加急;";
+			}else if(data=="2"){
+				str += "量大优惠;";
+			}else if(data=="3"){
+				str += "5天内完成;";
+			}
+		});
+		return str;
+	}else if(kind==4){
+		var str = "";
+		$.each(ts,function(index,data){
+			if(data=="1"){
+				str += "时间灵活;";
+			}else if(data=="2"){
+				str += "支持多人;";
+			}else if(data=="3"){
+				str += "可长期服务;";
+			}else if(data=="4"){
+				str += "专业领域;";
+			}
+		});
+		return str;
+	}else if(kind==5){
+		var str = "";
+		$.each(ts,function(index,data){
+			if(data=="1"){
+				str += "超时服务;";
+			}else if(data=="2"){
+				str += "时间灵活;";
+			}else if(data=="3"){
+				str += "上门服务;";
+			}
+		});
+		return str;
+	}
+}
+
+function kind2zh(kind){
+	if(kind==1){
+		return "咨询";
+	}else if(kind==2){
+		return "体验";
+	}else if(kind==3){
+		return "批改";
+	}else if(kind==4){
+		return "技艺教授";
+	}else if(kind==5){
+		return "帮忙";
+	}
+}
+
+function state2zh(state){
+	if(state==1){
+		return "通过审核";
+	}
+	if(state==0){
+		return "等待审核";
+	}
+	if(state==2){
+		return "未通过审核";
 	}
 }

@@ -10,9 +10,9 @@ public interface CommentDao {
 
 	void save(Comment comment);
 
-	void saveWithTeacherAndUser(Comment comment, Teacher teacher, User user,short kind);
+	void saveWithTeacherAndUser(Comment comment, Teacher teacher, User user, short kind);
 
-	void saveWithUser(Comment comment, User user,short kind);
+	void saveWithUser(Comment comment, User user, short kind);
 
 	Long saveAndReturnId(Comment comment);
 
@@ -39,6 +39,8 @@ public interface CommentDao {
 
 	List<Comment> queryListByTeacherId(final long teacherId, final int page, final int pageSize, short kind,
 			final boolean lazy);
+
+	List<Comment> queryListByServiceProId(final long serviceProId, final int page, final int pageSize, short kind);
 
 	List<Comment> queryListByTeacherIdAndScore(final long teacherId, final short score, final int page,
 			final int pageSize, short kind, final boolean lazy);

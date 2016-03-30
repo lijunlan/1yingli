@@ -91,7 +91,7 @@ public class WebNotificationUtil {
 		HttpPost post = new HttpPost("http://notifi.1yingli.cn/NotificationService/noti");
 		post.addHeader(HTTP.CONTENT_TYPE, APPLICATION_JSON);
 
-		StringEntity se = new StringEntity(json);
+		StringEntity se = new StringEntity(json,"utf-8");
 		se.setContentType(CONTENT_TYPE_TEXT_JSON);
 		se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, APPLICATION_JSON));
 		post.setEntity(se);

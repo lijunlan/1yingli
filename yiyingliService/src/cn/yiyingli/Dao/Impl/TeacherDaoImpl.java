@@ -1,5 +1,6 @@
 package cn.yiyingli.Dao.Impl;
 
+import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,14 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
+	public void updateAddSubMile(long teacherId, long subMile) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session.createSQLQuery("update teacher set teacher.SUBMILE=teacher.SUBMILE+" + subMile
+				+ " where teacher.TEACHER_ID=" + teacherId);
+		query.executeUpdate();
+	}
+
+	@Override
 	public void updateAddLookNumber(long teacherId, long number) {
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = session.createSQLQuery("update teacher set teacher.LOOKNUMBER=teacher.LOOKNUMBER+" + number
@@ -92,12 +101,20 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
-	public Teacher query(long id, boolean lazy) {
-		String hql = "from Teacher t left join fetch t.tService where t.id=?  and t.onService=true";
-		if (lazy) {
-			hql = "from Teacher t left join fetch t.tips " + " left join fetch t.comments "
-					+ " left join fetch t.tService where t.id=?  and t.onService=true";
+	public Boolean queryCheckMile(long teacherId, long subMile) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session.createSQLQuery("select teacher.MILE>=(teacher.SUBMile+" + subMile
+				+ ") from teacher where teacher.TEACHER_ID=" + teacherId + " for update");
+		BigInteger r = (BigInteger) query.uniqueResult();
+		if (r.intValue() != 1) {
+			return false;
 		}
+		return true;
+	}
+
+	@Override
+	public Teacher query(long id) {
+		String hql = "from Teacher t where t.id=?  and t.onService=true";
 		@SuppressWarnings("unchecked")
 		List<Teacher> list = getHibernateTemplate().find(hql, id);
 		if (list.isEmpty())
@@ -107,12 +124,19 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
-	public Teacher queryWithUser(long id, boolean lazy) {
-		String hql = "from Teacher t left join fetch t.tService left join fetch t.user where t.id=?  and t.onService=true";
-		if (lazy) {
-			hql = "from Teacher t left join fetch t.tips " + " left join fetch t.comments "
-					+ " left join fetch t.tService where t.id=?  and t.onService=true";
-		}
+	public Teacher queryWithOutStatue(long id) {
+		String hql = "from Teacher t where t.id=?";
+		@SuppressWarnings("unchecked")
+		List<Teacher> list = getHibernateTemplate().find(hql, id);
+		if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
+
+	@Override
+	public Teacher queryWithUser(long id) {
+		String hql = "from Teacher t left join fetch t.servicePros left join fetch t.user where t.id=?  and t.onService=true";
 		@SuppressWarnings("unchecked")
 		List<Teacher> list = getHibernateTemplate().find(hql, id);
 		if (list.isEmpty())
@@ -125,7 +149,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	public List<Teacher> queryByIds(long[] ids) {
 		if (ids.length <= 0)
 			return new ArrayList<Teacher>();
-		String hql = "from Teacher t left join fetch t.tService where t.id=" + ids[0];
+		String hql = "from Teacher t left join fetch t.servicePros where t.id=" + ids[0];
 		if (ids.length > 1) {
 			for (int i = 1; i < ids.length; i++) {
 				hql = hql + " or t.id=" + ids[i];
@@ -158,11 +182,8 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
-	public Teacher queryWithTips(long id, boolean lazy) {
-		String hql = "from Teacher t left join fetch t.tService left join fetch t.tips where t.id=?  and t.onService=true";
-		if (lazy) {
-			hql = "from Teacher t left join fetch t.tService left join fetch t.tips where t.id=?  and t.onService=true";
-		}
+	public Teacher queryWithServiceProList(long id) {
+		String hql = "from Teacher t left join fetch t.servicePros where t.id=?  and t.onService=true";
 		@SuppressWarnings("unchecked")
 		List<Teacher> list = getHibernateTemplate().find(hql, id);
 		if (list.isEmpty())
@@ -172,11 +193,30 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
-	public Teacher queryWithLikeUser(long teacherId, boolean lazy) {
+	public Teacher queryForUser(long id) {
+		String hql = "from Teacher t where t.id=? and t.onService=true";
+		@SuppressWarnings("unchecked")
+		List<Teacher> list = getHibernateTemplate().find(hql, id);
+		if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
+
+	@Override
+	public Teacher queryForTeacher(long id) {
+		String hql = "from Teacher t where t.id=?";
+		@SuppressWarnings("unchecked")
+		List<Teacher> list = getHibernateTemplate().find(hql, id);
+		if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
+
+	@Override
+	public Teacher queryWithLikeUser(long teacherId) {
 		String hql = "from Teacher t left join fetch t.likedUsers where t.id=?  and t.onService=true";
-		if (lazy) {
-			hql = "from Teacher t left join fetch t.likedUsers where t.id=?  and t.onService=true";
-		}
 		@SuppressWarnings("unchecked")
 		List<Teacher> list = getHibernateTemplate().find(hql, teacherId);
 		if (list.isEmpty())
@@ -194,11 +234,8 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
-	public Teacher queryByUserId(long userid, boolean lazy) {
-		String hql = "from Teacher t where t.user.id=?  and t.onService=true";
-		if (lazy) {
-			hql = "from Teacher t where t.user.id=?  and t.onService=true";
-		}
+	public Teacher queryByUserId(long userid) {
+		String hql = "from Teacher t where t.user.id=?";
 		@SuppressWarnings("unchecked")
 		List<Teacher> list = getHibernateTemplate().find(hql, userid);
 		if (list.isEmpty())
@@ -208,41 +245,14 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
-	public Teacher queryByUserIdWithTService(long userid, boolean lazy) {
-		String hql = "from Teacher t left join fetch t.tService where t.user.id=?  and t.onService=true";
-		if (lazy) {
-			hql = "from Teacher t left join fetch t.tService where t.user.id=?  and t.onService=true";
-		}
+	public Teacher queryByUserIdWithServicePro(long userid) {
+		String hql = "from Teacher t left join fetch t.servicePros where t.user.id=?  and t.onService=true";
 		@SuppressWarnings("unchecked")
 		List<Teacher> list = getHibernateTemplate().find(hql, userid);
 		if (list.isEmpty())
 			return null;
 		else
 			return list.get(0);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Teacher> queryByTipOrderByShow(final int size, final long tipMark, final boolean lazy) {
-		List<Teacher> list = new ArrayList<Teacher>();
-		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
-
-			@Override
-			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.tService where bitand(t.tipMark," + tipMark + ")="
-						+ tipMark + " and t.onService=true ORDER BY t.showWeight" + tipMark + " DESC";
-				if (lazy) {
-					hql = "from Teacher t left join fetch t.tService where bitand(t.tipMark," + tipMark + ")=" + tipMark
-							+ " and t.onService=true ORDER BY t.showWeight" + tipMark + " DESC";
-				}
-				Query query = session.createQuery(hql);
-				query.setFirstResult(0);
-				query.setMaxResults(size);
-				List<Teacher> list = query.list();
-				return list;
-			}
-		});
-		return list;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -254,10 +264,10 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 
 			@Override
 			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.tService left join fetch t.userLikeTeachers ult where ult.user.id="
+				String hql = "from Teacher t left join fetch t.servicePros left join fetch t.userLikeTeachers ult where ult.user.id="
 						+ userid + " and t.onService=true ORDER BY ult.createTime DESC";
 				if (lazy) {
-					hql = "from Teacher t left join fetch t.tService left join fetch t.userLikeTeachers ult where ult.user.id="
+					hql = "from Teacher t left join fetch t.servicePros left join fetch t.userLikeTeachers ult where ult.user.id="
 							+ userid + " and t.onService=true ORDER BY ult.createTime DESC";
 				}
 				Query query = session.createQuery(hql);
@@ -278,9 +288,9 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 
 			@Override
 			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.tService where t.onService=true ORDER BY t.id DESC";
+				String hql = "from Teacher t left join fetch t.servicePros where t.onService=true ORDER BY t.id DESC";
 				if (lazy) {
-					hql = "from Teacher t left join fetch t.tService where t.onService=true ORDER BY t.id DESC";
+					hql = "from Teacher t left join fetch t.servicePros where t.onService=true ORDER BY t.id DESC";
 				}
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
@@ -300,9 +310,9 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 
 			@Override
 			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.tService ORDER BY t.createTime DESC";
+				String hql = "from Teacher t ORDER BY t.createTime DESC";
 				if (lazy) {
-					hql = "from Teacher t left join fetch t.tService ORDER BY t.createTime DESC";
+					hql = "from Teacher t left join fetch t.servicePros ORDER BY t.createTime DESC";
 				}
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
@@ -323,10 +333,10 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 
 			@Override
 			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.tService where t.forSearch like '%" + keyword
+				String hql = "from Teacher t left join fetch t.servicePros where t.forSearch like '%" + keyword
 						+ "%' and t.onService=true ORDER BY t.createTime DESC";
 				if (lazy) {
-					hql = "from Teacher t left join fetch t.tService where t.forSearch like '%" + keyword
+					hql = "from Teacher t left join fetch t.servicePros where t.forSearch like '%" + keyword
 							+ "%' and t.onService=true ORDER BY t.createTime DESC";
 				}
 				Query query = session.createQuery(hql);
@@ -341,19 +351,13 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Teacher> queryListByTipOrderByLikeNo(final int page, final int pageSize, final long tipMark,
-			final boolean lazy) {
+	public List<Teacher> queryListByActivity(final String activityKey, final int page, final int pageSize) {
 		List<Teacher> list = new ArrayList<Teacher>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
-
 			@Override
 			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.tService where bitand(t.tipMark," + tipMark + ")="
-						+ tipMark + " and t.onService=true ORDER BY t.likeNumber DESC";
-				if (lazy) {
-					hql = "from Teacher t left join fetch t.tService where bitand(t.tipMark," + tipMark + ")=" + tipMark
-							+ " and t.onService=true ORDER BY t.likeNumber DESC";
-				}
+				String hql = "from Teacher t left join fetch t.contentAndPages tcap where tcap.pages.pagesKey='"
+						+ activityKey + "'and t.onService=true ORDER BY tcap.weight DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -362,174 +366,6 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 			}
 		});
 		return list;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Teacher> queryListByTip(final int page, final int pageSize, final long tipMark, final boolean lazy) {
-		List<Teacher> list = new ArrayList<Teacher>();
-		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
-
-			@Override
-			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.tService where bitand(t.tipMark," + tipMark + ")="
-						+ tipMark + " and t.onService=true ORDER BY t.createTime DESC";
-				if (lazy) {
-					hql = "from Teacher t left join fetch t.tService where bitand(t.tipMark," + tipMark + ")=" + tipMark
-							+ " and t.onService=true ORDER BY t.createTime DESC";
-				}
-				Query query = session.createQuery(hql);
-				query.setFirstResult((page - 1) * pageSize);
-				query.setMaxResults(pageSize);
-				List<Teacher> list = query.list();
-				return list;
-			}
-		});
-		return list;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Teacher> queryListByLevel(final short level, final int page, final int pageSize, final boolean lazy) {
-		List<Teacher> list = new ArrayList<Teacher>();
-		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
-			@Override
-			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.tService where t.level=" + level
-						+ " and t.onService=true ORDER BY t.createTime DESC";
-				if (lazy) {
-					hql = "from Teacher t left join fetch t.tService where t.level=" + level
-							+ " and t.onService=true ORDER BY t.createTime DESC";
-				}
-				Query query = session.createQuery(hql);
-				query.setFirstResult((page - 1) * pageSize);
-				query.setMaxResults(pageSize);
-				List<Teacher> list = query.list();
-				return list;
-			}
-		});
-		return list;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Teacher> queryListByTipAndLevel(final int page, final int pageSize, final long tipMark,
-			final short level, final boolean lazy) {
-		List<Teacher> list = new ArrayList<Teacher>();
-		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
-			@Override
-			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.tService where t.level=" + level
-						+ " and bitand(t.tipMark," + tipMark + ")=" + tipMark
-						+ " and t.onService=true ORDER BY t.createTime DESC";
-				if (lazy) {
-					hql = "from Teacher t left join fetch t.tService where t.level=" + level + " and bitand(t.tipMark,"
-							+ tipMark + ")=" + tipMark + " and t.onService=true ORDER BY t.createTime DESC";
-				}
-				Query query = session.createQuery(hql);
-				query.setFirstResult((page - 1) * pageSize);
-				query.setMaxResults(pageSize);
-				List<Teacher> list = query.list();
-				return list;
-			}
-		});
-		return list;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Teacher> queryListByTipAndLastId(final long lastId, final int size, final long tipMark,
-			final boolean lazy) {
-		List<Teacher> list = new ArrayList<Teacher>();
-		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
-
-			@Override
-			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.tService where bitand(t.tipMark," + tipMark + ")="
-						+ tipMark + " and t.id<" + lastId + " and t.onService=true ORDER BY t.id DESC";
-				if (lazy) {
-					hql = "from Teacher t left join fetch t.tService where bitand(t.tipMark," + tipMark + ")=" + tipMark
-							+ " and t.id<" + lastId + " and t.onService=true ORDER BY t.id DESC";
-				}
-				Query query = session.createQuery(hql);
-				query.setFirstResult(0);
-				query.setMaxResults(size);
-				List<Teacher> list = query.list();
-				return list;
-			}
-		});
-		return list;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Teacher> queryListByTipAndFirstId(final long firstId, final int size, final long tipMark,
-			final boolean lazy) {
-		List<Teacher> list = new ArrayList<Teacher>();
-		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
-
-			@Override
-			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.tService where bitand(t.tipMark," + tipMark + ")="
-						+ tipMark + " and t.id>" + firstId + " and t.onService=true ORDER BY t.id DESC";
-				if (lazy) {
-					hql = "from Teacher t left join fetch t.tService where bitand(t.tipMark," + tipMark + ")=" + tipMark
-							+ " and t.id>" + firstId + " and t.onService=true ORDER BY t.id DESC";
-				}
-				Query query = session.createQuery(hql);
-				query.setFirstResult(0);
-				query.setMaxResults(size);
-				List<Teacher> list = query.list();
-				return list;
-			}
-		});
-		return list;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Teacher> queryListByHomePage(final int pageSize) {
-		List<Teacher> list = new ArrayList<Teacher>();
-		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
-			@Override
-			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.tService where t.onService=true and t.homeWeight!=0 ORDER BY t.homeWeight DESC";
-				Query query = session.createQuery(hql);
-				query.setFirstResult(0);
-				query.setMaxResults(pageSize);
-				List<Teacher> list = query.list();
-				return list;
-			}
-		});
-		return list;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Teacher> queryListBySale(final int page, final int pageSize) {
-		List<Teacher> list = new ArrayList<Teacher>();
-		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
-			@Override
-			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join fetch t.tService where t.onService=true and t.saleWeight!=0 ORDER BY t.saleWeight DESC";
-				Query query = session.createQuery(hql);
-				query.setFirstResult((page - 1) * pageSize);
-				query.setMaxResults(pageSize);
-				List<Teacher> list = query.list();
-				return list;
-			}
-		});
-		return list;
-	}
-
-	@Override
-	public long queryListBySaleNo() {
-		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		long sum = (long) session
-				.createQuery("select count(*) from Teacher t where t.onService=true and t.saleWeight!=0")
-				.uniqueResult();
-		return sum;
 	}
 
 }

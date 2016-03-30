@@ -77,6 +77,10 @@ public class Passage {
 	@JoinColumn(name = "PASSAGE_ID", updatable = false)
 	private Set<UserLikePassage> userLikePassages = new HashSet<UserLikePassage>();
 
+	@OneToMany(targetEntity = ContentAndPage.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "PASSAGE_ID", updatable = false)
+	private Set<ContentAndPage> contentAndPages = new HashSet<ContentAndPage>();
+
 	public Long getId() {
 		return id;
 	}
@@ -219,6 +223,14 @@ public class Passage {
 
 	public void setOnReward(Boolean onReward) {
 		this.onReward = onReward;
+	}
+
+	public Set<ContentAndPage> getContentAndPages() {
+		return contentAndPages;
+	}
+
+	public void setContentAndPages(Set<ContentAndPage> contentAndPages) {
+		this.contentAndPages = contentAndPages;
 	}
 
 }

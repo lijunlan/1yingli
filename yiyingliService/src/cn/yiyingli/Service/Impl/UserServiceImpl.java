@@ -109,11 +109,16 @@ public class UserServiceImpl implements UserService {
 	public void update(User user) {
 		getUserDao().update(user);
 	}
+	
+	@Override
+	public void updateUsername(User user){
+		getUserDao().updateUsername(user);
+	}
 
 	@Override
 	public void updateWithTeacher(User user) {
 		if (user.getTeacherState() == TEACHER_STATE_ON_SHORT) {
-			Teacher teacher = getTeacherDao().queryByUserId(user.getId(), false);
+			Teacher teacher = getTeacherDao().queryByUserId(user.getId());
 			// 防止TEACHER被强制下架
 			if (teacher != null) {
 				// teacher.setSex(user.getSex());
@@ -181,6 +186,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User queryWithWeixin(String weixinNo, boolean lazy) {
 		return getUserDao().queryWithWeixin(weixinNo, lazy);
+	}
+
+	@Override
+	public User queryWithWeixinPlatform(String weixinNo) {
+		return getUserDao().queryWithWeixinPlatform(weixinNo);
 	}
 
 	@Override

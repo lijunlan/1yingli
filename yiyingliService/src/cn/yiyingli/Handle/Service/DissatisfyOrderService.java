@@ -49,22 +49,20 @@ public class DissatisfyOrderService extends UMsgService {
 			return;
 		}
 		String state = order.getState().split(",")[0];
-		if (!OrderService.ORDER_STATE_WAIT_SERVICE.equals(state)) {
+		if (!OrderService.ORDER_STATE_SERVICE_FINISH.equals(state)) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
 		order.setState(OrderService.ORDER_STATE_USER_DISLIKE + "," + order.getState());
 		getOrderService().updateAndSendTimeTask(order);
 
-		NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-				"尊敬的学员,您好,由于您对这次咨询(订单号" + order.getOrderNo() + ")不满意,申请退款,我们已将您的意见反馈给导师,请等待导师确认", user,
+		NotifyUtil.notifyUserOrder(order,
+				"尊敬的用户,您好,由于您否认本次服务(订单号" + order.getOrderNo() + "),申请退款,我们已将您的意见反馈给导师,请等待导师确认", user,
 				getNotificationService());
-		NotifyUtil.notifyTeacher(order.getTeacher().getPhone(), order.getTeacher().getEmail(),
-				"尊敬的导师,您好,很抱歉我们收到学员(" + order.getCustomerName() + ")不满意此次咨询(订单号" + order.getOrderNo()
-						+ ")的反馈,要求申请退款,等待您的回复,请您在五天内进行同意或拒绝哦,超时系统将自动同意退款.",
-				order.getTeacher(), getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",学员：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + ",学员对这次咨询不满意，申请退款，");
+		NotifyUtil.notifyTeacher(order, "尊敬的导师,您好,很抱歉我们收到用户(" + order.getCustomerName() + ")对此次服务(订单号"
+				+ order.getOrderNo() + ")的否认,要求申请退款,等待您的回复,请您在五天内进行同意或拒绝哦,超时系统将自动同意退款.", getNotificationService());
+		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
+				+ order.getTeacher().getName() + ",用户否认此次服务，申请退款，");
 		setResMsg(MsgUtil.getSuccessMsg("dissatisfy order successfully"));
 	}
 }

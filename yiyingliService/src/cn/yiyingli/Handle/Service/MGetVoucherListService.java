@@ -41,7 +41,7 @@ public class MGetVoucherListService extends MMsgService {
 			return;
 		}
 		ExList toSend = new ExArrayList();
-		List<Voucher> listV = getVoucherService().queryList(page, false);
+		List<Voucher> listV = getVoucherService().queryList(page);
 		for (Voucher v : listV) {
 			SuperMap map = new SuperMap();
 			map.put("createTime", v.getCreateTime());
@@ -52,12 +52,8 @@ public class MGetVoucherListService extends MMsgService {
 			map.put("id", v.getId());
 			map.put("money", v.getMoney());
 			map.put("origin", v.getOrigin());
-			map.put("orderId", v.getUseOrder() == null ? "" : v.getUseOrder().getOrderNo());
-			if (v.getUseOrder() == null) {
-				map.put("userId", "");
-			} else {
-				map.put("userId", v.getUseOrder().getOrderNo());
-			}
+			map.put("serviceProId", v.getServiceProId());
+			map.put("orderListCount", v.getUseCount());
 			toSend.add(map.finish());
 		}
 		setResMsg(MsgUtil.getSuccessMap().put("data", toSend).finishByJson());

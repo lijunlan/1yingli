@@ -82,6 +82,9 @@ public class User {
 	@Column(name = "WECHATNO", nullable = true, unique = true)
 	private String wechatNo;
 
+	@Column(name = "WECHATPLATFORMNO", nullable = true, unique = true)
+	private String wechatPlatformNo;
+
 	@Column(name = "WEIBONO", nullable = true, unique = true)
 	private String weiboNo;
 
@@ -93,6 +96,9 @@ public class User {
 
 	@Column(name = "LIKETEACHERNUMBER", nullable = false)
 	private Long likeTeacherNumber;
+
+	@Column(name = "LIKESERVICEPRONUMBER", nullable = false)
+	private Long likeServiceProNumber;
 
 	@Column(name = "RECEIVECOMMENTNUMBER", nullable = false)
 	private Long receiveCommentNumber;
@@ -113,14 +119,6 @@ public class User {
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private Set<ApplicationForm> applicationForms = new HashSet<ApplicationForm>();
 
-	// @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-	// @JoinTable(name = "USER_LIKE_TEACHER", joinColumns = {
-	// @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable
-	// = false) }, inverseJoinColumns = {
-	// @JoinColumn(name = "TEACHER_ID", referencedColumnName = "TEACHER_ID",
-	// nullable = false) })
-	// private Set<Teacher> likeTeahcers = new HashSet<Teacher>();
-
 	@OneToMany(targetEntity = UserLikeTeacher.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private Set<UserLikeTeacher> userLikeTeachers = new HashSet<UserLikeTeacher>();
@@ -128,6 +126,10 @@ public class User {
 	@OneToMany(targetEntity = UserLikePassage.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private Set<UserLikePassage> userLikePassages = new HashSet<UserLikePassage>();
+
+	@OneToMany(targetEntity = UserLikeServicePro.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID", updatable = false)
+	private Set<UserLikeServicePro> userLikeServicePros = new HashSet<UserLikeServicePro>();
 
 	@OneToMany(targetEntity = Notification.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", updatable = false)
@@ -258,14 +260,6 @@ public class User {
 	public void setForbid(Boolean forbid) {
 		this.forbid = forbid;
 	}
-
-	// public Set<Teacher> getLikeTeahcers() {
-	// return likeTeahcers;
-	// }
-	//
-	// public void setLikeTeahcers(Set<Teacher> likeTeahcers) {
-	// this.likeTeahcers = likeTeahcers;
-	// }
 
 	public Set<Notification> getNotifications() {
 		return notifications;
@@ -467,12 +461,36 @@ public class User {
 		this.mile = mile;
 	}
 
+	public Set<UserLikeServicePro> getUserLikeServicePros() {
+		return userLikeServicePros;
+	}
+
+	public void setUserLikeServicePros(Set<UserLikeServicePro> userLikeServicePros) {
+		this.userLikeServicePros = userLikeServicePros;
+	}
+
+	public Long getLikeServiceProNumber() {
+		return likeServiceProNumber;
+	}
+
+	public void setLikeServiceProNumber(Long likeServiceProNumber) {
+		this.likeServiceProNumber = likeServiceProNumber;
+	}
+
 	public String getOresume() {
 		return oresume;
 	}
 
 	public void setOresume(String oresume) {
 		this.oresume = oresume;
+	}
+
+	public String getWechatPlatformNo() {
+		return wechatPlatformNo;
+	}
+
+	public void setWechatPlatformNo(String wechatPlatformNo) {
+		this.wechatPlatformNo = wechatPlatformNo;
 	}
 
 }

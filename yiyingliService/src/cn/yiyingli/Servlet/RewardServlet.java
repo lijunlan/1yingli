@@ -3,6 +3,7 @@ package cn.yiyingli.Servlet;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLDecoder;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletConfig;
@@ -18,7 +19,9 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import cn.yiyingli.Alipay.AlipayConfig;
 import cn.yiyingli.Alipay.AlipaySubmit;
 import cn.yiyingli.ExchangeData.ExRewardForPay;
+import cn.yiyingli.Persistant.Reward;
 import cn.yiyingli.Persistant.User;
+import cn.yiyingli.Service.RewardService;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.ConfigurationXmlUtil;
 import cn.yiyingli.Util.LogUtil;
@@ -59,6 +62,7 @@ public class RewardServlet extends HttpServlet {
 		Map<String, String> parms = new HashMap<String, String>();
 
 		UserMarkService userMarkService = (UserMarkService) getApplicationContext().getBean("userMarkService");
+		RewardService rewardService = (RewardService) getApplicationContext().getBean("rewardService");
 
 		// uid is can be choosed
 		if (req.getParameter("teacherId") == null || req.getParameter("money") == null
@@ -77,18 +81,16 @@ public class RewardServlet extends HttpServlet {
 		String passageId = req.getParameter("passageId");
 		String callback = req.getParameter("callback");
 
-		String userId = null;
+		Long userId = null;
 		String userName = null;
 		if (uid != null) {
 			LogUtil.info("receive>>ALIPAY>>reward--->uid:" + uid, this.getClass());
 			User user = userMarkService.queryUser(uid);
 			if (user != null) {
-				userId = String.valueOf(user.getId());
+				userId = user.getId();
 				userName = user.getName();
 			}
 		}
-		// 商户订单号
-		String oid = ExRewardForPay.getRewardNo(Long.valueOf(teacherId));
 
 		// 订单名称
 		String subject = "打赏-" + teacherName;
@@ -118,6 +120,23 @@ public class RewardServlet extends HttpServlet {
 		// String exter_invoke_ip = RemoteIPUtil.getAddr(req);
 		// 非局域网的外网IP地址，如：221.0.0.1
 
+		Reward reward = new Reward();
+		String time = Calendar.getInstance().getTimeInMillis() + "";
+		reward.setCreateTime(time);
+		reward.setFinishPay(false);
+		reward.setFinishSalary(false);
+		reward.setMoney(Float.valueOf(money));
+		reward.setTeacherId(Long.valueOf(teacherId));
+		reward.setTeacherName(teacherName);
+		reward.setUserId(userId);
+		reward.setUserName(userName);
+
+		reward.setPassageId(passageId == null ? null : Long.valueOf(passageId));
+
+		rewardService.save(reward);
+
+		String oid = ExRewardForPay.getRewardNo(reward.getId());
+
 		parms.put("service", "create_direct_pay_by_user");
 		parms.put("partner", AlipayConfig.partner);
 		parms.put("seller_email", AlipayConfig.seller_email);
@@ -138,8 +157,7 @@ public class RewardServlet extends HttpServlet {
 		parms.put("show_url", show_url);
 		// parms.put("anti_phishing_key", anti_phishing_key);
 		// parms.put("exter_invoke_ip", exter_invoke_ip);
-		parms.put("extra_common_param",
-				ExRewardForPay.getExtraParams(teacherId, teacherName, money, uid, passageId, userId, userName));
+		parms.put("extra_common_param", ExRewardForPay.getExtraParams(reward.getId()));
 		// 过期时间 24h
 		parms.put("it_b_pay", "24h");
 

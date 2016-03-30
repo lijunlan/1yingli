@@ -8,6 +8,14 @@ import cn.yiyingli.Service.UserService;
 
 public class PUserUtil {
 
+	public static User assembleUserFromWXPlatform(String weixinUnion, String username, String password, String nickName,
+			String icon, String address) {
+		User user = assembleUser(username, password, nickName, icon, address, null);
+		user.setWechatPlatformNo(username);
+		user.setWechatNo(weixinUnion);
+		return user;
+	}
+
 	public static User assembleUserFromWX(String username, String password, String nickName, String icon,
 			String address) {
 		User user = assembleUser(username, password, nickName, icon, address, null);
@@ -25,6 +33,7 @@ public class PUserUtil {
 	public static User assembleUser(String username, String password, String nickName, String icon, String address,
 			Distributor distributor) {
 		User user = new User();
+		user.setLikeServiceProNumber(0L);
 		user.setLikeTeacherNumber(0L);
 		user.setOrderNumber(0L);
 		user.setUsername(username);

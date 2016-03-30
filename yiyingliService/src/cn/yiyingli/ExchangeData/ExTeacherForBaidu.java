@@ -11,17 +11,17 @@ import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.Tip;
 import cn.yiyingli.Persistant.WorkExperience;
 import cn.yiyingli.Util.LogUtil;
+import cn.yiyingli.Util.StringUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+//TODO  发给百度的物料数据也要改变
 public class ExTeacherForBaidu {
 
 	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 	public static JSONObject assembleTeacher(Teacher teacher) {
 		try {
-			String title = teacher.gettService().getTitle();
-			String content = teacher.gettService().getContent();
 			JSONArray jsonLabels = new JSONArray();
 			List<WorkExperience> workExperiences = teacher.getWorkExperiences();
 			for (WorkExperience w : workExperiences) {
@@ -61,8 +61,8 @@ public class ExTeacherForBaidu {
 			toBaidu.put("DisplaySwitch", teacher.getOnService() ? "On" : "Off");
 			toBaidu.put("Url", "http://www.1yingli.cn/teacher/" + teacher.getId());
 			JSONObject jsonIndexed = new JSONObject();
-			jsonIndexed.put("Title", title);
-			jsonIndexed.put("Content", content);
+			jsonIndexed.put("Title", teacher.getTopic());
+			jsonIndexed.put("Content", StringUtil.subStringHTML(teacher.getIntroduce(), 500, ""));
 			jsonIndexed.put("Labels", jsonLabels);
 			toBaidu.put("Indexed", jsonIndexed);
 			JSONObject jsonProperties = new JSONObject();

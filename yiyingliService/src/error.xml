@@ -62,8 +62,12 @@
 	<error name="22005" value="page is wrong" />
 	<error name="22006" value="passage is not existed" />
 	<error name="22007" value="passage is not belong to you" />
+	<error name="22008" value="servicePro is not existed" />
+	<error name="22009" value="mile is not enought to reduce" />
 	<error name="24001" value="you are not a teacher" />
 	<error name="24002" value="uid don't match teacherId" />
+	<error name="24003"
+		value="service is not exsited or service is not belong to the teacher" />
 
 
 	<!-- manager 3 -->
@@ -84,13 +88,18 @@
 	<error name="32013" value="background id is not existed" />
 	<error name="32014" value="user id is not existed" />
 	<error name="32015" value="teacher id is not existed" />
+	<error name="32016" value="activity is not existed" />
 	<error name="34001" value="manager is not existed" />
+	<error name="34002" value="you have no authorization" />
 
 
 	<!-- order 4 -->
 	<error name="40001" value="server error" />
 	<error name="41001" value="input data is wrong" />
 	<error name="42001" value="order is not existed" />
+	<error name="42002" value="servicePro is not existed" />
+	<error name="42003" value="orderList is not existed" />
+	<error name="42004" value="reward is not existed" />
 	<error name="43001" value="alipay error" />
 	<error name="43002" value="connect to paypal failed, please try again" />
 	<error name="43003" value="connect to weixin, please try again" />
@@ -101,11 +110,18 @@
 	<error name="44005"
 		value="the state of this can not be changed. last state is needed" />
 	<error name="44006" value="can not make deal with yourself" />
+	<error name="44007" value="this servicePro is not belong to the order" />
+	<error name="44008"
+		value="some servicePros are not existed or are not belong to the teacher" />
+	<error name="44009" value="some servicePros are in short supply" />
+	<error name="44010" value="the chat owned by this teacher has been closed" />
 	<error name="45001" value="voucher is not existed" />
 	<error name="45002" value="voucher is overdue" />
 	<error name="45003" value="voucher has been used" />
 	<error name="45004" value="order do not match the payment" />
 	<error name="45005" value="the state has changed automaticly" />
+	<error name="45006"
+		value="voucher can not be used by this orderList,because the ordelist contain some servicePro(s) not belong to the voucher" />
 
 	<!-- function 5 -->
 	<!-- <error name="53001" value="recommendation engine error" /> -->
@@ -117,6 +133,7 @@
 	<error name="53003" value="error when search" />
 	<error name="53004" value="Submit data to recommendation engine failed" />
 	<error name="53005" value="search engine error" />
+	<error name="53006" value="contentStyle is not accurate" />
 	<error name="55001" value="you can not get now" />
 
 	<!-- distributor 6 -->

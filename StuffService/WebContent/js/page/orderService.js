@@ -58,7 +58,8 @@ function showDetail(index, action) {
 	var createTime = new Date(ct);
 	var payTime = new Date(pt);
 	$("#modalDetail").text("");
-	$("#modalDetail").append("<b>订单ID：</b>" + order[index].orderId + "<br>");
+	$("#modalDetail").append("<b>流水ID：</b>" + order[index].orderId + "<br>");
+	$("#modalDetail").append("<b>订单ID：</b>" + order[index].orderListId + "<br>");
 	$("#modalDetail").append("<b>课程名称：</b>" + order[index].title + "<br>");
 	//当订单是搜索出来的，应显示订单的所有状态，此时action=
 	if (action == 1) {
@@ -79,8 +80,8 @@ function showDetail(index, action) {
 	$("#modalDetail").append("<b>支付时间：</b>" + payTime.toLocaleString() + "<br>");
 	$("#modalDetail").append("<b>支付方式：</b>" + order[index].payMethod + "<br>");
 	$("#modalDetail").append("<b>导师确认时间：</b>" + order[index].okTime + "<br>");
-	$("#modalDetail").append("<b>交易金额：</b>" + order[index].price + "<br>");
-	$("#modalDetail").append("<b>原始价格：</b>" + order[index].originPrice + "<br>");
+	$("#modalDetail").append("<b>交易金额：</b>" + order[index].money + "<br>");
+	$("#modalDetail").append("<b>原始价格：</b>" + order[index].originMoney + "<br>");
 	$("#modalDetail").append("<b>分销人姓名：</b>" + order[index].distriName + "<br>");
 	$("#modalDetail").append("<b>客户姓名：</b>" + order[index].customerName + "<br>");
 	$("#modalDetail").append("<b>客户手机：</b>" + order[index].customerPhone + "<br>");
@@ -122,7 +123,7 @@ var changeTable = function (result) {
 	//当搜索的时候
 	if (fun == 2) {
 		$("#infoTable").append(
-			"<tr><th>订单号</th> <th>下单或支付时间</th> <th>交易金额</th> <th>原始价格</th>" +
+			"<tr><th>流水号</th><th>订单号</th> <th>下单或支付时间</th> <th>交易金额</th> <th>原始价格</th>" +
 			"<th>客户姓名</th> <th>电话</th> <th>微信</th> <th>邮箱</th> <th>导师</th><th>是否评价</th>" +
 			"<th>操作</th> <th>点击显示详情</th></tr>");
 	}
@@ -131,7 +132,7 @@ var changeTable = function (result) {
 		//当订单状态为尚未支付的时候，显示下单时间
 		if ((state == "0100" || state == "0200") && salaryState == 0) {
 			$("#infoTable").append(
-				"<tr><th>订单号</th> <th>下单时间</th> <th>交易金额</th> <th>原始价格</th>" +
+				"<tr><th>流水号</th><th>订单号</th> <th>下单时间</th> <th>交易金额</th> <th>原始价格</th>" +
 				"<th>客户姓名</th> <th>电话</th> <th>微信</th> <th>邮箱</th> <th>导师</th>" +
 				"<th>操作</th> <th>点击显示详情</th></tr>");
 		}
@@ -139,14 +140,14 @@ var changeTable = function (result) {
 		//此时学员已经支付，因此显示支付时间 
 		else if (salaryState == 1 || salaryState == 2) {
 			$("#infoTable").append(
-				"<tr><th>订单号</th> <th>支付时间</th> <th>交易金额</th> <th>原始价格</th>" +
+				"<tr><th>流水号</th><th>订单号</th> <th>支付时间</th> <th>交易金额</th> <th>原始价格</th>" +
 				"<th>客户姓名</th> <th>电话</th> <th>微信</th> <th>邮箱</th> <th>导师</th>" +
 				"<th>是否评价</th><th>操作</th> <th>点击显示详情</th></tr>");
 		} 
 		//订单已经支付，但是还没有到应该支付给导师那一步，变化仅仅是显示支付时间而不是下单时间
 		else {
 			$("#infoTable").append(
-				"<tr><th>订单号</th> <th>支付时间</th> <th>交易金额</th> <th>原始价格</th>" +
+				"<tr><th>流水号</th><th>订单号</th> <th>支付时间</th> <th>交易金额</th> <th>原始价格</th>" +
 				"<th>客户姓名</th> <th>电话</th> <th>微信</th> <th>邮箱</th> <th>导师</th>" +
 				"<th>操作</th> <th>点击显示详情</th></tr>");
 		}
@@ -160,7 +161,7 @@ var changeTable = function (result) {
 		var paytime = new Date(pt);
 		var createtime = new Date(ct);
 		var row = "<tr><td>";
-
+		row += data.orderListId+"<br>流水需支付："+data.orderListPayMoney + "</td><td>";
 		row += data.orderId + "</td><td>";
 		//按照学员是否支付来决定要显示的事“支付时间”或“下单时间”
 		if (state == "0100" || state == "0200") {
@@ -168,8 +169,8 @@ var changeTable = function (result) {
 		} else {
 			row += paytime.toLocaleString() + "</td><td>";
 		}
-		row += data.price + "</td><td>";
-		row += data.originPrice + "</td><td>";
+		row += data.money + "</td><td>";
+		row += data.originMoney + "</td><td>";
 		row += data.customerName + "</td><td>";
 		row += data.customerPhone + "</td><td>";
 		row += data.weixin + "</td><td>";
@@ -218,10 +219,10 @@ var getStateName = function (s) {
 			stateName = "客户完成支付，等待导师确认";
 			break;
 		case "0400":
-			stateName = "导师已经确认，等待确认时间";
+			stateName = "导师已经确认";
 			break;
 		case "0500":
-			stateName = "已经约定好时间，等待服务";
+			stateName = "等待服务";
 			break;
 		case "0620":
 			stateName = "服务完毕，用户不满";
@@ -231,6 +232,9 @@ var getStateName = function (s) {
 			break;
 		case "0800":
 			stateName = "退款成功";
+			break;
+		case "0900":
+			stateName = "服务完毕,等待用户确认";
 			break;
 		case "1000":
 			stateName = "等待双方评价";
@@ -275,7 +279,7 @@ $(function () {
 		myJson.page = page.toString();
 		//状态码0900现在并不存在
 		//状态码改过，之前0900是要支付导师，后来被单独了出来，因为对这个网页而言用起来方便，因此没有更改
-		if (state == "0900") {
+		if (state == "2000") {
 			salaryState = 1;
 			myJson.salaryState = salaryState.toString();
 			delete myJson.state;
@@ -291,9 +295,11 @@ $(function () {
 			$('#orderState').find('option').eq(12).attr('selected', true);
 		} else if (state == "0900") {
 			// 暂时沿用之前的标识
-			$('#orderState').find('option').eq(15).attr('selected', true);
+			$('#orderState').find('option').eq(17).attr('selected', true);
 		} else if (state == "0300") {
 			$('#orderState').find('option').eq(2).attr('selected', true);
+		}else if (state == "2000") {
+			$('#orderState').find('option').eq(15).attr('selected', true);
 		}
 	} else {
 		//页面是管理员自己打开的，而不是点击提示框进来的
@@ -424,6 +430,9 @@ function get() {
 			break;
 		case "18":
 			salaryState = 2;
+			break;
+		case "19":
+			state = "0900";
 			break;
 		default:
 			state = "0100";

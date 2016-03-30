@@ -7,11 +7,12 @@ import java.util.Set;
 
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
+import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.StudyExperience;
-import cn.yiyingli.Persistant.TService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.Tip;
 import cn.yiyingli.Persistant.WorkExperience;
+import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Service.TeacherService;
 
 public class ExTeacher {
@@ -20,20 +21,30 @@ public class ExTeacher {
 
 	public static void assembleSimpleForUserLike(Teacher teacher, SuperMap map) {
 		assembleSimpleNormal(teacher, map);
-		map.put("price", teacher.gettService().getPriceTotal());
-		map.put("time", teacher.gettService().getTime());
-		map.put("title", teacher.gettService().getTitle());
-
+		map.put("score", teacher.getScore());
+		LikeAndFinishNoShowUtil.setLikeNo(teacher, map);
+		LikeAndFinishNoShowUtil.setFinishNo(teacher, map);
+		ExList serviceProList = new ExArrayList();
+		for (ServicePro servicePro : teacher.getServicePros()) {
+			if (servicePro.getOnShow() && (!servicePro.getRemove())
+					&& servicePro.getState() == ServiceProService.STATE_OK) {
+				SuperMap m = new SuperMap();
+				ExServicePro.assembleSimpleServiceProForUser(servicePro, m);
+				serviceProList.add(m.finish());
+				if (serviceProList.size() >= ServiceProService.PAGE_SIZE) {
+					break;
+				}
+			}
+		}
+		map.put("servicePros", serviceProList);
 	}
 
 	public static void assembleSimpleForUser(Teacher teacher, SuperMap map) {
 		assembleSimpleNormal(teacher, map);
 		map.put("level", teacher.getLevel());
-		LikeNoShowUtil.setLikeNo(teacher, map);
-		LikeNoShowUtil.setFinishNo(teacher, map);
-		TService tService = teacher.gettService();
-		map.put("serviceTitle", tService.getTitle());
-		map.put("serviceContent", tService.getContent());
+		map.put("introduce", teacher.getIntroduce());
+		LikeAndFinishNoShowUtil.setLikeNo(teacher, map);
+		LikeAndFinishNoShowUtil.setFinishNo(teacher, map);
 	}
 
 	private static void assembleSimpleNormal(Teacher teacher, SuperMap map) {
@@ -41,12 +52,16 @@ public class ExTeacher {
 		map.put("teacherId", teacher.getId());
 		map.put("iconUrl", teacher.getIconUrl());
 		map.put("simpleinfo", teacher.getSimpleInfo());
-		map.put("timeperweek", teacher.gettService().getTimesPerWeek());
+		map.put("price", teacher.getPrice());
+		map.put("topic", teacher.getTopic());
 	}
 
 	public static void assembleSimpleForManager(Teacher teacher, SuperMap map) {
 		map.put("address", teacher.getAddress());
 		map.put("mile", teacher.getMile());
+		map.put("subMile", teacher.getSubMile());
+		map.put("price", teacher.getPrice());
+		map.put("topic", teacher.getTopic());
 		map.put("checkDegree",
 				teacher.getCheckDegreeState() == TeacherService.CHECK_STATE_SUCCESS_SHORT ? "yes" : "no");
 		map.put("checkEmail", teacher.getCheckEmail());
@@ -63,34 +78,32 @@ public class ExTeacher {
 		map.put("name", teacher.getName());
 		map.put("phone", teacher.getPhone());
 		map.put("tid", teacher.getId());
-		// map.put(key, value)
+		map.put("username", teacher.getUsername());
 		map.put("onService", teacher.getOnService());
 	}
 
 	private static void assembleDetailNormal(Teacher teacher, SuperMap map) {
+		map.put("onChat", teacher.getOnChat());
 		map.put("rewardNumber", teacher.getRewardNumber());
 		map.put("simpleinfo", teacher.getSimpleInfo());
 		map.put("name", teacher.getName());
 		map.put("iconUrl", teacher.getIconUrl());
+		map.put("bgUrl", teacher.getBgUrl());
 		map.put("phone", teacher.getPhone());
 		map.put("mile", teacher.getMile());
 		map.put("email", teacher.getEmail());
 		map.put("introduce", teacher.getIntroduce());
-		LikeNoShowUtil.setLikeNo(teacher, map);
-		LikeNoShowUtil.setFinishNo(teacher, map);
+		LikeAndFinishNoShowUtil.setLikeNo(teacher, map);
+		LikeAndFinishNoShowUtil.setFinishNo(teacher, map);
+		map.put("score", teacher.getScore());
+		map.put("answerRatio", teacher.getAnswerRatio());
+		map.put("praiseRatio", teacher.getPraiseRatio());
+		map.put("answerTime", teacher.getAnswerTime());
 		map.put("address", teacher.getAddress());
-		map.put("talkWay", teacher.getTalkWay());
 		map.put("teacherId", teacher.getId());
 		map.put("commentNo", teacher.getCommentNumber());
-		TService tService = teacher.gettService();
-		map.put("timeperweek", tService.getTimesPerWeek());
-		map.put("freeTime", tService.getFreeTime());
-		map.put("price", tService.getPriceTotal());
-		map.put("onsale", tService.getOnSale());
-		map.put("pricetemp", tService.getPriceTemp());
-		map.put("serviceTime", tService.getTime());
-		map.put("serviceTitle", tService.getTitle());
-		map.put("serviceContent", tService.getContent());
+		map.put("topic", teacher.getTopic());
+		map.put("price", teacher.getPrice());
 		map.put("checkEmail", teacher.getCheckEmail());
 		map.put("checkPhone", teacher.getCheckPhone());
 		if (teacher.getCheckDegreeState() == TeacherService.CHECK_STATE_SUCCESS_SHORT) {
@@ -145,26 +158,19 @@ public class ExTeacher {
 
 	public static void assembleDetailForUser(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
-		map.put("bgUrl", teacher.getBgUrl());
 	}
 
 	public static void assembleDetailForTeacher(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
-		map.put("bgUrl", teacher.getBgUrl());
+		map.put("showNotify", teacher.getShowNotify());
 	}
 
 	public static void assembleDetailForManager(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
+		map.put("showNotify", teacher.getShowNotify());
 		map.put("mile", teacher.getMile());
 		map.put("alipayNo", teacher.getAlipay());
 		map.put("paypalNo", teacher.getPaypal());
-		map.put("showWeight1", teacher.getShowWeight1());
-		map.put("showWeight2", teacher.getShowWeight2());
-		map.put("showWeight4", teacher.getShowWeight4());
-		map.put("showWeight8", teacher.getShowWeight8());
-		map.put("showWeight16", teacher.getShowWeight16());
-		map.put("homeWeight", teacher.getHomeWeight());
-		map.put("saleWeight", teacher.getSaleWeight());
 		map.put("checkPassageNumber", teacher.getCheckPassageNumber());
 		map.put("passageNumber", teacher.getPassageNumber());
 		map.put("refusePassageNumber", teacher.getRefusePassageNumber());

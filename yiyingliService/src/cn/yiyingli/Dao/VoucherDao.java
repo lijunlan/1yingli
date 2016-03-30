@@ -16,15 +16,17 @@ public interface VoucherDao {
 
 	void update(Voucher voucher);
 
-	void updateWithOrderId(Voucher voucher, long orderId);
+	void updateWithOrderListId(Voucher voucher, long orderListId);
 
 	void updateFromSql(String sql);
+
+	Long queryOrderListNumber(long id);
 
 	Voucher query(long id, boolean lazy);
 
 	Voucher query(String vno, boolean lazy);
 
-	List<Voucher> queryList(int page, int pageSize, boolean lazy);
+	List<Voucher> queryList(int page, int pageSize);
 
 	List<Voucher> queryListByUserId(long userId, int page, int pageSize, boolean lazy);
 

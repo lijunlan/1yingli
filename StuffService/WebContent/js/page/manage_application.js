@@ -1,21 +1,58 @@
 //初始化
+var page = 1;
+var mid;
 checkLogin();
 registNotify();
 document.getElementById("admin_name").innerText = $.cookie('mname');
 
-$(document).ready(function () {
-	refresh();
+
+$(function () {
+	myJson.method = "getApplicationFormList";
+	myJson.page = page.toString();
+	delete myJson.teacherName;
+	myAjax(myJson, changeTable);
+	if (page == 1)
+		document.getElementById("lastPage").disabled = true;
+	document.getElementById("pageInput").value = page;
 });
 
-//重载页面的函数
-function refresh() {
-	//myJson的mid和style
-	myJson.method = 'getApplicationFormList';
-	myAjax(myJson, get);
+function search(){
+	var teacherName = $("#inputSearchTeacherName").val();
+	myJson.method = "getApplicationFormList";
+	delete myJson.page;
+	myJson.teacherName = teacherName;
+	myAjax(myJson, changeTable);
+}
+
+function changePage(action) {
+	if (action == "last") {
+		page--;
+	} else if (action == "next") {
+		page++;
+	}
+	document.getElementById("pageInput").value = page;
+	if (page <= 1)
+		document.getElementById("lastPage").disabled = true;
+	else
+		document.getElementById("lastPage").disabled = false;
+	myJson.method = "getApplicationFormList";
+	delete myJson.teacherName;
+	myJson.page = page.toString();
+	myAjax(myJson, changeTable);
+}
+
+function get() {
+	page = document.getElementById("pageInput").value;
+	myJson.method = "getApplicationFormList";
+	myJson.page = page.toString();
+	delete myJson.teacherName;
+	myAjax(myJson, changeTable);
+	if (document.getElementById("pageInput").value > 1)
+		document.getElementById("lastPage").disabled = false;
 }
 
 //将ajax返回的数据显示在页面上
-function get(json) {
+var changeTable = function (json) {
 	if (json.state == "success") {
 		var html = "";
 		if (typeof json.data == 'string') {
@@ -27,13 +64,16 @@ function get(json) {
 			var phone = data.phone;
 			var name = data.name;
 			var email = data.email;
+			var contact =data.contact;
 			var address = data.address;
+			var contact = data.contact;
 			var checkInfo = data.checkInfo;
 			if (checkInfo == "undefined")
 				checkInfo = "";
 			var serviceReason = data.serviceReason;
 			var serviceTitle = data.serviceTitle;
 			var serviceAdvantage = data.serviceAdvantage;
+			var serviceOnline = data.serviceOnline;
 			var serviceContent = data.serviceContent;
 			var servicePrice = data.servicePrice;
 			var serviceTime = data.serviceTime;
@@ -44,11 +84,11 @@ function get(json) {
 			var schoolExperience = data.schoolExperience;
 			var tips = data.tips;
 			var afId = data.afId;
-			html = html + "<tr>" + "	<td>" + afId + "	</td>" + "	<td>"
-			+ userid + "	</td><td>" + username + "</td><td>" + name + "	</td><td>" + createTime
-			+ "/</br>" + endTime + "	</td>" + "	<td>" + state
-			+ "	</td>" + "	<td>" + phone + "	</td>" + "	<td>"
-			+ address + "	</td>" + "	<td>" + email + "	</td>"
+			html = html + "<tr>" + "	<td>" + afId + "	</td>" + "	<td>用户ID:"
+			+ userid + "<br><br>用户名:<br>"+username+"<br><br>申请姓名:"+name+"<br><br>电话:"+phone+"<br><br>邮箱："+email+"<br><br>微信："+contact+"  </td><td>创建时间：<br>" + createTime
+			+ "</br></br>审核时间：</br>" + endTime + "	</td>" + "	<td>" + state
+			+ "	</td>" +  "	<td>"
+			+ address + "	</td>" 
 			+ "	<td>";
 			if (typeof workExperience == 'string') {
 				workExperience = JSON.parse(workExperience)
@@ -74,31 +114,8 @@ function get(json) {
 					+ "</br>结束时间:" + content.endTime
 					+ "</br></br>";
 				});
-			html = html + "	</td>" + "	<td>";
-			if (typeof tips == 'string') {
-				tips = JSON.parse(tips)
-			}
-			$.each(tips, function (index, content) {
-				html = html + content.name + "</br></br>";
-			});
-			html = html
-			+ "	</td>"
-			+ "	<td>"
-			+ "	服务价格:"
-			+ servicePrice
-			+ "</br>服务时间:"
-			+ serviceTime
-			+ "</br>名称:"
-			+ serviceTitle
-			+ "</br>服务原因:"
-			+ serviceReason
-			+ "</br>服务内容:"
-			+ serviceContent
-			+ "</br>优势:"
-			+ serviceAdvantage
-			+ "</br>"
-			+ "	</td>"
-			+ "	<td>"
+			html = html + "	</td>";
+			html = html + "	<td>"
 			+ "	<textarea id=\"checkInfo_"
 			+ afId
 			+ "\" placeholder=\""

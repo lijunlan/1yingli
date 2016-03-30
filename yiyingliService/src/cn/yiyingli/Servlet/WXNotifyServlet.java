@@ -3,6 +3,7 @@ package cn.yiyingli.Servlet;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,9 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.ExchangeData.ExRewardForPay;
 import cn.yiyingli.Persistant.Order;
+import cn.yiyingli.Persistant.OrderList;
 import cn.yiyingli.Service.NotificationService;
+import cn.yiyingli.Service.OrderListService;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Service.RewardService;
 import cn.yiyingli.Util.LogUtil;
@@ -62,46 +66,36 @@ public class WXNotifyServlet extends HttpServlet {
 			String result = WXMessageUtil.getContent(receive, "result_code");
 			if ("SUCCESS".equals(result)) {
 				String extra_param = WXMessageUtil.getContent(receive, "attach");
-				String oid = WXMessageUtil.getContent(receive, "out_trade_no");
+				String olid = WXMessageUtil.getContent(receive, "out_trade_no");
 				if (!"none".equals(extra_param)) {
 					RewardService rewardService = (RewardService) getApplicationContext().getBean("rewardService");
-					ExRewardForPay.dealReward(rewardService, extra_param, oid);
+					ExRewardForPay.dealReward(rewardService, extra_param, olid);
 				} else {
 					String money = WXMessageUtil.getContent(receive, "total_fee");
-					OrderService orderService = (OrderService) getApplicationContext().getBean("orderService");
+					OrderListService orderListService = (OrderListService) getApplicationContext()
+							.getBean("orderListService");
 					NotificationService notificationService = (NotificationService) getApplicationContext()
 							.getBean("notificationService");
-					Order order = orderService.queryByOrderNo(oid);
-					if (order != null) {
-						if (Float.valueOf(money) / 100F == order.getMoney().floatValue()) {
-							String state = order.getState().split(",")[0];
+					OrderList orderList = orderListService.queryByOrderListNo(olid);
+					if (orderList != null) {
+						if (Float.valueOf(money) / 100F == orderList.getPayMoney().floatValue()) {
+							String state = orderList.getState().split(",")[0];
 							if (state.equals(cn.yiyingli.Service.OrderService.ORDER_STATE_NOT_PAID)) {
-								order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + ","
-										+ order.getState());
-								finishOrder(orderService, order);
+								finishOrder(orderListService, orderList, notificationService);
 
-								NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-										"尊敬的用户，订单号为" + order.getOrderNo() + "的订单已经付款完成，请等待导师接受订单",
-										order.getCreateUser(), notificationService);
-								NotifyUtil.notifyTeacher(order.getTeacher().getPhone(),
-										order.getTeacher().getEmail(), "尊敬的导师，订单号为" + order.getOrderNo() + "的订单，用户("
-												+ order.getCustomerName() + ")已经付款，等待您的接受。",
-										order.getTeacher(), notificationService);
-								finishOrder(orderService, order);
 							} else {
-								LogUtil.error("TRADE_SUCCESS order id:" + oid + ", state is wrong", this.getClass());
-								WarnUtil.sendWarnToCTO("TRADE_SUCCESS order id:" + oid + ", state is wrong");
+								LogUtil.error("TRADE_SUCCESS orderList id:" + olid + ", state error", this.getClass());
+								WarnUtil.sendWarnToCTO(
+										"TRADE_SUCCESS orderList id:" + olid + ", has finished the payment before");
 							}
 						} else {
 							LogUtil.error(
-									"TRADE_SUCCESS order id:" + oid + ", price is wrong, it should be "
-											+ order.getMoney() + ", but it is " + Float.valueOf(money) / 100F,
+									"TRADE_SUCCESS orderList id:" + olid + ", price is wrong, it should be "
+											+ orderList.getPayMoney() + ", but it is " + Float.valueOf(money) / 100F,
 									this.getClass());
-							order.setState(
-									cn.yiyingli.Service.OrderService.ORDER_STATE_ABNORMAL + "," + order.getState());
-							WarnUtil.sendWarnToCTO("order id:" + oid + ", price is wrong, it should be "
-									+ order.getMoney() + ", but it is " + Float.valueOf(money) / 100F);
-							orderService.update(order, false);
+							orderList.setState(OrderListService.ORDER_STATE_ABNORMAL + "," + orderList.getState());
+							WarnUtil.sendWarnToCTO("orderList id:" + olid + ", price is wrong, it should be "
+									+ orderList.getPayMoney() + ", but it is " + Float.valueOf(money) / 100F);
 						}
 					}
 				}
@@ -120,8 +114,26 @@ public class WXNotifyServlet extends HttpServlet {
 				.getBytes("UTF-8"));
 	}
 
-	private void finishOrder(OrderService orderService, Order order) {
-		order.setPayMethod(OrderService.ORDER_PAYMETHOD_WEIXIN);
-		orderService.updateAndPlusNumber(order);
+	private void finishOrder(OrderListService orderListService, OrderList orderList,
+			NotificationService notificationService) {
+		String time = Calendar.getInstance().getTimeInMillis() + "";
+		for (Order order : orderList.getOrders()) {
+			order.setState(cn.yiyingli.Service.OrderService.ORDER_STATE_FINISH_PAID + "," + order.getState());
+			order.setPayTime(time);
+			order.setPayMethod(OrderService.ORDER_PAYMETHOD_WEIXIN);
+			NotifyUtil.notifyManager(new SuperMap().put("type", "waitConfirm").finishByJson());
+			// TimeTaskUtil.sendTimeTask("change", "order",
+			// (Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24)
+			// + "",
+			// new SuperMap().put("state", order.getState()).put("orderId",
+			// order.getOrderNo()).finishByJson());
+		}
+		orderList.setState(OrderListService.ORDER_STATE_FINISH_PAID + "," + orderList.getState());
+		orderListService.updateAndPlusNumber(orderList);
+		NotifyUtil.notifyUserOrder(orderList, "尊敬的用户，流水号为" + orderList.getOrderListNo() + "的订单组已经付款完成，请等待导师接受订单",
+				orderList.getUser(), notificationService);
+		NotifyUtil.notifyTeacher(orderList,
+				"尊敬的导师，流水号为" + orderList.getOrderListNo() + "的订单组，用户(" + orderList.getCustomerName() + ")已经付款，等待您的接受。",
+				notificationService);
 	}
 }

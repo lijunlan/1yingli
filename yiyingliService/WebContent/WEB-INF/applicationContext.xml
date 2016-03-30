@@ -21,11 +21,10 @@
 				<value>cn.yiyingli.Persistant.Comment</value>
 				<value>cn.yiyingli.Persistant.StudyExperience</value>
 				<value>cn.yiyingli.Persistant.WorkExperience</value>
-				<value>cn.yiyingli.Persistant.FreeTime</value>
 				<value>cn.yiyingli.Persistant.LinkinInfo</value>
 				<value>cn.yiyingli.Persistant.Teacher</value>
 				<value>cn.yiyingli.Persistant.Tip</value>
-				<value>cn.yiyingli.Persistant.TService</value>
+				<value>cn.yiyingli.Persistant.ServicePro</value>
 				<value>cn.yiyingli.Persistant.Voucher</value>
 				<value>cn.yiyingli.Persistant.CheckNo</value>
 				<value>cn.yiyingli.Persistant.Record</value>
@@ -36,7 +35,11 @@
 				<value>cn.yiyingli.Persistant.TeacherDemand</value>
 				<value>cn.yiyingli.Persistant.Passage</value>
 				<value>cn.yiyingli.Persistant.UserLikePassage</value>
+				<value>cn.yiyingli.Persistant.UserLikeServicePro</value>
+				<value>cn.yiyingli.Persistant.OrderList</value>
 				<value>cn.yiyingli.Persistant.Reward</value>
+				<value>cn.yiyingli.Persistant.Pages</value>
+				<value>cn.yiyingli.Persistant.ContentAndPage</value>
 			</list>
 		</property>
 	</bean>
@@ -67,6 +70,24 @@
 
 
 	<!-- !!!!!Dao!!!!! -->
+	<bean id="pagesDao" class="cn.yiyingli.Dao.Impl.PagesDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="contentAndPageDao" class="cn.yiyingli.Dao.Impl.ContentAndPageDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="orderListDao" class="cn.yiyingli.Dao.Impl.OrderListDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
 	<bean id="rewardDao" class="cn.yiyingli.Dao.Impl.RewardDaoImpl">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
@@ -176,12 +197,6 @@
 		</property>
 	</bean>
 
-	<bean id="freeTimeDao" class="cn.yiyingli.Dao.Impl.FreeTimeDaoImpl">
-		<property name="sessionFactory">
-			<ref local="sessionFactory" />
-		</property>
-	</bean>
-
 	<bean id="linkinInfoDao" class="cn.yiyingli.Dao.Impl.LinkinInfoDaoImpl">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
@@ -194,7 +209,7 @@
 		</property>
 	</bean>
 
-	<bean id="tServiceDao" class="cn.yiyingli.Dao.Impl.TServiceDaoImpl">
+	<bean id="serviceProDao" class="cn.yiyingli.Dao.Impl.ServiceProDaoImpl">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
 		</property>
@@ -225,6 +240,24 @@
 	</bean>
 
 	<!-- !!!!!Data Transaction Service !!!! -->
+	<bean id="contentAndPageService" parent="baseTxService">
+		<property name="target">
+			<ref local="contentAndPageServiceImpl" />
+		</property>
+	</bean>
+
+	<bean id="pagesService" parent="baseTxService">
+		<property name="target">
+			<ref local="pagesServiceImpl" />
+		</property>
+	</bean>
+
+	<bean id="orderListService" parent="baseTxService">
+		<property name="target">
+			<ref local="orderListServiceImpl" />
+		</property>
+	</bean>
+
 	<bean id="rewardService" parent="baseTxService">
 		<property name="target">
 			<ref local="rewardServiceImpl" />
@@ -297,12 +330,6 @@
 		</property>
 	</bean>
 
-	<bean id="freeTimeService" parent="baseTxService">
-		<property name="target">
-			<ref local="freeTimeServiceImpl" />
-		</property>
-	</bean>
-
 	<bean id="linkinInfoService" parent="baseTxService">
 		<property name="target">
 			<ref local="linkinInfoServiceImpl" />
@@ -327,9 +354,9 @@
 		</property>
 	</bean>
 
-	<bean id="tServiceService" parent="baseTxService">
+	<bean id="serviceProService" parent="baseTxService">
 		<property name="target">
-			<ref local="tServiceServiceImpl" />
+			<ref local="serviceProServiceImpl" />
 		</property>
 	</bean>
 
@@ -382,6 +409,24 @@
 	</bean>
 
 	<!--!!!!Data Service Impl!!!!! -->
+	<bean id="contentAndPageServiceImpl" class="cn.yiyingli.Service.Impl.ContentAndPageServiceImpl">
+		<property name="contentAndPageDao">
+			<ref local="contentAndPageDao" />
+		</property>
+	</bean>
+
+	<bean id="pagesServiceImpl" class="cn.yiyingli.Service.Impl.PagesServiceImpl">
+		<property name="pagesDao">
+			<ref local="pagesDao" />
+		</property>
+	</bean>
+
+	<bean id="orderListServiceImpl" class="cn.yiyingli.Service.Impl.OrderListServiceImpl">
+		<property name="orderListDao">
+			<ref local="orderListDao" />
+		</property>
+	</bean>
+
 	<bean id="rewardServiceImpl" class="cn.yiyingli.Service.Impl.RewardServiceImpl">
 		<property name="rewardDao">
 			<ref local="rewardDao" />
@@ -429,8 +474,8 @@
 		<property name="notificationDao">
 			<ref local="notificationDao" />
 		</property>
-		<property name="tServiceDao">
-			<ref local="tServiceDao" />
+		<property name="serviceProDao">
+			<ref local="serviceProDao" />
 		</property>
 		<property name="workExperienceDao">
 			<ref local="workExperienceDao" />
@@ -524,11 +569,6 @@
 		</property>
 	</bean>
 
-	<bean id="freeTimeServiceImpl" class="cn.yiyingli.Service.Impl.FreeTimeServiceImpl">
-		<property name="freeTimeDao">
-			<ref local="freeTimeDao" />
-		</property>
-	</bean>
 
 	<bean id="linkinInfoServiceImpl" class="cn.yiyingli.Service.Impl.LinkinInfoServiceImpl">
 		<property name="linkinInfoDao">
@@ -561,8 +601,8 @@
 		<property name="studyExperienceDao">
 			<ref local="studyExperienceDao" />
 		</property>
-		<property name="tServiceDao">
-			<ref local="tServiceDao" />
+		<property name="serviceProDao">
+			<ref local="serviceProDao" />
 		</property>
 	</bean>
 
@@ -572,9 +612,12 @@
 		</property>
 	</bean>
 
-	<bean id="tServiceServiceImpl" class="cn.yiyingli.Service.Impl.TServiceServiceImpl">
-		<property name="tServiceDao">
-			<ref local="tServiceDao" />
+	<bean id="serviceProServiceImpl" class="cn.yiyingli.Service.Impl.ServiceProServiceImpl">
+		<property name="serviceProDao">
+			<ref local="serviceProDao" />
+		</property>
+		<property name="userDao">
+			<ref local="userDao" />
 		</property>
 	</bean>
 
@@ -875,12 +918,21 @@
 		<property name="teacherService">
 			<ref local="teacherService" />
 		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
 	</bean>
 
-	<bean id="tGetTServiceService" class="cn.yiyingli.Handle.Service.TGetTServiceService"
+	<bean id="tGetServiceProService" class="cn.yiyingli.Handle.Service.TGetServiceProService"
 		scope="prototype">
 		<property name="teacherService">
 			<ref local="teacherService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
 		</property>
 	</bean>
 
@@ -903,6 +955,9 @@
 		<property name="teacherService">
 			<ref local="teacherService" />
 		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
 	</bean>
 
 	<bean id="tGetTeacherCheckInfoService" class="cn.yiyingli.Handle.Service.TGetTeacherCheckInfoService"
@@ -910,15 +965,18 @@
 		<property name="teacherService">
 			<ref local="teacherService" />
 		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
 	</bean>
 
-	<bean id="tGetCommentListService" class="cn.yiyingli.Handle.Service.TGetCommentListService"
+	<bean id="fGetCommentListService" class="cn.yiyingli.Handle.Service.FGetCommentListService"
 		scope="prototype">
-		<property name="teacherService">
-			<ref local="teacherService" />
-		</property>
 		<property name="commentService">
 			<ref local="commentService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
 		</property>
 	</bean>
 
@@ -926,6 +984,9 @@
 		scope="prototype">
 		<property name="teacherService">
 			<ref local="teacherService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
 		</property>
 	</bean>
 
@@ -948,6 +1009,9 @@
 		<property name="teacherService">
 			<ref local="teacherService" />
 		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
 	</bean>
 
 	<bean id="fGetCheckNoService" class="cn.yiyingli.Handle.Service.FGetCheckNoService"
@@ -962,8 +1026,8 @@
 		<property name="userMarkService">
 			<ref local="userMarkService" />
 		</property>
-		<property name="orderService">
-			<ref local="orderService" />
+		<property name="orderListService">
+			<ref local="orderListService" />
 		</property>
 	</bean>
 
@@ -1015,8 +1079,8 @@
 		<property name="userMarkService">
 			<ref local="userMarkService" />
 		</property>
-		<property name="orderService">
-			<ref local="orderService" />
+		<property name="orderListService">
+			<ref local="orderListService" />
 		</property>
 		<property name="teacherService">
 			<ref local="teacherService" />
@@ -1035,11 +1099,6 @@
 			<ref local="teacherService" />
 		</property>
 	</bean>
-	<!-- <bean id="tEditTServiceInfoService" class="cn.yiyingli.Handle.Service.TEditTServiceInfoService" 
-		scope="prototype"> <property name="userMarkService"> <ref local="userMarkService" 
-		/> </property> <property name="tServiceService"> <ref local="tServiceService" 
-		/> </property> <property name="teacherService"> <ref local="teacherService" 
-		/> </property> </bean> -->
 
 	<bean id="tEditSpecialTipService" class="cn.yiyingli.Handle.Service.TEditSpecialTipService"
 		scope="prototype">
@@ -1101,10 +1160,10 @@
 		</property>
 	</bean>
 
-	<!-- <bean id="tChangeTServiceService" class="cn.yiyingli.Handle.Service.TChangeTServiceService" 
+	<!-- <bean id="tChangeserviceProService" class="cn.yiyingli.Handle.Service.TChangeserviceProService" 
 		scope="prototype"> <property name="userMarkService"> <ref local="userMarkService" 
 		/> </property> <property name="teacherService"> <ref local="teacherService" 
-		/> </property> <property name="tServiceService"> <ref local="tServiceService" 
+		/> </property> <property name="serviceProService"> <ref local="serviceProService" 
 		/> </property> </bean> -->
 
 	<bean id="tChangeTitlePriceService" class="cn.yiyingli.Handle.Service.TChangeTitlePriceService"
@@ -1115,8 +1174,8 @@
 		<property name="teacherService">
 			<ref local="teacherService" />
 		</property>
-		<property name="tServiceService">
-			<ref local="tServiceService" />
+		<property name="serviceProService">
+			<ref local="serviceProService" />
 		</property>
 	</bean>
 
@@ -1221,8 +1280,8 @@
 		<property name="userMarkService">
 			<ref local="userMarkService" />
 		</property>
-		<property name="orderService">
-			<ref local="orderService" />
+		<property name="orderListService">
+			<ref local="orderListService" />
 		</property>
 		<property name="notificationService">
 			<ref local="notificationService" />
@@ -1351,6 +1410,12 @@
 		<property name="voucherService">
 			<ref local="voucherService" />
 		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="orderListService">
+			<ref local="orderListService" />
+		</property>
 	</bean>
 
 	<bean id="tGetAlipayNoService" class="cn.yiyingli.Handle.Service.TGetAlipayNoService"
@@ -1470,6 +1535,9 @@
 		<property name="notificationService">
 			<ref local="notificationService" />
 		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
 	</bean>
 
 	<bean id="mRegisterUserService" class="cn.yiyingli.Handle.Service.MRegisterUserService"
@@ -1514,6 +1582,9 @@
 		<property name="notificationService">
 			<ref local="notificationService" />
 		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
 	</bean>
 
 	<bean id="mCreateTeacherService" class="cn.yiyingli.Handle.Service.MCreateTeacherService"
@@ -1548,7 +1619,7 @@
 		</property>
 	</bean>
 
-	<bean id="tEditTServiceService" class="cn.yiyingli.Handle.Service.TEditTServiceService"
+	<bean id="tEditserviceProService" class="cn.yiyingli.Handle.Service.TEditserviceProService"
 		scope="prototype">
 		<property name="userMarkService">
 			<ref local="userMarkService" />
@@ -1556,8 +1627,8 @@
 		<property name="teacherService">
 			<ref local="teacherService" />
 		</property>
-		<property name="tServiceService">
-			<ref local="tServiceService" />
+		<property name="serviceProService">
+			<ref local="serviceProService" />
 		</property>
 	</bean>
 
@@ -1595,6 +1666,9 @@
 
 	<bean id="fSearchService" class="cn.yiyingli.Handle.Service.FSearchService"
 		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
 	</bean>
 
 	<bean id="changePhoneService" class="cn.yiyingli.Handle.Service.ChangePhoneService"
@@ -1650,30 +1724,6 @@
 		</property>
 		<property name="userService">
 			<ref local="userService" />
-		</property>
-	</bean>
-
-	<bean id="tGetCommentCountService" class="cn.yiyingli.Handle.Service.TGetCommentCountService"
-		scope="prototype">
-		<property name="teacherService">
-			<ref local="teacherService" />
-		</property>
-	</bean>
-
-	<bean id="getOrderCountService" class="cn.yiyingli.Handle.Service.GetOrderCountService"
-		scope="prototype">
-		<property name="userMarkService">
-			<ref local="userMarkService" />
-		</property>
-	</bean>
-
-	<bean id="tGetOrderCountService" class="cn.yiyingli.Handle.Service.TGetOrderCountService"
-		scope="prototype">
-		<property name="teacherService">
-			<ref local="teacherService" />
-		</property>
-		<property name="userMarkService">
-			<ref local="userMarkService" />
 		</property>
 	</bean>
 
@@ -1767,6 +1817,12 @@
 		</property>
 		<property name="notificationService">
 			<ref local="notificationService" />
+		</property>
+		<property name="orderListService">
+			<ref local="orderListService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
 		</property>
 	</bean>
 
@@ -1958,15 +2014,18 @@
 
 	<bean id="fGetHomeTeacherListService" class="cn.yiyingli.Handle.Service.FGetHomeTeacherListService"
 		scope="prototype">
-		<property name="teacherService">
-			<ref local="teacherService" />
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService" />
 		</property>
 	</bean>
 
 	<bean id="fGetSaleTeacherListService" class="cn.yiyingli.Handle.Service.FGetSaleTeacherListService"
 		scope="prototype">
-		<property name="teacherService">
-			<ref local="teacherService" />
+		<property name="pagesService">
+			<ref local="pagesService" />
+		</property>
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService" />
 		</property>
 	</bean>
 
@@ -2100,24 +2159,11 @@
 		<property name="teacherService">
 			<ref local="teacherService" />
 		</property>
-		<property name="tServiceService">
-			<ref local="tServiceService" />
+		<property name="serviceProService">
+			<ref local="serviceProService" />
 		</property>
 		<property name="tipService">
 			<ref local="tipService" />
-		</property>
-	</bean>
-
-	<bean id="tEditSimpleInfoService" class="cn.yiyingli.Handle.Service.TEditSimpleInfoService"
-		scope="prototype">
-		<property name="userMarkService">
-			<ref local="userMarkService" />
-		</property>
-		<property name="teacherService">
-			<ref local="teacherService" />
-		</property>
-		<property name="tServiceService">
-			<ref local="tServiceService" />
 		</property>
 	</bean>
 
@@ -2182,6 +2228,46 @@
 		</property>
 		<property name="orderService">
 			<ref local="orderService" />
+		</property>
+	</bean>
+
+	<bean id="fGetSaleServiceProListService"
+		class="cn.yiyingli.Handle.Service.FGetSaleServiceProListService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="pagesService">
+			<ref local="pagesService" />
+		</property>
+	</bean>
+
+
+	<bean id="fGetHomeServiceProListService"
+		class="cn.yiyingli.Handle.Service.FGetHomeServiceProListService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+	</bean>
+
+	<bean id="mGetServiceProService" class="cn.yiyingli.Handle.Service.MGetServiceProService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+	</bean>
+
+	<bean id="mEditServiceProService" class="cn.yiyingli.Handle.Service.MEditServiceProService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
 		</property>
 	</bean>
 
@@ -2266,22 +2352,467 @@
 			<ref local="orderService" />
 		</property>
 	</bean>
-	
+
 	<bean id="fGetWXPayUrlService" class="cn.yiyingli.Handle.Service.FGetWXPayUrlService"
 		scope="prototype">
-		<property name="orderService">
-			<ref local="orderService" />
+		<property name="orderListService">
+			<ref local="orderListService" />
 		</property>
 		<property name="userMarkService">
 			<ref local="userMarkService" />
 		</property>
 	</bean>
-		
+
 	<bean id="fGetWXRewardUrlService" class="cn.yiyingli.Handle.Service.FGetWXRewardUrlService"
 		scope="prototype">
 		<property name="userMarkService">
 			<ref local="userMarkService" />
 		</property>
+		<property name="rewardService">
+			<ref local="rewardService" />
+		</property>
 	</bean>
+
+	<bean id="mCreateServiceProService" class="cn.yiyingli.Handle.Service.MCreateServiceProService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userService">
+			<ref local="userService" />
+		</property>
+	</bean>
+
+	<bean id="tEditServiceProService" class="cn.yiyingli.Handle.Service.TEditServiceProService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+	</bean>
+
+	<bean id="tCreateServiceProService" class="cn.yiyingli.Handle.Service.TCreateServiceProService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+	</bean>
+
+	<bean id="tGetServiceProListService" class="cn.yiyingli.Handle.Service.TGetServiceProListService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+	</bean>
+
+	<bean id="tRemoveServiceProService" class="cn.yiyingli.Handle.Service.TRemoveServiceProService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+	</bean>
+
+	<bean id="mGetServiceProListService" class="cn.yiyingli.Handle.Service.MGetServiceProListService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userService">
+			<ref local="userService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mValidateServiceProService" class="cn.yiyingli.Handle.Service.MValidateServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="fGetCommentListByServiceProService"
+		class="cn.yiyingli.Handle.Service.FGetCommentListByServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="commentService">
+			<ref local="commentService" />
+		</property>
+	</bean>
+
+	<bean id="fGetServiceProService" class="cn.yiyingli.Handle.Service.FGetServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="recordService">
+			<ref local="recordService" />
+		</property>
+	</bean>
+
+	<bean id="fGetServiceProListSerivce" class="cn.yiyingli.Handle.Service.FGetServiceProListSerivce"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="fGetServiceProListByKindService"
+		class="cn.yiyingli.Handle.Service.FGetServiceProListByKindService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="recordService">
+			<ref local="recordService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="likeServiceProService" class="cn.yiyingli.Handle.Service.LikeServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="disLikeServiceProService" class="cn.yiyingli.Handle.Service.DisLikeServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="isLikeServiceProService" class="cn.yiyingli.Handle.Service.IsLikeServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="uGetLikeServiceProService" class="cn.yiyingli.Handle.Service.UGetLikeServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="loginByWeixinPlatformService" class="cn.yiyingli.Handle.Service.LoginByWeixinPlatformService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="userService">
+			<ref local="userService" />
+		</property>
+	</bean>
+
+	<bean id="tGetCommentListService" class="cn.yiyingli.Handle.Service.TGetCommentListService"
+		scope="prototype">
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="commentService">
+			<ref local="commentService" />
+		</property>
+	</bean>
+
+	<bean id="tGetRewardService" class="cn.yiyingli.Handle.Service.TGetRewardService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="rewardService">
+			<ref local="rewardService" />
+		</property>
+	</bean>
+
+	<bean id="mGetRewardListService" class="cn.yiyingli.Handle.Service.MGetRewardListService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="rewardService">
+			<ref local="rewardService" />
+		</property>
+	</bean>
+
+	<bean id="mGetRewardByTeacherService" class="cn.yiyingli.Handle.Service.MGetRewardByTeacherService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="rewardService">
+			<ref local="rewardService" />
+		</property>
+	</bean>
+
+	<bean id="mFinishPayRewardService" class="cn.yiyingli.Handle.Service.MFinishPayRewardService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="rewardService">
+			<ref local="rewardService" />
+		</property>
+	</bean>
+
+	<bean id="fGetMoreServiceProService" class="cn.yiyingli.Handle.Service.FGetMoreServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+	</bean>
+
+	<bean id="fSearchServiceProService" class="cn.yiyingli.Handle.Service.FSearchServiceProService"
+		scope="prototype">
+	</bean>
+
+	<bean id="tEditSimpleServiceProService" class="cn.yiyingli.Handle.Service.TEditSimpleServiceProService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="mChangeUserNameService" class="cn.yiyingli.Handle.Service.MChangeUserNameService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="userService">
+			<ref local="userService" />
+		</property>
+	</bean>
+
+	<bean id="mRemoveServiceProService" class="cn.yiyingli.Handle.Service.MRemoveServiceProService"
+		scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+	</bean>
+
+	<bean id="fGetSearchServiceProHintService"
+		class="cn.yiyingli.Handle.Service.FGetSearchServiceProHintService"
+		scope="prototype">
+	</bean>
+
+	<bean id="tAbandonOrderService" class="cn.yiyingli.Handle.Service.TAbandonOrderService"
+		scope="prototype">
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+		<property name="notificationService">
+			<ref local="notificationService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="tFinishOrderService" class="cn.yiyingli.Handle.Service.TFinishOrderService"
+		scope="prototype">
+		<property name="orderService">
+			<ref local="orderService" />
+		</property>
+		<property name="notificationService">
+			<ref local="notificationService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="fGetRecommendServiceProListService"
+		class="cn.yiyingli.Handle.Service.FGetRecommendServiceProListService"
+		scope="prototype">
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="fRecordRecommandServiceProService"
+		class="cn.yiyingli.Handle.Service.FRecordRecommandServiceProService"
+		scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService" />
+		</property>
+	</bean>
+
+	<bean id="fGetSalePassageListService" class="cn.yiyingli.Handle.Service.FGetSalePassageListService"
+		scope="prototype">
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+	</bean>
+
+	<bean id="mCloseVoucherService" class="cn.yiyingli.Handle.Service.MCloseVoucherService"
+		scope="prototype">
+		<property name="voucherService">
+			<ref local="voucherService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mGetActivityListService" class="cn.yiyingli.Handle.Service.MGetActivityListService"
+		scope="prototype">
+		<property name="pagesService">
+			<ref local="pagesService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mRemoveActivityService" class="cn.yiyingli.Handle.Service.MRemoveActivityService"
+		scope="prototype">
+		<property name="pagesService">
+			<ref local="pagesService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mGetActivityService" class="cn.yiyingli.Handle.Service.MGetActivityService"
+		scope="prototype">
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mRemoveActivityContentService"
+		class="cn.yiyingli.Handle.Service.MRemoveActivityContentService"
+		scope="prototype">
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mCreateActivityService" class="cn.yiyingli.Handle.Service.MCreateActivityService"
+		scope="prototype">
+		<property name="pagesService">
+			<ref local="pagesService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mCreateActivityContentService"
+		class="cn.yiyingli.Handle.Service.MCreateActivityContentService"
+		scope="prototype">
+		<property name="pagesService">
+			<ref local="pagesService" />
+		</property>
+		<property name="serviceProService">
+			<ref local="serviceProService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="passageService">
+			<ref local="passageService" />
+		</property>
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService" />
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="fGetActivityService" class="cn.yiyingli.Handle.Service.FGetActivityService"
+		scope="prototype">
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService" />
+		</property>
+		<property name="pagesService">
+			<ref local="pagesService" />
+		</property>
+	</bean>
+
+
 
 </beans>

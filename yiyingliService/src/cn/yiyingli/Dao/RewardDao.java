@@ -14,6 +14,8 @@ public interface RewardDao {
 
 	Reward query(long id);
 
+	Long queryRewardNoByTeacher(long teacherId);
+
 	Reward query(String rewardNo);
 
 	Float queryMoneyByTeacher(long teacherId, Boolean finishPay, Boolean finishSalary);

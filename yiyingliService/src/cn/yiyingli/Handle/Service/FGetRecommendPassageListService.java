@@ -44,14 +44,12 @@ public class FGetRecommendPassageListService extends MsgService {
 
 	@Override
 	public void doit() {
-
-		String passageId = (String) getData().get("passageId");
+		String passageId =  getData().getString("passageId");
 		String result = SendMsgToBaiduUtil.getRecommendPassageListAbout(passageId);
-
-		getTeacherInfo(result);
+		getPassageInfo(result);
 	}
 
-	private void getTeacherInfo(String result) {
+	private void getPassageInfo(String result) {
 		JSONObject r = JSONObject.fromObject(result);
 		if (r.getInt("Code") != 300 && r.getInt("Code") != 301 && r.getInt("Code") != 302 && r.getInt("Code") != 303
 				&& r.getInt("Code") != 304) {
@@ -68,12 +66,18 @@ public class FGetRecommendPassageListService extends MsgService {
 		List<Passage> passages = null;
 		if (ids.size() > 0) {
 			passages = getPassageService().queryListByIds(ids);
+			if (passages.size() == 0) {
+				passages = getPassageService().queryListByRecommand(0, PassageDao.PASSAGE_STATE_OK, true);
+			}
 		} else {
 			passages = getPassageService().queryListByRecommand(0, PassageDao.PASSAGE_STATE_OK, true);
 		}
 		SuperMap map = MsgUtil.getSuccessMap();
 		JSONArray jsonPassages = new JSONArray();
 		for (Passage passage : passages) {
+			if (passage.getId().longValue() == getData().getLong("passageId")) {
+				continue;
+			}
 			SuperMap m = new SuperMap();
 			ExPassage.assembleSimple(passage, m);
 			jsonPassages.add(m.finish());

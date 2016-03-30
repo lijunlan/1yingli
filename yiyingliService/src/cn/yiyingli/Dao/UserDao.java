@@ -5,6 +5,7 @@ import java.util.List;
 import cn.yiyingli.Persistant.Distributor;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.UserLikePassage;
+import cn.yiyingli.Persistant.UserLikeServicePro;
 import cn.yiyingli.Persistant.UserLikeTeacher;
 
 public interface UserDao {
@@ -23,9 +24,13 @@ public interface UserDao {
 
 	void update(User user);
 
+	void updateUsername(User user);
+
 	void updateLikeTeacher(UserLikeTeacher userLikeTeacher);
-	
+
 	void updateLikePassage(UserLikePassage userLikePassage);
+
+	void updateLikeServicePro(UserLikeServicePro userLikeServicePro);
 
 	void updateFromSql(String sql);
 
@@ -38,6 +43,8 @@ public interface UserDao {
 	User queryByTeacherId(long teacherId);
 
 	User query(String username, boolean lazy);
+
+	User queryWithWeixinPlatform(String weixinNo);
 
 	User queryWithWeibo(String weiboNo, boolean lazy);
 

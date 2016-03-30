@@ -50,7 +50,8 @@ public class LoginByWeiboService extends ULoginMsgService {
 		User u = getUserService().queryWithWeibo(weiboNo, false);
 		if (u == null) {
 			password = MD5Util.MD5(password);
-			User user = PUserUtil.assembleUserFromWB(weiboNo, password, nickName, icon, address);
+			String nowIcon = updataIcon(icon,weiboNo);
+			User user = PUserUtil.assembleUserFromWB(weiboNo, password, nickName, nowIcon, address);
 			try {
 				getUserService().save(user);
 			} catch (Exception e) {
@@ -58,12 +59,13 @@ public class LoginByWeiboService extends ULoginMsgService {
 				setResMsg(MsgUtil.getErrorMsgByCode("15003"));
 				return;
 			}
-			returnUser(user);
+			returnUser(user, true);
 		} else {
-			if (!u.getIconUrl().equals(icon)) {
-				u.setIconUrl(icon);
+			if(!u.getIconUrl().startsWith("http://image.1yingli.cn")){
+				String nowIcon = updataIcon(u.getIconUrl(),weiboNo);
+				u.setIconUrl(nowIcon);
 			}
-			returnUser(u);
+			returnUser(u, false);
 		}
 
 	}

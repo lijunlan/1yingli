@@ -77,7 +77,7 @@ public class AlipayTransServlet extends HttpServlet {
 		// 服务器异步通知页面路径
 		String notify_url = "";
 		if (!"false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
-			notify_url = AlipayConfig.notify_url_debug;
+			notify_url = AlipayConfig.trans_notify_url_debug;
 		} else {
 			notify_url = AlipayConfig.trans_notify_url;
 		}
@@ -112,11 +112,11 @@ public class AlipayTransServlet extends HttpServlet {
 		// 必填，即参数detail_data的值中，“|”字符出现的数量加1，最大支持1000笔（即“|”字符出现的数量999个）
 
 		// 付款详细数据
-		String detail_data = batch_no + "^"
-				+ (order.getAlipayNo() == null ? order.getTeacher().getAlipay() : order.getAlipayNo()) + "^"
-				+ order.getTeacher().getName() + "^" + batch_fee + "^【一英里】" + order.getServiceTitle();
-		// 必填，格式：流水号1^收款方帐号1^真实姓名^付款金额1^备注说明1|流水号2^收款方帐号2^真实姓名^付款金额2^备注说明2....
-		
+
+		String detail_data = batch_no + "^" + order.getAlipayNo() + "^" + order.getTeacher().getName() + "^" + batch_fee
+				+ "^【一英里】服务收入";
+				// 必填，格式：流水号1^收款方帐号1^真实姓名^付款金额1^备注说明1|流水号2^收款方帐号2^真实姓名^付款金额2^备注说明2....
+
 		//////////////////////////////////////////////////////////////////////////////////
 
 		// 把请求参数打包成数组

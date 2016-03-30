@@ -14,7 +14,7 @@
 
 <body>
 
-	<!--------------------------------------------- 头部 --------------------------------------------------------------->
+	<!--------------------------------------------- 头部 ---------------------------------------------------------------->
 	<header class="am-topbar admin-header">
 		<div class="am-topbar-brand">
 			<a href="index.html"><strong>One Mile</strong> <small>一英里后台管理系统</small></a>
@@ -33,7 +33,7 @@
 			</ul>
 		</div>
 	</header>
-	<!--------------------------------------------- 侧边 --------------------------------------------------------------->
+	<!--------------------------------------------- 侧边 ---------------------------------------------------------------->
 	<div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
 		<div class="am-offcanvas-bar admin-offcanvas-bar" data-am-sticky>
 			<ul class="am-list admin-sidebar-list">
@@ -101,14 +101,22 @@
 						<button class="am-btn am-btn-secondary am-btn-block"
 							onclick="regist()">注册</button>
 						<br>
-
+					</div>
+					<div>
+						<input id="oldusername" placeholder="旧用户名"
+							class="am-form-field am-round"></input> <br> 
+						<input id="newusername" placeholder="新用户名"
+							class="am-form-field am-round"></input> <br>
+						<button class="am-btn am-btn-secondary am-btn-block"
+							onclick="changeUsername()">修改用户名</button>
+						<br>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!--------------------------------------------- 主要部分 --------------------------------------------------------------->
+	<!--------------------------------------------- 主要部分 ---------------------------------------------------------------->
 	<div class="admin-content">
 		<div class="am-cf am-padding">
 			<div class="am-fl am-cf">
@@ -132,6 +140,16 @@
 				<div class="am-input-group am-input-group-secondary">
 					<div id='onServiceDiv' class="switch" data-on-label="YES" data-off-label="NO" data-off="info">
 						<input id='onService' type="checkbox" checked />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">是否提醒关注者，自己的下单情况</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<div id='onNotifyDiv' class="switch" data-on-label="YES" data-off-label="NO" data-off="info">
+						<input id='onNotify' type="checkbox" checked />
 					</div>
 				</div>
 			</div>
@@ -208,7 +226,7 @@
 					<img id="littleIcon" src="icon/littleIcon.png"
 						class="am-img-thumbnail">
 				</div>
-			</div>
+			</div>	
 			<div class="am-hide-sm-only am-u-md-3">
 				<a id="select-picture-src" class="am-btn am-btn-secondary am-round"></a>
 				<button class="am-btn am-btn-secondary am-round" id="submit"
@@ -216,7 +234,20 @@
 				<div id="imagelist" style="min-height: 10px; max-height: 55px"></div>
 			</div>
 			<div class="am-hide-sm-only am-u-md-3"></div>
-
+		</div>
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">背景URL</div>
+			<div class="am-u-sm-8 am-u-md-4" id="divForBg">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+						class="am-icon-file-photo-o am-icon-fw"></i></span> <input id="bgUrl"
+						type="text" class="am-form-field" placeholder="点击右侧按钮选择背景">
+				</div>
+			</div>
+			<div class="am-hide-sm-only am-u-md-6">
+				<button class="am-btn am-btn-secondary am-round" id="selectBg"
+					onclick="selectBg()">浏览</button>
+			</div>
 		</div>
 		<div class="am-g am-margin-top">
 			<div class="am-u-sm-4 am-u-md-2 am-text-right">话题</div>
@@ -225,6 +256,17 @@
 					<span class="am-input-group-label"><i
 						class="am-icon-edit am-icon-fw"></i></span> <input id="serviceTitle"
 						type="text" class="am-form-field" placeholder="title">
+				</div>
+			</div>
+		</div>
+		
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">是否开启微聊</div>
+			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+				<div class="am-input-group am-input-group-secondary">
+					<div id='onChatDiv' class="switch" data-on-label="YES" data-off-label="NO" data-off="info">
+						<input id='onChat' type="checkbox" checked />
+					</div>
 				</div>
 			</div>
 		</div>
@@ -239,16 +281,6 @@
 			</div>
 		</div>
 		<div class="am-g am-margin-top">
-			<div class="am-u-sm-4 am-u-md-2 am-text-right">时间</div>
-			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
-				<div class="am-input-group am-input-group-secondary">
-					<span class="am-input-group-label"><i
-						class="am-icon-dashboard am-icon-fw"></i></span> <input id="serviceTime"
-						type="text" class="am-form-field" placeholder="时间">
-				</div>
-			</div>
-		</div>
-		<div class="am-g am-margin-top">
 			<div class="am-u-sm-4 am-u-md-2 am-text-right">价格</div>
 			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
 				<div class="am-input-group am-input-group-secondary">
@@ -259,28 +291,10 @@
 			</div>
 		</div>
 		<div class="am-g am-margin-top">
-			<div class="am-u-sm-4 am-u-md-2 am-text-right">每周服务次数</div>
-			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
-				<div class="am-input-group am-input-group-secondary">
-					<span class="am-input-group-label"><i
-						class="am-icon-group am-icon-fw"></i></span> <input
-						id="serviceTimePerWeek" type="text" class="am-form-field"
-						placeholder="导师每周服务次数">
-				</div>
-			</div>
-		</div>
-		<div class="am-g am-margin-top">
-			<div class="am-u-sm-12 am-u-md-2 am-text-right">服务内容</div>
-			<div class="am-u-sm-12 am-u-md-10">
-				<textarea id="serviceContent" rows="10" placeholder="请输入导师服务的具体内容"
-					style="margin-top: 0px; margin-bottom: 0px; height: 208px; width: 500px"></textarea>
-			</div>
-		</div>
-		<div class="am-g am-margin-top">
 			<div class="am-u-sm-12 am-u-md-2 am-text-right">自我介绍</div>
 			<div class="am-u-sm-12 am-u-md-10">
-				<textarea id="introduce" rows="10" placeholder=""
-					style="margin-top: 0px; margin-bottom: 0px; height: 208px; width: 500px"></textarea>
+				<textarea name="introduce" id="introduce" rows="40" >
+            	</textarea>
 			</div>
 		</div>
 		<div class="am-g am-margin-top">
@@ -329,22 +343,7 @@
 				</label> <label class="am-checkbox"> <input id="checkbox16"
 					type="checkbox" value="" data-am-ucheck name='checkbox'>
 					猎奇分享
-				</label> <label class="am-checkbox"> <input id="checkbox32"
-					type="checkbox" value="" data-am-ucheck name='checkbox'> 学霸
-				</label> <label class="am-checkbox"> <input id="checkbox64"
-					type="checkbox" value="" data-am-ucheck name='checkbox'> 奇葩
-				</label> <label class="am-checkbox"> <input id="checkbox128"
-					type="checkbox" value="" data-am-ucheck name='checkbox'>
-					开飞机
-				</label> <label class="am-checkbox"> <input id="checkbox256"
-					type="checkbox" value="" data-am-ucheck name='checkbox'> 跑酷
-				</label> <label class="am-checkbox"> <input id="checkbox512"
-					type="checkbox" value="" data-am-ucheck name='checkbox'> 赛车
-				</label> <label class="am-checkbox"> <input id="checkbox1024"
-					type="checkbox" value="" data-am-ucheck name='checkbox'> 潜水
-				</label> <label class="am-checkbox"> <input id="checkbox2048"
-					type="checkbox" value="" data-am-ucheck name='checkbox'> 骑马
-				</label>
+				</label> 
 			</div>
 		</div>
 		<div class="am-g am-margin-top">
@@ -368,96 +367,7 @@
 				</label>
 			</div>
 		</div>
-		<div class="am-g am-margin-top">
-			<div class="am-u-sm-4 am-u-md-2 am-text-right">显示权重-留学领航</div>
-			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
-				<div class="am-input-group am-input-group-secondary">
-					<span class="am-input-group-label"><i
-						class="am-icon-bar-chart am-icon-fw"></i></span> <input id="showWeight1"
-						type="text" class="am-form-field" placeholder="留学领航">
-				</div>
-			</div>
-		</div>
-		<div class="am-g am-margin-top">
-			<div class="am-u-sm-4 am-u-md-2 am-text-right">显示权重-校园生活</div>
-			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
-				<div class="am-input-group am-input-group-secondary">
-					<span class="am-input-group-label"><i
-						class="am-icon-bar-chart am-icon-fw"></i></span> <input id="showWeight8"
-						type="text" class="am-form-field" placeholder="校园生活">
-				</div>
-			</div>
-		</div>
-		<div class="am-g am-margin-top">
-			<div class="am-u-sm-4 am-u-md-2 am-text-right">显示权重-求职就业</div>
-			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
-				<div class="am-input-group am-input-group-secondary">
-					<span class="am-input-group-label"><i
-						class="am-icon-bar-chart am-icon-fw"></i></span> <input id="showWeight2"
-						type="text" class="am-form-field" placeholder="求职就业">
-				</div>
-			</div>
-		</div>
-		<div class="am-g am-margin-top">
-			<div class="am-u-sm-4 am-u-md-2 am-text-right">显示权重-创业助力</div>
-			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
-				<div class="am-input-group am-input-group-secondary">
-					<span class="am-input-group-label"><i
-						class="am-icon-bar-chart am-icon-fw"></i></span> <input id="showWeight4"
-						type="text" class="am-form-field" placeholder="创业助力">
-				</div>
-			</div>
-		</div>
-		<div class="am-g am-margin-top">
-			<div class="am-u-sm-4 am-u-md-2 am-text-right">显示权重-猎奇分享</div>
-			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
-				<div class="am-input-group am-input-group-secondary">
-					<span class="am-input-group-label"><i
-						class="am-icon-bar-chart am-icon-fw"></i></span> <input id="showWeight16"
-						type="text" class="am-form-field" placeholder="猎奇分享">
-				</div>
-			</div>
-		</div>
-		<div class="am-g am-margin-top">
-			<div class="am-u-sm-4 am-u-md-2 am-text-right">主页权重</div>
-			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
-				<div class="am-input-group am-input-group-secondary">
-					<span class="am-input-group-label"><i
-						class="am-icon-bar-chart am-icon-fw"></i></span> <input id="homeWeight"
-						type="text" class="am-form-field" placeholder="主页权重">
-				</div>
-			</div>
-		</div>
-		<div class="am-g am-margin-top">
-			<div class="am-u-sm-4 am-u-md-2 am-text-right">打折权重</div>
-			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
-				<div class="am-input-group am-input-group-secondary">
-					<span class="am-input-group-label"><i
-						class="am-icon-bar-chart am-icon-fw"></i></span> <input id="saleWeight"
-						type="text" class="am-form-field" placeholder="打折权重">
-				</div>
-			</div>
-		</div>
-		<div class="am-g am-margin-top">
-			<div class="am-u-sm-4 am-u-md-2 am-text-right">是否打折</div>
-			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
-				<div class="am-input-group am-input-group-secondary">
-					<div id='onSaleDiv' class="switch" data-on-label="YES" data-off-label="NO" data-off="info">
-						<input id='onSale' type="checkbox" checked />
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="am-g am-margin-top">
-			<div class="am-u-sm-4 am-u-md-2 am-text-right">折扣价</div>
-			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
-				<div class="am-input-group am-input-group-secondary">
-					<span class="am-input-group-label"><i
-						class="am-icon-bar-chart am-icon-fw"></i></span> <input id="pricetemp"
-						type="text" class="am-form-field" placeholder="打折后的价格">
-				</div>
-			</div>
-		</div>
+		
 		<div class="am-g am-margin-top">
 			<div class="am-u-sm-4 am-u-md-2 am-text-right"></div>
 			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end am-u-sm-offset-2">
@@ -529,6 +439,18 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-----------------------------------------------背景列表-------------------------------------------------------------->
+	<div class="am-modal am-modal-no-btn" tabindex="-1"
+		id="modalBgList">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">
+				背景列表<a href="javascript: void(0)" class="am-close am-close-spin"
+					data-am-modal-close>&times;</a>
+			</div>
+			<div class="am-modal-bd" id="container" style="overflow-y:scroll;position:relative;max-height:700px;"></div>
+		</div>
+	</div>
 
 
 	<script type="text/javascript" src="js/libs/jquery-2.1.4.min.js"></script>
@@ -545,6 +467,7 @@
 	<script type="text/javascript" src="js/libs/RSAencrypt.js"></script>
 	<script type="text/javascript" src="assets/js/amazeui.min.js"></script>
 	<script type="text/javascript" src="js/page/StuffService-common.js"></script>
+	<script type="text/javascript" src="js/ckeditor-introduce/ckeditor.js"></script>
 	<script type="text/javascript" src='js/page/editTeacherService.js'></script>
 </body>
 

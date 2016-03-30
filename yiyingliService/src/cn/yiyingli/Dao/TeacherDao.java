@@ -24,25 +24,35 @@ public interface TeacherDao {
 
 	void updateAddMile(long teacherId, long mile);
 
+	void updateAddSubMile(long teacherId, long subMile);
+
 	void updateFromSql(String sql);
+
+	Teacher query(long id);
+
+	Teacher queryWithOutStatue(long id);
+
+	Teacher queryWithUser(long id);
 
 	void updateAddLookNumber(long teacherId, long number);
 
-	Teacher query(long id, boolean lazy);
-
-	Teacher queryWithUser(long id, boolean lazy);
-
 	Boolean queryCheckLikeUser(long teacherId, long userId);
+
+	Boolean queryCheckMile(long teacherId, long subMile);
 
 	Teacher queryAll(long id);
 
-	Teacher queryWithTips(long id, boolean lazy);
+	Teacher queryWithServiceProList(long id);
 
-	Teacher queryWithLikeUser(long teacherId, boolean lazy);
+	Teacher queryForUser(long id);
 
-	Teacher queryByUserId(long userid, boolean lazy);
+	Teacher queryForTeacher(long id);
 
-	Teacher queryByUserIdWithTService(long userid, boolean lazy);
+	Teacher queryWithLikeUser(long teacherId);
+
+	Teacher queryByUserId(long userid);
+
+	Teacher queryByUserIdWithServicePro(long userid);
 
 	List<Teacher> queryByIds(long[] ids);
 
@@ -52,28 +62,10 @@ public interface TeacherDao {
 
 	List<Teacher> queryList(int page, int pageSize, boolean lazy);
 
-	List<Teacher> queryListByHomePage(int pageSize);
-
-	long queryListBySaleNo();
-
-	List<Teacher> queryListBySale(int page, int pageSize);
-
 	List<Teacher> queryListOnservice(int page, int pageSize, boolean lazy);
-
-	List<Teacher> queryByTipOrderByShow(int size, long tipMark, boolean lazy);
 
 	List<Teacher> queryListByKeyWord(String keyword, int page, int pageSize, boolean lazy);
 
-	List<Teacher> queryListByTip(int page, int pageSize, long tipMark, boolean lazy);
-
-	List<Teacher> queryListByTipOrderByLikeNo(int page, int pageSize, long tipMark, boolean lazy);
-
-	List<Teacher> queryListByTipAndLastId(long lastId, int size, long tipMark, boolean lazy);
-
-	List<Teacher> queryListByTipAndFirstId(long firstId, int size, long tipMark, boolean lazy);
-
-	List<Teacher> queryListByLevel(short level, int page, int pageSize, boolean lazy);
-
-	List<Teacher> queryListByTipAndLevel(int page, int pageSize, long tipMark, short level, boolean lazy);
+	List<Teacher> queryListByActivity(String activityKey, int page, int pageSize);
 
 }

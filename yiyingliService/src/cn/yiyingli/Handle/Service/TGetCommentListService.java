@@ -45,8 +45,7 @@ public class TGetCommentListService extends MsgService {
 
 	@Override
 	public void doit() {
-		String teacherId = (String) getData().get("teacherId");
-		Teacher teacher = getTeacherService().query(Long.valueOf(teacherId), false);
+		Teacher teacher = getTeacherService().queryWithOutStatue(getData().getLong("teacherId"));
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
@@ -77,6 +76,7 @@ public class TGetCommentListService extends MsgService {
 			map.put("nickName", c.getUser().getNickName());
 			map.put("iconUrl", c.getUser().getIconUrl());
 			map.put("serviceTitle", c.getServiceTitle());
+			map.put("serviceProId", c.getServicePro() == null ? null : c.getServicePro().getId());
 			sends.add(map.finish());
 		}
 		setResMsg(toSend.put("data", sends).finishByJson());

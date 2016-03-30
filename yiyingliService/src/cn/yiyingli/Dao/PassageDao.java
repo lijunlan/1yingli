@@ -51,4 +51,5 @@ public interface PassageDao {
 
 	List<Passage> queryListByIds(long[] ids);
 
+	List<Passage> queryListByActivity(String activityKey, int page, int pageSize);
 }

@@ -9,8 +9,8 @@ var changeTable = function (result) {
 	$("#voucherTable").empty();
 	$("#voucherTable").append(
 		"<thead><tr><th>ID</th><th>创建时间</th><th>优惠金额</th><th>优惠券验证码</th>" +
-		"<th>开始时间</th><th>结束时间</th><th>创建人</th><th>订单ID</th>" +
-		"<th>是否使用</th></tr></thead><tbody>");
+		"<th>开始时间</th><th>结束时间</th><th>创建人</th><th>适用订单</th><th>使用订单数</th>" +
+		"<th>是否使用</th><th>操作</th></tr></thead><tbody>");
 	var list = result.data;
 	$.each(list, function (index, data) {
 		var createTime = parseInt(data.createTime, 10);
@@ -27,11 +27,21 @@ var changeTable = function (result) {
 		row += startTime.toLocaleString() + "</td><td>";
 		row += endTime.toLocaleString() + "</td><td>";
 		row += data.origin + "</td><td>";
-		row += data.orderId + "</td><td>";
+		row += data.serviceProId + "</td><td>";
+		row += data.orderListCount + "</td><td>";
 		row += data.used + "</td>";
+		if(data.used=="false"){
+			row += "<td><button onClick=\"closeVoucher("+data.id+")\">关闭优惠券</button></td>";
+		}
 		$("#voucherTable").append(row);
 	})
 	$("#voucherTable").append("</tbody>");
+}
+
+function closeVoucher(voucherId){
+	myJson.method = "closeVoucher";
+	myJson.voucherId = voucherId;
+	myAjax(myJson, get);
 }
 
 var getList = function () {
@@ -105,6 +115,12 @@ $(document).ready(function () {
 			alert("time1:"+time1);
 			alert("time2:"+time2);
 			return;
+		}
+		var serviceProId = $("#serviceProId").val();
+		if(serviceProId!=null&&serviceProId!=""){
+			myJson.serviceProId = serviceProId;
+		}else{
+			delete myJson.serviceProId ;
 		}
 		myJson.method = "createVoucher";
 		myJson.money = money.toString();

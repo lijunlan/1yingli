@@ -3,7 +3,6 @@ package cn.yiyingli.Service;
 import java.util.List;
 
 import cn.yiyingli.Persistant.Notification;
-import cn.yiyingli.Persistant.Teacher;
 
 public interface NotificationService {
 
@@ -11,7 +10,7 @@ public interface NotificationService {
 
 	void save(Notification notification);
 
-	void saveWithTeacher(Notification notification, Teacher teacher);
+	void saveWithTeacher(Notification notification, long teacherId);
 
 	Long saveAndReturnId(Notification notification);
 
@@ -21,7 +20,13 @@ public interface NotificationService {
 
 	void update(Notification notification);
 
+	void updateReadAll(long userId);
+
+	void updateReadByIds(long[] ids);
+
 	long querySumNo();
+
+	long queryUnreadSumNo(long userId);
 
 	long querySumNo(long userId);
 
@@ -30,5 +35,6 @@ public interface NotificationService {
 	List<Notification> queryList(int page, int pageSize, boolean lazy);
 
 	List<Notification> queryListByUserId(long userId, int page, int pageSize, boolean lazy);
+
 
 }

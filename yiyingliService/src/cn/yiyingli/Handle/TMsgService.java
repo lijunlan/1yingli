@@ -55,20 +55,20 @@ public abstract class TMsgService extends MsgService {
 
 	@Override
 	public boolean validate() {
-		String uid = (String) getData().get("uid");
+		String uid =  getData().getString("uid");
 		User user = getUserMarkService().queryUser(uid);
 		if (user == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("14001"));
 			return false;
 		}
 		setUser(user);
-		Teacher teacher = getTeacherService().queryByUserId(user.getId(), false);
+		Teacher teacher = getTeacherService().queryByUserId(user.getId());
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("24001"));
 			return false;
 		}
 		setTeacher(teacher);
-		String teacherId = (String) getData().get("teacherId");
+		String teacherId = getData().getString("teacherId");
 		if (!teacherId.equals(teacher.getId() + "")) {
 			setResMsg(MsgUtil.getErrorMsgByCode("24002"));
 			return false;

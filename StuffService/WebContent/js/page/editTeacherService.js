@@ -4,6 +4,20 @@ var WorkExpList = new Array();
 var StudyExpList = new Array();
 checkLogin();
 registNotify();
+var editor = CKEDITOR.replace( 'introduce');
+
+editor.on( 'instanceReady', function(evt,editor){
+		    		var url = window.location.href;
+					var attri = url.split("?")[1];
+					if(attri!=null){
+						var key = attri.split("=")[0];
+						var value = attri.split("=")[1];
+						if(key=="username"&&value!=null){
+							$("#inputSearchUsername").val(value);
+							get();
+						}	
+					}
+});
 
 //图片上传
 $(document).ready(function () {
@@ -52,7 +66,33 @@ $(document).ready(function () {
 			}
 		}
 	});
+	getBgList();
 });
+
+function getBgList(){
+	myJson.method = "getBackgroundList";
+	delete myJson.page;
+	myAjax(myJson,listBg);
+}
+
+function listBg(bg){
+	var bglist = bg.data;
+	var container = $("#container");
+	container.empty();
+	$.each(bglist,function(index,content){
+		var html  =  "<div><a href=\"javascript:selectPic('"+content.url+"');\"><img style=\"width:400px;\" src=\""+content.url+"\"/></a></div><br>";
+		container.append(html);
+	});
+}
+
+function selectBg(){
+	$("#modalBgList").modal();
+}
+
+function selectPic(bgUrl){
+	$("#bgUrl").val(bgUrl);
+	$("#modalBgList").modal('close');
+}
 
 //注册导师
 function regist() {
@@ -87,16 +127,15 @@ function getAndParse(t) {
 	$("#address").val(t.address);
 	$("#email").val(t.email);
 	$("#iconUrl").val(t.iconUrl);
+	$("#bgUrl").val(t.bgUrl);
 	$("#littleIcon").attr('src',t.iconUrl);
-	$("#serviceTitle").val(t.serviceTitle);
+	$("#serviceTitle").val(t.topic);
 	$("#mileValue").val(t.mile);
-	$("#serviceTime").val(t.serviceTime);
 	//兼容不同版本api
 	t.price == null ? $("#servicePrice").val(t.servicePrice) : $("#servicePrice").val(t.price);
-	t.timeperweek == null ? $("#serviceTimePerWeek").val(t.serviceTimePerWeek) : $("#serviceTimePerWeek").val(t.timeperweek);
 	//
-	$("#serviceContent").val(t.serviceContent);
-	$("#introduce").val(t.introduce);
+	//$("#introduce").val(t.introduce);
+	editor.setData(t.introduce);
 	WorkExpList = t.workExperience;
 	$("#showWorkExp").val($.toJSON(WorkExpList));
 	StudyExpList = t.studyExperience;
@@ -104,26 +143,19 @@ function getAndParse(t) {
 	$("[name='checkbox']").uCheck('uncheck');
 	$.each(t.tips, function (index, data) {
 		$("#checkbox" + data.id).uCheck('check');
-	})
+	});
 	t.checkPhone == 'true' ? $("#checkPhone").uCheck('check') : $("#checkPhone").uCheck('uncheck');
 	t.checkEmail == 'true' ? $("#checkEmail").uCheck('check') : $("#checkEmail").uCheck('uncheck');
 	t.checkIDCard == 'true' ? $("#checkId").uCheck('check') : $("#checkId").uCheck('uncheck');
 	t.checkWork == 'true' ? $("#checkJob").uCheck('check') : $("#checkJob").uCheck('uncheck');
 	//兼容不同版本api
-	t.checkDegree == null ? checkEducation = t.checkStudy : checkEducation = t.checkDegree
+	t.checkDegree == null ? checkEducation = t.checkStudy : checkEducation = t.checkDegree;
 	checkEducation == 'true' ? $("#checkEducation").uCheck('check') : $("#checkEducation").uCheck('uncheck');
 
-	$("#showWeight1").val(t.showWeight1);
-	$("#showWeight2").val(t.showWeight2);
-	$("#showWeight4").val(t.showWeight4);
-	$("#showWeight8").val(t.showWeight8);
-	$("#showWeight16").val(t.showWeight16);
-	$("#homeWeight").val(t.homeWeight);
-	$("#saleWeight").val(t.saleWeight);
-	$('#pricetemp').val(t.pricetemp);
 	$('#actionDiv').bootstrapSwitch('setState', false)
 	t.onService == 'true' ? $('#onServiceDiv').bootstrapSwitch('setState', true) : $('#onServiceDiv').bootstrapSwitch('setState', false);
-	t.onsale == 'true' ? $('#onSaleDiv').bootstrapSwitch('setState', true) : $('#onSaleDiv').bootstrapSwitch('setState', false);
+	t.onChat == 'true' ? $('#onChatDiv').bootstrapSwitch('setState', true) : $('#onChatDiv').bootstrapSwitch('setState', false);
+	t.showNotify == 'true' ? $('#onNotifyDiv').bootstrapSwitch('setState', true) : $('#onNotifyDiv').bootstrapSwitch('setState', false);
 	Messenger().post("加载完成");
 }
 
@@ -188,7 +220,6 @@ function deleteStudyExp() {
 //提交保存
 function submit() {
 	var teacher = new Object();
-	var service = new Object();
 	var tips = new Array();
 	var send = new Object();
 	var tmp;
@@ -199,18 +230,14 @@ function submit() {
 	teacher.address = $("#address").val();
 	teacher.email = $("#email").val();
 	teacher.iconUrl = $("#iconUrl").val();
+	teacher.bgUrl = $("#bgUrl").val();
 	teacher.email = $("#email").val();
-	teacher.introduce = $("#introduce").val();
+	teacher.introduce = CKEDITOR.instances.introduce.getData();
 	teacher.workExperience = WorkExpList;
 	teacher.studyExperience = StudyExpList;
 
-	service.title = $("#serviceTitle").val();
-	service.time = $("#serviceTime").val();
-	service.price = $("#servicePrice").val();
-	service.timeperweek = $("#serviceTimePerWeek").val();
-	service.content = $("#serviceContent").val();
-	service.pricetemp = $('#pricetemp').val();
-	service.onsale = document.getElementById('onSale').checked.toString();
+	teacher.topic = $("#serviceTitle").val();
+	teacher.price = $("#servicePrice").val();
 
 	var tmpId = 1 / 2;
 	var i;
@@ -224,23 +251,18 @@ function submit() {
 		}
 	}
 
-	service.tips = tips;
+	teacher.tips = tips;
 
-	teacher.service = service;
 	teacher.checkEmail = $("#checkEmail").prop("checked") ? "true" : "false";
 	teacher.checkPhone = $("#checkPhone").prop("checked") ? "true" : "false";
 	teacher.checkWork = $("#checkJob").prop("checked") ? "true" : "false";
 	teacher.checkStudy = $("#checkEducation").prop("checked") ? "true" : "false";
 	teacher.checkIDCard = $("#checkId").prop("checked") ? "true" : "false";
-	teacher.showWeight1 = $("#showWeight1").val();
-	teacher.showWeight2 = $("#showWeight2").val();
-	teacher.showWeight4 = $("#showWeight4").val();
-	teacher.showWeight8 = $("#showWeight8").val();
-	teacher.showWeight16 = $("#showWeight16").val();
-	teacher.homeWeight = $("#homeWeight").val();
-	teacher.saleWeight = $("#saleWeight").val();
+
 	teacher.mile = $('#mileValue').val();
 	teacher.onService = document.getElementById('onService').checked.toString();
+	teacher.onChat = document.getElementById('onChat').checked.toString();
+	teacher.showNotify = document.getElementById('onNotify').checked.toString();
 	
 	send.teacher = teacher;
 	send.style = "manager";
@@ -254,8 +276,16 @@ function submit() {
 	send.mid = mid;
 	send.username = $("#username").val();
 
-	myAjax(send, null)
+	myAjax(send, null);
 	Messenger().post("操作成功");
+}
+
+function changeUsername(){
+	myJson.method = "changeUserName";
+	myJson.oldusername = $("#oldusername").val();
+	myJson.newusername = $("#newusername").val();
+	myAjax(myJson,null);
+	Messenger().post("修改用户名成功");
 }
 
 function clean() {

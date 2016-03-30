@@ -19,8 +19,13 @@ public interface ApplicationFormDao {
 	void updateFromSql(String sql);
 
 	ApplicationForm query(long id);
-	
+
+	ApplicationForm queryByTeacherName(String name);
+
 	ApplicationForm query(String userId);
 
 	List<ApplicationForm> queryList();
+
+	List<ApplicationForm> queryList(int page, int pageSize);
+
 }

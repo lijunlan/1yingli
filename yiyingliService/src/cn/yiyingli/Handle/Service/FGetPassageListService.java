@@ -44,7 +44,7 @@ public class FGetPassageListService extends MsgService {
 	@Override
 	public void doit() {
 		long tid = Long.valueOf((String) getData().get("teacherId"));
-		Teacher teacher = getTeacherService().query(tid, false);
+		Teacher teacher = getTeacherService().queryWithOutStatue(tid);
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;

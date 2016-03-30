@@ -55,7 +55,7 @@ public class GetTeacherAllInfoService extends MsgService {
 
 	@Override
 	public void doit() {
-		Teacher teacher = getTeacherService().queryWithTips(Long.valueOf((String) getData().get("teacherId")), false);
+		Teacher teacher = getTeacherService().queryForUser(Long.valueOf((String) getData().get("teacherId")));
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;

@@ -33,7 +33,7 @@ public class PPassageUtil {
 	}
 
 	public static void toEditPassageByManager(String title, String tag, String summary, String content, String imageUrl,
-			Passage passage, boolean onshow,boolean onReward) {
+			boolean onshow, boolean onReward, Passage passage) {
 		passage.setContent(content);
 		passage.setSummary(summary);
 		passage.setImageUrl(imageUrl);

@@ -36,6 +36,7 @@ public class MGetTeacherListService extends MMsgService {
 			return;
 		}
 		List<Teacher> teachers = getTeacherService().queryList(Integer.valueOf(page), false);
+
 		ExList exTeachers = new ExArrayList();
 		for (Teacher teacher : teachers) {
 			SuperMap map = new SuperMap();

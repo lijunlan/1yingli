@@ -69,7 +69,7 @@ public class GetSingleUserWeixinInfoUtil {
 				}
 
 				public void checkServerTrusted(X509Certificate[] xcs, String string) throws CertificateException {
-					
+
 				}
 
 				public X509Certificate[] getAcceptedIssuers() {
@@ -84,8 +84,8 @@ public class GetSingleUserWeixinInfoUtil {
 			SchemeRegistry sr = ccm.getSchemeRegistry();
 			sr.register(new Scheme("https", 443, ssf));
 
-			HttpGet httpget = new HttpGet(
-					"https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token + "&openid=" + openid);
+			HttpGet httpget = new HttpGet("https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token
+					+ "&openid=" + openid + "&lang=zh_CN");
 
 			HttpResponse response = httpclient.execute(httpget);
 			String result = "{}";
@@ -145,7 +145,7 @@ public class GetSingleUserWeixinInfoUtil {
 						+ SECRET_MOBILE + "&code=" + code + "&grant_type=authorization_code";
 			}
 			HttpGet httpget = new HttpGet(urls);
-			
+
 			ResponseHandler responseHandler = new BasicResponseHandler();
 			String responseBody = httpclient.execute(httpget, responseHandler);
 			JSONObject data = JSONObject.fromObject(responseBody);

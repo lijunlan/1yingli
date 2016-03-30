@@ -1,5 +1,7 @@
 package cn.yiyingli.Service.Impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import cn.yiyingli.Dao.OrderDao;
@@ -54,9 +56,11 @@ public class OrderServiceImpl implements OrderService {
 		} else {
 			getOrderDao().update(order);
 		}
-		TimeTaskUtil.sendTimeTask("change", "order",
-				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) + "",
-				new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+		// TimeTaskUtil.sendTimeTask("change", "order",
+		// (Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 48) +
+		// "",
+		// new SuperMap().put("state", order.getState()).put("orderId",
+		// order.getOrderNo()).finishByJson());
 		return order.getOrderNo();
 	}
 
@@ -85,28 +89,15 @@ public class OrderServiceImpl implements OrderService {
 		if (addMile) {
 			if (!order.getOnSale()) {
 				Teacher teacher = order.getTeacher();
-				float time = order.getTime();
-				long m = (long) (10 * time);
-				getTeacherDao().update(teacher);
+				// float time = order.getTime();
+				long m = (long) (order.getMoney() / 10 + 1);
+				// getTeacherDao().update(teacher);
 				getTeacherDao().updateAddMile(teacher.getId(), m);
 			}
 			getOrderDao().updateOrderWhenOrderFinish(order);
 		} else {
 			getOrderDao().update(order);
 		}
-		// 如果订单完成，给分销人更新数据
-		// if (order.getState().startsWith(ORDER_STATE_WAIT_COMMENT)) {
-		// if (!order.getOnSale()) {
-		// Teacher teacher = order.getTeacher();
-		// float time = order.getTime();
-		// long m = (long) (10 * time);
-		// teacher.setMile(teacher.getMile() + m);
-		// getTeacherDao().update(teacher);
-		// }
-		// getOrderDao().updateOrderWhenOrderFinish(order);
-		// } else {
-		// getOrderDao().update(order);
-		// }
 		// 通知管理员
 		if (order.getState().startsWith(ORDER_STATE_WAIT_RETURN)) {
 			NotifyUtil.notifyManager(new SuperMap().put("type", "withdraw").finishByJson());
@@ -120,13 +111,25 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void updateAndSendTimeTask(Order order) {
 		getOrderDao().update(order);
-		if (order.getState().startsWith(ORDER_STATE_TEACHER_ACCEPT)) {
-			TimeTaskUtil.sendTimeTask("change", "order",
-					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
-					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+		if (order.getState().startsWith(ORDER_STATE_WAIT_ENSURETIME)) {
+			// TimeTaskUtil.sendTimeTask("change", "order",
+			// (Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24)
+			// + "",
+			// new SuperMap().put("state", order.getState()).put("orderId",
+			// order.getOrderNo()).finishByJson());
 		} else if (order.getState().startsWith(ORDER_STATE_WAIT_SERVICE)) {
-			TimeTaskUtil.sendTimeTask("change", "order",
-					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 14) + "",
+			long time = Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 14;
+			if (order.getOkTime() != null) {
+				SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+				String okTime = order.getOkTime();
+				try {
+					java.util.Date date = sdf1.parse(okTime);
+					time = date.getTime() + 1000 * 60 * 60 * 24 * 14;
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+			TimeTaskUtil.sendTimeTask("change", "order", time + "",
 					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
 		} else if (order.getState().startsWith(ORDER_STATE_USER_DISLIKE)) {
 			TimeTaskUtil.sendTimeTask("change", "order",
@@ -135,6 +138,10 @@ public class OrderServiceImpl implements OrderService {
 		} else if (order.getState().startsWith(ORDER_STATE_USER_REGRET)) {
 			TimeTaskUtil.sendTimeTask("change", "order",
 					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 5) + "",
+					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+		} else if (order.getState().startsWith(ORDER_STATE_SERVICE_FINISH)) {
+			TimeTaskUtil.sendTimeTask("change", "order",
+					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 7) + "",
 					new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
 		}
 		// else if (order.getState().startsWith(ORDER_STATE_FINISH_PAID)) {
@@ -151,13 +158,15 @@ public class OrderServiceImpl implements OrderService {
 		if (order.getState().startsWith(ORDER_STATE_FINISH_PAID)) {
 			order.setPayTime(Calendar.getInstance().getTimeInMillis() + "");
 		}
-		getOrderDao().updateWithTeacherNumber(order, order.getTeacher());
+		getOrderDao().updateWithTeacherNumber(order, order.getTeacher().getId());
 		if (order.getState().startsWith(ORDER_STATE_FINISH_PAID)) {
 			NotifyUtil.notifyManager(new SuperMap().put("type", "waitConfirm").finishByJson());
 		}
-		TimeTaskUtil.sendTimeTask("change", "order",
-				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) + "",
-				new SuperMap().put("state", order.getState()).put("orderId", order.getOrderNo()).finishByJson());
+		// TimeTaskUtil.sendTimeTask("change", "order",
+		// (Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24) +
+		// "",
+		// new SuperMap().put("state", order.getState()).put("orderId",
+		// order.getOrderNo()).finishByJson());
 	}
 
 	@Override
@@ -216,11 +225,6 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> queryListByTServiceId(long tServiceId, String state, int page, int pageSize, boolean lazy) {
-		return getOrderDao().queryListByTServiceId(tServiceId, state, page, pageSize, lazy);
-	}
-
-	@Override
 	public List<Order> queryListByTeacherId(long teacherId, String state, int page, boolean lazy) {
 		return queryListByTeacherId(teacherId, state, page, PAGE_SIZE_INT, lazy);
 	}
@@ -228,11 +232,6 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<Order> queryListByUserId(long userId, String state, int page, boolean lazy) {
 		return queryListByUserId(userId, state, page, PAGE_SIZE_INT, lazy);
-	}
-
-	@Override
-	public List<Order> queryListByTServiceId(long tServiceId, String state, int page, boolean lazy) {
-		return queryListByTServiceId(tServiceId, state, page, PAGE_SIZE_INT, lazy);
 	}
 
 	@Override

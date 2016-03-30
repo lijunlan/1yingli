@@ -44,8 +44,13 @@ public class VoucherServiceImpl implements VoucherService {
 	}
 
 	@Override
-	public void updateWithOrderId(Voucher voucher, long orderId) {
-		getVoucherDao().updateWithOrderId(voucher, orderId);
+	public void updateWithOrderListId(Voucher voucher, long orderListId) {
+		getVoucherDao().updateWithOrderListId(voucher, orderListId);
+	}
+
+	@Override
+	public Long queryOrderListNumber(long id) {
+		return getVoucherDao().queryOrderListNumber(id);
 	}
 
 	@Override
@@ -59,8 +64,8 @@ public class VoucherServiceImpl implements VoucherService {
 	}
 
 	@Override
-	public List<Voucher> queryList(int page, int pageSize, boolean lazy) {
-		return getVoucherDao().queryList(page, pageSize, lazy);
+	public List<Voucher> queryList(int page, int pageSize) {
+		return getVoucherDao().queryList(page, pageSize);
 	}
 
 	@Override
@@ -69,8 +74,8 @@ public class VoucherServiceImpl implements VoucherService {
 	}
 
 	@Override
-	public List<Voucher> queryList(int page, boolean lazy) {
-		return queryList(page, PAGE_SIZE_INT, lazy);
+	public List<Voucher> queryList(int page) {
+		return queryList(page, PAGE_SIZE_INT);
 	}
 
 	@Override

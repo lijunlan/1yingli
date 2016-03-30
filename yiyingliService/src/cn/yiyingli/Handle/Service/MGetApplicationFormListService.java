@@ -24,8 +24,22 @@ public class MGetApplicationFormListService extends MMsgService {
 	}
 
 	@Override
+	public boolean checkData() {
+		return super.checkData() && (getData().containsKey("page") || getData().containsKey("teacherName"));
+	}
+
+	@Override
 	public void doit() {
-		List<ApplicationForm> applicationForms = getApplicationFormService().queryList();
+		List<ApplicationForm> applicationForms = null;
+		if (getData().containsKey("page")) {
+			int page = getData().getInt("page");
+			applicationForms = getApplicationFormService().queryList(page, 10);
+		} else {
+			String teacherName = getData().getString("teacherName");
+			ApplicationForm applicationForm = getApplicationFormService().queryByTeacherName(teacherName);
+			applicationForms = new ArrayList<ApplicationForm>();
+			applicationForms.add(applicationForm);
+		}
 		List<ExApplicationForm> exApplicationForms = new ArrayList<ExApplicationForm>();
 		for (ApplicationForm applicationForm : applicationForms) {
 			ExApplicationForm exApplicationForm = new ExApplicationForm();

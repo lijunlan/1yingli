@@ -46,8 +46,11 @@ public class PassageServiceImpl implements PassageService {
 	}
 
 	@Override
-	public void save(Passage passage) {
+	public void save(Passage passage, boolean updateToBaidu) {
 		getPassageDao().saveAndCount(passage, passage.getOwnTeacher());
+		if (updateToBaidu) {
+			SendMsgToBaiduUtil.updatePassageData(passage);
+		}
 	}
 
 	@Override
@@ -120,6 +123,11 @@ public class PassageServiceImpl implements PassageService {
 	@Override
 	public List<Passage> queryList(int page, int pageSize) {
 		return getPassageDao().queryList(page, pageSize);
+	}
+
+	@Override
+	public List<Passage> queryListByActivity(String activityKey, int page, int pageSize) {
+		return getPassageDao().queryListByActivity(activityKey, page, pageSize);
 	}
 
 	@Override

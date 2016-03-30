@@ -14,6 +14,7 @@ import cn.yiyingli.Dao.UserDao;
 import cn.yiyingli.Persistant.Distributor;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.UserLikePassage;
+import cn.yiyingli.Persistant.UserLikeServicePro;
 import cn.yiyingli.Persistant.UserLikeTeacher;
 
 public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
@@ -61,6 +62,17 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	}
 
 	@Override
+	public void updateUsername(User user) {
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session.createSQLQuery(
+				"update user set user.USERNAME='" + user.getUsername() + "' where user.USER_ID=" + user.getId());
+		query.executeUpdate();
+		query = session.createSQLQuery(
+				"update teacher set teacher.USERNAME='" + user.getUsername() + "' where teacher.USER_ID=" + user.getId());
+		query.executeUpdate();
+	}
+
+	@Override
 	public void updateLikeTeacher(UserLikeTeacher userLikeTeacher) {
 		getHibernateTemplate().save(userLikeTeacher);
 		Session session = getSessionFactory().getCurrentSession();
@@ -86,6 +98,23 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 				"update passage set passage.LIKENUMBER=(select count(*) from userlikepassage where userlikepassage.PASSAGE_ID='"
 						+ userLikePassage.getPassage().getId() + "') where passage.PASSAGE_ID="
 						+ userLikePassage.getPassage().getId());
+		query.executeUpdate();
+	}
+
+	@Override
+	public void updateLikeServicePro(UserLikeServicePro userLikeServicePro) {
+		getHibernateTemplate().save(userLikeServicePro);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session.createSQLQuery(
+				"update user set user.LIKESERVICEPRONUMBER=(select count(*) from userlikeservicepro where userlikeservicepro.USER_ID='"
+						+ userLikeServicePro.getUser().getId() + "') where user.USER_ID="
+						+ userLikeServicePro.getUser().getId());
+		query.executeUpdate();
+		query = session.createSQLQuery(
+				"update servicepro set servicepro.LIKENO=(select count(*) from userlikeservicepro where userlikeservicepro.SERVICEPRO_ID='"
+						+ userLikeServicePro.getServicePro().getId() + "') where servicepro.SERVICEPRO_ID="
+						+ userLikeServicePro.getServicePro().getId());
 		query.executeUpdate();
 	}
 
@@ -193,6 +222,17 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 					+ "left join fetch u.teacher left join fetch u.cvs left join fetch u.ownSiteDiscounts"
 					+ " left join fetch u.givecomments where u.wechatNo=?";
 		}
+		@SuppressWarnings("unchecked")
+		List<User> list = getHibernateTemplate().find(hql, weixinNo);
+		if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
+
+	@Override
+	public User queryWithWeixinPlatform(String weixinNo) {
+		String hql = "from User u where u.wechatPlatformNo=?";
 		@SuppressWarnings("unchecked")
 		List<User> list = getHibernateTemplate().find(hql, weixinNo);
 		if (list.isEmpty())

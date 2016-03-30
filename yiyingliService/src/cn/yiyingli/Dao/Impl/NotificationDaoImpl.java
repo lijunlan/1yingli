@@ -77,6 +77,16 @@ public class NotificationDaoImpl extends HibernateDaoSupport implements Notifica
 		return sum;
 	}
 
+	@Override
+	public long queryUnreadSumNo(long userId) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		long sum = (long) session
+				.createQuery("select count(*) from Notification n where n.toUser.id=" + userId + " and n.read=false")
+				.uniqueResult();
+		return sum;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Notification> queryList(final int page, final int pageSize, final boolean lazy) {
@@ -97,6 +107,30 @@ public class NotificationDaoImpl extends HibernateDaoSupport implements Notifica
 			}
 		});
 		return list;
+	}
+
+	@Override
+	public void updateReadByIds(long[] ids) {
+		if (ids.length <= 0) {
+			return;
+		}
+		String hql = "update Notification n set n.read=true where n.id=" + ids[0];
+		if (ids.length > 1) {
+			for (int i = 1; i < ids.length; i++) {
+				hql = hql + " or n.id=" + ids[i];
+			}
+		}
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.createQuery(hql).executeUpdate();
+	}
+
+	@Override
+	public void updateReadAll(long userId) {
+		String hql = "update Notification n set n.read=true where n.toUser.id=" + userId;
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.createQuery(hql).executeUpdate();
 	}
 
 	@SuppressWarnings("unchecked")

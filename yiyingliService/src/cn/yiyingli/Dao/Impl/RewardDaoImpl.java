@@ -18,18 +18,6 @@ public class RewardDaoImpl extends HibernateDaoSupport implements RewardDao {
 	@Override
 	public void save(Reward reward) {
 		getHibernateTemplate().save(reward);
-		Session session = getSessionFactory().getCurrentSession();
-		session.flush();
-		Query query = session.createSQLQuery(
-				"update teacher set teacher.REWARDNUMBER=(select count(*) from reward where reward.TEACHER_ID='"
-						+ reward.getTeacherId() + "') where teacher.TEACHER_ID=" + reward.getTeacherId());
-		query.executeUpdate();
-		if (reward.getPassageId() != null) {
-			query = session.createSQLQuery(
-					"update passage set passage.REWARDNUMBER=(select count(*) from reward where reward.PASSAGE_ID='"
-							+ reward.getPassageId() + "') where passage.PASSAGE_ID=" + reward.getPassageId());
-			query.executeUpdate();
-		}
 	}
 
 	@Override
@@ -40,6 +28,29 @@ public class RewardDaoImpl extends HibernateDaoSupport implements RewardDao {
 	@Override
 	public void update(Reward reward) {
 		getHibernateTemplate().update(reward);
+		Session session = getSessionFactory().getCurrentSession();
+		session.flush();
+		Query query = session.createSQLQuery(
+				"update teacher set teacher.REWARDNUMBER=(select count(*) from reward where reward.TEACHER_ID='"
+						+ reward.getTeacherId() + "' and reward.FINISHPAY=true) where teacher.TEACHER_ID="
+						+ reward.getTeacherId());
+		query.executeUpdate();
+		if (reward.getPassageId() != null) {
+			query = session.createSQLQuery(
+					"update passage set passage.REWARDNUMBER=(select count(*) from reward where reward.PASSAGE_ID='"
+							+ reward.getPassageId() + "' and reward.FINISHPAY=true) where passage.PASSAGE_ID="
+							+ reward.getPassageId());
+			query.executeUpdate();
+		}
+	}
+
+	@Override
+	public Long queryRewardNoByTeacher(long teacherId) {
+		String hql = "select count(*) from Reward r where r.teacherId=" + teacherId + " and r.finishPay=true";
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = session.createQuery(hql);
+		Number peopleNo = (Number) query.uniqueResult();
+		return peopleNo.longValue();
 	}
 
 	@Override
@@ -66,17 +77,17 @@ public class RewardDaoImpl extends HibernateDaoSupport implements RewardDao {
 
 	@Override
 	public Float queryMoneyByTeacher(long teacherId, Boolean finishPay, Boolean finishSalary) {
-		String hql = "select sum(r.money) from Reward where r.teacherId=" + teacherId;
+		String hql = "select sum(r.money) from Reward r where r.teacherId=" + teacherId;
 		if (finishPay != null) {
 			hql = hql + " and r.finishPay=" + finishPay;
 		}
 		if (finishSalary != null) {
-			hql = hql + "and r.finishSalary=" + finishSalary;
+			hql = hql + " and r.finishSalary=" + finishSalary;
 		}
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = session.createQuery(hql);
-		float moneySum = (float) query.uniqueResult();
-		return moneySum;
+		Number moneySum = (Number) query.uniqueResult();
+		return moneySum == null ? 0F : moneySum.floatValue();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -86,7 +97,7 @@ public class RewardDaoImpl extends HibernateDaoSupport implements RewardDao {
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Reward>>() {
 			@Override
 			public List<Reward> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Reward r ORDER BY r.createTime DESC";
+				String hql = "from Reward r where r.finishPay=true ORDER BY r.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -104,7 +115,8 @@ public class RewardDaoImpl extends HibernateDaoSupport implements RewardDao {
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Reward>>() {
 			@Override
 			public List<Reward> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Reward r where teacherId=" + teacherId + " ORDER BY r.createTime DESC";
+				String hql = "from Reward r where teacherId=" + teacherId
+						+ " and r.finishPay=true ORDER BY r.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);

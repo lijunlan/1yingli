@@ -3,6 +3,7 @@ package cn.yiyingli.ExchangeData;
 import cn.yiyingli.Persistant.Teacher;
 import net.sf.json.JSONObject;
 
+//TODO 搜索导师展现的东西
 public class ExSearchTeacher implements ExDataToShow<Teacher> {
 
 	private String teacherId;
@@ -16,8 +17,6 @@ public class ExSearchTeacher implements ExDataToShow<Teacher> {
 	private String number;
 
 	private String name;
-
-	private String tServiceId;
 
 	private String title;
 
@@ -75,14 +74,6 @@ public class ExSearchTeacher implements ExDataToShow<Teacher> {
 		this.name = name;
 	}
 
-	public String gettServiceId() {
-		return tServiceId;
-	}
-
-	public void settServiceId(String tServiceId) {
-		this.tServiceId = tServiceId;
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -115,7 +106,6 @@ public class ExSearchTeacher implements ExDataToShow<Teacher> {
 		map.put("price", price);
 		map.put("introduce", introduce);
 		map.put("name", name);
-		map.put("tServiceId", tServiceId);
 		map.put("number", number);
 		map.put("title", title);
 		map.put("firstIdentity", firstIdentity);
@@ -128,14 +118,14 @@ public class ExSearchTeacher implements ExDataToShow<Teacher> {
 	public void setUpByPersistant(Teacher persistant) {
 		teacherId = String.valueOf(persistant.getId());
 		iconUrl = persistant.getIconUrl();
-		price = String.valueOf(persistant.gettService().getPriceTotal());
+		// price = String.valueOf(persistant.gettService().getPriceTotal());
 		introduce = persistant.getIntroduce();
 		name = persistant.getName();
-		tServiceId = String.valueOf(persistant.gettService().getId());
-		number = String.valueOf(persistant.gettService().getTimesPerWeek());
-		title = persistant.gettService().getTitle();
+		// tServiceId = String.valueOf(persistant.gettService().getId());
+		// number = String.valueOf(persistant.gettService().getTimesPerWeek());
+		// title = persistant.gettService().getTitle();
 		firstIdentity = persistant.getFirstIdentity();
-		serviceContent = persistant.gettService().getContent();
+		// serviceContent = persistant.gettService().getContent();
 		level = String.valueOf(persistant.getLevel());
 	}
 
@@ -147,7 +137,6 @@ public class ExSearchTeacher implements ExDataToShow<Teacher> {
 		map.put("price", price);
 		map.put("introduce", introduce);
 		map.put("name", name);
-		map.put("tServiceId", tServiceId);
 		map.put("number", number);
 		map.put("title", title);
 		map.put("firstIdentity", firstIdentity);

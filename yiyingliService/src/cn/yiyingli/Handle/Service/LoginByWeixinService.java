@@ -60,7 +60,8 @@ public class LoginByWeixinService extends ULoginMsgService {
 		User u = getUserService().queryWithWeixin(weixinNo, false);
 		if (u == null) {
 			password = MD5Util.MD5(password);
-			User user = PUserUtil.assembleUserFromWX(weixinNo, password, nickName, icon, address);
+			String nowIcon = updataIcon(icon,weixinNo);
+			User user = PUserUtil.assembleUserFromWX(weixinNo, password, nickName, nowIcon, address);
 			try {
 				getUserService().save(user);
 			} catch (Exception e) {
@@ -68,12 +69,13 @@ public class LoginByWeixinService extends ULoginMsgService {
 				setResMsg(MsgUtil.getErrorMsgByCode("15003"));
 				return;
 			}
-			returnUser(user);
+			returnUser(user,true);
 		} else {
-			if (!u.getIconUrl().equals(icon)) {
-				u.setIconUrl(icon);
+			if(!u.getIconUrl().startsWith("http://image.1yingli.cn")){
+				String nowIcon = updataIcon(u.getIconUrl(),weixinNo);
+				u.setIconUrl(nowIcon);
 			}
-			returnUser(u);
+			returnUser(u,false);
 		}
 
 	}

@@ -32,12 +32,12 @@ public interface OrderService {
 	public static final String ORDER_STATE_FINISH_PAID = "0300";
 
 	/**
-	 * 导师已经确认，等待确认时间
+	 * 等待导师确认时间
 	 */
-	public static final String ORDER_STATE_TEACHER_ACCEPT = "0400";
+	public static final String ORDER_STATE_WAIT_ENSURETIME = "0400";
 
 	/**
-	 * 已经约定好时间，等待服务
+	 * 等待服务
 	 */
 	public static final String ORDER_STATE_WAIT_SERVICE = "0500";
 
@@ -56,10 +56,10 @@ public interface OrderService {
 	 */
 	public static final String ORDER_STATE_RETURN_SUCCESS = "0800";
 
-	// /**
-	// * 服务完成等待平台将钱打入导师账户中
-	// */
-	// public static final String ORDER_STATE_WAIT_SALARY = "0900";
+	/**
+	 * 导师确认服务完毕
+	 */
+	public static final String ORDER_STATE_SERVICE_FINISH = "0900";
 
 	/**
 	 * 等待双方评价
@@ -178,10 +178,6 @@ public interface OrderService {
 	List<Order> queryListByUserId(long userId, String state, int page, int pageSize, boolean lazy);
 
 	List<Order> queryListByUserId(long userId, String state, int page, boolean lazy);
-
-	List<Order> queryListByTServiceId(long tServiceId, String state, int page, int pageSize, boolean lazy);
-
-	List<Order> queryListByTServiceId(long tServiceId, String state, int page, boolean lazy);
 
 	List<Order> queryListByName(String name, final int page);
 

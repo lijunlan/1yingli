@@ -7,7 +7,6 @@ import cn.yiyingli.Dao.NotificationDao;
 import cn.yiyingli.Dao.UserDao;
 import cn.yiyingli.Dao.UserMarkDao;
 import cn.yiyingli.Persistant.Notification;
-import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.UserMark;
 import cn.yiyingli.Service.NotificationService;
@@ -61,8 +60,8 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
-	public void saveWithTeacher(Notification notification, Teacher teacher) {
-		User user = getUserDao().queryByTeacherId(teacher.getId());
+	public void saveWithTeacher(Notification notification, long teacherId) {
+		User user = getUserDao().queryByTeacherId(teacherId);
 		notification.setToUser(user);
 		getNotificationDao().save(notification);
 		long userId = notification.getToUser().getId();
@@ -98,6 +97,11 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
+	public void updateReadByIds(long[] ids) {
+		getNotificationDao().updateReadByIds(ids);
+	}
+
+	@Override
 	public Notification query(long id, boolean lazy) {
 		return getNotificationDao().query(id, lazy);
 	}
@@ -105,6 +109,16 @@ public class NotificationServiceImpl implements NotificationService {
 	@Override
 	public long querySumNo() {
 		return getNotificationDao().querySumNo();
+	}
+
+	@Override
+	public long queryUnreadSumNo(long userId) {
+		return getNotificationDao().queryUnreadSumNo(userId);
+	}
+
+	@Override
+	public void updateReadAll(long userId) {
+		getNotificationDao().updateReadAll(userId);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package cn.yiyingli.Util;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.http.HttpResponse;
@@ -72,8 +73,24 @@ public class SendMessageUtil {
 		sendThread.start();
 	}
 
-	public static void main(String[] args) {
-
+	public static void main(String[] args) throws UnsupportedEncodingException {
+		String message = "这是一条测试短信！验证码12312";
+		message = URLEncoder.encode(message, "UTF-8");
+		HttpClient httpClient = HttpClients.createDefault();
+		//&from=PaaSoo
+		String url = "http://api.paasoo.com/json?key=test1&secret=fZYwXVpw&to=8615659831720&text="+message;
+		LogUtil.info("send>>>" + url, SendMailUtil.class);
+		HttpGet get = new HttpGet(url);
+		String result = null;
+		try {
+			HttpResponse response = httpClient.execute(get);
+			if (response.getStatusLine().getStatusCode() == 200) {
+				result = EntityUtils.toString(response.getEntity(), "utf-8");
+			}
+			LogUtil.info("receive>>>" + result, SendMailUtil.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static final String MESSAGE_NAME_VERIFY = "yyl-ipxmt";

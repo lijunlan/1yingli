@@ -15,7 +15,7 @@ public interface CommentService {
 	public static final int PAGE_SIZE_INT = 5;
 
 	void save(Comment comment);
-	
+
 	void saveWithOrder(Comment comment, Order order);
 
 	void saveWithOrderAndTeacher(Comment comment, Order order, Teacher teacher);
@@ -50,6 +50,10 @@ public interface CommentService {
 
 	List<Comment> queryListByTeacherId(final long teacherId, final int page, final int pageSize, short kind,
 			final boolean lazy);
+
+	List<Comment> queryListByServiceProId(final long serviceProId, final int page, final int pageSize, short kind);
+
+	List<Comment> queryListByServiceProId(final long serviceProId, final int page, short kind);
 
 	List<Comment> queryListByTeacherIdAndScore(final long teacherId, final short score, final int page, short kind,
 			final boolean lazy);

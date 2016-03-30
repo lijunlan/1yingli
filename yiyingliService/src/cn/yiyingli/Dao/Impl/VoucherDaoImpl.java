@@ -42,18 +42,27 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 	}
 
 	@Override
-	public void updateWithOrderId(Voucher voucher, long orderId) {
+	public void updateWithOrderListId(Voucher voucher, long orderListId) {
 		getHibernateTemplate().update(voucher);
 		Session session = getSessionFactory().getCurrentSession();
 		session.flush();
-		Query query = session.createSQLQuery(
-				"update voucher set voucher.ORDER_ID=" + orderId + " where voucher.VOUCHER_ID=" + voucher.getId());
+		Query query = session.createSQLQuery("update voucher set voucher.ORDERLIST_ID=" + orderListId
+				+ " where voucher.VOUCHER_ID=" + voucher.getId());
 		query.executeUpdate();
 	}
 
 	@Override
 	public void updateFromSql(String sql) {
 		getHibernateTemplate().bulkUpdate(sql);
+	}
+
+	@Override
+	public Long queryOrderListNumber(long id) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		long sum = (long) session.createQuery("select count(*) from OrderList ol where ol.voucher.id=" + id)
+				.uniqueResult();
+		return sum;
 	}
 
 	@Override
@@ -74,7 +83,7 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 	public Voucher query(String vno, boolean lazy) {
 		String hql = "from Voucher v where v.number=?";
 		if (lazy) {
-			hql = "from Voucher v left join fetch v.useOrder left join fetch v.ownUser where v.number=?";
+			hql = "from Voucher v left join fetch v.useOrderList left join fetch v.ownUser where v.number=?";
 		}
 		@SuppressWarnings("unchecked")
 		List<Voucher> list = getHibernateTemplate().find(hql, vno);
@@ -86,16 +95,13 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Voucher> queryList(final int page, final int pageSize, final boolean lazy) {
+	public List<Voucher> queryList(final int page, final int pageSize) {
 		List<Voucher> list = new ArrayList<Voucher>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Voucher>>() {
 
 			@Override
 			public List<Voucher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Voucher v left join fetch v.useOrder ORDER BY v.createTime DESC";
-				if (lazy) {
-					hql = "from Voucher v left join fetch v.useOrder left join fetch v.ownUser ORDER BY v.createTime DESC";
-				}
+				String hql = "from Voucher v ORDER BY v.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -116,7 +122,7 @@ public class VoucherDaoImpl extends HibernateDaoSupport implements VoucherDao {
 			public List<Voucher> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from Voucher v where v.ownUser.id=" + userId + " ORDER BY v.createTime DESC";
 				if (lazy) {
-					hql = "from Voucher v left join fetch v.useOrder left join fetch v.ownUser where v.ownUser.id="
+					hql = "from Voucher v left join fetch v.useOrderList left join fetch v.ownUser where v.ownUser.id="
 							+ userId + " ORDER BY v.createTime DESC";
 				}
 				Query query = session.createQuery(hql);

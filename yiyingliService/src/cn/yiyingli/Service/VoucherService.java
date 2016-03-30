@@ -18,15 +18,17 @@ public interface VoucherService {
 
 	void update(Voucher voucher);
 
-	void updateWithOrderId(Voucher voucher, long orderId);
+	void updateWithOrderListId(Voucher voucher, long orderListId);
+	
+	Long queryOrderListNumber(long id);
 
 	Voucher query(long id, boolean lazy);
 
 	Voucher query(String vno, boolean lazy);
 
-	List<Voucher> queryList(int page, boolean lazy);
+	List<Voucher> queryList(int page);
 
-	List<Voucher> queryList(int page, int pageSize, boolean lazy);
+	List<Voucher> queryList(int page, int pageSize);
 
 	List<Voucher> queryListByUserId(long userId, int page, boolean lazy);
 

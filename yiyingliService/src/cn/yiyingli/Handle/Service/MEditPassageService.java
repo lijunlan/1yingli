@@ -42,7 +42,7 @@ public class MEditPassageService extends MMsgService {
 		boolean onshow = getData().getBoolean("onshow");
 		boolean onReward = getData().getBoolean("onReward");
 
-		PPassageUtil.toEditPassageByManager(title, tag, summary, content, imageUrl, passage, onshow, onReward);
+		PPassageUtil.toEditPassageByManager(title, tag, summary, content, imageUrl, onshow, onReward, passage);
 
 		getPassageService().update(passage, false, true);
 

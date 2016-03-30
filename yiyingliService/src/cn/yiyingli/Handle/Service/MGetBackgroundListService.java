@@ -24,19 +24,25 @@ public class MGetBackgroundListService extends MMsgService {
 
 	@Override
 	protected boolean checkData() {
-		return super.checkData() && getData().containsKey("page");
+		// || getData().containsKey("page");
+		return super.checkData();
 	}
 
 	@Override
 	public void doit() {
-		int page;
-		try {
-			page = Integer.parseInt((String) getData().get("page"));
-		} catch (Exception e) {
-			setResMsg(MsgUtil.getErrorMsgByCode("32009"));
-			return;
+		List<Background> bgList = null;
+		if (getData().containsKey("page")) {
+			int page;
+			try {
+				page = getData().getInt("page");
+			} catch (Exception e) {
+				setResMsg(MsgUtil.getErrorMsgByCode("32009"));
+				return;
+			}
+			bgList = getBackgroundService().queryList(page, 10);
+		}else{
+			bgList = getBackgroundService().queryList();
 		}
-		List<Background> bgList = getBackgroundService().queryList(page, 10);
 		ExList send = new ExArrayList();
 		SuperMap toSend = MsgUtil.getSuccessMap();
 		for (Background bg : bgList) {

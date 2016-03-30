@@ -15,6 +15,7 @@ import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.ConfigurationXmlUtil;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.SendMsgToBaiduUtil;
+import cn.yiyingli.Util.TimeTaskUtil;
 
 public class FGetPassageService extends MsgService {
 
@@ -72,10 +73,11 @@ public class FGetPassageService extends MsgService {
 	/**
 	 * 为浏览添加记录
 	 * 
-	 * @param teacher
+	 * @param passage
 	 */
 	private void saveRecord(Passage passage) {
-		getPassageService().updateAddLookNumber(passage.getId(), 1L);
+		TimeTaskUtil.sendTimeTask("add", "passage", (Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 10) + "",
+				new SuperMap().put("passageId", passage.getId()).put("number", 1).finishByJson());
 		Record r = new Record();
 		r.setKind(RecordService.RECORD_KIND_SEE_PASSAGE);
 		r.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");

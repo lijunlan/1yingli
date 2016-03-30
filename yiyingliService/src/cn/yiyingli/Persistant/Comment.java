@@ -44,7 +44,11 @@ public class Comment {
 
 	@ManyToOne(targetEntity = Order.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "ORDER_ID", updatable = false)
-	private Order ownOrder;
+	private Order order;
+
+	@ManyToOne(targetEntity = ServicePro.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "SERVICEPRO_ID", updatable = true)
+	private ServicePro servicePro;
 
 	public Long getId() {
 		return id;
@@ -110,12 +114,20 @@ public class Comment {
 		this.serviceTitle = serviceTitle;
 	}
 
-	public Order getOwnOrder() {
-		return ownOrder;
+	public ServicePro getServicePro() {
+		return servicePro;
 	}
 
-	public void setOwnOrder(Order ownOrder) {
-		this.ownOrder = ownOrder;
+	public void setServicePro(ServicePro servicePro) {
+		this.servicePro = servicePro;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 }

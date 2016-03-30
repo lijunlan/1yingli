@@ -7,7 +7,8 @@ public class TGetMileService extends TMsgService {
 
 	@Override
 	public void doit() {
-		setResMsg(MsgUtil.getSuccessMap().put("mile", getTeacher().getMile().longValue()).finishByJson());
+		setResMsg(MsgUtil.getSuccessMap().put("mile", getTeacher().getMile().longValue())
+				.put("subMile", getTeacher().getSubMile()).finishByJson());
 	}
 
 }

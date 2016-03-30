@@ -31,8 +31,17 @@ public class Teacher {
 	private Long id;
 
 	@OneToOne
-	@JoinColumn(name = "USER_ID", insertable = true, unique = true, updatable = true)
+	@JoinColumn(name = "USER_ID", insertable = true, unique = true, updatable = false)
 	private User user;
+
+	@Column(name = "MASKNUMBER", nullable = false)
+	private Long maskNumber;
+
+	@Column(name = "MASKFINISHNUMBER", nullable = false)
+	private Long maskFinishNumber;
+
+	@Column(name = "SHOWNOTIFY", nullable = false)
+	private Boolean showNotify;
 
 	@Column(name = "USERNAME", nullable = false, unique = true)
 	private String username;
@@ -67,44 +76,35 @@ public class Teacher {
 	@Column(name = "TIPMARK", nullable = false)
 	private Long tipMark;
 
-	@Column(name = "EMAIL", nullable = false)
+	@Column(name = "EMAIL", nullable = true)
 	private String email;
 
-	@Column(name = "PHONE", unique = false)
+	@Column(name = "PHONE", nullable = true)
 	private String phone;
 
 	@Column(name = "SEX", nullable = true)
 	private Short sex;
 
-	@Column(name = "SHOWWEIGHT1", nullable = true)
-	private Integer showWeight1;
+	@Column(name = "SCORE", nullable = false)
+	private Float score;
 
-	@Column(name = "SHOWWEIGHT2", nullable = true)
-	private Integer showWeight2;
+	@Column(name = "ONCHAT", nullable = false)
+	private Boolean onChat;
 
-	@Column(name = "SHOWWEIGHT4", nullable = true)
-	private Integer showWeight4;
+	@Column(name = "ANSWERTIME", nullable = false)
+	private Long answerTime;
 
-	@Column(name = "SHOWWEIGHT8", nullable = true)
-	private Integer showWeight8;
+	@Column(name = "ANSWERRATIO", nullable = false)
+	private Float answerRatio;
 
-	@Column(name = "SHOWWEIGHT16", nullable = true)
-	private Integer showWeight16;
-
-	@Column(name = "HOMEWEIGHT", nullable = true)
-	private Integer homeWeight;
-
-	@Column(name = "SALEWEIGHT", nullable = true)
-	private Integer saleWeight;
+	@Column(name = "PRAISERATIO", nullable = false)
+	private Float praiseRatio;
 
 	@Column(name = "LEVEL", nullable = false)
 	private Short level;
 
 	@Column(name = "BGURL", nullable = true)
 	private String bgUrl;
-
-	@Column(name = "IMAGEURL", nullable = true)
-	private String imageUrl;
 
 	@Column(name = "ALIPAY", nullable = true)
 	private String alipay;
@@ -115,11 +115,14 @@ public class Teacher {
 	@Column(name = "CHECKEMAIL", nullable = false)
 	private Boolean checkEmail;
 
-	@Column(name = "TALKWAY", nullable = true)
-	private String talkWay;
-
 	@Column(name = "CHECKPHONE", nullable = false)
 	private Boolean checkPhone;
+
+	@Column(name = "SERVICEPRONUMBERFORUSER", nullable = false)
+	private Integer serviceProNumberForUser;
+
+	@Column(name = "SERVICEPRONUMBERFORTEACHER", nullable = false)
+	private Integer serviceProNumberForTeacher;
 
 	@Column(name = "COMMENTNUMBER", nullable = false)
 	private Long commentNumber;
@@ -127,20 +130,20 @@ public class Teacher {
 	@Column(name = "ORDERNUMBER", nullable = false)
 	private Long orderNumber;
 
+	@Column(name = "ORDERALLNUMBER", nullable = false)
+	private Long orderAllNumber;
+
 	@Column(name = "FINISHORDERNUMBER", nullable = false)
 	private Long finishOrderNumber;
+
+	@Column(name = "ACCEPTORDERNUMBER", nullable = false)
+	private Long acceptOrderNumber;
 
 	@Column(name = "MILE", nullable = false)
 	private Long mile;
 
-	// @Column(name = "CHECKIDCARD", nullable = false)
-	// private Boolean checkIDCard;
-	//
-	// @Column(name = "CHECKWORK", nullable = false)
-	// private Boolean checkWork;
-	//
-	// @Column(name = "CHECKDEGREE", nullable = false)
-	// private Boolean checkDegree;
+	@Column(name = "SUBMILE", nullable = false)
+	private Long subMile;
 
 	@Column(name = "CHECKIDCARDSTATE", nullable = false)
 	private Short checkIDCardState;
@@ -151,24 +154,26 @@ public class Teacher {
 	@Column(name = "CHECKDEGREESTATE", nullable = false)
 	private Short checkDegreeState;
 
-	@Column(name = "FORSEARCH", nullable = true)
-	private String forSearch;
-
 	@Column(name = "SIMPLEINFO", nullable = true)
 	private String simpleInfo;
 
 	@Column(name = "ONSERVICE", nullable = false)
 	private Boolean onService;
 
-	@OneToOne(mappedBy = "teacher", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	private TService tService;
+	@OneToMany(targetEntity = ContentAndPage.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "TEACHER_ID", updatable = false)
+	private Set<ContentAndPage> contentAndPages = new HashSet<ContentAndPage>();
+
+	@OneToMany(targetEntity = ServicePro.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "TEACHER_ID", updatable = true, insertable = true)
+	private Set<ServicePro> servicePros = new HashSet<ServicePro>();
 
 	@Column(name = "FIRSTIDENTITY", nullable = true)
 	private String firstIdentity;
 
 	@OneToMany(targetEntity = WorkExperience.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "TEACHER_ID", updatable = true, insertable = true)
-	@IndexColumn(name = "WORK_NO")
+	@IndexColumn(name = "WORK_NO", base = 0)
 	private List<WorkExperience> workExperiences = new ArrayList<WorkExperience>();
 
 	@OneToMany(targetEntity = StudyExperience.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -176,9 +181,6 @@ public class Teacher {
 	@IndexColumn(name = "STUDY_NO", base = 0)
 	private List<StudyExperience> studyExperiences = new ArrayList<StudyExperience>();
 
-	// @ManyToMany(cascade = CascadeType.REFRESH, mappedBy = "likeTeahcers",
-	// fetch = FetchType.LAZY)
-	// private Set<User> likedUsers = new HashSet<User>();
 	@OneToMany(targetEntity = UserLikeTeacher.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Set<UserLikeTeacher> userLikeTeachers = new HashSet<UserLikeTeacher>();
@@ -201,6 +203,10 @@ public class Teacher {
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Set<Order> receiveOrders = new HashSet<Order>();
 
+	@OneToMany(targetEntity = OrderList.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "TEACHER_ID", updatable = false)
+	private Set<OrderList> receiveOrderLists = new HashSet<OrderList>();
+
 	@OneToMany(targetEntity = Passage.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Set<Passage> passages = new HashSet<Passage>();
@@ -210,6 +216,23 @@ public class Teacher {
 
 	@Column(name = "LOOKNUMBER", nullable = false)
 	private Long lookNumber;
+
+	@Column(name = "PRICE", nullable = true)
+	private Float price;
+
+	/**
+	 * 导师默认的闲聊话题，需要跟服务中的同步
+	 */
+	@Column(name = "TOPIC", nullable = false)
+	private String topic;
+
+	public Float getPrice() {
+		return price;
+	}
+
+	public void setPrice(Float price) {
+		this.price = price;
+	}
 
 	public Long getOrderNumber() {
 		return orderNumber;
@@ -315,14 +338,6 @@ public class Teacher {
 		this.bgUrl = bgUrl;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-
 	public String getAlipay() {
 		return alipay;
 	}
@@ -369,22 +384,6 @@ public class Teacher {
 
 	public void setCheckDegreeState(Short checkDegreeState) {
 		this.checkDegreeState = checkDegreeState;
-	}
-
-	public String getForSearch() {
-		return forSearch;
-	}
-
-	public void setForSearch(String forSearch) {
-		this.forSearch = forSearch;
-	}
-
-	public TService gettService() {
-		return tService;
-	}
-
-	public void settService(TService tService) {
-		this.tService = tService;
 	}
 
 	public List<WorkExperience> getWorkExperiences() {
@@ -459,14 +458,6 @@ public class Teacher {
 		this.checkForms = checkForms;
 	}
 
-	public String getTalkWay() {
-		return talkWay;
-	}
-
-	public void setTalkWay(String talkWay) {
-		this.talkWay = talkWay;
-	}
-
 	public Long getLikeNumber() {
 		return likeNumber;
 	}
@@ -507,68 +498,12 @@ public class Teacher {
 		this.lookNumber = lookNumber;
 	}
 
-	public Integer getShowWeight1() {
-		return showWeight1;
-	}
-
-	public Integer getShowWeight2() {
-		return showWeight2;
-	}
-
-	public Integer getShowWeight4() {
-		return showWeight4;
-	}
-
-	public Integer getShowWeight8() {
-		return showWeight8;
-	}
-
-	public Integer getShowWeight16() {
-		return showWeight16;
-	}
-
-	public void setShowWeight1(Integer showWeight1) {
-		this.showWeight1 = showWeight1;
-	}
-
-	public void setShowWeight2(Integer showWeight2) {
-		this.showWeight2 = showWeight2;
-	}
-
-	public void setShowWeight4(Integer showWeight4) {
-		this.showWeight4 = showWeight4;
-	}
-
-	public void setShowWeight8(Integer showWeight8) {
-		this.showWeight8 = showWeight8;
-	}
-
-	public void setShowWeight16(Integer showWeight16) {
-		this.showWeight16 = showWeight16;
-	}
-
 	public String getUsername() {
 		return username;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public Integer getHomeWeight() {
-		return homeWeight;
-	}
-
-	public void setHomeWeight(Integer homeWeight) {
-		this.homeWeight = homeWeight;
-	}
-
-	public Integer getSaleWeight() {
-		return saleWeight;
-	}
-
-	public void setSaleWeight(Integer saleWeight) {
-		this.saleWeight = saleWeight;
 	}
 
 	public Long getPassageNumber() {
@@ -627,12 +562,148 @@ public class Teacher {
 		this.paypal = paypal;
 	}
 
+	public Set<ServicePro> getServicePros() {
+		return servicePros;
+	}
+
+	public void setServicePros(Set<ServicePro> servicePros) {
+		this.servicePros = servicePros;
+	}
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
+
+	public Set<OrderList> getReceiveOrderLists() {
+		return receiveOrderLists;
+	}
+
+	public void setReceiveOrderLists(Set<OrderList> receiveOrderLists) {
+		this.receiveOrderLists = receiveOrderLists;
+	}
+
+	public Float getScore() {
+		return score;
+	}
+
+	public void setScore(Float score) {
+		this.score = score;
+	}
+
+	public Long getAnswerTime() {
+		return answerTime;
+	}
+
+	public void setAnswerTime(Long answerTime) {
+		this.answerTime = answerTime;
+	}
+
+	public Float getAnswerRatio() {
+		return answerRatio;
+	}
+
+	public void setAnswerRatio(Float answerRatio) {
+		this.answerRatio = answerRatio;
+	}
+
+	public Float getPraiseRatio() {
+		return praiseRatio;
+	}
+
+	public void setPraiseRatio(Float praiseRatio) {
+		this.praiseRatio = praiseRatio;
+	}
+
+	public Integer getServiceProNumberForUser() {
+		return serviceProNumberForUser;
+	}
+
+	public void setServiceProNumberForUser(Integer serviceProNumberForUser) {
+		this.serviceProNumberForUser = serviceProNumberForUser;
+	}
+
+	public Integer getServiceProNumberForTeacher() {
+		return serviceProNumberForTeacher;
+	}
+
+	public void setServiceProNumberForTeacher(Integer serviceProNumberForTeacher) {
+		this.serviceProNumberForTeacher = serviceProNumberForTeacher;
+	}
+
 	public Long getRewardNumber() {
 		return rewardNumber;
 	}
 
 	public void setRewardNumber(Long rewardNumber) {
 		this.rewardNumber = rewardNumber;
+	}
+
+	public Long getOrderAllNumber() {
+		return orderAllNumber;
+	}
+
+	public void setOrderAllNumber(Long orderAllNumber) {
+		this.orderAllNumber = orderAllNumber;
+	}
+
+	public Long getAcceptOrderNumber() {
+		return acceptOrderNumber;
+	}
+
+	public void setAcceptOrderNumber(Long acceptOrderNumber) {
+		this.acceptOrderNumber = acceptOrderNumber;
+	}
+
+	public Long getMaskNumber() {
+		return maskNumber;
+	}
+
+	public void setMaskNumber(Long maskNumber) {
+		this.maskNumber = maskNumber;
+	}
+
+	public Long getMaskFinishNumber() {
+		return maskFinishNumber;
+	}
+
+	public void setMaskFinishNumber(Long maskFinishNumber) {
+		this.maskFinishNumber = maskFinishNumber;
+	}
+
+	public Boolean getOnChat() {
+		return onChat;
+	}
+
+	public void setOnChat(Boolean onChat) {
+		this.onChat = onChat;
+	}
+
+	public Set<ContentAndPage> getContentAndPages() {
+		return contentAndPages;
+	}
+
+	public void setContentAndPages(Set<ContentAndPage> contentAndPages) {
+		this.contentAndPages = contentAndPages;
+	}
+
+	public Long getSubMile() {
+		return subMile;
+	}
+
+	public void setSubMile(Long subMile) {
+		this.subMile = subMile;
+	}
+
+	public Boolean getShowNotify() {
+		return showNotify;
+	}
+
+	public void setShowNotify(Boolean showNotify) {
+		this.showNotify = showNotify;
 	}
 
 }

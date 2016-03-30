@@ -57,9 +57,10 @@ public class GetTeacherSimpleInfoListService extends MsgService {
 
 	@Override
 	public void doit() {
-		String tipId = (String) getData().get("tip");
+		Long tipId = getData().getLong("tip");
 		try {
-			List<Teacher> teachers = getTeacherService().queryByTipOrderByShow(Long.valueOf(tipId), false);
+			List<Teacher> teachers = getTeacherService().queryListByActivity("teacherShow" + tipId, 0,
+					TeacherService.SHOW_PAGE_SIZE);
 			ExList exTeachers = new ExArrayList();
 			for (Teacher teacher : teachers) {
 				SuperMap map = new SuperMap();
@@ -79,7 +80,7 @@ public class GetTeacherSimpleInfoListService extends MsgService {
 	 * 
 	 * @param teacher
 	 */
-	private void saveRecord(String tid) {
+	private void saveRecord(Long tid) {
 
 		Record r = new Record();
 		r.setKind(RecordService.RECORD_KIND_SEE_TIP);
