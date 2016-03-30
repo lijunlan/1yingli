@@ -104,7 +104,7 @@ public class AlipayTransServlet extends HttpServlet {
 		// 必填，格式：当天日期[8位]+序列号[3至16位]，如：201008010000001
 
 		// 付款总金额
-		String batch_fee = String.valueOf(order.getOriginMoney());
+		String batch_fee = String.valueOf(order.getOriginMoney() + order.getAdditionalMoney());
 		// 必填，即参数detail_data的值中所有金额的总和
 
 		// 付款笔数
