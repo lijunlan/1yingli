@@ -40,6 +40,7 @@
 				<value>cn.yiyingli.Persistant.Reward</value>
 				<value>cn.yiyingli.Persistant.Pages</value>
 				<value>cn.yiyingli.Persistant.ContentAndPage</value>
+				<value>cn.yiyingli.Persistant.BackingComment</value>
 			</list>
 		</property>
 	</bean>
