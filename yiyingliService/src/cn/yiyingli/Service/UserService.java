@@ -14,6 +14,10 @@ public interface UserService {
 
 	public static final int PAGE_SIZE_INT = 12;
 
+	public static final Short USER_STATE_PRIMARY_SHORT = 0;
+
+	public static final Short USER_STATE_SUB_SHORT = 1;
+
 	void save(User user) throws Exception;
 
 	Long saveAndReturnId(User user);
@@ -27,6 +31,10 @@ public interface UserService {
 	void updateUsername(User user);
 
 	void updateWithTeacher(User user);
+
+	void mergeUserWithPhone(User user, String phone);
+
+	void mergeUserWithEmail(User user, String email);
 
 	void changePassword(long userId, String oldpwd, String newpwd) throws Exception;
 

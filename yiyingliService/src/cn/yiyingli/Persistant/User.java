@@ -115,6 +115,9 @@ public class User {
 	@Column(name = "MILE", nullable = false)
 	private Long mile;
 
+	@Column(name = "STATE", nullable = false)
+	private Short state;
+
 	@OneToMany(targetEntity = ApplicationForm.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private Set<ApplicationForm> applicationForms = new HashSet<ApplicationForm>();
@@ -493,4 +496,11 @@ public class User {
 		this.wechatPlatformNo = wechatPlatformNo;
 	}
 
+	public Short getState() {
+		return state;
+	}
+
+	public void setState(Short state) {
+		this.state = state;
+	}
 }

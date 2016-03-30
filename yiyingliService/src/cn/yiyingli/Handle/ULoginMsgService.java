@@ -63,7 +63,7 @@ public abstract class ULoginMsgService extends MsgService {
 				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 7) + "", _UUID);
 	}
 
-	protected String updataIcon(String originUrl, String tmpName) {
+	protected String updateIcon(String originUrl, String tmpName) {
 		String key = "";
 		try {
 			DownloadUtil.download(originUrl, tmpName,

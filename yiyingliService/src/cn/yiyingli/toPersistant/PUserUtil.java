@@ -9,7 +9,7 @@ import cn.yiyingli.Service.UserService;
 public class PUserUtil {
 
 	public static User assembleUserFromWXPlatform(String weixinUnion, String username, String password, String nickName,
-			String icon, String address) {
+												  String icon, String address) {
 		User user = assembleUser(username, password, nickName, icon, address, null);
 		user.setWechatPlatformNo(username);
 		user.setWechatNo(weixinUnion);
@@ -17,21 +17,21 @@ public class PUserUtil {
 	}
 
 	public static User assembleUserFromWX(String username, String password, String nickName, String icon,
-			String address) {
+										  String address) {
 		User user = assembleUser(username, password, nickName, icon, address, null);
 		user.setWechatNo(username);
 		return user;
 	}
 
 	public static User assembleUserFromWB(String username, String password, String nickName, String icon,
-			String address) {
+										  String address) {
 		User user = assembleUser(username, password, nickName, icon, address, null);
 		user.setWeiboNo(username);
 		return user;
 	}
 
 	public static User assembleUser(String username, String password, String nickName, String icon, String address,
-			Distributor distributor) {
+									Distributor distributor) {
 		User user = new User();
 		user.setLikeServiceProNumber(0L);
 		user.setLikeTeacherNumber(0L);
@@ -49,6 +49,7 @@ public class PUserUtil {
 		user.setCreateTime(String.valueOf(Calendar.getInstance().getTimeInMillis()));
 		user.setTeacherState(UserService.TEACHER_STATE_OFF_SHORT);
 		user.setForbid(false);
+		user.setState(UserService.USER_STATE_PRIMARY_SHORT);
 		return user;
 	}
 }

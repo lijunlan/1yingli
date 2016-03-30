@@ -1,16 +1,9 @@
 package cn.yiyingli.Service.Impl;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
-import cn.yiyingli.Dao.TeacherDao;
-import cn.yiyingli.Dao.UserDao;
-import cn.yiyingli.Dao.VoucherDao;
-import cn.yiyingli.Persistant.Distributor;
-import cn.yiyingli.Persistant.Teacher;
-import cn.yiyingli.Persistant.User;
-import cn.yiyingli.Persistant.Voucher;
+import cn.yiyingli.Dao.*;
+import cn.yiyingli.Persistant.*;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.CouponNumberUtil;
@@ -109,9 +102,9 @@ public class UserServiceImpl implements UserService {
 	public void update(User user) {
 		getUserDao().update(user);
 	}
-	
+
 	@Override
-	public void updateUsername(User user){
+	public void updateUsername(User user) {
 		getUserDao().updateUsername(user);
 	}
 
@@ -132,6 +125,54 @@ public class UserServiceImpl implements UserService {
 		} else {
 			getUserDao().update(user);
 		}
+	}
+
+	@Override
+	public void mergeUserWithPhone(User user, String phone) {
+		List<User> subUsers = getUserDao().queryListByPhoneWithTeacher(phone, false);
+		mergeUserWithUserList(user, subUsers);
+	}
+
+	@Override
+	public void mergeUserWithEmail(User user, String email) {
+		List<User> subUsers = getUserDao().queryListByEmailWithTeacher(email, false);
+		mergeUserWithUserList(user, subUsers);
+	}
+
+	private void mergeUserWithUserList(User user, List<User> subUsers) {
+		for (User subUser : subUsers) {
+			if (!subUser.getId().equals(user.getId()) || (subUser.getState() != null
+					&& subUser.getState().equals(USER_STATE_SUB_SHORT))) {
+				String changeUserSql = " set USER_ID = " + user.getId() + " where USER_ID = " + subUser.getId();
+				String tableNames[] = {"applicationform", "comment", "notification", "orderlist", "orders",
+						"reward", "userlikepassage", "userlikeservicepro", "userliketeacher", "voucher"};
+				for (String tableName : tableNames) {
+					getUserDao().updateWithRawSql("update " + tableName + changeUserSql);
+				}
+				if (subUser.getTeacher() != null && subUser.getTeacher().getOnService() &&
+						(user.getTeacher() == null || !user.getTeacher().getOnService())) {
+					Teacher teacher = subUser.getTeacher();
+					subUser.setTeacher(null);
+					user.setTeacher(teacher);
+					getUserDao().updateWithRawSql("update teacher" + changeUserSql);
+				}
+				if(subUser.getWechatNo() != null && user.getWechatNo()==null) {
+					user.setWechatNo(subUser.getWechatNo());
+					subUser.setWechatNo(null);
+				}
+				if(subUser.getWechatPlatformNo() != null && user.getWechatPlatformNo() == null) {
+					user.setWechatPlatformNo(subUser.getWechatPlatformNo());
+					subUser.setWechatPlatformNo(null);
+				}
+				if(subUser.getWeiboNo() != null && user.getWeiboNo() ==null) {
+					user.setWeiboNo(subUser.getWeiboNo());
+					subUser.setWeiboNo(null);
+				}
+				subUser.setState(USER_STATE_SUB_SHORT);
+				getUserDao().merge(subUser);
+			}
+		}
+		getUserDao().merge(user);
 	}
 
 	@Override

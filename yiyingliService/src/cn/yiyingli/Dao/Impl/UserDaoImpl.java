@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -121,6 +122,13 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	@Override
 	public void updateFromSql(String sql) {
 		getHibernateTemplate().bulkUpdate(sql);
+	}
+
+	@Override
+	public void updateWithRawSql(String sql) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		SQLQuery sqlQuery = session.createSQLQuery(sql);
+		sqlQuery.executeUpdate();
 	}
 
 	@Override
@@ -243,14 +251,14 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 
 	@Override
 	public User queryWithTeacher(String username, boolean lazy) {
-		String hql = "from User u left join fetch u.teacher where u.username=?";
+		String hql = "from User u left join fetch u.teacher  where u.state!=1 and (u.username=? or u.email=? or u.phone=?)";
 		if (lazy) {
 			hql = "from User u left join fetch u.orders left join fetch u.linkinInfos "
 					+ "left join fetch u.teacher left join fetch u.cvs left join fetch u.ownSiteDiscounts"
-					+ " left join fetch u.givecomments where u.username=?";
+					+ " left join fetch u.givecomments where u.state!=1 and (u.username=? or u.email=? or u.phone=?)";
 		}
 		@SuppressWarnings("unchecked")
-		List<User> list = getHibernateTemplate().find(hql, username);
+		List<User> list = getHibernateTemplate().find(hql, username,username,username);
 		if (list.isEmpty())
 			return null;
 		else
@@ -306,7 +314,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> queryListByValidate(final int page, final int pageSize, final boolean validate,
-			final boolean lazy) {
+										  final boolean lazy) {
 		List<User> list = new ArrayList<User>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<User>>() {
 			@Override
@@ -353,7 +361,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> queryListByTeacher(final int page, final int pageSize, final short teacherState,
-			final boolean lazy) {
+										 final boolean lazy) {
 		List<User> list = new ArrayList<User>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<User>>() {
 			@Override
@@ -375,4 +383,37 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> queryListByPhoneWithTeacher(final String phone, boolean lazy) {
+		List<User> list;
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<User>>() {
+			@Override
+			public List<User> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from User u left join fetch u.teacher " +
+						"where u.phone=" + phone;
+				Query query = session.createQuery(hql);
+				List<User> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> queryListByEmailWithTeacher(final String email, boolean lazy) {
+		List<User> list;
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<User>>() {
+			@Override
+			public List<User> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from User u left join fetch u.teacher" +
+						" where u.email='" + email + "'";
+				Query query = session.createQuery(hql);
+				List<User> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
 }

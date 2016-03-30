@@ -34,6 +34,8 @@ public interface UserDao {
 
 	void updateFromSql(String sql);
 
+	void updateWithRawSql(String sql);
+
 	User queryByNo(String no, boolean lazy);
 
 	User query(long id, boolean lazy);
@@ -62,4 +64,7 @@ public interface UserDao {
 
 	List<User> queryListByTeacher(int page, int pageSize, short teacherState, boolean lazy);
 
+	List<User> queryListByPhoneWithTeacher(String phone, boolean lazy);
+
+	List<User> queryListByEmailWithTeacher(String email, boolean lazy);
 }
