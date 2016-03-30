@@ -55,6 +55,8 @@ public interface TeacherService {
 
 	long querySumNoByLikedTeacherId(long likedTeacherId);
 
+	long querySumNoByInviterId(long inviterId);
+
 	Teacher query(long id);
 
 	Teacher queryWithOutStatue(long id);
@@ -77,6 +79,8 @@ public interface TeacherService {
 
 	Teacher queryByUserIdWithServicePro(long userid);
 
+	Teacher queryByInvitationCode(String invitationCode);
+
 	List<Teacher> queryByIds(List<Long> ids);
 
 	List<Teacher> queryByNameOrUsername(String word);
@@ -94,6 +98,10 @@ public interface TeacherService {
 	List<Teacher> queryListByKeyWord(String keyword, int page, int pageSize, boolean lazy);
 
 	List<Teacher> queryListByKeyWord(String keyword, int page, boolean lazy);
+
+	List<Teacher> queryListByInviterId(Long inviterId, int page);
+
+	List<Teacher> queryListByInviterId(Long inviterId, int page, int pageSize);
 
 	List<Teacher> queryListByActivity(String activityKey, int page, int pageSize);
 

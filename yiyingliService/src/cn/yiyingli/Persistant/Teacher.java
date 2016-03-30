@@ -5,20 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import org.bouncycastle.jcajce.provider.symmetric.TEA;
 import org.hibernate.annotations.IndexColumn;
 
 @Entity
@@ -187,8 +176,8 @@ public class Teacher {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "TEACHER_TIP", joinColumns = {
-			@JoinColumn(name = "TEACHER_ID", referencedColumnName = "TEACHER_ID", nullable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "TIP_ID", referencedColumnName = "TIP_ID", nullable = false) })
+			@JoinColumn(name = "TEACHER_ID", referencedColumnName = "TEACHER_ID", nullable = false)}, inverseJoinColumns = {
+			@JoinColumn(name = "TIP_ID", referencedColumnName = "TIP_ID", nullable = false)})
 	private Set<Tip> tips = new HashSet<Tip>();
 
 	@OneToMany(targetEntity = Comment.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
@@ -225,6 +214,15 @@ public class Teacher {
 	 */
 	@Column(name = "TOPIC", nullable = false)
 	private String topic;
+
+	@Column(name = "INVITATIONCODE")
+	private String invitationCode;
+
+
+	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "INVITER", updatable = false)
+	private Teacher inviter;
+
 
 	public Float getPrice() {
 		return price;
@@ -698,6 +696,22 @@ public class Teacher {
 		this.subMile = subMile;
 	}
 
+	public String getInvitationCode() {
+		return invitationCode;
+	}
+
+	public void setInvitationCode(String invitationCode) {
+		this.invitationCode = invitationCode;
+	}
+
+	public Teacher getInviter() {
+		return inviter;
+	}
+
+	public void setInviter(Teacher inviter) {
+		this.inviter = inviter;
+	}
+
 	public Boolean getShowNotify() {
 		return showNotify;
 	}
@@ -705,5 +719,6 @@ public class Teacher {
 	public void setShowNotify(Boolean showNotify) {
 		this.showNotify = showNotify;
 	}
+
 
 }

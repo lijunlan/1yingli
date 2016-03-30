@@ -40,6 +40,8 @@ public interface TeacherDao {
 
 	Boolean queryCheckMile(long teacherId, long subMile);
 
+	long querySumNoByInviterId(long inviterId);
+
 	Teacher queryAll(long id);
 
 	Teacher queryWithServiceProList(long id);
@@ -54,6 +56,8 @@ public interface TeacherDao {
 
 	Teacher queryByUserIdWithServicePro(long userid);
 
+	Teacher queryByInvitationCode(String invitationCode);
+
 	List<Teacher> queryByIds(long[] ids);
 
 	List<Teacher> queryByNameOrUsername(String word);
@@ -65,6 +69,8 @@ public interface TeacherDao {
 	List<Teacher> queryListOnservice(int page, int pageSize, boolean lazy);
 
 	List<Teacher> queryListByKeyWord(String keyword, int page, int pageSize, boolean lazy);
+
+	List<Teacher> queryListByInviterId(Long inviterId, int page, int pageSize);
 
 	List<Teacher> queryListByActivity(String activityKey, int page, int pageSize);
 

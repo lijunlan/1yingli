@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -171,6 +172,16 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 			return true;
 	}
 
+	@Override
+	public long querySumNoByInviterId(long inviterId) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Transaction ts = session.beginTransaction();
+		long sum = (long) session.createQuery("select count(*) from Teacher t where t.inviter.id = " + inviterId)
+				.uniqueResult();
+		ts.commit();
+		return sum;
+	}
+
 	public Teacher queryAll(long id) {
 		String hql = "from Teacher t  where t.id=?";
 		@SuppressWarnings("unchecked")
@@ -253,6 +264,18 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 			return null;
 		else
 			return list.get(0);
+	}
+
+	@Override
+	public Teacher queryByInvitationCode(String invitationCode) {
+		String hql = "from Teacher t where t.invitationCode = ?";
+		@SuppressWarnings("unchecked")
+		List<Teacher> list = getHibernateTemplate().find(hql,invitationCode);
+		if (list.isEmpty()) {
+			return  null;
+		} else {
+			return list.get(0);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -342,6 +365,24 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
+				List<Teacher> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Teacher> queryListByInviterId(final Long inviterId, final int page, final int pageSize) {
+		List<Teacher> list = new ArrayList<>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
+			@Override
+			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from Teacher t where t.inviter.id = " + inviterId +
+						" and t.onService=true ORDER BY t.createTime DESC";
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page-1) * pageSize);
 				List<Teacher> list = query.list();
 				return list;
 			}

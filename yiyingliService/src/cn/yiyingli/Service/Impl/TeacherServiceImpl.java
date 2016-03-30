@@ -237,6 +237,16 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
+	public List<Teacher> queryListByInviterId(Long inviterId, int page) {
+		return queryListByInviterId(inviterId, page, PAGE_SIZE_INT);
+	}
+
+	@Override
+	public List<Teacher> queryListByInviterId(Long inviterId, int page, int pageSize) {
+		return getTeacherDao().queryListByInviterId(inviterId, page, pageSize);
+	}
+
+	@Override
 	public List<Teacher> queryListOnservice(int page, int pageSize, boolean lazy) {
 		return getTeacherDao().queryListOnservice(page, pageSize, lazy);
 	}
@@ -254,6 +264,11 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public Teacher queryByUserIdWithServicePro(long userid) {
 		return getTeacherDao().queryByUserIdWithServicePro(userid);
+	}
+
+	@Override
+	public Teacher queryByInvitationCode(String invitationCode) {
+		return getTeacherDao().queryByInvitationCode(invitationCode);
 	}
 
 	@Override
@@ -307,6 +322,11 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public long querySumNoByLikedTeacherId(long likedTeacherId) {
 		return getUserLikeTeacherDao().querySumNoByLikedTeacherId(likedTeacherId);
+	}
+
+	@Override
+	public long querySumNoByInviterId(long inviterId) {
+		return getTeacherDao().querySumNoByInviterId(inviterId);
 	}
 
 	@Override
