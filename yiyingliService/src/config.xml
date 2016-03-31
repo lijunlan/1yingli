@@ -194,7 +194,7 @@
 		<method name="getTips" beanName="getTipsService"/>
 		<method name="getSearchServiceProHint" beanName="fGetSearchServiceProHintService"/>
 		<method name="getSearchHint" beanName="fGetSearchHintService"/>
-		<method name="createApplication" beanName="createApplicationFormService"/>
+		<method name="createApplication" beanName="creategetRecommendPassageListpplicationFormService"/>
 		<method name="searchServicePro" beanName="fSearchServiceProService"/>
 		<method name="search" beanName="fSearchService"/>
 		<method name="timer" beanName="fTimeTaskCallbackService"/>
