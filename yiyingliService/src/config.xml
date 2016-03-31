@@ -52,6 +52,7 @@
 		<method name="isLikeTeacher" beanName="isLikeTeacherService"/>
 		<method name="forgetPassword" beanName="forgetPasswordService"/>
 		<method name="iosForgetPassword" beanName="iosForgetPasswordService"/>
+		<method name="addBackingComment" beanName="addBackingCommentService"/>
 		<!-- <method name="change_info" beanName="" /> <method name="change_password" 
 			beanName="" /> -->
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
