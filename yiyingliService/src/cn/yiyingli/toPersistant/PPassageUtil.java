@@ -13,7 +13,8 @@ public class PPassageUtil {
 		toSavePassage(teacher, title, tag, summary, content, imageUrl, passage);
 		passage.setOnshow(true);
 		passage.setRemove(false);
-		passage.setState(PassageDao.PASSAGE_STATE_CHECKING);
+		// passage.setState(PassageDao.PASSAGE_STATE_CHECKING);
+		passage.setState(PassageDao.PASSAGE_STATE_OK);
 	}
 
 	private static void toSavePassage(Teacher teacher, String title, String tag, String summary, String content,
