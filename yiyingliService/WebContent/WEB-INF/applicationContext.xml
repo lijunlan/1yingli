@@ -1012,6 +1012,16 @@
 		</property>
 	</bean>
 
+	<bean id="fGetBackingCommentService" class="cn.yiyingli.Handle.Service.FGetBackingCommentService"
+		  scope="prototype">
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
+		<property name="backingCommentService">
+			<ref local="backingCommentService"/>
+		</property>
+	</bean>
+
 	<!--<bean id="tGetTServiceInfoService" class="cn.yiyingli.Handle.Service.TGetTServiceInfoService"-->
 		<!--scope="prototype">-->
 		<!--<property name="teacherService">-->
