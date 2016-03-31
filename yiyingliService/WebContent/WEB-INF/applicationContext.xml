@@ -16,6 +16,7 @@
 				<value>cn.yiyingli.Persistant.ManagerMark</value>
 				<value>cn.yiyingli.Persistant.Notification</value>
 				<value>cn.yiyingli.Persistant.Order</value>
+				<value>cn.yiyingli.Persistant.AdditionalPay</value>
 				<value>cn.yiyingli.Persistant.User</value>
 				<value>cn.yiyingli.Persistant.UserMark</value>
 				<value>cn.yiyingli.Persistant.Comment</value>
