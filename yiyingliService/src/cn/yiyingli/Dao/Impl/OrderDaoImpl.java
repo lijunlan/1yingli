@@ -407,7 +407,8 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Order> queryListByName(String name, final int page, final int pageSize) {
-		final String hql = "from Order o left join fetch o.createUser u left join fetch o.teacher t where u.name='"
+		final String hql = "from Order o left join fetch o.createUser u left join fetch o.teacher t " +
+				"left join fetch o.distributor where u.name='"
 				+ name + "' or u.nickName='" + name + "' or t.name='" + name + "' or o.customerName='" + name + "'";
 		List<Order> list = new ArrayList<Order>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Order>>() {
