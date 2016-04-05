@@ -140,7 +140,7 @@ public class Teacher {
 	private Long acceptOrderNumber;
 
 	@Column(name = "MILE", nullable = false)
-	private Long mile;
+	private Float mile;
 
 	@Column(name = "SUBMILE", nullable = false)
 	private Long subMile;
@@ -546,11 +546,11 @@ public class Teacher {
 		this.finishOrderNumber = finishOrderNumber;
 	}
 
-	public Long getMile() {
+	public Float getMile() {
 		return mile;
 	}
 
-	public void setMile(Long mile) {
+	public void setMile(Float mile) {
 		this.mile = mile;
 	}
 

@@ -32,7 +32,9 @@ public class DislikeTeacherService extends UMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
 		}
-		getTeacherService().updateUserUnlike(teacher.getId(), user.getId());
+		if (getTeacherService().updateUserUnlike(teacher.getId(), user.getId())) {
+			getTeacherService().updateAddMile(teacher.getId(), -1F);
+		}
 		setResMsg(MsgUtil.getSuccessMsg("disliked successfully"));
 	}
 }

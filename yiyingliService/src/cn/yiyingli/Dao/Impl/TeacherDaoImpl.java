@@ -67,7 +67,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
-	public void updateAddMile(long teacherId, long mile) {
+	public void updateAddMile(long teacherId, float mile) {
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = session.createSQLQuery(
 				"update teacher set teacher.MILE=teacher.MILE+" + mile + " where teacher.TEACHER_ID=" + teacherId);

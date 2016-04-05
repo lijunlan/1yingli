@@ -37,7 +37,7 @@ public interface TeacherService {
 
 	void update(Teacher teacher, boolean refreshRecommend);
 
-	void updateAddMile(long teacherId, long mile);
+	void updateAddMile(long teacherId, float mile);
 
 	boolean updateAddSubMile(long teacherId, long subMile);
 
@@ -45,9 +45,9 @@ public interface TeacherService {
 
 	void updateWithUser(Teacher teacher, long userId, boolean refreshRecommend);
 
-	void updateUserLike(Teacher teacher, User user);
+	boolean updateUserLike(Teacher teacher, User user);
 
-	void updateUserUnlike(long teacherId, long userId);
+	boolean updateUserUnlike(long teacherId, long userId);
 
 	void updateStudyExp(Teacher teacher, boolean refreshRecommend);
 

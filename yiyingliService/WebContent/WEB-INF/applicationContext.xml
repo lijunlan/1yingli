@@ -619,6 +619,9 @@
 		<property name="userDao">
 			<ref local="userDao" />
 		</property>
+		<property name="teacherDao">
+			<ref local="teacherDao"/>
+		</property>
 	</bean>
 
 	<bean id="userServiceImpl" class="cn.yiyingli.Service.Impl.UserServiceImpl">
@@ -2185,6 +2188,9 @@
 		<property name="passageService">
 			<ref local="passageService" />
 		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
 	</bean>
 
 
@@ -2517,6 +2523,9 @@
 		<property name="userMarkService">
 			<ref local="userMarkService" />
 		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
 	</bean>
 
 	<bean id="disLikeServiceProService" class="cn.yiyingli.Handle.Service.DisLikeServiceProService"
@@ -2526,6 +2535,9 @@
 		</property>
 		<property name="userMarkService">
 			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
 		</property>
 	</bean>
 
