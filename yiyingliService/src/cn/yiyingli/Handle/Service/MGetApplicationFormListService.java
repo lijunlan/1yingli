@@ -38,7 +38,9 @@ public class MGetApplicationFormListService extends MMsgService {
 			String teacherName = getData().getString("teacherName");
 			ApplicationForm applicationForm = getApplicationFormService().queryByTeacherName(teacherName);
 			applicationForms = new ArrayList<ApplicationForm>();
-			applicationForms.add(applicationForm);
+			if (null != applicationForm) {
+				applicationForms.add(applicationForm);
+			}
 		}
 		List<ExApplicationForm> exApplicationForms = new ArrayList<ExApplicationForm>();
 		for (ApplicationForm applicationForm : applicationForms) {
