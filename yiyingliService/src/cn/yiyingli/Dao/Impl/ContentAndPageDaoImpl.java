@@ -48,7 +48,8 @@ public class ContentAndPageDaoImpl extends HibernateDaoSupport implements Conten
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ContentAndPage>>() {
 			@Override
 			public List<ContentAndPage> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from ContentAndPage cap left join fetch cap.pages capp left join fetch cap.passage"
+				String hql = "from ContentAndPage cap left join fetch cap.pages capp left join fetch cap.passage cappp" +
+						" left join fetch cappp.ownTeacher"
 						+ " where capp.pagesKey='" + activityKey + "' and cap.style=" + STYLE_PASSAGE
 						+ " ORDER BY cap.weight DESC";
 				Query query = session.createQuery(hql);

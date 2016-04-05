@@ -118,7 +118,7 @@ public class ServicePro {
 	@Column(name = "ONSHOW", nullable = false)
 	private Boolean onShow;
 
-	@Column(name = "LOOKNUMBER", nullable = false)
+	@Column(name = "LOOKNUMBER", nullable = true)
 	private Long lookNumber;
 
 	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)

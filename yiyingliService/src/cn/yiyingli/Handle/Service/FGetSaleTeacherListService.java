@@ -2,6 +2,7 @@ package cn.yiyingli.Handle.Service;
 
 import java.util.List;
 
+import cn.yiyingli.ExchangeData.ExContentAndPage;
 import cn.yiyingli.ExchangeData.ExTeacher;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
@@ -59,8 +60,7 @@ public class FGetSaleTeacherListService extends MsgService {
 		ExList exTeachers = new ExArrayList();
 		for (ContentAndPage contentAndPage : contentAndPages) {
 			SuperMap map = new SuperMap();
-			ExTeacher.assembleSimpleForUser(contentAndPage.getTeacher(), map);
-			map.put("activityDes", contentAndPage.getActivityDes());
+			ExContentAndPage.assembleTeacherForUser(contentAndPage,map);
 			exTeachers.add(map.finish());
 		}
 		if (exTeachers.size() == TeacherService.SALE_PAGE_SIZE) {

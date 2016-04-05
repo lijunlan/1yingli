@@ -31,6 +31,7 @@ public class ExContentAndPage {
 	public static void assemblePassageForUser(ContentAndPage contentAndPage, SuperMap map) {
 		map.put("activityDes", contentAndPage.getActivityDes());
 		ExPassage.assembleSimple(contentAndPage.getPassage(), map);
+		map.put("icon", contentAndPage.getPassage().getOwnTeacher().getIconUrl());
 	}
 
 	public static void assembleServiceProForUser(ContentAndPage contentAndPage, SuperMap map) {
@@ -41,6 +42,7 @@ public class ExContentAndPage {
 	public static void assembleTeacherForUser(ContentAndPage contentAndPage, SuperMap map) {
 		map.put("activityDes", contentAndPage.getActivityDes());
 		ExTeacher.assembleSimpleForUser(contentAndPage.getTeacher(), map);
+		map.put("mile", contentAndPage.getTeacher().getMile());
 	}
 
 }
