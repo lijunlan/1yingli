@@ -40,6 +40,26 @@ public abstract class MMsgService extends MsgService {
 			return false;
 		}
 		setManager(manager);
+		if (!checkRoot()) {
+			setResMsg(MsgUtil.getErrorMsgByCode("34002"));
+			return false;
+		}
 		return true;
+	}
+
+	public boolean checkRoot() {
+		String method = getData().getString("method");
+		if (method.contains("Order") || method.contains("order") || method.contains("voucher")
+				|| method.contains("Voucher") || method.contains("Passage") || method.contains("passage")
+				|| method.contains("Activity") || method.contains("activity") || method.contains("Distributor")
+				|| method.contains("distributor") || method.contains("reward") || method.contains("Reward")) {
+			if (manager.getRoot().shortValue() > 700) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return true;
+		}
 	}
 }

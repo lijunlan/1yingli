@@ -90,6 +90,7 @@
 	<error name="32015" value="teacher id is not existed" />
 	<error name="32016" value="activity is not existed" />
 	<error name="34001" value="manager is not existed" />
+	<error name="34002" value="you have no authorization" />
 
 
 	<!-- order 4 -->
