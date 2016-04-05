@@ -1,8 +1,12 @@
 package cn.yiyingli.Handle.Service;
 
 import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Persistant.BackingComment;
+import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.BackingCommentService;
 import cn.yiyingli.Service.TeacherService;
+
+import java.util.List;
 
 public class FGetBackingCommentService extends MsgService{
 
@@ -33,6 +37,9 @@ public class FGetBackingCommentService extends MsgService{
 
 	@Override
 	public void doit() {
+		long teacherId = getData().getLong("teacherId");
+		int page = getData().getInt("page");
+		List<BackingComment> backingCommentList = getBackingCommentService().queryListByTeacherIdAndPage(teacherId,page);
 
 	}
 }
