@@ -54,15 +54,13 @@ public abstract class MMsgService extends MsgService {
 				|| method.contains("Distributor") || method.contains("distributor") || method.contains("reward")
 				|| method.contains("Reward")) {
 			if (manager.getRoot().shortValue() > 700) {
-				if (method.contains("Passage") || method.contains("passage")) {
-					if (manager.getRoot().shortValue() > 710) {
-						return true;
-					} else {
-						return false;
-					}
-				} else {
-					return true;
-				}
+				return true;
+			} else {
+				return false;
+			}
+		} else if (method.contains("passage") || method.contains("Passage")) {
+			if (manager.getRoot().shortValue() > 670) {
+				return true;
 			} else {
 				return false;
 			}
