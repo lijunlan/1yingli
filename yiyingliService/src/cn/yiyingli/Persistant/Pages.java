@@ -54,6 +54,21 @@ public class Pages {
 	@JoinColumn(name = "PAGES_ID", updatable = false)
 	private Set<ContentAndPage> contentAndPages = new HashSet<ContentAndPage>();
 
+	@Column(name = "WEIGHT",nullable = true)
+	private Long weight;
+
+	@Column(name = "CONTENT")
+	private String content;
+
+	@Column(name = "CONTACT")
+	private String contact;
+
+	@Column(name = "EMAIL")
+	private String email;
+
+	@Column(name = "MILE")
+	private Float mile;
+
 	public Long getId() {
 		return id;
 	}
@@ -142,4 +157,43 @@ public class Pages {
 		this.remove = remove;
 	}
 
+	public Long getWeight() {
+		return weight;
+	}
+
+	public void setWeight(Long weight) {
+		this.weight = weight;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Float getMile() {
+		return mile;
+	}
+
+	public void setMile(Float mile) {
+		this.mile = mile;
+	}
 }

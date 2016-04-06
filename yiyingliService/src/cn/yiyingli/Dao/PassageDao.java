@@ -3,6 +3,7 @@ package cn.yiyingli.Dao;
 import java.util.List;
 
 import cn.yiyingli.Persistant.Passage;
+import cn.yiyingli.Persistant.PassageLookUser;
 import cn.yiyingli.Persistant.Teacher;
 
 public interface PassageDao {
@@ -14,6 +15,8 @@ public interface PassageDao {
 	public static final short PASSAGE_STATE_OK = 2;
 
 	void saveAndCount(Passage passage, Teacher teacher);
+
+	void save(PassageLookUser passageLookUser);
 
 	Long saveAndReturnId(Passage passage);
 
@@ -38,6 +41,8 @@ public interface PassageDao {
 	Passage queryByUserWithTeacher(long id);
 
 	Boolean queryCheckLikeUser(long passageId, long userId);
+
+	boolean checkUserLook(long passageId, long userId);
 
 	List<Passage> queryList(int page, int pageSize);
 

@@ -37,7 +37,7 @@ public class DisLikeServiceProService extends UMsgService {
 	@Override
 	public void doit() {
 		User user = getUser();
-		ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"), false);
+		ServicePro servicePro = getServiceProService().query(getData().getLong("serviceProId"), true);
 		if (servicePro == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22008"));
 			return;

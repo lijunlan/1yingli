@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.yiyingli.Persistant.PassageLookUser;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -33,6 +34,12 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 						+ PassageDao.PASSAGE_STATE_OK + " and passage.ONSHOW=true) where teacher.TEACHER_ID="
 						+ teacher.getId());
 		query.executeUpdate();
+	}
+
+
+	@Override
+	public void save(PassageLookUser passageLookUser) {
+		getHibernateTemplate().save(passageLookUser);
 	}
 
 	@Override
@@ -178,6 +185,14 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 		else
 			return true;
 
+	}
+
+	@Override
+	public boolean checkUserLook(long passageId, long userId) {
+		String hql = "from PassageLookUser plu where plu.passage.id = ? and plu.user.id = ?";
+		@SuppressWarnings("unchecked")
+		List<PassageLookUser> list = getHibernateTemplate().find(hql,passageId,userId);
+		return !list.isEmpty();
 	}
 
 	@Override

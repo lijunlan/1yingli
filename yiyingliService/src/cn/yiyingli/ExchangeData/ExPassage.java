@@ -18,6 +18,7 @@ public class ExPassage {
 		map.put("likeno", passage.getLikeNumber());
 		map.put("summary", passage.getSummary());
 		map.put("lookno", passage.getLookNumber());
+		map.put("lookuser",passage.getLookUsers());
 		map.put("simpleinfo", passage.getOwnTeacher().getSimpleInfo());
 		map.put("rewardNumber", passage.getRewardNumber());
 		map.put("onReward", passage.getOnReward());
@@ -31,6 +32,7 @@ public class ExPassage {
 		map.put("createTime", p.getCreateTime());
 		map.put("likeno", p.getLikeNumber());
 		map.put("lookno", p.getLookNumber());
+		map.put("lookuser",p.getLookUsers());
 		map.put("tag", p.getTag());
 	}
 
@@ -43,6 +45,7 @@ public class ExPassage {
 		map.put("imageUrl", p.getImageUrl());
 		map.put("likeNumber", p.getLikeNumber());
 		map.put("lookNumber", p.getLookNumber());
+		map.put("lookuser",p.getLookUsers());
 		map.put("teacherId", p.getOwnTeacher().getId());
 		map.put("refuseReason", p.getRefuseReason());
 		map.put("onshow", p.getOnshow());

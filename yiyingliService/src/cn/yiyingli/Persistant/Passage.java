@@ -36,6 +36,9 @@ public class Passage {
 	@Column(name = "LOOKNUMBER", nullable = false)
 	private Long lookNumber;
 
+	@Column(name = "LOOKUSER", nullable = false)
+	private Long lookUsers;
+
 	@Column(name = "EDITORNAME", nullable = false)
 	private String editorName;
 
@@ -233,4 +236,11 @@ public class Passage {
 		this.contentAndPages = contentAndPages;
 	}
 
+	public Long getLookUsers() {
+		return lookUsers;
+	}
+
+	public void setLookUsers(Long lookUsers) {
+		this.lookUsers = lookUsers;
+	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.yiyingli.Dao.ContentAndPageDao;
 import cn.yiyingli.ExchangeData.ExContentAndPage;
+import cn.yiyingli.ExchangeData.ExPages;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
@@ -55,36 +56,38 @@ public class FGetActivityService extends MsgService {
 		}
 		ExList toSend = new ExArrayList();
 		switch (style) {
-		case ContentAndPageDao.STYLE_PASSAGE:
-			List<ContentAndPage> passages = getContentAndPageService().queryListWithPassageByKey(key, page, pageSize);
-			for (ContentAndPage contentAndPage : passages) {
-				SuperMap map = new SuperMap();
-				ExContentAndPage.assemblePassageForUser(contentAndPage, map);
-				toSend.add(map.finish());
-			}
-			break;
-		case ContentAndPageDao.STYLE_SERVICEPRO:
-			List<ContentAndPage> servicePros = getContentAndPageService().queryListWithServiceProByKey(key, page,
-					pageSize);
-			for (ContentAndPage contentAndPage : servicePros) {
-				SuperMap map = new SuperMap();
-				ExContentAndPage.assembleServiceProForUser(contentAndPage, map);
-				toSend.add(map.finish());
-			}
-			break;
-		case ContentAndPageDao.STYLE_TEACHER:
-			List<ContentAndPage> teachers = getContentAndPageService().queryListWithTeacherByKey(key, page, pageSize);
-			for (ContentAndPage contentAndPage : teachers) {
-				SuperMap map = new SuperMap();
-				ExContentAndPage.assembleTeacherForUser(contentAndPage, map);
-				toSend.add(map.finish());
-			}
-			break;
-		default:
-			setResMsg(MsgUtil.getErrorMsgByCode("53006"));
-			return;
+			case ContentAndPageDao.STYLE_PASSAGE:
+				List<ContentAndPage> passages = getContentAndPageService().queryListWithPassageByKey(key, page, pageSize);
+				for (ContentAndPage contentAndPage : passages) {
+					SuperMap map = new SuperMap();
+					ExContentAndPage.assemblePassageForUser(contentAndPage, map);
+					toSend.add(map.finish());
+				}
+				break;
+			case ContentAndPageDao.STYLE_SERVICEPRO:
+				List<ContentAndPage> servicePros = getContentAndPageService().queryListWithServiceProByKey(key, page,
+						pageSize);
+				for (ContentAndPage contentAndPage : servicePros) {
+					SuperMap map = new SuperMap();
+					ExContentAndPage.assembleServiceProForUser(contentAndPage, map);
+					toSend.add(map.finish());
+				}
+				break;
+			case ContentAndPageDao.STYLE_TEACHER:
+				List<ContentAndPage> teachers = getContentAndPageService().queryListWithTeacherByKey(key, page, pageSize);
+				for (ContentAndPage contentAndPage : teachers) {
+					SuperMap map = new SuperMap();
+					ExContentAndPage.assembleTeacherForUser(contentAndPage, map);
+					toSend.add(map.finish());
+				}
+				break;
+			default:
+				setResMsg(MsgUtil.getErrorMsgByCode("53006"));
+				return;
 		}
-		setResMsg(MsgUtil.getSuccessMap().put("data", toSend).finishByJson());
+		SuperMap pageMap = new SuperMap();
+		ExPages.assembleSimple(pages, pageMap);
+		setResMsg(MsgUtil.getSuccessMap().put("data", toSend).put("detail", pageMap).finishByJson());
 	}
 
 }
