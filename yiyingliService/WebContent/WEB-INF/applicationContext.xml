@@ -40,6 +40,7 @@
 				<value>cn.yiyingli.Persistant.Reward</value>
 				<value>cn.yiyingli.Persistant.Pages</value>
 				<value>cn.yiyingli.Persistant.ContentAndPage</value>
+				<value>cn.yiyingli.Persistant.PassageLookUser</value>
 			</list>
 		</property>
 	</bean>
@@ -1827,6 +1828,12 @@
 		<property name="passageService">
 			<ref local="passageService" />
 		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
+		<property name="userService">
+			<ref local="userService"/>
+		</property>
 	</bean>
 
 	<bean id="forgetPasswordService" class="cn.yiyingli.Handle.Service.ForgetPasswordService"
@@ -2748,6 +2755,16 @@
 		</property>
 		<property name="managerMarkService">
 			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mEditActivity" class="cn.yiyingli.Handle.Service.MEditActivityService"
+		  scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService"/>
+		</property>
+		<property name="pagesService">
+			<ref local="pagesService" />
 		</property>
 	</bean>
 

@@ -8,6 +8,7 @@ import cn.yiyingli.Dao.PassageDao;
 import cn.yiyingli.Dao.TeacherDao;
 import cn.yiyingli.Dao.UserDao;
 import cn.yiyingli.Persistant.Passage;
+import cn.yiyingli.Persistant.PassageLookUser;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Persistant.UserLikePassage;
 import cn.yiyingli.Service.PassageService;
@@ -53,6 +54,12 @@ public class PassageServiceImpl implements PassageService {
 		}
 	}
 
+
+	@Override
+	public void save(PassageLookUser passageLookUser) {
+		getPassageDao().save(passageLookUser);
+	}
+
 	@Override
 	public Long saveAndReturnId(Passage passage) {
 		return getPassageDao().saveAndReturnId(passage);
@@ -94,6 +101,11 @@ public class PassageServiceImpl implements PassageService {
 			getUserDao().updateLikePassage(userLikePassage);
 			return true;
 		}
+	}
+
+	@Override
+	public boolean checkUserLook(long passageId, long userId) {
+		return false;
 	}
 
 	@Override

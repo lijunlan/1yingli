@@ -58,7 +58,7 @@ public class ExTeacher {
 
 	public static void assembleSimpleForManager(Teacher teacher, SuperMap map) {
 		map.put("address", teacher.getAddress());
-		map.put("mile", teacher.getMile());
+		map.put("mile", (long)teacher.getMile().floatValue());
 		map.put("subMile", teacher.getSubMile());
 		map.put("price", teacher.getPrice());
 		map.put("topic", teacher.getTopic());
@@ -90,7 +90,7 @@ public class ExTeacher {
 		map.put("iconUrl", teacher.getIconUrl());
 		map.put("bgUrl", teacher.getBgUrl());
 		map.put("phone", teacher.getPhone());
-		map.put("mile", teacher.getMile());
+		map.put("mile", (long)teacher.getMile().floatValue());
 		map.put("email", teacher.getEmail());
 		map.put("introduce", teacher.getIntroduce());
 		LikeAndFinishNoShowUtil.setLikeNo(teacher, map);
@@ -168,7 +168,7 @@ public class ExTeacher {
 	public static void assembleDetailForManager(Teacher teacher, SuperMap map) {
 		assembleDetailNormal(teacher, map);
 		map.put("showNotify", teacher.getShowNotify());
-		map.put("mile", teacher.getMile());
+		map.put("mile",(long) teacher.getMile().floatValue());
 		map.put("alipayNo", teacher.getAlipay());
 		map.put("paypalNo", teacher.getPaypal());
 		map.put("checkPassageNumber", teacher.getCheckPassageNumber());

@@ -76,9 +76,8 @@ public class FGetPassageService extends MsgService {
 	 * @param passage
 	 */
 	private void saveRecord(Passage passage) {
-		TimeTaskUtil.sendTimeTask("add", "passage", (Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 10) + "",
-				new SuperMap().put("passageId", passage.getId()).put("number", 1).finishByJson());
 		Record r = new Record();
+		SuperMap toSend = new SuperMap().put("passageId", passage.getId()).put("number", 1);
 		r.setKind(RecordService.RECORD_KIND_SEE_PASSAGE);
 		r.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		r.setIp((String) getData().get("IP"));
@@ -87,6 +86,7 @@ public class FGetPassageService extends MsgService {
 			String uid = (String) getData().get("uid");
 			User user = getUserMarkService().queryUser(uid);
 			if (user != null) {
+				toSend.put("userId",user.getId());
 				if (user.getTeacherState() == UserService.TEACHER_STATE_ON_SHORT) {
 					r.setType(RecordService.RECORD_TYPE_TEACHER);
 					r.setData("passageId=" + passage.getId() + ",userId=" + user.getId());
@@ -106,6 +106,8 @@ public class FGetPassageService extends MsgService {
 			r.setType(RecordService.RECORD_TYPE_GUEST);
 			r.setData("passageId=" + passage.getId());
 		}
+		TimeTaskUtil.sendTimeTask("add", "passage", (Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 10) + "",
+				toSend.finishByJson());
 
 		getRecordService().save(r);
 	}

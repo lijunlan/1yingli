@@ -32,6 +32,26 @@ public class MCreateActivityService extends MMsgService {
 		pages.setPassageCount(0);
 		pages.setServiceProCount(0);
 		pages.setTeacherCount(0);
+		if(getData().containsKey("weight")) {
+			pages.setWeight(getData().getLong("weight"));
+		} else {
+			pages.setWeight(0L);
+		}
+		if(getData().containsKey("content")) {
+			pages.setContent(getData().getString("content"));
+		} else {
+			pages.setContent("");
+		}
+		if(getData().containsKey("contact")) {
+			pages.setContact(getData().getString("contact"));
+		} else {
+			pages.setContact("");
+		}
+		if(getData().containsKey("email")) {
+			pages.setEmail(getData().getString("email"));
+		} else {
+			pages.setEmail("");
+		}
 		pages.setRemove(false);
 		getPagesService().save(pages);
 		setResMsg(MsgUtil.getSuccessMsg("create activity successfully"));
