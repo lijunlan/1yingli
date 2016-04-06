@@ -88,10 +88,10 @@ $(function(){
 var edit = function (){
 	var key =  $("#pageKey").val();
 	var description = $("#teamName").val();
-	var content = $("#iconUrl").val();
-	var img = $("#contact").val();
+	var img = $("#iconUrl").val();
+	var contact = $("#contact").val();
 	var email = $("#email").val();
-	var contact = $("#content").val();
+	var content = $("#content").val();
 	myJson.pagesId = json.pagesId;
 	myJson.key = key;
 	myJson.description = description;
