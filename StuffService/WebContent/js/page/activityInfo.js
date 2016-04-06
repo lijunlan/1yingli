@@ -54,8 +54,8 @@ $(document).ready(function () {
 			var json = eval("(" + data + ")");
 			if (json.state == "success") {
 				$("#imagelist").fadeOut(3000);
-				$("#iconUrl").val(json.url);
-				$("#littleIcon").attr('src',json.url);
+				$("#iconUrl").val(json.url.toString().split("@!")[0]+"@!teamlogo");
+				$("#littleIcon").attr('src',json.url.toString().split("@!")[0]+"@!teamlogo");
 				Messenger().post("背景图片添加完成");
 			} else {
 				$(".mark").show();
