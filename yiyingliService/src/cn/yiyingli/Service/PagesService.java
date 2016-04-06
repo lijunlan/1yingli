@@ -32,4 +32,6 @@ public interface PagesService {
 
 	List<Pages> queryList(int page);
 
+	List<Pages> queryListOrderByWeight(int page);
+
 }

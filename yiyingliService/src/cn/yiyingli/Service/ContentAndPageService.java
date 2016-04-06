@@ -19,4 +19,6 @@ public interface ContentAndPageService {
 	List<ContentAndPage> queryListWithPassageByKey(String activityKey, int page, int pageSize);
 
 	List<ContentAndPage> queryListWithServiceProByKey(String activityKey, int page, int pageSize);
+
+	List<ContentAndPage> queryListWithTeacherOrderByTeacherMile(int page,int pageSize);
 }

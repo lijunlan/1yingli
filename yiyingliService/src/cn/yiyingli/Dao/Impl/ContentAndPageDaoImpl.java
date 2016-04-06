@@ -104,4 +104,24 @@ public class ContentAndPageDaoImpl extends HibernateDaoSupport implements Conten
 		return list;
 	}
 
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ContentAndPage> queryListWithTeacher(final int page, final int pageSize) {
+		List<ContentAndPage> list = new ArrayList<ContentAndPage>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ContentAndPage>>() {
+			@Override
+			public List<ContentAndPage> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from ContentAndPage cap left join fetch cap.pages capp left join fetch cap.teacher"
+						+ " where  cap.style=" + STYLE_TEACHER
+						+ " ORDER BY cap.weight DESC";
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<ContentAndPage> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
 }

@@ -2788,6 +2788,19 @@
 		</property>
 	</bean>
 
+	<bean id="fGetHotActivityService" class="cn.yiyingli.Handle.Service.FGetHotActivityService"
+		  scope="prototype">
+		<property name="pagesService">
+			<ref local="pagesService"/>
+		</property>
+	</bean>
+
+	<bean id="fGetHotActivityTeacherService" class="cn.yiyingli.Handle.Service.FGetHotActivityTeacherService"
+		  scope="prototype">
+
+	</bean>
+
+
 	<bean id="mRemoveActivityContentService"
 		class="cn.yiyingli.Handle.Service.MRemoveActivityContentService"
 		scope="prototype">

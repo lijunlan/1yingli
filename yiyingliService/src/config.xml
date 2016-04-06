@@ -171,6 +171,8 @@
 	</style>
 	<style name="function">
 		<method name="getActivity" beanName="fGetActivityService"/>
+		<method name="getHotActivity" beanName="fGetHotActivityService"/>
+		<method name="getHotActivityTeacher" beanName="fGetHotActivityTeacherService"/>
 		<method name="getSalePassageList" beanName="fGetSalePassageListService"/>
 		<method name="getRecommendServiceProList" beanName="fGetRecommendServiceProListService"/>
 		<method name="recordRecommandServicePro" beanName="fRecordRecommandServiceProService"/>
