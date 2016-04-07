@@ -6,7 +6,6 @@ import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.ContentAndPage;
-import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.ContentAndPageService;
 import cn.yiyingli.Util.MsgUtil;
 

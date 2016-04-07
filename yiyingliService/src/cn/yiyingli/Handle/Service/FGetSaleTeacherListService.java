@@ -3,7 +3,6 @@ package cn.yiyingli.Handle.Service;
 import java.util.List;
 
 import cn.yiyingli.ExchangeData.ExContentAndPage;
-import cn.yiyingli.ExchangeData.ExTeacher;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;

@@ -27,7 +27,7 @@ var changeTable = function (result) {
 	$("#activityList").empty();
 	$("#activityList").append(
 		"<tr><th>ID</th><th>活动标识</th><th>描述</th><th>创建时间</th>"
-		+ "<th>包含导师数量</th><th>包含文章数量</th><th>包含服务数量</th><th>操作</th></tr>");
+		+ "<th>包含导师数量</th><th>包含文章数量</th><th>包含服务数量</th><th>总英里数</th><th>操作</th></tr>");
 	var list = result.data;
 	$.each(list, function (index, data) {
 		var tmp = parseInt(data.createTime, 10);
@@ -42,8 +42,11 @@ var changeTable = function (result) {
 		row += data.teacherCount + "</td><td>";
 		row += data.passageCount + "</td><td>";
 		row += data.serviceProCount + "</td><td>";
-	 	row += "<button onclick='detail("
-			+ data.pagesId + ")'>编辑</button></td>";
+		row += data.mile + "</td><td>";
+		row += data.serviceProCount + "</td><td>";
+		row += "<a href=\"activityInfo.html?data="
+			+ encodeURI($.toJSON(data)) + "\" target=\"_blank\">查看信息</a><button onclick='detail("
+			+ data.pagesId + ")'>查看列表</button></td>";
 		$("#activityList").append(row);
 	});
 };

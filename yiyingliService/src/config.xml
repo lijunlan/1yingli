@@ -213,7 +213,7 @@
 	</style>
 	<style name="order">
 		<method name="abandonOrder" beanName="tAbandonOrderService"/>
-		<method name="finishOrder" beanName="tFinishOrderService"/>å
+		<method name="finishOrder" beanName="tFinishOrderService"/>
 		<method name="createOrder" beanName="createOrderService"/>
 		<method name="getListByTeacher" beanName="tGetOrderListService"/>
 		<method name="getByTeacher" beanName="tGetOrderInfoService"/>
