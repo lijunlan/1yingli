@@ -18,6 +18,8 @@ public interface ContentAndPageDao {
 
 	void update(ContentAndPage contentAndPage);
 
+	ContentAndPage query(long contentAndPageId);
+
 	List<ContentAndPage> queryListByPages(long pagesId);
 
 	List<ContentAndPage> queryListWithTeacherByKey(String activityKey, int page, int pageSize);

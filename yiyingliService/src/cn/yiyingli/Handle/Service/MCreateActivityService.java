@@ -30,6 +30,7 @@ public class MCreateActivityService extends MMsgService {
 		pages.setDescription(getData().getString("description"));
 		pages.setPagesKey(getData().getString("key"));
 		pages.setPassageCount(0);
+		pages.setMile(0F);
 		pages.setServiceProCount(0);
 		pages.setTeacherCount(0);
 		if(getData().containsKey("weight")) {
@@ -51,6 +52,11 @@ public class MCreateActivityService extends MMsgService {
 			pages.setEmail(getData().getString("email"));
 		} else {
 			pages.setEmail("");
+		}
+		if(getData().containsKey("bgImg")) {
+			pages.setBgImg(getData().getString("bgImg"));
+		} else {
+			pages.setBgImg("");
 		}
 		pages.setRemove(false);
 		getPagesService().save(pages);
