@@ -54,7 +54,7 @@ public class Pages {
 	@JoinColumn(name = "PAGES_ID", updatable = false)
 	private Set<ContentAndPage> contentAndPages = new HashSet<ContentAndPage>();
 
-	@Column(name = "WEIGHT",nullable = true)
+	@Column(name = "WEIGHT", nullable = true)
 	private Long weight;
 
 	@Column(name = "CONTENT")
@@ -68,6 +68,12 @@ public class Pages {
 
 	@Column(name = "MILE")
 	private Float mile;
+
+	@Column(name = "IMG")
+	private String img;
+
+	@Column(name = "BGIMG")
+	private String bgImg;
 
 	public Long getId() {
 		return id;
@@ -195,5 +201,21 @@ public class Pages {
 
 	public void setMile(Float mile) {
 		this.mile = mile;
+	}
+	
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	public String getBgImg() {
+		return bgImg;
+	}
+
+	public void setBgImg(String bgImg) {
+		this.bgImg = bgImg;
 	}
 }

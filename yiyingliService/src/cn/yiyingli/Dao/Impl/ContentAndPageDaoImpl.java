@@ -43,7 +43,7 @@ public class ContentAndPageDaoImpl extends HibernateDaoSupport implements Conten
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ContentAndPage> queryListWithPassageByKey(final String activityKey, final int page,
-			final int pageSize) {
+														  final int pageSize) {
 		List<ContentAndPage> list = new ArrayList<ContentAndPage>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ContentAndPage>>() {
 			@Override
@@ -65,7 +65,7 @@ public class ContentAndPageDaoImpl extends HibernateDaoSupport implements Conten
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ContentAndPage> queryListWithTeacherByKey(final String activityKey, final int page,
-			final int pageSize) {
+														  final int pageSize) {
 		List<ContentAndPage> list = new ArrayList<ContentAndPage>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ContentAndPage>>() {
 			@Override
@@ -86,12 +86,13 @@ public class ContentAndPageDaoImpl extends HibernateDaoSupport implements Conten
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ContentAndPage> queryListWithServiceProByKey(final String activityKey, final int page,
-			final int pageSize) {
+															 final int pageSize) {
 		List<ContentAndPage> list = new ArrayList<ContentAndPage>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ContentAndPage>>() {
 			@Override
 			public List<ContentAndPage> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from ContentAndPage cap left join fetch cap.pages capp left join fetch cap.servicePro"
+				String hql = "from ContentAndPage cap left join fetch cap.pages capp left join fetch cap.servicePro caps"
+						+ " left join fetch caps.teacher"
 						+ " where capp.pagesKey='" + activityKey + "' and cap.style=" + STYLE_SERVICEPRO
 						+ " ORDER BY cap.weight DESC";
 				Query query = session.createQuery(hql);
@@ -112,8 +113,9 @@ public class ContentAndPageDaoImpl extends HibernateDaoSupport implements Conten
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ContentAndPage>>() {
 			@Override
 			public List<ContentAndPage> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from ContentAndPage cap left join fetch cap.pages capp left join fetch cap.teacher"
+				String hql = "from ContentAndPage cap left join fetch cap.pages left join fetch cap.teacher"
 						+ " where  cap.style=" + STYLE_TEACHER
+						+ " and cap.pages.weight > 0"
 						+ " ORDER BY cap.weight DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);

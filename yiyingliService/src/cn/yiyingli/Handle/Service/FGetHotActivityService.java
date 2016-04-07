@@ -14,11 +14,6 @@ import java.util.List;
 public class FGetHotActivityService extends MsgService {
 	private PagesService pagesService;
 
-	@Override
-	protected boolean checkData() {
-		return getData().containsKey("page");
-	}
-
 	public PagesService getPagesService() {
 		return pagesService;
 	}
@@ -28,13 +23,33 @@ public class FGetHotActivityService extends MsgService {
 	}
 
 	@Override
+	protected boolean checkData() {
+		return getData().containsKey("page") && getData().containsKey("pageSize");
+	}
+
+	@Override
 	public void doit() {
-		int p = getData().getInt("page");
-		List<Pages> pages = getPagesService().queryListOrderByWeight(p);
+		int p = 0;
+		int pageSize;
+		try {
+			p = getData().getInt("page");
+		} catch (Exception e) {
+			setResMsg(MsgUtil.getErrorMsgByCode("52003"));
+			return;
+		}
+
+		try {
+			pageSize = getData().getInt("pageSize");
+		} catch (Exception e) {
+			setResMsg(MsgUtil.getErrorMsgByCode("52004"));
+			return;
+		}
+
+		List<Pages> pages = getPagesService().queryListOrderByWeight(p, pageSize);
 		ExList jsonPages = new ExArrayList();
 		for (Pages page : pages) {
 			SuperMap map = new SuperMap();
-			ExPages.assembleSimple(page,map);
+			ExPages.assembleSimple(page, map);
 			jsonPages.add(map.finish());
 		}
 		setResMsg(MsgUtil.getSuccessMap().put("data", jsonPages).finishByJson());

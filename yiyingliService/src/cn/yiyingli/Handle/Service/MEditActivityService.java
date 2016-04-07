@@ -5,7 +5,7 @@ import cn.yiyingli.Persistant.Pages;
 import cn.yiyingli.Service.PagesService;
 import cn.yiyingli.Util.MsgUtil;
 
-public class MEditActivityService extends MMsgService{
+public class MEditActivityService extends MMsgService {
 
 	private PagesService pagesService;
 
@@ -20,8 +20,8 @@ public class MEditActivityService extends MMsgService{
 	@Override
 	protected boolean checkData() {
 		return super.checkData() && getData().containsKey("pagesId") && getData().containsKey("description")
-				&& getData().containsKey("key") && getData().containsKey("weight") && getData().containsKey("content")
-				&& getData().containsKey("contact") && getData().containsKey("email");
+				&& getData().containsKey("key") && getData().containsKey("content")
+				&& getData().containsKey("contact") && getData().containsKey("email") && getData().containsKey("bgImg");
 	}
 
 	@Override
@@ -29,11 +29,12 @@ public class MEditActivityService extends MMsgService{
 		Pages pages = getPagesService().query(getData().getLong("pagesId"));
 		pages.setDescription(getData().getString("description"));
 		pages.setPagesKey(getData().getString("key"));
-		pages.setWeight(getData().getLong("weight"));
 		pages.setContent(getData().getString("content"));
 		pages.setContact(getData().getString("contact"));
 		pages.setEmail(getData().getString("email"));
-		getPagesService().save(pages);
+		pages.setImg(getData().getString("img"));
+		pages.setBgImg(getData().getString("bgImg"));
+		getPagesService().update(pages);
 		setResMsg(MsgUtil.getSuccessMsg("edit activity successfully"));
 	}
 }
