@@ -65,12 +65,62 @@ $(document).ready(function () {
 			}
 		}
 	});
+
+	$("#select-bg-src").uploadifive({
+		'buttonText': '浏览',
+		'buttonClass': 'file-box',
+		'queueID': 'bglist',
+		'auto': false,
+		'method': 'post',
+		'fileType': 'image/*',
+		'queueSizeLimit': 10,
+		'multi': false,
+		'uploadScript': 'http://service.1yingli.cn/yiyingliService/upimage',
+		'formData': {
+		},
+		'onInit': function () {
+			//alert('Add files to the queue to start uploading.');
+		},
+		'onFallback': function () {
+			alert('Oops!  You have to use the non-HTML5 file uploader.');
+		},
+		'onSelect': function (queue) {
+			//alert(queue.queued + ' files were added to the queue.');
+			$("#bglist").fadeIn();
+		},
+		'onUpload': function (
+			filesToUpload) {
+			// alert(filesToUpload + ' files will be uploaded.');
+		},
+		'onError': function (errorType) {
+			//alert('The error was: ' + errorType);
+		},
+		'onUploadComplete': function (file, data) {
+			//alert('The file ' + file.name + ' uploaded successfully.');
+			var json = eval("(" + data + ")");
+			if (json.state == "success") {
+				$("#bglist").fadeOut(3000);
+				$("#bgUrl").val(json.url.toString().split("@!")[0]);
+				$("#littleBg").attr('src',json.url.toString().split("@!")[0]);
+				Messenger().post("背景图片添加完成");
+			} else {
+				$(".mark").show();
+				$("#box").show();
+				$("#bomb").html("上传信息失败");
+				$("#connect").attr('href', 'general.html');
+			}
+		}
+	});
+
+
+
 });
 
 var changeTable = function (result) {
 	$("#pageKey").val(result.key);
 	$("#teamName").val(result.description);
 	$("#iconUrl").val(result.img);
+	$("#bgUrl").val(result.bgImg);
 	$("#contact").val(result.contact);
 	$("#email").val(result.email);
 	$("#content").val(result.content);
@@ -89,6 +139,7 @@ var edit = function (){
 	var key =  $("#pageKey").val();
 	var description = $("#teamName").val();
 	var img = $("#iconUrl").val();
+	var bgImg = $("#bgUrl").val();
 	var contact = $("#contact").val();
 	var email = $("#email").val();
 	var content = $("#content").val();
@@ -97,6 +148,7 @@ var edit = function (){
 	myJson.description = description;
 	myJson.content = content;
 	myJson.img = img;
+	myJson.bgImg = bgImg;
 	myJson.email = email;
 	myJson.contact = contact;
 	myJson.method = "editActivity";
