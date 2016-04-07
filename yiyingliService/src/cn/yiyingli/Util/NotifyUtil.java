@@ -8,10 +8,28 @@ import cn.yiyingli.Dao.NotificationDao;
 import cn.yiyingli.Persistant.Notification;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.OrderList;
+import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.NotificationService;
+import cn.yiyingli.Service.OrderService;
 
 public class NotifyUtil {
+
+	public static String getUserMessageByState(String state,Teacher teacher,String No) {
+		String states[] = state.split(",");
+		String nowState = states[0];
+		if (states.length > 1) {
+			String lastState = states[1];
+			//TODO
+			if(nowState.equals(OrderService.ORDER_STATE_USER_REGRET)&&lastState.equals(OrderService.ORDER_STATE_WAIT_ENSURETIME)){
+				return "尊敬的用户，被导师(" + order.getTeacher().getName() + ")接受的订单已经申请取消。订单号" + order.getOrderNo() + "，请等待导师同意";
+			}else if(){
+				
+			}
+		} else {
+			// TODO
+		}
+	}
 
 	/**
 	 * @param phone
@@ -20,20 +38,22 @@ public class NotifyUtil {
 	 * @param uid
 	 *            用户标识 UUID
 	 */
-	public static boolean notifyUserOrder(String phone, String email, String message, User user,
-			NotificationService notificationService) {
+	public static boolean notifyUserOrder(String state, String phone, String email, String No, User user,
+			Teacher teacher, NotificationService notificationService) {
+		String message = getUserMessageByState(state, teacher, No);
 		return notifyUserNormal(phone, email, "订单状态改变通知", message, user, notificationService);
 	}
 
-	public static boolean notifyUserOrder(OrderList orderList, String message, User user,
+	public static boolean notifyUserOrder(String state, OrderList orderList, User user, Teacher teacher,
 			NotificationService notificationService) {
-		return notifyUserOrder(orderList.getCustomerPhone(), orderList.getCustomerEmail(), message, user,
-				notificationService);
+		return notifyUserOrder(state, orderList.getCustomerPhone(), orderList.getCustomerEmail(),
+				orderList.getOrderListNo(), user, teacher, notificationService);
 	}
 
-	public static boolean notifyUserOrder(Order order, String message, User user,
+	public static boolean notifyUserOrder(String state, Order order, User user, Teacher teacher,
 			NotificationService notificationService) {
-		return notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(), message, user, notificationService);
+		return notifyUserOrder(state, order.getCustomerPhone(), order.getCustomerEmail(), order.getOrderNo(), user,
+				teacher, notificationService);
 	}
 
 	public static boolean notifyUserNormal(String phone, String email, String title, String message, User user) {
