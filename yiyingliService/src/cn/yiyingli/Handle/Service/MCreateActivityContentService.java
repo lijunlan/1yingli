@@ -119,9 +119,11 @@ public class MCreateActivityContentService extends MMsgService {
 				setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 				return;
 			}
+			pages.setMile(pages.getMile() + teacher.getMile());
 			contentAndPage.setTeacher(teacher);
 		}
 		getContentAndPageService().save(contentAndPage);
+		getPagesService().update(pages);
 		setResMsg(MsgUtil.getSuccessMsg("create activity content successfully"));
 	}
 

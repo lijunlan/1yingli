@@ -2812,6 +2812,9 @@
 		<property name="managerMarkService">
 			<ref local="managerMarkService" />
 		</property>
+		<property name="pagesService">
+			<ref local="pagesService"/>
+		</property>
 	</bean>
 
 	<bean id="mCreateActivityService" class="cn.yiyingli.Handle.Service.MCreateActivityService"

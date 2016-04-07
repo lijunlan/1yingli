@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.yiyingli.Persistant.Pages;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -28,6 +29,19 @@ public class ContentAndPageDaoImpl extends HibernateDaoSupport implements Conten
 	@Override
 	public void update(ContentAndPage contentAndPage) {
 		getHibernateTemplate().update(contentAndPage);
+	}
+
+	@Override
+	public ContentAndPage query(long contentAndPageId) {
+		String hql = "from ContentAndPage cap left join fetch cap.servicePro" +
+				" left join fetch cap.teacher left join fetch cap.passage" +
+				" left join fetch cap.pages where cap.id=?";
+		@SuppressWarnings("unchecked")
+		List<ContentAndPage> list = getHibernateTemplate().find(hql, contentAndPageId);
+		if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
 	}
 
 	@Override
