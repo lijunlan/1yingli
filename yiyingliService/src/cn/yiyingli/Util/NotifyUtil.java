@@ -244,7 +244,6 @@ public class NotifyUtil {
 		return true;
 	}
 
-
 	public static boolean notifyTeacher(Order order, NotificationService notificationService) {
 		String message = getTeacherOrderMessageByState(order, "");
 		if (message.equals("")) {
@@ -294,6 +293,7 @@ public class NotifyUtil {
 
 	public static Notification sendNotification(long teacherId, NotificationService notificationService, String msg) {
 		Notification notification = new Notification();
+		notification.setKind(0);
 		notification.setRead(false);
 		notification.setTitle(msg);
 		notification.setUrl("#");
@@ -305,6 +305,7 @@ public class NotifyUtil {
 
 	public static Notification sendNotification(User user, NotificationService notificationService, String msg) {
 		Notification notification = new Notification();
+		notification.setKind(0);
 		notification.setRead(false);
 		notification.setTitle(msg);
 		notification.setUrl("#");
@@ -318,6 +319,7 @@ public class NotifyUtil {
 	public static Notification sendNotification(User user, NotificationDao notificationDao, String msg) {
 		Notification notification = new Notification();
 		notification.setRead(false);
+		notification.setKind(0);
 		notification.setTitle(msg);
 		notification.setUrl("#");
 		notification.setToUser(user);

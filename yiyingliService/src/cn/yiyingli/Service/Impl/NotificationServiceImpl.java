@@ -117,13 +117,13 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
-	public void updateReadAll(long userId) {
-		getNotificationDao().updateReadAll(userId);
+	public void updateReadAll(long userId, int kind) {
+		getNotificationDao().updateReadAll(userId,kind);
 	}
 
 	@Override
-	public long querySumNo(long userId) {
-		return getNotificationDao().querySumNo(userId);
+	public long querySumNo(long userId, int kind) {
+		return getNotificationDao().querySumNo(userId, kind);
 	}
 
 	@Override
@@ -132,8 +132,8 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
-	public List<Notification> queryListByUserId(long userId, int page, int pageSize, boolean lazy) {
-		return getNotificationDao().queryListByUserId(userId, page, pageSize, lazy);
+	public List<Notification> queryListByUserId(long userId, int page, int pageSize, int kind, boolean lazy) {
+		return getNotificationDao().queryListByUserId(userId, page, pageSize, kind, lazy);
 	}
 
 }

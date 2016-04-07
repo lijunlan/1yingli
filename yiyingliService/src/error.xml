@@ -129,6 +129,8 @@
 	<error name="51001" value="input data is wrong" />
 	<error name="52001" value="username is not accurate" />
 	<error name="52002" value="this phone or email have no checkNo" />
+	<error name="52003" value="page num is wrong"/>
+	<error name="52003" value="pageSize is wrong"/>
 	<error name="53002" value="can not connect to search engine" />
 	<error name="53003" value="error when search" />
 	<error name="53004" value="Submit data to recommendation engine failed" />

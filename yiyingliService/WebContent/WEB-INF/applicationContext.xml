@@ -2797,7 +2797,9 @@
 
 	<bean id="fGetHotActivityTeacherService" class="cn.yiyingli.Handle.Service.FGetHotActivityTeacherService"
 		  scope="prototype">
-
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService"/>
+		</property>
 	</bean>
 
 
@@ -2809,6 +2811,9 @@
 		</property>
 		<property name="managerMarkService">
 			<ref local="managerMarkService" />
+		</property>
+		<property name="pagesService">
+			<ref local="pagesService"/>
 		</property>
 	</bean>
 

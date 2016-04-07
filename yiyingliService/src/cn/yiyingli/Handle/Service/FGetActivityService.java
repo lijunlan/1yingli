@@ -87,7 +87,7 @@ public class FGetActivityService extends MsgService {
 		}
 		SuperMap pageMap = new SuperMap();
 		ExPages.assembleSimple(pages, pageMap);
-		setResMsg(MsgUtil.getSuccessMap().put("data", toSend).put("detail", pageMap).finishByJson());
+		setResMsg(MsgUtil.getSuccessMap().put("data", toSend).put("detail", pageMap.finish()).finishByJson());
 	}
 
 }

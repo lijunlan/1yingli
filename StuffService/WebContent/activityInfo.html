@@ -62,6 +62,7 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="am-g am-margin-top">
 			<div class="am-u-sm-4 am-u-md-2 am-text-right">团队LOGO</div>
 			<div class="am-u-sm-8 am-u-md-4" id="divForIcon">
@@ -83,6 +84,29 @@
 			</div>
 			<div class="am-hide-sm-only am-u-md-3"></div>
 		</div>
+
+		<div class="am-g am-margin-top">
+			<div class="am-u-sm-4 am-u-md-2 am-text-right">团队背景</div>
+			<div class="am-u-sm-8 am-u-md-4" id="divForBg">
+				<div class="am-input-group am-input-group-secondary">
+					<span class="am-input-group-label"><i
+							class="am-icon-file-photo-o am-icon-fw"></i></span> <input id="bgUrl"
+							type="text" class="am-form-field" placeholder="点击右侧按钮上传团队背景">
+				</div>
+				<div>
+					<img id="littleBg" src="icon/littleIcon.png"
+						 class="am-img-thumbnail">
+				</div>
+			</div>
+			<div class="am-hide-sm-only am-u-md-3">
+				<a id="select-bg-src" class="am-btn am-btn-secondary am-round"></a>
+				<button class="am-btn am-btn-secondary am-round" id="bgSubmit"
+						onclick="javascript:$('#select-bg-src').uploadifive('upload')">上传</button>
+				<div id="bglist" style="min-height: 10px; max-height: 55px"></div>
+			</div>
+			<div class="am-hide-sm-only am-u-md-3"></div>
+		</div>
+
 		<div class="am-g am-margin-top">
 			<div class="am-u-sm-4 am-u-md-2 am-text-right">微信</div>
 			<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
