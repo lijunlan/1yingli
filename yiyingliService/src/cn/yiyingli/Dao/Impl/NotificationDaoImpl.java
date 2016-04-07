@@ -69,10 +69,11 @@ public class NotificationDaoImpl extends HibernateDaoSupport implements Notifica
 	}
 
 	@Override
-	public long querySumNo(long userId) {
+	public long querySumNo(long userId, int kind) {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		long sum = (long) session.createQuery("select count(*) from Notification n where n.toUser.id=" + userId)
+		long sum = (long) session.createQuery("select count(*) from Notification n where n.toUser.id=" + userId +
+				" and n.kind = " + kind)
 				.uniqueResult();
 		return sum;
 	}
@@ -126,8 +127,8 @@ public class NotificationDaoImpl extends HibernateDaoSupport implements Notifica
 	}
 
 	@Override
-	public void updateReadAll(long userId) {
-		String hql = "update Notification n set n.read=true where n.toUser.id=" + userId;
+	public void updateReadAll(long userId, int kind) {
+		String hql = "update Notification n set n.read=true where n.toUser.id=" + userId + " and n.kind = " + kind;
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		session.createQuery(hql).executeUpdate();
@@ -135,17 +136,18 @@ public class NotificationDaoImpl extends HibernateDaoSupport implements Notifica
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Notification> queryListByUserId(final long userId, final int page, final int pageSize,
-			final boolean lazy) {
+	public List<Notification> queryListByUserId(final long userId, final int page, final int pageSize, final int kind,
+												final boolean lazy) {
 		List<Notification> list = new ArrayList<Notification>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Notification>>() {
 
 			@Override
 			public List<Notification> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Notification n where n.toUser.id=" + userId + " ORDER BY n.createTime DESC";
+				String hql = "from Notification n where n.toUser.id=" + userId + " and n.kind = "
+						+ kind + " ORDER BY n.createTime DESC";
 				if (lazy) {
 					hql = "from Notification n left join fetch n.toUser where n.toUser.id=" + userId
-							+ " ORDER BY n.createTime DESC";
+							+ " and n.kind = " + kind + " ORDER BY n.createTime DESC";
 				}
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);

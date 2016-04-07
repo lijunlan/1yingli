@@ -46,6 +46,7 @@ public class MCreateNotificationService extends MMsgService {
 			return;
 		}
 		Notification notification = new Notification();
+		notification.setKind(0);
 		notification.setTitle(title);
 		notification.setToUser(user);
 		notification.setContent("");

@@ -32,7 +32,13 @@ public class GetNotificationService extends UMsgService {
 	public void doit() {
 		User user = getUser();
 		if (getData().get("page") != null) {
-			long count = getNotificationService().querySumNo(user.getId());
+			int kind;
+			if (getData().containsKey("kind")) {
+				kind = getData().getInt("kind");
+			} else {
+				kind = 0;
+			}
+			long count = getNotificationService().querySumNo(user.getId(), kind);
 			int page = 0;
 			SuperMap toSend = MsgUtil.getSuccessMap();
 			toSend.put("count", count);
@@ -56,7 +62,7 @@ public class GetNotificationService extends UMsgService {
 					return;
 				}
 			}
-			List<Notification> notifications = getNotificationService().queryListByUserId(user.getId(), page, 9, false);
+			List<Notification> notifications = getNotificationService().queryListByUserId(user.getId(), page, 9, kind, false);
 			ExList sends = new ExArrayList();
 			long ids[] = new long[notifications.size()];
 			for (int i = 0; i < notifications.size(); i++) {
@@ -69,7 +75,7 @@ public class GetNotificationService extends UMsgService {
 				map.put("time", n.getCreateTime());
 				sends.add(map.finish());
 			}
-			getNotificationService().updateReadAll(user.getId());
+			getNotificationService().updateReadAll(user.getId(), kind);
 			setResMsg(toSend.put("data", sends).finishByJson());
 		} else {
 			String notiId = (String) getData().get("notiId");
@@ -90,7 +96,7 @@ public class GetNotificationService extends UMsgService {
 			map.put("content", notification.getContent());
 			map.put("createTime", notification.getCreateTime());
 			map.put("notiId", notification.getId());
-			getNotificationService().updateReadByIds(new long[] { notification.getId() });
+			getNotificationService().updateReadByIds(new long[]{notification.getId()});
 			setResMsg(MsgUtil.getSuccessMsg(map.finishByJson()));
 		}
 

@@ -20,7 +20,7 @@ public interface NotificationService {
 
 	void update(Notification notification);
 
-	void updateReadAll(long userId);
+	void updateReadAll(long userId,int kind);
 
 	void updateReadByIds(long[] ids);
 
@@ -28,13 +28,13 @@ public interface NotificationService {
 
 	long queryUnreadSumNo(long userId);
 
-	long querySumNo(long userId);
+	long querySumNo(long userId,int kind);
 
 	Notification query(long id, boolean lazy);
 
 	List<Notification> queryList(int page, int pageSize, boolean lazy);
 
-	List<Notification> queryListByUserId(long userId, int page, int pageSize, boolean lazy);
+	List<Notification> queryListByUserId(long userId, int page, int pageSize,int kind, boolean lazy);
 
 
 }
