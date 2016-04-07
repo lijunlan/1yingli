@@ -56,13 +56,8 @@ public class DissatisfyOrderService extends UMsgService {
 		order.setState(OrderService.ORDER_STATE_USER_DISLIKE + "," + order.getState());
 		getOrderService().updateAndSendTimeTask(order);
 
-		NotifyUtil.notifyUserOrder(order,
-				"尊敬的用户,您好,由于您否认本次服务(订单号" + order.getOrderNo() + "),申请退款,我们已将您的意见反馈给导师,请等待导师确认", user,
-				getNotificationService());
-		NotifyUtil.notifyTeacher(order, "尊敬的导师,您好,很抱歉我们收到用户(" + order.getCustomerName() + ")对此次服务(订单号"
-				+ order.getOrderNo() + ")的否认,要求申请退款,等待您的回复,请您在五天内进行同意或拒绝哦,超时系统将自动同意退款.", getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + ",用户否认此次服务，申请退款，");
+		NotifyUtil.notifyUserOrder(order, getNotificationService());
+		NotifyUtil.notifyTeacher(order, getNotificationService());
 		setResMsg(MsgUtil.getSuccessMsg("dissatisfy order successfully"));
 	}
 }

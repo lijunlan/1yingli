@@ -56,9 +56,7 @@ public class TAbandonOrderService extends TMsgService {
 		order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
 		getOrderService().update(order, false);
 
-		NotifyUtil.notifyUserOrder(order,
-				"尊敬的学员,您好,您的订单(" + order.getOrderNo() + "),导师(" + getTeacher().getName() + ")已经取消服务,本次预付款将在24小时内为您退款。",
-				order.getCreateUser(), getNotificationService());
+		NotifyUtil.notifyUserOrder(order, getNotificationService());
 		setResMsg(MsgUtil.getSuccessMsg("finish order successfully"));
 
 	}

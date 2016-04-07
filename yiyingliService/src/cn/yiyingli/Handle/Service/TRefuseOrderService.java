@@ -58,14 +58,8 @@ public class TRefuseOrderService extends TMsgService {
 		order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
 		getOrderService().update(order, false);
 
-		NotifyUtil.notifyUserOrder(
-				order, "尊敬的用户,抱歉的通知您,您的订单(" + order.getOrderNo() + ")已被导师(" + teacher.getName() + ")拒绝,拒绝理由:"
-						+ refuseReason + ",您可预约其他优秀的导师哦,预付款将在24小时内退还到您的账户。",
-				order.getCreateUser(), getNotificationService());
-		NotifyUtil.notifyTeacher(order, "尊敬的导师，您已经拒绝订单号为" + order.getOrderNo() + "的订单。用户姓名：" + order.getCustomerName()
-				+ ",拒绝理由:" + refuseReason, getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + "，导师已经拒绝订单.拒绝理由：" + refuseReason);
+		NotifyUtil.notifyUserOrder(order, TRefuseOrderService.class, getNotificationService());
+
 		setResMsg(MsgUtil.getSuccessMsg("refuse order successfully"));
 	}
 
