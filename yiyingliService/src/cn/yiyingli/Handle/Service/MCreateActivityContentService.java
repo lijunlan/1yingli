@@ -120,10 +120,10 @@ public class MCreateActivityContentService extends MMsgService {
 				return;
 			}
 			pages.setMile(pages.getMile() + teacher.getMile());
+			getPagesService().update(pages);
 			contentAndPage.setTeacher(teacher);
 		}
 		getContentAndPageService().save(contentAndPage);
-		getPagesService().update(pages);
 		setResMsg(MsgUtil.getSuccessMsg("create activity content successfully"));
 	}
 

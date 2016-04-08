@@ -63,15 +63,8 @@ public class TDisagreeOrderService extends TMsgService {
 		order.setState(OrderService.ORDER_STATE_MANAGER_IN + "," + order.getState());
 		getOrderService().update(order, false);
 
-		NotifyUtil
-				.notifyUserOrder(order,
-						"尊敬的用户,很抱歉,您的订单(" + order.getOrderNo() + ")退款申请已被导师(" + teacher.getName()
-								+ ")拒绝,客服将介入此次订单,请耐心等待,我们会在24小时内与您联系哦。",
-						order.getCreateUser(), getNotificationService());
-		NotifyUtil.notifyTeacher(order, "尊敬的导师，您已经拒绝订单号为" + order.getOrderNo() + "的退款，客服将介入此次订单，我们会在24小时内与您联系。",
-				getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + "，导师已经拒绝订单退款。");
+		NotifyUtil.notifyUserOrder(order, getNotificationService());
+
 		setResMsg(MsgUtil.getSuccessMsg("disagree order successfully"));
 	}
 

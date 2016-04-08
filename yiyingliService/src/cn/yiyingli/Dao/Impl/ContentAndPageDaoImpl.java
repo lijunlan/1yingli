@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.yiyingli.Persistant.Pages;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
