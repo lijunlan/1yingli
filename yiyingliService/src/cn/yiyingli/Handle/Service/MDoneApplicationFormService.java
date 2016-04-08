@@ -51,7 +51,7 @@ public class MDoneApplicationFormService extends MMsgService {
 		if (acpt) {
 			user.setTeacherState(UserService.TEACHER_STATE_ON_SHORT);
 			teacher.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
-			teacher.setOnService(true);
+			teacher.setOnService(false);
 			af.setState(ApplicationFormService.APPLICATION_STATE_SUCCESS_SHORT);
 		} else {
 			user.setTeacherState(UserService.TEACHER_STATE_OFF_SHORT);
