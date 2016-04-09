@@ -121,7 +121,9 @@ function getAndParse(t) {
 	if (t.teacher != null) {
 		t = t.teacher;
 	}
-	$("#username").val($("#inputSearchUsername").val());
+	//$("#username").val($("#inputSearchUsername").val());
+	
+	$("#username").val(t.username);
 	$("#simpleinfo").val(t.simpleinfo);
 	$("#name").val(t.name);
 	$("#phone").val(t.phone);
