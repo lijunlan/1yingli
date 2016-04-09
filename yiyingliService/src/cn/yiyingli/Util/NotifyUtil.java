@@ -34,7 +34,6 @@ public class NotifyUtil {
 			} else if (nowState.equals(OrderService.ORDER_STATE_USER_REGRET)
 					&& lastState.equals(OrderService.ORDER_STATE_WAIT_SERVICE)) {
 				if (operation.equals(TRefuseOrderService.class.getName())) {
-					// TODO
 					return "尊敬的用户，订单(订单号:" + No + ")已被[" + teacher.getName() + "]拒绝,拒绝理由:" + order.getRefuseReason()
 							+ ",您可预约其他优秀的导师哦,预付款将在24小时内退还到您的账户。";
 				} else {
