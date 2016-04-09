@@ -211,6 +211,11 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
+	public Teacher queryByName(String name) {
+		return getTeacherDao().queryByName(name);
+	}
+
+	@Override
 	public Teacher queryWithLikeUser(long teacherId) {
 		return getTeacherDao().queryWithLikeUser(teacherId);
 	}

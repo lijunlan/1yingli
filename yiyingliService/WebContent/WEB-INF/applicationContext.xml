@@ -2067,6 +2067,12 @@
 		<property name="passageService">
 			<ref local="passageService" />
 		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
+		<property name="userService">
+			<ref local="userService"/>
+		</property>
 	</bean>
 
 	<bean id="mValidatePassageService" class="cn.yiyingli.Handle.Service.MValidatePassageService"
@@ -2481,6 +2487,9 @@
 		</property>
 		<property name="managerMarkService">
 			<ref local="managerMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
 		</property>
 	</bean>
 

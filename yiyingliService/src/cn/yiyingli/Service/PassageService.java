@@ -60,6 +60,8 @@ public interface PassageService {
 
 	List<Passage> queryListByTeacherAndState(int page, long teacherId, short state);
 
+	List<Passage> queryListByTeacher(int page, long teacherId);
+
 	List<Passage> queryListByIds(List<Long> ids);
 
 	List<Passage> queryListByRecommand(int page, int pageSize, short state, boolean show);

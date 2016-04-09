@@ -69,6 +69,8 @@ public interface TeacherService {
 
 	Teacher queryForTeacher(long id);
 
+	Teacher queryByName(String name);
+
 	Teacher queryWithLikeUser(long teacherId);
 
 	Teacher queryByUserId(long userid);
