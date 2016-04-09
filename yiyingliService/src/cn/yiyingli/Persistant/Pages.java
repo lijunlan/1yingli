@@ -75,6 +75,9 @@ public class Pages {
 	@Column(name = "BGIMG")
 	private String bgImg;
 
+	@Column(name = "SLOGAN")
+	private String slogan;
+
 	public Long getId() {
 		return id;
 	}
@@ -217,5 +220,13 @@ public class Pages {
 
 	public void setBgImg(String bgImg) {
 		this.bgImg = bgImg;
+	}
+
+	public String getSlogan() {
+		return slogan;
+	}
+
+	public void setSlogan(String slogan) {
+		this.slogan = slogan;
 	}
 }

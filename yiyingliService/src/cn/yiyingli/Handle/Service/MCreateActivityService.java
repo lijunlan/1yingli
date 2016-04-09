@@ -58,6 +58,9 @@ public class MCreateActivityService extends MMsgService {
 		} else {
 			pages.setBgImg("");
 		}
+		if(getData().containsKey("slogan")) {
+			pages.setSlogan(getData().getString("slogan"));
+		}
 		pages.setRemove(false);
 		getPagesService().save(pages);
 		setResMsg(MsgUtil.getSuccessMsg("create activity successfully"));
