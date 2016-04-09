@@ -66,20 +66,23 @@ public class NotifyUtil {
 				return "尊敬的用户，订单(订单号:" + No + "),客服已经协调结束，协调结果：同意此次退款。";
 			} else if (nowState.equals(OrderService.ORDER_STATE_WAIT_ENSURETIME)
 					&& lastState.equals(OrderService.ORDER_STATE_FINISH_PAID)) {
-				return "尊敬的用户，订单(订单号:" + No + ")已被您接受,请及时与客户联系并确认服务时间,之后请到一英里平台登记服务时间。(客户姓名:" + order.getCustomerName()
-						+ ",电话:" + order.getCustomerPhone() + ",邮箱:" + order.getCustomerEmail() + ",微信:"
-						+ order.getCustomerContact() + ")";
+//				return "尊敬的用户，订单(订单号:" + No + ")已被您接受,请及时与客户联系并确认服务时间,之后请到一英里平台登记服务时间。(客户姓名:" + order.getCustomerName()
+//						+ ",电话:" + order.getCustomerPhone() + ",邮箱:" + order.getCustomerEmail() + ",微信:"
+//						+ order.getCustomerContact() + ")";
+				return "";
 			} else if (nowState.equals(OrderService.ORDER_STATE_WAIT_SERVICE)
 					&& lastState.equals(OrderService.ORDER_STATE_FINISH_PAID)) {
-				return "尊敬的用户，订单(订单号:" + No + ")已被您接受,请及时为客户提供服务。(客户姓名:" + order.getCustomerName() + ",电话:"
-						+ order.getCustomerPhone() + ",邮箱:" + order.getCustomerEmail() + ",微信:"
-						+ order.getCustomerContact() + ")";
+//				return "尊敬的用户，订单(订单号:" + No + ")已被您接受,请及时为客户提供服务。(客户姓名:" + order.getCustomerName() + ",电话:"
+//						+ order.getCustomerPhone() + ",邮箱:" + order.getCustomerEmail() + ",微信:"
+//						+ order.getCustomerContact() + ")";
+				return "";
 			} else if (nowState.equals(OrderService.ORDER_STATE_WAIT_SERVICE)
 					&& lastState.equals(OrderService.ORDER_STATE_WAIT_ENSURETIME)) {
-				return "尊敬的用户，订单(订单号:" + No + ")已经进入等待服务状态,请在" + order.getOkTime() + "，按时进行服务.(客户姓名:"
-						+ order.getCustomerName() + ",电话:" + order.getCustomerPhone() + ",邮箱:"
-						+ order.getCustomerEmail() + ",微信:" + order.getCustomerContact() + ").系统会在约定时间("
-						+ order.getOkTime() + ")2周后自动确认服务完毕.";
+//				return "尊敬的用户，订单(订单号:" + No + ")已经进入等待服务状态,请在" + order.getOkTime() + "，按时进行服务.(客户姓名:"
+//						+ order.getCustomerName() + ",电话:" + order.getCustomerPhone() + ",邮箱:"
+//						+ order.getCustomerEmail() + ",微信:" + order.getCustomerContact() + ").系统会在约定时间("
+//						+ order.getOkTime() + ")2周后自动确认服务完毕.";
+				return "";
 			} else if (nowState.equals(OrderService.ORDER_STATE_FINISH_PAID)
 					&& lastState.equals(OrderService.ORDER_STATE_NOT_PAID)) {
 				return "尊敬的用户，订单(订单号:" + No + ")，客户(" + order.getCustomerName() + ")已经付款，等待您的接受。";
