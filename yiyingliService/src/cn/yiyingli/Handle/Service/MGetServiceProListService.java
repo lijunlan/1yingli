@@ -8,16 +8,21 @@ import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.ServicePro;
+import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.ServiceProService;
+import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.MsgUtil;
+import org.bouncycastle.util.Pack;
 
 public class MGetServiceProListService extends MMsgService {
 
 	private ServiceProService serviceProService;
 
 	private UserService userService;
+
+	private TeacherService teacherService;
 
 	public ServiceProService getServiceProService() {
 		return serviceProService;
@@ -35,6 +40,14 @@ public class MGetServiceProListService extends MMsgService {
 		this.userService = userService;
 	}
 
+	public TeacherService getTeacherService() {
+		return teacherService;
+	}
+
+	public void setTeacherService(TeacherService teacherService) {
+		this.teacherService = teacherService;
+	}
+
 	@Override
 	public boolean checkData() {
 		return super.checkData() && getData().containsKey("page") || getData().containsKey("state")
@@ -48,11 +61,22 @@ public class MGetServiceProListService extends MMsgService {
 		if (getData().containsKey("username")) {
 			String username = (String) getData().get("username");
 			User user = getUserService().queryWithTeacher(username, false);
-			if (user == null) {
-				setResMsg(MsgUtil.getErrorMsgByCode("14001"));
-				return;
+			Long teacherId;
+			if (user != null) {
+				teacherId = user.getTeacher().getId();
+			} else {
+				Teacher teacher = getTeacherService().queryByName(username);
+				if (teacher == null) {
+					try {
+						teacher = getTeacherService().query(Long.parseLong(username));
+					} catch (NumberFormatException e) {
+						setResMsg(MsgUtil.getErrorMsgByCode("32015"));
+						return;
+					}
+				}
+				teacherId = teacher.getId();
 			}
-			servicePros = getServiceProService().queryListByTeacherId(user.getTeacher().getId(), page,
+			servicePros = getServiceProService().queryListByTeacherId(teacherId, page,
 					ServiceProService.MANAGER_PAGE_SIZE);
 		} else if (getData().containsKey("state")) {
 			short state = Short.parseShort(getData().getString("state"));

@@ -274,6 +274,27 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public List<Passage> queryListByTeacher(final int page,final int pageSize,final long teacherId) {
+		List<Passage> list = new ArrayList<Passage>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Passage>>() {
+
+			@Override
+			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from Passage p left join fetch p.ownTeacher where p.remove=" + false
+						+ " and p.ownTeacher.id=" + teacherId
+						+ " ORDER BY p.createTime DESC";
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<Passage> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<Passage> queryListByState(final int page, final int pageSize, final short state) {
 		List<Passage> list = new ArrayList<Passage>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Passage>>() {

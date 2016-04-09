@@ -177,6 +177,12 @@ public class PassageServiceImpl implements PassageService {
 		return getPassageDao().queryListByTeacherAndState(page, PAGE_SIZE_PASSAGE, teacherId, state);
 	}
 
+
+	@Override
+	public List<Passage> queryListByTeacher(int page, long teacherId) {
+		return getPassageDao().queryListByTeacher(page, PAGE_SIZE_PASSAGE, teacherId);
+	}
+
 	@Override
 	public List<Passage> queryListByIds(List<Long> ids) {
 		long[] idarray = new long[ids.size()];

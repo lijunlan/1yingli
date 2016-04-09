@@ -40,23 +40,37 @@ public class MGetTeacherInfoService extends MMsgService {
 	public void doit() {
 		String username = (String) getData().get("username");
 		User user = getUserService().queryWithTeacher(username, false);
-		if (user == null) {
-			setResMsg(MsgUtil.getErrorMsgByCode("12015"));
-			return;
-		}
-		try {
-			Teacher teacher = getTeacherService().queryAll(user.getTeacher().getId());
-			if (teacher == null) {
-				setResMsg(MsgUtil.getErrorMsgByCode("32002"));
+		Teacher teacher;
+		if (user != null) {
+			try {
+				teacher = getTeacherService().queryAll(user.getTeacher().getId());
+				if (teacher == null) {
+					setResMsg(MsgUtil.getErrorMsgByCode("32002"));
+					return;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				setResMsg(MsgUtil.getErrorMsgByCode("31001"));
 				return;
 			}
-			SuperMap map = MsgUtil.getSuccessMap();
-			ExTeacher.assembleDetailForManager(teacher, map);
-			setResMsg(map.finishByJson());
-		} catch (Exception e) {
-			e.printStackTrace();
-			setResMsg(MsgUtil.getErrorMsgByCode("31001"));
+		} else {
+			teacher = getTeacherService().queryByName(username);
+			if (teacher == null) {
+				try {
+					teacher = getTeacherService().query(Long.parseLong(username));
+				} catch (NumberFormatException e) {
+					setResMsg(MsgUtil.getErrorMsgByCode("32015"));
+					return;
+				}
+			}
 		}
+		if (teacher == null) {
+			setResMsg(MsgUtil.getErrorMsgByCode("31001"));
+			return;
+		}
+		SuperMap map = MsgUtil.getSuccessMap();
+		ExTeacher.assembleDetailForManager(teacher, map);
+		setResMsg(map.finishByJson());
 	}
 
 }

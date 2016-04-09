@@ -54,6 +54,8 @@ public interface PassageDao {
 
 	List<Passage> queryListByTeacherAndState(int page, int pageSize, long teacherId, short state);
 
+	List<Passage> queryListByTeacher(int page, int pageSize, long teacherId);
+
 	List<Passage> queryListByIds(long[] ids);
 
 	List<Passage> queryListByActivity(String activityKey, int page, int pageSize);
