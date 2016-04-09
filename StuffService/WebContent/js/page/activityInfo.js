@@ -121,6 +121,7 @@ var changeTable = function (result) {
 	$("#teamName").val(result.description);
 	$("#iconUrl").val(result.img);
 	$("#bgUrl").val(result.bgImg);
+	$("#teamSlogan").val(result.slogan);
 	$("#contact").val(result.contact);
 	$("#email").val(result.email);
 	$("#content").val(result.content);
@@ -138,6 +139,7 @@ $(function(){
 var edit = function (){
 	var key =  $("#pageKey").val();
 	var description = $("#teamName").val();
+	var slogan = $("#teamSlogan").val();
 	var img = $("#iconUrl").val();
 	var bgImg = $("#bgUrl").val();
 	var contact = $("#contact").val();
@@ -149,6 +151,7 @@ var edit = function (){
 	myJson.content = content;
 	myJson.img = img;
 	myJson.bgImg = bgImg;
+	myJson.slogan = slogan;
 	myJson.email = email;
 	myJson.contact = contact;
 	myJson.method = "editActivity";

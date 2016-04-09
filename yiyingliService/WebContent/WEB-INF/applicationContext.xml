@@ -1937,6 +1937,26 @@
 		</property>
 	</bean>
 
+	<bean id="mGetPayInformationService" class="cn.yiyingli.Handle.Service.MGetPayInformationService"
+		  scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="mEditPayInformationService" class="cn.yiyingli.Handle.Service.MEditPayInformationService"
+		  scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
 	<bean id="fRecordRecommendService" class="cn.yiyingli.Handle.Service.FRecordRecommendService"
 		scope="prototype">
 		<property name="userMarkService">

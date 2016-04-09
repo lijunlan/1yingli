@@ -34,6 +34,9 @@ public class MEditActivityService extends MMsgService {
 		pages.setEmail(getData().getString("email"));
 		pages.setImg(getData().getString("img"));
 		pages.setBgImg(getData().getString("bgImg"));
+		if(getData().containsKey("slogan")) {
+			pages.setSlogan(getData().getString("slogan"));
+		}
 		getPagesService().update(pages);
 		setResMsg(MsgUtil.getSuccessMsg("edit activity successfully"));
 	}

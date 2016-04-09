@@ -80,7 +80,10 @@ public class NotifyUtil {
 						+ order.getCustomerName() + ",电话:" + order.getCustomerPhone() + ",邮箱:"
 						+ order.getCustomerEmail() + ",微信:" + order.getCustomerContact() + ").系统会在约定时间("
 						+ order.getOkTime() + ")2周后自动确认服务完毕.";
-			} else {
+			} else if (nowState.equals(OrderService.ORDER_STATE_FINISH_PAID)
+					&& lastState.equals(OrderService.ORDER_STATE_NOT_PAID)) {
+				return "尊敬的用户，订单(订单号:" + No + ")，客户(" + order.getCustomerName() + ")已经付款，等待您的接受。";
+			}else {
 				return "";
 			}
 		} else {
@@ -171,9 +174,6 @@ public class NotifyUtil {
 			} else if (nowState.equals(OrderService.ORDER_STATE_WAIT_RETURN)
 					&& lastState.equals(OrderService.ORDER_STATE_WAIT_ENSURETIME)) {
 				return "尊敬的用户，订单(订单号:" + No + ")已经被[" + teacher.getName() + "]取消,您可以在平台选择其他优秀的导师进行服务。本次预付款将在24小时内为您退款。";
-			} else if (nowState.equals(OrderService.ORDER_STATE_FINISH_PAID)
-					&& lastState.equals(OrderService.ORDER_STATE_NOT_PAID)) {
-				return "尊敬的用户，订单(订单号:" + No + ")，客户(" + order.getCustomerName() + ")已经付款，等待您的接受。";
 			} else {
 				return "";
 			}
@@ -190,14 +190,6 @@ public class NotifyUtil {
 		return notifyUserNormal(orderList.getCustomerPhone(), orderList.getCustomerEmail(), "订单状态改变通知", message,
 				orderList.getUser(), notificationService);
 	}
-
-	/**
-	 * @param phone
-	 * @param email
-	 * @param message
-	 * @param uid
-	 *            用户标识 UUID
-	 */
 	public static boolean notifyUserOrder(Order order, NotificationService notificationService) {
 		String message = getUserOrderMessageByState(order, "");
 		if (message.equals("")) {

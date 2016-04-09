@@ -15,6 +15,8 @@ public class ExPages {
 		map.put("contact", page.getContact());
 		map.put("email", page.getEmail());
 		map.put("img",page.getImg());
+		map.put("bgImg", page.getBgImg());
+		map.put("slogan", page.getSlogan());
 		map.put("mile", (long)page.getMile().floatValue());
 		map.put("key", page.getPagesKey());
 	}
