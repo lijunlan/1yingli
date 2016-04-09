@@ -107,11 +107,12 @@ function regist() {
 
 //获取导师信息
 function get() {
-	if ($("#inputSearchUsername").val() == "") {
+	var keyword = $("#searchInput").val();
+	if (keyword == null || keyword == '') {
 		return;
 	}
+	myJson.username = keyword;
 	myJson.method = "getTeacherInfo";
-	myJson.username = $("#inputSearchUsername").val();
 	myAjax(myJson, getAndParse);
 }
 
