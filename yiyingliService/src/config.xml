@@ -104,6 +104,7 @@
 		<method name="editAlipayNo" beanName="tEditAlipayNoService"/>
 		<method name="getAlipayNo" beanName="tGetAlipayNoService"/>
 		<method name="getInvitation" beanName="tGetInvitationCode"/>
+		<method name="getBackingComment" beanName="tGetBackingCommentService"/>
 	</style>
 	<style name="distributor">
 		<method name="getInfo" beanName="dGetInfoService"/>
