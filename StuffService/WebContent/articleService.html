@@ -84,13 +84,16 @@
 					</p>
 					<div>
 						<select name="articleState" id="articleState" data-am-selected>
-							<option value="-1">全部</option>
+							<option id="all001" value="-1">全部</option>
 							<option value="0">审核中</option>
 							<option value="1">未通过</option>
 							<option value="2">通过</option>
 						</select>
 						<br>
 						<br>
+						<!--搜索--->
+						<input type="text" class="am-form-field am-round" id="search"
+							   placeholder="用户名/姓名/编号" >
 						<br>
 						<button id="lastPage" onclick="changePage('last')" class="am-btn am-btn-default am-round">上一页</button>
 						<input id="pageInput" style="width: 20px;border-style:solid;border-color:gainsboro;border-width:0.5px"></input>
@@ -98,6 +101,7 @@
 						<br>
 						<br>
 						<button id="get" class="am-btn am-btn-secondary am-btn-block" onclick="get()">获取文章</button>
+
 						<br>
 					</div>
 				</div>
