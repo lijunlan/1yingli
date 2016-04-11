@@ -37,6 +37,9 @@ public class MEditActivityService extends MMsgService {
 		if(getData().containsKey("slogan")) {
 			pages.setSlogan(getData().getString("slogan"));
 		}
+		if(getData().containsKey("weight")) {
+			pages.setWeight(getData().getLong("weight"));
+		}
 		getPagesService().update(pages);
 		setResMsg(MsgUtil.getSuccessMsg("edit activity successfully"));
 	}
