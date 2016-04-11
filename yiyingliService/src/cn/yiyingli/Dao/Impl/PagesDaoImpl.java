@@ -87,4 +87,20 @@ public class PagesDaoImpl extends HibernateDaoSupport implements PagesDao {
 		});
 		return list;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Pages> queryListOrderByMile() {
+		List<Pages> list = new ArrayList<Pages>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Pages>>() {
+			@Override
+			public List<Pages> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from Pages p where p.remove=" + false + " and p.weight > 0 ORDER BY p.mile DESC";
+				Query query = session.createQuery(hql);
+				List<Pages> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
 }

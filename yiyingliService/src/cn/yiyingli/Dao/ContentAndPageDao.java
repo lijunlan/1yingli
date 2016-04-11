@@ -29,4 +29,6 @@ public interface ContentAndPageDao {
 	List<ContentAndPage> queryListWithServiceProByKey(String activityKey, int page, int pageSize);
 
 	List<ContentAndPage> queryListWithTeacher(int page, int pageSize);
+
+	List<ContentAndPage> queryListWithTeacher();
 }

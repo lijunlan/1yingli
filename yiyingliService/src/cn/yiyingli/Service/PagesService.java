@@ -34,4 +34,5 @@ public interface PagesService {
 
 	List<Pages> queryListOrderByWeight(int page,int pageSize);
 
+	List<Pages> queryListOrderByMile();
 }

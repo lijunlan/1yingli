@@ -62,4 +62,9 @@ public class ContentAndPageServiceImpl implements ContentAndPageService {
 	public List<ContentAndPage> queryListWithTeacherOrderByTeacherMile(int page, int pageSize) {
 		return getContentAndPageDao().queryListWithTeacher(page, pageSize);
 	}
+
+	@Override
+	public List<ContentAndPage> queryListWithTeacherOrderByTeacherMile() {
+		return getContentAndPageDao().queryListWithTeacher();
+	}
 }

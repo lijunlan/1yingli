@@ -20,4 +20,6 @@ public interface PagesDao {
 
 	List<Pages> queryListOrderByWeight(int page, int pageSize);
 
+	List<Pages> queryListOrderByMile();
+
 }

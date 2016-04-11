@@ -115,6 +115,7 @@
 		<method name="getActivity" beanName="mGetActivityService"/>
 		<method name="removeActivity" beanName="mRemoveActivityService"/>
 		<method name="getActivityList" beanName="mGetActivityListService"/>
+		<method name="rebuildTeamOrder" beanName="mRebuildTeamOrderService"/>
 		<method name="closeVoucher" beanName="mCloseVoucherService"/>
 		<method name="removeServicePro" beanName="mRemoveServiceProService"/>
 		<method name="validateServicePro" beanName="mValidateServiceProService"/>

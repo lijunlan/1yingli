@@ -2177,6 +2177,20 @@
 		</property>
 	</bean>
 
+
+	<bean id="mRebuildTeamOrderService" class="cn.yiyingli.Handle.Service.MRebuildTeamOrderService"
+		  scope="prototype">
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService"/>
+		</property>
+		<property name="pagesService">
+			<ref local="pagesService"/>
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService"/>
+		</property>
+	</bean>
+
 	<bean id="tEditPayPalService" class="cn.yiyingli.Handle.Service.TEditPayPalService"
 		scope="prototype">
 		<property name="userMarkService">

@@ -57,4 +57,9 @@ public class PagesServiceImpl implements PagesService {
 	public List<Pages> queryListOrderByWeight(int page,int pageSize) {
 		return getPagesDao().queryListOrderByWeight(page, pageSize);
 	}
+
+	@Override
+	public List<Pages> queryListOrderByMile() {
+		return getPagesDao().queryListOrderByMile();
+	}
 }
