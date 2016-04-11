@@ -2893,6 +2893,16 @@
 		</property>
 	</bean>
 
+	<bean id="mEditActivityContentService" class="cn.yiyingli.Handle.Service.MEditActivityContentService"
+		  scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService"/>
+		</property>
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService"/>
+		</property>
+	</bean>
+
 	<bean id="fGetActivityService" class="cn.yiyingli.Handle.Service.FGetActivityService"
 		scope="prototype">
 		<property name="contentAndPageService">

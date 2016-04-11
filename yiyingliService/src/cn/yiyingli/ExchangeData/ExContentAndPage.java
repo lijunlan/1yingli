@@ -9,6 +9,7 @@ public class ExContentAndPage {
 		map.put("contentId", contentAndPage.getId());
 		map.put("activityDes", contentAndPage.getActivityDes());
 		map.put("weight", contentAndPage.getWeight());
+		map.put("img",contentAndPage.getImg());
 		map.put("contentStyle", contentAndPage.getStyle());
 		switch (contentAndPage.getStyle()) {
 			case ContentAndPageDao.STYLE_PASSAGE:
@@ -30,17 +31,20 @@ public class ExContentAndPage {
 
 	public static void assemblePassageForUser(ContentAndPage contentAndPage, SuperMap map) {
 		map.put("activityDes", contentAndPage.getActivityDes());
+		map.put("img",contentAndPage.getImg());
 		ExPassage.assembleSimple(contentAndPage.getPassage(), map);
 		map.put("icon", contentAndPage.getPassage().getOwnTeacher().getIconUrl());
 	}
 
 	public static void assembleServiceProForUser(ContentAndPage contentAndPage, SuperMap map) {
 		map.put("activityDes", contentAndPage.getActivityDes());
+		map.put("img",contentAndPage.getImg());
 		ExServicePro.assembleSimpleServiceProForUser(contentAndPage.getServicePro(), map);
 	}
 
 	public static void assembleTeacherForUser(ContentAndPage contentAndPage, SuperMap map) {
 		map.put("activityDes", contentAndPage.getActivityDes());
+		map.put("img",contentAndPage.getImg());
 		ExTeacher.assembleSimpleForUser(contentAndPage.getTeacher(), map);
 		map.put("mile", (long) contentAndPage.getTeacher().getMile().floatValue());
 	}

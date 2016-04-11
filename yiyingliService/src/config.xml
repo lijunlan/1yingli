@@ -111,6 +111,7 @@
 		<method name="createActivity" beanName="mCreateActivityService"/>
 		<method name="editActivity" beanName="mEditActivity"/>
 		<method name="createActivityContent" beanName="mCreateActivityContentService"/>
+		<method name="editActivityContent" beanName="mEditActivityContentService"/>
 		<method name="removeActivityContent" beanName="mRemoveActivityContentService"/>
 		<method name="getActivity" beanName="mGetActivityService"/>
 		<method name="removeActivity" beanName="mRemoveActivityService"/>
