@@ -43,7 +43,6 @@ var changeTable = function (result) {
 		row += data.passageCount + "</td><td>";
 		row += data.serviceProCount + "</td><td>";
 		row += data.mile + "</td><td>";
-		row += data.serviceProCount + "</td><td>";
 		row += "<a href=\"activityInfo.html?data="
 			+ encodeURI($.toJSON(data)) + "\" target=\"_blank\">查看信息</a><button onclick='detail("
 			+ data.pagesId + ")'>查看列表</button></td>";
@@ -57,14 +56,20 @@ function removeActivity(pagesId){
 	myAjax(myJson,getAll);
 }
 
-$(function(){
+function refresh() {
 	myJson.method = "getActivityList";
 	myJson.page = page.toString();
 	myAjax(myJson, changeTable);
 	if (page == 1)
 		document.getElementById("lastPage").disabled = true;
 	document.getElementById("pageInput").value = page;
+}
+
+$(function(){
+	refresh();
 });
+
+
 
 function changePage(action) {
 	if (action == "last") {
@@ -90,4 +95,10 @@ function getAll() {
 	myAjax(myJson, changeTable);
 	if (document.getElementById("pageInput").value > 1)
 		document.getElementById("lastPage").disabled = false;
+}
+
+function  reOrder() {
+	myJson.method ="rebuildTeamOrder";
+	myAjax(myJson, refresh);
+	Messenger().post("排序成功");
 }

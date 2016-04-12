@@ -125,6 +125,7 @@ var changeTable = function (result) {
 	$("#contact").val(result.contact);
 	$("#email").val(result.email);
 	$("#content").val(result.content);
+	$("#weight").val(result.weight);
 };
 
 $(function(){
@@ -157,7 +158,7 @@ var edit = function (){
 	myJson.method = "editActivity";
 	myAjax(myJson, null);
 	Messenger().post("修改成功");
-}
+};
 
 
 

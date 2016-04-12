@@ -59,3 +59,4 @@ Carthage/Build
 # test
 
 **/.idea
+**/*.iml
