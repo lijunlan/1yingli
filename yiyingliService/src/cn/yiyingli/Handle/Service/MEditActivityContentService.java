@@ -1,6 +1,5 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Dao.ContentAndPageDao;
 import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.ContentAndPage;
 import cn.yiyingli.Service.ContentAndPageService;
