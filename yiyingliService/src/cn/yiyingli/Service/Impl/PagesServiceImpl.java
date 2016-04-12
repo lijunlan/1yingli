@@ -44,6 +44,11 @@ public class PagesServiceImpl implements PagesService {
 	}
 
 	@Override
+	public long queryTeamSum() {
+		return getPagesDao().queryTeamSum();
+	}
+
+	@Override
 	public List<Pages> queryList(int page, int pageSize) {
 		return getPagesDao().queryList(page, pageSize);
 	}

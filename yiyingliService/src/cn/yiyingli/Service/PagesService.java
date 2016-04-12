@@ -28,6 +28,8 @@ public interface PagesService {
 
 	Pages queryByKey(String activityKey);
 
+	long queryTeamSum();
+
 	List<Pages> queryList(int page, int pageSize);
 
 	List<Pages> queryList(int page);

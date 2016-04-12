@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -50,6 +51,14 @@ public class PagesDaoImpl extends HibernateDaoSupport implements PagesDao {
 			return null;
 		else
 			return list.get(0);
+	}
+
+	@Override
+	public long queryTeamSum() {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		long sum = (long) session.createQuery("select count(*) from Pages p where p.remove = "
+				+ false + " and  p.weight > 0").uniqueResult();
+		return sum;
 	}
 
 	@SuppressWarnings("unchecked")

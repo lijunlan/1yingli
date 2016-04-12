@@ -44,6 +44,15 @@ public class ContentAndPageDaoImpl extends HibernateDaoSupport implements Conten
 	}
 
 	@Override
+	public long queryTeamTeacherSum() {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		long sum = (long) session.createQuery("select count(*) from ContentAndPage cap left join cap.pages"
+				+ " where cap.style=" + STYLE_TEACHER
+				+ " and cap.pages.weight > 0").uniqueResult();
+		return sum;
+	}
+
+	@Override
 	public List<ContentAndPage> queryListByPages(long pagesId) {
 		String hql = "from ContentAndPage cap left join fetch cap.pages cp left join fetch cap.teacher"
 				+ " left join fetch cap.passage left join fetch cap.servicePro where cp.id=" + pagesId

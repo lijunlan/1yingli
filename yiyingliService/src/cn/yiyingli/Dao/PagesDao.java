@@ -16,6 +16,8 @@ public interface PagesDao {
 
 	Pages queryByKey(String activityKey);
 
+	long queryTeamSum();
+
 	List<Pages> queryList(int page, int pageSize);
 
 	List<Pages> queryListOrderByWeight(int page, int pageSize);

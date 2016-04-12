@@ -105,7 +105,7 @@ public class PassageServiceImpl implements PassageService {
 
 	@Override
 	public boolean checkUserLook(long passageId, long userId) {
-		return false;
+		return getPassageDao().checkUserLook(passageId, userId);
 	}
 
 	@Override
