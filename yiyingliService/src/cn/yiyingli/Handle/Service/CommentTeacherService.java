@@ -14,7 +14,6 @@ import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Util.MsgUtil;
-import cn.yiyingli.Util.NotifyUtil;
 
 public class CommentTeacherService extends UMsgService {
 
@@ -120,13 +119,12 @@ public class CommentTeacherService extends UMsgService {
 			// 加积分(英里数)
 			getCommentService().saveWithOrderAndTeacher(comment, order, teacher);
 
-			NotifyUtil.notifyTeacher(
-					order, "尊敬的导师，您好,用户(" + order.getCustomerName() + ")已经对本次服务(订单号:" + order.getOrderNo()
-							+ ")进行了评价,评价分数:" + comment.getScore() + "分。评价内容:" + comment.getContent() + ".",
-					getNotificationService());
-			NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-					+ order.getTeacher().getName() + ",用户已经对服务进行了评价(评价分数:" + comment.getScore() + "分。评价内容:"
-					+ comment.getContent() + ")");
+			// NotifyUtil.notifyTeacher(
+			// order, "尊敬的导师，您好,用户(" + order.getCustomerName() + ")已经对本次服务(订单号:"
+			// + order.getOrderNo()
+			// + ")进行了评价,评价分数:" + comment.getScore() + "分。评价内容:" +
+			// comment.getContent() + ".",
+			// getNotificationService());
 			setResMsg(MsgUtil.getSuccessMsg("comment successfully"));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();

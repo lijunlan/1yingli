@@ -38,6 +38,9 @@ public class Notification {
 	@JoinColumn(name = "USER_ID", updatable = false)
 	private User toUser;
 
+	@Column(name = "KIND")
+	private int kind;
+
 	public Long getId() {
 		return id;
 	}
@@ -94,4 +97,11 @@ public class Notification {
 		this.toUser = toUser;
 	}
 
+	public int getKind() {
+		return kind;
+	}
+
+	public void setKind(int kind) {
+		this.kind = kind;
+	}
 }

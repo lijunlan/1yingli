@@ -34,6 +34,11 @@ public class ContentAndPageServiceImpl implements ContentAndPageService {
 	}
 
 	@Override
+	public ContentAndPage query(long contentAndPageId) {
+		return getContentAndPageDao().query(contentAndPageId);
+	}
+
+	@Override
 	public List<ContentAndPage> queryListByPages(long pagesId) {
 		return getContentAndPageDao().queryListByPages(pagesId);
 	}
@@ -53,4 +58,13 @@ public class ContentAndPageServiceImpl implements ContentAndPageService {
 		return getContentAndPageDao().queryListWithServiceProByKey(activityKey, page, pageSize);
 	}
 
+	@Override
+	public List<ContentAndPage> queryListWithTeacherOrderByTeacherMile(int page, int pageSize) {
+		return getContentAndPageDao().queryListWithTeacher(page, pageSize);
+	}
+
+	@Override
+	public List<ContentAndPage> queryListWithTeacherOrderByTeacherMile() {
+		return getContentAndPageDao().queryListWithTeacher();
+	}
 }

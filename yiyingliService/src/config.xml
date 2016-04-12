@@ -113,11 +113,14 @@
 
 	<style name="manager">
 		<method name="createActivity" beanName="mCreateActivityService"/>
+		<method name="editActivity" beanName="mEditActivity"/>
 		<method name="createActivityContent" beanName="mCreateActivityContentService"/>
+		<method name="editActivityContent" beanName="mEditActivityContentService"/>
 		<method name="removeActivityContent" beanName="mRemoveActivityContentService"/>
 		<method name="getActivity" beanName="mGetActivityService"/>
 		<method name="removeActivity" beanName="mRemoveActivityService"/>
 		<method name="getActivityList" beanName="mGetActivityListService"/>
+		<method name="rebuildTeamOrder" beanName="mRebuildTeamOrderService"/>
 		<method name="closeVoucher" beanName="mCloseVoucherService"/>
 		<method name="removeServicePro" beanName="mRemoveServiceProService"/>
 		<method name="validateServicePro" beanName="mValidateServiceProService"/>
@@ -171,9 +174,13 @@
 		<method name="addBackground" beanName="mAddBackgroundService"/>
 		<method name="getBackgroundList" beanName="mGetBackgroundListService"/>
 		<method name="removeBackground" beanName="mRemoveBackgroundService"/>
+		<method name="getPayInformation" beanName="mGetPayInformationService"/>
+		<method name="editPayInformation" beanName="mEditPayInformationService"/>
 	</style>
 	<style name="function">
 		<method name="getActivity" beanName="fGetActivityService"/>
+		<method name="getHotActivity" beanName="fGetHotActivityService"/>
+		<method name="getHotActivityTeacher" beanName="fGetHotActivityTeacherService"/>
 		<method name="getSalePassageList" beanName="fGetSalePassageListService"/>
 		<method name="getRecommendServiceProList" beanName="fGetRecommendServiceProListService"/>
 		<method name="recordRecommandServicePro" beanName="fRecordRecommandServiceProService"/>

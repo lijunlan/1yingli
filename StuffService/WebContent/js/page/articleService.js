@@ -82,8 +82,11 @@ function changePage(action) {
 	get()
 }
 
+
 //获取页面内容
 function get() {
+
+
 	page = document.getElementById("pageInput").value;
 	if (page <= 1)
 		document.getElementById("lastPage").disabled = true;
@@ -104,6 +107,17 @@ function get() {
 	else if (fun == 'audit') {
 		myJson.state = '0';
 	}
+
+	var keyword = $("#search").val();
+	if (keyword == null || keyword == '') {
+		delete myJson.username;
+	}
+	else {
+		myJson.username = keyword;
+		$("#all001").attr('selected',true);
+		delete myJson.state;
+	}
+
 	//封装的ajax方法
 	//参数action传入1表示ajax返回值包含data，并使用changeTable函数来处理
 	myAjax(myJson, changeTable);

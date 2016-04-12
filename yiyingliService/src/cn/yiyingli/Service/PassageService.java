@@ -3,6 +3,7 @@ package cn.yiyingli.Service;
 import java.util.List;
 
 import cn.yiyingli.Persistant.Passage;
+import cn.yiyingli.Persistant.PassageLookUser;
 import cn.yiyingli.Persistant.User;
 
 public interface PassageService {
@@ -17,6 +18,8 @@ public interface PassageService {
 
 	void save(Passage passage, boolean updateToBaidu);
 
+	void save(PassageLookUser passageLookUser);
+
 	Long saveAndReturnId(Passage passage);
 
 	void remove(Passage passage);
@@ -26,6 +29,8 @@ public interface PassageService {
 	void updateAddLookNumber(long passageId, long number);
 
 	boolean updateUserLike(Passage passage, User user);
+
+	boolean checkUserLook(long passageId, long userId);
 
 	Passage query(long id);
 
@@ -54,6 +59,8 @@ public interface PassageService {
 	List<Passage> queryListByShow(int page, boolean show);
 
 	List<Passage> queryListByTeacherAndState(int page, long teacherId, short state);
+
+	List<Passage> queryListByTeacher(int page, long teacherId);
 
 	List<Passage> queryListByIds(List<Long> ids);
 

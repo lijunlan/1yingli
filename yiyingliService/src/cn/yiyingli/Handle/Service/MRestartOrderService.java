@@ -1,12 +1,10 @@
 package cn.yiyingli.Handle.Service;
 
 import cn.yiyingli.Handle.MMsgService;
-import cn.yiyingli.Persistant.Manager;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Util.MsgUtil;
-import cn.yiyingli.Util.NotifyUtil;
 
 public class MRestartOrderService extends MMsgService {
 
@@ -37,7 +35,6 @@ public class MRestartOrderService extends MMsgService {
 
 	@Override
 	public void doit() {
-		Manager manager = getManager();
 		String oid = (String) getData().get("orderId");
 		Order order = getOrderService().queryByShowId(oid, false);
 		if (order == null) {
@@ -55,12 +52,6 @@ public class MRestartOrderService extends MMsgService {
 		}
 		order.setState(ss[1] + "," + order.getState());
 		getOrderService().updateAndSendTimeTask(order);
-		NotifyUtil.notifyUserOrder(order, "尊敬的用户,您好,订单(" + order.getOrderNo() + ")状态已经被管理员恢复,您可以继续流程.",
-				order.getCreateUser(), getNotificationService());
-		NotifyUtil.notifyTeacher(order, "尊敬的导师,您好,订单(" + order.getOrderNo() + ")状态已经被管理员恢复,您可以继续流程.",
-				getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + ",订单状态已经被管理员(" + manager.getName() + ")恢复");
 		setResMsg(MsgUtil.getSuccessMsg("restart successfully"));
 	}
 

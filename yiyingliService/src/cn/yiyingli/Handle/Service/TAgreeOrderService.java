@@ -59,12 +59,7 @@ public class TAgreeOrderService extends TMsgService {
 		order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
 		getOrderService().update(order, false);
 
-		NotifyUtil.notifyUserOrder(order,
-				"尊敬的用户，订单号为" + order.getOrderNo() + "的订单，申请退款已经被导师(" + teacher.getName() + ")接受，我们会在24小时内为您退款。",
-				order.getCreateUser(), getNotificationService());
-		NotifyUtil.notifyTeacher(order, "尊敬的导师，您已经同意订单号为" + order.getOrderNo() + "的退款。", getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + "，导师已经同意订单退款。");
+		NotifyUtil.notifyUserOrder(order, getNotificationService());
 		setResMsg(MsgUtil.getSuccessMsg("agree order successfully"));
 	}
 }

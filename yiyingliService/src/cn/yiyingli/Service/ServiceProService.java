@@ -61,7 +61,7 @@ public interface ServiceProService {
 
 	void updateAddLookNumber(long serviceProId, long number);
 
-	void updateUserUnlike(long serviceProId, long userId);
+	boolean updateUserUnlike(long serviceProId, long userId);
 
 	boolean updateUserLike(ServicePro servicePro, User user);
 

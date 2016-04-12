@@ -42,6 +42,7 @@
 				<value>cn.yiyingli.Persistant.Pages</value>
 				<value>cn.yiyingli.Persistant.ContentAndPage</value>
 				<value>cn.yiyingli.Persistant.BackingComment</value>
+				<value>cn.yiyingli.Persistant.PassageLookUser</value>
 			</list>
 		</property>
 	</bean>
@@ -647,6 +648,9 @@
 		</property>
 		<property name="userDao">
 			<ref local="userDao" />
+		</property>
+		<property name="teacherDao">
+			<ref local="teacherDao"/>
 		</property>
 	</bean>
 
@@ -1940,6 +1944,12 @@
 		<property name="passageService">
 			<ref local="passageService" />
 		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
+		<property name="userService">
+			<ref local="userService"/>
+		</property>
 	</bean>
 
 	<bean id="forgetPasswordService" class="cn.yiyingli.Handle.Service.ForgetPasswordService"
@@ -2040,6 +2050,26 @@
 		</property>
 		<property name="managerMarkService">
 			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mGetPayInformationService" class="cn.yiyingli.Handle.Service.MGetPayInformationService"
+		  scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="mEditPayInformationService" class="cn.yiyingli.Handle.Service.MEditPayInformationService"
+		  scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
 		</property>
 	</bean>
 
@@ -2153,6 +2183,12 @@
 		<property name="passageService">
 			<ref local="passageService" />
 		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
+		<property name="userService">
+			<ref local="userService"/>
+		</property>
 	</bean>
 
 	<bean id="mValidatePassageService" class="cn.yiyingli.Handle.Service.MValidatePassageService"
@@ -2257,6 +2293,20 @@
 		</property>
 	</bean>
 
+
+	<bean id="mRebuildTeamOrderService" class="cn.yiyingli.Handle.Service.MRebuildTeamOrderService"
+		  scope="prototype">
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService"/>
+		</property>
+		<property name="pagesService">
+			<ref local="pagesService"/>
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService"/>
+		</property>
+	</bean>
+
 	<bean id="tEditPayPalService" class="cn.yiyingli.Handle.Service.TEditPayPalService"
 		scope="prototype">
 		<property name="userMarkService">
@@ -2300,6 +2350,9 @@
 		</property>
 		<property name="passageService">
 			<ref local="passageService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
 		</property>
 	</bean>
 
@@ -2565,6 +2618,9 @@
 		<property name="managerMarkService">
 			<ref local="managerMarkService" />
 		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
 	</bean>
 
 	<bean id="mValidateServiceProService" class="cn.yiyingli.Handle.Service.MValidateServiceProService"
@@ -2633,6 +2689,9 @@
 		<property name="userMarkService">
 			<ref local="userMarkService" />
 		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
 	</bean>
 
 	<bean id="disLikeServiceProService" class="cn.yiyingli.Handle.Service.DisLikeServiceProService"
@@ -2642,6 +2701,9 @@
 		</property>
 		<property name="userMarkService">
 			<ref local="userMarkService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
 		</property>
 	</bean>
 
@@ -2855,6 +2917,16 @@
 		</property>
 	</bean>
 
+	<bean id="mEditActivity" class="cn.yiyingli.Handle.Service.MEditActivityService"
+		  scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService"/>
+		</property>
+		<property name="pagesService">
+			<ref local="pagesService" />
+		</property>
+	</bean>
+
 	<bean id="mRemoveActivityService" class="cn.yiyingli.Handle.Service.MRemoveActivityService"
 		scope="prototype">
 		<property name="pagesService">
@@ -2875,6 +2947,21 @@
 		</property>
 	</bean>
 
+	<bean id="fGetHotActivityService" class="cn.yiyingli.Handle.Service.FGetHotActivityService"
+		  scope="prototype">
+		<property name="pagesService">
+			<ref local="pagesService"/>
+		</property>
+	</bean>
+
+	<bean id="fGetHotActivityTeacherService" class="cn.yiyingli.Handle.Service.FGetHotActivityTeacherService"
+		  scope="prototype">
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService"/>
+		</property>
+	</bean>
+
+
 	<bean id="mRemoveActivityContentService"
 		class="cn.yiyingli.Handle.Service.MRemoveActivityContentService"
 		scope="prototype">
@@ -2883,6 +2970,9 @@
 		</property>
 		<property name="managerMarkService">
 			<ref local="managerMarkService" />
+		</property>
+		<property name="pagesService">
+			<ref local="pagesService"/>
 		</property>
 	</bean>
 
@@ -2916,6 +3006,16 @@
 		</property>
 		<property name="managerMarkService">
 			<ref local="managerMarkService" />
+		</property>
+	</bean>
+
+	<bean id="mEditActivityContentService" class="cn.yiyingli.Handle.Service.MEditActivityContentService"
+		  scope="prototype">
+		<property name="managerMarkService">
+			<ref local="managerMarkService"/>
+		</property>
+		<property name="contentAndPageService">
+			<ref local="contentAndPageService"/>
 		</property>
 	</bean>
 

@@ -119,6 +119,8 @@ public class MCreateActivityContentService extends MMsgService {
 				setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 				return;
 			}
+			pages.setMile(pages.getMile() + teacher.getMile());
+			getPagesService().update(pages);
 			contentAndPage.setTeacher(teacher);
 		}
 		getContentAndPageService().save(contentAndPage);

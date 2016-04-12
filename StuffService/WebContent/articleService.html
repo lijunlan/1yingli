@@ -68,6 +68,8 @@
 								class="am-icon-leanpub"></span> 文章管理</a></li>
 						<li><a href="suggestionService.html"><span
 								class="am-icon-envelope-o"></span> 用户建议</a></li>
+						<li><a href="editTeacherPay.html"><span
+								class ="am-icon-list"></span> 编辑支付</a></li>
 					</ul>
 				</li>
 
@@ -82,20 +84,24 @@
 					</p>
 					<div>
 						<select name="articleState" id="articleState" data-am-selected>
-							<option value="-1">全部</option>
+							<option id="all001" value="-1">全部</option>
 							<option value="0">审核中</option>
 							<option value="1">未通过</option>
 							<option value="2">通过</option>
 						</select>
 						<br>
 						<br>
-
+						<!--搜索--->
+						<input type="text" class="am-form-field am-round" id="search"
+							   placeholder="用户名/姓名/编号" >
+						<br>
 						<button id="lastPage" onclick="changePage('last')" class="am-btn am-btn-default am-round">上一页</button>
-						<input id="pageInput" style="width: 20px"></input>
+						<input id="pageInput" style="width: 20px;border-style:solid;border-color:gainsboro;border-width:0.5px"></input>
 						<button id="nextPage" onclick="changePage('next')" class="am-btn am-btn-default am-round">下一页</button>
 						<br>
 						<br>
 						<button id="get" class="am-btn am-btn-secondary am-btn-block" onclick="get()">获取文章</button>
+
 						<br>
 					</div>
 				</div>
@@ -121,6 +127,7 @@
 					<div class="am-tabs-bd">
 						<div class="am-tab-panel am-active" id="check">
 							<div class="am-panel-group" id="checkAccordion">
+								<!---貌似无用的div-->
 								<div class="am-panel am-panel-default">
 									<div class="am-panel-hd">
 										<h4 class="am-panel-title" data-am-collapse="{parent: '#checkAccordion', target: '#do-not-say-1'}">

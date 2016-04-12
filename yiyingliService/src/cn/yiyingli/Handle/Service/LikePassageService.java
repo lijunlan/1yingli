@@ -5,6 +5,7 @@ import java.util.Calendar;
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Passage;
 import cn.yiyingli.Service.PassageService;
+import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.SendMsgToBaiduUtil;
 
@@ -12,12 +13,22 @@ public class LikePassageService extends UMsgService {
 
 	private PassageService passageService;
 
+	private TeacherService teacherService;
+
 	public PassageService getPassageService() {
 		return passageService;
 	}
 
 	public void setPassageService(PassageService passageService) {
 		this.passageService = passageService;
+	}
+
+	public TeacherService getTeacherService() {
+		return teacherService;
+	}
+
+	public void setTeacherService(TeacherService teacherService) {
+		this.teacherService = teacherService;
 	}
 
 	@Override
@@ -35,6 +46,7 @@ public class LikePassageService extends UMsgService {
 		}
 		boolean result = getPassageService().updateUserLike(passage, getUser());
 		if (result) {
+			getTeacherService().updateAddMile(passage.getOwnTeacher().getId(),1F);
 			setResMsg(MsgUtil.getSuccessMsg("like passage successfully"));
 			SendMsgToBaiduUtil.updatePassageUserTrainDataLike(getUser().getId() + "", passage.getId() + "",
 					Calendar.getInstance().getTimeInMillis() + "");

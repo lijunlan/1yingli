@@ -34,13 +34,17 @@ public class StringUtil {
 		if (con != null) {
 			content = con.replaceAll("</?[^>]+>", "");// 剔出了<html>的标签
 			content = content.replace("&nbsp;", "");
-			content = content.replace("\"", "‘");
-			content = content.replace("'", "‘");
+			content = content.replace("\"", "\\\"");
+			content = content.replace("'", "\\'");
 			if (content.length() > length) {
 				content = content.substring(0, length) + end;
 			}
 		}
 
 		return content;
+	}
+
+	public static String HTMLtoString(String HTML) {
+		return subStringHTML(HTML, HTML.length(), "");
 	}
 }

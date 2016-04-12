@@ -28,6 +28,7 @@ public class PPassageUtil {
 		passage.setImageUrl(imageUrl);
 		passage.setLikeNumber(0L);
 		passage.setLookNumber(0L);
+		passage.setLookUsers(0L);
 		passage.setOwnTeacher(teacher);
 		passage.setTag(tag);
 		passage.setTitle(title);

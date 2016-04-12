@@ -22,7 +22,7 @@ public interface TeacherDao {
 
 	void update(Teacher teacher);
 
-	void updateAddMile(long teacherId, long mile);
+	void updateAddMile(long teacherId, float mile);
 
 	void updateAddSubMile(long teacherId, long subMile);
 
@@ -53,6 +53,8 @@ public interface TeacherDao {
 	Teacher queryWithLikeUser(long teacherId);
 
 	Teacher queryByUserId(long userid);
+
+	Teacher queryByName(String name);
 
 	Teacher queryByUserIdWithServicePro(long userid);
 

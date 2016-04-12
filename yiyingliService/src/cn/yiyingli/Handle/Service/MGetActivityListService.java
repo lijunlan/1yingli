@@ -2,6 +2,7 @@ package cn.yiyingli.Handle.Service;
 
 import java.util.List;
 
+import cn.yiyingli.ExchangeData.ExPages;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
@@ -33,13 +34,7 @@ public class MGetActivityListService extends MMsgService {
 		ExList jsonPages = new ExArrayList();
 		for (Pages page : pages) {
 			SuperMap map = new SuperMap();
-			map.put("pagesId", page.getId());
-			map.put("createTime", page.getCreateTime());
-			map.put("passageCount", page.getPassageCount());
-			map.put("serviceProCount", page.getServiceProCount());
-			map.put("teacherCount", page.getTeacherCount());
-			map.put("description", page.getDescription());
-			map.put("key", page.getPagesKey());
+			ExPages.assembleSimple(page,map);
 			jsonPages.add(map.finish());
 		}
 		setResMsg(MsgUtil.getSuccessMap().put("data", jsonPages).finishByJson());

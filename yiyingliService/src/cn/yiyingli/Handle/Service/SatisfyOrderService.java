@@ -8,7 +8,6 @@ import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Util.MsgUtil;
-import cn.yiyingli.Util.NotifyUtil;
 
 public class SatisfyOrderService extends UMsgService {
 
@@ -60,15 +59,6 @@ public class SatisfyOrderService extends UMsgService {
 		order.setSalaryState(OrderService.ORDER_SALARY_STATE_NEED);
 		order.setEndTime(Calendar.getInstance().getTimeInMillis() + "");
 		getOrderService().update(order, true);
-
-		NotifyUtil.notifyUserOrder(order,
-				"尊敬的用户,您好,您已经确认本次服务(订单号:" + order.getOrderNo() + "),相信您与导师合作得很愉快,请在一英里平台对本次服务进行评价哦,谢谢。", user,
-				getNotificationService());
-		NotifyUtil.notifyTeacher(order,
-				"尊敬的导师,您好,(订单号:" + order.getOrderNo() + ")用户已经确认服务,感谢您的付出,您的酬劳将在24小时内到账,请注意查收。",
-				getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + "，用户已经确认服务。");
 
 		setResMsg(MsgUtil.getSuccessMsg("satisfy order successfully"));
 	}

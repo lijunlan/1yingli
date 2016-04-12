@@ -37,7 +37,7 @@ public class PTeacherUtil {
 	public static void editTeacherByManagerDetail(User user, JSONArray workExperiences, JSONArray studyExperiences,
 			JSONArray tips, String simpleinfo, String name, String phone, String address, String mail, String iconUrl,
 			String introduce, String checkPhone, String checkIDCard, String checkEmail, String checkWork,
-			String checkStudy, String onService, long mile, String topic, float price, String bgUrl, boolean onChat,
+			String checkStudy, String onService, float mile, String topic, float price, String bgUrl, boolean onChat,
 			boolean showNotify, Teacher teacher, TipService tipService) {
 		refreshTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone, address, mail, iconUrl,
 				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, mile, topic, price, bgUrl,
@@ -102,7 +102,7 @@ public class PTeacherUtil {
 	@SuppressWarnings("unchecked")
 	public static void refreshTeacher(User user, JSONArray workExperiences, JSONArray studyExperiences, JSONArray tips,
 			String simpleinfo, String name, String phone, String address, String mail, String iconUrl, String introduce,
-			String checkPhone, String checkIDCard, String checkEmail, String checkWork, String checkStudy, long mile,
+			String checkPhone, String checkIDCard, String checkEmail, String checkWork, String checkStudy, float mile,
 			String topic, float price, String bgUrl, boolean onChat, boolean showNotify, Teacher teacher,
 			TipService tipService) {
 		if (Boolean.valueOf(checkPhone)) {

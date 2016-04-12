@@ -64,15 +64,8 @@ public class CancelOrderAfterAcceptService extends UMsgService {
 			order.setState(OrderService.ORDER_STATE_USER_REGRET + "," + order.getState());
 		}
 		getOrderService().updateAndSendTimeTask(order);
-
-		NotifyUtil.notifyUserOrder(order,
-				"尊敬的用户，被导师(" + order.getTeacher().getName() + ")接受的订单已经取消。订单号" + order.getOrderNo() + "，请等待导师同意",
-				user, getNotificationService());
-		NotifyUtil.notifyTeacher(order,
-				"尊敬的导师，已经确认的订单(订单号:" + order.getOrderNo() + ")，用户("
-						+ order.getCustomerName() + ")已申请取消", getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + ",用户申请取消");
+		NotifyUtil.notifyUserOrder(order, getNotificationService());
+		NotifyUtil.notifyTeacher(order, getNotificationService());
 		setResMsg(MsgUtil.getSuccessMsg("cancel order after accept successfully"));
 	}
 
