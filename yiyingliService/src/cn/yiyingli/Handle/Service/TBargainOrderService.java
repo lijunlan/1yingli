@@ -72,8 +72,7 @@ public class TBargainOrderService extends TMsgService {
 				"尊敬的学员,您好,您的订单(订单号:" + order.getOrderNo() +
 						")已经被导师(" + teacher.getName() + ")确定价格,请在48小时内完成支付哦,超时系统将自动取消订单。",
 				order.getCreateUser(), getNotificationService());
-		NotifyUtil.notifyTeacher(order, "尊敬的导师，您已经为订单号" + order.getOrderNo() + "的订单确定价格," +
-				"请通知用户("+ order.getCustomerName() +")在48小时内完成支付哦,超时系统将自动取消订单。",
+		NotifyUtil.notifyTeacher(order, TBargainOrderService.class,
 				getNotificationService());
 		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
 				+ order.getTeacher().getName() + "，导师已经确定价格");

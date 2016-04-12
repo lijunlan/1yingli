@@ -24,11 +24,13 @@
 			<ul
 				class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
 
-				<li class="am-dropdown" data-am-dropdown=""><a
-					class="am-dropdown-toggle" data-am-dropdown-toggle=""
-					href="javascript:;"> <span class="am-icon-users"></span> <label
+				<li class="am-dropdown" data-am-dropdown="">
+					<a
+						class="am-dropdown-toggle" data-am-dropdown-toggle=""
+						href="javascript:;"> <span class="am-icon-users"></span> <label
 						id="admin_name">管理员</label>,你好
-				</a></li>
+					</a>
+				</li>
 				<li class="am-hide-sm-only"><a onclick="logout()"><span
 						class="am-icon-sign-out"></span> <span class="admin-fullText">注销</span></a></li>
 			</ul>
@@ -84,6 +86,9 @@
 						</li>
 						<li><a href="listActivityService.html"><span
 								class ="am-icon-list"></span> 查看活动</a>
+						</li>
+						<li><a href="editTeacherPay.html"><span
+								class ="am-icon-list"></span> 编辑支付</a>
 						</li>
 					</ul>
 				</li>
@@ -151,10 +156,17 @@
 			<li><a href="listServiceProService.html" class="am-text-warning"><span
 					class="am-icon-btn am-icon-list"></span><br> <br>查看服务</a></li>
 			<li><a href="reward.html" class="am-text-danger"><span
-					class="am-icon-btn am-icon-envelope"></span><br> <br>查看打赏</a></li>	
+					class="am-icon-btn am-icon-envelope"></span><br> <br>查看打赏</a></li>
 					<li><a href="listActivityService.html" class="am-text-secondary"><span
-					class="am-icon-btn am-icon-envelope"></span><br> <br>查看活动</a></li>	
-		</ul>		
+					class="am-icon-btn am-icon-envelope"></span><br> <br>查看活动</a></li>
+		</ul>
+
+		<!---缺个图标------>
+		<ul
+			class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
+			<li><a href="editTeacherPay.html" class="am-text-success"><span
+					class="am-icon-btn am-icon-server"></span><br> <br>编辑支付</a></li>
+		</ul>
 	</div>
 	<!--------------------------------------------- 声音 ---------------------------------------------------------------->
 	<div id="sound"></div>

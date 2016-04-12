@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import cn.yiyingli.Dao.ServiceProDao;
+import cn.yiyingli.Dao.TeacherDao;
 import cn.yiyingli.Dao.UserDao;
 import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.User;
@@ -22,6 +23,8 @@ public class ServiceProServiceImpl implements ServiceProService {
 
 	private UserDao userDao;
 
+	private TeacherDao teacherDao;
+
 	public ServiceProDao getServiceProDao() {
 		return serviceProDao;
 	}
@@ -36,6 +39,14 @@ public class ServiceProServiceImpl implements ServiceProService {
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
+	}
+
+	public TeacherDao getTeacherDao() {
+		return teacherDao;
+	}
+
+	public void setTeacherDao(TeacherDao teacherDao) {
+		this.teacherDao = teacherDao;
 	}
 
 	@Override
@@ -83,11 +94,12 @@ public class ServiceProServiceImpl implements ServiceProService {
 	}
 
 	@Override
-	public void updateUserUnlike(long serviceProId, long userId) {
+	public boolean updateUserUnlike(long serviceProId, long userId) {
 		if (!getServiceProDao().queryCheckLikeUser(serviceProId, userId)) {
-			return;
+			return false;
 		} else {
 			getServiceProDao().removeUserLike(serviceProId, userId);
+			return true;
 		}
 	}
 

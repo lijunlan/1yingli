@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.yiyingli.Persistant.PassageLookUser;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -33,6 +34,12 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 						+ PassageDao.PASSAGE_STATE_OK + " and passage.ONSHOW=true) where teacher.TEACHER_ID="
 						+ teacher.getId());
 		query.executeUpdate();
+	}
+
+
+	@Override
+	public void save(PassageLookUser passageLookUser) {
+		getHibernateTemplate().save(passageLookUser);
 	}
 
 	@Override
@@ -181,6 +188,14 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 	}
 
 	@Override
+	public boolean checkUserLook(long passageId, long userId) {
+		String hql = "from PassageLookUser plu where plu.passage.id = ? and plu.user.id = ?";
+		@SuppressWarnings("unchecked")
+		List<PassageLookUser> list = getHibernateTemplate().find(hql,passageId,userId);
+		return !list.isEmpty();
+	}
+
+	@Override
 	public List<Passage> queryListByIds(long[] ids) {
 		if (ids.length <= 0)
 			return new ArrayList<Passage>();
@@ -246,6 +261,27 @@ public class PassageDaoImpl extends HibernateDaoSupport implements PassageDao {
 			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from Passage p left join fetch p.ownTeacher where p.remove=" + false
 						+ " and p.ownTeacher.id=" + teacherId + " and p.state=" + state + " and p.onshow=" + true
+						+ " ORDER BY p.createTime DESC";
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<Passage> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Passage> queryListByTeacher(final int page,final int pageSize,final long teacherId) {
+		List<Passage> list = new ArrayList<Passage>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Passage>>() {
+
+			@Override
+			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from Passage p left join fetch p.ownTeacher where p.remove=" + false
+						+ " and p.ownTeacher.id=" + teacherId
 						+ " ORDER BY p.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);

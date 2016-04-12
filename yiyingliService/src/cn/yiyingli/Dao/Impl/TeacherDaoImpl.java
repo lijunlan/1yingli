@@ -68,7 +68,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	}
 
 	@Override
-	public void updateAddMile(long teacherId, long mile) {
+	public void updateAddMile(long teacherId, float mile) {
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = session.createSQLQuery(
 				"update teacher set teacher.MILE=teacher.MILE+" + mile + " where teacher.TEACHER_ID=" + teacherId);
@@ -249,6 +249,17 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 		String hql = "from Teacher t where t.user.id=?";
 		@SuppressWarnings("unchecked")
 		List<Teacher> list = getHibernateTemplate().find(hql, userid);
+		if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
+
+	@Override
+	public Teacher queryByName(String name) {
+		String hql = "from Teacher t where t.name=?";
+		@SuppressWarnings("unchecked")
+		List<Teacher> list = getHibernateTemplate().find(hql, name);
 		if (list.isEmpty())
 			return null;
 		else

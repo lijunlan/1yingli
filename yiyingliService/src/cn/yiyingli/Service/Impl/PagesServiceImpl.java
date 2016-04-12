@@ -52,4 +52,14 @@ public class PagesServiceImpl implements PagesService {
 	public List<Pages> queryList(int page) {
 		return getPagesDao().queryList(page, SIZE_MANAGER_PAGE);
 	}
+
+	@Override
+	public List<Pages> queryListOrderByWeight(int page,int pageSize) {
+		return getPagesDao().queryListOrderByWeight(page, pageSize);
+	}
+
+	@Override
+	public List<Pages> queryListOrderByMile() {
+		return getPagesDao().queryListOrderByMile();
+	}
 }

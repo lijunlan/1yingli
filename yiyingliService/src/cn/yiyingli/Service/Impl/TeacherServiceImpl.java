@@ -127,7 +127,7 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public void updateAddMile(long teacherId, long mile) {
+	public void updateAddMile(long teacherId, float mile) {
 		getTeacherDao().updateAddMile(teacherId, mile);
 	}
 
@@ -217,6 +217,11 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
+	public Teacher queryByName(String name) {
+		return getTeacherDao().queryByName(name);
+	}
+
+	@Override
 	public Teacher queryWithLikeUser(long teacherId) {
 		return getTeacherDao().queryWithLikeUser(teacherId);
 	}
@@ -282,24 +287,26 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public void updateUserLike(Teacher teacher, User user) {
+	public boolean updateUserLike(Teacher teacher, User user) {
 		if (getTeacherDao().queryCheckLikeUser(teacher.getId(), user.getId())) {
-			return;
+			return false;
 		} else {
 			UserLikeTeacher userLikeTeacher = new UserLikeTeacher();
 			userLikeTeacher.setTeacher(teacher);
 			userLikeTeacher.setUser(user);
 			userLikeTeacher.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 			getUserDao().updateLikeTeacher(userLikeTeacher);
+			return true;
 		}
 	}
 
 	@Override
-	public void updateUserUnlike(long teacherId, long userId) {
+	public boolean updateUserUnlike(long teacherId, long userId) {
 		if (!getTeacherDao().queryCheckLikeUser(teacherId, userId)) {
-			return;
+			return false;
 		} else {
 			getTeacherDao().removeUserLike(teacherId, userId);
+			return true;
 		}
 	}
 

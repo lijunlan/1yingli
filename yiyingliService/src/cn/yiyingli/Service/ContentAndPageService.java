@@ -12,6 +12,8 @@ public interface ContentAndPageService {
 
 	void update(ContentAndPage contentAndPage);
 
+	ContentAndPage query(long contentAndPageId);
+
 	List<ContentAndPage> queryListByPages(long pagesId);
 
 	List<ContentAndPage> queryListWithTeacherByKey(String activityKey, int page, int pageSize);
@@ -19,4 +21,8 @@ public interface ContentAndPageService {
 	List<ContentAndPage> queryListWithPassageByKey(String activityKey, int page, int pageSize);
 
 	List<ContentAndPage> queryListWithServiceProByKey(String activityKey, int page, int pageSize);
+
+	List<ContentAndPage> queryListWithTeacherOrderByTeacherMile(int page,int pageSize);
+
+	List<ContentAndPage> queryListWithTeacherOrderByTeacherMile();
 }

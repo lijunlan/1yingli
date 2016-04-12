@@ -64,17 +64,8 @@ public class CancelOrderAfterPayService extends UMsgService {
 			order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
 		}
 		getOrderService().update(order, false);
-
-		if(order.getServiceType().equals(ServicePro.SERVICE_TYPE_BARGAIN)){
-			NotifyUtil.notifyUserOrder(order, "尊敬的用户，您的订单(" + order.getOrderNo() + ")已经取消", user,
-					getNotificationService());
-		} else {
-			NotifyUtil.notifyUserOrder(order, "尊敬的用户，您的订单(" + order.getOrderNo() + ")已经取消，我们将竭尽全力在24小时内为您全额退款", user,
-					getNotificationService());
-		}
-		NotifyUtil.notifyTeacher(order, "尊敬的导师，您的订单(" + order.getOrderNo() + ")已经被用户取消。", getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + ",订单已经被用户取消，");
+		NotifyUtil.notifyUserOrder(order, getNotificationService());
+		NotifyUtil.notifyTeacher(order, getNotificationService());
 		setResMsg(MsgUtil.getSuccessMsg("cancel order after paid successfully"));
 	}
 

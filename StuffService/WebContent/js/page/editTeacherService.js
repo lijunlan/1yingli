@@ -107,11 +107,12 @@ function regist() {
 
 //获取导师信息
 function get() {
-	if ($("#inputSearchUsername").val() == "") {
+	var keyword = $("#searchInput").val();
+	if (keyword == null || keyword == '') {
 		return;
 	}
+	myJson.username = keyword;
 	myJson.method = "getTeacherInfo";
-	myJson.username = $("#inputSearchUsername").val();
 	myAjax(myJson, getAndParse);
 }
 
@@ -120,7 +121,9 @@ function getAndParse(t) {
 	if (t.teacher != null) {
 		t = t.teacher;
 	}
-	$("#username").val($("#inputSearchUsername").val());
+	//$("#username").val($("#inputSearchUsername").val());
+	
+	$("#username").val(t.username);
 	$("#simpleinfo").val(t.simpleinfo);
 	$("#name").val(t.name);
 	$("#phone").val(t.phone);

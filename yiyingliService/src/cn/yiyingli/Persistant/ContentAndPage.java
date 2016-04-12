@@ -47,6 +47,9 @@ public class ContentAndPage {
 	@Column(name = "CREATETIME", nullable = false, updatable = false)
 	private String createTime;
 
+	@Column(name = "IMG")
+	private String img;
+
 	public Long getId() {
 		return id;
 	}
@@ -119,4 +122,11 @@ public class ContentAndPage {
 		this.style = style;
 	}
 
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
 }

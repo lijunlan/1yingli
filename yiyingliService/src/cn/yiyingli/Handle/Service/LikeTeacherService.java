@@ -43,7 +43,9 @@ public class LikeTeacherService extends UMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
 		}
-		getTeacherService().updateUserLike(teacher, user);
+		if(getTeacherService().updateUserLike(teacher, user)) {
+			getTeacherService().updateAddMile(teacher.getId(),1F);
+		}
 		setResMsg(MsgUtil.getSuccessMsg("liked"));
 	}
 

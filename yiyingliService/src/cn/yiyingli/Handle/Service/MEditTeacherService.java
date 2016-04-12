@@ -88,7 +88,7 @@ public class MEditTeacherService extends MMsgService {
 		PTeacherUtil.editTeacherByManagerDetail(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone,
 				address, mail, iconUrl, introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy,
 				onService == null ? String.valueOf(teacher.getOnService()) : onService,
-				mile == null ? teacher.getMile() : Long.valueOf(mile), topic, price,
+				mile == null ? teacher.getMile() : Float.valueOf(mile), topic, price,
 				(bgUrl == null || bgUrl.equals("")) ? teacher.getBgUrl() : bgUrl, onChat, showNotify, teacher,
 				getTipService());
 

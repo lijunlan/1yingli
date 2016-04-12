@@ -99,7 +99,9 @@ var changeTable = function (result) {
 		var showName = getName(data.contentStyle,data);
 		row += showId + "</td><td>";
 		row += showName + "</td><td>";
-	 	row += "<button onclick='removeContent("
+	 	row += "<a href=\"activityContent.html?data="
+			+ encodeURI($.toJSON(data)) + "\" target=\"_blank\">查看信息</a>" +
+			"<button onclick='removeContent("
 			+ data.contentId + ")'>删除</button></td>";
 		$("#activity").append(row);
 	});

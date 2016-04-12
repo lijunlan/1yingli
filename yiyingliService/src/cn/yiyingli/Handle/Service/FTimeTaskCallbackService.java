@@ -3,14 +3,14 @@ package cn.yiyingli.Handle.Service;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.OrderList;
-import cn.yiyingli.Service.NotificationService;
-import cn.yiyingli.Service.OrderListService;
-import cn.yiyingli.Service.OrderService;
-import cn.yiyingli.Service.PassageService;
-import cn.yiyingli.Service.UserMarkService;
+import cn.yiyingli.Persistant.Passage;
+import cn.yiyingli.Persistant.PassageLookUser;
+import cn.yiyingli.Service.*;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
 import net.sf.json.JSONObject;
+
+import java.util.Calendar;
 
 public class FTimeTaskCallbackService extends MsgService {
 
@@ -23,6 +23,10 @@ public class FTimeTaskCallbackService extends MsgService {
 	private NotificationService notificationService;
 
 	private PassageService passageService;
+
+	private UserService userService;
+
+	private TeacherService teacherService;
 
 	public OrderService getOrderService() {
 		return orderService;
@@ -62,6 +66,22 @@ public class FTimeTaskCallbackService extends MsgService {
 
 	public void setPassageService(PassageService passageService) {
 		this.passageService = passageService;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public TeacherService getTeacherService() {
+		return teacherService;
+	}
+
+	public void setTeacherService(TeacherService teacherService) {
+		this.teacherService = teacherService;
 	}
 
 	@Override
@@ -122,18 +142,8 @@ public class FTimeTaskCallbackService extends MsgService {
 						order.setState(OrderService.ORDER_STATE_CANCEL_PAID + ","
 								+ order.getState());
 						getOrderService().update(order, false);
-						NotifyUtil.notifyUserOrder(order,
-								"尊敬的用户,您好,由于您24小时内未支付订单(" + order.getOrderNo() +
-										"),系统已自动关闭,如若需要,请重新创建订单",
-								order.getCreateUser(), getNotificationService());
-						NotifyUtil.notifyTeacher(order,
-								"尊敬的导师,您好,您的订单(" + order.getOrderNo() +
-										")由于用户未在24小时付款,系统已自动取消.",
-								getNotificationService());
-						NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户："
-								+ order.getCustomerName() + ",导师："
-								+ order.getTeacher().getName() +
-								",由于用户未在24小时内付款，已经自动取消");
+						NotifyUtil.notifyUserOrder(order, getNotificationService());
+						NotifyUtil.notifyTeacher(order, getNotificationService());
 						break;
 					case OrderService.ORDER_STATE_FINISH_PAID:
 						// order.setState(OrderService.ORDER_STATE_WAIT_RETURN + ","
@@ -174,51 +184,28 @@ public class FTimeTaskCallbackService extends MsgService {
 					case OrderService.ORDER_STATE_WAIT_SERVICE:
 						order.setState(OrderService.ORDER_STATE_SERVICE_FINISH + "," + order.getState());
 						getOrderService().update(order, false);
-						NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-								"尊敬的用户,您好,您的订单(" + order.getOrderNo() + ")系统已经自动代替导师确认服务完毕.请到一英里平台确认本次服务.",
-								order.getCreateUser(), getNotificationService());
-						NotifyUtil.notifyTeacher(order, "尊敬的导师,您的订单(" + order.getOrderNo() + ")已自动确认服务完毕,请等待用户确认本次服务.",
-								getNotificationService());
+						NotifyUtil.notifyUserOrder(order, getNotificationService());
+						NotifyUtil.notifyTeacher(order, getNotificationService());
 						break;
 					case OrderService.ORDER_STATE_USER_DISLIKE:
 						order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
 						getOrderService().update(order, false);
-						NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-								"尊敬的用户,您的订单(" + order.getOrderNo() + ")由于导师未作出响应,系统已自动确认为同意退款,我们将竭尽全力在24内退还到您的账户,请注意查收.",
-								order.getCreateUser(), getNotificationService());
-						NotifyUtil.notifyTeacher(order,
-								"尊敬的导师,您的订单(" + order.getOrderNo() + ")由于您未作出响应,系统已自动确认同意退款,如有疑问,请与客服联系.",
-								getNotificationService());
-						NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-								+ order.getTeacher().getName() + "，由于导师未作出响应，已经自动确认为同意退款。");
+						NotifyUtil.notifyUserOrder(order, getNotificationService());
+						NotifyUtil.notifyTeacher(order, getNotificationService());
 						break;
 					case OrderService.ORDER_STATE_USER_REGRET:
 						order.setState(OrderService.ORDER_STATE_WAIT_RETURN + "," + order.getState());
 						getOrderService().update(order, false);
-						NotifyUtil.notifyUserOrder(order.getCustomerPhone(), order.getCustomerEmail(),
-								"尊敬的用户,您的订单(" + order.getOrderNo() + ")由于导师未作出响应,系统已经自动确认为同意退款,我们将竭尽全力在24内退还到您的账户,请注意查收.",
-								order.getCreateUser(), getNotificationService());
-						NotifyUtil.notifyTeacher(order,
-								"尊敬的导师，您的订单(" + order.getOrderNo() + ")由于您未作出响应,系统已自动确认同意退款,如有疑问,请与客服联系.",
-								getNotificationService());
-						NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-								+ order.getTeacher().getName() + "，由于导师未作出响应，已经自动确认为同意退款。");
+						NotifyUtil.notifyUserOrder(order, getNotificationService());
+						NotifyUtil.notifyTeacher(order, getNotificationService());
 						break;
 					case OrderService.ORDER_STATE_SERVICE_FINISH:
 						order.setState(OrderService.ORDER_STATE_WAIT_COMMENT + "," + order.getState());
 						order.setSalaryState(OrderService.ORDER_SALARY_STATE_NEED);
 						getOrderService().update(order, true);
-						NotifyUtil.notifyUserOrder(order,
-								"尊敬的用户,您的订单(" + order.getOrderNo() + ")由于您未作出响应,系统已经自动确认本次服务,请到一英里平台对本次咨询进行评价,留下您宝贵的意见.",
-								order.getCreateUser(), getNotificationService());
-						NotifyUtil.notifyTeacher(order,
-								"尊敬的导师,您的订单(" + order.getOrderNo() + ")已自动代替用户确认服务,您的酬劳将在24小时内到账,请注意查收.",
-								getNotificationService());
-						NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-								+ order.getTeacher().getName() + ",已经自动帮用户确认服务");
+						NotifyUtil.notifyUserOrder(order, getNotificationService());
 						break;
 					default:
-
 						break;
 				}
 				setResMsg(MsgUtil.getSuccessMsg("time task done"));
@@ -256,10 +243,8 @@ public class FTimeTaskCallbackService extends MsgService {
 				}
 				switch (state.split(",")[0]) {
 					case OrderListService.ORDER_STATE_NOT_PAID:
-//						cancelOrderList(orderList);
-//						NotifyUtil.notifyUserOrder(orderList,
-//								"尊敬的用户,您好,由于您超时未支付订单(流水号：" + orderList.getOrderListNo() + "),系统已自动关闭,如若需要,请重新创建订单",
-//								orderList.getUser(), getNotificationService());
+						cancelOrderList(orderList);
+						NotifyUtil.notifyUserOrder(orderList, getNotificationService());
 						break;
 					default:
 						break;
@@ -273,7 +258,20 @@ public class FTimeTaskCallbackService extends MsgService {
 			if ("add".equals(action)) {
 				String data = getData().getString("data");
 				JSONObject oMap = JSONObject.fromObject(data);
-				getPassageService().updateAddLookNumber(oMap.getLong("passageId"), oMap.getLong("number"));
+				Long passageId = oMap.getLong("passageId");
+				getPassageService().updateAddLookNumber(passageId, oMap.getLong("number"));
+				if (oMap.containsKey("userId")) {
+					Long userId = oMap.getLong("userId");
+					if (!getPassageService().checkUserLook(passageId, userId)) {
+						PassageLookUser passageLookUser = new PassageLookUser();
+						passageLookUser.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
+						passageLookUser.setUser(getUserService().query(userId, false));
+						Passage passage = getPassageService().query(passageId);
+						passageLookUser.setPassage(passage);
+						getPassageService().save(passageLookUser);
+						getTeacherService().updateAddMile(passage.getOwnTeacher().getId(), 0.1F);
+					}
+				}
 				setResMsg(MsgUtil.getSuccessMsg("time task done"));
 			} else {
 				// TODO

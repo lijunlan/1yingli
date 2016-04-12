@@ -91,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
 			if (!order.getOnSale()) {
 				Teacher teacher = order.getTeacher();
 				// float time = order.getTime();
-				long m = (long) (order.getMoney() / 10 + 1);
+				float m = (float) (order.getMoney() / 3 + 1);
 				// getTeacherDao().update(teacher);
 				getTeacherDao().updateAddMile(teacher.getId(), m);
 			}

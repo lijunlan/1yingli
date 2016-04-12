@@ -87,40 +87,18 @@ public class TAcceptOrderService extends TMsgService {
 	}
 
 	public void dealOrder(Order order, boolean needEnsureTime, boolean needBargain) {
-		String message2Teacher = null;
-		String message2User = null;
 		if (needBargain) {
 			order.setState(OrderService.ORDER_BARGAINING + "," + order.getState());
-			message2Teacher = "尊敬的导师,您好,您已接受订单(" + order.getOrderNo()
-					+ "),请及时与用户联系,并到一英里平台登记价格,超时系统将自动取消订单哦。(用户姓名:" + order.getCustomerName() + ",电话:"
-					+ order.getCustomerPhone() + ",邮箱:" + order.getCustomerEmail() + ",微信:" + order.getCustomerContact()
-					+ ")";
-			message2User = "尊敬的用户,您好,您的订单(" + order.getOrderNo() + ")已被导师(" + getTeacher().getName()
-					+ ")接受,导师将通过您提供的联系方式与您联系,请及时与导师确认服务价格哦。";
 		} else {
 			if (needEnsureTime) {
 				order.setState(OrderService.ORDER_STATE_WAIT_ENSURETIME + "," + order.getState());
-				message2Teacher = "尊敬的导师,您好,您已接受订单(" + order.getOrderNo()
-						+ "),请及时与用户确认时间,并到一英里平台登记服务时间,超时系统将自动取消订单哦。(用户姓名:" + order.getCustomerName() + ",电话:"
-						+ order.getCustomerPhone() + ",邮箱:" + order.getCustomerEmail() + ",微信:" + order.getCustomerContact()
-						+ ")";
-				message2User = "尊敬的用户,您好,您的订单(" + order.getOrderNo() + ")已被导师(" + getTeacher().getName()
-						+ ")接受,导师将通过您提供的联系方式与您联系,请及时与导师确认服务时间哦。";
 			} else {
 				order.setState(OrderService.ORDER_STATE_WAIT_SERVICE + "," + order.getState());
-				message2Teacher = "尊敬的导师,您好,您已经接受用户(" + order.getCustomerName() + ",电话:" + order.getCustomerPhone() + ",邮箱:"
-						+ order.getCustomerEmail() + ",微信:" + order.getCustomerContact() + ")的订单(" + order.getOrderNo()
-						+ "),系统会在2周后自动确认服务完毕.";
-				message2User = "尊敬的用户,您好,您的订单(" + order.getOrderNo() + ")已被导师(" + getTeacher().getName()
-						+ ")接受,导师将通过您提供的联系方式与您联系,请等待服务。";
 			}
 		}
 		getOrderService().updateAndSendTimeTask(order);
-
-		NotifyUtil.notifyUserOrder(order, message2User, order.getCreateUser(), getNotificationService());
-		NotifyUtil.notifyTeacher(order, message2Teacher, getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + "，导师已经接受订单。");
+		NotifyUtil.notifyUserOrder(order, getNotificationService());
+		NotifyUtil.notifyTeacher(order, getNotificationService());
 	}
 
 }

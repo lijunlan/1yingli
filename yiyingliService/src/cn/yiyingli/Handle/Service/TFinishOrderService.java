@@ -56,8 +56,7 @@ public class TFinishOrderService extends TMsgService {
 		order.setState(OrderService.ORDER_STATE_SERVICE_FINISH + "," + order.getState());
 		getOrderService().updateAndSendTimeTask(order);
 
-		NotifyUtil.notifyUserOrder(order, "尊敬的学员,您好,您的订单(" + order.getOrderNo() + "),导师(" + getTeacher().getName()
-				+ ")已经服务完毕,请及时确认服务,系统会在1周后自动确认服务。", order.getCreateUser(), getNotificationService());
+		NotifyUtil.notifyUserOrder(order, getNotificationService());
 		setResMsg(MsgUtil.getSuccessMsg("finish order successfully"));
 
 	}

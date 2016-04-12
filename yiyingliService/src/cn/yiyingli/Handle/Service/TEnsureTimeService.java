@@ -58,16 +58,8 @@ public class TEnsureTimeService extends TMsgService {
 		order.setState(OrderService.ORDER_STATE_WAIT_SERVICE + "," + order.getState());
 		getOrderService().updateAndSendTimeTask(order);
 
-		NotifyUtil.notifyUserOrder(order,
-				"尊敬的用户,您好,您已与导师(" + teacher.getName() + ")约好服务时间(" + okTime + "),请等待服务.",
-				order.getCreateUser(), getNotificationService());
-		NotifyUtil.notifyTeacher(order,
-				"尊敬的导师,您好,您与用户(" + order.getCustomerName() + ",电话:" + order.getCustomerPhone() + ",邮箱:"
-						+ order.getCustomerEmail() + ",微信:" + order.getCustomerContact() + ")约定好时间,请在" + okTime
-						+ "进行服务.系统会在"+okTime+"的2周后自动确认服务完毕.",
-				getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + "，导师已经与用户约定好时间。" + okTime);
+		NotifyUtil.notifyUserOrder(order, getNotificationService());
+		NotifyUtil.notifyTeacher(order, getNotificationService());
 		setResMsg(MsgUtil.getSuccessMsg("accept order successfully"));
 	}
 
