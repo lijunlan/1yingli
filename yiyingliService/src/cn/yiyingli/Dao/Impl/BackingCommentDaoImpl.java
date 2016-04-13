@@ -20,6 +20,23 @@ public class BackingCommentDaoImpl extends HibernateDaoSupport implements Backin
 	}
 
 	@Override
+	public void update(BackingComment backingComment) {
+		getHibernateTemplate().update(backingComment);
+	}
+
+	@Override
+	public BackingComment query(long id) {
+		String hql = "from BackingComment bc left join fetct bc.teacher where bc.id=?";
+		@SuppressWarnings("unchecked")
+		List<BackingComment> list = getHibernateTemplate().find(hql, id);
+		if (list.isEmpty()) {
+			return null;
+		} else {
+			return list.get(0);
+		}
+	}
+
+	@Override
 	public long querySumByTeacherId(long teacherId, boolean display) {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Transaction ts = session.beginTransaction();

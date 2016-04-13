@@ -146,6 +146,7 @@ var edit = function (){
 	var contact = $("#contact").val();
 	var email = $("#email").val();
 	var content = $("#content").val();
+	var weight = $("#weight").val();
 	myJson.pagesId = json.pagesId;
 	myJson.key = key;
 	myJson.description = description;
@@ -155,6 +156,7 @@ var edit = function (){
 	myJson.slogan = slogan;
 	myJson.email = email;
 	myJson.contact = contact;
+	myJson.weight = weight;
 	myJson.method = "editActivity";
 	myAjax(myJson, null);
 	Messenger().post("修改成功");

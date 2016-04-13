@@ -1522,6 +1522,19 @@
 		</property>
 	</bean>
 
+	<bean id="tChangeBackingComment" class="cn.yiyingli.Handle.Service.TChangeBackingComment"
+		  scope="prototype">
+		<property name="backingCommentService">
+			<ref local="backingCommentService"/>
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService"/>
+		</property>
+	</bean>
+
 	<bean id="tEditAlipayNoService" class="cn.yiyingli.Handle.Service.TEditAlipayNoService"
 		scope="prototype">
 		<property name="userMarkService">

@@ -26,6 +26,16 @@ public class BackingCommentServiceImpl implements BackingCommentService {
 	}
 
 	@Override
+	public void update(BackingComment backingComment) {
+		getBackingCommentDao().update(backingComment);
+	}
+
+	@Override
+	public BackingComment query(long id) {
+		return getBackingCommentDao().query(id);
+	}
+
+	@Override
 	public long querySumByTeacherId(long teacherId, boolean display) {
 		return getBackingCommentDao().querySumByTeacherId(teacherId,display);
 	}
