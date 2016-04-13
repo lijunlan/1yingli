@@ -63,14 +63,14 @@ public class NotifyUtil {
 			}
 		}
 		for (String phoneNum : phoneMap.keySet()) {
-			String message = "尊敬的用户，订单号为" + phoneMap.get(phoneNum) + "的订单组已经付款完成，请等待导师接受订单"
+			String message = "尊敬的用户，订单号为" + phoneMap.get(phoneNum) + "的订单组已经付款完成，请等待接受订单"
 					+ "(http://www.1yingli.cn/myTutor)";
 			if (CheckUtil.checkMobileNumber(phoneNum) || CheckUtil.checkGlobleMobileNumber(phoneNum)) {
 				SendMessageUtil.sendMessage(phoneNum, message);
 			}
 		}
 		for (String email : emailMap.keySet()) {
-			String message = "尊敬的用户，订单号为" + emailMap.get(email) + "的订单组已经付款完成，请等待导师接受订单"
+			String message = "尊敬的用户，订单号为" + emailMap.get(email) + "的订单组已经付款完成，请等待接受订单"
 					+ "(<a href=\"http://www.1yingli.cn/myTutor\">查看订单</a>)";
 			if (CheckUtil.checkEmail(email)) {
 				SendMailUtil.sendMessage(email, "订单状态改变通知", message);
@@ -114,14 +114,14 @@ public class NotifyUtil {
 			}
 		}
 		for (String phoneNum : phoneMap.keySet()) {
-			String message = "尊敬的导师，订单号为" + phoneMap.get(phoneNum) + "的订单组已经付款完成，等待您的接受"
+			String message = "尊敬的用户，订单号为" + phoneMap.get(phoneNum) + "的订单组已经付款完成，等待您的接受"
 					+ "(http://www.1yingli.cn/myStudent)";
 			if (CheckUtil.checkMobileNumber(phoneNum) || CheckUtil.checkGlobleMobileNumber(phoneNum)) {
 				SendMessageUtil.sendMessage(phoneNum, message);
 			}
 		}
 		for (String email : emailMap.keySet()) {
-			String message = "尊敬的导师，订单号为" + emailMap.get(email) + "的订单组已经付款完成，等待您的接受"
+			String message = "尊敬的用户，订单号为" + emailMap.get(email) + "的订单组已经付款完成，等待您的接受"
 					+ "(<a href=\"http://www.1yingli.cn/myStudent\">查看订单</a>)";
 			if (CheckUtil.checkEmail(email)) {
 				SendMailUtil.sendMessage(email, "订单状态改变通知", message);
@@ -132,12 +132,12 @@ public class NotifyUtil {
 			String teacherPhone = order.getTeacher().getPhone();
 			String teacherEmail = order.getTeacher().getEmail();
 			String orderNo = order.getOrderNo();
-			String message = "尊敬的导师，订单号为" + orderNo + "的订单已经追加付款"
+			String message = "尊敬的用户，订单号为" + orderNo + "的订单已经追加付款"
 					+ additionalPay.getMoney() + "(http://www.1yingli.cn/myTutor)";
 			if (CheckUtil.checkMobileNumber(teacherPhone) || CheckUtil.checkGlobleMobileNumber(teacherPhone)) {
 				SendMessageUtil.sendMessage(teacherPhone, message);
 			}
-			message = "尊敬的导师，订单号为" + orderNo + "的订单已经追加付款"
+			message = "尊敬的用户，订单号为" + orderNo + "的订单已经追加付款"
 					+ additionalPay.getMoney() + "(<a href=\"http://www.1yingli.cn/myTutor\">查看订单</a>)";
 			if (CheckUtil.checkEmail(teacherEmail)) {
 				SendMailUtil.sendMessage(teacherEmail, "订单状态改变通知", message);
