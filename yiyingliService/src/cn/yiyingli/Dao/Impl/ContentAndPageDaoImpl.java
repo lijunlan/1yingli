@@ -138,7 +138,8 @@ public class ContentAndPageDaoImpl extends HibernateDaoSupport implements Conten
 				String hql = "from ContentAndPage cap left join fetch cap.pages left join fetch cap.teacher"
 						+ " where  cap.style=" + STYLE_TEACHER
 						+ " and cap.pages.weight > 0"
-						+ " ORDER BY cap.weight DESC";
+						+ " group by cap.teacher.id"
+						+ " ORDER BY cap.turn DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
