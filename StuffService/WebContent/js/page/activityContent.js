@@ -66,6 +66,7 @@ $(document).ready(function () {
 var changeTable = function (result) {
     $("#activityDes").val(result.activityDes);
     $("#iconUrl").val(result.img);
+    $("#activityWeight").val(result.weight);
 };
 
 
@@ -80,6 +81,7 @@ $(function(){
 var edit = function () {
     myJson.activityDes = $("#activityDes").val();
     myJson.img = $("#iconUrl").val();
+    myJson.weight=$("#activityWeight").val();
     myJson.contentAndPageId = json.contentId;
     myJson.method = "editActivityContent";
     myAjax(myJson, null);
