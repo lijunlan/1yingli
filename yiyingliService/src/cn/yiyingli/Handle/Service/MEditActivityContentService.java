@@ -31,6 +31,9 @@ public class MEditActivityContentService extends MMsgService {
 		if (getData().containsKey("img")) {
 			contentAndPage.setImg(getData().getString("img"));
 		}
+		if (getData().containsKey("weight")) {
+			contentAndPage.setWeight(getData().getInt("weight"));
+		}
 		getContentAndPageService().update(contentAndPage);
 		setResMsg(MsgUtil.getSuccessMsg("edit content success"));
 	}

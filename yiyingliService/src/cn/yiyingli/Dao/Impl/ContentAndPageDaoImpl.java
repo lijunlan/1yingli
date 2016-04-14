@@ -139,7 +139,7 @@ public class ContentAndPageDaoImpl extends HibernateDaoSupport implements Conten
 						+ " where  cap.style=" + STYLE_TEACHER
 						+ " and cap.pages.weight > 0"
 						+ " group by cap.teacher.id"
-						+ " ORDER BY cap.weight DESC";
+						+ " ORDER BY cap.turn DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
