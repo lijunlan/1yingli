@@ -194,4 +194,8 @@ public class ApplicationFormServiceImpl implements ApplicationFormService {
 		return getApplicationFormDao().queryList(page, pageSize);
 	}
 
+	@Override
+	public List<ApplicationForm> queryList(int page, int pageSize, int state) {
+		return getApplicationFormDao().queryList(page, pageSize,state);
+	}
 }

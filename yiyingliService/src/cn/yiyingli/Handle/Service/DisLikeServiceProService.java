@@ -43,7 +43,7 @@ public class DisLikeServiceProService extends UMsgService {
 			return;
 		}
 		if (getServiceProService().updateUserUnlike(servicePro.getId(), user.getId())) {
-			getTeacherService().updateAddMile(servicePro.getTeacher().getId(), -1F);
+//			getTeacherService().updateAddMile(servicePro.getTeacher().getId(), -1F);
 		};
 
 		setResMsg(MsgUtil.getSuccessMsg("disliked successfully"));

@@ -46,7 +46,7 @@ public class LikePassageService extends UMsgService {
 		}
 		boolean result = getPassageService().updateUserLike(passage, getUser());
 		if (result) {
-			getTeacherService().updateAddMile(passage.getOwnTeacher().getId(),1F);
+//			getTeacherService().updateAddMile(passage.getOwnTeacher().getId(),1F);
 			setResMsg(MsgUtil.getSuccessMsg("like passage successfully"));
 			SendMsgToBaiduUtil.updatePassageUserTrainDataLike(getUser().getId() + "", passage.getId() + "",
 					Calendar.getInstance().getTimeInMillis() + "");

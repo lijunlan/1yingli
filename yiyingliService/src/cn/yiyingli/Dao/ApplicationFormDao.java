@@ -28,4 +28,6 @@ public interface ApplicationFormDao {
 
 	List<ApplicationForm> queryList(int page, int pageSize);
 
+	List<ApplicationForm> queryList(int page, int pageSize, int state);
+
 }

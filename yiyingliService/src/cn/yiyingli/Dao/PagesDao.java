@@ -3,6 +3,7 @@ package cn.yiyingli.Dao;
 import java.util.List;
 
 import cn.yiyingli.Persistant.Pages;
+import cn.yiyingli.Persistant.Passage;
 
 public interface PagesDao {
 
@@ -24,4 +25,7 @@ public interface PagesDao {
 
 	List<Pages> queryListOrderByMile();
 
+	List<Passage> queryTeacherPassageListById(long id, int page, int pageSize);
+
+	List<Passage> queryPassageListById(long id, int page, int pageSize);
 }
