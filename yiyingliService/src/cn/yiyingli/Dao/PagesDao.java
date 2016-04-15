@@ -27,5 +27,5 @@ public interface PagesDao {
 
 	List<Passage> queryTeacherPassageListById(long id, int page, int pageSize);
 
-
+	List<Passage> queryPassageListById(long id, int page, int pageSize);
 }

@@ -120,7 +120,26 @@ public class PagesDaoImpl extends HibernateDaoSupport implements PagesDao {
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Passage>>() {
 			@Override
 			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Passage p left join Teacher t right join ContentAndPages cap on cap.teacher.id = t.id" +
+				String hql = "from Passage p left join Teacher t inner join ContentAndPages cap on cap.teacher.id = t.id" +
+						" left join Pages pa on cap.page.id = pa.id where pa.id = " + id;
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<Passage> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Passage> queryPassageListById(final long id, final int page, final int pageSize) {
+		List<Passage> list = new ArrayList<>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Passage>>() {
+			@Override
+			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from Passage p left  join ContentAndPages cap on cap.passage.id = p.id" +
 						" left join Pages pa on cap.page.id = pa.id where pa.id = " + id;
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);

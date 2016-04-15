@@ -264,7 +264,7 @@ public class CreateOrderService extends UMsgService {
 		// }
 
 		if(getTeacherService().updateUserLike(teacher, user)) {
-			getTeacherService().updateAddMile(teacher.getId(),1F);
+//			getTeacherService().updateAddMile(teacher.getId(),1F);
 		}
 
 		SendMsgToBaiduUtil.updateUserTrainDataOrder(user.getId() + "", teacher.getId() + "",

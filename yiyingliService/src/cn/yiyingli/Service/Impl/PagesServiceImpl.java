@@ -60,7 +60,7 @@ public class PagesServiceImpl implements PagesService {
 	}
 
 	@Override
-	public List<Pages> queryListOrderByWeight(int page,int pageSize) {
+	public List<Pages> queryListOrderByWeight(int page, int pageSize) {
 		return getPagesDao().queryListOrderByWeight(page, pageSize);
 	}
 
@@ -71,6 +71,11 @@ public class PagesServiceImpl implements PagesService {
 
 	@Override
 	public List<Passage> queryTeacherPassageListById(long id, int page, int pageSize) {
-		return getPagesDao().queryTeacherPassageListById(id,page,pageSize);
+		return getPagesDao().queryTeacherPassageListById(id, page, pageSize);
+	}
+
+	@Override
+	public List<Passage> queryPassageListById(long id, int page, int pageSize) {
+		return getPagesDao().queryPassageListById(id, page, pageSize);
 	}
 }
