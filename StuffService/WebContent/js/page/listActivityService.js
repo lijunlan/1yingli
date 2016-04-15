@@ -14,6 +14,13 @@ var detail = function (pagesId) {
 		"height=500,width=400,top=100,left=100,toolbar=yes,menubar=yes,scrollbars=yes, resizable=yes,location=yes, status=yes");
 }
 
+//显示文章
+var article = function (key) {
+	window.open(
+		"articleFromActivity.html?key=" + key, "newWindow",
+		"height=500,width=400,top=100,left=100,toolbar=yes,menubar=yes,scrollbars=yes, resizable=yes,location=yes, status=yes");
+}
+
 var createActivity = function (){
 	var des = $("#inputDes").val();
 	var key = $("#inputKey").val();
@@ -44,8 +51,9 @@ var changeTable = function (result) {
 		row += data.serviceProCount + "</td><td>";
 		row += data.mile + "</td><td>";
 		row += "<a href=\"activityInfo.html?data="
-			+ encodeURI($.toJSON(data)) + "\" target=\"_blank\">查看信息</a><button onclick='detail("
-			+ data.pagesId + ")'>查看列表</button></td>";
+			+ encodeURI($.toJSON(data)) + "\" target=\"_blank\">查看信息</a><br>" +
+			"<button onclick='detail(" + data.pagesId + ")'>查看列表</button><br>" +
+			"<button onclick='article(\"" +data.key+ "\")'>查看文章</button></td>";
 		$("#activityList").append(row);
 	});
 };
@@ -69,8 +77,6 @@ $(function(){
 	refresh();
 });
 
-
-
 function changePage(action) {
 	if (action == "last") {
 		page--;
@@ -86,7 +92,6 @@ function changePage(action) {
 	myJson.page = page.toString();
 	myAjax(myJson, changeTable);
 }
-
 
 function getAll() {
 	page = document.getElementById("pageInput").value;
