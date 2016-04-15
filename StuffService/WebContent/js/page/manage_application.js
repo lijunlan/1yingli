@@ -46,6 +46,10 @@ function get() {
 	myJson.method = "getApplicationFormList";
 	myJson.page = page.toString();
 	delete myJson.teacherName;
+	if(document.getElementById("selectState").value!=-1)
+		myJson.state=document.getElementById("selectState").value;
+	else
+		delete myJson.state;
 	myAjax(myJson, changeTable);
 	if (document.getElementById("pageInput").value > 1)
 		document.getElementById("lastPage").disabled = false;
