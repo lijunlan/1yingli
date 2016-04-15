@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.yiyingli.Dao.ContentAndPageDao;
 import cn.yiyingli.Persistant.Passage;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -120,8 +121,10 @@ public class PagesDaoImpl extends HibernateDaoSupport implements PagesDao {
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Passage>>() {
 			@Override
 			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Passage p left join Teacher t inner join ContentAndPages cap on cap.teacher.id = t.id" +
-						" left join Pages pa on cap.page.id = pa.id where pa.id = " + id;
+				String hql = "from Passage p left join p.ownTeacher as t" +
+						" where t.id in" +
+						"(select cap.teacher.id from ContentAndPage cap inner join cap.teacher as tt" +
+						" left join cap.pages as pa where pa.id = " + id + ")";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -136,11 +139,12 @@ public class PagesDaoImpl extends HibernateDaoSupport implements PagesDao {
 	@Override
 	public List<Passage> queryPassageListById(final long id, final int page, final int pageSize) {
 		List<Passage> list = new ArrayList<>();
-		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Passage>>() {
+		list = getHibernateTemplate().executeFind(new HibernateCacllback<List<Passage>>() {
 			@Override
 			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Passage p left  join ContentAndPages cap on cap.passage.id = p.id" +
-						" left join Pages pa on cap.page.id = pa.id where pa.id = " + id;
+				String hql = "select cap.passage from ContentAndPages cap left join fetch cap.passage as p" +
+						" left join cap.pages as pa where pa.id = " + id + " and cap.style = " +
+						ContentAndPageDao.STYLE_TEACHER;
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
