@@ -44,7 +44,7 @@ public class MRebuildTeamOrderService extends MMsgService {
 		List<ContentAndPage> contentAndPageList = getContentAndPageService().queryListWithTeacherOrderByTeacherMile();
 		int j = contentAndPageList.size() + 1;
 		for (ContentAndPage contentAndPage : contentAndPageList) {
-			contentAndPage.setWeight(j);
+			contentAndPage.setTurn(j);
 			getContentAndPageService().update(contentAndPage);
 			j = j - 1;
 		}
