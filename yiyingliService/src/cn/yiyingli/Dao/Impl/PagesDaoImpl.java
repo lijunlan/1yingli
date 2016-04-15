@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.yiyingli.Persistant.Passage;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -80,7 +81,7 @@ public class PagesDaoImpl extends HibernateDaoSupport implements PagesDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Pages> queryListOrderByWeight(final int page,final int pageSize) {
+	public List<Pages> queryListOrderByWeight(final int page, final int pageSize) {
 		List<Pages> list = new ArrayList<Pages>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Pages>>() {
 			@Override
@@ -106,6 +107,25 @@ public class PagesDaoImpl extends HibernateDaoSupport implements PagesDao {
 				String hql = "from Pages p where p.remove=" + false + " and p.weight > 0 ORDER BY p.mile DESC";
 				Query query = session.createQuery(hql);
 				List<Pages> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Passage> queryTeacherPassageListById(final long id, final int page, final int pageSize) {
+		List<Passage> list = new ArrayList<>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Passage>>() {
+			@Override
+			public List<Passage> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from Passage p left join Teacher t right join ContentAndPages cap on cap.teacher.id = t.id" +
+						" left join Pages pa on cap.page.id = pa.id where pa.id = " + id;
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<Passage> list = query.list();
 				return list;
 			}
 		});

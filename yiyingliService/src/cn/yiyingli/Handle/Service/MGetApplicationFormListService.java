@@ -33,7 +33,11 @@ public class MGetApplicationFormListService extends MMsgService {
 		List<ApplicationForm> applicationForms = null;
 		if (getData().containsKey("page")) {
 			int page = getData().getInt("page");
-			applicationForms = getApplicationFormService().queryList(page, 10);
+			if (getData().containsKey("state")) {
+				applicationForms = getApplicationFormService().queryList(page, 10, getData().getInt("state"));
+			} else {
+				applicationForms = getApplicationFormService().queryList(page, 10);
+			}
 		} else {
 			String teacherName = getData().getString("teacherName");
 			ApplicationForm applicationForm = getApplicationFormService().queryByTeacherName(teacherName);

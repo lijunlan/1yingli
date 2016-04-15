@@ -31,4 +31,6 @@ public interface ApplicationFormService {
 	List<ApplicationForm> queryList();
 
 	List<ApplicationForm> queryList(int page, int pageSize);
+
+	List<ApplicationForm> queryList(int page, int pageSize, int state);
 }

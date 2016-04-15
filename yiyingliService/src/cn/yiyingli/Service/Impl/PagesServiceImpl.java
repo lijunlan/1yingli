@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.yiyingli.Dao.PagesDao;
 import cn.yiyingli.Persistant.Pages;
+import cn.yiyingli.Persistant.Passage;
 import cn.yiyingli.Service.PagesService;
 
 public class PagesServiceImpl implements PagesService {
@@ -66,5 +67,10 @@ public class PagesServiceImpl implements PagesService {
 	@Override
 	public List<Pages> queryListOrderByMile() {
 		return getPagesDao().queryListOrderByMile();
+	}
+
+	@Override
+	public List<Passage> queryTeacherPassageListById(long id, int page, int pageSize) {
+		return getPagesDao().queryTeacherPassageListById(id,page,pageSize);
 	}
 }
