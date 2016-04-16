@@ -39,6 +39,11 @@ public class ContentAndPageServiceImpl implements ContentAndPageService {
 	}
 
 	@Override
+	public long queryTeamTeacherSum() {
+		return getContentAndPageDao().queryTeamTeacherSum();
+	}
+
+	@Override
 	public List<ContentAndPage> queryListByPages(long pagesId) {
 		return getContentAndPageDao().queryListByPages(pagesId);
 	}

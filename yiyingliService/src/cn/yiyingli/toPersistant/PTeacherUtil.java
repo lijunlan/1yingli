@@ -206,6 +206,7 @@ public class PTeacherUtil {
 		refreshTeacher(user, workExperiences, studyExperiences, tips, simpleinfo, name, phone, address, mail, iconUrl,
 				introduce, checkPhone, checkIDCard, checkEmail, checkWork, checkStudy, 0L, topic, price, bgUrl, onChat,
 				showNotify, teacher, tipService);
+		teacher.setCreateTime(Calendar.getInstance().getTimeInMillis() + "");
 		teacher.setSubMile(0L);
 		teacher.setScore(0F);
 		teacher.setOrderAllNumber(0L);

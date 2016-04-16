@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.yiyingli.Service.ApplicationFormService;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -105,4 +106,23 @@ public class ApplicationFormDaoImpl extends HibernateDaoSupport implements Appli
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ApplicationForm> queryList(final int page, final int pageSize, final int state) {
+		List<ApplicationForm> list = new ArrayList<ApplicationForm>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<ApplicationForm>>() {
+			@Override
+			public List<ApplicationForm> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from ApplicationForm af left join fetch af.user left join fetch af.teacher "
+						+ "where af.state=" + state
+						+ " ORDER BY af.createTime DESC";
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<ApplicationForm> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
 }

@@ -2885,6 +2885,16 @@
 		</property>
 	</bean>
 
+	<bean id="mGetActivityTeacherPassage" class="cn.yiyingli.Handle.Service.MGetActivityTeacherPassage"
+		  scope="prototype">
+		<property name="pagesService">
+			<ref local="pagesService"/>
+		</property>
+		<property name="managerMarkService">
+			<ref local="managerMarkService"/>
+		</property>
+	</bean>
+
 	<bean id="mGetActivityService" class="cn.yiyingli.Handle.Service.MGetActivityService"
 		scope="prototype">
 		<property name="contentAndPageService">

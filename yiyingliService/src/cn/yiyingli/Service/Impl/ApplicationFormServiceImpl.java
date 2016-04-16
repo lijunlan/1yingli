@@ -116,7 +116,7 @@ public class ApplicationFormServiceImpl implements ApplicationFormService {
 			getWorkExperienceDao().save(we);
 		}
 		Notification notification = NotifyUtil.sendNotification(applicationForm.getUser(), notificationDao,
-				"您的导师申请已经提交，请等待工作人员为您审核。");
+				"您的入驻申请已经提交，请等待工作人员为您审核。");
 		long userId = notification.getToUser().getId();
 		UserMark userMark = getUserMarkDao().queryUUID(userId);
 		if (userMark != null) {
@@ -152,9 +152,9 @@ public class ApplicationFormServiceImpl implements ApplicationFormService {
 		getUserDao().update(applicationForm.getUser());
 		String msg = "";
 		if (applicationForm.getState() == ApplicationFormService.APPLICATION_STATE_SUCCESS_SHORT) {
-			msg = "您的导师申请已经审核完毕,审核结果:通过。请重新登陆，以使用导师功能";
+			msg = "您的入驻申请已经审核完毕,审核结果:通过。请重新登陆，以使用更多功能";
 		} else {
-			msg = "您的导师申请已经审核完毕,审核结果:未通过.原因:" + applicationForm.getCheckInfo();
+			msg = "您的入驻申请已经审核完毕,审核结果:未通过.原因:" + applicationForm.getCheckInfo();
 		}
 		Notification notification = NotifyUtil.sendNotification(applicationForm.getUser(), notificationDao, msg);
 		long userId = notification.getToUser().getId();
@@ -194,4 +194,8 @@ public class ApplicationFormServiceImpl implements ApplicationFormService {
 		return getApplicationFormDao().queryList(page, pageSize);
 	}
 
+	@Override
+	public List<ApplicationForm> queryList(int page, int pageSize, int state) {
+		return getApplicationFormDao().queryList(page, pageSize,state);
+	}
 }

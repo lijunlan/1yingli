@@ -14,7 +14,6 @@ import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.MsgUtil;
-import org.bouncycastle.util.Pack;
 
 public class MGetServiceProListService extends MMsgService {
 

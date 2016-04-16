@@ -43,7 +43,7 @@ public class LikeServiceProService extends UMsgService {
 			return;
 		}
 		if(getServiceProService().updateUserLike(servicePro, user)) {
-			getTeacherService().updateAddMile(servicePro.getTeacher().getId(),1F);
+//			getTeacherService().updateAddMile(servicePro.getTeacher().getId(),1F);
 		};
 		setResMsg(MsgUtil.getSuccessMsg("liked"));
 

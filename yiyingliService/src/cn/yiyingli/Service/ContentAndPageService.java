@@ -14,6 +14,8 @@ public interface ContentAndPageService {
 
 	ContentAndPage query(long contentAndPageId);
 
+	long queryTeamTeacherSum();
+
 	List<ContentAndPage> queryListByPages(long pagesId);
 
 	List<ContentAndPage> queryListWithTeacherByKey(String activityKey, int page, int pageSize);
