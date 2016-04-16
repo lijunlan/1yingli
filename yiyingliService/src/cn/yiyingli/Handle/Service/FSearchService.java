@@ -63,11 +63,8 @@ public class FSearchService extends MsgService {
 			// search.addFilter("onservice=1");
 			String query = "";
 			if (getData().containsKey("word")) {
-				String wd =  getData().getString("word").replace("\\", "");
+				String wd = getData().getString("word").replace("\\", "");
 				wd = wd.replace(",", "");
-				if(wd.equals("")){
-					wd = "none";
-				}
 				wd = URLDecoder.decode(wd, "utf-8");
 				if (!"".equals(wd)) {
 					query = "n:'" + wd + "' OR sw:'" + wd + "'^70 OR i:'" + wd + "'^40 OR mw:'" + wd + "' OR mw2:'" + wd
