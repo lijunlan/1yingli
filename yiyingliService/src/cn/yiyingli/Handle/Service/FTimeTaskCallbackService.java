@@ -243,7 +243,7 @@ public class FTimeTaskCallbackService extends MsgService {
 						Passage passage = getPassageService().query(passageId);
 						passageLookUser.setPassage(passage);
 						getPassageService().save(passageLookUser);
-						getTeacherService().updateAddMile(passage.getOwnTeacher().getId(), 0.1F);
+//						getTeacherService().updateAddMile(passage.getOwnTeacher().getId(), 0.1F);
 					}
 				}
 				setResMsg(MsgUtil.getSuccessMsg("time task done"));
