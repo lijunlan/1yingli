@@ -2987,7 +2987,7 @@
 		</property>
 	</bean>
 
-	<bean id="tGetInvitation" class="cn.yiyingli.Handle.Service.TGetInvitationService" scope="prototype">
+	<bean id="tGetInvitationService" class="cn.yiyingli.Handle.Service.TGetInvitationService" scope="prototype">
 		<property name="teacherService">
 			<ref local="teacherService"/>
 		</property>

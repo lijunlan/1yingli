@@ -29,7 +29,7 @@ public class TGetInvitationService extends TMsgService {
 				invitationCode = InvitationUtil.createInvitationCode(teacher.getName());
 			} while (getTeacherService().queryByInvitationCode(invitationCode) == null);
 			teacher.setInvitationCode(invitationCode);
-			getTeacherService().save(teacher);
+			getTeacherService().update(teacher,false);
 		}
 		int page;
 		try {
