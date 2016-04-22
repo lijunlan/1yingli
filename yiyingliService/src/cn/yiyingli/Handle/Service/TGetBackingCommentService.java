@@ -39,7 +39,7 @@ public class TGetBackingCommentService extends TMsgService {
 
 	@Override
 	protected boolean checkData() {
-		return super.checkData();
+		return super.checkData() && getData().containsKey("page");
 	}
 
 	@Override
