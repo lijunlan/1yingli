@@ -179,14 +179,14 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 	}
 
 	@Override
-	public List<Order> queryListByIds(long[] ids) {
-		if(ids.length <= 0) {
+	public List<Order> queryListByOrderNos(long[] orderNos) {
+		if(orderNos.length <= 0) {
 			return new ArrayList<Order>();
 		}
-		String hql = "from Order o where o.id =" + ids[0];
-		if (ids.length>1) {
-			for (int i=1;i<ids.length;i++) {
-				hql = hql + "or o.id=" + ids[i];
+		String hql = "from Order o where o.orderNo =" + orderNos[0];
+		if (orderNos.length>1) {
+			for (int i = 1; i< orderNos.length; i++) {
+				hql = hql + "or o.orderNo=" + orderNos[i];
 			}
 		}
 		hql = hql + ")";

@@ -40,9 +40,12 @@ public class ContentAndPage {
 
 	@Column(name = "STYLE", nullable = false)
 	private Integer style;
-	
+
 	@Column(name = "WEIGHT", nullable = false)
 	private Integer weight;
+
+	@Column(name = "TURN")
+	private Integer turn;
 
 	@Column(name = "CREATETIME", nullable = false, updatable = false)
 	private String createTime;
@@ -128,5 +131,13 @@ public class ContentAndPage {
 
 	public void setImg(String img) {
 		this.img = img;
+	}
+
+	public Integer getTurn() {
+		return turn;
+	}
+
+	public void setTurn(Integer turn) {
+		this.turn = turn;
 	}
 }

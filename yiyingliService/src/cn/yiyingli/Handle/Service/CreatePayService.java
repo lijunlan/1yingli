@@ -9,7 +9,6 @@ import cn.yiyingli.Service.VoucherService;
 import cn.yiyingli.Util.MsgUtil;
 import net.sf.json.JSONArray;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -59,7 +58,7 @@ public class CreatePayService extends UMsgService {
 		for (int i = 0; i < jsonServiceList.size(); i++) {
 			ids[i] = jsonServiceList.getLong(i);
 		}
-		List<Order> orders = getOrderService().queryListByIds(ids);
+		List<Order> orders = getOrderService().queryListByOrderNos(ids);
 		long ntime = Calendar.getInstance().getTimeInMillis();
 		OrderList orderList = new OrderList();
 		orderList.setCreateTime(ntime + "");

@@ -3,6 +3,7 @@ package cn.yiyingli.Service;
 import java.util.List;
 
 import cn.yiyingli.Persistant.Pages;
+import cn.yiyingli.Persistant.Passage;
 
 public interface PagesService {
 
@@ -28,6 +29,8 @@ public interface PagesService {
 
 	Pages queryByKey(String activityKey);
 
+	long queryTeamSum();
+
 	List<Pages> queryList(int page, int pageSize);
 
 	List<Pages> queryList(int page);
@@ -35,4 +38,8 @@ public interface PagesService {
 	List<Pages> queryListOrderByWeight(int page,int pageSize);
 
 	List<Pages> queryListOrderByMile();
+
+	List<Passage> queryTeacherPassageListById(long id, int page, int pageSize);
+
+	List<Passage> queryPassageListById(long id, int page, int pageSize);
 }

@@ -31,13 +31,13 @@ public class FGetHotActivityTeacherService extends MsgService {
 	public void doit() {
 		int p = getData().getInt("page");
 		int size = getData().getInt("pageSize");
-		List<ContentAndPage> teachers = getContentAndPageService().queryListWithTeacherOrderByTeacherMile(p,size);
+		List<ContentAndPage> teachers = getContentAndPageService().queryListWithTeacherOrderByTeacherMile(p, size);
 		ExList toSend = new ExArrayList();
 		for (ContentAndPage contentAndPage : teachers) {
 			SuperMap map = new SuperMap();
 			ExContentAndPage.assembleTeacherForUser(contentAndPage, map);
 			toSend.add(map.finish());
 		}
-		setResMsg(MsgUtil.getSuccessMap().put("data", toSend).finishByJson());
+		setResMsg(MsgUtil.getSuccessMap().put("data", toSend).put("count", getContentAndPageService().queryTeamTeacherSum()).finishByJson());
 	}
 }

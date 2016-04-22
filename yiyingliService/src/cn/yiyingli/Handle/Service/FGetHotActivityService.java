@@ -52,6 +52,6 @@ public class FGetHotActivityService extends MsgService {
 			ExPages.assembleSimple(page, map);
 			jsonPages.add(map.finish());
 		}
-		setResMsg(MsgUtil.getSuccessMap().put("data", jsonPages).finishByJson());
+		setResMsg(MsgUtil.getSuccessMap().put("data", jsonPages).put("count", getPagesService().queryTeamSum()).finishByJson());
 	}
 }

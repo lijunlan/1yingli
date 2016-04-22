@@ -103,9 +103,9 @@
 		<method name="editTService" beanName="tEditTServiceService"/>
 		<method name="editAlipayNo" beanName="tEditAlipayNoService"/>
 		<method name="getAlipayNo" beanName="tGetAlipayNoService"/>
-		<method name="getInvitation" beanName="tGetInvitationCode"/>
 		<method name="getBackingComment" beanName="tGetBackingCommentService"/>
 		<method name="changeBackingComment" beanName="tChangeBackingComment"/>
+		<method name="getInvitation" beanName="tGetInvitationService"/>
 	</style>
 	<style name="distributor">
 		<method name="getInfo" beanName="dGetInfoService"/>
@@ -118,6 +118,7 @@
 		<method name="createActivityContent" beanName="mCreateActivityContentService"/>
 		<method name="editActivityContent" beanName="mEditActivityContentService"/>
 		<method name="removeActivityContent" beanName="mRemoveActivityContentService"/>
+		<method name="getActivityTeacherPassage" beanName="mGetActivityTeacherPassage"/>
 		<method name="getActivity" beanName="mGetActivityService"/>
 		<method name="removeActivity" beanName="mRemoveActivityService"/>
 		<method name="getActivityList" beanName="mGetActivityListService"/>

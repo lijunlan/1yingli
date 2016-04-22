@@ -1,6 +1,5 @@
 package cn.yiyingli.Handle.Service;
 
-import cn.yiyingli.Dao.ContentAndPageDao;
 import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.ContentAndPage;
 import cn.yiyingli.Service.ContentAndPageService;
@@ -31,6 +30,9 @@ public class MEditActivityContentService extends MMsgService {
 		}
 		if (getData().containsKey("img")) {
 			contentAndPage.setImg(getData().getString("img"));
+		}
+		if (getData().containsKey("weight")) {
+			contentAndPage.setWeight(getData().getInt("weight"));
 		}
 		getContentAndPageService().update(contentAndPage);
 		setResMsg(MsgUtil.getSuccessMsg("edit content success"));

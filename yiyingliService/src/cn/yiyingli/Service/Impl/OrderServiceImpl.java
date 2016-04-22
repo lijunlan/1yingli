@@ -2,7 +2,6 @@ package cn.yiyingli.Service.Impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import cn.yiyingli.Dao.OrderDao;
@@ -290,8 +289,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> queryListByIds(long[] ids) {
-		return getOrderDao().queryListByIds(ids);
+	public List<Order> queryListByOrderNos(long[] orderNos) {
+		return getOrderDao().queryListByOrderNos(orderNos);
 	}
 
 	@Override
