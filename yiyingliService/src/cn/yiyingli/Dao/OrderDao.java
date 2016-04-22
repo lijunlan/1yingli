@@ -55,7 +55,7 @@ public interface OrderDao {
 
 	List<Order> queryListAll(int page, int pageSize);
 
-	List<Order> queryListByIds(long[] ids);
+	List<Order> queryListByOrderNos(long[] orderNos);
 
 	List<Order> queryListByState(String state, int page, int pageSize, boolean lazy);
 
