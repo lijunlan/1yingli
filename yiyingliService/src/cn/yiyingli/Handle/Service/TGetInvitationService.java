@@ -8,6 +8,7 @@ import cn.yiyingli.Handle.TMsgService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Util.InvitationUtil;
+import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
 
 import java.util.List;
@@ -27,7 +28,8 @@ public class TGetInvitationService extends TMsgService {
 		if (null == invitationCode) {
 			do {
 				invitationCode = InvitationUtil.createInvitationCode(teacher.getName());
-			} while (getTeacherService().queryByInvitationCode(invitationCode) == null);
+				LogUtil.info(invitationCode, TGetInvitationService.class);
+			} while (getTeacherService().queryByInvitationCode(invitationCode) != null);
 			teacher.setInvitationCode(invitationCode);
 			getTeacherService().update(teacher,false);
 		}
