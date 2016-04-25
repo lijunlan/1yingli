@@ -67,4 +67,6 @@ public interface UserDao {
 	List<User> queryListByPhoneWithTeacher(String phone, boolean lazy);
 
 	List<User> queryListByEmailWithTeacher(String email, boolean lazy);
+
+	List<User> queryListWithTeacher(String username, boolean lazy);
 }

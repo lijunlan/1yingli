@@ -6,6 +6,8 @@ import cn.yiyingli.Util.MD5Util;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.RSAUtil;
 
+import java.util.List;
+
 public class LoginService extends ULoginMsgService {
 
 	@Override
@@ -29,10 +31,14 @@ public class LoginService extends ULoginMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("10001"));
 			return;
 		}
-		User user = getUserService().queryWithTeacher(username, false);
-		if (user == null) {
+		List<User> users = getUserService().queryListWithTeacher(username, false);
+		if (users.size() == 0) {
 			setResMsg(MsgUtil.getErrorMsgByCode("12015"));
 			return;
+		}
+		User user = users.get(0);
+		if(users.size() > 1) {
+			getUserService().mergeUserWithUserList(user, users);
 		}
 		if (password.equals(user.getPassword())) {
 			returnUser(user, false);

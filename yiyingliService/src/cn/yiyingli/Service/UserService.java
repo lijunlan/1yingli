@@ -36,6 +36,8 @@ public interface UserService {
 
 	void mergeUserWithEmail(User user, String email);
 
+	void mergeUserWithUserList(User user, List<User> subUsers);
+
 	void changePassword(long userId, String oldpwd, String newpwd) throws Exception;
 
 	User queryByNo(String no, boolean lazy);
@@ -74,5 +76,5 @@ public interface UserService {
 
 	List<User> queryListByTeacher(int page, short teacherState, boolean lazy);
 
-
+	List<User> queryListWithTeacher(String username, boolean lazy);
 }

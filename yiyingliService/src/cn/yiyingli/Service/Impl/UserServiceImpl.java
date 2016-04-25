@@ -7,6 +7,7 @@ import cn.yiyingli.Persistant.*;
 import cn.yiyingli.Service.UserService;
 import cn.yiyingli.Util.CheckUtil;
 import cn.yiyingli.Util.CouponNumberUtil;
+import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.NotifyUtil;
 
 public class UserServiceImpl implements UserService {
@@ -139,9 +140,10 @@ public class UserServiceImpl implements UserService {
 		mergeUserWithUserList(user, subUsers);
 	}
 
-	private void mergeUserWithUserList(User user, List<User> subUsers) {
+	@Override
+	public void mergeUserWithUserList(User user, List<User> subUsers) {
 		for (User subUser : subUsers) {
-			if (!subUser.getId().equals(user.getId()) || (subUser.getState() != null
+			if (!subUser.getId().equals(user.getId()) && (subUser.getState() != null
 					&& subUser.getState().equals(USER_STATE_SUB_SHORT))) {
 				String changeUserSql = " set USER_ID = " + user.getId() + " where USER_ID = " + subUser.getId();
 				String tableNames[] = {"applicationform", "comment", "notification", "orderlist", "orders",
@@ -154,20 +156,38 @@ public class UserServiceImpl implements UserService {
 					Teacher teacher = subUser.getTeacher();
 					subUser.setTeacher(null);
 					user.setTeacher(teacher);
+					user.setTeacherState(TEACHER_STATE_ON_SHORT);
+					user.setIconUrl(teacher.getIconUrl());
+					user.setName(teacher.getName());
+					user.setAddress(teacher.getAddress());
 					getUserDao().updateWithRawSql("update teacher" + changeUserSql);
 				}
-				if(subUser.getWechatNo() != null && user.getWechatNo()==null) {
+				if (subUser.getWechatNo() != null && user.getWechatNo() == null) {
 					user.setWechatNo(subUser.getWechatNo());
 					subUser.setWechatNo(null);
 				}
-				if(subUser.getWechatPlatformNo() != null && user.getWechatPlatformNo() == null) {
+				if (subUser.getWechatPlatformNo() != null && user.getWechatPlatformNo() == null) {
 					user.setWechatPlatformNo(subUser.getWechatPlatformNo());
 					subUser.setWechatPlatformNo(null);
 				}
-				if(subUser.getWeiboNo() != null && user.getWeiboNo() ==null) {
+				if (subUser.getWeiboNo() != null && user.getWeiboNo() == null) {
 					user.setWeiboNo(subUser.getWeiboNo());
 					subUser.setWeiboNo(null);
 				}
+				if (subUser.getIconUrl() != null && user.getIconUrl() == null) {
+					user.setIconUrl(subUser.getIconUrl());
+				}
+				if (subUser.getName() != null && user.getName() == null) {
+					user.setName(subUser.getName());
+				}
+				if (subUser.getAddress() != null && user.getAddress() == null) {
+					user.setAddress(subUser.getAddress());
+				}
+				user.setOrderNumber(user.getOrderNumber() + subUser.getOrderNumber());
+				user.setReceiveCommentNumber(user.getReceiveCommentNumber() + subUser.getReceiveCommentNumber());
+				user.setSendCommentNumber(user.getSendCommentNumber() + subUser.getSendCommentNumber());
+				user.setLikeTeacherNumber(user.getLikeTeacherNumber() + subUser.getLikeTeacherNumber());
+				user.setLikeServiceProNumber(user.getLikeServiceProNumber() + subUser.getLikeServiceProNumber());
 				subUser.setState(USER_STATE_SUB_SHORT);
 				getUserDao().merge(subUser);
 			}
@@ -296,4 +316,8 @@ public class UserServiceImpl implements UserService {
 		return queryListByTeacher(page, PAGE_SIZE_INT, teacherState, lazy);
 	}
 
+	@Override
+	public List<User> queryListWithTeacher(String username, boolean lazy) {
+		return getUserDao().queryListWithTeacher(username, lazy);
+	}
 }
