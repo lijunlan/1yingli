@@ -65,6 +65,8 @@ public interface OrderDao {
 
 	List<Order> queryListByTeacherId(long teacherId, String[] state, int page, int pageSize, boolean lazy);
 
+	List<Order> queryListByTeacherIdAndServiceProId(long teacherId, long serviceProId, String[] state, int page, int pageSize, boolean lazy);
+
 	List<Order> queryListByUserId(long userId, int page, int pageSize, boolean lazy);
 
 	List<Order> queryListByUserId(long userId, String[] state, int page, int pageSize, boolean lazy);

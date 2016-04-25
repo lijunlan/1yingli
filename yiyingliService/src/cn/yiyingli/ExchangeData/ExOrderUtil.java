@@ -12,6 +12,7 @@ public class ExOrderUtil {
 		map.put("phone", o.getCustomerPhone());
 		map.put("email", o.getCustomerEmail());
 		map.put("contact", o.getCustomerContact());
+		map.put("img",o.getCreateUser().getIconUrl());
 	}
 
 	public static void assembleOrderToUser(SuperMap map, Order o) {
@@ -20,6 +21,7 @@ public class ExOrderUtil {
 		map.put("teacherName", o.getTeacher().getName());
 		map.put("iconUrl", o.getIconUrl());
 		map.put("phone", o.getCustomerPhone());
+		map.put("img", o.getTeacher().getIconUrl());
 		map.put("email", o.getCustomerEmail());
 		map.put("name", o.getCustomerName());
 		map.put("contact", o.getCustomerContact());

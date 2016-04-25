@@ -62,11 +62,14 @@ public class TGetOrderListService extends TMsgService {
 			type = Integer.parseInt((String) getData().get("type"));
 		}
 		List<Order> orders;
-
-
 		String s = OrderService.TEACHER_ORDER_TYPE_STATES[type];
 		String states[] = s.split("\\|");
+		if(getData().containsKey("serviceProId")) {
+			Long serviceProId = getData().getLong("serviceProId");
+
+		}
 		orders = getOrderService().queryListByTeacherId(teacher.getId(), states, page, false);
+
 		long count = getOrderService().querySumNoByTeacherIdAndStates(teacher.getId(),states);
 		toSend.put("count", count);
 

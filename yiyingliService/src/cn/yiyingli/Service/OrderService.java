@@ -205,6 +205,8 @@ public interface OrderService {
 
 	List<Order> queryListByTeacherId(long teacherId, String[] state, int page, boolean lazy);
 
+	List<Order> queryListByTeacherIdAndServiceProId(long teacherId, long serviceProId, String[] state, int page, boolean lazy);
+
 	List<Order> queryListByUserId(long userId, int page, boolean lazy);
 
 	List<Order> queryListByUserId(long userId, int page, int pageSize, boolean lazy);
