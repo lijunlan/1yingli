@@ -15,7 +15,7 @@ editor.on( 'instanceReady', function(evt,editor){
 						if(key=="username"&&value!=null){
 							$("#inputSearchUsername").val(value);
 							get();
-						}	
+						}
 					}
 });
 
@@ -107,7 +107,7 @@ function regist() {
 
 //获取导师信息
 function get() {
-	var keyword = $("#searchInput").val();
+	var keyword = $("#inputSearchUsername").val();
 	if (keyword == null || keyword == '') {
 		return;
 	}
@@ -122,7 +122,7 @@ function getAndParse(t) {
 		t = t.teacher;
 	}
 	//$("#username").val($("#inputSearchUsername").val());
-	
+
 	$("#username").val(t.username);
 	$("#simpleinfo").val(t.simpleinfo);
 	$("#name").val(t.name);
@@ -266,7 +266,7 @@ function submit() {
 	teacher.onService = document.getElementById('onService').checked.toString();
 	teacher.onChat = document.getElementById('onChat').checked.toString();
 	teacher.showNotify = document.getElementById('onNotify').checked.toString();
-	
+
 	send.teacher = teacher;
 	send.style = "manager";
 
@@ -275,7 +275,7 @@ function submit() {
 	}else{
 		send.method = "editTeacher";
 	}
-	
+
 	send.mid = mid;
 	send.username = $("#username").val();
 

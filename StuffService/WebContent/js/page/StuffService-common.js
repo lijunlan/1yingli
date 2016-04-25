@@ -4,7 +4,7 @@
 var myJson = new Object();
 var URL = "http://120.26.83.33/yiyingliManagerService/";
 //var SERVICE_URL= "http://service.1yingli.cn/yiyingliService/"
-var SERVICE_URL= "http://service.1yingli.cn/yiyingliService/"
+var SERVICE_URL= "http://service.1yingli.cn/yiyingliService/";
 myJson.style = "manager";
 var _Notification;
 if(!window.webkitNotifications){
