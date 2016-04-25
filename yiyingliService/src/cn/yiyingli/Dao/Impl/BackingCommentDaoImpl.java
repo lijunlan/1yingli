@@ -39,14 +39,12 @@ public class BackingCommentDaoImpl extends HibernateDaoSupport implements Backin
 	@Override
 	public long querySumByTeacherId(long teacherId, boolean display) {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-		Transaction ts = session.beginTransaction();
 		String hql = "select count(*) from BackingComment bc left join bc.teacher where bc.teacher.id = " +
 				teacherId;
 		if (display) {
 			hql = hql + " and bc.display is true";
 		}
 		long sum = (long) session.createQuery(hql).uniqueResult();
-		ts.commit();
 		return sum;
 	}
 
