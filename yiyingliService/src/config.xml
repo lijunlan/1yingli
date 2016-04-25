@@ -52,6 +52,7 @@
 		<method name="isLikeTeacher" beanName="isLikeTeacherService"/>
 		<method name="forgetPassword" beanName="forgetPasswordService"/>
 		<method name="iosForgetPassword" beanName="iosForgetPasswordService"/>
+		<method name="addBackingComment" beanName="addBackingCommentService"/>
 		<!-- <method name="change_info" beanName="" /> <method name="change_password" 
 			beanName="" /> -->
 		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
@@ -102,6 +103,8 @@
 		<method name="editTService" beanName="tEditTServiceService"/>
 		<method name="editAlipayNo" beanName="tEditAlipayNoService"/>
 		<method name="getAlipayNo" beanName="tGetAlipayNoService"/>
+		<method name="getBackingComment" beanName="tGetBackingCommentService"/>
+		<method name="changeBackingComment" beanName="tChangeBackingComment"/>
 		<method name="getInvitation" beanName="tGetInvitationService"/>
 	</style>
 	<style name="distributor">
@@ -212,6 +215,7 @@
 		<method name="recordRecommend" beanName="fRecordRecommendService"/>
 		<method name="getRecommendTeacherList" beanName="fGetRecommendTeacherListService"/>
 		<method name="checkPaypalPayment" beanName="fCheckPaypalPaymentService"/>
+		<method name="getBackingComment" beanName="fGetBackingCommentService"/>
 		<!-- <method name="fMoneyReturned" beanName="fMoneyReturnedService" /> -->
 	</style>
 	<style name="notification">

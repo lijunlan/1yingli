@@ -64,6 +64,7 @@
 	<error name="22007" value="passage is not belong to you" />
 	<error name="22008" value="servicePro is not existed" />
 	<error name="22009" value="mile is not enought to reduce" />
+	<error name="22010" value="backingComment is not belong to you"/>
 	<error name="24001" value="you are not a teacher" />
 	<error name="24002" value="uid don't match teacherId" />
 	<error name="24003"

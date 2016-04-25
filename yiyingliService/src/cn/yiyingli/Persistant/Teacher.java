@@ -184,6 +184,11 @@ public class Teacher {
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Set<Comment> comments = new HashSet<Comment>();
 
+
+	@OneToMany(targetEntity = BackingComment.class, cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@JoinColumn(name = "TEACHER_ID", updatable = false)
+	private Set<BackingComment> backingComments = new HashSet<>();
+
 	@OneToMany(targetEntity = CheckForm.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Set<CheckForm> checkForms = new HashSet<CheckForm>();
@@ -721,4 +726,11 @@ public class Teacher {
 	}
 
 
+	public Set<BackingComment> getBackingComments() {
+		return backingComments;
+	}
+
+	public void setBackingComments(Set<BackingComment> backingComments) {
+		this.backingComments = backingComments;
+	}
 }

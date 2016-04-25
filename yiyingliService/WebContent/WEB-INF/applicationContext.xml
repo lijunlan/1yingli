@@ -41,6 +41,7 @@
 				<value>cn.yiyingli.Persistant.Reward</value>
 				<value>cn.yiyingli.Persistant.Pages</value>
 				<value>cn.yiyingli.Persistant.ContentAndPage</value>
+				<value>cn.yiyingli.Persistant.BackingComment</value>
 				<value>cn.yiyingli.Persistant.PassageLookUser</value>
 			</list>
 		</property>
@@ -142,6 +143,12 @@
 	<bean id="backgroundDao" class="cn.yiyingli.Dao.Impl.BackgroundDaoImpl">
 		<property name="sessionFactory">
 			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="backingCommentDao" class="cn.yiyingli.Dao.Impl.BackingCommentDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory"/>
 		</property>
 	</bean>
 
@@ -416,6 +423,12 @@
 		</property>
 	</bean>
 
+	<bean id="backingCommentService" parent="baseTxService">
+		<property name="target">
+			<ref local="backingCommentServiceImpl"/>
+		</property>
+	</bean>
+
 	<!--!!!!Data Service Impl!!!!! -->
 	<bean id="contentAndPageServiceImpl" class="cn.yiyingli.Service.Impl.ContentAndPageServiceImpl">
 		<property name="contentAndPageDao">
@@ -538,6 +551,12 @@
 	<bean id="backgroundServiceImpl" class="cn.yiyingli.Service.Impl.BackgroundServiceImpl">
 		<property name="backgroundDao">
 			<ref local="backgroundDao" />
+		</property>
+	</bean>
+
+	<bean id="backingCommentServiceImpl" class="cn.yiyingli.Service.Impl.BackingCommentServiceImpl">
+		<property name="backingCommentDao">
+			<ref local="backingCommentDao"/>
 		</property>
 	</bean>
 
@@ -994,6 +1013,16 @@
 		</property>
 		<property name="teacherService">
 			<ref local="teacherService" />
+		</property>
+	</bean>
+
+	<bean id="fGetBackingCommentService" class="cn.yiyingli.Handle.Service.FGetBackingCommentService"
+		  scope="prototype">
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
+		<property name="backingCommentService">
+			<ref local="backingCommentService"/>
 		</property>
 	</bean>
 
@@ -1480,6 +1509,32 @@
 		</property>
 	</bean>
 
+	<bean id="tGetBackingCommentService" class="cn.yiyingli.Handle.Service.TGetBackingCommentService"
+		scope="prototype">
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
+		<property name="backingCommentService">
+			<ref local="backingCommentService"/>
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService"/>
+		</property>
+	</bean>
+
+	<bean id="tChangeBackingComment" class="cn.yiyingli.Handle.Service.TChangeBackingComment"
+		  scope="prototype">
+		<property name="backingCommentService">
+			<ref local="backingCommentService"/>
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService"/>
+		</property>
+	</bean>
+
 	<bean id="tEditAlipayNoService" class="cn.yiyingli.Handle.Service.TEditAlipayNoService"
 		scope="prototype">
 		<property name="userMarkService">
@@ -1652,6 +1707,16 @@
 		</property>
 		<property name="serviceProService">
 			<ref local="serviceProService" />
+		</property>
+	</bean>
+
+	<bean id="addBackingCommentService" class="cn.yiyingli.Handle.Service.AddBackingCommentService"
+		  scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService"/>
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService"/>
 		</property>
 	</bean>
 
