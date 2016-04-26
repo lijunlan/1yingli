@@ -175,7 +175,8 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	@Override
 	public long querySumNoByInviterId(long inviterId) {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-		long sum = (long) session.createQuery("select count(*) from Teacher t where t.inviterId = " + inviterId)
+		long sum = (long) session.createQuery("select count(*) from Teacher t where t.inviterId = " + inviterId +
+					" and t.onService = true")
 				.uniqueResult();
 		return sum;
 	}

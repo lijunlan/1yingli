@@ -7,7 +7,6 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-import org.bouncycastle.jcajce.provider.symmetric.TEA;
 import org.hibernate.annotations.IndexColumn;
 
 @Entity
@@ -186,7 +185,7 @@ public class Teacher {
 
 
 	@OneToMany(targetEntity = BackingComment.class, cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinColumn(name = "TEACHER_ID", updatable = false)
+	@JoinColumn(name = "TEACHER_ID")
 	private Set<BackingComment> backingComments = new HashSet<>();
 
 	@OneToMany(targetEntity = CheckForm.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
@@ -224,7 +223,7 @@ public class Teacher {
 	private String invitationCode;
 
 
-	@JoinColumn(name = "INVITERID", updatable = false)
+	@JoinColumn(name = "INVITERID")
 	private Long inviterId;
 
 
