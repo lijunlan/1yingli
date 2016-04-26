@@ -205,7 +205,7 @@ var changeTable = function (result) {
 		if(data.returnVisit=="true")
 			row += "<button class='am-btn am-btn-primary' onclick='showDetail(" + index + "," + fun + ")'>详情</button></td></tr>";
 		else
-			row += "<button class='am-btn am-btn-primary' style='background-color: sandybrown;border-color:#dbc59e' onclick='showDetail(" + index + "," + fun + ")'>详情</button></td></tr>";
+			row += "<button class='am-btn am-btn-primary' style='background-color: #d9534f;border-color:#d9534f' onclick='showDetail(" + index + "," + fun + ")'>详情</button></td></tr>";
 		$("#infoTable").append(row);
 	})
 }
