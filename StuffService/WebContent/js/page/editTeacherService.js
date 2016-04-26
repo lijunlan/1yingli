@@ -14,6 +14,7 @@ editor.on( 'instanceReady', function(evt,editor){
 						var value = attri.split("=")[1];
 						if(key=="username"&&value!=null){
 							$("#inputSearchUsername").val(value);
+							$("#username").val(value);
 							get();
 						}
 					}
@@ -123,7 +124,7 @@ function getAndParse(t) {
 	}
 	//$("#username").val($("#inputSearchUsername").val());
 
-	$("#username").val(t.username);
+	//$("#username").val(t.username);
 	$("#simpleinfo").val(t.simpleinfo);
 	$("#name").val(t.name);
 	$("#phone").val(t.phone);
