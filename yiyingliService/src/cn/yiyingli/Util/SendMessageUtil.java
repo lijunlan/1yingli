@@ -60,9 +60,9 @@ public class SendMessageUtil {
 						short kind = Short.valueOf(map.finish().getString("kind"));
 						LogUtil.info("send message to phone:" + phone + ";message is:" + msg, SendMessageUtil.class);
 						if (CheckUtil.checkMobileNumber(phone)) {
-							sendChinaMsg(phone, msg, kind);
+							sendChinaMsg(phone, msg);
 						} else {
-							sendGlobleMsg(phone, msg, kind);
+							sendGlobleMsg(phone, msg);
 						}
 					} catch (InterruptedException e) {
 						e.printStackTrace();
@@ -75,22 +75,24 @@ public class SendMessageUtil {
 
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		String message = "这是一条测试短信！验证码12312";
-		message = URLEncoder.encode(message, "UTF-8");
-		HttpClient httpClient = HttpClients.createDefault();
-		//&from=PaaSoo
-		String url = "http://api.paasoo.com/json?key=test1&secret=fZYwXVpw&to=8615659831720&text="+message;
-		LogUtil.info("send>>>" + url, SendMailUtil.class);
-		HttpGet get = new HttpGet(url);
-		String result = null;
-		try {
-			HttpResponse response = httpClient.execute(get);
-			if (response.getStatusLine().getStatusCode() == 200) {
-				result = EntityUtils.toString(response.getEntity(), "utf-8");
-			}
-			LogUtil.info("receive>>>" + result, SendMailUtil.class);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		String phone = "18964959647";
+		sendChinaMsg(phone,message);
+//		message = URLEncoder.encode(message, "UTF-8");
+//		HttpClient httpClient = HttpClients.createDefault();
+//		//&from=PaaSoo
+//		String url = "http://api.paasoo.com/json?key=rtolso&secret=31MZ0kkx&from=1yingli&to=8618964959647&text=" + message;
+//		LogUtil.info("send>>>" + url, SendMailUtil.class);
+//		HttpGet get = new HttpGet(url);
+//		String result = null;
+//		try {
+//			HttpResponse response = httpClient.execute(get);
+//			if (response.getStatusLine().getStatusCode() == 200) {
+//				result = EntityUtils.toString(response.getEntity(), "utf-8");
+//			}
+//			LogUtil.info("receive>>>" + result, SendMailUtil.class);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	private static final String MESSAGE_NAME_VERIFY = "yyl-ipxmt";
@@ -122,36 +124,35 @@ public class SendMessageUtil {
 	}
 
 	/**
-	 * @param phone
-	 *            e.g. 8615659831720,12176076581
+	 * @param phone e.g. 8615659831720,12176076581
 	 * @param msg
 	 * @return
 	 */
-	private static String sendGlobleMsg(String phone, String msg, short kind) {
+	private static String sendGlobleMsg(String phone, String msg) {
 		String message = "";
 		try {
-			message = hexString(msg.getBytes("GBK"));
-
+			message = URLEncoder.encode(msg, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		}
 		HttpClient httpClient = HttpClients.createDefault();
-		String url = "";
-		switch (kind) {
-		case MESSAGE_KIND_VERIFY:
-			url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_VERIFY + "&cppwd="
-					+ MESSAGE_PASSWD_VERIFY + "&da=" + phone + "&dc=15&sm=" + message;
-			break;
-		case MESSAGE_KIND_NOTIFY:
-			url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_NOTIFY + "&cppwd="
-					+ MESSAGE_PASSWD_NOTIFY + "&da=" + phone + "&dc=15&sm=" + message;
-			break;
-		default:
-			url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_NOTIFY + "&cppwd="
-					+ MESSAGE_PASSWD_NOTIFY + "&da=" + phone + "&dc=15&sm=" + message;
-			break;
-		}
+		String url = "http://api.paasoo.com/json?key=rtolso&secret=31MZ0kkx&from=1yingli&to=" + phone + "&text=" + message;
+//		switch (kind) {
+//		case MESSAGE_KIND_VERIFY:
+//			url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_VERIFY + "&cppwd="
+//					+ MESSAGE_PASSWD_VERIFY + "&da=" + phone + "&dc=15&sm=" + message;
+//			break;
+//		case MESSAGE_KIND_NOTIFY:
+//			url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_NOTIFY + "&cppwd="
+//					+ MESSAGE_PASSWD_NOTIFY + "&da=" + phone + "&dc=15&sm=" + message;
+//			break;
+//		default:
+//			url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_NOTIFY + "&cppwd="
+//					+ MESSAGE_PASSWD_NOTIFY + "&da=" + phone + "&dc=15&sm=" + message;
+//			break;
+//		}
 		HttpGet get = new HttpGet(url);
+		LogUtil.info("send>>>" + url, SendMailUtil.class);
 		String result = null;
 		try {
 			HttpResponse response = httpClient.execute(get);
@@ -166,36 +167,35 @@ public class SendMessageUtil {
 	}
 
 	/**
-	 * @param phone
-	 *            e.g. 15659831720
+	 * @param phone e.g. 15659831720
 	 * @param msg
 	 * @return
 	 */
-	private static String sendChinaMsg(String phone, String msg, short kind) {
+	private static String sendChinaMsg(String phone, String msg) {
 		String message = "";
 		try {
-			message = hexString(msg.getBytes("GBK"));
-
+			message = URLEncoder.encode(msg, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		}
 		HttpClient httpClient = HttpClients.createDefault();
-		String url = "";
-		switch (kind) {
-		case MESSAGE_KIND_VERIFY:
-			url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_VERIFY + "&cppwd="
-					+ MESSAGE_PASSWD_VERIFY + "&da=86" + phone + "&dc=15&sm=" + message;
-			break;
-		case MESSAGE_KIND_NOTIFY:
-			url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_NOTIFY + "&cppwd="
-					+ MESSAGE_PASSWD_NOTIFY + "&da=86" + phone + "&dc=15&sm=" + message;
-			break;
-		default:
-			url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_NOTIFY + "&cppwd="
-					+ MESSAGE_PASSWD_NOTIFY + "&da=86" + phone + "&dc=15&sm=" + message;
-			break;
-		}
+		String url = "http://api.paasoo.com/json?key=rtolso&secret=31MZ0kkx&from=1yingli&to=86" + phone + "&text=" + message;
+//		switch (kind) {
+//			case MESSAGE_KIND_VERIFY:
+//				url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_VERIFY + "&cppwd="
+//						+ MESSAGE_PASSWD_VERIFY + "&da=86" + phone + "&dc=15&sm=" + message;
+//				break;
+//			case MESSAGE_KIND_NOTIFY:
+//				url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_NOTIFY + "&cppwd="
+//						+ MESSAGE_PASSWD_NOTIFY + "&da=86" + phone + "&dc=15&sm=" + message;
+//				break;
+//			default:
+//				url = "http://api2.santo.cc/submit?command=MT_REQUEST&cpid=" + MESSAGE_NAME_NOTIFY + "&cppwd="
+//						+ MESSAGE_PASSWD_NOTIFY + "&da=86" + phone + "&dc=15&sm=" + message;
+//				break;
+//		}
 		HttpGet get = new HttpGet(url);
+		LogUtil.info("send>>>" + url, SendMailUtil.class);
 		String result = null;
 		try {
 			HttpResponse response = httpClient.execute(get);
