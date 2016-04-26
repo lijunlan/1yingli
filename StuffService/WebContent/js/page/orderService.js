@@ -66,7 +66,7 @@ function showDetail(index, action) {
 		var tmp2 = getStateName(order[index].state.split(",")[0]);
 		$("#modalDetail").append("<b>订单状态：</b>" + tmp2 + "<br>");
 	}
-	if (action == 2) {
+	if (action == 2 || action == 3) {
 		tmp = order[index].state.split(",");
 		var tmp2 = "";
 		for (i = 0; i < tmp.length; i++) {

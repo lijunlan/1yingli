@@ -114,7 +114,7 @@ function get() {
 	}
 	else {
 		myJson.username = keyword;
-		$("#all001").attr('selected',true);
+		$("#articleState").val(-1);
 		delete myJson.state;
 	}
 

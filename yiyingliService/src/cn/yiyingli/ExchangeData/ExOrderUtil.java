@@ -59,6 +59,7 @@ public class ExOrderUtil {
 		map.put("customerName", o.getCustomerName());
 		map.put("customerPhone", o.getCustomerPhone());
 		map.put("customerEmail", o.getCustomerEmail());
+		map.put("state", o.getState());
 		map.put("salaryState", o.getSalaryState());
 		map.put("weixin", o.getCustomerContact());
 		map.put("returnVisit", o.getReturnVisit());
