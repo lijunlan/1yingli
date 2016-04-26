@@ -67,6 +67,8 @@ public interface ServiceProService {
 
 	void updateAndPlusNumber(ServicePro servicePro, boolean remove, boolean updateToBaidu);
 
+	int sumNumByTeacherIdAndState(long teacherId, short state);
+
 	ServicePro query(long id, boolean withTeacher);
 
 	ServicePro queryByUser(long id);

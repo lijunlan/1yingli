@@ -33,8 +33,18 @@ public class TGetServiceProListService extends TMsgService {
 	public void doit() {
 		Teacher teacher = getTeacher();
 		int page = getData().getInt("page");
-		List<ServicePro> servicePros = getServiceProService().queryListByTeacherId(teacher.getId(), page,
-				ServiceProService.TEACHER_PAGE_SIZE);
+		List<ServicePro> servicePros;
+		int count;
+		if (getData().containsKey("state")) {
+			short state = (short) getData().getInt("state");
+			servicePros = getServiceProService().queryListByTeacherIdAndState(teacher.getId(), state, page,
+					ServiceProService.TEACHER_PAGE_SIZE);
+			count = getServiceProService().sumNumByTeacherIdAndState(teacher.getId(), state);
+		} else {
+			servicePros = getServiceProService().queryListByTeacherId(teacher.getId(), page,
+					ServiceProService.TEACHER_PAGE_SIZE);
+			count = teacher.getServiceProNumberForTeacher();
+		}
 		ExList sends = new ExArrayList();
 		for (ServicePro servicePro : servicePros) {
 			SuperMap map = new SuperMap();
@@ -42,7 +52,7 @@ public class TGetServiceProListService extends TMsgService {
 			sends.add(map.finish());
 		}
 		SuperMap toSend = MsgUtil.getSuccessMap();
-		toSend.put("count", teacher.getServiceProNumberForTeacher());
+		toSend.put("count", count);
 		toSend.put("data", sends);
 		setResMsg(toSend.finishByJson());
 	}

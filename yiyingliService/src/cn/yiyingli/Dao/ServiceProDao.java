@@ -32,6 +32,8 @@ public interface ServiceProDao {
 
 	void updateAndPlusNumber(ServicePro servicePro, boolean remove);
 
+	int sumNumByTeacherIdAndState(long teacherId, short state);
+
 	ServicePro querySimple(long id);
 
 	ServicePro queryDetail(long id);

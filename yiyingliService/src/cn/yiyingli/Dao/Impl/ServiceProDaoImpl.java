@@ -91,6 +91,16 @@ public class ServiceProDaoImpl extends HibernateDaoSupport implements ServicePro
 		}
 	}
 
+
+	@Override
+	public int sumNumByTeacherIdAndState(long teacherId, short state) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		String hql = "select count(*) from ServicePro sp left join fetch sp.teacher where sp.remove=" + false
+				+ " and sp.teacher.id=" + teacherId + " and state=" + state;
+		int sum = (int) session.createQuery(hql).uniqueResult();
+		return sum;
+	}
+
 	@Override
 	public ServicePro querySimple(long id) {
 		String hql = "from ServicePro sp where sp.remove=" + false + " and sp.id=?";

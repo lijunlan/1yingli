@@ -94,6 +94,11 @@ public class ServiceProServiceImpl implements ServiceProService {
 	}
 
 	@Override
+	public int sumNumByTeacherIdAndState(long teacherId, short state) {
+		return getServiceProDao().sumNumByTeacherIdAndState(teacherId,state);
+	}
+
+	@Override
 	public boolean updateUserUnlike(long serviceProId, long userId) {
 		if (!getServiceProDao().queryCheckLikeUser(serviceProId, userId)) {
 			return false;
