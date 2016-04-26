@@ -224,9 +224,8 @@ public class Teacher {
 	private String invitationCode;
 
 
-	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "INVITER", updatable = false)
-	private Teacher inviter;
+	@JoinColumn(name = "INVITERID", updatable = false)
+	private Long inviterId;
 
 
 	public Float getPrice() {
@@ -709,12 +708,12 @@ public class Teacher {
 		this.invitationCode = invitationCode;
 	}
 
-	public Teacher getInviter() {
-		return inviter;
+	public Long getInviterId() {
+		return inviterId;
 	}
 
-	public void setInviter(Teacher inviter) {
-		this.inviter = inviter;
+	public void setInviterId(Long inviterId) {
+		this.inviterId = inviterId;
 	}
 
 	public Boolean getShowNotify() {

@@ -14,6 +14,7 @@ import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.toPersistant.PTeacherUtil;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 
 public class CreateApplicationFormService extends UMsgService {
@@ -81,11 +82,18 @@ public class CreateApplicationFormService extends UMsgService {
 				new JSONArray(), "", name, phone, address, mail, "", "", "false", "false", "false", "false", "false",
 				"", 0F, getTipService());
 
-		String invitationCode = application.getString("invitationCode");
-		if (invitationCode != "") {
-			Teacher inviter = getTeacherService().queryByInvitationCode(invitationCode);
-			teacher.setInviter(inviter);
+		try {
+			String invitationCode = application.getString("invitationCode");
+			if (invitationCode != "") {
+				Teacher inviter = getTeacherService().queryByInvitationCode(invitationCode);
+				if (inviter != null) {
+					teacher.setInviterId(inviter.getId());
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
+
 
 		ApplicationForm applicationForm = new ApplicationForm();
 		applicationForm.setContact(contact);

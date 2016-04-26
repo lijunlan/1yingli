@@ -175,7 +175,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	@Override
 	public long querySumNoByInviterId(long inviterId) {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-		long sum = (long) session.createQuery("select count(*) from Teacher t where t.inviter.id = " + inviterId)
+		long sum = (long) session.createQuery("select count(*) from Teacher t where t.inviterId = " + inviterId)
 				.uniqueResult();
 		return sum;
 	}
@@ -388,7 +388,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
 			@Override
 			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t where t.inviter.id = " + inviterId +
+				String hql = "from Teacher t where t.inviterId = " + inviterId +
 						" and t.onService=true ORDER BY t.createTime DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page-1) * pageSize);
