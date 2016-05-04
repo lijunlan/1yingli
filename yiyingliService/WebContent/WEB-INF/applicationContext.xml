@@ -986,6 +986,16 @@
 		</property>
 	</bean>
 
+	<bean id="tGetLikeTeacherList" class="cn.yiyingli.Handle.Service.TGetLikeTeacherList"
+		  scope="prototype">
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
+		<property name="userMarkService">
+			<ref local="userMarkService"/>
+		</property>
+	</bean>
+
 	<bean id="tGetTeacherSimpleInfoService" class="cn.yiyingli.Handle.Service.TGetTeacherSimpleInfoService"
 		scope="prototype">
 		<property name="teacherService">

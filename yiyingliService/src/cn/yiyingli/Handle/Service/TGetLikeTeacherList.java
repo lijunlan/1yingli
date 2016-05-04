@@ -39,7 +39,7 @@ public class TGetLikeTeacherList extends TMsgService {
 		ExList sends = new ExArrayList();
 		for (Teacher t : teachers) {
 			SuperMap map = new SuperMap();
-			ExTeacher.assembleSimpleForUser(teacher, map);
+			ExTeacher.assembleSimpleForUser(t, map);
 			sends.add(map.finish());
 		}
 		toSend.put("data", sends);

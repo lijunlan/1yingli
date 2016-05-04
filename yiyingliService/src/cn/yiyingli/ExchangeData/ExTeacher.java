@@ -43,6 +43,7 @@ public class ExTeacher {
 		assembleSimpleNormal(teacher, map);
 		map.put("level", teacher.getLevel());
 		map.put("introduce", teacher.getIntroduce());
+		map.put("score",teacher.getScore());
 		LikeAndFinishNoShowUtil.setLikeNo(teacher, map);
 		LikeAndFinishNoShowUtil.setFinishNo(teacher, map);
 	}

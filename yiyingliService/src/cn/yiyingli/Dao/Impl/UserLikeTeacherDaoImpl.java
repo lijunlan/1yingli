@@ -2,6 +2,7 @@ package cn.yiyingli.Dao.Impl;
 
 import cn.yiyingli.Dao.UserLikeTeacherDao;
 import cn.yiyingli.Persistant.Teacher;
+import cn.yiyingli.Util.LogUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -21,8 +22,9 @@ public class UserLikeTeacherDaoImpl extends HibernateDaoSupport implements UserL
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
 			@Override
 			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from Teacher t left join UserLikeTeacher u on t.user.id = u.user.id where u.teacher.id ="
-						+ likedTeacherId;
+				String hql = "select t from Teacher t left join fetch t.user u1, UserLikeTeacher ult " +
+						"left join ult.teacher t2 left join ult.user u2 where t.onService = true and " +
+						"u1.id = u2.id and t.id != "+ likedTeacherId + " and t2.id =" + likedTeacherId;
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -33,13 +35,13 @@ public class UserLikeTeacherDaoImpl extends HibernateDaoSupport implements UserL
 		return list;
 	}
 
-	public long querySumNoByLikedTeacherId(long likeTeacherId) {
+	public long querySumNoByLikedTeacherId(long likedTeacherId) {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-		Transaction ts = session.beginTransaction();
 		long sum = (long) session.createQuery(
-				"select count(*) from Teacher t left join UserLikeTeacher u on t.user.id = u.user.id where u.teacher.id =" + likeTeacherId)
+				"select count(t) from Teacher t left join t.user u1, UserLikeTeacher ult " +
+						"left join ult.teacher t2 left join ult.user u2 where t.onService = true and " +
+						"u1.id = u2.id and t.id != "+ likedTeacherId + " and t2.id =" + likedTeacherId)
 				.uniqueResult();
-		ts.commit();
 		return sum;
 	}
 }
