@@ -32,10 +32,6 @@ public interface UserService {
 
 	void updateWithTeacher(User user);
 
-	void mergeUserWithPhone(User user, String phone);
-
-	void mergeUserWithEmail(User user, String email);
-
 	void mergeUserWithUserList(User user, List<User> subUsers);
 
 	void changePassword(long userId, String oldpwd, String newpwd) throws Exception;
@@ -75,6 +71,4 @@ public interface UserService {
 	List<User> queryListByLevel(int page, short level, boolean lazy);
 
 	List<User> queryListByTeacher(int page, short teacherState, boolean lazy);
-
-	List<User> queryListWithTeacher(String username, boolean lazy);
 }

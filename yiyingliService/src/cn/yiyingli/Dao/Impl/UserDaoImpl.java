@@ -251,14 +251,14 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 
 	@Override
 	public User queryWithTeacher(String username, boolean lazy) {
-		String hql = "from User u left join fetch u.teacher  where u.state!=1 and (u.username=? or u.email=? or u.phone=?)";
+		String hql = "from User u left join fetch u.teacher where u.username=?";
 		if (lazy) {
 			hql = "from User u left join fetch u.orders left join fetch u.linkinInfos "
 					+ "left join fetch u.teacher left join fetch u.cvs left join fetch u.ownSiteDiscounts"
-					+ " left join fetch u.givecomments where u.state!=1 and (u.username=? or u.email=? or u.phone=?)";
+					+ " left join fetch u.givecomments where u.username=?";
 		}
 		@SuppressWarnings("unchecked")
-		List<User> list = getHibernateTemplate().find(hql, username,username,username);
+		List<User> list = getHibernateTemplate().find(hql, username);
 		if (list.isEmpty())
 			return null;
 		else
@@ -409,29 +409,6 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 			public List<User> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from User u left join fetch u.teacher" +
 						" where u.email='" + email + "'";
-				Query query = session.createQuery(hql);
-				List<User> list = query.list();
-				return list;
-			}
-		});
-		return list;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<User> queryListWithTeacher(final String username, final boolean lazy) {
-		List<User> list;
-		list = getHibernateTemplate().executeFind(new HibernateCallback<List<User>>() {
-			@Override
-			public List<User> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from User u left join fetch u.teacher  where u.state!=1 and (u.username=" +
-						"'" + username + "' or u.email='" + username + "' or u.phone='" + username + "')";
-				if (lazy) {
-					hql = "from User u left join fetch u.orders left join fetch u.linkinInfos "
-							+ "left join fetch u.teacher left join fetch u.cvs left join fetch u.ownSiteDiscounts"
-							+ " left join fetch u.givecomments where u.state!=1 and (u.username=" +
-							"' " + username + "' or u.email='" + username + "' or u.phone='" + username + "')";
-				}
 				Query query = session.createQuery(hql);
 				List<User> list = query.list();
 				return list;

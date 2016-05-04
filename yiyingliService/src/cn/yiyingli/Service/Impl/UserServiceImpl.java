@@ -129,18 +129,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void mergeUserWithPhone(User user, String phone) {
-		List<User> subUsers = getUserDao().queryListByPhoneWithTeacher(phone, false);
-		mergeUserWithUserList(user, subUsers);
-	}
-
-	@Override
-	public void mergeUserWithEmail(User user, String email) {
-		List<User> subUsers = getUserDao().queryListByEmailWithTeacher(email, false);
-		mergeUserWithUserList(user, subUsers);
-	}
-
-	@Override
 	public void mergeUserWithUserList(User user, List<User> subUsers) {
 		for (User subUser : subUsers) {
 			if (!subUser.getId().equals(user.getId()) && (subUser.getState() != null
@@ -314,10 +302,5 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> queryListByTeacher(int page, short teacherState, boolean lazy) {
 		return queryListByTeacher(page, PAGE_SIZE_INT, teacherState, lazy);
-	}
-
-	@Override
-	public List<User> queryListWithTeacher(String username, boolean lazy) {
-		return getUserDao().queryListWithTeacher(username, lazy);
 	}
 }
