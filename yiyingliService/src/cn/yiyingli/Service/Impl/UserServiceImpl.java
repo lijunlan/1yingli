@@ -129,57 +129,32 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void mergeUserWithUserList(User user, List<User> subUsers) {
-		for (User subUser : subUsers) {
-			if (!subUser.getId().equals(user.getId()) && (subUser.getState() != null
-					&& subUser.getState().equals(USER_STATE_SUB_SHORT))) {
-				String changeUserSql = " set USER_ID = " + user.getId() + " where USER_ID = " + subUser.getId();
-				String tableNames[] = {"applicationform", "comment", "notification", "orderlist", "orders",
-						"reward", "userlikepassage", "userlikeservicepro", "userliketeacher", "voucher"};
-				for (String tableName : tableNames) {
-					getUserDao().updateWithRawSql("update " + tableName + changeUserSql);
-				}
-				if (subUser.getTeacher() != null && subUser.getTeacher().getOnService() &&
-						(user.getTeacher() == null || !user.getTeacher().getOnService())) {
-					Teacher teacher = subUser.getTeacher();
-					subUser.setTeacher(null);
-					user.setTeacher(teacher);
-					user.setTeacherState(TEACHER_STATE_ON_SHORT);
-					user.setIconUrl(teacher.getIconUrl());
-					user.setName(teacher.getName());
-					user.setAddress(teacher.getAddress());
-					getUserDao().updateWithRawSql("update teacher" + changeUserSql);
-				}
-				if (subUser.getWechatNo() != null && user.getWechatNo() == null) {
-					user.setWechatNo(subUser.getWechatNo());
-					subUser.setWechatNo(null);
-				}
-				if (subUser.getWechatPlatformNo() != null && user.getWechatPlatformNo() == null) {
-					user.setWechatPlatformNo(subUser.getWechatPlatformNo());
-					subUser.setWechatPlatformNo(null);
-				}
-				if (subUser.getWeiboNo() != null && user.getWeiboNo() == null) {
-					user.setWeiboNo(subUser.getWeiboNo());
-					subUser.setWeiboNo(null);
-				}
-				if (subUser.getIconUrl() != null && user.getIconUrl() == null) {
-					user.setIconUrl(subUser.getIconUrl());
-				}
-				if (subUser.getName() != null && user.getName() == null) {
-					user.setName(subUser.getName());
-				}
-				if (subUser.getAddress() != null && user.getAddress() == null) {
-					user.setAddress(subUser.getAddress());
-				}
-				user.setOrderNumber(user.getOrderNumber() + subUser.getOrderNumber());
-				user.setReceiveCommentNumber(user.getReceiveCommentNumber() + subUser.getReceiveCommentNumber());
-				user.setSendCommentNumber(user.getSendCommentNumber() + subUser.getSendCommentNumber());
-				user.setLikeTeacherNumber(user.getLikeTeacherNumber() + subUser.getLikeTeacherNumber());
-				user.setLikeServiceProNumber(user.getLikeServiceProNumber() + subUser.getLikeServiceProNumber());
-				subUser.setState(USER_STATE_SUB_SHORT);
-				getUserDao().merge(subUser);
-			}
+	public void mergeUser(User user, User subUser) {
+		if (subUser.getId().equals(user.getId()) || subUser.getFaUserId() != null) {
+			return;
 		}
+		String changeUserSql = " set USER_ID = " + user.getId() + " where USER_ID = " + subUser.getId();
+		String tableNames[] = {"comment", "notification", "orderlist", "orders",
+				"reward", "userlikepassage", "userlikeservicepro", "userliketeacher", "voucher"};
+		for (String tableName : tableNames) {
+			getUserDao().updateWithRawSql("update " + tableName + changeUserSql);
+		}
+		if (subUser.getIconUrl() != null && user.getIconUrl() == null) {
+			user.setIconUrl(subUser.getIconUrl());
+		}
+		if (subUser.getName() != null && user.getName() == null) {
+			user.setName(subUser.getName());
+		}
+		if (subUser.getAddress() != null && user.getAddress() == null) {
+			user.setAddress(subUser.getAddress());
+		}
+		user.setOrderNumber(user.getOrderNumber() + subUser.getOrderNumber());
+		user.setReceiveCommentNumber(user.getReceiveCommentNumber() + subUser.getReceiveCommentNumber());
+		user.setSendCommentNumber(user.getSendCommentNumber() + subUser.getSendCommentNumber());
+		user.setLikeTeacherNumber(user.getLikeTeacherNumber() + subUser.getLikeTeacherNumber());
+		user.setLikeServiceProNumber(user.getLikeServiceProNumber() + subUser.getLikeServiceProNumber());
+		subUser.setFaUserId(user.getId());
+		getUserDao().merge(subUser);
 		getUserDao().merge(user);
 	}
 

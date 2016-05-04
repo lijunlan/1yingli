@@ -49,7 +49,6 @@ public class PUserUtil {
 		user.setCreateTime(String.valueOf(Calendar.getInstance().getTimeInMillis()));
 		user.setTeacherState(UserService.TEACHER_STATE_OFF_SHORT);
 		user.setForbid(false);
-		user.setState(UserService.USER_STATE_PRIMARY_SHORT);
 		return user;
 	}
 }

@@ -51,7 +51,7 @@ public class CancelOrderAfterAcceptService extends UMsgService {
 		}
 		String state = order.getState().split(",")[0];
 		if (!((OrderService.ORDER_STATE_WAIT_ENSURETIME.equals(state) &&
-				order.getServiceType().equals(ServicePro.SERVICE_TYPE_NORMAL))
+				(order.getServiceType() == null || order.getServiceType().equals(ServicePro.SERVICE_TYPE_NORMAL)))
 				|| (OrderService.ORDER_BARGAINING.equals(state) &&
 				order.getServiceType().equals(ServicePro.SERVICE_TYPE_BARGAIN)))) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44002"));

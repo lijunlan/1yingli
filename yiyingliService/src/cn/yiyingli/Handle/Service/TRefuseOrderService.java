@@ -51,7 +51,7 @@ public class TRefuseOrderService extends TMsgService {
 		}
 		String state = order.getState().split(",")[0];
 		if (!((OrderService.ORDER_STATE_FINISH_PAID.equals(state) &&
-				order.getServiceType().equals(ServicePro.SERVICE_TYPE_NORMAL))
+				(order.getServiceType() == null || order.getServiceType().equals(ServicePro.SERVICE_TYPE_NORMAL)))
 				|| (OrderService.ORDER_BARGAINED_NOT_PAID.equals(state) &&
 				order.getServiceType().equals(ServicePro.SERVICE_TYPE_BARGAIN))
 				||(OrderService.ORDER_BARGAINING.equals(state) &&

@@ -115,8 +115,8 @@ public class User {
 	@Column(name = "MILE", nullable = false)
 	private Long mile;
 
-	@Column(name = "STATE", nullable = false)
-	private Short state;
+	@Column(name = "FAUSERID")
+	private Long faUserId;
 
 	@OneToMany(targetEntity = ApplicationForm.class, cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", updatable = false)
@@ -496,11 +496,12 @@ public class User {
 		this.wechatPlatformNo = wechatPlatformNo;
 	}
 
-	public Short getState() {
-		return state;
+
+	public Long getFaUserId() {
+		return faUserId;
 	}
 
-	public void setState(Short state) {
-		this.state = state;
+	public void setFaUserId(Long faUserId) {
+		this.faUserId = faUserId;
 	}
 }

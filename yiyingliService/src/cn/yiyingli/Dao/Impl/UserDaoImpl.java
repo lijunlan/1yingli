@@ -131,6 +131,19 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		sqlQuery.executeUpdate();
 	}
 
+	private User returnUser(User user){
+		if (user.getFaUserId() == null) {
+			return user;
+		}
+		String hql = "from User u left join fetch u.teacher where u.ud = " + user.getFaUserId();
+		List<User> list = getHibernateTemplate().find(hql);
+		if (list.isEmpty()) {
+			return user;
+		} else {
+			return list.get(0);
+		}
+	}
+
 	@Override
 	public User query(long id, boolean lazy) {
 		String hql = "from User u where u.id=?";
@@ -144,7 +157,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		if (list.isEmpty())
 			return null;
 		else
-			return list.get(0);
+			return returnUser(list.get(0));
 	}
 
 	@Override
@@ -155,7 +168,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		if (list.isEmpty())
 			return null;
 		else
-			return list.get(0);
+			return returnUser(list.get(0));
 	}
 
 	@Override
@@ -171,7 +184,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		if (list.isEmpty())
 			return null;
 		else
-			return list.get(0);
+			return returnUser(list.get(0));
 	}
 
 	@Override
@@ -187,7 +200,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		if (list.isEmpty())
 			return null;
 		else
-			return list.get(0);
+			return returnUser(list.get(0));
 	}
 
 	@Override
@@ -203,7 +216,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		if (list.isEmpty())
 			return null;
 		else
-			return list.get(0);
+			return returnUser(list.get(0));
 	}
 
 	@Override
@@ -219,7 +232,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		if (list.isEmpty())
 			return null;
 		else
-			return list.get(0);
+			return returnUser(list.get(0));
 	}
 
 	@Override
@@ -235,7 +248,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		if (list.isEmpty())
 			return null;
 		else
-			return list.get(0);
+			return returnUser(list.get(0));
 	}
 
 	@Override
@@ -246,7 +259,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		if (list.isEmpty())
 			return null;
 		else
-			return list.get(0);
+			return returnUser(list.get(0));
 	}
 
 	@Override
@@ -262,7 +275,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		if (list.isEmpty())
 			return null;
 		else
-			return list.get(0);
+			return returnUser(list.get(0));
 	}
 
 	@SuppressWarnings("unchecked")

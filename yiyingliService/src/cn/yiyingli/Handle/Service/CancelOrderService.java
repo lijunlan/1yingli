@@ -21,6 +21,8 @@ public class CancelOrderService extends UMsgService {
 
 	private OrderListService orderListService;
 
+	private OrderService orderService;
+
 	private NotificationService notificationService;
 
 	public OrderListService getOrderListService() {
@@ -39,45 +41,45 @@ public class CancelOrderService extends UMsgService {
 		this.notificationService = notificationService;
 	}
 
+	public OrderService getOrderService() {
+		return orderService;
+	}
+
+	public void setOrderService(OrderService orderService) {
+		this.orderService = orderService;
+	}
+
 	@Override
 	protected boolean checkData() {
-		return super.checkData() && getData().containsKey("olid");
+		return super.checkData() && getData().containsKey("orderId");
 	}
 
 	@Override
 	public void doit() {
 		User user = getUser();
-		String olid = (String) getData().get("olid");
-		OrderList orderList = getOrderListService().queryByOrderListNo(olid);
-		if (orderList == null) {
-			setResMsg(MsgUtil.getErrorMsgByCode("42003"));
+		String orderId = (String) getData().get("orderId");
+		Order order = getOrderService().queryByOrderNo(orderId);
+		if (order == null) {
+			setResMsg(MsgUtil.getErrorMsgByCode("42001"));
 			return;
 		}
-		if (orderList.getUser().getId().longValue() != user.getId().longValue()) {
-			LogUtil.info("receive>>>>cancelOrderListId:" + orderList.getUser().getId() + ",userId:" + user.getId() + ","
-					+ (orderList.getUser().getId().longValue() == user.getId().longValue()), this.getClass());
+		if (order.getCreateUser().getId().longValue() != user.getId().longValue()) {
+			LogUtil.info("receive>>>>cancelOrderListId:" + order.getCreateUser().getId() + ",userId:" + user.getId() + ","
+					+ (order.getCreateUser().getId().longValue() == user.getId().longValue()), this.getClass());
 			setResMsg(MsgUtil.getErrorMsgByCode("44001"));
 			return;
 		}
-		String state = orderList.getState().split(",")[0];
+		String state = order.getState().split(",")[0];
 		if (!OrderService.ORDER_STATE_NOT_PAID.equals(state)) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
-
-		try {
-			AlipayCancelUtil.cancelOrder("", olid);
-		} catch (Exception e) {
-			e.printStackTrace();
-			// setResMsg(MsgUtil.getErrorMsgByCode("43001"));
-		}
-		cancelOrderList(orderList);
-
+		order.setState(OrderService.ORDER_STATE_END_FAILED + "," + OrderService.ORDER_STATE_CANCEL_PAID + ","
+				+ order.getState());
+		getOrderService().updateAndAddCount(order);
 //		NotifyUtil.notifyUserOrder(orderList, "尊敬的学员，您的订单已经取消。订单号" + orderList.getOrderListNo(), user,
 		// getNotificationService());
-
-		setResMsg(MsgUtil.getSuccessMsg("cancel orderList successfully"));
-
+		setResMsg(MsgUtil.getSuccessMsg("cancel order successfully"));
 	}
 
 	private void cancelOrderList(OrderList orderList) {

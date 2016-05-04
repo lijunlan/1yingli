@@ -26,6 +26,8 @@ public interface OrderDao {
 
 	void updateDistriOrderNumber(Order order, Distributor distributor);
 
+	void updateAndAddCount(Order order);
+
 	/**
 	 * 操作包括更新分销人订单数据，并且更新订单状态
 	 * 

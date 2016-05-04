@@ -161,6 +161,8 @@ public interface OrderService {
 
 	void updateAndPlusNumber(Order order);
 
+	void updateAndAddCount(Order order);
+
 	Order query(long id, boolean lazy);
 
 	Order queryByOrderNo(String orderNo);

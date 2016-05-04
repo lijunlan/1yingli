@@ -81,12 +81,26 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 		query.executeUpdate();
 	}
 
+	@Override
+	public void updateAndAddCount(Order order) {
+		getHibernateTemplate().update(order);
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = null;
+		if (order.getServiceId() != null) {
+			long serviceProId = order.getServiceId();
+			int count = order.getCount();
+			query = session.createSQLQuery("update servicepro set servicepro.number=servicepro.number+" + count
+					+ " where servicepro.SERVICEPRO_ID=" + serviceProId);
+			query.executeUpdate();
+		}
+	}
+
 	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see cn.yiyingli.Dao.OrderDao#updateOrderWhenOrderFinish(cn.yiyingli.
-	 * Persistant.Order)
-	 */
+		 * (non-Javadoc)
+		 *
+		 * @see cn.yiyingli.Dao.OrderDao#updateOrderWhenOrderFinish(cn.yiyingli.
+		 * Persistant.Order)
+		 */
 	@Override
 	public void updateOrderWhenOrderFinish(Order order) {
 		getHibernateTemplate().update(order);

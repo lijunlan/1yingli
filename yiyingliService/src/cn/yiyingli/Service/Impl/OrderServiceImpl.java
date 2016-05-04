@@ -173,6 +173,12 @@ public class OrderServiceImpl implements OrderService {
 		// order.getOrderNo()).finishByJson());
 	}
 
+
+	@Override
+	public void updateAndAddCount(Order order) {
+		getOrderDao().updateAndAddCount(order);
+	}
+
 	@Override
 	public Order query(long id, boolean lazy) {
 		return getOrderDao().query(id, lazy);

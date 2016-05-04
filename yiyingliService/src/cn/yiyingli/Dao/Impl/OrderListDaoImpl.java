@@ -101,7 +101,8 @@ public class OrderListDaoImpl extends HibernateDaoSupport implements OrderListDa
 
 	@Override
 	public OrderList queryByOrderListNo(String orderListNo) {
-		String hql = "from OrderList ol left join fetch ol.user left join fetch ol.teacher where ol.orderListNo=?";
+		String hql = "from OrderList ol left join fetch ol.user left join fetch ol.orders o" +
+				" left join fetch o.teacher where ol.orderListNo=?";
 		@SuppressWarnings("unchecked")
 		List<OrderList> list = getHibernateTemplate().find(hql, orderListNo);
 		if (list.isEmpty())
