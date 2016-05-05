@@ -34,6 +34,9 @@ public class Comment {
 	@Column(name = "SERVICETITLE", nullable = false)
 	private String serviceTitle;
 
+	@Column(name = "PICS",columnDefinition="TEXT")
+	private String pics;
+
 	@ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TEACHER_ID", updatable = false)
 	private Teacher teacher;
@@ -130,4 +133,11 @@ public class Comment {
 		this.order = order;
 	}
 
+	public String getPics() {
+		return pics;
+	}
+
+	public void setPics(String pics) {
+		this.pics = pics;
+	}
 }

@@ -110,6 +110,15 @@ public class CommentTeacherService extends UMsgService {
 			comment.setOrder(order);
 			comment.setUser(user);
 
+			if(getData().containsKey("pics")) {
+				try {
+					String pics = getData().getString("pics");
+					comment.setPics(pics);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
 			if (order.getServiceId() != null) {
 				long serviceProId = order.getServiceId();
 				ServicePro servicePro = getServiceProService().query(serviceProId, false);
