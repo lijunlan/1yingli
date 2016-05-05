@@ -74,7 +74,9 @@ public class CreateAdditionalPayService extends UMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("44009"));
 			return;
 		}
-		setResMsg(MsgUtil.getSuccessMap().put("orderNoList", orderList.getOrderListNo())
-				.put("msg", "create order successfully").finishByJson());
+		setResMsg(MsgUtil.getSuccessMap()
+				.put("orderNoList", orderList.getOrderListNo())
+				.put("originMoney",orderList.getNowMoney())
+				.put("msg", "create additionalPay successfully").finishByJson());
 	}
 }
