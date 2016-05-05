@@ -295,6 +295,11 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public long querySumNoByTeacherIdAndServicePro(long teacherId, long serviceProId, String[] states) {
+		return getOrderDao().querySumNoByTeacherIdAndServicePro(teacherId,serviceProId,states);
+	}
+
+	@Override
 	public long querySumNoByState(String state) {
 		return getOrderDao().querySumNoByState(state);
 	}

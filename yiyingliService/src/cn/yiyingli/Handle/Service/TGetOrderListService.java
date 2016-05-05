@@ -67,13 +67,13 @@ public class TGetOrderListService extends TMsgService {
 		if(getData().containsKey("serviceProId")) {
 			Long serviceProId = getData().getLong("serviceProId");
 			orders = getOrderService().queryListByTeacherIdAndServiceProId(teacher.getId(), serviceProId,states, page, false);
+			long count = getOrderService().querySumNoByTeacherIdAndStates(teacher.getId(),states);
+			toSend.put("count", count);
 		} else {
 			orders = getOrderService().queryListByTeacherId(teacher.getId(), states, page, false);
+			long count = getOrderService().querySumNoByTeacherIdAndStates(teacher.getId(),states);
+			toSend.put("count", count);
 		}
-
-		long count = getOrderService().querySumNoByTeacherIdAndStates(teacher.getId(),states);
-		toSend.put("count", count);
-
 		ExList toSendOrders = new ExArrayList();
 		for (Order order : orders) {
 			SuperMap map = new SuperMap();

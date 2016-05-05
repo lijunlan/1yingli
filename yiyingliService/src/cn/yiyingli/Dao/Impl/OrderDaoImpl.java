@@ -325,9 +325,10 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 		if(serviceProId == -1) {
 			hql = "from Order o left join fetch o.createUser left join fetch o.teacher where o.teacher.id="
 					+ teacherId + "and o.serviceId is null and (o.state like '" + state[0] + "%'";
+		} else {
+			hql = "from Order o left join fetch o.createUser left join fetch o.teacher where o.teacher.id="
+					+ teacherId + "and o.serviceId = " + serviceProId + " and (o.state like '" + state[0] + "%'";
 		}
-		hql = "from Order o left join fetch o.createUser left join fetch o.teacher where o.teacher.id="
-				+ teacherId + "and o.serviceId = " + serviceProId + " and (o.state like '" + state[0] + "%'";
 		if (state.length > 1) {
 			for (int i = 1; i < state.length; i++) {
 				hql = hql + " or o.state like '" + state[i] + "%'";
@@ -483,6 +484,30 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 		if (states.length > 1) {
 			for (int i = 1; i < states.length; i++) {
 				hql = hql + " or o.state like '" + states[i] + "%'";
+			}
+		}
+		final String _hql = hql + ")";
+		long sum = (long) session.createQuery(_hql)
+				.uniqueResult();
+		return sum;
+	}
+
+	@Override
+	public long querySumNoByTeacherIdAndServicePro(long teacherId, long serviceProId, String[] state) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		if (state.length <= 0)
+			return 0;
+		String hql;
+		if(serviceProId == -1) {
+			hql = "select count(*) from Order o left join o.createUser left join o.teacher where o.teacher.id="
+					+ teacherId + "and o.serviceId is null and (o.state like '" + state[0] + "%'";
+		} else {
+			hql = "select count(*) from Order o left join o.createUser left join o.teacher where o.teacher.id="
+					+ teacherId + "and o.serviceId = " + serviceProId + " and (o.state like '" + state[0] + "%'";
+		}
+		if (state.length > 1) {
+			for (int i = 1; i < state.length; i++) {
+				hql = hql + " or o.state like '" + state[i] + "%'";
 			}
 		}
 		final String _hql = hql + ")";

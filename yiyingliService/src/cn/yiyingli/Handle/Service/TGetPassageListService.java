@@ -51,8 +51,9 @@ public class TGetPassageListService extends TMsgService {
 			ExPassage.assembleSimple(p, map);
 			sends.add(map.finish());
 		}
+		long[] counts = {getTeacher().getCheckPassageNumber(), getTeacher().getRefusePassageNumber(), getTeacher().getPassageNumber()};
 		SuperMap toSend = MsgUtil.getSuccessMap();
-		toSend.put("data", sends).put("count", count);
+		toSend.put("data", sends).put("count", count).put("counts", counts);
 		setResMsg(toSend.finishByJson());
 	}
 
