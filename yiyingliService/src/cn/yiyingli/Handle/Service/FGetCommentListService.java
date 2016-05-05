@@ -76,6 +76,7 @@ public class FGetCommentListService extends MsgService {
 			map.put("createTime", SIMPLE_DATE_FORMAT.format(new Date(Long.valueOf(c.getCreateTime()))));
 			map.put("nickName", c.getUser().getNickName());
 			map.put("iconUrl", c.getUser().getIconUrl());
+			map.put("pics",c.getPics());
 			map.put("serviceTitle", c.getServiceTitle());
 			sends.add(map.finish());
 		}

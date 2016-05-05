@@ -71,6 +71,7 @@ public class FGetCommentListByServiceProService extends MsgService {
 			map.put("createTime", c.getCreateTime());
 			map.put("nickName", c.getUser().getNickName());
 			map.put("iconUrl", c.getUser().getIconUrl());
+			map.put("pics",c.getPics());
 			map.put("serviceTitle", c.getServiceTitle());
 			sends.add(map.finish());
 		}

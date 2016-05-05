@@ -74,6 +74,7 @@ public class TGetCommentListService extends MsgService {
 			map.put("score", c.getScore());
 			map.put("createTime", SIMPLE_DATE_FORMAT.format(new Date(Long.valueOf(c.getCreateTime()))));
 			map.put("nickName", c.getUser().getNickName());
+			map.put("pics",c.getPics());
 			map.put("iconUrl", c.getUser().getIconUrl());
 			map.put("serviceTitle", c.getServiceTitle());
 			map.put("serviceProId", c.getServicePro() == null ? null : c.getServicePro().getId());
