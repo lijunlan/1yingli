@@ -173,7 +173,7 @@ var changeTable = function (result) {
 		row += data.originMoney + "</td><td>";
 		row += data.customerName + "</td><td>";
 		row += data.customerPhone + "</td><td>";
-		row += data.weixin + "</td><td>";
+		row += data.weixin + "</td><td style='word-break:break-all'>";
 		row += data.customerEmail + "</td><td>";
 		row += data.teacherName + "</td><td>";
 		//根据订单是否要支付导师或已经支付导师，显示学员是否已经评价导师
@@ -201,7 +201,11 @@ var changeTable = function (result) {
 			row += "</td><td>";
 		}
 		//显示订单详情
-		row += "<button class='am-btn am-btn-primary' onclick='showDetail(" + index + "," + fun + ")'>详情</button></td></tr>";
+
+		if(data.returnVisit=="true")
+			row += "<button class='am-btn am-btn-primary' onclick='showDetail(" + index + "," + fun + ")'>详情</button></td></tr>";
+		else
+			row += "<button class='am-btn am-btn-primary' style='background-color: #d9534f;border-color:#d9534f' onclick='showDetail(" + index + "," + fun + ")'>详情</button></td></tr>";
 		$("#infoTable").append(row);
 	})
 }

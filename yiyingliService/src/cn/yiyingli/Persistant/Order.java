@@ -229,6 +229,9 @@ public class Order {
 	}
 
 	public void setState(String state) {
+		if(this.state == null || !this.state.equals(state)) {
+			this.returnVisit = false;
+		}
 		this.state = state;
 	}
 
