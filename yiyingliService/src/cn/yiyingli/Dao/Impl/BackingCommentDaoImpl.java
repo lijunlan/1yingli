@@ -26,7 +26,7 @@ public class BackingCommentDaoImpl extends HibernateDaoSupport implements Backin
 
 	@Override
 	public BackingComment query(long id) {
-		String hql = "from BackingComment bc left join fetct bc.teacher where bc.id=?";
+		String hql = "from BackingComment bc left join fetch bc.teacher where bc.id=?";
 		@SuppressWarnings("unchecked")
 		List<BackingComment> list = getHibernateTemplate().find(hql, id);
 		if (list.isEmpty()) {
@@ -55,7 +55,7 @@ public class BackingCommentDaoImpl extends HibernateDaoSupport implements Backin
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<BackingComment>>() {
 			@Override
 			public List<BackingComment> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from BackingComment bc left join bc.teacher left join bc.user where bc.teacher.id = "
+				String hql = "from BackingComment bc left join fetch bc.teacher left join fetch bc.user where bc.teacher.id = "
 						+ teacherId + " order by bc.weight DESC,bc.display DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);

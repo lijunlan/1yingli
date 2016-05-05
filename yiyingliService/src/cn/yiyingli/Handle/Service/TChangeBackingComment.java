@@ -25,6 +25,10 @@ public class TChangeBackingComment extends TMsgService {
 	public void doit() {
 		long backingCommentId = getData().getLong("backingCommentId");
 		BackingComment backingComment = getBackingCommentService().query(backingCommentId);
+		if(backingComment == null) {
+			setResMsg(MsgUtil.getErrorMsgByCode("25001"));
+			return;
+		}
 		if (backingComment.getTeacher().getId() != getTeacher().getId()) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22010"));
 			return;

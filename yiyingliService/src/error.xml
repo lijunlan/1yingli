@@ -70,6 +70,7 @@
 	<error name="24002" value="uid don't match teacherId" />
 	<error name="24003"
 		value="service is not exsited or service is not belong to the teacher" />
+	<error name="25001" value="backingComment is not existed"/>
 
 
 	<!-- manager 3 -->
