@@ -48,8 +48,12 @@ public class CreateAdditionalPayService extends UMsgService {
 		if (money < 0.01) {
 			money = 0.01F;
 		}
-		Long orderId = Long.parseLong((String) getData().get("orderId"));
-		Order order = getOrderService().query(orderId, false);
+		String orderId = (String) getData().get("orderId");
+		Order order = getOrderService().queryByOrderNo(orderId);
+		if (order == null) {
+			setResMsg(MsgUtil.getErrorMsgByCode("42001"));
+			return;
+		}
 		long ntime = Calendar.getInstance().getTimeInMillis();
 
 		AdditionalPay additionalPay = new AdditionalPay();

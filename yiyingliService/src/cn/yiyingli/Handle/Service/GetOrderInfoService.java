@@ -38,9 +38,9 @@ public class GetOrderInfoService extends UMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("44001"));
 			return;
 		}
-		SuperMap map = MsgUtil.getSuccessMap();
+		SuperMap map = new SuperMap();
 		ExOrderUtil.assembleOrderToUser(map, o);
-		setResMsg(map.finishByJson());
+		setResMsg(MsgUtil.getSuccessMap().put("data",map.finish()).finishByJson());
 	}
 
 }

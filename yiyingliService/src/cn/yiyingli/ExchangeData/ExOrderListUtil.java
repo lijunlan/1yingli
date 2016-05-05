@@ -49,7 +49,12 @@ public class ExOrderListUtil {
 
 	public static String getMultiTitle(OrderList orderList) {
 		List<Order> orders = orderList.getOrders();
-		String subject = orders.get(0).getServiceTitle() + (orders.size() > 1 ? "等" + orders.size() + "项" : "");
+		String subject = "付款 "+ orderList.getPayMoney();
+		if(!orders.isEmpty()) {
+			subject = orders.get(0).getServiceTitle() + (orders.size() > 1 ? "等" + orders.size() + "项" : "");
+		} else if(!orderList.getAdditionalPays().isEmpty()) {
+			subject = "追加付款:" + orderList.getAdditionalPays().get(0).getOrder().getOrderNo();
+		}
 		return subject;
 	}
 
