@@ -28,7 +28,7 @@ public class AddBackingCommentService extends UMsgService {
 	@Override
 	public void doit() {
 		User user = getUser();
-		Teacher teacher = getTeacherService().query(Long.parseLong((String) getData().get("teacherId")));
+		Teacher teacher = getTeacherService().queryWithBackingComment(Long.parseLong((String) getData().get("teacherId")));
 		if (teacher == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
@@ -42,7 +42,7 @@ public class AddBackingCommentService extends UMsgService {
 		backingComment.setWeight(weight);
 		backingComment.setDisplay(false);
 		teacher.getBackingComments().add(backingComment);
-		getTeacherService().save(teacher);
+		getTeacherService().update(teacher, false);
 		setResMsg(MsgUtil.getSuccessMsg("backingComment successfully"));
 	}
 }

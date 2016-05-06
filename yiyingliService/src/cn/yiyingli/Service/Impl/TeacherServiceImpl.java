@@ -277,6 +277,11 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
+	public Teacher queryWithBackingComment(long teacherId) {
+		return getTeacherDao().queryWithBackingComment(teacherId);
+	}
+
+	@Override
 	public List<Teacher> queryLikeListByUserId(long userid, int page, boolean lazy) {
 		return queryLikeListByUserId(userid, page, PAGE_SIZE_INT, lazy);
 	}

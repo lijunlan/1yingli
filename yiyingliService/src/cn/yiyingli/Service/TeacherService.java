@@ -83,6 +83,8 @@ public interface TeacherService {
 
 	Teacher queryByInvitationCode(String invitationCode);
 
+	Teacher queryWithBackingComment(long teacherId);
+
 	List<Teacher> queryByIds(List<Long> ids);
 
 	List<Teacher> queryByNameOrUsername(String word);

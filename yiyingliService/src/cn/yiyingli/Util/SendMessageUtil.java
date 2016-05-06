@@ -59,11 +59,12 @@ public class SendMessageUtil {
 						String msg = map.finish().getString("msg");
 						short kind = Short.valueOf(map.finish().getString("kind"));
 						LogUtil.info("send message to phone:" + phone + ";message is:" + msg, SendMessageUtil.class);
-						if (CheckUtil.checkMobileNumber(phone)) {
-							sendChinaMsg(phone, msg);
-						} else {
-							sendGlobleMsg(phone, msg);
-						}
+						//todo 测试取消短信
+//						if (CheckUtil.checkMobileNumber(phone)) {
+//							sendChinaMsg(phone, msg);
+//						} else {
+//							sendGlobleMsg(phone, msg);
+//						}
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

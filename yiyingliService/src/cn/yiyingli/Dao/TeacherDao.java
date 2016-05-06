@@ -60,6 +60,8 @@ public interface TeacherDao {
 
 	Teacher queryByInvitationCode(String invitationCode);
 
+	Teacher queryWithBackingComment(long teacherId);
+
 	List<Teacher> queryByIds(long[] ids);
 
 	List<Teacher> queryByNameOrUsername(String word);
