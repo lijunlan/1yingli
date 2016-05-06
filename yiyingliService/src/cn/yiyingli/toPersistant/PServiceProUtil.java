@@ -68,6 +68,7 @@ public class PServiceProUtil {
 		servicePro.setFreeTime(jsonServicePro.getString("freeTime"));
 		// 类别
 		servicePro.setKind(jsonServicePro.getInt("kind"));
+		servicePro.setType(Short.parseShort(jsonServicePro.getString("type")));
 		servicePro.setOnShow(Boolean.valueOf(jsonServicePro.getString("onshow")));
 		// 修改后需要审核
 		servicePro.setState(ServiceProService.STATE_CHECKING);
@@ -115,6 +116,7 @@ public class PServiceProUtil {
 		servicePro.setFreeTime(jsonServicePro.getString("freeTime"));
 		servicePro.setLikeNo(0L);
 		servicePro.setLookNumber(0L);
+		servicePro.setType(Short.parseShort(jsonServicePro.getString("type")));
 		servicePro.setKind(jsonServicePro.getInt("kind"));
 		servicePro.setOnShow(false);
 		servicePro.setPraiseRatio(0F);
@@ -142,6 +144,7 @@ public class PServiceProUtil {
 		servicePro.setMaskFinishNo(0L);
 		servicePro.setMaskNo(0L);
 		servicePro.setFreeTime(jsonServicePro.getString("freeTime"));
+		servicePro.setType(Short.parseShort(jsonServicePro.getString("type")));
 		servicePro.setLikeNo(0L);
 		servicePro.setLookNumber(0L);
 		servicePro.setKind(jsonServicePro.getInt("kind"));
@@ -156,7 +159,7 @@ public class PServiceProUtil {
 
 	public static void editrByManager(int count, float price, float priceTemp, float numeral, int kind, short talkWay,
 			String address, String freeTime, String tip, String onshow, String onsale, String quantifier,
-			String servicetitle, String servicecontent, String imageUrls, String summary, ServicePro servicePro) {
+			String servicetitle, String servicecontent, String imageUrls, String summary, Short type,ServicePro servicePro) {
 		assemble(servicecontent, imageUrls, summary, address, talkWay, price, numeral, count, quantifier, servicetitle,
 				servicePro);
 		servicePro.setUpdateTime(Calendar.getInstance().getTimeInMillis() + "");
@@ -167,6 +170,7 @@ public class PServiceProUtil {
 		servicePro.setKind(kind);
 		servicePro.setOnShow(Boolean.valueOf(onshow));
 		servicePro.setTips(tip);
+		servicePro.setType(type);
 	}
 
 	public static void editPriceByTeacher(float price, float numeral, int count, String quantifier, boolean onsale,

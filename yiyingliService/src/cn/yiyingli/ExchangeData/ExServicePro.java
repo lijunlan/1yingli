@@ -92,6 +92,7 @@ public class ExServicePro {
 		map.put("quantifier", servicePro.getQuantifier());
 		// map.put("freeTime", servicePro.getFreeTime());
 		map.put("kind", servicePro.getKind());
+		map.put("type",servicePro.getType());
 	}
 
 	private static void assembelDetail(ServicePro servicePro, SuperMap map) {
@@ -114,5 +115,6 @@ public class ExServicePro {
 		map.put("quantifier", servicePro.getQuantifier());
 		map.put("freeTime", servicePro.getFreeTime());
 		map.put("kind", servicePro.getKind());
+		map.put("type",servicePro.getType());
 	}
 }
