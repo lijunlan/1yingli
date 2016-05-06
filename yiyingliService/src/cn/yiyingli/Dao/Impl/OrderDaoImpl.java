@@ -410,7 +410,8 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 		final String hql = "from Order o left join fetch o.createUser u left join fetch o.teacher t " +
 				"left join fetch o.distributor where u.name='"
 				+ name + "' or u.nickName='" + name + "' or t.name='" + name + "' or o.customerName='" + name + "'" +
-				"  order by o.id desc ";
+				" or o.customerContact='"+name+ "'" +
+				" order by o.id desc ";
 		List<Order> list = new ArrayList<Order>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Order>>() {
 			@Override
