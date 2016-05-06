@@ -36,7 +36,7 @@ public class POrderUtil {
 			order.setServiceSummary(servicePro.getSummary());
 			order.setIconUrl(servicePro.getImageUrls().split(",")[0]);
 			if(servicePro.getType() == ServicePro.SERVICE_TYPE_BARGAIN) {
-				order.setState(OrderService.ORDER_BARGAINED_NOT_PAID);
+				order.setState(OrderService.ORDER_NOT_BARGAINED);
 			} else {
 				order.setState(OrderService.ORDER_STATE_NOT_PAID);
 			}

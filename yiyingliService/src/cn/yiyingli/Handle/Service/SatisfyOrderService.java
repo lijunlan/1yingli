@@ -58,6 +58,7 @@ public class SatisfyOrderService extends UMsgService {
 		order.setState(OrderService.ORDER_STATE_WAIT_COMMENT + "," + order.getState());
 		order.setSalaryState(OrderService.ORDER_SALARY_STATE_NEED);
 		order.setEndTime(Calendar.getInstance().getTimeInMillis() + "");
+		order.setUserConfirmTime(Calendar.getInstance().getTimeInMillis() + "");
 		getOrderService().update(order, true);
 
 		setResMsg(MsgUtil.getSuccessMsg("satisfy order successfully"));

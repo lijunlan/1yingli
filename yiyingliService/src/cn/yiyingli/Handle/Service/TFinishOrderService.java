@@ -8,6 +8,8 @@ import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
 
+import java.util.Calendar;
+
 public class TFinishOrderService extends TMsgService {
 
 	private OrderService orderService;
@@ -54,6 +56,7 @@ public class TFinishOrderService extends TMsgService {
 			return;
 		}
 		order.setState(OrderService.ORDER_STATE_SERVICE_FINISH + "," + order.getState());
+		order.setTeacherConfirmTime(Calendar.getInstance().getTimeInMillis() + "");
 		getOrderService().updateAndSendTimeTask(order);
 
 		NotifyUtil.notifyUserOrder(order, getNotificationService());

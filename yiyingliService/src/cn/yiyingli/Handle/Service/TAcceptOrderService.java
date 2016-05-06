@@ -10,6 +10,8 @@ import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Util.MsgUtil;
 import cn.yiyingli.Util.NotifyUtil;
 
+import java.util.Calendar;
+
 /**
  * 导师接受用户订单
  *
@@ -59,7 +61,7 @@ public class TAcceptOrderService extends TMsgService {
 		String state = order.getState().split(",")[0];
 		if (!((OrderService.ORDER_STATE_FINISH_PAID.equals(state)
 				&& (order.getServiceType() == null || order.getServiceType().equals(ServicePro.SERVICE_TYPE_NORMAL)))
-				|| (OrderService.ORDER_BARGAINED_NOT_PAID.equals(state)
+				|| (OrderService.ORDER_NOT_BARGAINED.equals(state)
 				&& order.getServiceType().equals(ServicePro.SERVICE_TYPE_BARGAIN)))) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
@@ -96,6 +98,7 @@ public class TAcceptOrderService extends TMsgService {
 				order.setState(OrderService.ORDER_STATE_WAIT_SERVICE + "," + order.getState());
 			}
 		}
+		order.setAcceptTime(Calendar.getInstance().getTimeInMillis() + "");
 		getOrderService().updateAndSendTimeTask(order);
 		NotifyUtil.notifyUserOrder(order, getNotificationService());
 		NotifyUtil.notifyTeacher(order, getNotificationService());

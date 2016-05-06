@@ -69,13 +69,13 @@ public class TBargainOrderService extends TMsgService {
 				new SuperMap().put("state", order.getState()).put("orderId",
 						order.getOrderNo()).finishByJson());
 		NotifyUtil.notifyUserOrder(order,
-				"尊敬的学员,您好,您的订单(订单号:" + order.getOrderNo() +
-						")已经被导师(" + teacher.getName() + ")确定价格,请在48小时内完成支付哦,超时系统将自动取消订单。",
+				"尊敬的用户,您好,您的订单(订单号:" + order.getOrderNo() +
+						")已经被(" + teacher.getName() + ")确定价格,请在48小时内完成支付哦,超时系统将自动取消订单。",
 				order.getCreateUser(), getNotificationService());
-		NotifyUtil.notifyTeacher(order, TBargainOrderService.class,
-				getNotificationService());
-		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
-				+ order.getTeacher().getName() + "，导师已经确定价格");
+//		NotifyUtil.notifyTeacher(order, TBargainOrderService.class,
+//				getNotificationService());
+//		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
+//				+ order.getTeacher().getName() + "，导师已经确定价格");
 		setResMsg(MsgUtil.getSuccessMsg("bargain order successfully"));
 	}
 }

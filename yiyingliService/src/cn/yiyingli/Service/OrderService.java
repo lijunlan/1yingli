@@ -89,7 +89,7 @@ public interface OrderService {
 	public static final String ORDER_STATE_RETURN_SUCCESS = "0800";
 
 	/**
-	 * 导师确认服务完毕
+	 * 导师确认服务完毕,等待学员确认
 	 */
 	public static final String ORDER_STATE_SERVICE_FINISH = "0900";
 

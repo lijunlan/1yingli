@@ -152,6 +152,15 @@ public class Order {
 	@Column(name = "PAYTIME", nullable = true)
 	private String payTime;
 
+	@Column(name = "ACCEPTTIME")
+	private String acceptTime;
+
+	@Column(name = "TEACHERCONFIRMTIME")
+	private String teacherConfirmTime;
+
+	@Column(name = "USERCONFIRMTIME")
+	private String userConfirmTime;
+
 	@Column(name = "PAYMETHOD", nullable = true)
 	private Short payMethod;
 
@@ -519,5 +528,29 @@ public class Order {
 
 	public void setAdditionalMoney(Float additionalMoney) {
 		this.additionalMoney = additionalMoney;
+	}
+
+	public String getAcceptTime() {
+		return acceptTime;
+	}
+
+	public void setAcceptTime(String acceptTime) {
+		this.acceptTime = acceptTime;
+	}
+
+	public String getTeacherConfirmTime() {
+		return teacherConfirmTime;
+	}
+
+	public void setTeacherConfirmTime(String teacherConfirmTime) {
+		this.teacherConfirmTime = teacherConfirmTime;
+	}
+
+	public String getUserConfirmTime() {
+		return userConfirmTime;
+	}
+
+	public void setUserConfirmTime(String userConfirmTime) {
+		this.userConfirmTime = userConfirmTime;
 	}
 }

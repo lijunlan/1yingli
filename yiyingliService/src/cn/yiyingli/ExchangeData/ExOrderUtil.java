@@ -89,5 +89,9 @@ public class ExOrderUtil {
 		map.put("okTime", o.getOkTime());
 		map.put("question", o.getQuestion());
 		map.put("endTime", o.getEndTime());
+		map.put("payTime", o.getPayTime());
+		map.put("acceptTime",o.getAcceptTime());
+		map.put("teacherConfirmTime",o.getTeacherConfirmTime());
+		map.put("userConfirmTime", o.getUserConfirmTime());
 	}
 }
