@@ -13,7 +13,8 @@ public class EXBackingComment {
 
 	public static void assembleToTeacher(BackingComment backingComment, SuperMap map) {
 		assembleSimple(backingComment, map);
-		map.put("display", backingComment.getDisplay());
+		int display = backingComment.getDisplay()?1:0;
+		map.put("display", display);
 		map.put("weight", backingComment.getWeight());
 	}
 }

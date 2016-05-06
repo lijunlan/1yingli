@@ -34,6 +34,7 @@ public class ExServicePro {
 		map.put("serviceProState", servicePro.getState());
 		LikeAndFinishNoShowUtil.setLikeNo(servicePro, map);
 		LikeAndFinishNoShowUtil.setFinishNo(servicePro, map);
+		map.put("realFinishNo", servicePro.getFinishNo());
 	}
 
 	public static void assembleSimpleServiceProForManager(ServicePro servicePro, SuperMap map) {
