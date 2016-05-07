@@ -71,6 +71,7 @@
 	<error name="24003"
 		value="service is not exsited or service is not belong to the teacher" />
 	<error name="25001" value="backingComment is not existed"/>
+	<error name="25002" value="you have add backingComment for this Teacher"/>
 
 
 	<!-- manager 3 -->

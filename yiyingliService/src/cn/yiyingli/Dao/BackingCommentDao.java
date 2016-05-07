@@ -13,5 +13,9 @@ public interface BackingCommentDao {
 
 	long querySumByTeacherId(long teacherId, boolean display);
 
+	Long querySumByUserId(long userId);
+
 	List<BackingComment> queryListByTeacherIdAndPage(long teacherId, int page, int pageSize);
+
+	List<BackingComment> queryListByUserIdAndPage(long userId, int page, int pageSize);
 }

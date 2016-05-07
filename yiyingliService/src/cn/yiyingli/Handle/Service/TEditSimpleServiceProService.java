@@ -35,7 +35,7 @@ public class TEditSimpleServiceProService extends TMsgService {
 				Float.valueOf(getData().getString("numeral")), getData().getInt("count"),
 				getData().getString("quantifier"), getData().getBoolean("onsale"),
 				Float.valueOf(getData().getString("pricetemp")), getData().getBoolean("onshow"),
-				getData().getString("freetime"), servicePro);
+				getData().getString("freetime"),Short.parseShort(getData().getString("type")), servicePro);
 		getServiceProService().update(servicePro);
 		setResMsg(MsgUtil.getSuccessMsg("edit simple servicePro successfully"));
 	}

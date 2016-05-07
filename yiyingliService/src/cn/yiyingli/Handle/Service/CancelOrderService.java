@@ -3,6 +3,7 @@ package cn.yiyingli.Handle.Service;
 import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.Order;
 import cn.yiyingli.Persistant.OrderList;
+import cn.yiyingli.Persistant.ServicePro;
 import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.NotificationService;
 import cn.yiyingli.Service.OrderListService;
@@ -70,7 +71,10 @@ public class CancelOrderService extends UMsgService {
 			return;
 		}
 		String state = order.getState().split(",")[0];
-		if (!OrderService.ORDER_STATE_NOT_PAID.equals(state)) {
+		if (!((OrderService.ORDER_STATE_NOT_PAID.equals(state) &&
+				(order.getServiceType() == null || order.getServiceType().equals(ServicePro.SERVICE_TYPE_NORMAL)))
+				|| (OrderService.ORDER_BARGAINED_NOT_PAID.equals(state) &&
+				order.getServiceType().equals(ServicePro.SERVICE_TYPE_BARGAIN)))) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}

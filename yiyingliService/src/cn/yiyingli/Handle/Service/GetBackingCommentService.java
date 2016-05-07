@@ -4,17 +4,16 @@ import cn.yiyingli.ExchangeData.EXBackingComment;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.ExchangeData.Util.ExArrayList;
 import cn.yiyingli.ExchangeData.Util.ExList;
-import cn.yiyingli.Handle.MsgService;
+import cn.yiyingli.Handle.UMsgService;
 import cn.yiyingli.Persistant.BackingComment;
+import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.BackingCommentService;
-import cn.yiyingli.Service.TeacherService;
 import cn.yiyingli.Util.MsgUtil;
 
 import java.util.List;
 
-public class FGetBackingCommentService extends MsgService {
 
-	private TeacherService teacherService;
+public class GetBackingCommentService extends UMsgService {
 
 	private BackingCommentService backingCommentService;
 
@@ -26,25 +25,17 @@ public class FGetBackingCommentService extends MsgService {
 		this.backingCommentService = backingCommentService;
 	}
 
-	public TeacherService getTeacherService() {
-		return teacherService;
-	}
-
-	public void setTeacherService(TeacherService teacherService) {
-		this.teacherService = teacherService;
-	}
-
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("teacherId") && getData().containsKey("page");
+		return super.checkData() && getData().containsKey("page");
 	}
 
 	@Override
 	public void doit() {
-		long teacherId = getData().getLong("teacherId");
+		User user = getUser();
 		int page = getData().getInt("page");
-		List<BackingComment> backingCommentList = getBackingCommentService()
-				.queryListByTeacherIdAndPage(teacherId, page);
+		List<BackingComment> backingCommentList = getBackingCommentService().
+				queryListByUserIdAndPage(user.getId(), page);
 		ExList send = new ExArrayList();
 		for (BackingComment backingComment : backingCommentList) {
 			SuperMap map = new SuperMap();
@@ -52,7 +43,7 @@ public class FGetBackingCommentService extends MsgService {
 			send.add(map.finish());
 		}
 		SuperMap toSend = MsgUtil.getSuccessMap();
-		toSend.put("count", getBackingCommentService().querySumByTeacherId(teacherId, true));
+		toSend.put("count", getBackingCommentService().querySumByUserId(user.getId()));
 		toSend.put("data", send);
 		setResMsg(toSend.finishByJson());
 	}

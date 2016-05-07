@@ -33,6 +33,12 @@ public class AddBackingCommentService extends UMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("22001"));
 			return;
 		}
+		for(BackingComment backingComment : teacher.getBackingComments()) {
+			if(backingComment.getUser().getId().equals(user.getId())) {
+				setResMsg(MsgUtil.getErrorMsgByCode("25002"));
+				return;
+			}
+		}
 		short weight = 0;
 		BackingComment backingComment = new BackingComment();
 		backingComment.setContent((String) getData().get("content"));

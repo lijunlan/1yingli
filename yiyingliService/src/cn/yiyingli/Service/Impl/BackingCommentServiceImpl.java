@@ -8,7 +8,6 @@ import java.util.List;
 
 
 public class BackingCommentServiceImpl implements BackingCommentService {
-	public static final int BACKINGCOMMENTPAGESIZE = 10;
 
 	private BackingCommentDao backingCommentDao;
 
@@ -41,7 +40,17 @@ public class BackingCommentServiceImpl implements BackingCommentService {
 	}
 
 	@Override
+	public Long querySumByUserId(long userId) {
+		return getBackingCommentDao().querySumByUserId(userId);
+	}
+
+	@Override
 	public List<BackingComment> queryListByTeacherIdAndPage(long teacherId, int page) {
 		return getBackingCommentDao().queryListByTeacherIdAndPage(teacherId, page, BACKINGCOMMENTPAGESIZE);
+	}
+
+	@Override
+	public List<BackingComment> queryListByUserIdAndPage(long userId, int page) {
+		return getBackingCommentDao().queryListByUserIdAndPage(userId,page,BACKINGCOMMENTPAGESIZE);
 	}
 }

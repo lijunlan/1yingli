@@ -291,7 +291,8 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 
 	@Override
 	public Teacher queryWithBackingComment(long teacherId) {
-		String hql = "from Teacher t left join fetch t.backingComments where t.id=?";
+		String hql = "from Teacher t left join fetch t.backingComments bc left join fetch " +
+				" bc.user where t.id=?";
 		@SuppressWarnings("unchecked")
 		List<Teacher> list = getHibernateTemplate().find(hql, teacherId);
 		if (list.isEmpty())

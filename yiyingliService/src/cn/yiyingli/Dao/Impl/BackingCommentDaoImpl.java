@@ -48,6 +48,16 @@ public class BackingCommentDaoImpl extends HibernateDaoSupport implements Backin
 		return sum;
 	}
 
+
+	@Override
+	public Long querySumByUserId(long userId) {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		String hql = "select count(*) from BackingComment bc left join bc.user where bc.user.id = " +
+				userId;
+		long sum = (long) session.createQuery(hql).uniqueResult();
+		return sum;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<BackingComment> queryListByTeacherIdAndPage(final long teacherId, final int page, final int pageSize) {
@@ -55,8 +65,29 @@ public class BackingCommentDaoImpl extends HibernateDaoSupport implements Backin
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<BackingComment>>() {
 			@Override
 			public List<BackingComment> doInHibernate(Session session) throws HibernateException, SQLException {
-				String hql = "from BackingComment bc left join fetch bc.teacher left join fetch bc.user where bc.teacher.id = "
-						+ teacherId + " order by bc.weight DESC,bc.display DESC";
+				String hql = "from BackingComment bc left join fetch bc.teacher" +
+						" left join fetch bc.user where bc.teacher.id = "+ teacherId +
+						" order by bc.weight DESC,bc.display DESC";
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<BackingComment> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BackingComment> queryListByUserIdAndPage(final long userId, final int page, final int pageSize) {
+		List<BackingComment> list;
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<BackingComment>>() {
+			@Override
+			public List<BackingComment> doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql = "from BackingComment bc left join fetch bc.teacher " +
+						"left join fetch bc.user where bc.user.id = "+ userId +
+						" order by bc.weight DESC,bc.display DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
