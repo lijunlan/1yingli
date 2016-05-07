@@ -39,7 +39,7 @@ public class GetBackingCommentService extends UMsgService {
 		ExList send = new ExArrayList();
 		for (BackingComment backingComment : backingCommentList) {
 			SuperMap map = new SuperMap();
-			EXBackingComment.assembleSimple(backingComment, map);
+			EXBackingComment.assembleToUser(backingComment, map);
 			send.add(map.finish());
 		}
 		SuperMap toSend = MsgUtil.getSuccessMap();

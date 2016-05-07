@@ -47,7 +47,7 @@ public class POrderUtil {
 			order.setNumeral(10F);
 			order.setServiceId(null);
 			order.setServiceKind(null);
-			order.setServiceType(null);
+			order.setServiceType(ServicePro.SERVICE_TYPE_NORMAL);
 			order.setPrice(teacher.getPrice());
 			order.setOriginPrice(teacher.getPrice());
 			float price = teacher.getPrice() * (float) count;

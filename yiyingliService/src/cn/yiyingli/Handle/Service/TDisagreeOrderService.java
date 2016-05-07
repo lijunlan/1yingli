@@ -38,7 +38,7 @@ public class TDisagreeOrderService extends TMsgService {
 
 	@Override
 	protected boolean checkData() {
-		return super.checkData() && getData().containsKey("orderId");
+		return super.checkData() && getData().containsKey("orderId") && getData().containsKey("refuseReason");
 	}
 
 	@Override
@@ -60,6 +60,7 @@ public class TDisagreeOrderService extends TMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
 		}
+		order.setRefuseReason(getData().getString("refuseReason"));
 		order.setState(OrderService.ORDER_STATE_MANAGER_IN + "," + order.getState());
 		getOrderService().update(order, false);
 

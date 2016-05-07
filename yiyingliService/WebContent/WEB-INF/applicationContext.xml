@@ -1363,6 +1363,16 @@
 		</property>
 	</bean>
 
+	<bean id="getBackingCommentService" class="cn.yiyingli.Handle.Service.GetBackingCommentService"
+			scope="prototype">
+		<property name="userMarkService">
+			<ref local="userMarkService"/>
+		</property>
+		<property name="backingCommentService">
+			<ref local="backingCommentService"/>
+		</property>
+	</bean>
+
 	<bean id="cancelOrderAfterAcceptService"
 		class="cn.yiyingli.Handle.Service.CancelOrderAfterAcceptService"
 		scope="prototype">

@@ -143,7 +143,7 @@ public class Order {
 	@Column(name = "SERVICEKIND", nullable = true)
 	private Integer serviceKind;
 
-	@Column(name = "SERVICETYPE", nullable = true)
+	@Column(name = "SERVICETYPE", nullable = false)
 	private Short serviceType;
 
 	@Column(name = "ENDTIME", nullable = true)
