@@ -73,7 +73,8 @@ public class CancelOrderService extends UMsgService {
 		String state = order.getState().split(",")[0];
 		if (!((OrderService.ORDER_STATE_NOT_PAID.equals(state) &&
 				(order.getServiceType() == null || order.getServiceType().equals(ServicePro.SERVICE_TYPE_NORMAL)))
-				|| (OrderService.ORDER_BARGAINED_NOT_PAID.equals(state) &&
+				|| ((OrderService.ORDER_BARGAINED_NOT_PAID.equals(state) ||
+				OrderService. ORDER_NOT_BARGAINED.equals(state)) &&
 				order.getServiceType().equals(ServicePro.SERVICE_TYPE_BARGAIN)))) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 			return;
