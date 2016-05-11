@@ -47,7 +47,8 @@ public class TGetBackingCommentService extends TMsgService {
 		Teacher teacher = getTeacher();
 		long teacherId = teacher.getId();
 		int page = getData().getInt("page");
-		List<BackingComment> backingCommentList = getBackingCommentService().queryListByTeacherIdAndPage(teacherId, page);
+		List<BackingComment> backingCommentList = getBackingCommentService()
+				.queryListByTeacherIdAndPage(teacherId, page, false);
 		ExList send = new ExArrayList();
 		for (BackingComment backingComment : backingCommentList) {
 			SuperMap map = new SuperMap();

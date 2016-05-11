@@ -44,7 +44,7 @@ public class FGetBackingCommentService extends MsgService {
 		long teacherId = getData().getLong("teacherId");
 		int page = getData().getInt("page");
 		List<BackingComment> backingCommentList = getBackingCommentService()
-				.queryListByTeacherIdAndPage(teacherId, page);
+				.queryListByTeacherIdAndPage(teacherId, page, 5, true);
 		ExList send = new ExArrayList();
 		for (BackingComment backingComment : backingCommentList) {
 			SuperMap map = new SuperMap();

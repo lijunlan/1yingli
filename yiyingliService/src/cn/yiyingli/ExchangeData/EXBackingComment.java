@@ -1,6 +1,7 @@
 package cn.yiyingli.ExchangeData;
 
 import cn.yiyingli.Persistant.BackingComment;
+import cn.yiyingli.Service.UserService;
 
 public class EXBackingComment {
 
@@ -9,6 +10,9 @@ public class EXBackingComment {
 		map.put("content", backingComment.getContent());
 		map.put("nickName", backingComment.getUser().getNickName());
 		map.put("createTime", backingComment.getCreateTime());
+		if (backingComment.getUser().getTeacherState().equals(UserService.TEACHER_STATE_ON_SHORT) ) {
+			map.put("simpleInfo", backingComment.getUser().getTeacher().getSimpleInfo());
+		}
 		map.put("iconUrl", backingComment.getUser().getIconUrl());
 	}
 

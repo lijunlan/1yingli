@@ -18,7 +18,9 @@ public interface BackingCommentService {
 
 	Long querySumByUserId(long userId);
 
-	List<BackingComment> queryListByTeacherIdAndPage(long teacherId, int page);
+	List<BackingComment> queryListByTeacherIdAndPage(long teacherId, int page, boolean display);
+
+	List<BackingComment> queryListByTeacherIdAndPage(long teacherId, int page, int pageSize, boolean display);
 
 	List<BackingComment> queryListByUserIdAndPage(long userId, int page);
 }

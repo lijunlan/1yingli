@@ -29,7 +29,7 @@ public class TChangeBackingComment extends TMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("25001"));
 			return;
 		}
-		if (backingComment.getTeacher().getId() != getTeacher().getId()) {
+		if (!backingComment.getTeacher().getId().equals(getTeacher().getId())) {
 			setResMsg(MsgUtil.getErrorMsgByCode("22010"));
 			return;
 		}

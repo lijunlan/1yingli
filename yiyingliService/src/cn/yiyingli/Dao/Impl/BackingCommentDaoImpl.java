@@ -60,14 +60,18 @@ public class BackingCommentDaoImpl extends HibernateDaoSupport implements Backin
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<BackingComment> queryListByTeacherIdAndPage(final long teacherId, final int page, final int pageSize) {
+	public List<BackingComment> queryListByTeacherIdAndPage(final long teacherId, final int page, final int pageSize,
+															final boolean display) {
 		List<BackingComment> list;
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<BackingComment>>() {
 			@Override
 			public List<BackingComment> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from BackingComment bc left join fetch bc.teacher" +
-						" left join fetch bc.user where bc.teacher.id = "+ teacherId +
-						" order by bc.weight DESC,bc.display DESC";
+						" left join fetch bc.user left join fetch bc.user.teacher where bc.teacher.id = "+ teacherId;
+				if(display) {
+					hql = hql + " and bc.display is true ";
+				}
+				hql += " order by bc.weight DESC,bc.display DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
 				query.setMaxResults(pageSize);
@@ -86,7 +90,7 @@ public class BackingCommentDaoImpl extends HibernateDaoSupport implements Backin
 			@Override
 			public List<BackingComment> doInHibernate(Session session) throws HibernateException, SQLException {
 				String hql = "from BackingComment bc left join fetch bc.teacher " +
-						"left join fetch bc.user where bc.user.id = "+ userId +
+						"left join fetch bc.user left join fetch bc.user.teacher where bc.user.id = "+ userId +
 						" order by bc.weight DESC,bc.display DESC";
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);
