@@ -54,6 +54,7 @@
 	<error name="15004" value="user has not been registered" />
 	<error name="15005" value="subUser has Teacher on service"/>
 	<error name="15006" value="you can't add backingComment to yourself"/>
+	<error name="15007" value="subUser has been merged"/>
 
 	<!-- teacher 2 -->
 	<error name="21001" value="input data is wrong" />

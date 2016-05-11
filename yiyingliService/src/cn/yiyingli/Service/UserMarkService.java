@@ -13,6 +13,8 @@ public interface UserMarkService {
 
 	void remove(String UUID);
 
+	UserMark queryUUID(long userId);
+
 	UserMark query(String UUID);
 
 	User queryUser(String UUID);

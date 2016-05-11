@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Random;
 import java.util.UUID;
 
+import cn.yiyingli.Persistant.UserMark;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.internal.OSSConstants;
 import com.aliyun.oss.model.ObjectMetadata;
@@ -44,11 +45,18 @@ public abstract class ULoginMsgService extends MsgService {
 		this.userMarkService = userMarkService;
 	}
 
-	protected void returnUser(User user, boolean register) {
+	protected void returnUser(User user, boolean register, boolean isLogin) {
 		String _UUID = UUID.randomUUID().toString();
-		getUserMarkService().save(String.valueOf(user.getId()), _UUID);
-		user.setLastLoginTime("" + Calendar.getInstance().getTimeInMillis());
-		getUserService().update(user);
+		UserMark userMark = getUserMarkService().queryUUID(user.getId());
+		if (!isLogin && userMark != null && userMark.getUuid() != null) {
+			_UUID = userMark.getUuid();
+		} else {
+			getUserMarkService().save(String.valueOf(user.getId()), _UUID);
+			user.setLastLoginTime("" + Calendar.getInstance().getTimeInMillis());
+			getUserService().update(user);
+			TimeTaskUtil.sendTimeTask("remove", "userMark",
+					(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 7) + "", _UUID);
+		}
 		SuperMap toSend = MsgUtil.getSuccessMap();
 		toSend.put("uid", _UUID);
 		toSend.put("nickName", user.getNickName());
@@ -59,8 +67,6 @@ public abstract class ULoginMsgService extends MsgService {
 			toSend.put("teacherId", user.getTeacher().getId());
 		}
 		setResMsg(toSend.finishByJson());
-		TimeTaskUtil.sendTimeTask("remove", "userMark",
-				(Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 7) + "", _UUID);
 	}
 
 	protected String updateIcon(String originUrl, String tmpName) {

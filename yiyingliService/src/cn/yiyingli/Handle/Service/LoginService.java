@@ -29,13 +29,17 @@ public class LoginService extends ULoginMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("10001"));
 			return;
 		}
+		boolean isLogin = true;
+		if (getData().containsKey("isLogin") && getData().getInt("isLogin") == 0) {
+			isLogin = false;
+		}
 		User user = getUserService().queryWithTeacher(username, false);
 		if (user == null) {
 			setResMsg(MsgUtil.getErrorMsgByCode("12015"));
 			return;
 		}
 		if (password.equals(user.getPassword())) {
-			returnUser(user, false);
+			returnUser(user, false, isLogin);
 		} else {
 			setResMsg(MsgUtil.getErrorMsgByCode("12016"));
 		}

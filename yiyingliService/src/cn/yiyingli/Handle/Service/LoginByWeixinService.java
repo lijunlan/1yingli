@@ -57,6 +57,11 @@ public class LoginByWeixinService extends ULoginMsgService {
 		String icon = (String) userInfo.get("headimgurl");
 		String address = co + " " + p + " " + ci;
 
+		boolean isLogin = true;
+		if (getData().containsKey("isLogin") && getData().getInt("isLogin") == 0) {
+			isLogin = false;
+		}
+
 		User u = getUserService().queryWithWeixin(weixinNo, false);
 		if (u == null) {
 			password = MD5Util.MD5(password);
@@ -69,13 +74,13 @@ public class LoginByWeixinService extends ULoginMsgService {
 				setResMsg(MsgUtil.getErrorMsgByCode("15003"));
 				return;
 			}
-			returnUser(user,true);
+			returnUser(user,true, isLogin);
 		} else {
 			if(!u.getIconUrl().startsWith("http://image.1yingli.cn")){
 				String nowIcon = updateIcon(u.getIconUrl(),weixinNo);
 				u.setIconUrl(nowIcon);
 			}
-			returnUser(u,false);
+			returnUser(u,false, isLogin);
 		}
 
 	}

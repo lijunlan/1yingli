@@ -37,6 +37,10 @@ public class LoginByWeiboService extends ULoginMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("12018"));
 			return;
 		}
+		boolean isLogin = true;
+		if (getData().containsKey("isLogin") && getData().getInt("isLogin") == 0) {
+			isLogin = false;
+		}
 
 		String weiboNo = "wb" + weiboUser.getId();
 		String password = weiboUser.getId();
@@ -50,7 +54,7 @@ public class LoginByWeiboService extends ULoginMsgService {
 		User u = getUserService().queryWithWeibo(weiboNo, false);
 		if (u == null) {
 			password = MD5Util.MD5(password);
-			String nowIcon = updateIcon(icon,weiboNo);
+			String nowIcon = updateIcon(icon, weiboNo);
 			User user = PUserUtil.assembleUserFromWB(weiboNo, password, nickName, nowIcon, address);
 			try {
 				getUserService().save(user);
@@ -59,13 +63,13 @@ public class LoginByWeiboService extends ULoginMsgService {
 				setResMsg(MsgUtil.getErrorMsgByCode("15003"));
 				return;
 			}
-			returnUser(user, true);
+			returnUser(user, true, isLogin);
 		} else {
-			if(!u.getIconUrl().startsWith("http://image.1yingli.cn")){
-				String nowIcon = updateIcon(u.getIconUrl(),weiboNo);
+			if (!u.getIconUrl().startsWith("http://image.1yingli.cn")) {
+				String nowIcon = updateIcon(u.getIconUrl(), weiboNo);
 				u.setIconUrl(nowIcon);
 			}
-			returnUser(u, false);
+			returnUser(u, false, isLogin);
 		}
 
 	}

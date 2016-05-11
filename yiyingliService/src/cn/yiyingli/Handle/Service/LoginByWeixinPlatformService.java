@@ -52,6 +52,10 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 		String address = co + " " + p + " " + ci;
 
 		User u = getUserService().queryWithWeixin(weixinNoU, false);
+		boolean isLogin = true;
+		if (getData().containsKey("isLogin") && getData().getInt("isLogin") == 0) {
+			isLogin = false;
+		}
 		if (u == null) {
 			u = getUserService().queryWithWeixinPlatform(weixinNo);
 			if (u != null && u.getWechatNo() == null) {
@@ -73,7 +77,7 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 				setResMsg(MsgUtil.getErrorMsgByCode("15003"));
 				return;
 			}
-			returnUser(user, true);
+			returnUser(user, true, isLogin);
 		} else {
 			if (u.getWechatPlatformNo() == null) {
 				u.setWechatPlatformNo(weixinNo);
@@ -82,7 +86,7 @@ public class LoginByWeixinPlatformService extends ULoginMsgService {
 				String nowIcon = updateIcon(u.getIconUrl(),weixinNo);
 				u.setIconUrl(nowIcon);
 			}
-			returnUser(u, false);
+			returnUser(u, false, isLogin);
 		}
 
 	}

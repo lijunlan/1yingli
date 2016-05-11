@@ -31,6 +31,14 @@ public class MergeUserService extends UMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("14001"));
 			return;
 		}
+		if (subUser.getFaUserId() != null) {
+			setResMsg(MsgUtil.getErrorMsgByCode("15007"));
+			return;
+		}
+		if (subUser.getId().equals(user.getId())) {
+			setResMsg(MsgUtil.getErrorMsgByCode("15007"));
+			return;
+		}
 		if(subUser.getTeacher() != null && subUser.getTeacher().getOnService()) {
 			setResMsg(MsgUtil.getErrorMsgByCode("15005"));
 			return;

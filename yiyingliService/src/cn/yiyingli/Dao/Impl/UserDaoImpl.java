@@ -131,11 +131,11 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		sqlQuery.executeUpdate();
 	}
 
-	private User returnUser(User user){
+	private User returnUser(User user) {
 		if (user.getFaUserId() == null) {
 			return user;
 		}
-		String hql = "from User u left join fetch u.teacher where u.ud = " + user.getFaUserId();
+		String hql = "from User u left join fetch u.teacher where u.id = " + user.getFaUserId();
 		List<User> list = getHibernateTemplate().find(hql);
 		if (list.isEmpty()) {
 			return user;

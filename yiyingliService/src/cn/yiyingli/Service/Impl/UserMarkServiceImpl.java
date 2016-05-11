@@ -59,6 +59,11 @@ public class UserMarkServiceImpl implements UserMarkService {
 	}
 
 	@Override
+	public UserMark queryUUID(long userId) {
+		return getUserMarkDao().queryUUID(userId);
+	}
+
+	@Override
 	public UserMark query(String UUID) {
 		return getUserMarkDao().query(UUID);
 	}
