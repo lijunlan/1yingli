@@ -64,7 +64,7 @@ public class FGetWXPayUrlService extends MsgService {
 		}
 		String subject = ExOrderListUtil.getMultiTitle(orderList);
 		// 付款金额 以分为单位
-		String total_fee = String.valueOf((int) (orderList.getPayMoney() * 100F));
+		String total_fee = String.valueOf((int) (Math.round(orderList.getPayMoney()*100F)));
 
 		SuperMap map = new SuperMap();
 		map.put("extra_param", "none");

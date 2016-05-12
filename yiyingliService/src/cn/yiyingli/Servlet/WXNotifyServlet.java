@@ -78,7 +78,7 @@ public class WXNotifyServlet extends HttpServlet {
 							.getBean("notificationService");
 					OrderList orderList = orderListService.queryByOrderListNo(olid);
 					if (orderList != null) {
-						if (Float.valueOf(money) / 100F == orderList.getPayMoney().floatValue()) {
+						if (Float.valueOf(money) / 100F == Math.round(orderList.getPayMoney()*100)/100F) {
 							String state = orderList.getState().split(",")[0];
 							if (state.equals(cn.yiyingli.Service.OrderService.ORDER_STATE_NOT_PAID)) {
 								finishOrder(orderListService, orderList, notificationService);
@@ -96,6 +96,7 @@ public class WXNotifyServlet extends HttpServlet {
 							orderList.setState(OrderListService.ORDER_STATE_ABNORMAL + "," + orderList.getState());
 							WarnUtil.sendWarnToCTO("orderList id:" + olid + ", price is wrong, it should be "
 									+ orderList.getPayMoney() + ", but it is " + Float.valueOf(money) / 100F);
+							orderListService.update(orderList);
 						}
 					}
 				}
