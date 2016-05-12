@@ -57,6 +57,7 @@ xcuserdata
 Carthage/Build
 
 # test
+<<<<<<< HEAD
 
 **/.idea
 **/*.iml
