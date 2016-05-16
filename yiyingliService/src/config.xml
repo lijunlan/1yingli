@@ -189,6 +189,7 @@
 		<method name="getRecommendServiceProList" beanName="fGetRecommendServiceProListService"/>
 		<method name="recordRecommandServicePro" beanName="fRecordRecommandServiceProService"/>
 		<method name="getMoreServicePro" beanName="fGetMoreServiceProService"/>
+		<method name="getTeacherByKeyWord" beanName="fGetTeacherByKeyWordService"/>
 		<method name="getServiceProListByKind" beanName="fGetServiceProListByKindService"/>
 		<method name="getServiceProList" beanName="fGetServiceProListSerivce"/>
 		<method name="getServicePro" beanName="fGetServiceProService"/>

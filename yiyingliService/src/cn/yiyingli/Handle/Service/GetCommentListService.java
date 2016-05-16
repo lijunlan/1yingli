@@ -82,6 +82,7 @@ public class GetCommentListService extends UMsgService {
 			map.put("commentId", c.getId());
 			map.put("content", c.getContent());
 			map.put("score", c.getScore());
+			map.put("serviceTitle", c.getServiceTitle());
 			map.put("createTime", SIMPLE_DATE_FORMAT.format(new Date(Long.valueOf(c.getCreateTime()))));
 			map.put("name", c.getTeacher().getName());
 			map.put("url", c.getTeacher().getIconUrl());

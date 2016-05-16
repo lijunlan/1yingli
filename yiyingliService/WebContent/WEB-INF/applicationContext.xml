@@ -2713,6 +2713,13 @@
 		</property>
 	</bean>
 
+	<bean id="fGetTeacherByKeyWordService" class="cn.yiyingli.Handle.Service.FGetTeacherByKeyWordService"
+		  scope="prototype">
+		<property name="teacherService">
+			<ref local="teacherService"/>
+		</property>
+	</bean>
+
 	<bean id="fGetServiceProListByKindService"
 		class="cn.yiyingli.Handle.Service.FGetServiceProListByKindService"
 		scope="prototype">

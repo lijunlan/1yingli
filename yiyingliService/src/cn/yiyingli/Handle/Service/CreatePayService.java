@@ -7,6 +7,7 @@ import cn.yiyingli.Persistant.*;
 import cn.yiyingli.Service.OrderListService;
 import cn.yiyingli.Service.OrderService;
 import cn.yiyingli.Service.VoucherService;
+import cn.yiyingli.Util.LogUtil;
 import cn.yiyingli.Util.MsgUtil;
 import net.sf.json.JSONArray;
 
@@ -69,9 +70,10 @@ public class CreatePayService extends UMsgService {
 		orderList.setPayMoney(0F);
 		orderList.setUser(user);
 		for (Order order : orders) {
-			if (!((order.getState().equals(OrderService.ORDER_STATE_NOT_PAID)
+			String state = order.getState().split(",")[0];
+			if (!((state.equals(OrderService.ORDER_STATE_NOT_PAID)
 					&& (order.getServiceType() == null || order.getServiceType().equals(ServicePro.SERVICE_TYPE_NORMAL)))
-					|| (order.getState().equals(OrderService.ORDER_BARGAINED_NOT_PAID)
+					|| (state.equals(OrderService.ORDER_BARGAINED_NOT_PAID)
 					&& order.getServiceType().equals(ServicePro.SERVICE_TYPE_BARGAIN)))) {
 				setResMsg(MsgUtil.getErrorMsgByCode("44002"));
 				return;
@@ -119,12 +121,12 @@ public class CreatePayService extends UMsgService {
 			setResMsg(MsgUtil.getErrorMsgByCode("44009"));
 			return;
 		}
-		SuperMap toSend =MsgUtil.getSuccessMap();
+		SuperMap toSend = MsgUtil.getSuccessMap();
 		toSend.put("orderNoList", orderList.getOrderListNo())
 				.put("msg", "create pay successfully")
-				.put("originMoney",orderList.getNowMoney());
+				.put("originMoney", orderList.getNowMoney());
 		if (orderList.getVoucher() != null) {
-			toSend.put("payMoney",orderList.getPayMoney());
+			toSend.put("payMoney", orderList.getPayMoney());
 		}
 		setResMsg(toSend.finishByJson());
 	}
