@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.yiyingli.HibernateFunction.BitAndFunction;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -441,7 +440,6 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
 			@Override
 			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
-				SQLFunction bitAnd = new BitAndFunction();
 				String hql = "from Teacher t where bitand(t.tipMark," + tip + ") = " + tip;
 				Query query = session.createQuery(hql);
 				query.setFirstResult((page - 1) * pageSize);

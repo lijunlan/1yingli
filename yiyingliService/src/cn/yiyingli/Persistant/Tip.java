@@ -16,7 +16,7 @@ public class Tip {
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
-	@ManyToMany(mappedBy = "tips", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "tips", fetch = FetchType.LAZY)
 	private Set<Teacher> teachers;
 
 	public Long getId() {
