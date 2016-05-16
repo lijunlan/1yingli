@@ -2,14 +2,7 @@ package cn.yiyingli.Persistant;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "TIP")
@@ -23,7 +16,7 @@ public class Tip {
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
-	@ManyToMany(mappedBy = "tips", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "tips", fetch = FetchType.EAGER)
 	private Set<Teacher> teachers;
 
 	public Long getId() {

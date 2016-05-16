@@ -5,10 +5,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.yiyingli.HibernateFunction.BitAndFunction;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.dialect.function.SQLFunction;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -176,7 +178,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	public long querySumNoByInviterId(long inviterId) {
 		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
 		long sum = (long) session.createQuery("select count(*) from Teacher t where t.inviterId = " + inviterId +
-					" and t.onService = true")
+				" and t.onService = true")
 				.uniqueResult();
 		return sum;
 	}
@@ -280,9 +282,9 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	public Teacher queryByInvitationCode(String invitationCode) {
 		String hql = "from Teacher t where t.invitationCode = ?";
 		@SuppressWarnings("unchecked")
-		List<Teacher> list = getHibernateTemplate().find(hql,invitationCode);
+		List<Teacher> list = getHibernateTemplate().find(hql, invitationCode);
 		if (list.isEmpty()) {
-			return  null;
+			return null;
 		} else {
 			return list.get(0);
 		}
@@ -304,7 +306,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Teacher> queryLikeListByUserId(final long userid, final int page, final int pageSize,
-			final boolean lazy) {
+											   final boolean lazy) {
 		List<Teacher> list = new ArrayList<Teacher>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
 
@@ -373,7 +375,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Teacher> queryListByKeyWord(final String keyword, final int page, final int pageSize,
-			final boolean lazy) {
+											final boolean lazy) {
 		List<Teacher> list = new ArrayList<Teacher>();
 		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
 
@@ -405,7 +407,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 				String hql = "from Teacher t where t.inviterId = " + inviterId +
 						" and t.onService=true ORDER BY t.createTime DESC";
 				Query query = session.createQuery(hql);
-				query.setFirstResult((page-1) * pageSize);
+				query.setFirstResult((page - 1) * pageSize);
 				List<Teacher> list = query.list();
 				return list;
 			}
@@ -432,4 +434,22 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Teacher> queryListByTip(final long tip, final int page, final int pageSize) {
+		List<Teacher> list = new ArrayList<Teacher>();
+		list = getHibernateTemplate().executeFind(new HibernateCallback<List<Teacher>>() {
+			@Override
+			public List<Teacher> doInHibernate(Session session) throws HibernateException, SQLException {
+				SQLFunction bitAnd = new BitAndFunction();
+				String hql = "from Teacher t where bitand(t.tipMark," + tip + ") = " + tip;
+				Query query = session.createQuery(hql);
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				List<Teacher> list = query.list();
+				return list;
+			}
+		});
+		return list;
+	}
 }

@@ -78,4 +78,6 @@ public interface TeacherDao {
 
 	List<Teacher> queryListByActivity(String activityKey, int page, int pageSize);
 
+	List<Teacher> queryListByTip(long tip, int page, int pageSize);
+
 }

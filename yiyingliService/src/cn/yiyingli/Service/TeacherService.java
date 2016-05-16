@@ -113,4 +113,6 @@ public interface TeacherService {
 
 	List<Teacher> queryListByLikedTeacherId(long likedTeacherId,int page, int pageSize);
 
+	List<Teacher> queryListByTip(long tip, int page, int pageSize);
+
 }

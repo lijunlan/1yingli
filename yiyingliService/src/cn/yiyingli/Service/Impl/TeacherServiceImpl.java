@@ -365,4 +365,9 @@ public class TeacherServiceImpl implements TeacherService {
 	public List<Teacher> queryListByLikedTeacherId(long likedTeacherId, int page, int pageSize) {
 		return getUserLikeTeacherDao().queryTeacherListByLikedTeacherId(likedTeacherId, page, pageSize);
 	}
+
+	@Override
+	public List<Teacher> queryListByTip(long tip, int page, int pageSize) {
+		return getTeacherDao().queryListByTip(tip,page,pageSize);
+	}
 }

@@ -7,13 +7,16 @@ import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.Teacher;
 import cn.yiyingli.Service.TeacherService;
+import cn.yiyingli.Service.TipService;
 import cn.yiyingli.Util.MsgUtil;
 
 import java.util.List;
 
-public class FGetTeacherByKeyWordService extends MsgService {
+public class FGetTeacherByTipService extends MsgService {
 
 	private TeacherService teacherService;
+
+	private TipService tipService;
 
 	public TeacherService getTeacherService() {
 		return teacherService;
@@ -23,15 +26,23 @@ public class FGetTeacherByKeyWordService extends MsgService {
 		this.teacherService = teacherService;
 	}
 
+	public TipService getTipService() {
+		return tipService;
+	}
+
+	public void setTipService(TipService tipService) {
+		this.tipService = tipService;
+	}
+
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("keyWord");
+		return getData().containsKey("tip");
 	}
 
 	@Override
 	public void doit() {
-		String keyWord = getData().getString("keyWord");
-		List<Teacher> teacherList = getTeacherService().queryListByKeyWord(keyWord, 1, false);
+		Long tipId = getData().getLong("tip");
+		List<Teacher> teacherList = getTeacherService().queryListByTip(tipId, 1, TeacherService.PAGE_SIZE_INT);
 		ExList toSend = new ExArrayList();
 		for (Teacher teacher : teacherList) {
 			SuperMap map = new SuperMap();
