@@ -56,7 +56,11 @@ public class FGetRecommendTeacherListService extends MsgService {
 			}
 		}
 		if (isUser) {
-			result = SendMsgToBaiduUtil.getRecommendListIndividuation(userId + "");
+			if (getData().containsKey("num")) {
+				result = SendMsgToBaiduUtil.getRecommendListIndividuation(userId + "", getData().getInt("num"));
+			} else {
+				result = SendMsgToBaiduUtil.getRecommendListIndividuation(userId + "");
+			}
 		} else {
 			String teacherId = (String) getData().get("teacherId");
 			result = SendMsgToBaiduUtil.getRecommendListAbout(teacherId);

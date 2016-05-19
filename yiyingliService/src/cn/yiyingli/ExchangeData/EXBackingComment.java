@@ -26,6 +26,7 @@ public class EXBackingComment {
 	public static void assembleToUser(BackingComment backingComment, SuperMap map) {
 		assembleSimple(backingComment, map);
 		map.put("teacherName", backingComment.getTeacher().getName());
+		map.put("teacherId", backingComment.getTeacher().getId());
 		map.put("teacherSimpleInfo", backingComment.getTeacher().getSimpleInfo());
 	}
 }

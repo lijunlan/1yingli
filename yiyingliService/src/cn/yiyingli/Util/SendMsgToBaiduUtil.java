@@ -3,6 +3,7 @@ package cn.yiyingli.Util;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -95,6 +96,16 @@ public class SendMsgToBaiduUtil {
 				ConfigurationXmlUtil.getInstance().getSettingData().get("baiduPersonalUrl") + "&num=5&uid=" + uid);
 	}
 
+	public static String getRecommendListIndividuation(String uid, int count) {
+		return sendGet(
+				ConfigurationXmlUtil.getInstance().getSettingData().get("baiduPersonalUrl") + "&num=" + count + "&uid=" + uid);
+	}
+
+	public static String getRecommendServiceProIndividuation(String uid, int count) {
+		return sendGet("http://api.recsys.baidu.com/s/142407/340927/rs?token=a4c5f22d60e79cf2779e4d4cff18e5e3"
+				+ "&num=" + count + "&uid=" + uid);
+	}
+
 	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 	private static String sendMsgToBaiduTrainData(String json) {
@@ -181,9 +192,6 @@ public class SendMsgToBaiduUtil {
 	}
 
 	public static void updateServiceProUserTrainDataRead(String uid, String sid, String time) {
-		if (!"false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
-			return;
-		}
 		JSONArray sendList = new JSONArray();
 		sendList.add(JSONUserTrainData(uid, sid, "rate", (short) 1, time.equals("") ? 0L : Long.valueOf(time)));
 		sendMsgToBaiduTrainData(sendList.toString(),

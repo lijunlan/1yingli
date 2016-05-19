@@ -91,10 +91,8 @@ public class FGetServiceProService extends MsgService {
 					r.setType(RecordService.RECORD_TYPE_USER);
 					r.setData("serviceProId=" + servicePro.getId() + ",userId=" + user.getId());
 				}
-				if ("false".equals(ConfigurationXmlUtil.getInstance().getSettingData().get("debug"))) {
-					SendMsgToBaiduUtil.updateServiceProUserTrainDataRead(user.getId() + "", servicePro.getId() + "",
-							Calendar.getInstance().getTimeInMillis() + "");
-				}
+				SendMsgToBaiduUtil.updateServiceProUserTrainDataRead(user.getId() + "", servicePro.getId() + "",
+						Calendar.getInstance().getTimeInMillis() + "");
 			} else {
 				r.setType(RecordService.RECORD_TYPE_GUEST);
 				r.setData("serviceProId=" + servicePro.getId());

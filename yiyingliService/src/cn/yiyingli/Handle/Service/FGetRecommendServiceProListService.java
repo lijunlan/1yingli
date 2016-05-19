@@ -7,6 +7,7 @@ import cn.yiyingli.ExchangeData.ExServicePro;
 import cn.yiyingli.ExchangeData.SuperMap;
 import cn.yiyingli.Handle.MsgService;
 import cn.yiyingli.Persistant.ServicePro;
+import cn.yiyingli.Persistant.User;
 import cn.yiyingli.Service.ServiceProService;
 import cn.yiyingli.Service.UserMarkService;
 import cn.yiyingli.Util.MsgUtil;
@@ -38,13 +39,32 @@ public class FGetRecommendServiceProListService extends MsgService {
 
 	@Override
 	protected boolean checkData() {
-		return getData().containsKey("serviceProId");
+		return getData().containsKey("serviceProId") || getData().containsKey("uid");
 	}
 
 	@Override
 	public void doit() {
-		String serviceProId = getData().getString("serviceProId");
-		String result = SendMsgToBaiduUtil.getRecommendServiceProListAbout(serviceProId);
+		boolean isUser = false;
+		long userId = 0L;
+		if (getData().containsKey("uid")) {
+			String uid = (String) getData().get("uid");
+			User user = getUserMarkService().queryUser(uid);
+			if (user != null) {
+				isUser = true;
+				userId = user.getId();
+			}
+		}
+		String result;
+		if (!getData().containsKey("serviceProId") && isUser) {
+			int count = 5;
+			if (getData().containsKey("num")) {
+				count = getData().getInt("num");
+			}
+			result = SendMsgToBaiduUtil.getRecommendServiceProIndividuation(getData().getString("uid"), count);
+		} else {
+			String serviceProId = getData().getString("serviceProId");
+			result = SendMsgToBaiduUtil.getRecommendServiceProListAbout(serviceProId);
+		}
 		getServiceProInfo(result);
 	}
 
@@ -74,7 +94,7 @@ public class FGetRecommendServiceProListService extends MsgService {
 		SuperMap map = MsgUtil.getSuccessMap();
 		JSONArray jsonServicePros = new JSONArray();
 		for (ServicePro servicePro : servicePros) {
-			if (servicePro.getId().longValue() == getData().getLong("serviceProId")) {
+			if (servicePro.getId().equals(getData().getLong("serviceProId"))) {
 				continue;
 			}
 			SuperMap m = new SuperMap();
