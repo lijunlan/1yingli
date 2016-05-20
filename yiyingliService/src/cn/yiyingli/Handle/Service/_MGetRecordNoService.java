@@ -21,6 +21,7 @@ public class _MGetRecordNoService extends MMsgService {
 	}
 
 	@Override
-	public void doit() {}
+	public void doit() {
+	}
 
 }

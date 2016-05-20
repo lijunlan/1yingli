@@ -22,7 +22,6 @@ public class _MGetTeacherService extends MMsgService {
 
 	@Override
 	public void doit() {
-
 	}
 
 }

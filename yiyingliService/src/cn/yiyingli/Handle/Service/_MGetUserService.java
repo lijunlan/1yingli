@@ -22,7 +22,6 @@ public class _MGetUserService extends MMsgService {
 
 	@Override
 	public void doit() {
-
 	}
 
 }
