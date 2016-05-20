@@ -115,7 +115,7 @@ public class CreatePayService extends UMsgService {
 		if (money < 0.01) {
 			money = 0.01F;
 		}
-		orderList.setPayMoney(money);
+		orderList.setPayMoney(((int) (Math.round(money * 100F))) / 100F);
 		String r = getOrderListService().saveAndSubCount(orderList);
 		if (r.equals(OrderListService.ORDER_ERROR_COUNT_LIMITED)) {
 			setResMsg(MsgUtil.getErrorMsgByCode("44009"));

@@ -96,7 +96,7 @@ public class AlipayServlet extends HttpServlet {
 		// 必填
 
 		// 付款金额
-		String total_fee = String.valueOf(orderList.getPayMoney());
+		String total_fee = String.valueOf(((int) (Math.round(orderList.getPayMoney()*100F))) / 100F);
 		// 必填
 
 		// 订单描述
@@ -150,7 +150,7 @@ public class AlipayServlet extends HttpServlet {
 
 		String sHtmlText = AlipaySubmit.buildRequest(parms, "get", "确认");
 		sHtmlText = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">"
-				+ "<title>支付宝</title>" + "</head>" + sHtmlText + "<body></body></html>";
+				+ "<title>支付宝</title>" + "</head><body>" + sHtmlText + "</body></html>";
 		returnMsg(resp, sHtmlText);
 	}
 

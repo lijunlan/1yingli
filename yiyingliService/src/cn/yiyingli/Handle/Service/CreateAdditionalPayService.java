@@ -69,7 +69,7 @@ public class CreateAdditionalPayService extends UMsgService {
 		orderList.setState(OrderListService.ORDER_STATE_NOT_PAID);
 		orderList.setOriginMoney(money);
 		orderList.setNowMoney(money);
-		orderList.setPayMoney(money);
+		orderList.setPayMoney(((int) (Math.round(money * 100F))) / 100F);
 		orderList.setUser(user);
 		orderList.getAdditionalPays().add(additionalPay);
 
