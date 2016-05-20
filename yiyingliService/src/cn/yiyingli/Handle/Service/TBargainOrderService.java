@@ -60,7 +60,7 @@ public class TBargainOrderService extends TMsgService {
 			return;
 		}
 		Float price = Float.parseFloat((String) getData().get("price"));
-		order.setPrice(price);
+		order.setMoney(price);
 		order.setState(OrderService.ORDER_BARGAINED_NOT_PAID + "," + order.getState());
 		getOrderService().update(order, false);
 		TimeTaskUtil.sendTimeTask("change", "order",
@@ -77,5 +77,6 @@ public class TBargainOrderService extends TMsgService {
 //		NotifyUtil.notifyBD("订单号：" + order.getOrderNo() + ",用户：" + order.getCustomerName() + ",导师："
 //				+ order.getTeacher().getName() + "，导师已经确定价格");
 		setResMsg(MsgUtil.getSuccessMsg("bargain order successfully"));
+		NotifyUtil.notifyTeacher(order, getNotificationService());
 	}
 }

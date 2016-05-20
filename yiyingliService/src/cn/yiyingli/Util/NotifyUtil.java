@@ -214,11 +214,18 @@ public class NotifyUtil {
 			} else if (nowState.equals(OrderService.ORDER_STATE_FINISH_PAID)
 					&& lastState.equals(OrderService.ORDER_STATE_NOT_PAID)) {
 				return "尊敬的用户，订单(订单号:" + No + ")，客户(" + order.getCustomerName() + ")已经付款，等待您的接受。如有疑问请联系小助手,小助手微信号:yiyinglikeke";
+			} else if (nowState.equals(OrderService.ORDER_STATE_WAIT_SERVICE)
+					&& lastState.equals(OrderService.ORDER_BARGAINED_NOT_PAID)) {
+				return "尊敬的用户，订单(订单号:" + No + ")，客户(" + order.getCustomerName() + ")已经按议价金额付款，等待您的服务。如有疑问请联系小助手,小助手微信号:yiyinglikeke";
 			} else {
 				return "";
 			}
 		} else {
-			return "";
+			if (nowState.equals(OrderService.ORDER_NOT_BARGAINED)) {
+				return "尊敬的用户，订单(订单号:" + No + ")，客户(" + order.getCustomerName() + ")已经下单，等待您商议具体价格。如有疑问请联系小助手,小助手微信号:yiyinglikeke";
+			} else {
+				return "";
+			}
 		}
 	}
 
@@ -305,6 +312,12 @@ public class NotifyUtil {
 			} else if (nowState.equals(OrderService.ORDER_STATE_WAIT_RETURN)
 					&& lastState.equals(OrderService.ORDER_STATE_WAIT_ENSURETIME)) {
 				return "尊敬的用户，订单(订单号:" + No + ")已经被[" + teacher.getName() + "]取消,您可以在平台选择其他优秀的导师进行服务。本次预付款将在24小时内为您退款。如有疑问请联系小助手,小助手微信号:yiyinglikeke";
+			} else if (nowState.equals(OrderService.ORDER_BARGAINING)
+					&& lastState.equals(OrderService.ORDER_NOT_BARGAINED)) {
+				return "尊敬的用户，订单(订单号:" + No + "),[" + teacher.getName() + "]已经接受,TA将通过您提供的联系方式与您联系进行议价,请等待TA与您确认服务金额。如有疑问请联系小助手,小助手微信号:yiyinglikeke";
+			} else if (nowState.equals(OrderService.ORDER_BARGAINED_NOT_PAID)
+					&& lastState.equals(OrderService.ORDER_BARGAINING)) {
+				return "尊敬的用户，订单(订单号:" + No + "),[" + teacher.getName() + "]已经与您确定服务金额为:" + order.getMoney() + "，请及时完成付款。如有疑问请联系小助手,小助手微信号:yiyinglikeke";
 			} else {
 				return "";
 			}
@@ -373,7 +386,7 @@ public class NotifyUtil {
 		return true;
 	}
 
-//	public static boolean notifyTeacher(OrderList orderList, String message, NotificationService notificationService) {
+	//	public static boolean notifyTeacher(OrderList orderList, String message, NotificationService notificationService) {
 //		return notifyTeacher(orderList.getTeacher().getPhone(), orderList.getTeacher().getEmail(), message,
 //				orderList.getTeacher().getId(), orderList.getTeacher().getUsername(), notificationService);
 //	}
