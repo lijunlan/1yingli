@@ -70,7 +70,7 @@ public class PayPal {
 			java.lang.System.setProperty("https.protocols", prop.getProperty("SSL_VERSION_TO_USE"));
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		} finally {
 			if (input != null) {
@@ -136,7 +136,7 @@ public class PayPal {
 		try {
 			return URLEncoder.encode((String) object, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		return (String) object;
@@ -451,7 +451,7 @@ public class PayPal {
 					value = URLDecoder.decode(stInternalTokenizer.nextToken(), "UTF-8");
 					nvp.put(key.toUpperCase(), value);
 				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
 

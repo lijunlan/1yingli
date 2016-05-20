@@ -33,12 +33,7 @@ public class NotifyUtil {
 				return "尊敬的用户，订单(订单号:" + No + "),客户申请退款，等待您的确认，请在5天内到平台进行操作，超时系统会自动同意退款。如有疑问请联系小助手,小助手微信号:yiyinglikeke";
 			} else if (nowState.equals(OrderService.ORDER_STATE_USER_REGRET)
 					&& lastState.equals(OrderService.ORDER_STATE_WAIT_SERVICE)) {
-				if (operation.equals(TRefuseOrderService.class.getName())) {
-					return "尊敬的用户，订单(订单号:" + No + ")已被[" + teacher.getName() + "]拒绝,拒绝理由:" + order.getRefuseReason()
-							+ ",您可预约其他优秀的导师哦,预付款将在24小时内退还到您的账户。如有疑问请联系小助手,小助手微信号:yiyinglikeke";
-				} else {
-					return "尊敬的用户，订单(订单号:" + No + "),客户申请退款，等待您的确认。请在5天内到平台进行操作，超时系统会自动同意退款。如有疑问请联系小助手,小助手微信号:yiyinglikeke";
-				}
+				return "尊敬的用户，订单(订单号:" + No + "),客户申请退款，等待您的确认。请在5天内到平台进行操作，超时系统会自动同意退款。如有疑问请联系小助手,小助手微信号:yiyinglikeke";
 			} else if (nowState.equals(OrderService.ORDER_STATE_WAIT_RETURN)
 					&& lastState.equals(OrderService.ORDER_STATE_FINISH_PAID)) {
 				return "尊敬的用户，订单(订单号:" + No + "),已经被用户取消。如有疑问请联系小助手,小助手微信号:yiyinglikeke";
@@ -86,7 +81,7 @@ public class NotifyUtil {
 			} else if (nowState.equals(OrderService.ORDER_STATE_FINISH_PAID)
 					&& lastState.equals(OrderService.ORDER_STATE_NOT_PAID)) {
 				return "尊敬的用户，订单(订单号:" + No + ")，客户(" + order.getCustomerName() + ")已经付款，等待您的接受。如有疑问请联系小助手,小助手微信号:yiyinglikeke";
-			}else {
+			} else {
 				return "";
 			}
 		} else {
@@ -169,7 +164,7 @@ public class NotifyUtil {
 				return "尊敬的用户，订单(订单号:" + No + "),[" + teacher.getName() + "]已经接受,TA将通过您提供的联系方式与您联系,请等待服务。如有疑问请联系小助手,小助手微信号:yiyinglikeke";
 			} else if (nowState.equals(OrderService.ORDER_STATE_MANAGER_IN)
 					&& (OrderService.ORDER_STATE_USER_DISLIKE.equals(lastState)
-							|| OrderService.ORDER_STATE_USER_REGRET.equals(lastState))) {
+					|| OrderService.ORDER_STATE_USER_REGRET.equals(lastState))) {
 				return "尊敬的用户，订单(订单号:" + No + ")的退款申请已被[" + teacher.getName() + "]拒绝,客服将介入此订单,请耐心等待,我们会在48小时内与您联系。如有疑问请联系小助手,小助手微信号:yiyinglikeke";
 			} else if (nowState.equals(OrderService.ORDER_STATE_WAIT_SERVICE)
 					&& lastState.equals(OrderService.ORDER_STATE_WAIT_ENSURETIME)) {
@@ -193,6 +188,7 @@ public class NotifyUtil {
 		return notifyUserNormal(orderList.getCustomerPhone(), orderList.getCustomerEmail(), "订单状态改变通知", message,
 				orderList.getUser(), notificationService);
 	}
+
 	public static boolean notifyUserOrder(Order order, NotificationService notificationService) {
 		String message = getUserOrderMessageByState(order, "");
 		if (message.equals("")) {
@@ -203,7 +199,7 @@ public class NotifyUtil {
 	}
 
 	public static boolean notifyUserOrder(Order order, Class<?> operationClass,
-			NotificationService notificationService) {
+										  NotificationService notificationService) {
 		String message = getUserOrderMessageByState(order, operationClass.getName());
 		return notifyUserNormal(order.getCustomerPhone(), order.getCustomerEmail(), "订单状态改变通知", message,
 				order.getCreateUser(), notificationService);
@@ -220,7 +216,7 @@ public class NotifyUtil {
 	}
 
 	public static boolean notifyUserNormal(String phone, String email, String title, String message, User user,
-			NotificationService notificationService) {
+										   NotificationService notificationService) {
 		String m1 = message + "(<a href=\"http://www.1yingli.cn/myTutor\">查看订单</a>)";
 		String m2 = message + "(http://www.1yingli.cn/myTutor)";
 		if (CheckUtil.checkMobileNumber(phone) || CheckUtil.checkGlobleMobileNumber(phone)) {
@@ -232,7 +228,7 @@ public class NotifyUtil {
 		// web
 		sendNotification(user, notificationService, message);
 		// mobile
-		String[] usernames = { user.getUsername() };
+		String[] usernames = {user.getUsername()};
 		CloudPushUtil.IOSpushMessageToAccount(usernames, message);
 		CloudPushUtil.IOSpushNoticeToAccount(usernames, message);
 		return true;
@@ -257,7 +253,7 @@ public class NotifyUtil {
 	}
 
 	private static boolean notifyTeacher(String phone, String email, String message, long teacherId,
-			String teacherUserName, NotificationService notificationService) {
+										 String teacherUserName, NotificationService notificationService) {
 		String m1 = message + "(<a href=\"http://www.1yingli.cn/myStudent\">管理订单</a>)";
 		String m2 = message + "(http://www.1yingli.cn/myStudent)";
 		if (CheckUtil.checkMobileNumber(phone) || CheckUtil.checkGlobleMobileNumber(phone)) {
@@ -269,7 +265,7 @@ public class NotifyUtil {
 		// web
 		sendNotification(teacherId, notificationService, m1);
 		// mobile
-		String[] usernames = { teacherUserName };
+		String[] usernames = {teacherUserName};
 		CloudPushUtil.IOSpushMessageToAccount(usernames, message);
 		CloudPushUtil.IOSpushNoticeToAccount(usernames, message);
 		return true;
