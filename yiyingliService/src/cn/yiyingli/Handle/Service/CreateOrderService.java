@@ -231,7 +231,7 @@ public class CreateOrderService extends UMsgService {
 		if (money < 0.01) {
 			money = 0.01F;
 		}
-		orderList.setPayMoney(money);
+		orderList.setPayMoney(((int) (Math.round(money * 100F))) / 100F);
 
 		user.setOname(name);
 		user.setOphone(phone);

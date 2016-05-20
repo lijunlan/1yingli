@@ -99,7 +99,7 @@ public class TradeNotifyProcessServlet extends HttpServlet {
 			String state = orderList.getState().split(",")[0];
 			// 交易成功
 			if (is_trade_success.equals("TRADE_SUCCESS")) {
-				if (!(price == orderList.getPayMoney().floatValue())) {
+				if (!(price == (((int) (Math.round(orderList.getPayMoney()*100F))) / 100F))) {
 					LogUtil.error("TRADE_SUCCESS orderList id:" + olid + ", price is wrong, it should be "
 							+ orderList.getPayMoney() + ", but it is " + price, this.getClass());
 					orderList.setState(OrderListService.ORDER_STATE_ABNORMAL + "," + orderList.getState());

@@ -120,8 +120,8 @@ public class NotifyUtil {
 			if (nowState.equals(OrderService.ORDER_STATE_USER_REGRET)
 					&& lastState.equals(OrderService.ORDER_STATE_WAIT_ENSURETIME)) {
 				return "尊敬的用户，订单(订单号:" + No + ")已经申请取消,请等待[" + teacher.getName() + "]同意.如有疑问请联系小助手,小助手微信号:yiyinglikeke";
-			} else if (nowState.equals(OrderService.ORDER_STATE_USER_REGRET)
-					&& lastState.equals(OrderService.ORDER_STATE_WAIT_SERVICE)) {
+			} else if (nowState.equals(OrderService.ORDER_STATE_WAIT_RETURN)
+					&& lastState.equals(OrderService.ORDER_STATE_FINISH_PAID)) {
 				if (operation.equals(TRefuseOrderService.class.getName())) {
 					return "尊敬的用户，订单(订单号:" + No + ")已被导师[" + teacher.getName() + "]拒绝,拒绝理由:" + order.getRefuseReason()
 							+ ",您可预约其他优秀的导师哦,预付款将在24小时内退还到您的账户。如有疑问请联系小助手,小助手微信号:yiyinglikeke";
