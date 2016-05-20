@@ -60,7 +60,7 @@ public class FGetRecommendServiceProListService extends MsgService {
 			if (getData().containsKey("num")) {
 				count = getData().getInt("num");
 			}
-			result = SendMsgToBaiduUtil.getRecommendServiceProIndividuation(getData().getString("uid"), count);
+			result = SendMsgToBaiduUtil.getRecommendServiceProIndividuation(userId + "", count);
 		} else {
 			String serviceProId = getData().getString("serviceProId");
 			result = SendMsgToBaiduUtil.getRecommendServiceProListAbout(serviceProId);
@@ -94,7 +94,7 @@ public class FGetRecommendServiceProListService extends MsgService {
 		SuperMap map = MsgUtil.getSuccessMap();
 		JSONArray jsonServicePros = new JSONArray();
 		for (ServicePro servicePro : servicePros) {
-			if (servicePro.getId().equals(getData().getLong("serviceProId"))) {
+			if (getData().containsKey("serviceProId") && servicePro.getId().equals(getData().getLong("serviceProId"))) {
 				continue;
 			}
 			SuperMap m = new SuperMap();
