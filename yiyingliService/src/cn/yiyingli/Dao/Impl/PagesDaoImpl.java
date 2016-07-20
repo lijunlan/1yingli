@@ -6,9 +6,7 @@ import java.util.List;
 
 import cn.yiyingli.Dao.ContentAndPageDao;
 import cn.yiyingli.Dao.PassageDao;
-import cn.yiyingli.Persistant.ContentAndPage;
 import cn.yiyingli.Persistant.Passage;
-import cn.yiyingli.Persistant.Teacher;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;

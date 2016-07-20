@@ -7,7 +7,6 @@ import cn.yiyingli.ExchangeData.Util.ExList;
 import cn.yiyingli.Handle.MMsgService;
 import cn.yiyingli.Persistant.Pages;
 import cn.yiyingli.Persistant.Passage;
-import cn.yiyingli.Service.ContentAndPageService;
 import cn.yiyingli.Service.PagesService;
 import cn.yiyingli.Util.MsgUtil;
 
@@ -19,8 +18,6 @@ import java.util.Set;
 public class MGetActivityTeacherPassage extends MMsgService {
 
 	private PagesService pagesService;
-
-	private ContentAndPageService contentAndPageService;
 
 	public PagesService getPagesService() {
 		return pagesService;

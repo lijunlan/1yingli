@@ -57,7 +57,7 @@ public class SendMessageUtil {
 						SuperMap map = sendQueue.take();
 						String phone = map.finish().getString("phone");
 						String msg = map.finish().getString("msg");
-						short kind = Short.valueOf(map.finish().getString("kind"));
+						//short kind = Short.valueOf(map.finish().getString("kind"));
 						LogUtil.info("send message to phone:" + phone + ";message is:" + msg, SendMessageUtil.class);
 						if (CheckUtil.checkMobileNumber(phone)) {
 							sendChinaMsg(phone, msg);
@@ -95,24 +95,24 @@ public class SendMessageUtil {
 //		}
 	}
 
-	private static final String MESSAGE_NAME_VERIFY = "yyl-ipxmt";
-
-	private static final String MESSAGE_PASSWD_VERIFY = "IQ8R1Wpy";
-
-	private static final String MESSAGE_NAME_NOTIFY = "yylipxmt2";
-
-	private static final String MESSAGE_PASSWD_NOTIFY = "LE0TMxXd";
-
-	private static String hexString(byte[] b) {
-		StringBuffer d = new StringBuffer(b.length * 2);
-		for (int i = 0; i < b.length; i++) {
-			char hi = Character.forDigit((b[i] >> 4) & 0x0F, 16);
-			char lo = Character.forDigit(b[i] & 0x0F, 16);
-			d.append(Character.toUpperCase(hi));
-			d.append(Character.toUpperCase(lo));
-		}
-		return d.toString().toLowerCase();
-	}
+//	private static final String MESSAGE_NAME_VERIFY = "yyl-ipxmt";
+//
+//	private static final String MESSAGE_PASSWD_VERIFY = "IQ8R1Wpy";
+//
+//	private static final String MESSAGE_NAME_NOTIFY = "yylipxmt2";
+//
+//	private static final String MESSAGE_PASSWD_NOTIFY = "LE0TMxXd";
+//
+//	private static String hexString(byte[] b) {
+//		StringBuffer d = new StringBuffer(b.length * 2);
+//		for (int i = 0; i < b.length; i++) {
+//			char hi = Character.forDigit((b[i] >> 4) & 0x0F, 16);
+//			char lo = Character.forDigit(b[i] & 0x0F, 16);
+//			d.append(Character.toUpperCase(hi));
+//			d.append(Character.toUpperCase(lo));
+//		}
+//		return d.toString().toLowerCase();
+//	}
 
 	public static void sendCheckNo(String phone, String checkNo) {
 		SendMessageUtil.getInstance().addSend(phone.replaceAll("-", ""), "尊敬的用户，您的短信验证码为 " + checkNo + "(3分钟内有效)",

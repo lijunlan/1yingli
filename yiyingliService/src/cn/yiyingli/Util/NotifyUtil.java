@@ -21,7 +21,7 @@ public class NotifyUtil {
 	private static String getTeacherOrderMessageByState(Order order, String operation) {
 		String states[] = order.getState().split(",");
 		String No = order.getOrderNo();
-		Teacher teacher = order.getTeacher();
+		//Teacher teacher = order.getTeacher();
 		String nowState = states[0];
 		if (operation.equals(MOrderSalaryDoneService.class.getName())) {
 			return "尊敬的用户，订单(订单号:" + No + "),酬劳已成功转出，请注意查收.如有疑问请联系小助手,小助手微信号:yiyinglikeke";
