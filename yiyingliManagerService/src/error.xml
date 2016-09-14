@@ -1,0 +1,6 @@
+<?xml version = "1.0" encoding= "UTF-8"?>
+<!DOCTYPE service-error PUBLIC "error.dtd" "http://source.1yingli.cn/error.dtd">
+<service-error>
+	<error name="1" value="error1" />
+	<error name="2" value="error2" />
+</service-error>

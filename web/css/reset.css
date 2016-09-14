@@ -1,0 +1,16 @@
+*{margin:0;padding:0}
+body{line-height:1.4;font-size:14px;color:#34495e;margin:0 auto;font-family:"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;;overflow-x:hidden;background:#fff;}
+input,textarea{outline:none;}
+body.bg2{background:#dcdddd;}
+i{font-style: normal;}
+fieldset,img{border:0}
+a{text-decoration:none;color:#34495e;}
+a:hover{text-decoration:none;}
+ul,li {list-style:none;}
+header,footer,section {display:block;}
+.f-cb:after,.m-trip-detail li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+.f-right{float:right;}
+.f-left{float:left;}
+/*::-webkit-input-placeholder{color:#99a4ae;font-size:15px;height: 0;font-family:Helvetica,ff-tisa-web-pro-1,ff-tisa-web-pro-2,"Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3","microsoft yahei";text-indent: 20;}
+::-ms-input-placeholder{color:#99a4ae;font-size:15px;height: 0;font-family:Helvetica,ff-tisa-web-pro-1,ff-tisa-web-pro-2,"Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3","microsoft yahei";text-indent: 20;}
+::-moz-input-placeholder{color:#99a4ae;font-size:15px;height: 0;font-family:Helvetica,ff-tisa-web-pro-1,ff-tisa-web-pro-2,"Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3","microsoft yahei";text-indent: 20;}*/

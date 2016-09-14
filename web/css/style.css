@@ -1,0 +1,307 @@
+/* main page head */
+/*#header {
+	width: 100%;
+	height: 81px;
+	min-width: 1000px;
+	line-height: 81px;
+	background-color: rgba(233, 94, 89, 0.8);
+	overflow: hidden;
+	background-image: url(http://image.1yingli.cn/image/headerLogo.png);
+	background-repeat: no-repeat;
+	background-position: 150px 0px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}*/
+input,textarea{outline:none;}
+@font-face{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+
+}
+
+@font-face{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+
+}
+
+@font-face{
+    font-family:"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+}
+
+.logoLink {
+	height: 80px;
+	width: 150px;
+	margin-left: 150px;
+	display: block;
+	float: left;
+}
+
+.headerLink {
+	font-size: 16px;
+	float: right;
+	margin-right: 20px;
+}
+
+.headerLink:hover {
+
+}
+
+.headerLink>a {
+	color: white;
+}
+
+.headerLink>a:hover {
+
+}
+
+#header>ul {
+	margin-right: 140px;
+}
+
+#header>ul li {
+	list-style-type: none;
+}
+
+.menuItem {
+	float: left;
+	width: 250px;
+	height: 80px;
+	line-height: 80px;
+	z-index: 10;
+	cursor: default;
+}
+/*dropMenu*/
+#dropMenuBg {
+	height: 80px;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+	position: absolute;
+	bottom: 0px;
+	z-index: 20;
+}
+
+#dropMenu {
+	width: 1000px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.MenuItem {
+	float: left;
+	width: 200px;
+	height: 80px;
+	line-height: 80px;
+	z-index: 10;
+	cursor: default;
+}
+
+.MenuItem>img {
+	margin-top: 15px;
+	float: left;
+	margin-left: 50px;
+}
+
+.MenuItem>a {
+	margin-left: 20px;
+	color: white;
+	font-size: 16px;
+	float: left;
+}/*
+
+.dropDown {
+	position: absolute;
+	bottom: 80px;
+	margin-left: 84px;
+	width: 150px;
+	z-index: 9;
+	display: none;
+}
+
+.dropDownItem {
+	height: 45px;
+	width: 150px;
+	line-height: 45px;
+	text-align: center;
+	background-color: rgba(233, 94, 89, 0.8);
+	border-bottom: 1px solid #e84e49;
+}
+
+.dropDownItem:hover {
+	background-color: #e1504b;
+}
+
+.dropDownItem>a {
+	font-size: 16px;
+	color: white;
+} */
+/* show images*/
+.ownol {
+	margin-bottom: 70px;
+}
+
+.show-images {
+
+}
+
+.show-images img {
+	width: 100%;
+}
+/* foot */
+#footer {
+	width: 100%;
+	height: 220px;
+	background-color: #252525;
+	position: relative;
+}
+
+#footerWrapper {
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#footerWrapper>img {
+	width: 110px;
+	height: 110px;
+	margin-top: 45px;
+	float: left;
+}
+
+#footerWrapper>p {
+	color: white;
+	font-size: 15px;
+	float: left;
+	margin-top: 114px;
+	margin-left: 20px;
+}
+
+#footerWrapper>p:nth-of-type(2) {
+	margin-left: 50px !important;
+}
+
+#footerWrapper>p:last-child {
+	margin-left: 76px;
+	color: #898989 !important;
+}
+.mark{
+    background:#000;
+    width:100%;
+    height:100%;
+    top: 0px;
+    left: 0px;
+    padding:0;
+    position: fixed;
+    color:#F00;
+    filter:alpha(Opacity=60);
+    -moz-opacity:0.6;
+    opacity: 0.6;
+}
+
+
+.page {
+    padding: 20px 0px;
+    overflow: hidden;
+    clear: both;
+    text-align: center;
+}
+.page img{
+	width: 20px;
+	height: 20px;
+}
+.page-inner {
+    padding: 0 20px;
+}
+.page a {
+    overflow: hidden;
+    display: inline-block;
+	margin: 0 5px;
+    min-width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+    color: #787d82;
+    text-align: center;
+    border-bottom: 1px solid transparent;
+    -webkit-transition: border-color 0.2s;
+    -moz-transition: border-color 0.2s;
+    transition: border-color 0.2s;
+    text-decoration: none;
+}
+.page a:hover {
+    /*border-color: #56bbe8;*/
+    color: #56bbe8;
+    text-decoration: none;
+}
+.page a.active {
+    background: #56bbe8;
+    color: #ffffff;
+    border-color: transparent;
+}
+
+@media (max-width: 768px) {
+    .page a.active {
+        position: relative;
+        top: -6px;
+    }
+
+    .ui-autocomplete .ui-menu-item {
+        font-size: 12px;
+    }
+}
+.bg {
+    display: none;
+}
+.bg-show {
+    z-index: 100;
+    display: block;
+    background: rgba(0,0,0,0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.page span,
+.page-disabled {
+    display: inline-block;
+    padding: 0 5px;
+    min-width: 20px;
+    height: 39px;
+    line-height: 39px;
+    font-size: 14px;
+    color: #c8cdd2;
+    text-align: center;
+}
+.page-first,
+.page-last {
+    width: 50px;
+}
+.page-prev,
+.page-next {
+    width: 70px;
+}
+.page .notmargin {
+    margin-right: 0;
+}
+input{
+	font-size: 14px;
+}
+textarea{
+	font-size: 14px;
+}
+#diandian{
+	position: relative;
+	top: -10px;
+	color: #343434;
+}
+.right-content-item-p a{
+	color: #56bbe8;
+}
+.searchBox{
+	background-image:url('http://image.1yingli.cn/img/discount_02.png');
+	background-position-y:3px;
+	background-repeat:no-repeat;
+	text-indent: 25px;
+}

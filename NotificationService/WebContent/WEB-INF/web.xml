@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+
+	<display-name>OneMileNotification</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	
+	<!-- Define the pushlet servlet -->
+	<servlet>
+		<servlet-name>pushlet</servlet-name>
+		<servlet-class>nl.justobjects.pushlet.servlet.Pushlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Define the Servlet Mappings. -->
+
+	<!-- The pushlet -->
+	<servlet-mapping>
+		<servlet-name>pushlet</servlet-name>
+		<url-pattern>/pushlet.srv</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+    <description>转发接口</description>
+    <display-name>notification</display-name>
+    <servlet-name>notification</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.NotificationServlet
+       </servlet-class>
+  	</servlet>
+		
+   <servlet-mapping>
+    <servlet-name>notification</servlet-name>
+    <url-pattern>/noti</url-pattern>
+  </servlet-mapping>
+  
+	
+</web-app>
+  

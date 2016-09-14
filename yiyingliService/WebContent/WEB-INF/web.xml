@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>OneMile</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  
+   <servlet>
+    <description>管理</description>
+    <display-name>Manage</display-name>
+    <servlet-name>Manage</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.ManageServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>Manage</servlet-name>
+    <url-pattern>/manage</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+    <description>更改头像</description>
+    <display-name>ChangeIcon</display-name>
+    <servlet-name>ChangeIcon</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.ChangeIconServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>ChangeIcon</servlet-name>
+    <url-pattern>/changeIcon</url-pattern>
+  </servlet-mapping>
+  
+  <servlet> 
+        <servlet-name>validateCodeServlet</servlet-name> 
+        <servlet-class>cn.yiyingli.Servlet.ValidateCodeServlet</servlet-class> 
+    </servlet>     
+    <servlet-mapping> 
+        <servlet-name>validateCodeServlet</servlet-name> 
+        <url-pattern>*.images</url-pattern> 
+    </servlet-mapping> 
+    
+   <servlet>
+    <description>上传头像图片</description>
+    <display-name>UploadImage</display-name>
+    <servlet-name>UploadImage</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.UpLoadImageServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>UploadImage</servlet-name>
+    <url-pattern>/upimage</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>上传文章图片</description>
+    <display-name>UploadPImage</display-name>
+    <servlet-name>UploadPImage</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.UpLoadPImageServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>UploadPImage</servlet-name>
+    <url-pattern>/uppassageimage</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <description>上传文章CK图片</description>
+    <display-name>UploadPCKImage</display-name>
+    <servlet-name>UploadPCKImage</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.UpLoadPCKImageServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>UploadPCKImage</servlet-name>
+    <url-pattern>/uppassageckimage</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>上传介绍CK图片</description>
+    <display-name>UploadICKImage</display-name>
+    <servlet-name>UploadICKImage</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.UpLoadICKImageServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>UploadICKImage</servlet-name>
+    <url-pattern>/upintroduceckimage</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>上传背景</description>
+    <display-name>UploadBackground</display-name>
+    <servlet-name>UploadBackground</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.UpLoadBackgroundServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>UploadBackground</servlet-name>
+    <url-pattern>/upbg</url-pattern>
+  </servlet-mapping>
+  
+  <!--  <servlet>
+    <description>下载图片</description>
+    <display-name>DownloadImage</display-name>
+    <servlet-name>DownloadImage</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.DownLoadImageServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>DownloadImage</servlet-name>
+    <url-pattern>/image</url-pattern>
+  </servlet-mapping> -->
+  <!-- 支付宝通知处理 -->
+  <servlet>
+    <description>处理支付宝通知</description>
+    <display-name>TradeNotifyProcess</display-name>
+    <servlet-name>TradeNotifyProcess</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.TradeNotifyProcessServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>TradeNotifyProcess</servlet-name>
+    <url-pattern>/TradeNotifyProcess</url-pattern>
+  </servlet-mapping>  
+  
+   <servlet>
+    <description>支付宝转账通知服务</description>
+    <display-name>AlipayTransNotify</display-name>
+    <servlet-name>AlipayTransNotify</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.AlipayTransNotifyServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>AlipayTransNotify</servlet-name>
+    <url-pattern>/AlipayTransNotify</url-pattern>
+  </servlet-mapping>  
+  
+   <servlet>
+    <description>支付宝转账</description>
+    <display-name>AlipayTrans</display-name>
+    <servlet-name>AlipayTrans</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.AlipayTransServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>AlipayTrans</servlet-name>
+    <url-pattern>/AlipayTrans</url-pattern>
+  </servlet-mapping>  
+  
+    
+  <servlet>
+    <description>打赏交易请求</description>
+    <display-name>Reward</display-name>
+    <servlet-name>Reward</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.RewardServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>Reward</servlet-name>
+    <url-pattern>/Reward</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>支付宝交易请求</description>
+    <display-name>Alipay</display-name>
+    <servlet-name>Alipay</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.AlipayServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>Alipay</servlet-name>
+    <url-pattern>/Alipay</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Paypal通知处理 
+  <servlet>
+    <description>处理Paypal通知</description>
+    <display-name>PaypalNotifyProcess</display-name>
+    <servlet-name>PaypalNotifyProcess</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.PaypalNotifyServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>PaypalNotifyProcess</servlet-name>
+    <url-pattern>/PaypalNotify</url-pattern>
+  </servlet-mapping> 
+  -->
+  
+  <servlet>
+    <description>请求Paypal交易</description>
+    <display-name>PaypalCheckout</display-name>
+    <servlet-name>PaypalCheckout</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.CheckoutServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>PaypalCheckout</servlet-name>
+    <url-pattern>/Checkout</url-pattern>
+  </servlet-mapping> 
+  
+  <servlet>
+    <description>Paypal返回</description>
+    <display-name>PaypalReturn</display-name>
+    <servlet-name>PaypalReturn</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.ReturnServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>PaypalReturn</servlet-name>
+    <url-pattern>/Return</url-pattern>
+  </servlet-mapping> 
+  
+  <servlet>
+    <description>微信支付返回</description>
+    <display-name>WXNotify</display-name>
+    <servlet-name>WXNotify</servlet-name>
+    <servlet-class>
+          cn.yiyingli.Servlet.WXNotifyServlet
+       </servlet-class>
+  </servlet>
+		
+   <servlet-mapping>
+    <servlet-name>WXNotify</servlet-name>
+    <url-pattern>/WXNotify</url-pattern>
+  </servlet-mapping> 
+  
+  <listener>
+        <listener-class>
+          org.apache.commons.fileupload.servlet.FileCleanerCleanup
+        </listener-class>
+  </listener> 
+  
+  <listener>
+    <listener-class>
+      org.springframework.web.context.ContextLoaderListener
+ 	</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/applicationContext.xml</param-value>
+  </context-param>
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>/WEB-INF/classes/log4j.properties</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
+</web-app>

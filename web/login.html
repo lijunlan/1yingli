@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <title>登录</title>
+    <link href="css/login.css" rel="stylesheet" type="text/css"/>
+    <link href="css/register.css" rel="stylesheet" type="text/css"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
+    <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
+
+    <script src="js/jquery-2.1.4.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="js/get.js"></script>
+    <script src="js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="js/jquery.foggy.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/RSA/RSA.js"></script>
+    <script type="text/javascript" src="js/RSA/BigInt.js"></script>
+    <script type="text/javascript" src="js/RSA/Barrett.js"></script>
+    <script type="text/javascript" src="js/RSA/RSAencrypt.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="container-top" id="container-top">
+            <a id="close" href="javascript:void(0);"><img src="http://image.1yingli.cn/img/register_close.png" style="position: absolute;left: 269px;"></a>
+            <h1 class="container-top-title" id="container-top-title">欢迎登录一英里</h1>
+            <a href="https://api.weibo.com/oauth2/authorize?client_id=3399536820&redirect_uri=http://www.1yingli.cn/weiboredirect.html&response_type=code" class="container-top-weibo-login" id="container-top-weibo-login">
+                <div class="container-top-weibo-login-box" id="container-top-weibo-login-box">
+                    <img src="http://image.1yingli.cn/img/footer_weibo.png" alt=""/>
+                    <p>使用新浪微博登录</p>
+                </div>
+            </a>
+            <a href="https://open.weixin.qq.com/connect/qrconnect?appid=wxe8dcba556150ef5a&redirect_uri=http://www.1yingli.cn/weixinredirect.html&response_type=code&scope=snsapi_login" id="container-top-wechat-login">
+                <div class="container-top-wechat-login-box" id="container-top-wechat-login-box">
+                    <img src="http://image.1yingli.cn/img/footer_wechat.png" alt=""/>
+                    <p>使用微信登录</p>
+                </div>
+            </a>
+        </div>
+        <div class="container-bottom" id="container-bottom">
+            <div id="login-form" action="" method="get">
+                <input  id="login-username" name="username" type="text" placeholder="手机号/邮箱" style="padding-left: 7px;font-size:16px;"/>
+                <p id="usernameError" style="margin-bottom:5px;margin-left:43px;display:none;">用户名不能为空！</p>
+                <input id="login-password" name="password" type="password" placeholder="密码" style="padding-left: 7px;font-size:16px;letter-spacing: 0px;" />
+                <p id="passwordError" style="margin-bottom:5px;margin-left:43px;display:none;">密码最少为6位数！</p>
+                <br/>
+                <br/>
+                <button class="login" id="login" onClick="mlogin()" style="cursor:pointer;">登录</button>
+            </div>
+            <div style="text-align:center;margin:10px 10px"><a href="forgotPassword.html" id="forget">忘了密码</a></div>
+            <h2 class="container-footer-h2">还没账号？去<a href="javascript:void(0);" ><span id="container-footer-a">注册</span></a></h2>
+        </div>
+    </div>
+
+    <div class="register-container" id="register-container" method="method">
+        <a href="javascript:void(0);"><img class="register-close" id="register-close" src="http://image.1yingli.cn/img/register_close.png"/></a>
+        <form action="" id="register-form">
+            <div style="font-size: 20px;text-align:center;color:#000">注册用户</div>
+            <p><br/>
+                <input class="user" id="nickName" name="nickName" type="text" placeholder="昵称" style="padding-left: 7px"/>
+            </p>
+           
+            <p>
+                <input class="user" id="username" name="username" type="text" placeholder="手机号码/邮箱" style="padding-left: 7px"/>
+            </p>
+            
+            <p style="position: relative;">
+                <input class="user" id="validate" name="validate" type="text" style="width:141px;padding-left:7px" placeholder="4位验证码"/>
+                <img style="width:100px;height:30px;margin-bottom:-10px;position: absolute;top: 10px;left: 170px;" id="validateImage" src="http://service.1yingli.cn/yiyingliService/yiyingli.images" onClick="refreshValidate()"></img>
+            </p>
+
+            <p><input class="user" id="password" name="password" type="password" placeholder="输入密码" style="padding-left: 7px"/></p>
+
+            <p><input class="user" id="confirm-password" name="confirm-password" type="password" placeholder="确认密码" style="padding-left: 7px"/></p>
+
+            <p>
+                <input class="user" id="ident" name="ident" type="text" placeholder="6位验证码" style="padding-left: 7px"/>
+                <button id="sent-ident" onClick="sendCN()">获取验证码</button>
+            </p>
+            </p>
+
+            <p class="container-footer">注册即表示我同意服务条款，隐私政策</p>
+            <button class="login" id="register" onClick="upInfo()">注册</button>
+            <hr noshade size=1 color=darkgray>
+            <h2 class="container-footer-h2">已有账号？去<a href="javascript:void(0);" class="container-footer-a" id="register-container-footer-a">登录</a></h2>
+        </form>
+    </div>
+    
+    <div class="mark" style="display:none;"></div>
+<!-- 提交信息成功 -->
+    <div id="succ" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 30%;left: 50%;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; display:none;">
+        <div style="    width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+        <div style="position: absolute;top: 40%;left: 25%;font-size: 20px;color: #b6b6b6;">您已注册成功，点击登录</div>
+        <a href="login.html" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">登录</a>
+    </div>
+<!-- 提交信息有误 -->
+    <div id="erro" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 30%;left: 50%;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; display:none;">
+        <div style="    width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+        <div style="position: absolute;top: 40%;left: 36%;font-size: 20px;color: #b6b6b6;">帐号密码错误</div>
+        <a href="##" id="newLog" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%; line-height:30px; font-size: 16px;cursor:pointer; color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">确定</a>
+    </div>
+<!-- 更新 -->
+    <div id="updata" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 30%;left: 50%;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; display:none;">
+        <div style="    width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+        <div style="position: absolute;top: 40%;left: 20%;font-size: 20px;color: #b6b6b6;">系统正在维护，请稍后登录</div>
+        <a href="login.html" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">确定</a>
+    </div>
+<!-- 密码格式问题 -->
+    <div id="sty" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 30%;left: 50%;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; display:none;">
+        <div style="    width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+        <div style="position: absolute;top: 40%;left: 36%;font-size: 20px;color: #b6b6b6;">密码格式错误</div>
+        <a href="##" id="sty1" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">确定</a>
+    </div>
+<!-- 验证码问题 -->
+    <div id="code" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 30%;left: 50%;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; display:none;">
+        <div style="    width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+        <div style="position: absolute;top: 40%;left: 38%;font-size: 20px;color: #b6b6b6;">验证码错误</div>
+        <a href="##" id="code1" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">确定</a>
+    </div>
+<!-- 用户名重复问题 -->
+    <div id="repeat" style="width: 400px;height: 200px;margin: auto;position: fixed;top: 30%;left: 50%;margin-left:-200px;border-radius: 10px;z-index: 101;background: #fff; display:none;">
+        <div style="    width: 400px;height: 35px;background-color: #d2d2d2;border-top-left-radius: 10px;border-top-right-radius: 10px;text-align: center;"><div style="font-size: 16px;padding-top: 5px;font-weight: bold;color:#FFF;">来自一英里的信息</div></div>
+        <div style="position: absolute;top: 40%;left: 28%;font-size: 20px;color: #b6b6b6;">该用户名已经被注册</div>
+        <a href="##" id="repeat1" style="text-decoration: none;width: 128px;position: absolute;top: 70%;left: 35%;font-size: 20px;color: #FFF;background-color: #56bbe8;text-align: center;border-radius: 14px;">确定</a>
+    </div>
+    <script>
+        $(document).ready(function(){
+            var u = $.cookie('uid');
+            var n = $.cookie('nickName');
+            var i = $.cookie('iconUrl');
+            if(u!=null&&n!=null&&i!=null){
+                self.location='home.html';
+                return;
+            }
+
+            $("#close").click(function(){
+                if(document.referrer){
+                     if(document.referrer.indexOf("1yingli.cn/login")>0){
+                        self.location = "http://www.1yingli.cn";
+                        return;
+                    }
+                    if(document.referrer.indexOf("account")>0||document.referrer.indexOf("general")>0 ||document.referrer.indexOf("assessSheet")>0||
+                       document.referrer.indexOf("bct0")>0 || document.referrer.indexOf("likeList")>0 || document.referrer.indexOf("yourTutor")>0 ||
+                       document.referrer.indexOf("controlPanel")>0 || document.referrer.indexOf("tutor")>0 || document.referrer.indexOf("tutor_edit")>0 ||
+                       document.referrer.indexOf("account_binding")>0||document.referrer.indexOf("studentassess")>0) {
+                        self.location = "http://www.1yingli.cn";
+                    	return;
+                    }
+                    history.go(-1);
+                } else {
+                        self.location = "http://www.1yingli.cn";  
+                        return;                  
+                }
+            })
+
+            var kind = $_GET("kind");
+            if(kind=="register"){
+                $("#container").fadeOut(1200);/*stop().animate({left: "-=300px",top: "50px"},1200);*/
+                /*$("#container").foggy({
+                    blurRadius: 2,          // In pixels.
+                    opacity: 0.8,           // Falls back to a filter for IE.
+                    cssFilterSupport: true  // Use "-webkit-filter" where available.
+                });*/
+                $("#register-container").fadeIn(1200);
+            }
+
+
+            $(window).bind('beforeunload',function(){ 
+                $.cookie('validate','',{expires: -1,path:'/',domain:".1yingli.cn",secure:false,raw:false}) ;
+            }); 
+
+            //$("#vn").attr("value",$.cookie('validate'));
+            $.validator.setDefaults({
+                debug: true
+            });
+            $.validator.addMethod("checkvn",function(value,element,params){
+                var n = $.cookie('validate');
+                n = n.toLowerCase();
+                var v = value.toLowerCase();
+                if(v==n)return true;
+                return false;
+            },"验证码错误");
+
+            jQuery.validator.addMethod("ispassW", function (value, element) {  
+                var reg=/^[0-9]+$/;
+                if(!reg.test(value))
+                {
+                    return true;        
+                }
+                return false;
+            }, "密码不能全为数字");  
+
+            $.validator.addMethod("checkusername",function(value,element,params){
+                var reg1 = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/; //验证邮箱的正则表达式判断
+                var reg2 =/^1\d{10}$/;
+                if(!reg1.exec(value)&&!reg2.exec(value))
+                {
+                 return false;
+                }
+                return true;
+            },"请输入11位国内手机号码或邮箱");
+
+            //登录验证
+            $("#login-username").mousedown(function(){
+                $("#usernameError").hide();
+            }); 
+            $("#login-password").mousedown(function(){
+                $("#passwordError").hide();
+            }); 
+
+            //注册用户验证
+            $("#register-form").validate({
+                rules: {
+                    nickName: {
+                        required: true,
+                        minlength: 1,
+                        maxlength: 20
+                    },
+                    username: {
+                        required: true,
+                        checkusername: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 20,
+                        ispassW:true
+                    },
+                    "confirm-password": {
+                        required: true,
+                        equalTo: "#password"
+                    }
+                    ,
+                    validate:{
+                        required:true,
+                        checkvn: true
+                    }
+                },
+                messages: {
+                    nickName: {
+                        required: "请填写昵称",
+                        minlength: "昵称太短",
+                        maxlength: "昵称太长"
+                    },
+                    username: {
+                        required: "请填写用户名"
+                    },
+                    password: {
+                        required: "请填写密码",
+                        minlength: "密码过短",
+                        maxlength: "密码过长"
+                    },
+                    "confirm-password": {
+                        required: "请重复密码",
+                        equalTo: "密码不匹配"
+                    },
+                    validate:{
+                        required:"请填验证码"
+                    }
+                }
+            });
+
+            $("#container-footer-a").click(function () {
+                $("#container").fadeOut(1200);/*stop().animate({left: "-=300px",top: "50px"},1200);*/
+                /*$("#container").foggy({
+                    blurRadius: 2,          // In pixels.
+                    opacity: 0.8,           // Falls back to a filter for IE.
+                    cssFilterSupport: true  // Use "-webkit-filter" where available.
+                });*/
+                $("#register-container").fadeIn(1200);
+            });
+            $("#register-close").click(function() {
+                $("#register-container").fadeOut(1200);
+                $("#container").fadeIn(1200);
+            });
+                /*$("#container").stop().animate({left: "0px",top: "0px"},1200);
+                $("#container").foggy({
+                    blurRadius: 0,          // In pixels.
+                    opacity: 1,           // Falls back to a filter for IE.
+                    cssFilterSupport: true  // Use "-webkit-filter" where available.
+                });*/
+            $("#register-container-footer-a").click(function(){
+                $("#register-container").fadeOut(1200);
+                $("#container").fadeIn(1200);
+            });
+        })
+
+        //密码框快捷键登录
+        $("#login-password").bind('keypress',function(event){
+            if(event.keyCode == "13")    
+            {
+                mlogin();
+            }
+        });
+
+        function refreshValidate(){
+                $("#validateImage").attr("src","http://service.1yingli.cn/yiyingliService/"+parseInt(Math.random()*1000000)+".images");
+                //alert($.cookie('validate'));
+                //$.cookie('test',"hehehe");
+                //$("#vn").val($.cookie('validate'));
+        }
+        var countdown = 60;
+        function settime() { 
+            var val = $("#sent-ident");
+            if (countdown == 0) { 
+                val.removeAttr("disabled");    
+                val.html("获取验证码"); 
+                countdown = 60; 
+                return;
+            }  else { 
+                val.attr("disabled", "disabled"); 
+                val.html ("(" + countdown + "S)后重新获取"); 
+                countdown--; 
+            } 
+            setTimeout(function() { 
+                settime() 
+            },1000);
+        } 
+
+        function sendCN(){
+            var n = $.cookie('validate');
+            if(n==null)return;
+            n = n.toLowerCase();
+            var v = $("#validate").val().toLowerCase();
+            if(v!=n)return;
+            var username = $("#username").val();
+            $.ajax({
+                cache : true,
+                type : "POST",
+                url : config.base_url,
+                data : "{'style':'function','method':'getCheckNo','username':'" + username+"'}",
+                async : false,
+                error : function(request) {
+                            alert("Connection error");
+                        },
+                success : function(data, textStatu) {
+                    var json = eval("(" + data + ")");
+                    if (json.state == "success") {
+                        settime();
+                    } else {
+                        $(".mark").show();
+                        $("#sty").show();
+                        $("#sty1").click(function(){
+                            $(".mark").hide();
+                            $("#sty").hide();
+                        })
+                    }
+                }
+            });
+        }
+
+        var publickey = "8959d2ced61bee338accd16794538ec0a49da0655ddca8fa2461d4cf419dafaf4d7c47813f6ac8c6e5646a2beb08cccf4184a831e683a631e3c528b908deecc57235d03935d0650fbe53d44f717da7f5d1622e7405a3b4f06377eb506880dae21e5065c878c03d85113e068ac82af6b29037d57163d9a311807bee654927d349";
+
+        function mlogin(){
+            var username = $("#login-username").val().replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+            var password = $("#login-password").val().replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+
+            var isPass = true;
+            if(!username) {
+                $("#usernameError").show();
+                isPass = false;
+            }
+            if(!password||password.length<6) {
+                $("#passwordError").show();
+                isPass = false;
+            }
+            if(!isPass) {
+                return;
+            }
+
+            password = encryptedStr(password,publickey);
+            $.ajax({
+                cache : true,
+                type : "POST",
+                url : config.base_url,
+                data : "{'style':'user','method':'login','username':'" + username
+                       + "','password':'" + password + "'}",
+                async : false,
+                error : function(request) {
+                        $(".mark").show();
+                        $("#updata").show();
+                        },
+                success : function(data, textStatu) {
+                    var json = eval("(" + data + ")");
+                    if (json.state == "success") {
+                        var uid = json.uid;
+                        var nickName = json.nickName;
+                        var iconUrl = json.iconUrl;
+                        $.cookie("uid",uid,{path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                        $.cookie("nickName",nickName,{path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                        $.cookie("iconUrl",iconUrl,{path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                        
+                        var tid = json.teacherId;
+                        if(tid!=null&&tid!="undefined"&&tid!=""){
+                            $.cookie("tid",tid,{path:'/',domain:".1yingli.cn",secure:false,raw:false});
+                        }
+                        
+                        var callback = $_GET("callback");
+                        if(callback!=null&&callback!=""){
+                            callback = decodeURIComponent(callback);
+                            self.location = callback;
+                        }else{
+                        	if(document.referrer){
+                                if(document.referrer.indexOf("1yingli.cn/login")>0){
+                                    self.location = "http://www.1yingli.cn";
+                                    return;
+                                }
+                                self.location = document.referrer;
+                            } else {
+                                self.location = "http://www.1yingli.cn/controlPanel.html";
+                            }
+                        }
+                    } else {
+                        $("#login-password").val("");
+                        $(".mark").show();
+                        $("#erro").show();
+                        $("#newLog").click(function(){
+                            $(".mark").hide();
+                            $("#erro").hide();
+                        })
+                    }
+                }
+            });
+        }
+
+        function upInfo(){
+            var n = $.cookie('validate');
+            n = n.toLowerCase();
+            var v = $("#validate").val().toLowerCase();
+            if(v!=n)return;
+            var cn = $("#ident").val();
+            if(cn.length<6){
+                alert("验证码错误");
+                return ;
+            }
+            var username = $("#username").val();
+            var password = $("#password").val();
+            password = encryptedStr(password,publickey);
+            var checkNo = $("#ident").val();
+            var nickName = $("#nickName").val();
+
+            var toSend = new Object();
+            toSend.style = "user";
+            toSend.method = "register";
+            toSend.username = username;
+            toSend.password = password;
+            toSend.checkNo = checkNo;
+            toSend.nickName = nickName;
+            var distributorNO = $_GET('distributorNO'); 
+            if(distributorNO) {
+                toSend.distributorNO = distributorNO;
+            }
+            $.ajax({
+                cache : true,
+                type : "POST",
+                url : config.base_url,
+                data : JSON.stringify(toSend),
+                async : false,
+                error : function(request) {
+                            alert("Connection error");
+                        },
+                success : function(data, textStatu) {
+                    var json = eval("(" + data + ")");
+                    if (json.state == "success") {
+                        $(".mark").show();
+                        $("#succ").show();
+                    } else {
+                        if(json.msg == "username is exsited"){
+                            $(".mark").show();
+                            $("#repeat").show();
+                            $("#repeat1").click(function(){
+                                $(".mark").hide();
+                                $("#repeat").hide();
+                            });
+                        }else{
+                            $(".mark").show();
+                            $("#code").show();
+                            $("#code1").click(function(){
+                                $(".mark").hide();
+                                $("#code").hide();
+                            });
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

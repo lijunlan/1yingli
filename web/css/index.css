@@ -1,0 +1,149 @@
+.messageTab{color: red; overflow: hidden;    font-size: 12px;  line-height: 20px;}
+
+.g-hd{height: 60px;background:#fff;    border-bottom: 1px solid rgba(0,0,0,0.3);}
+.g-hd .left{height: 60px;}
+.g-hd .right{width:400px;padding:23px 0;line-height: 29px;}
+.u-logo{display: block;padding:19px 26px;}
+.u-logo img{display:block;}
+
+textarea {resize:none;}
+
+.m-search{padding:23px 0;}
+.u-input{height: 29px;line-height: 29px;width:282px;border:1px solid #99a4ae;margin-right:10px;font-size:15px;text-indent: 10px;}
+.m-search a{display:inline-block;line-height: 29px;padding-right:30px;background:url(http://image.1yingli.cn/images/search.png) no-repeat 100% 50%;font-size:17px;}
+
+.m-thumb{display:inline-block;width:29px;height:29px;margin-right:12px;}
+.m-name{position:relative;font-size:17px;padding-right:15px;margin-right:43px;}
+.m-name ul{display: none;position: absolute;top:29px;left:0;}
+.m-name:after{content:'';position: absolute;top:11px;right: 0;border:6px solid transparent;border-top-color:#aaa;}
+.u-msg{position:relative;display: inline-block;width: 24px;height: 18px;background:url(http://image.1yingli.cn/images/msg.png) no-repeat;margin-top:5px;}
+.u-msg i{display: block;position: absolute;top:-8px;right: -8px;width: 16px;height: 16px;color: #fff;background:#56bbe8;border-radius:50%;line-height: 16px;text-align: center;font-size: 14px;}
+
+.u-become{position:relative;padding:0 25px 0 15px;border-left:1px solid #88929b;margin-left:20px;}
+.u-become:after{content:'';position: absolute;top:8px;right: 0;border:6px solid transparent;border-left-color:#aaa;}
+
+.g-mn{width: 950px;margin:0 auto 67px;border:1px solid #d3d3d3; margin-top:30px;}
+.g-mn2{width:100%;background:#FFFFFF;border-top:1px solid #ffffff;    padding-bottom: 67px;}
+.m-bd{width:950px;margin:0 auto;}
+.m-intro{border-bottom:1px solid #d3d3d3;background:#eee;padding:38px 84px;}
+.m-intro h3{font-size:22px;font-weight: normal;margin-bottom:10px;}
+.m-intro p{font-size:15px;line-height:28px;}
+
+.m-inputbox{padding: 30px 84px;}
+.m-inputbox p{font-size:14px; margin-bottom: 20px;} 
+.m-inputlist{margin-bottom:70px;}
+.m-input{width:50%;float: left;height:69px;}
+.m-input label{display: block;}
+.m-input-2{float: none;}
+.m-input-2 input,.m-input-2 textarea,.m-timebox{width: 386px;}
+.m-input-2 textarea{height: 125px;text-align: left;width: 366px;padding:10px;margin-bottom:10px;resize: none;}
+.m-input-2 textarea::-webkit-input-placeholder{font-size:12px;line-height: 18px;}
+.m-timebox .mid{margin-right: 20px;}
+.m-step{height: 65px;padding:25px 0;background:#34495e;border-radius:46px;color:#56bbe8;font-size: 16px;margin-bottom:15px;}
+.m-step li{display: block;width: 33.33%;text-align: center;float:left;position: relative;}
+.m-step li p{margin-bottom:15px;}
+.m-step li span{display: block;width: 34px;height: 34px;position: relative;border-radius: 50%;color:#fff;background:#56bbe8;margin: 0 auto;font-size:25px;}
+.m-step li span:after,.m-step li span:before{content: '';position:absolute;display:block;width: 130px;height: 5px;line-height: 0;font-size: 0;background:#56bbe8;top:50%;left:30px;z-index: 0;margin-top:-3px;}
+.m-step li span:before{left: auto;right:30px;}
+.m-step li:nth-child(1){z-index: 10}
+.m-step li:nth-child(2){z-index: 5}
+.m-step li.unactive{color:#b5b5b5;}
+.m-step li.unactive span{background: #b5b5b5;}
+.m-step li.unactive span:before,.m-step li.unactive span:after{height: 3px;background:#b5b5b5;margin-top:-2px;}
+.m-step li:nth-child(1) span:before{display: none;}
+.m-step li:nth-child(3) span:after{display: none;}
+.m-btn{text-align: center;}
+.u-next{width:236px;display: inline-block;height: 34px;border-radius: 17px;background: #56bbe8;color: #fff;text-align: center;margin: 0 auto;font-size:20px;color:#fff;line-height: 34px;}
+.u-next.pre{margin-right: 20px;background:#919ba6;}
+
+.m-toptips{height:149px;margin:30px 0 10px;padding:0 120px 0 20px;background:url(http://image.1yingli.cn/images/midtips.png) no-repeat;color:#fff;}
+.m-toptips h3{font-size:24px;padding:40px 0 10px;}
+.m-toptips p{line-height: 25px;font-size: 14px;}
+
+.m-experience{width: 100%;margin-bottom:25px;}
+.m-experience .list{display:block;height:199px;width: 417px;background:#fff;padding:25px;float:left; border: 1px solid #d0d0d0;}
+.m-experience .list:first-child{margin-right:10px;}
+.m-experience .list img{float:left;}
+.m-experience .list .con{margin-left:187px;padding-top:30px;}
+.m-experience .list .con h3{font-size:24px;}
+.m-experience .list .con h4{font-size:20px;font-weight: normal;}
+.m-experience .list .con p{font-size: 14px;line-height: 25px;}
+
+.m-cate{}
+.m-cate h2{height:50px;border-top:1px solid #34495e;background: url(http://image.1yingli.cn/images/navtips.png) no-repeat;font-size:24px;text-indent: 40px;line-height: 40px;color:#fff;margin-bottom:10px;}
+.m-floatCon{width: 517px;background: #fff;margin-bottom:10px;}
+.m-floatCon .hd{height: 55px;background:#eee;line-height: 55px;padding-left:45px;font-size:20px;font-weight: 400}
+.m-floatCon .hd a{float: right;display: block;width: 24px;height: 24px;margin:15px 10px;}
+.m-floatCon .hd a img{display: block;}
+.m-floatCon .con{padding:20px 40px;font-size:16px;line-height: 25px;  border: 1px solid #d0d0d0;}
+.m-floatCon .part{margin-bottom:20px;}
+.u-add{font-size:15px;height: 37px;line-height: 37px;text-align: center;display: block;background:#eee;}
+.u-add span{display: inline-block;padding-left: 30px;background: url(http://image.1yingli.cn/images/add.png) no-repeat 0 50%;}
+.u-save,.u-cancle{width: 78px;height: 29px;line-height:29px;color:#fff;display: inline-block;font-size: 14px;text-align: center;background:#34495e;}
+.u-cancle{background:#b7b7b7;margin-left:5px;}
+
+.m-floatCon .con.m-editor{padding:40px 40px 27px;}
+.m-editor h3{font-size:21px;font-weight: 400;margin-bottom:10px;margin-right: 10px;}
+.m-editor h3 img{margin-left: 10px;}
+.m-editor p{font-size:14px;}
+.m-old{padding:40px 88px;margin-top:40px;    border: 1px solid #d0d0d0;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.contact{width:100%;min-width:1000px;font-family:"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-weight:700;background:#eee;border-top:1px solid #d3d3d3;}
+.contact2{background:#fff;}
+.contact-content{width:1000px;height:238px;margin:0 auto}
+.contact-left{float:left}
+.contact-left-top{padding-top:28px}
+.contact-left-top li{height:50px;line-height:50px;display:inline-block;margin:10px 20px}
+.contact-left-top li a{color:#273241;opacity:.7;font-size:20px;text-decoration:none}
+.contact-left-top li span{color:#273241;opacity:.7;font-size:22px}
+.contact-left-center,.contact-left-left,.contact-left-right,.contact-right{float:left;margin:5px 30px;margin-right:90px}
+.contact-left-center li,.contact-left-left li,.contact-left-right li,.contact-right li{color:#273241;opacity:.7;font-size:15px;text-decoration:none;margin-top:5px}
+.contact-left-center li a,.contact-left-left li a,.contact-left-right li a,.contact-right li a{color:#273241;opacity:.7;font-size:13px;text-decoration:none}
+.contact-left-center li a:hover,.contact-left-left li a:hover,.contact-left-right li a:hover,.contact-left-top li a:hover,.contact-right li a:hover{color:#56bbe8}
+.contact-right{float:right;position:relative;right:0;top:0;padding-top:50px}
+.contact-right-1{text-align:right;color:#273241;opacity:.7;font-size:17px;padding-bottom:3px}
+.contact-right-2{text-align:right;color:#273241;opacity:.7;font-size:30px;padding-bottom:16px}
+.contact-right-3{text-align:right;color:#273241;opacity:.7;font-size:12px;padding-bottom:2px}
+.contact-right-4{text-align:right;color:#273241;opacity:.7;font-size:12px}
+.footer{font-family:"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;width:100%;min-width:1000px;height:380px;background:url(http://image.1yingli.cn/img/footer_bg.jpg) no-repeat;-moz-background-size:100% 100%;-o-background-size:100% 100%;-webkit-background-size:100% 100%;background-size:100% 100%}
+.footer-share{width:1000px;height:50px;position:relative;top:80px;line-height:50px;margin:0 auto;text-align:center}
+.footer-share li{display:inline-block;height:50px;line-height:50px;float:left;text-align:center}
+.footer-share li a{height:50px;line-height:50px}
+.footer-share li:first-child{margin-left:31%}
+.copyright{color:#fff;text-align:center;height:20px;line-height:20px;margin-top:85px;}
+.copyright a{color: #fff;}

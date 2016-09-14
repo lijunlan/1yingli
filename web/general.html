@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=0">
+    <title>个人主页</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="css/general.css" rel="stylesheet" type="text/css"/>
+    <link href="css/personal_common.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/bottom.css">
+    <link rel="stylesheet" type="text/css" href="uploadify/uploadifive.css" />
+    <link rel="Shortcut Icon" href="http://image.1yingli.cn/img/logo0.png">
+    <link rel="Bookmark" href="http://image.1yingli.cn/img/logo0.png">
+</head>
+<body>
+
+<input type="checkbox" id="le"/>
+<ul class="sidenav">
+    <div class="home"><a href="home.html"><b>首页</b></a></div>
+    <li onClick="findByTheme($(this).find('a').text(), 'i1');"><a href="javascript:void(0);">留学领航</a></li>
+    <li onClick="findByTheme($(this).find('a').text(), 'i2');"><a href="javascript:void(0);">求职就业</a></li>
+    <li onClick="findByTheme($(this).find('a').text(), 'i3');"><a href="javascript:void(0);">创业助力</a></li>
+    <li onClick="findByTheme($(this).find('a').text(), 'i4');"><a href="javascript:void(0);">校园生活</a></li>
+    <li onClick="findByTheme($(this).find('a').text(), 'i5');"><a href="javascript:void(0);">猎奇分享</a></li>
+</ul>
+<input type="checkbox" id="ri"/>
+<ul class="sidenav1">
+    <li><a href="controlPanel.html"><b>消息中心</b></a></li>
+    <li><a href="yourTutor.html"><b>我的导师</b></a></li>
+    <li class="i-am-a-teacher"><a href="tutor.html"><b>导师中心</b></a></li>
+    <li><a href="likeList.html"><b>心愿名单</b></a></li>
+    <li><a href="general.html"><b>个人资料修改</b></a></li>
+    <li><a href="account.html"><b>密码修改</b></a></li>
+    <li><a href="javascript:logout()"><b>退出</b></a></li>
+</ul>
+
+<section id='section' class="subject">
+<div class="g-hd"></div>
+<div class="top-nav"></div>
+<nav class="mobile-header" style="display: none;">
+    <label for="le" class="left"><img class="left_img" src="http://image.1yingli.cn/img/mobile_menu_white.png"></label>
+    <div class="mobile-search">
+        <input id="mobile_search" type="text" placeholder="搜索：导师 / 学校 / 专业">
+        <img id="mobile_search_button" src="http://image.1yingli.cn/img/mobile-search-blue.png">
+    </div>
+    <label for="ri" class="right"><img class="right_img" src="http://image.1yingli.cn/img/mobile_people_white.png"></label>
+</nav>
+<div class="content-container">
+    <div class="content">
+        <div class="content-left">
+            <div class="content-left-01">
+               <img id="bigIcon" style="height:200px;width:200px" src="http://image.1yingli.cn/img/img.png" alt=""/>
+                <p id="bigNickName"></p>
+                <a href="javascript:void(0);" id="personal-info" style="color:#56bbe8;">编辑个人资料</a>
+                <a href="account.html" id="personal-assess">修改帐号密码</a>
+                <a href="assessSheet.html" id="personal-assess">评价</a>
+            </div>
+        </div>
+        <div class="content-right">
+            <ul class="right-top" style="display:none;">
+                    <li class="right-top-item">
+                        <a class="right-top-item-link" href="javascript:void(0);">
+                            <img class="right-top-item-link-icon" src="http://image.1yingli.cn/img/mobile_my_tutor.png">
+                            <span class="right-top-item-link-span"> 修改个人资料</span>
+                        </a>
+                    </li>
+                </ul>
+            <p class="personal-info-title">个人资料</p>
+            <div class="personal-info-face-box">
+                <div class="personal-info-face">
+                    <img class="face-face" src="http://image.1yingli.cn/img/img.png" id="iconView"/>
+                    <p>上传头像</p>
+                </div>
+                <div class="personal-info-pic">
+                    <p style="margin-top:15px;font-size:14px;">请上传长宽比一样的图片!</p>
+                    <div id="imagelist" style="min-height:10px;max-height:55px"></div>
+                    <div id="select-picture" >
+                        <input type="text" id="picture-src" name="picture-src"  readonly="readonly"/>
+                        <button id="select-picture-src" style="cursor:pointer"></button>
+                        <!--<input type="file" id="select-picture-src" value="浏览"/>-->
+                        <a id="submit" href="javascript:" style="display:none;">上传</a>
+                    </div>
+                </div>
+            </div>
+            <div id="rewrite-info" >
+                <label id="username-label">昵称</label>
+                <input id="nickname" name="name" type="text" style="padding-left: 7px;margin-right: 10px; background:#F3F3F3;"/><span id="nickname_span">用户昵称不能为空</span>
+                </br>
+                <label id="name-label">姓名</label>
+                <input id="name" name="name" type="text" style="padding-left: 7px;margin-right: 10px;background:#F3F3F3;"/><span id="name_span">用户姓名不能为空</span>
+                </br>
+                <label id="phone-label">手机</label>
+                <input id="phone" name="name" type="text" style="padding-left: 7px;margin-right: 10px;background:#F3F3F3;" disabled="disabled" /><span class="prompt">不可修改，需要验证。</span>
+                </br>
+                <label id="email-label">邮箱</label>
+                <input id="email" name="name" type="text" style="padding-left: 7px;margin-right: 10px;background:#F3F3F3;" disabled="disabled" /><span class="prompt">不可修改，需要验证。</span>
+                </br>
+                <label id="address-label">长居地</label>
+                <input id="address" name="name" type="text" style="padding-left: 7px;background:#F3F3F3;"/>
+                </br>
+                <label id="intro-label" style='height:150px;line-height:150px;float: left;'>个人简介</label>
+                <textarea id="intro" name="name" style="padding-left: 7px; line-height: 20px;background:#F3F3F3;margin:0 5px;float: left;margin-right: 10px;"></textarea> <label style="height: 150px;line-height: 150px;float: left;"><span id="intro_span">最多500字。</span></label>
+                <button  id="info-submit" onClick="changeInfo()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contact"></div>
+<div class="footer"></div>
+</section>
+
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+
+<script type="text/javascript" src="uploadify/jquery.uploadifive.min.js"></script>
+<script type="text/javascript" src="js/jquery.json-2.4.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/person_header.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/general.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $("#exit-loginout").click(function(){
+            if($(".exit-list").css("display")=="none"){
+                $(".exit-list").css("display","block");
+            }else if($(".exit-list").css("display")=="block"){
+                $(".exit-list").css("display","none");
+            }
+        });
+       // $("#personal-assess").css('','');
+       // $("#personal-assess").css('','');
+       // $("#personal-assess").css('','');
+    })
+</script>
+</body>
+</html>

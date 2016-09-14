@@ -1,0 +1,24 @@
+<!ELEMENT service-configuration (cachePath,imagePath,httpPath,searchUrl,searchHintUrl,rsaPath,baiduAboutUrl,baiduPersonalUrl,debug,style+)>
+<!ELEMENT cachePath EMPTY>
+<!ATTLIST cachePath value CDATA #REQUIRED>
+<!ELEMENT imagePath EMPTY>
+<!ATTLIST imagePath value CDATA #REQUIRED>
+<!ELEMENT httpPath EMPTY>
+<!ATTLIST httpPath value CDATA #REQUIRED>
+<!ELEMENT searchUrl EMPTY>
+<!ATTLIST searchUrl value CDATA #REQUIRED>
+<!ELEMENT searchHintUrl EMPTY>
+<!ATTLIST searchHintUrl value CDATA #REQUIRED>
+<!ELEMENT rsaPath EMPTY>
+<!ATTLIST rsaPath value CDATA #REQUIRED>
+<!ELEMENT baiduAboutUrl EMPTY>
+<!ATTLIST baiduAboutUrl value CDATA #REQUIRED>
+<!ELEMENT baiduPersonalUrl EMPTY>
+<!ATTLIST baiduPersonalUrl value CDATA #REQUIRED>
+<!ELEMENT debug EMPTY>
+<!ATTLIST debug value CDATA #REQUIRED>
+<!ELEMENT style (method+)>
+<!ATTLIST style name CDATA #REQUIRED>
+<!ELEMENT method EMPTY>
+<!ATTLIST method name CDATA #REQUIRED>
+<!ATTLIST method beanName CDATA #REQUIRED>

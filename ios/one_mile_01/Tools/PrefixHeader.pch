@@ -1,0 +1,120 @@
+//
+//  PrefixHeader.pch
+//  one_mile_01
+//
+//  Created by 王雅蓉 on 15/8/21.
+//  Copyright (c) 2015年 王雅蓉. All rights reserved.
+//
+
+#ifndef one_mile_01_PrefixHeader_pch
+#define one_mile_01_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef __OBJC__
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "AFNConnect.h"
+#import "JSONKit.h"
+#import "LoginModal.h"
+#import "TagForClient.h"
+#import "UserDefaultDictionary.h"
+#import "LoginViewController.h"
+#import <UIImageView+WebCache.h>
+#import "UIImage+UIImageByScaleToSize.h"
+#import <ASIHTTPRequest/ASIHTTPRequest.h>
+#import <ASIFormDataRequest.h>
+#import <Masonry.h>
+#import "MJRefresh.h"
+#import "NSString+URL.h"
+
+#endif
+
+//edit scheme 来设置调试模式
+#if DEBUG
+
+#define NSLog(FORMAT, ...) fprintf(stderr,"[%s:%d行] %s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+
+#else
+
+#define NSLog(FORMAT, ...) nil
+
+#endif
+
+//判断当前版本
+#define  iOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) ? YES : NO
+
+#define  iOS8 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) ? YES : NO
+
+#define  iOS9 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) ? YES : NO
+
+#define iPhone6 [[UIScreen mainScreen] bounds].size.width == 375
+#define iPhone5 [[UIScreen mainScreen] bounds].size.height == 568
+#define iPhone6P [[UIScreen mainScreen] bounds].size.width == 414
+#define iPhone4s [[UIScreen mainScreen] bounds].size.height == 480
+
+#define WIDTH [[UIScreen mainScreen] bounds].size.width
+#define HEIGHT [[UIScreen mainScreen] bounds].size.height
+
+#define STATUS 20
+
+#define COMMONCELLHEIGHT 160
+
+#define NAVIGATIONHEIGHT 69
+
+#define PUSHANDPOPBUTTONSIZE 25
+
+//公钥module
+#define RSA_KEY @"-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCJWdLO1hvuM4rM0WeUU47ApJ2g\nZV3cqPokYdTPQZ2vr018R4E/asjG5WRqK+sIzM9BhKgx5oOmMePFKLkI3uzFcjXQ\nOTXQZQ++U9RPcX2n9dFiLnQFo7TwY3frUGiA2uIeUGXIeMA9hRE+BorIKvaykDfV\ncWPZoxGAe+5lSSfTSQIDAQAB\n-----END PUBLIC KEY-----"
+
+//密钥
+#define RSADataSignerKey @"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAM7w7yHhGBblC200BYiuydVBA0yxtr2hx+hxAI01GGiMDlyKMBHEOtP7E9rg6SGbWNdNscRLm3kvwMVZU1qE+3NZNNjnWbdFVnNj5/mo5Xg9MHM/zhyFHdxlzrBMbsRx73kcX4wYI9iuDGk0/GW9EOmZRXof51je1RyzqesGcm1JAgMBAAECgYBOTk8+s61o5GzperjpWrKXFo3IFKtAoJpDs5bw1/mPfgflLok3/9f+5NBDj73H8L+yYPz2eWGwfshkJQPsicuX0HDXsWk48Q0F6fo/liSnWqWaya+cdvdlfGXZO7mS7W7sRZiisFb07Tb4zKTJ3JvR0hHu26i9MIIiIZjlKoItAQJBAPvYnHi2KhCTaSjb6oDOKIb9HTEeGNqSnQYKx4hCmraEzwEkC9vNZ3HMjZZw8w47DYRrCAdg8FYlUui/EPkQl+ECQQDSWreagzIXrq7xwzGUawk7x9FSP1j608r8Ar0iqTA8Sl3q1C94BMDyoHsiXQKKRk29IYp4/L4OskzrCtMUgGJpAkBXy/DoiCDr/GfZraj31Gb+gDjwCZ0CfcAt/g4Ha6jB3lTIAgf8TYQ1gOkPPDsPh/izZBi9ccb3UTWxHALPwUAhAkEAkRTyh0YveXgIv0RiYLxGPQ3/CBwa8by7xn7ZFhvc4ehkyD8akkutDGq1IqlFxDrjCSwmBnZDW32MYZwwo3Y86QJBANRQ4BrzpAqU9CBj9cnalpMatw4G3dO+APq7ArCTVjmEEGsGDwOH32VHG6775uu+omfsSbLVY5dKHEMPZl88VJ0="
+
+//post请求网址
+#define HTTPREQUEST @"http://service.1yingli.cn/yiyingliService/manage"
+
+#define ORDERHTTPREQUEST @"http://service.1yingli.cn/yiyingliService/TradeNotifyProcess"
+
+
+#define SingletonH(name) + (instancetype)share##name;
+
+#define SingletonM(name) \
+static id _instance;\
+\
++ (instancetype)allocWithZone:(struct _NSZone *)zone\
+{\
+static dispatch_once_t onceToken;\
+dispatch_once(&onceToken, ^{\
+\
+_instance = [super allocWithZone:zone];\
+\
+});\
+return _instance;\
+}\
+\
+\
++ (instancetype)share##name\
+{\
+static dispatch_once_t onceToken;\
+dispatch_once(&onceToken, ^{\
+\
+_instance = [[self alloc] init];\
+\
+});\
+return _instance;\
+}\
+\
+\
+- (id)copyWithZone:(NSZone *)zone\
+{\
+return _instance;\
+}\
+
+
+//微博登陆
+#define kAppKey @"309044909"
+
+
+#endif

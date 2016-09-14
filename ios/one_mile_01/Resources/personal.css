@@ -1,0 +1,953 @@
+html{color:#000;background:#FFF;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,
+fieldset,input,textarea,p,blockquote,th,td {
+    margin:0;
+    padding:0;
+}
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+fieldset,img {
+    border:0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+    font-style:normal;
+    font-weight:normal;
+}
+ol,ul {
+    list-style:none;
+}
+caption,th {
+    text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-size:20%;
+    font-weight:normal;
+}
+q:before,q:after {
+    content:'';
+}
+abbr,acronym { border:0;
+}
+
+
+@font-face{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+
+}
+
+@font-face{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+
+}
+
+@font-face{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;;
+
+}
+/*--------------------------------------------------header-----------------------------------------------------*/
+#personal-header{
+    width: 100%;
+    background: rgba(0,0,0,0.05);
+    min-width: 1096px;
+}
+.personal-bg{
+    position: relative;  width: 100%; height:570px;
+}
+#header{
+    width: 100%;  
+    height: 60px;  
+    border-bottom: 2px solid #dedede;
+   /* border-bottom-moz-linear-gradient(left,rgba(0,0,0,0.3),rgba(255,255,255,0.3));*/
+    -moz-border-left-colors: rgba(0,0,0,0.3) rgba(0,0,0,0.2) rgba(0,0,0,0.1) rgba(0,0,0,0.05) rgba(0,0,0,0.01);
+    -moz-border-right-colors: rgba(255,255,255,0.03) rgba(255,255,255,0.05) rgba(255,255,255,0.1) rgba(255,255,255,0.3) rgba(255,255,255,0.5) rgba(255,255,255,0.7);
+    position: absolute;
+    top:0;
+    min-width: 1096px;
+}
+#header-left{
+    width: 650px;
+    height: 70px;
+    line-height: 70px;
+    float: left;
+}
+#logo{
+    width: 117px;
+    height: 37px;
+    float: left;
+    margin-top: 13px;
+    margin-left: 29px;
+}
+#search-box {
+    float: left;
+    width: 460px;
+    margin-left: 20px;
+    height: 70px;
+    line-height: 70px;
+}
+#search-input {
+    width: 317px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid rgba(0,0,0,0.3);
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+    font-size: 15px;
+    float: left;
+    margin-top: 15px;
+}
+#search-submit {
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    border: 0;
+    font-size: 18px;
+    background: #f5f5f5;
+    font-weight: bold;
+    color: rgba(0,0,0,0.3);
+    cursor: pointer;
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+    float: left;
+    margin-top: 19px;
+    margin-left: 10px;
+}
+#search-img {
+    height: 30px;
+    float: left;
+    margin-top: 15px;
+}
+#nav-left{
+    height: 60px;  line-height: 60px;  float: left;  margin-left: 5%;
+}
+.nav-left{
+    height: 60px;  line-height: 60px;  float: left;  margin-right: 30px;
+}
+.nav-left a{
+    text-decoration: none;  color: rgba(0,0,0,0.3);font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 17px;
+}
+.nav-left a:hover{
+    color: #56bbe8;
+}
+
+#header-right{
+    width: 328px;  height: 70px;line-height: 70px;  float: right;
+}
+#nav-right{
+    height: 70px;  line-height: 70px;  float: left;
+}
+.nav-right{
+    height: 70px;  line-height: 70px;  float: left;  margin-right: 15px;
+}
+.nav-right a{
+    text-decoration: none;  color: rgba(255,255,255,0.8);font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;
+}
+.nav-right a:hover{
+    color: #56bbe8;
+}
+.nav-right span{
+    text-decoration: none;  color: rgba(255,255,255,0.7);
+}
+/*--------------------content----------------------------------------------------------------------------------------------*/
+.content-box{
+    width: 100%; min-width: 1096px;   background: rgba(0,0,0,0.05);overflow: hidden;
+}
+.content{
+    width:1096px;margin: 0 auto;min-height: 1096px;
+}
+.content-left{
+    width: 700px;float: left;overflow: hidden; margin-left: 48px
+}
+.content-left-person{
+    width: 700px;height: 220px;border-bottom: 1px solid rgba(0,0,0,0.3);overflow: visible;
+}
+.face{
+    width: 200px;height: 220px;float: left;/*position: relative;*/
+}
+.face img{
+    position: absolute;
+}
+.face p{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 30px;margin-bottom: 7px;color: rgba(0,0,0,0.8);margin-top: 178px;font-weight: bold;
+}
+.content-left-person-right{
+    width: 500px;height: 220px;float: right;position: relative;
+}
+.info{
+    width: 475px;height: 200px;margin: 15px 5px 5px 20px;
+}
+.info-top{
+    height: 60px;
+}
+.info-top h1{
+    display: inline-block;font-size: 40px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+}
+.info-top p{
+    display: inline-block;font-size: 15px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;margin-left: 10px;
+}
+.people-want{
+    float: right;height: 25px;line-height: 25px;margin-top: 20px;
+}
+.people-want img{
+    float: left;margin-top: 2px;
+}
+.people-want span{
+    display: inline-block;float: left;height: 25px;line-height: 25px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 16px;
+}
+.info ul{
+    margin-left: 1px;
+}
+.info ul li{
+    float: left;margin-right: 23px;margin-left: 10px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+}
+.info ul li:last-of-type{
+    margin-right: 10px;
+}
+.info ul li img{
+    width: 49px;
+    margin-left: 7px;
+}
+.info ul li p{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 16px;
+}
+.rent-p{
+    position: absolute;right: 10px;bottom: 5px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;font-weight: bold;
+}
+.rent-p a{
+    width:70px;height: 20px;line-height:20px;background: #56bbe8;border-radius: 10px;color: white;display: inline-block;text-align: center;text-decoration: none;font-size: 16px;
+}
+
+
+.content-left-topic{
+    width: 700px;min-height: 225px;border-bottom: 1px solid rgba(0,0,0,0.3);overflow: hidden;position: relative;
+}
+.content-left-topic h1{
+    height: 60px;line-height: 60px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;;font-size: 2px;color: rgba(0,0,0,0.8);font-weight: bold;
+}
+.topic-content{
+    min-height: 100px;overflow: hidden;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;color: rgba(0,0,0,0.9);margin-bottom: 50px;font-size: 16px;line-height: 1.9;
+}
+.content-left-topic a{
+    position: absolute;bottom: 5px;right: 5px;text-decoration: none;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;color: rgba(0,0,0,0.7);
+ }
+.content-left-topic a:hover{
+    color: #56bbe8;
+}
+
+
+.content-left-about{
+    width: 700px;min-height: 200px;border-bottom: 1px solid rgba(0,0,0,0.3);overflow: hidden;
+}
+.content-left-about img{
+    width: 500px;height: 334px;margin-bottom: 40px;
+}
+.content-left-about h1{
+    height: 60px;line-height: 60px;font-weight: bold;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;;font-size: 22px;color: rgba(0,0,0,0.8);
+}
+.about-content{
+    min-height: 50px;overflow: hidden;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;color: rgba(0,0,0,0.9);margin-bottom: 20px;font-size: 16px;line-height: 1.9;
+}
+
+
+.content-left-ident{
+    width: 700px;height: 80px;border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+.content-left-ident ul{
+    height: 70px;margin: 10px;margin-top: 18px;
+}
+.content-left-ident ul li{
+    float: left;margin-right: 24px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;text-align: center;width: 110px;
+}
+.content-left-ident ul li p{
+    margin-top: 0px;
+}
+.content-left-ident ul li:nth-last-of-type(1){
+    margin-right: 0px;
+}
+.content-left-ident ul li img{
+    /*width: 52px;*/
+}
+
+
+.content-left-resume{
+    width: 700px;border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+.content-left-resume h1{
+    height: 40px;line-height: 40px;font-weight: bold;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 24px;color: rgba(0,0,0,0.7);margin-top: 10px;
+}
+.content-left-resume p{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;color: rgba(0,0,0,1);line-height: 2.8;
+}
+.content-left-resume div{
+    /*margin-bottom: 20px;*/
+}
+
+
+.content-left-assess{
+    width: 700px;min-height: 200px;overflow: hidden;
+}
+.content-left-assess h1{
+    height: 60px;line-height: 60px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-weight: bold;font-size: 24px;color: rgba(0,0,0,0.7);
+}
+.assess-content{
+    width: 700px;min-height: 50px;overflow: hidden;margin-top: 10px;margin-bottom: 10px;border-bottom: 1px dotted rgba(0,0,0,0.3);
+}
+.assess-content-top{
+    height: 60px;
+}
+.assess-face{
+    width: 60px;height: 60px;display: inline-block;float: left;
+}
+.assess-face img{
+    width: 60px;height: 60px;
+}
+.assess-content-top h3{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;float: left;font-size: 23px;margin-top: 30px;margin-left: 10px;
+}
+.assess-content-top p{
+    display: inline-block;height: 20px;line-height: 20px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 16px;float: left;margin-top: 39px;color: rgba(0,0,0,0.8);
+}
+.assess-star {
+    float: right;margin-top: 29px;
+}
+.assess-star li{
+    float: left;
+}
+.assess-star li img{
+    width: 21px;
+    margin-left: 2px;
+    padding-top: 5px;
+}
+
+.assess-content-center{
+    margin-top: 10px;
+}
+.assess-content-center p:nth-of-type(1){
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 16px;color: rgba(0,0,0,1);margin-bottom: 25px;line-height: 1.7;
+}
+.assess-content-center p:nth-of-type(2){
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 16px;color: rgba(0,0,0,0.5);margin-bottom: 10px;
+}
+
+
+
+/*-------------------------------------------------------�Ҳ�--------------------------------------------------------------------------------------------*/
+.content-right{
+    width: 300px;min-height: 1096px;/*background: #5bc0de;*/float: left;
+}
+.contact-her{
+    width: 220px;height: 250px;margin-left: 20px;background: white;padding: 30px 30px 25px 30px;border-radius: 2px;
+}
+.contact-her-top{
+    width: 240px;height: 35px;line-height: 35px;
+}
+.contact-icon{
+    float: left;height: 35px;
+}
+.contact-her-top p{
+    float: left;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;color: rgba(0,0,0,1);height: 35px;line-height: 35px;font-size: 14px;
+}
+.contact-her-top ul{
+    float: left;height: 35px;
+}
+.contact-her-top ul li{
+    float: left;height: 35px;line-height: 35px;
+}
+.contact-her-top ul li a img{
+    margin-top: 3px;
+}
+
+.contact-her-address{
+    width: 220px;height: 35px;line-height: 35px;margin-top: 5px;
+}
+.contact-her-address p{
+    float: left;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;color: rgba(0,0,0,1);height: 35px;line-height: 35px;font-size: 14px;
+}
+.contact-her-times{
+    width: 220px;height: 35px;line-height: 35px;margin-top: 5px;
+}
+.contact-her-times p{
+    float: left;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;color: rgba(0,0,0,1);height: 35px;line-height: 35px;font-size: 14px;
+}
+.contact-her-times img{
+    height: 25px;margin-top: 5px;margin-left: 6px;
+}
+.ident-button{
+    text-decoration: none;
+}
+.ident-button p{
+    width: 218px;height: 25px;line-height: 25px;background: #56bbe8;border-radius: 8px;color: white;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;text-align: center;text-decoration: none;margin-top: 10px;
+}
+.add-like{
+    text-decoration: none;
+}
+.add-like-img{
+    margin-top: 4px;float: left;margin-left: 50px;
+}
+.add-like-p{
+    width: 218px;height: 23px;line-height: 23px;border: 1px solid rgba(0,0,0,0.5);border-radius: 8px;color: rgba(0,0,0,0.6);font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;text-align: center;text-decoration: none;margin-top: 10px;/*padding-bottom: 8px;*/
+}
+.add-like-text{
+    height: 25px;line-height: 25px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;display: inline-block;/*padding-bottom: 8px;*/float: left;font-size: 14px;
+}
+
+.share-her{
+    width: 220px;margin: 20px auto;height: 30px;line-height: 30px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;
+}
+.share-her p{
+    float: left;/*margin-right: 2px;*/color: rgba(0,0,0,0.7);
+}
+.share-her a{
+    float: left;
+}
+
+/*----------------------------------------��ػ���-------------------------------------------------------------------------------------------------------------------------------*/
+.concerning{
+    width: 280px;min-height: 200px;overflow: hidden;margin-left: 20px;margin-top: 20px;position: relative;
+}
+.concerning h1{
+    height: 50px;line-height: 50px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 20px;color: rgba(0,0,0,0.7);
+}
+.concerning-topic{
+    width: 250px;height: 110px;background: white;padding: 15px 20px 8px 10px;border-radius: 10px;position: relative;
+}
+.concerning-topic-face{
+    width: 80px;float: left;
+}
+.concerning-topic-face img{
+    width: 75px;
+}
+.concerning-topic-face p{
+    text-align: center;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 18px;color: black;
+}
+.concerning-topic-content{
+    float: left;width: 160px;margin-left: 5px;
+}
+.concerning-topic-content h1{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 17px;display: inline-block;height: 25px;line-height: 25px;margin-top: 20px;color: rgba(0,0,0,0.8);
+}
+.concerning-topic-content p{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 12px;display: inline-block;height: 15px;line-height: 15px;color: #56bbe8;
+}
+.tea-cup{
+    position: absolute;right: 15px;bottom: 5px;
+}
+.tea-cup{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;color: rgba(0,0,0,0.7);
+}
+.concerning ul li{
+    margin-bottom: 20px;
+    -moz-transition: box-shadow 0.3s;
+    -webkit-transition: box-shadow 0.3s;
+    -o-transition: box-shadow 0.3s;
+    transition: box-shadow 0.3s;
+}
+.concerning ul li:hover,
+.concerning ul li.hover {
+    border-bottom: 2px solid #dae0e5\0/;
+    *border-bottom: 2px solid #dae0e5;
+    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.concerning ul li a:focus{
+    outline: none;
+    color: #56bbe8;
+}
+.concerning ul li a{
+    text-decoration: none;
+}
+.concerning ul li a:hover{
+
+}
+
+/*.contact-her-top{
+    position: relative;
+}*/
+.schedule{
+    position: relative;right: 400px;top: 0;z-index: 99;width: 550px;height: 320px;background: #34495e;border-radius: 8px;padding: 40px;display: none;
+}
+.schedule1{
+    position: relative;right: 400px;top: 0;z-index: 99;width: 550px;height: 320px;background: #34495e;border-radius: 8px;padding: 0px 48px 0px 32px;display: none;
+}
+.schedule-top{
+    margin-bottom: 35px;height: 40px;width: 550px;margin-top: -80px;
+}
+.solider{
+    width: 200px;height: 20px;border-bottom: 1px solid rgba(255,255,255,0.8);display: inline-block;float: left;
+}
+.top-schedule{
+    display: inline-block;width: 150px;height: 40px;line-height: 40px;text-align: center;float: left;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;color: rgba(255,255,255,0.8);
+}
+.select-timezone{
+    width: 300px;height: 25px;border: 1px solid #56bbe8;float: left;margin-bottom: 25px;margin-top: 10px;
+}
+.select-timezone p{
+    float: left;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 12px;height: 25px;line-height: 25px;color: #56bbe8;margin-left: 10px;
+}
+.schedule-ul{
+    width: 300px;height: 200px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 12px;color: #56bbe8;border: 1px solid #56bbe8;position: absolute;left: 40px;top: 110px;background: #34495e;overflow: auto;display: none;
+}
+.schedule-ul::-webkit-scrollbar-track{
+    background-color: #b46868;
+} /* �������Ļ��챳����ɫ */
+
+.schedule-ul::-webkit-scrollbar-thumb{
+  background-color: #56bbe8;
+  } /* ������ɫ */
+
+.schedule-ul::-webkit-scrollbar-button{
+  background-color: #7c2929;
+} /* ������ͷ�ļ�����ť��ɫ */
+
+.schedule-ul::-webkit-scrollbar-corner {
+  background-color: black;
+  } /* ���������������������ཻ����ǵ���ɫ */
+
+.schedule-ul li{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 12px;height: 25px;line-height: 25px;color: #56bbe8;/*margin-left: 10px;*/
+}
+.schedule-ul li a{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 12px;height: 25px;line-height: 25px;color: #56bbe8;text-decoration: none;
+}
+.schedule-ul li a p{
+    margin-left: 10px;
+}
+.schedule-ul li:hover{
+    background-color: #56bbe8;color: white;
+}
+.schedule-ul li a:hover{
+    background-color: #56bbe8;color: white;
+}
+.select-timezone img{
+    float: right;margin-top: 6px;margin-right: 8px;
+}
+.select-timezone-right{
+    float: right;
+}
+.blue-block{
+    width: 40px;height: 15px;background: #56bbe8;border-radius: 8px;float: left;margin-right: 10px;
+}
+.select-timezone-right p{
+    float: right;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;color: #56bbe8;font-size: 13px;
+}
+.timetable{
+    width: 548px;height: 200px;border: 1px solid rgba(255,255,255,0.4);
+}
+.timetable tr{
+    border: 1px solid rgba(255,255,255,0.4);text-align: center;height: 30px;
+}
+.timetable tr td{
+    /*border: 1px solid rgba(255,255,255,0.6);*/color: #000;text-align: center;height: 30px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;
+}
+.timetable th{
+    border: 1px solid rgba(255,255,255,0.4);height: 30px;
+}
+.timetable1{
+    width: 548px;height: 200px;border: 1px solid #b2b2b2;
+}
+.timetable1 tr{
+    border: 1px solid #b2b2b2;text-align: center;height: 30px;
+}
+.timetable1 tr td{
+    /*border: 1px solid rgba(255,255,255,0.6);*/color: #000;text-align: center;height: 30px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;
+}
+.timetable1 th{
+    border: 1px solid #b2b2b2;height: 30px;
+}
+
+.table-block{
+    width: 50px;height: 18px;background: #56bbe8;border-radius: 9px;float: left;margin-left: 6px;cursor: pointer;
+}
+.time-block{
+    width: 70px;height: 18px;line-height: 18px;background: #56bbe8;border-radius: 9px;color: white;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 11px;margin-left: 10px;text-align: center;
+}
+.schedule-close{
+    position: absolute;right: 0;bottom: 5px;
+}
+/*---------------------------------��ϵ����------------------------------------*/
+.contact{
+    width: 100%;
+    min-width: 1096px;
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+    font-weight: bold;
+}
+.contact-content{
+    width: 1000px;
+    height: 135px;
+    margin: 0 auto;
+}
+.contact-left{
+    float: left;
+}
+.contact-left-top{
+    padding-top: 28px;
+}
+.contact-left-top li{
+    height: 50px;
+    line-height: 50px;
+    display: inline-block;
+    margin: 10px 20px;
+}
+.contact-left-top li a{
+    color: #273241;
+    opacity: 0.7;
+    font-size: 20px;
+    text-decoration: none;
+}
+.contact-left-top li span{
+    color: #273241;
+    opacity: 0.7;
+    font-size: 22px;
+}
+.contact-left-left,.contact-left-center,.contact-left-right,.contact-right{
+    float: left;
+    margin: 5px 30px;
+    margin-right: 90px;
+}
+.contact-left-left li,.contact-left-center li,.contact-left-right li,.contact-right li{
+    color: #273241;
+    opacity: 0.7;
+    font-size: 15px;
+    text-decoration: none;
+    margin-top: 5px;
+}
+.contact-left-left li a,.contact-left-center li a,.contact-left-right li a,.contact-right li a{
+    color: #273241;
+    opacity: 0.7;
+    font-size: 13px;
+    text-decoration: none;
+}
+.contact-left-left li a:hover,.contact-left-center li a:hover,.contact-left-right li a:hover,.contact-right li a:hover,.contact-left-top li a:hover{
+    color: #56bbe8;
+
+}
+.contact-right{
+    float: right;
+    position: relative;
+    right: 0;
+    top: 0;
+    padding-top: 50px;
+}
+.contact-right-1{
+    text-align: right;
+    color: #273241;
+    opacity: 0.7;
+    font-size: 17px;
+    padding-bottom: 3px;
+}
+.contact-right-2{
+    text-align: right;
+    color: #273241;
+    opacity: 0.7;
+    font-size: 30px;
+    padding-bottom: 16px;
+}
+.contact-right-3{
+    text-align: right;
+    color: #273241;
+    opacity: 0.7;
+    font-size: 12px;
+    padding-bottom: 2px;
+}
+.contact-right-4{
+    text-align: right;
+    color: #273241;
+    opacity: 0.7;
+    font-size: 12px;
+}
+/*---------------------------------------�ײ�---------------------------------------*/
+.footer{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+    width: 100%;
+    min-width: 1096px;
+    height: 230px;
+    background: url(http://image.1yingli.cn/img/footer_bg.jpg) no-repeat;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+.footer-share{
+    width: 1000px;
+    height: 50px;
+    position: relative;
+
+    top: 80px;
+    line-height: 50px;
+    margin: 100px auto;
+    text-align: center;
+}
+.footer-share li{
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    float: left;
+    text-align: center;
+}
+.footer-share li a{
+    height: 50px;
+    line-height: 50px;
+}
+.footer-share li:first-child{
+    margin-left: 31%;
+}
+.copyright{
+    color: white;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+}
+.copyright a{
+    text-decoration: none;
+    color: #428bca
+}
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+.order-box{
+    width: 500px;height: 720px;border-radius: 10px;background: white;padding: 30px 50px;position: absolute;top: 150px;left: 30%;display: none;
+}
+#order-close-icon{
+    position: absolute;top: 55px;left: 600px;cursor: pointer;
+}
+#ident-close-icon{
+    position: absolute;top: 35px;left: 600px;cursor: pointer;
+}
+.order-title{
+    width: 500px;height: 140px;
+}
+.order-title-top{
+    width: 500px;height: 140px;
+}
+.order-title-face{
+    width: 100px;height: 140px;float: left;text-align: center;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;
+}
+.order-title-face img{
+    width: 100px;height: 100px;
+}
+.order-title-title{
+    float: left;width: 285px;height: 140px;
+}
+.order-title-title{
+    width: 255px;height: 140px;float: left;margin-left: 15px;
+}
+.order-title-title h1{
+    width: 255px;height: 40px;line-height: 40px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 21px;margin-top: 15px;
+}
+.order-title-title p{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 12px;
+}
+.order-title-title p:nth-of-type(2){
+    height: 22px;line-height: 22px;margin-top: 5px;
+}
+.order-title-title p:nth-of-type(2) img{
+    float: left;
+}
+.order-title-title p:nth-of-type(2) span{
+    float: left;width: 150px;
+}
+
+#cancel{
+    width: 98px;height: 23px;line-height: 23px;text-align: center;border-radius: 10px;border: 1px solid rgba(0,0,0,0.3);margin-left: 270px;float: left;margin-right: 20px;cursor: pointer;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;
+}
+#order-submit{
+    width: 100px;height: 25px;border-radius: 10px;border: 0;background: #56bbe8;color: white;float: left;cursor: pointer;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;
+}
+
+.order-price{
+    float: right;width: 130px;margin-top: 60px;
+}
+.order-price p{
+    display: inline-block;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;float: left;margin-top: 12px;
+}
+.order-price h1{
+    display: inline-block;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 25px;float: left;width: 50px;
+}
+
+.order-step{
+    width: 400px;height: 18px;margin-left: 50px;
+}
+.yuan{
+    width: 18px;height: 18px;border-radius: 9px;background: rgba(0,0,0,0.3);color: white;float: left;text-align: center;
+}
+.yuan span{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;
+}
+.xian{
+    width: 77.5px;height: 8px;border-bottom: 2px solid rgba(0,0,0,0.3);float: left;
+}
+.yuan:nth-of-type(1){
+    background: #56bbe8;
+}
+.xian:nth-of-type(1){
+    border-bottom: 2px solid #56bbe8;
+}
+#order-discription{
+    width: 500px;height: 600px;margin-top: 10px;
+}
+.discriptions{
+    width: 500px;height: 25px;line-height: 25px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 12px;color: black;
+}
+#your-problem{
+    width: 484px;height: 76px;border: 1px solid rgba(0,0,0,0.05);font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;color: rgba(0,0,0,0.9);line-height: 1.5;padding: 7px;resize: none;
+}
+#your-present{
+    width: 484px;height: 76px;border: 1px solid rgba(0,0,0,0.05);margin-bottom: 15px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;color: rgba(0,0,0,0.9);line-height: 1.5;padding: 7px;resize: none;
+}
+.order-step-text{
+    width: 500px;height: 30px;line-height: 30px;
+}
+.order-step-text li:nth-of-type(1){
+    clear: left;
+}
+.order-step-text li{
+    float: left;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;height: 30px;line-height: 30px;margin-left:30px;margin-right: 15px;
+}
+.order-step-text li:nth-last-of-type(1){
+    margin-right: 0;
+}
+.order-step-text li:nth-of-type(1){
+    color: #56bbe8;
+}
+
+.order-time{
+    width: 500px;height: 35px;line-height: 35px;
+}
+.order-time-left{
+    width: 150px;height: 30px;line-height: 30px;float: left;
+}
+.order-time-left-span1{
+    width: 35px;height: 12px;border-radius: 10px;background: #56bbe8;display: inline-block;
+}
+.order-time-left-span2{
+    width: 120px;height: 30px;line-height: 30px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;color: #56bbe8;
+}
+.order-time-right{
+    width: 300px;height: 23px;line-height: 23px;float: right;border: 1px solid #56bbe8;
+}
+.timee{
+    width: 273px;height: 23px;line-height: 23px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;color: rgba(0,0,0,0.7);float: left;margin-left: 7px;
+}
+.order-time-right img{
+    float: left;margin-top: 5px;
+}
+
+.timee-block{
+    width: 300px;height: 250px;border: 1px solid #56bbe8;position: absolute;left: 248px;top: 507px;overflow: auto;background: white;
+}
+.timee-block li{
+    width: 283px;height: 23px;line-height: 23px;
+}
+.timee-block li a{
+    width: 275px;height: 23px;line-height: 23px;text-decoration: none;color: rgba(0,0,0,0.7);font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 13px;margin-left: 7px;display: inline-block;
+}
+.timee-block li:hover{
+    background: #56bbe8;
+}
+.timee-block li a:hover{
+    color: white;
+}
+.timee-block{
+    display: none;
+}
+
+.order-timetable{
+    width: 498px;height: 190px;border: 1px solid rgba(0,0,0,0.05);margin-bottom: 26px;
+}
+.order-timetable tr{
+    border: 1px solid rgba(0,0,0,0.05);text-align: center;height: 18px;
+}
+.order-timetable tr td{
+    /*border: 1px solid rgba(255,255,255,0.6);*/color: rgba(0,0,0,0.5);text-align: center;height: 18px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;
+}
+.order-timetable th{
+    border: 1px solid rgba(0,0,0,0.05);height: 18px;background: #56bbe8;
+}
+.order-table-block{
+    width: 50px;height: 16px;line-height: 16px;background: #a7a7a7;border-radius: 9px;float: left;margin-left: 6px;color: #a7a7a7;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;
+}
+.order-time-block{
+    width: 75px;height: 16px;line-height: 16px;background: #56bbe8;border-radius: 8px;color: white;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 11px;margin-left: 5px;text-align: center;
+}
+.able-order-time-block{
+    background: #56bbe8;
+    color: #56bbe8;
+    cursor: pointer;
+}
+.waterBlue{
+    background: #a7e1fb;
+}
+.disc li{
+    margin: auto;
+    width: auto;
+    list-style: disc;
+}
+/*-----------------------------------------------------------------------------------------------------------------------------------------------*/
+.info-ident{
+    width: 460px;height: 240px;padding: 60px 70px 40px 70px;background: white;position: fixed;top: 200px;left: 30%;z-index: 9999999999;border-radius: 15px;display: none;
+}
+.info-ident p:nth-of-type(1){
+    width: 460px;height: 30px;line-height: 30px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 17px;text-align: center;
+}
+.info-ident p:nth-of-type(2){
+    width: 460px;height: 25px;line-height: 25px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 12px;color: rgba(0,0,0,0.3);text-align: center;margin-bottom: 10px;
+}
+#write-real-name{
+    width: 280px;height: 25px;line-height: 25px;border: 1px solid rgba(0,0,0,0.6);border-radius: 14px;margin-bottom: 10px;
+}
+#write-phoneNumber{
+    width: 280px;height: 25px;line-height: 25px;border: 1px solid rgba(0,0,0,0.6);border-radius: 14px;margin-bottom: 10px;
+}
+#write-wechat{
+    width: 280px;height: 25px;line-height: 25px;border: 1px solid rgba(0,0,0,0.6);border-radius: 14px;margin-bottom: 10px;
+}
+#wechat{
+    display: inline-block;width: 56px;height: 25px;line-height: 25px;text-align: center;background: #56bbe8;border-radius: 10px;color: white;margin-left: 10px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;
+}
+#write-email{
+    width: 280px;height: 25px;line-height: 25px;border: 1px solid rgba(0,0,0,0.6);border-radius: 12px;margin-bottom: 30px;
+}
+#email{
+    display: inline-block;width: 56px;height: 24px;line-height: 24px;text-align: center;background: #56bbe8;border-radius: 12px;color: white;margin-left: 10px;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;
+}
+#real-name,#phoneNumber{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 14px;margin-left: 10px;
+}
+#cancel-ident{
+    width: 98px;height: 23px;line-height: 23px;text-align: center;border-radius: 12px;border: 1px solid rgba(0,0,0,0.3);margin-left: 240px;float: left;margin-right: 20px;cursor: pointer;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;
+}
+#order-submit-ident{
+    width: 100px;height: 25px;border-radius: 12px;border: 0;background: #56bbe8;color: white;float: left;cursor: pointer;font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;font-size: 15px;
+}
+
+#shelter{
+    background-color:black;
+    left:0;
+    opacity:0.7;
+    position:absolute;
+    top:0;
+    z-index:999;
+    filter:alpha(opacity=70);
+    -moz-opacity:0.7;
+    -khtml-opacity:0.7;
+}
+
+#nav-right-theme ul {
+    display: none;
+}
+
+#nav-right-theme ul li {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Arial,Helvetica,sans-serif;
+    font-size: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+

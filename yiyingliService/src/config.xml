@@ -1,0 +1,232 @@
+<?xml version = "1.0" encoding= "UTF-8"?>
+<!DOCTYPE service-configuration PUBLIC "config.dtd" "http://source.1yingli.cn/config1.dtd">
+<service-configuration>
+	<cachePath value="/TEMP/"/>
+	<imagePath value="http://image.1yingli.cn"/>
+	<httpPath value="http://service.1yingli.cn"/>
+	<searchUrl value="http://intranet.opensearch-cn-hangzhou.aliyuncs.com"/>
+	<searchHintUrl value="http://intranet.opensearch-cn-hangzhou.aliyuncs.com"/>
+	<rsaPath value="/RSAKey/"/>
+	<baiduAboutUrl
+			value="http://api.recsys.baidu.com/s/130426/326542/rs?token=8d116fa25cfde0085776beee152741e2"/>
+	<baiduPersonalUrl
+			value="http://api.recsys.baidu.com/s/130426/326544/rs?token=8d116fa25cfde0085776beee152741e2"/>
+	<debug value="false"/>
+	<style name="user">
+		<method name="getLikeServicePro" beanName="uGetLikeServiceProService"/>
+		<method name="isLikeServicePro" beanName="isLikeServiceProService"/>
+		<method name="disLikeServicePro" beanName="disLikeServiceProService"/>
+		<method name="likeServicePro" beanName="likeServiceProService"/>
+		<method name="likePassage" beanName="likePassageService"/>
+		<method name="getTeacherState" beanName="getTeacherStateService"/>
+		<method name="getCommentCount" beanName="getCommentCountService"/>
+		<method name="getLikeTeacherCount" beanName="getLikeTeacherCountService"/>
+		<method name="changePhone" beanName="changePhoneService"/>
+		<method name="changeEmail" beanName="changeEmailService"/>
+		<method name="login" beanName="loginService"/>
+		<method name="loginByWeixinPlatform" beanName="loginByWeixinPlatformService"/>
+		<method name="loginByWeibo" beanName="loginByWeiboService"/>
+		<method name="loginByWeixin" beanName="loginByWeixinService"/>
+		<method name="iosLogin" beanName="iosLoginService"/>
+		<method name="logout" beanName="logoutService"/>
+		<method name="register" beanName="registerService"/>
+		<method name="iosRegister" beanName="iosRegisterService"/>
+		<method name="getSInfo" beanName="getUserSimpleInfoService"/>
+		<method name="getInfo" beanName="getUserInfoService"/>
+		<method name="changeInfo" beanName="changeUserInfoService"/>
+		<method name="changePassword" beanName="changePasswordService"/>
+		<method name="iosChangePassword" beanName="iosChangePasswordService"/>
+		<method name="changeIcon" beanName="changeIconService"/>
+		<method name="checkPhone" beanName="tCheckPhoneService"/>
+		<method name="getCommentList" beanName="getCommentListService"/>
+		<method name="getLikeTeachers" beanName="getLikeTeachersService"/>
+		<method name="getNotificationCount" beanName="getNotificationCountService"/>
+		<method name="getNotification" beanName="getNotificationService"/>
+		<method name="getPhone" beanName="getPhoneNOService"/>
+		<method name="getEmail" beanName="getEmailService"/>
+		<method name="getIntroduce" beanName="getIntroduceService"/>
+		<method name="getTeacherInfo" beanName="getTeacherAllInfoService"/>
+		<method name="likeTeacher" beanName="likeTeacherService"/>
+		<method name="commentTeacher" beanName="commentTeacherService"/>
+		<method name="dislikeTeacher" beanName="dislikeTeacherService"/>
+		<method name="isLikeTeacher" beanName="isLikeTeacherService"/>
+		<method name="forgetPassword" beanName="forgetPasswordService"/>
+		<method name="iosForgetPassword" beanName="iosForgetPasswordService"/>
+		<!-- <method name="change_info" beanName="" /> <method name="change_password" 
+			beanName="" /> -->
+		<!-- <method name="get_info" beanName="getUserInfoService" /> -->
+	</style>
+	<style name="teacher">
+		<method name="editSimpleServicePro" beanName="tEditSimpleServiceProService"/>
+		<method name="getServicePro" beanName="tGetServiceProService"/>
+		<method name="removeServicePro" beanName="tRemoveServiceProService"/>
+		<method name="getServiceProList" beanName="tGetServiceProListService"/>
+		<method name="createServicePro" beanName="tCreateServiceProService"/>
+		<method name="editServicePro" beanName="tEditServiceProService"/>
+		<method name="getReward" beanName="tGetRewardService"/>
+		<method name="removePassage" beanName="tRemovePassageService"/>
+		<method name="getMile" beanName="tGetMileService"/>
+		<method name="getPaypalNo" beanName="tGetPaypalNoService"/>
+		<method name="editPayPal" beanName="tEditPayPalService"/>
+		<method name="editDetailInfo" beanName="tEditDetailInfoService"/>
+		<method name="getPassage" beanName="tGetPassageService"/>
+		<method name="createPassage" beanName="tCreatePassageService"/>
+		<method name="getPassageList" beanName="tGetPassageListService"/>
+		<method name="getAllInfo" beanName="tGetAllInfoService"/>
+		<method name="changeTitlePrice" beanName="tChangeTitlePriceService"/>
+		<method name="changeSimpleInfo" beanName="tChangeSimpleInfoService"/>
+		<method name="getCommentList" beanName="tGetCommentListService"/>
+		<method name="getTeacherCheckInfo" beanName="tGetTeacherCheckInfoService"/>
+		<method name="changeTip" beanName="tChangeTipsService"/>
+		<method name="commentUser" beanName="tCommentUserService"/>
+		<method name="createCheckForm" beanName="createCheckFormService"/>
+		<method name="changeBG" beanName="tChangeBGService"/>
+		<method name="changeIntroduce" beanName="tChangeIntroduceService"/>
+		<method name="changeStudyExp" beanName="tChangeStudyExperienceService"/>
+		<method name="changeTService" beanName="tChangeTServiceService"/>
+		<method name="changeWorkExp" beanName="tChangeWorkExperienceService"/>
+		<method name="editSpecialTip" beanName="tEditSpecialTipService"/>
+		<!-- <method name="editTServiceInfo" beanName="tEditTServiceInfoService" 
+			/> -->
+		<method name="getBackgrounds" beanName="tGetBackgroundsService"/>
+		<method name="getBGService" beanName="tGetBGService"/>
+		<method name="getCheckFromState" beanName="tGetCheckFormStateService"/>
+		<method name="getIntroduce" beanName="tGetIntroduceService"/>
+		<method name="getStudyExp" beanName="tGetStudyExperienceService"/>
+		<method name="getTeacherSInfo" beanName="tGetTeacherSimpleInfoService"/>
+		<method name="getTServiceInfo" beanName="tGetTServiceInfoService"/>
+		<method name="getTService" beanName="tGetTServiceService"/>
+		<method name="getWorkExp" beanName="tGetWorkExperienceService"/>
+		<method name="getTeacherSInfoList" beanName="getTeacherSimpleInfoListService"/>
+		<method name="editTService" beanName="tEditTServiceService"/>
+		<method name="editAlipayNo" beanName="tEditAlipayNoService"/>
+		<method name="getAlipayNo" beanName="tGetAlipayNoService"/>
+	</style>
+	<style name="distributor">
+		<method name="getInfo" beanName="dGetInfoService"/>
+		<method name="login" beanName="dLoginService"/>
+	</style>
+
+	<style name="manager">
+		<method name="createActivity" beanName="mCreateActivityService"/>
+		<method name="createActivityContent" beanName="mCreateActivityContentService"/>
+		<method name="removeActivityContent" beanName="mRemoveActivityContentService"/>
+		<method name="getActivity" beanName="mGetActivityService"/>
+		<method name="removeActivity" beanName="mRemoveActivityService"/>
+		<method name="getActivityList" beanName="mGetActivityListService"/>
+		<method name="closeVoucher" beanName="mCloseVoucherService"/>
+		<method name="removeServicePro" beanName="mRemoveServiceProService"/>
+		<method name="validateServicePro" beanName="mValidateServiceProService"/>
+		<method name="getServiceProList" beanName="mGetServiceProListService"/>
+		<method name="createServicePro" beanName="mCreateServiceProService"/>
+		<method name="getServicePro" beanName="mGetServiceProService"/>
+		<method name="editServicePro" beanName="mEditServiceProService"/>
+		<method name="changeUserName" beanName="mChangeUserNameService"/>
+		<method name="finishPayReward" beanName="mFinishPayRewardService"/>
+		<method name="getRewardByTeacher" beanName="mGetRewardByTeacherService"/>
+		<method name="getRewardList" beanName="mGetRewardListService"/>
+		<method name="remarkOrder" beanName="mRemarkOrderService"/>
+		<method name="returnVisitOrder" beanName="mReturnVisitOrderService"/>
+		<method name="removePassage" beanName="mRemovePassageService"/>
+		<method name="editPassage" beanName="mEditPassageService"/>
+		<method name="getPassage" beanName="mGetPassageService"/>
+		<method name="createPassage" beanName="mCreatePassageService"/>
+		<method name="getAllOrderList" beanName="mGetAllOrderListService"/>
+		<method name="getSuggestion" beanName="mGetSuggestionService"/>
+		<method name="searchTeacher" beanName="mSearchTeacherService"/>
+		<method name="editTeacherMile" beanName="mEditTeacherMileService"/>
+		<method name="editUserMile" beanName="mEditUserMileService"/>
+		<method name="validatePassage" beanName="mValidatePassageService"/>
+		<method name="getPassageList" beanName="mGetPassageListService"/>
+		<method name="getTeacherDemand" beanName="mGetTeacherDemandService"/>
+		<method name="createDistributor" beanName="mCreateDistributorService"/>
+		<method name="getDistributorList" beanName="mGetDistributorListService"/>
+		<method name="restartOrder" beanName="mRestartOrderService"/>
+		<method name="login" beanName="mLoginService"/>
+		<method name="logout" beanName="mLogoutService"/>
+		<method name="getUserList" beanName="mGetUserListService"/>
+		<method name="getTeacherList" beanName="mGetTeacherListService"/>
+		<!-- <method name="getApplicationForm" beanName="mGetApplicationFormService"/> -->
+		<method name="getApplicationFormList" beanName="mGetApplicationFormListService"/>
+		<method name="getCheckFormList" beanName="mGetCheckFormListService"/>
+		<method name="doneCheckForm" beanName="mDoneCheckFormService"/>
+		<method name="doneApplicationForm" beanName="mDoneApplicationFormService"/>
+		<method name="orderSalaryDone" beanName="orderSalaryDoneService"/>
+		<method name="orderReturnDone" beanName="orderReturnDoneService"/>
+		<method name="dealOrder" beanName="mDealOrderService"/>
+		<method name="registerUser" beanName="mRegisterUserService"/>
+		<method name="createTeacher" beanName="mCreateTeacherService"/>
+		<method name="editTeacher" beanName="mEditTeacherService"/>
+		<method name="getTeacherInfo" beanName="mGetTeacherInfoService"/>
+		<method name="getOrderList" beanName="mGetOrderListService"/>
+		<method name="getTeacherAllInfo" beanName="mGetTeacherAllInfoService"/>
+		<method name="getOrderById" beanName="mGetOrderByOIdService"/>
+		<method name="getOrderListByName" beanName="mGetOrderListByNameService"/>
+		<method name="createVoucher" beanName="mCreateVoucherService"/>
+		<method name="getVoucherLsit" beanName="mGetVoucherListService"/>
+		<method name="addBackground" beanName="mAddBackgroundService"/>
+		<method name="getBackgroundList" beanName="mGetBackgroundListService"/>
+		<method name="removeBackground" beanName="mRemoveBackgroundService"/>
+	</style>
+	<style name="function">
+		<method name="getActivity" beanName="fGetActivityService"/>
+		<method name="getSalePassageList" beanName="fGetSalePassageListService"/>
+		<method name="getRecommendServiceProList" beanName="fGetRecommendServiceProListService"/>
+		<method name="recordRecommandServicePro" beanName="fRecordRecommandServiceProService"/>
+		<method name="getMoreServicePro" beanName="fGetMoreServiceProService"/>
+		<method name="getServiceProListByKind" beanName="fGetServiceProListByKindService"/>
+		<method name="getServiceProList" beanName="fGetServiceProListSerivce"/>
+		<method name="getServicePro" beanName="fGetServiceProService"/>
+		<method name="getCommentListByServicePro" beanName="fGetCommentListByServiceProService"/>
+		<method name="getCommentList" beanName="fGetCommentListService"/>
+		<method name="getSaleServiceProList" beanName="fGetSaleServiceProListService"/>
+		<method name="getHomeServiceProList" beanName="fGetHomeServiceProListService"/>
+		<method name="getWXPayUrl" beanName="fGetWXPayUrlService"/>
+		<method name="getWXRewardUrl" beanName="fGetWXRewardUrlService"/>
+		<method name="recordRecommandPassage" beanName="fRecordRecommandPassageService"/>
+		<method name="getRecommendPassageList" beanName="fGetRecommendPassageListService"/>
+		<method name="getPassage" beanName="fGetPassageService"/>
+		<method name="getPassageList" beanName="fGetPassageListService"/>
+		<method name="getSaleTeacherList" beanName="fGetSaleTeacherListService"/>
+		<method name="getHomeTeacherList" beanName="fGetHomeTeacherListService"/>
+		<method name="teacherDemand" beanName="fTeacherDemandService"/>
+		<method name="getCheckNo" beanName="fGetCheckNoService"/>
+		<method name="getTips" beanName="getTipsService"/>
+		<method name="getSearchServiceProHint" beanName="fGetSearchServiceProHintService"/>
+		<method name="getSearchHint" beanName="fGetSearchHintService"/>
+		<method name="createApplication" beanName="createApplicationFormService"/>
+		<method name="searchServicePro" beanName="fSearchServiceProService"/>
+		<method name="search" beanName="fSearchService"/>
+		<method name="timer" beanName="fTimeTaskCallbackService"/>
+		<method name="suggest" beanName="fSuggestService"/>
+		<method name="recordRecommend" beanName="fRecordRecommendService"/>
+		<method name="getRecommendTeacherList" beanName="fGetRecommendTeacherListService"/>
+		<method name="checkPaypalPayment" beanName="fCheckPaypalPaymentService"/>
+		<!-- <method name="fMoneyReturned" beanName="fMoneyReturnedService" /> -->
+	</style>
+	<style name="notification">
+		<method name="getNoti" beanName="getNotificationService"/>
+		<method name="getNotiCount" beanName="getNotificationCountService"/>
+	</style>
+	<style name="order">
+		<method name="abandonOrder" beanName="tAbandonOrderService"/>
+		<method name="finishOrder" beanName="tFinishOrderService"/>
+		<method name="createOrder" beanName="createOrderService"/>
+		<method name="getListByTeacher" beanName="tGetOrderListService"/>
+		<method name="getByTeacher" beanName="tGetOrderInfoService"/>
+		<method name="getListByUser" beanName="getOrderListService"/>
+		<method name="getByUser" beanName="getOrderInfoService"/>
+		<method name="refuseOrder" beanName="tRefuseOrderService"/>
+		<method name="ensureTime" beanName="tEnsureTimeService"/>
+		<method name="disagreeOrder" beanName="tDisagreeOrderService"/>
+		<method name="agreeOrder" beanName="tAgreeOrderService"/>
+		<method name="acceptOrder" beanName="tAcceptOrderService"/>
+		<method name="satisfyOrder" beanName="satisfyOrderService"/>
+		<method name="dissatisfyOrder" beanName="dissatisfyOrderService"/>
+		<method name="cancelOrder" beanName="cancelOrderService"/>
+		<method name="selectNoTime" beanName="tSelectNoTimeService"/>
+		<method name="cancelOrderAfterAccept" beanName="cancelOrderAfterAcceptService"/>
+		<method name="cancelOrderAfterEnsure" beanName="cancelOrderAfterEnsureTimeService"/>
+		<method name="cancelOrderAfterPay" beanName="cancelOrderAfterPayService"/>
+	</style>
+</service-configuration>
