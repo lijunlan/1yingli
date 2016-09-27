@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Fri Apr 15 14:56:22 CST 2016
+onejar.license.required=false
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=DataBaseListener_fat.jar
+manifest.mergeall=true
+manifest.mainclass=cn.yiyingli.databaselistener.MainListener
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=
